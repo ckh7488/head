@@ -16,7 +16,7 @@
     <div class="top-inner">
       <a class="brand" href="../">R5 <span>B15</span></a>
       <nav aria-label="검토 화면">
-        <a href="../">구동 검토</a>
+        <a href="../?view=wiring">구동 검토</a>
         <a href="./" aria-current="page">조립 순서</a>
       </nav>
       <button id="stock-open" class="button">볼트 규격</button>
@@ -58,6 +58,7 @@
           <div class="legend">
             <span><i class="moving"></i>이동 부품</span>
             <span><i class="fastener"></i>나사·너트</span>
+            <span id="wire-legend" hidden><i class="wiring"></i>전원·신호·USB 배선</span>
             <span id="hit-legend" hidden><i class="hit"></i>겹치는 체적</span>
           </div>
           <div id="picked" class="picked" hidden></div>
@@ -138,9 +139,11 @@
     <table class="stock-table">
       <thead><tr><th scope="col">규격</th><th scope="col">기본 수량</th><th scope="col">사용 위치</th></tr></thead>
       <tbody>
-        <tr><th scope="row">M3×8</th><td>29</td><td>캐리어·눌림판·허브·덮개·상판 · <button data-jump="mast-bolts">목 기둥</button> · <button data-jump="blink-clamp-bolts">눈꺼풀 축</button></td></tr>
-        <tr><th scope="row">M3×16</th><td>19</td><td>케이블 고정부·베어링 받침·요크 · <button data-jump="blink-rail-bolts">눈꺼풀 레일과 모터판</button></td></tr>
-        <tr><th scope="row">M2×8</th><td>16</td><td><button data-jump="blink-links">소형 링크</button> · <button data-jump="rotor-horn">XL430 혼</button> · C3</td></tr>
+        <tr><th scope="row">M3×8</th><td>25</td><td>캐리어·눌림판·허브·덮개·상판 · <button data-jump="blink-clamp-bolts">눈꺼풀 축</button></td></tr>
+        <tr><th scope="row">M3×16</th><td>23</td><td>케이블 고정부·베어링 받침·요크 · <button data-jump="mast-bolts">목 기둥</button> · <button data-jump="blink-rail-bolts">눈꺼풀 레일과 모터판</button></td></tr>
+        <tr><th scope="row">M2×8</th><td>20</td><td><button data-jump="blink-links">소형 링크</button> · <button data-jump="rotor-horn">XL430 혼</button> · C3 · OpenRB</td></tr>
+        <tr><th scope="row">일반 육각너트</th><td>64</td><td>M3 52개 · M2 12개</td></tr>
+        <tr><th scope="row">평와셔</th><td>8</td><td>M3 2개 · M2 6개</td></tr>
       </tbody>
     </table>
     <p class="stock-note">M3는 2.5 mm, M2는 1.5 mm 육각렌치로 조입니다. 모터 케이스의 성형 나사와 카메라 구멍은 부품에 대조합니다. <button data-jump="blink-motor-heads" class="button compact">모터 원통머리 자리</button></p>

@@ -3,6 +3,9 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { clamp, ease, jawPivot, motionMatrix } from "./motion.js";
+import { installedHardware } from "./assembly/steps.js";
+import { fastener } from "./hardware.js";
+import { loadWiring, WiringModel } from "./wiring.js";
 
 const V = (...coords) => new THREE.Vector3(...coords);
 const views = {
@@ -117,6 +120,7 @@ export class AssemblyViewer {
     this.grid.material.opacity = .105;
     this.scene.add(this.grid);
     this.parts = [];
+    this.fastenerBatches = [];
     this.mode = "assembled";
     this.preset = "oblique";
     this.detail = null;
@@ -146,7 +150,7 @@ export class AssemblyViewer {
     const pointer = new THREE.Vector2(2 * (x - rect.left) / rect.width - 1, 1 - 2 * (y - rect.top) / rect.height);
     const ray = new THREE.Raycaster();
     ray.setFromCamera(pointer, this.camera);
-    const nodes = this.parts.filter(item => item.node.visible);
+    const nodes = this.parts.filter(item => item.node.visible && !item.batch);
     let object = ray.intersectObjects(nodes.map(item => item.node), true)[0]?.object;
     while (object) {
       const part = nodes.find(item => item.node === object);
@@ -161,26 +165,65 @@ export class AssemblyViewer {
       fetch("./assets/assembly.json").then(r => { if (!r.ok) throw Error("assembly metadata"); return r.json(); }),
       loader.loadAsync("./assets/assembly.glb")
     ]);
+    const wiring = await loadWiring("./assets/wiring.json", data.cad_sha256);
+    this.wiring = new WiringModel(wiring, this.scene);
+    const overlap = new THREE.BufferGeometry();
+    overlap.setAttribute("position", new THREE.Float32BufferAttribute(wiring.rotorClash.vertices.flat(), 3));
+    overlap.setIndex(wiring.rotorClash.triangles.flat());
+    this.rotorClash = new THREE.Mesh(overlap, new THREE.MeshBasicMaterial({
+      color: 0xff493f, side: THREE.DoubleSide, depthTest: false, depthWrite: false, toneMapped: false,
+    }));
+    this.rotorClash.visible = false;
+    this.rotorClash.renderOrder = 10;
+    this.scene.add(this.rotorClash);
+    const wiringFades = new Set(["Part000", "Part001", "Part002", "Part073", "Part074", "Part019"]);
     this.scene.add(model.scene);
     model.scene.updateMatrixWorld(true);
     for (const info of data.parts) {
       const node = model.scene.getObjectByName(info.name);
       if (!node) throw Error("Missing CAD part " + info.name);
+      if (/^HubBolt[1-4]$/.test(info.cad_id)) {
+        node.visible = false;
+        continue;
+      }
+      info.wiringFade = wiringFades.has(info.cad_id) || info.shell || info.cover;
       node.updateMatrix();
       const materials = [];
       node.traverse(mesh => {
         if (!mesh.isMesh) return;
         mesh.castShadow = true;
         mesh.receiveShadow = false;
-        if (info.name === "01_base_cup") mesh.material = mesh.material.clone();
+        if (info.wiringFade) mesh.material = mesh.material.clone();
         if (Array.isArray(mesh.material)) materials.push(...mesh.material);
         else materials.push(mesh.material);
       });
       this.parts.push({ node, info, base: node.matrix.clone(), materials });
       node.matrixAutoUpdate = false;
     }
+    this.loadFasteners(installedHardware(data.parts));
     this.poseHash = "";
     this.visibility();
+  }
+
+  loadFasteners(parts) {
+    const types = Map.groupBy(parts, part => [part.type, part.size, part.length, part.phase].join());
+    const up = V(0, 0, 1);
+    for (const group of types.values()) {
+      const { node: pattern } = fastener(group[0]);
+      const [{ geometry, material }] = pattern.children;
+      const batch = new THREE.InstancedMesh(geometry, material, group.length);
+      batch.frustumCulled = false;
+      this.scene.add(batch);
+      this.fastenerBatches.push(batch);
+      for (const part of group) {
+        const node = new THREE.Object3D();
+        node.position.set(...part.seat);
+        node.quaternion.setFromUnitVectors(up, V(...part.axis));
+        node.updateMatrix();
+        const info = { name: part.id, cad_id: part.id, parent: part.parent, motion: part.motion, cover: part.cover };
+        this.parts.push({ node, info, base: node.matrix.clone(), batch });
+      }
+    }
   }
 
   changeView(mode) {
@@ -192,22 +235,27 @@ export class AssemblyViewer {
   }
 
   visibility() {
+    this.wiring?.show(!this.detail || this.detail === closeups.hub, this.mode === "electronics");
+    this.poseHash = "";
     for (const item of this.parts) {
       const { node, info, materials } = item;
       const jawCloseup = this.detail === closeups.jaw && info.motion === "jaw" && info.shell;
-      const inside = this.detail === closeups.eyes ? blinkParts.has(info.cad_id) : !info.shell || jawCloseup;
+      const inside = this.detail === closeups.eyes ?
+        blinkParts.has(info.cad_id) || blinkParts.has(info.parent) || /^(lid|blink)/.test(info.motion) :
+        !info.shell || jawCloseup;
       node.visible = info.name.startsWith("Ballast") ? this.detail === closeups.neck :
-        this.mode === "assembled" || (this.mode === "mechanism" && inside) ||
+        this.mode === "assembled" || this.mode === "wiring" || (this.mode === "mechanism" && inside) ||
         (this.mode === "electronics" && (info.motion === "fixed" || info.motion === "hatch") && !info.cover);
-      if (info.name === "01_base_cup" || (info.motion === "jaw" && info.shell)) {
-        const ghost = jawCloseup || (info.name === "01_base_cup" && this.mode === "electronics" && this.drop > .75);
+      if (info.wiringFade) {
+        const wired = this.mode === "wiring";
+        const ghost = wired || jawCloseup || (info.cad_id === "Part000" && this.mode === "electronics" && this.drop > .75);
         for (const material of materials) {
           if (material.transparent !== ghost) {
             material.transparent = ghost;
             material.depthWrite = !ghost;
             material.needsUpdate = true;
           }
-          material.opacity = jawCloseup ? .51 : ghost ? .34 : 1;
+          material.opacity = wired ? .15 : jawCloseup ? .51 : ghost ? .34 : 1;
         }
       }
     }
@@ -244,6 +292,10 @@ export class AssemblyViewer {
     this.visibility();
     this.point([this.detail.position, this.detail.center]);
     return this.detail;
+  }
+
+  inspectRotorClash() {
+    this.point([[68, 112, 28], [-9, 21, -45]]);
   }
 
   point(pair, animate = true) {
@@ -288,11 +340,22 @@ export class AssemblyViewer {
       }
       this.drop = drop;
       const byMotion = new Map();
+      const matrixFor = motion => {
+        if (!byMotion.has(motion)) byMotion.set(motion, motionMatrix(motion, pose, drop));
+        return byMotion.get(motion);
+      };
+      for (const batch of this.fastenerBatches) batch.count = 0;
       for (const item of this.parts) {
-        if (!byMotion.has(item.info.motion)) byMotion.set(item.info.motion, motionMatrix(item.info.motion, pose, drop));
-        item.node.matrix.multiplyMatrices(byMotion.get(item.info.motion), item.base);
-        item.node.matrixWorldNeedsUpdate = true;
+        item.node.matrix.multiplyMatrices(matrixFor(item.info.motion), item.base);
+        if (item.batch) {
+          if (item.node.visible) item.batch.setMatrixAt(item.batch.count++, item.node.matrix);
+        } else {
+          item.node.matrixWorldNeedsUpdate = true;
+        }
       }
+      for (const batch of this.fastenerBatches) batch.instanceMatrix.needsUpdate = true;
+      this.wiring?.draw(matrixFor);
+      if (this.rotorClash) this.rotorClash.visible = this.mode === "wiring" && Math.abs(pose.neckYaw - 36) < .25;
       this.poseHash = hash;
       this.dirty = true;
       this.keepShadows = true;
@@ -311,7 +374,7 @@ export class AssemblyViewer {
     } else {
       this.anchor.hidden = true;
     }
-    this.renderer.shadowMap.needsUpdate = this.keepShadows && this.floor.visible;
+    this.renderer.shadowMap.needsUpdate = this.keepShadows && this.floor.visible && this.mode !== "wiring";
     this.renderer.render(this.scene, this.camera);
     this.keepShadows = false;
     this.dirty = false;

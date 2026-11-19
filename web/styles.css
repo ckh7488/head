@@ -161,6 +161,9 @@ h1 {
   background: #151b1f;
 }
 .viewer-top { border-bottom: 1px solid #2c363d; }
+.wiring-review { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px; margin-top: 12px; padding: 11px 14px; border: 1px solid #68513b; border-radius: 10px; }
+.wiring-review p { margin: 0; color: var(--muted); }
+.wiring-review strong { color: #ffcc99; }
 .viewer-bottom { border-top: 1px solid #2c363d; }
 .segmented {
   background: #101518;
@@ -552,6 +555,7 @@ dialog p { margin-top: 10px; color: var(--muted); font-size: .86rem; }
   .sim-status { font-size: .75rem; padding: 5px 8px; }
   .page-heading p { font-size: .89rem; }
   .viewer-top, .viewer-bottom { padding: 8px; }
+  .view-switch { flex-wrap: wrap; }
   .view-switch button { font-size: .78rem; padding: 6px 7px; gap: 3px; }
   .view-switch svg { width: 14px; height: 14px; }
   .icon-button { min-width: 31px; height: 31px; }

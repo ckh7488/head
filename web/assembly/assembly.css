@@ -98,6 +98,7 @@ h1 { font-size: clamp(1.85rem, 3vw, 2.8rem); line-height: 1.13; letter-spacing: 
 .legend i { width: 9px; height: 9px; border-radius: 3px; display: block; }
 .legend .moving { background: var(--blue); }
 .legend .fastener { background: var(--gold); }
+.legend .wiring { background: #7fe6ef; }
 .legend .hit { background: var(--red); }
 .view-controls { padding: 9px 13px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
 .view-buttons, .player-actions > div { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }

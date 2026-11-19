@@ -47,6 +47,7 @@ fc mechanical/revise.py
 fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B15-Assembly.FCStd
 fc mechanical/physics/cable_assembly.py build/mechanical/R5-B15-Assembly.FCStd
 fc mechanical/physics/harness_fit.py build/mechanical/R5-B15-Assembly.FCStd
+fc mechanical/physics/installed_fit.py mechanical/R5-B15-Assembly.FCStd --candidate-seat -36.5
 fc mechanical/physics/service_clearance.py build/mechanical/R5-B15-Assembly.FCStd
 kicad-cli pcb export step --board-only --user-origin 65x42mm -o build/mechanical/c3.step electronics/c3-rf/C3_Antenna.kicad_pcb
 kicad-cli pcb export step --board-only --user-origin 100x80mm -o build/mechanical/hub.step electronics/servo-hub/R5_Servo_Hub.kicad_pcb

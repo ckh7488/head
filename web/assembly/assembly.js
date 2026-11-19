@@ -65,7 +65,7 @@ function makeIndex() {
 }
 
 const current = () => steps[state.index];
-const span = () => Math.hypot(...current().moves[0].offset);
+const span = () => Math.hypot(...(current().moves[0]?.offset || []));
 const stopData = () => stops?.[current().id];
 const limit = () => stopData() ? 1 - stopData().remaining / span() : 1;
 const candidates = () => steps.map((step, index) => ({step, index})).filter(({step}) => !state.issues || needsCheck(step));
@@ -124,7 +124,7 @@ function details() {
   const stop = stopData();
   const status = el("detail-status");
   status.dataset.kind = needsCheck(step) ? "blocker" : step.checked ? "verified" : "reference";
-  status.textContent = step.blocker ? "CAD 간섭" : step.hold ? "체결품 확인 대기" : step.checked ? "CAD 경로 확인" : "조립 방향";
+  status.textContent = step.status || (step.blocker ? "CAD 간섭" : step.hold ? "실물 확인 필요" : step.checked ? "CAD 경로 확인" : "조립 방향");
   el("task").textContent = step.task;
   el("check").textContent = step.check;
   el("note").textContent = step.note || "";
@@ -156,12 +156,17 @@ function selectStep(index) {
   el("step-number").textContent = `${String(index + 1).padStart(2, "0")} / ${steps.length}`;
   el("step-title").textContent = step.title;
   el("section").hidden = !step.cut;
+  el("wire-legend").hidden = !step.wiring;
+  el("ghost").textContent = step.wiring ? "배선·체결 보기" : "체결품 보기";
+  const noMotion = !step.moves.length;
+  el("play").closest(".timeline").hidden = noMotion;
+  el("start").parentElement.hidden = noMotion;
   el("picked").hidden = true;
   updateNavigation();
   details();
   scene?.show(step);
   applyView();
-  position(stopData() ? limit() : 0);
+  position(stopData() ? limit() : noMotion ? 1 : 0);
 }
 
 function go(direction) {
@@ -171,6 +176,7 @@ function go(direction) {
 }
 
 function play() {
+  if (!current().moves.length) return;
   if (animation) {
     pause();
     return;

@@ -132,6 +132,7 @@ function defaultCaption() {
     assembled: ["조립 상태", "아이보리 외장 · 차콜 받침"],
     mechanism: ["내부 기구", "안구와 눈꺼풀 링크 · 목 구동부"],
     electronics: ["전장 배치", "서보 허브 · OpenRB-150 · ESP32-C3"],
+    wiring: ["배선·체결", "전원·신호·USB · 체결품과 함께 구동 검토"],
   };
   const message = names[mount];
   setCaption(message[0], hatchOpen ? "서비스 덮개 · 약 30 mm 열림" : message[1]);
@@ -143,6 +144,7 @@ function setCaption(title, detail) {
 }
 
 function updateHatch() {
+  at("wiring-review").hidden = mount !== "wiring";
   hatch.setAttribute("aria-pressed", String(hatchOpen));
   hatch.querySelector("span").textContent = hatchOpen ? "받침 덮개 닫기" : "받침 덮개 열기";
 }
@@ -159,6 +161,17 @@ for (const button of viewButtons) {
     defaultCaption();
   });
 }
+
+at("show-rotor-clash").addEventListener("click", () => {
+  changeMode("manual");
+  stopDemo();
+  stopGestures();
+  desired = { ...neutral, neckYaw: 36 };
+  updateReadouts(desired, true);
+  scene?.inspectRotorClash();
+  setCaption("회전판과 목 모터", "+36° · 붉은 체적 44.9 mm³");
+  upright.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
+});
 
 for (const button of cameraButtons) {
   button.addEventListener("click", () => {
@@ -313,7 +326,7 @@ dialog.addEventListener("close", () => dialog.querySelector("video").pause());
 
 let previous = performance.now();
 function animate(now) {
-  const dt = clamp((now - previous) / 1000, 0, .05);
+  const dt = clamp((now - previous) / 1000, 0, .2);
   previous = now;
   let command = desired;
   let animated = demoStart !== null;
@@ -351,6 +364,7 @@ async function start() {
     found = true;
     loader.hidden = true;
     at("view-canvas").dataset.ready = "true";
+    if (location.search === "?view=wiring") viewButtons.find(b => b.dataset.view === "wiring").click();
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
   } catch (error) {

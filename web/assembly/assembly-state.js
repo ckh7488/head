@@ -51,5 +51,5 @@ export function withAssemblyState(definitions, joints, hardware) {
   for (const item of hardware) {
     if (!item.tool && !parents.has(item.id)) throw Error(`Missing installation stage for ${item.id}`);
   }
-  return stages;
+  return { stages, parents };
 }

@@ -27,8 +27,8 @@
     <section class="page-heading" aria-labelledby="page-title">
       <div>
         <h1 id="page-title">조립·구동 검토</h1>
-        <p>받침 너트와 바닥 덮개를 고쳤습니다. 단계별 조립에서 끼우는 방향과 덮개 단면을 볼 수 있습니다.</p>
-        <a class="assembly-link" href="./assembly/">단계별 조립 보기</a>
+        <p>배선·체결 화면을 켜면 외장 안쪽을 보면서 여섯 축을 움직일 수 있습니다.</p>
+        <a class="assembly-link" href="./assembly/#complete">배선·체결 완료 보기</a>
       </div>
       <dl class="spec">
         <div><dt>전체 높이</dt><dd>293 <span>mm</span></dd></div>
@@ -53,6 +53,7 @@
               <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3m14-6h3m-3 6h3"/></svg>
               전장 배치
             </button>
+            <button type="button" data-view="wiring" aria-pressed="false">배선·체결</button>
           </div>
           <button type="button" class="icon-button" id="expand-view" aria-label="뷰어 전체 화면" title="전체 화면">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4H4v4m12-4h4v4M4 16v4h4m12-4v4h-4"/></svg>
@@ -140,6 +141,11 @@
           </button>
         </div>
       </aside>
+    </div>
+
+    <div class="wiring-review" id="wiring-review" hidden>
+      <p><strong>B15 출력 전 수정 필요</strong> · 회전판 아래 M3 볼트가 목 모터에 닿습니다. 목 모터 두 곳에서 JST 플러그가 지지대에 걸립니다.</p>
+      <button type="button" class="action-button" id="show-rotor-clash">+36° 볼트 간섭 보기</button>
     </div>
 
     <section class="part-section" aria-labelledby="part-title">

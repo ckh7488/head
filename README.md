@@ -4,6 +4,8 @@
 
 구조물은 **M3×8·M3×16 육각렌치 원통머리 ISO 4762 (DIN 912)**와 일반 M3 육각너트를 씁니다. 작은 링크와 기판, 제조사 체결 구멍은 부품표에 적었습니다. [기구 부품표](mechanical/BOM.csv)
 
+**B15 제작 보류.** 회전판 볼트와 목 모터 플러그 간섭을 확인했습니다. [제작 전 구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사)
+
 시험판 2번은 케이블 덮개 공구 통로, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어용입니다. 모터 케이스 나사산과 OpenRB 구멍 간격은 가조립에서 확인합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B15-Fit-P1S.3mf)
 
 | 작업 | 시작 파일 |
@@ -13,7 +15,7 @@
 | 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
-| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/) · [B15 웹 뷰어](web/) |
+| 브라우저에서 조립 순서와 6축 조작 | [조립 완료](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#complete) · [배선 포함 구동](https://r5-b1-review.ckh.chatgpt.site/b15/?view=wiring) |
 
 ## 웹 뷰어
 

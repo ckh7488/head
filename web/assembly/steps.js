@@ -703,11 +703,26 @@ const definitions = [
     stock: "일반 M3 육각너트 ×4", checked: true, inspectFasteners: true,
   },
   {
+    id: "neck-wiring", group: "턱·외장", title: "목과 머리 배선 연결", base: "Part000",
+    moves: [], focus: [0, 0, 55], view: [1.6, -1, .8], span: 310,
+    task: "뒤 해골을 닫기 전에 받침에서 올라오는 선을 회전판 앞 통로로 보내고 모터 네 개와 카메라를 연결합니다.",
+    check: "받침, 목 좌우축, 목 상하축마다 여유를 따로 둡니다. 전원을 빼고 목을 끝까지 움직이며 선이 당기거나 끼는지 봅니다.",
+    inspectFasteners: true, wiring: true, hold: true, status: "배선 경로 검토",
+  },
+  {
     id: "rear-shell", group: "턱·외장", title: "뒤 해골을 씌우기", base: frame,
     moves: [move("Part074", 0, 68, 0)], focus: [0, 43, 151], view: [1.1, 1.4, .59], span: 172,
     task: "뒤 해골을 이음면에 수직으로 밀어 넣습니다.",
     check: "앞뒤 이음면이 힘 없이 닫히는지 봅니다. 눈 지지대와 링크의 옆 나사를 먼저 확인합니다.",
-    cut: ["y", 22.98], checked: true,
+    cut: ["y", 22.98], checked: true, wiring: true,
+  },
+  {
+    id: "complete", group: "턱·외장", title: "조립 완료 · 체결과 배선", base: "Part000",
+    moves: [], focus: [0, 1, 58], view: [1.15, -1.45, .8], span: 325,
+    task: "기본 체결품 140개와 체결 길이를 확인 중인 원통머리 18곳, 내부 전선 32가닥을 표시합니다.",
+    check: "회전판 아래 볼트와 목 모터 두 곳의 JST가 걸립니다. 카메라 고정 나사와 실제 배선 여유도 확인이 필요합니다.",
+    note: "상단 구동 검토에서 목 좌우 +36°의 볼트 간섭을 볼 수 있습니다.",
+    inspectFasteners: true, wiring: true, hold: true, status: "제작 전 수정",
   },
 ];
 
@@ -787,4 +802,27 @@ const joints = {
   "rear-shell": [["Part019", "Part074"]],
 };
 
-export const steps = withAssemblyState(definitions, joints, hardware);
+const assembly = withAssemblyState(definitions, joints, hardware);
+export const steps = assembly.stages;
+
+const jointMotion = new Map([
+  [names(mastNuts), "pan"],
+  ["middleServo0 middleNut0 middleWasher0", "blink_motor_horn"],
+  ["centerLink0 linkNutPos0 linkWasherPos0", "blink_shaft_crank"],
+  ["centerLink1 rightLink0 linkNutPos1 linkNutNeg0 " + upperLinkWasherIds, "blink_shaft_crank"],
+  ["centerLower0 linkLeftLowerNut0 linkWasherPos2", "lid1"],
+  ["rightLower0 linkRightLowerNut0 linkWasherNeg1", "lid2"],
+  [names(hatchNuts) + " " + names(hatchBolts), "fixed"],
+].flatMap(([list, motion]) => ids(list).map(id => [id, motion])));
+
+export function installedHardware(cadParts) {
+  const parts = new Map(cadParts.map(part => [part.cad_id, part]));
+  return hardware.filter(part => !part.tool).map(part => {
+    const parent = parts.get(assembly.parents.get(part.id));
+    if (!parent) throw Error(`Missing motion parent for ${part.id}`);
+    return {
+      ...part, parent: parent.cad_id, motion: jointMotion.get(part.id) || parent.motion,
+      cover: parent.cover && /^(Part00[12])$/.test(parent.cad_id),
+    };
+  });
+}
