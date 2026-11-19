@@ -18,7 +18,7 @@ from stock import YOKE_MOUNTS, nut, socket_screw
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B11-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B12-Assembly.FCStd"
 
 
 def check_pairs(doc):

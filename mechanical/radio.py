@@ -4,6 +4,7 @@ C3_ORIGIN = (-71.0, 22.0)
 C3_HOLES = ((3.0, 50.8), (31.0, 37.9))
 C3_BOTTOM = -71.0
 C3_TOP = C3_BOTTOM + 1.6
+C3_NUT_SEAT = -76.86
 
 
 def board_xy(x, y):

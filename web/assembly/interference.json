@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "aaee8bd465b6e65bf5c93f1b2f6547b12f6b9c72f6b50e9782e8d8c6d6a65f52",
+  "cad_sha256": "c59390a852b811f6fd96d9f0702c0c4d192358dcb45e6366e0c9c699de8fc57e",
   "stops": {},
   "service_hatch": {
     "base_centers": [
@@ -320,6 +320,44 @@
     "tray_washer_y": 83.75,
     "tray_nut_y": 82.95,
     "tray_inner_travel": 14.0
+  },
+  "board_mounts": {
+    "c3": {
+      "centers": [
+        [
+          -68.0,
+          -28.799999999999997
+        ],
+        [
+          -40.0,
+          -15.899999999999999
+        ]
+      ],
+      "nut_z": -76.86,
+      "bolt_z": -69.4
+    },
+    "openrb": {
+      "centers": [
+        [
+          42.25,
+          -42.0
+        ],
+        [
+          42.25,
+          19.5
+        ],
+        [
+          62.75,
+          -42.0
+        ],
+        [
+          62.75,
+          19.5
+        ]
+      ],
+      "nut_z": -74.36,
+      "bolt_z": -66.9
+    }
   },
   "neck": {
     "mast_mounts": [

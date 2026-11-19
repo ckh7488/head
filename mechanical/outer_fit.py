@@ -64,7 +64,7 @@ def front_loading_clearance(doc):
         base = solid(shell)
         tools = [enclosure_motion(solid(doc.getObject(name)), FRONT_TRAVEL)
                  for name in ('Part012', 'Part013', 'Part014', 'Part015',
-                              'Part025', 'Part026', 'Part027', 'Part028')]
+                              'Part025', 'Part026', 'Part027', 'Part028', 'Part044')]
         for low, high in ((-60., -48.), (48., 60.)):
             wing = doc.Part011.Shape.common(box(low, high, -20., 32., 97., 125.))
             tools.append(enclosure_motion(solid(shape=wing), FRONT_TRAVEL))

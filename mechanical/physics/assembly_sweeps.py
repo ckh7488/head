@@ -29,14 +29,21 @@ def manifold(mesh):
                                np.asarray(mesh.faces, dtype=np.uint32)))
 
 
+def washer_dimensions(size):
+    return {2: (2.50, 1.10, .3), 3: (3.50, 1.60, .5)}[size]
+
+
 def fastener(row):
     kind, size = row['type'], row['size']
     length = row.get('length', 0)
     if kind in ('nut', 'washer'):
-        radius = {2: 4., 3: 5.5}[size] / np.sqrt(3) if kind == 'nut' else 3.5
-        height = {2: 1.6, 3: 2.4}[size] if kind == 'nut' else .5
+        if kind == 'nut':
+            radius = {2: 4., 3: 5.5}[size] / np.sqrt(3)
+            hole_radius, height = size/2+.006, {2: 1.6, 3: 2.4}[size]
+        else:
+            radius, hole_radius, height = washer_dimensions(size)
         stem = tr.creation.cylinder(radius=radius, height=height, sections=6 if kind == 'nut' else 30)
-        hole = tr.creation.cylinder(radius=size/2+.006, height=height+.08, sections=48)
+        hole = tr.creation.cylinder(radius=hole_radius, height=height+.08, sections=48)
         stem = tr.boolean.difference([stem, hole], engine='manifold')
         stem.apply_transform(tr.transformations.rotation_matrix(row.get('phase', 0), WORLD_Z))
         stem.apply_translation((0, 0, height/2))
@@ -65,8 +72,9 @@ def exact_fastener(row):
         return socket_screw(size, row['length'], seat, axis)
     shift = App.Vector(*seat) - .045*App.Vector(*axis)
     if row['type'] == 'washer':
-        blank = cylinder(3.50, .5, seat, axis)
-        return blank.cut(cylinder(1.60, .59, tuple(shift), axis))
+        outer, inner, height = washer_dimensions(size)
+        blank = cylinder(outer, height, seat, axis)
+        return blank.cut(cylinder(inner, height+.09, tuple(shift), axis))
     height = {2: 1.6, 3: 2.4}[size]
     phase = row.get('phase', 0)-pi/6
     normal = App.Rotation(App.Vector(*WORLD_Z), App.Vector(*axis)).multVec(App.Vector(cos(phase), sin(phase), 0))
@@ -85,13 +93,14 @@ def check_paths(doc, directory, plan, selected):
     hardware = {row['id']: row for row in plan['hardware']}
     cache, exact = {}, {}
 
-    def element(name, closed=False):
+    def element(name, closed, adjustment):
         closed = closed and name in ('Part078', 'Part079')
-        key = name, closed
+        key = name, closed, adjustment
         if key not in cache:
             mesh = fastener(hardware[name]) if name in hardware else tr.load_mesh(directory/f'{name}.stl')
             if closed:
                 mesh.apply_transform(tr.transformations.rotation_matrix(np.pi/2, (1, 0, 0), (0, -39, 119)))
+            mesh.apply_translation(adjustment)
             solid = manifold(mesh)
             if solid.is_empty():
                 solid = None
@@ -108,22 +117,32 @@ def check_paths(doc, directory, plan, selected):
         return exact[name]
 
     zero = np.zeros(3)
+    checked_seats = set()
     problems, samples = {}, 0
     for step in plan['steps']:
         identifier = step['id']
         if selected and identifier not in selected:
             continue
         closed = step.get('closedLids', False)
+        offsets = step.get('seatOffsets', {})
         moving = {part: np.asarray(move['offset']) for move in step['moves'] for part in move['ids']}
         parts = dict.fromkeys(step['base'].split() + list(moving))
         issues = []
         for first, second in combinations(parts, 2):
             shift = moving.get(first, zero) - moving.get(second, zero)
             distance = np.linalg.norm(shift)
-            if distance < 1e-8:
+            hardware_pair = first in hardware or second in hardware
+            at_rest = distance < 1e-8
+            if at_rest and not hardware_pair:
                 continue
-            m1, o1, solid1 = element(first, closed)
-            m2, o2, solid2 = element(second, closed)
+            first_seat = tuple(offsets.get(first, (0, 0, 0)))
+            second_seat = tuple(offsets.get(second, (0, 0, 0)))
+            seated = frozenset(((first, first_seat, closed and first in ('Part078', 'Part079')),
+                                (second, second_seat, closed and second in ('Part078', 'Part079'))))
+            if at_rest and seated in checked_seats:
+                continue
+            m1, o1, solid1 = element(first, closed, first_seat)
+            m2, o2, solid2 = element(second, closed, second_seat)
             if np.any(np.maximum(m1.bounds[1], m1.bounds[1]+shift) < m2.bounds[0]):
                 continue
             if np.any(np.minimum(m1.bounds[0], m1.bounds[0]+shift) > m2.bounds[1]):
@@ -135,18 +154,26 @@ def check_paths(doc, directory, plan, selected):
                     solid2 = crop(solid2, m1.bounds, shift)
             hits = []
             o2.setTransform(fcl.Transform())
-            for fraction in np.linspace(0., 1., max(2, int(np.ceil(distance))+1)):
+            fractions = (0.,) if at_rest else np.linspace(0., 1., max(2, int(np.ceil(distance))+1))
+            for fraction in fractions:
+                if fraction == 0. and hardware_pair:
+                    if seated in checked_seats:
+                        continue
+                    checked_seats.add(seated)
                 offset = shift*fraction
                 samples += 1
                 o1.setTransform(fcl.Transform(offset))
-                if not fcl.collide(o1, o2, request, fcl.CollisionResult()):
+                surface_hit = fcl.collide(o1, o2, request, fcl.CollisionResult())
+                if not surface_hit and (fraction != 0. or not hardware_pair):
                     continue
                 if solid1 is not None and solid2 is not None:
                     overlap = (solid1.translate(offset) ^ solid2).volume()
                 elif brep(first) is not None and brep(second) is not None:
-                    overlap = brep(first).translated(App.Vector(*offset)).common(brep(second)).Volume
+                    first_shape = brep(first).translated(App.Vector(*offset) + App.Vector(*first_seat))
+                    second_shape = brep(second).translated(App.Vector(*second_seat))
+                    overlap = first_shape.common(second_shape).Volume
                 else:
-                    overlap = None
+                    overlap = None if surface_hit else 0.
                 if overlap is None or overlap > MESH_VOLUME_LIMIT:
                     hits.append((float(fraction), overlap))
             if hits:

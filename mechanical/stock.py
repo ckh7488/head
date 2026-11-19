@@ -114,7 +114,10 @@ def blink_stock(doc, folder, layout):
         part.Label = f'45 blink shaft spacer {label.lower()}'
         part.addProperty('App::PropertyBool','Printed','Design')
         part.Printed = True
-        printed(doc,part.Name,shoulder.fuse(sleeve).cut(bore),
+        collar = shoulder.fuse(sleeve).cut(bore)
+        if label == 'Left':
+            collar = collar.cut(box(6.82, 7.62, shaft_y-4.2, shaft_y+4.2, shaft_z+2.42, shaft_z+4.0))
+        printed(doc,part.Name,collar,
                 folder/f'45_blink_shaft_spacer_{label.lower()}.stl','x+')
 
     plate = doc.Part046.Shape
@@ -184,13 +187,19 @@ def ballast_stock(doc, folder):
 
 
 def radio_board_stock(doc, folder):
-    from radio import C3_HOLES, board_xy
+    from openrb import HOLES, NUT_SEAT, TOP, board_xy as rb_xy
+    from radio import C3_HOLES, C3_NUT_SEAT, C3_TOP, board_xy
 
-    tray = doc.Part071.Shape
-    for x,y in (board_xy(*corner) for corner in C3_HOLES):
-        tray = tray.cut(hexagon(4.30, 2.20, (x,y,-77.45)))
-        tray = tray.cut(cylinder(1.13, 4.5, (x,y,-75.45)))
-    printed(doc,'Part071',tray,folder/'27_radio_plate.stl')
+    for name, slug, centers, nut_seat, top in (
+        ('Part071', '27_radio_plate', [board_xy(*corner) for corner in C3_HOLES], C3_NUT_SEAT, C3_TOP),
+        ('Part072', '27_openrb_plate', [rb_xy(*corner) for corner in HOLES], NUT_SEAT, TOP),
+    ):
+        tray = doc.getObject(name).Shape
+        for x, y in centers:
+            roof = nut_seat + 1.61
+            tray = tray.cut(hexagon(4.30, roof + 77.45, (x, y, -77.45)))
+            tray = tray.cut(cylinder(1.13, top - 1.35 - roof, (x, y, roof - .20)))
+        printed(doc, name, tray, folder/f'{slug}.stl')
 
 
 def neck_stock(doc, folder):

@@ -142,7 +142,7 @@ function selectStep(index) {
     makeIndex();
   }
   state.index = index;
-  state.ghost = Boolean(steps[index].blocker);
+  state.ghost = Boolean(steps[index].blocker || steps[index].inspectFasteners);
   state.section = false;
   const step = current();
   history.replaceState(null, "", `#${step.id}`);

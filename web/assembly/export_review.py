@@ -29,6 +29,8 @@ from neck_joint import (
     PITCH_HORN, PITCH_HORN_SEAT,
 )
 from outer_fit import CAMERA_TRAVEL, FRONT_TRAVEL, JAW_TRAVEL, ORBIT_TRAVEL
+from openrb import HOLES, NUT_SEAT, TOP, board_xy as rb_xy
+from radio import C3_HOLES, C3_NUT_SEAT, C3_TOP, board_xy
 from stock import (
     BLINK_CLAMPS, BLINK_CLAMP_NUT_Z, BLINK_MOUNTS, BLINK_RAIL_LENGTH, BLINK_RAIL_NUT_Y, BLINK_RAIL_SEAT_Y,
 )
@@ -55,6 +57,10 @@ def export(cad, output):
             'bolt_seat': CAP_BOLT_SEAT_Z, 'bolt_length': CAP_BOLT_LENGTH, 'cover_travel': CAP_TRAVEL,
             'tray_mounts': SADDLE_MOUNTS, 'tray_travel': SADDLE_TRAVEL, 'tray_bolt_travel': SADDLE_BOLT_TRAVEL,
             'tray_washer_y': SADDLE_WASHER_Y, 'tray_nut_y': SADDLE_NUT_Y, 'tray_inner_travel': SADDLE_INNER_TRAVEL,
+        },
+        'board_mounts': {
+            'c3': {'centers': [board_xy(*corner) for corner in C3_HOLES], 'nut_z': C3_NUT_SEAT, 'bolt_z': C3_TOP},
+            'openrb': {'centers': [rb_xy(*corner) for corner in HOLES], 'nut_z': NUT_SEAT, 'bolt_z': TOP},
         },
     }
     result['neck'] = {
@@ -88,7 +94,7 @@ def export(cad, output):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B11-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B12-Assembly.FCStd')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     export(args.cad, args.output)

@@ -43,7 +43,7 @@ function fastener(part) {
     const across = isSmall ? 4 : 5.5;
     add(ring(across / Math.sqrt(3), radius, isSmall ? 1.6 : 2.4, 6, 24, phase), 0, false);
   } else if (type === "washer") {
-    add(ring(3.5, 1.6, .5, 30, 24), 0, false);
+    add(ring(isSmall ? 2.5 : 3.5, isSmall ? 1.1 : 1.6, isSmall ? .3 : .5, 30, 24), 0, false);
   } else if (type === "tool") {
     add(new THREE.CylinderGeometry(1, 1, length, 12), length / 2);
   } else {
@@ -84,7 +84,7 @@ export class WalkthroughScene {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     this.renderer.localClippingEnabled = true;
-    this.renderer.domElement.setAttribute("aria-label", "B11 움직이는 CAD 형상");
+    this.renderer.domElement.setAttribute("aria-label", "B12 움직이는 CAD 형상");
     this.host.append(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = false;
@@ -183,6 +183,7 @@ export class WalkthroughScene {
         initial.sub(hinge).applyQuaternion(closed).add(hinge);
         node.quaternion.premultiply(closed);
       }
+      if (step.seatOffsets?.[id]) initial.add(vector(step.seatOffsets[id]));
       node.position.copy(initial);
     }
     this.moveById = new Map(step.moves.flatMap(({ ids, offset }) => ids.map(id => [id, vector(offset)])));
@@ -195,7 +196,8 @@ export class WalkthroughScene {
     for (const move of step.moves.slice(0, 4)) {
       const offset = vector(move.offset);
       const length = offset.length();
-      const start = this.entries.get(move.ids[0]).center.clone().add(offset);
+      const entry = this.entries.get(move.ids[0]);
+      const start = entry.center.clone().add(entry.initial).sub(entry.original).add(offset);
       const arrow = new THREE.ArrowHelper(offset.normalize().negate(), start, length, 0x9de6e1, Math.min(3.5, length * .35), Math.min(2.4, length * .28));
       arrow.traverse(line => {
         if (!line.material) return;
@@ -235,10 +237,10 @@ export class WalkthroughScene {
       const isMoving = this.moveById.has(id);
       entry.node.visible = this.fixed.has(id) || isMoving;
       if (!entry.node.visible) continue;
-      const translucent = ghost && !isMoving && entry.kind !== "fastener";
+      const translucent = ghost && entry.kind !== "fastener";
       for (const { material, color, opacity } of entry.materials) {
         material.clippingPlanes = planes;
-        material.opacity = translucent ? .24 : opacity;
+        material.opacity = translucent ? (isMoving ? .42 : .19) : opacity;
         material.transparent = translucent || opacity < 1;
         material.depthWrite = !material.transparent;
         material.color.copy(color);

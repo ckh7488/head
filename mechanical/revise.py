@@ -1,4 +1,4 @@
-"""Build R5 B11 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B12 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -19,6 +19,8 @@ from primitives import box, cylinder, holes, print_mesh
 from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
 from motor_seats import JAW_STAY, head_pockets
 from neck_joint import PITCH_HORN, PITCH_HORN_SEAT
+from openrb import board_model as openrb_model, carrier as openrb_carrier
+from openrb import usb_plug as openrb_usb_plug
 from outer_fit import finish_camera, front_loading_clearance
 from radio import c3_mount
 from stock import ballast_stock, blink_stock, cable_stock, hatch_stock, hexagon, neck_stock, radio_board_stock
@@ -195,15 +197,12 @@ def board_mounts(doc, base):
     radio, radio_base = c3_mount(doc.Part071.Shape.copy().translated(V(0, -14, 0)))
     doc.Part070.Label = 'ESP32-C3 board · front-facing USB-C'
 
-    openrb = doc.Part069.Shape.copy().translated(V(0, -14, 3.2))
     rb_base = box(37, 73, -46.5, 24.5, -77.3, -74.3).common(cylinder(85.85, 5., (0,0,-78)))
     rb_base = holes(rb_base, 1.7, 5., [(x,y,-78.2) for x,y in tray_holes[1]])
     rb_base = rb_base.cut(box(44.0, 59.0, -37.2, 17.5, -78, -73.7))
-    for x in (41.7, 61.3):
-        for y in (-39.5, 19.5):
-            rb_base = rb_base.cut(box(x-2.55, x+2.55, y-2.65, y+2.65, -78, -73.7))
-    for o, shape in ((doc.Part069, openrb), (doc.Part070, radio)):
-        o.Shape = shape
+    rb_base = openrb_carrier(rb_base)
+    doc.Part069.Shape = openrb_model()
+    doc.Part070.Shape = radio
     return base, {
         'Part071': ('27_radio_plate', radio_base, None),
         'Part072': ('27_openrb_plate', rb_base, None),
@@ -381,6 +380,7 @@ def cut_running_clearance(doc):
 
         targets[JAW_STAY].extend(mesh(pocket) for pocket in head_pockets(JAW_STAY))
         targets[JAW_STAY].append(mesh(box(-43.8, -40.52, 2.20, 4.2, 79.7, 119.2)))
+        targets[JAW_STAY].append(mesh(box(-55.85, -54.24, -34.82, -32.72, 111.02, 112.85)))
         targets['Jaw_37_right_jaw_bearing_stay'].append(mesh(box(54.53, 55.8, -7.21, -5.73, 107.66, 109.7)))
         arm = doc.Jaw_39_right_jaw_pivot_arm
         parent_to_world = arm.getGlobalPlacement().multiply(arm.Placement.inverse())
@@ -647,6 +647,7 @@ def main(output=BUILD):
     apply_repairs(doc, repairs, output/'STL')
     print_mesh(bearer, output/'STL'/'41_outer_race_keeper.stl', 'z-')
     base_group = doc.Base_and_neck
+    add_fixture(doc, base_group, 'OpenRBUSB', 'OpenRB USB-C plug envelope', openrb_usb_plug(), 'fixed', False)
     add_fixture(doc, base_group, 'CableSaddle', '40 captive cable tray', saddle, 'fixed', True)
     add_fixture(doc, base_group, 'CableGate', '42 interlocking cable cover', gate, 'fixed', True)
     print_mesh(gate, output/'STL'/'42_captive_cable_cover.stl', 'z-')
@@ -673,10 +674,10 @@ def main(output=BUILD):
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B11 · prototype'
+    doc.R5.Label = 'R5 B12 · prototype'
     doc.R5.Status = 'Cylindrical hex-socket heads only. DYNAMIXEL case thread fit pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B11-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B12-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 
