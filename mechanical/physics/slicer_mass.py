@@ -9,7 +9,10 @@ import re
 
 
 MOVE = re.compile(r'^G[0123] (?=[^;]*[XY])[^;]*? E([-+.0-9]+)(?=[ ;\n])')
-NOT_ON_PART = {'Custom', 'Skirt', 'Brim', 'Support', 'Support interface', 'Prime tower', 'Wipe tower'}
+NOT_ON_PART = {
+    'Custom', 'Skirt', 'Brim', 'Support', 'Support interface', 'Support transition',
+    'Prime tower', 'Wipe tower',
+}
 
 
 def part_weights(gcode):

@@ -39,6 +39,8 @@ B15 전체 출력은 구동 간섭과 출력 경로 문제를 수정한 뒤 진�
 
 ## 받침
 
+받침의 뒤쪽 M3 통로 두 곳과 바닥 덮개 체결부 네 곳에서 서포트를 제거합니다. 시험판 2번 시편의 뒤쪽 통로 두 곳도 정리합니다. 볼트가 힘을 주지 않고 통과하는지 확인한 뒤 조립합니다.
+
 1. 허브를 넣기 전에 트레이 40을 M3×16 두 개로 붙입니다. 뒤에서 긴 육각렌치를 넣고 받침 안에서 소켓으로 와셔 뒤의 너트를 잡습니다. 커넥터 뒤턱을 맞추고 덮개 42를 얹습니다. 위에서 덮개 볼트를 조이는 동안 뒤쪽 열린 턱에서 너트를 스패너로 잡습니다. [케이블 덮개 체결](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-cover-bolts)
 2. 작업대에서 바닥 덮개를 양끝만 받쳐 밑을 비웁니다. 5.5 mm 소켓에 너트를 담아 덮개 아래 Ø10.6 mm 구멍에 올리고 기판 쪽에서 볼트를 겁니다. 소켓 앞쪽 외경 Ø9.3 mm까지 확인했습니다. 허브가 달린 덮개를 받침에 올린 다음에는 옆 창에서 스패너로 너트를 잡고 아래에서 M3×8을 조입니다. 배선에는 덮개를 30 mm 내릴 여유를 둡니다. [허브 소켓 경로](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-nuts) · [외경 Ø8 mm 복스 드라이버 예](https://digicat.wiha.com/au/en/tools/screwdrivers/mechanic-s-screwdrivers/softfinish/hex/screwdriver-softfinish/01076)
 3. 각 PCB를 분리된 캐리어에 M2×8로 조입니다. 4 mm 소켓은 아래에서 들어갑니다. 보드가 달린 캐리어를 놓고 양옆 M3×8을 아래에서 넣어 위의 너트를 잡습니다. OpenRB는 USB-C를 꽂은 채 내려놓습니다. 플러그 몸체는 12.4 × 18 × 6.2 mm 이내입니다. OpenRB의 홀 간격은 제조사 그림에서 환산한 20.5 × 61.5 mm로, 시험판 4번에서 실물과 맞춥니다. [보드 캐리어 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#base-boards) · [ROBOTIS 보드 그림](https://docs.robotis.com/docs/parts/controller/openrb-150/#pinout)
