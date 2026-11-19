@@ -35,6 +35,22 @@ AMASS 두 커넥터에 각 전선의 납땜 컵 간격을 맞춘 둥근 홈을 �
 
 덮개를 얹은 뒤 위에서 M3×16을 넣고, 트레이 뒤쪽 열린 공간에서 5.5 mm 스패너로 너트를 잡습니다. [시험판 2번](R5-B15-Fit-P1S.3mf)에서 공구와 실제 커넥터를 맞춥니다. 시임으로 좌우·상하 유격을 편측 약 0.12 mm로 맞추고 커넥터 뒤턱을 밀착시킵니다. 전원을 끄고 케이블을 직선과 45°에서 10 N으로 30초씩 당겨 0.5 mm 이하 이동과 피복 상태를 확인합니다. [허브 극성](../electronics/README.md#전원과-배선)
 
+## 출력 경로 검사
+
+Bambu Studio 2.9.1.70에서 P1S 0.4 mm·PETG HF·0.20 mm 설정으로 전체 13판과 시험판 4판을 슬라이스했습니다. 전체 57개와 시험 24개 배치에 모두 압출 경로가 있습니다. 분리된 고형 조각은 없었고, 받침과 바닥 덮개 맞춤용 시편에는 약 0.20 mm³의 내부 빈 공간이 두 곳씩 있습니다. 실물 출력은 아직입니다.
+
+| 출력판 | 확인한 내용 |
+|---|---|
+| 시험 2 · 케이블 고정 벽 | 열린 메시를 닫힌 솔리드로 복구하고 돌출부 아래에 일반 서포트가 닿도록 수정. 수정한 시험판 4장 모두 Bambu 경고 없이 슬라이스됨 |
+| 전체 1 · 받침 | Z 16.6 mm에서 공중에 시작하던 1.6 × 1.0 mm 자리 두 곳을 본체 위에서 올라오는 서포트로 해결. 필라멘트 약 10.5 g와 예상 시간 23분 추가 |
+| 전체 4 · 앞 해골 | 부분적으로 받침 없이 시작하는 경로 다섯 곳. 가장 긴 곳은 Z 71.4 mm에서 약 2.8 mm |
+| 전체 6 · 목 기둥·머리 프레임 | 목 기둥의 0.35 mm 가장자리와 머리 프레임의 0.10 mm 가장자리가 일부 층에서 빠짐 |
+| 전체 7 · 모터 앞판 | 눈·눈꺼풀 모터 앞판 3개의 약 0.10 mm 잔여벽이 출력 경로에서 빠짐 |
+| 전체 8 / 시험 1 · 눈꺼풀 축 | 크랭크 3개의 축 구멍과 스패너 홈 사이 0.30 mm 벽이 일부 층에서 빠짐. 스페이서 2개의 같은 두께 구간은 한 줄로 출력되므로 실제 끼움과 강도 확인 필요 |
+| 전체 3 / 시험 4 · OpenRB 캐리어 | USB 쪽 가장자리의 약 0.15 mm 잔여벽이 출력 경로에서 빠짐 |
+
+받침에 추가한 서포트는 모델상 외부에서 접근할 수 있는 위치에 있습니다. FreeCAD 원본에서는 받침 솔리드와 앞 해골 메시가 형상 유효성 검사에 걸립니다. 형상을 다시 편집하거나 내보낼 때 함께 확인합니다.
+
 ## 재현
 
 저장소 루트에서 실행합니다. FreeCAD 1.0과 Python 3.12가 필요하며 Linux에서 Gmsh는 `libGLU`를 사용합니다.
@@ -65,8 +81,9 @@ QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechani
 QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B15-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
 python mechanical/physics/check_head.py build/physics/cad build/physics/clearance.json
 python mechanical/physics/tolerances.py build/physics/cad build/physics/tolerance.json
-mkdir -p build/p1s
+mkdir -p build/p1s build/p1s-fit
 bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B15-P1S.3mf
+bambu-studio --slice 0 --outputdir build/p1s-fit mechanical/R5-B15-Fit-P1S.3mf
 python mechanical/physics/slicer_mass.py build/p1s/sliced-grams.json build/p1s/plate_{4,5,6,7,8,9,10,12,13}.gcode
 python mechanical/physics/multibody.py build/physics/cad build/physics/motion --sliced-grams build/p1s/sliced-grams.json
 python mechanical/physics/blink_fea.py build/physics/cad build/physics/blink-fea.json

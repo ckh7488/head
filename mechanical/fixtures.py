@@ -98,7 +98,12 @@ def captive_cables(base):
 def cable_wall_fixture(base):
     wall = base.common(box(-51., 51., 77.5, 94., -83., -48.))
     footprint = box(-51., 51., 75.5, 93.1, -86.3, -81.9)
-    return wall.fuse(footprint).removeSplitter()
+    fixture = wall.fuse(footprint).removeSplitter()
+    if not fixture.isValid():
+        fixture.fix(.001, .001, .02)
+    if not fixture.isValid() or len(fixture.Solids) != 1:
+        raise ValueError('Cable wall fixture is not a closed solid')
+    return fixture
 
 
 def ballast_mount(frame):
