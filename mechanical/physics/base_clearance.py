@@ -10,7 +10,7 @@ import FreeCAD as App
 import Part
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B3-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B4-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -31,6 +31,9 @@ def check_pairs(doc):
     saddle = doc.CableSaddle.Shape
     base = doc.Part000.Shape
     yield saddle, base, "Saddle to base"
+    gate = doc.CableGate.Shape
+    yield gate, saddle, "Cable cover to keyed tray"
+    yield gate, base, "Cable cover to base"
     along = V(0, -1, 0)
     fasteners = []
     for x in (-28.5, 28.5):
@@ -43,13 +46,32 @@ def check_pairs(doc):
     for fastener in fasteners:
         for static in (base, saddle, doc.Part001.Shape, doc.Part069.Shape, doc.Part070.Shape):
             yield fastener, static, "Saddle fastener envelope"
+    cables = json.loads(doc.R5.MotionGeometry)['cables']
+    for x in cables['cap_bolts_x_mm']:
+        stem = Part.makeCylinder(1.5, 13., V(x,121.6,-49.1), V(0,0,-1))
+        for static in (base, saddle, gate):
+            yield stem, static, "Cable cover screw clearance"
+    stop, center_z = cables['stop_y_mm'], cables['center_z_mm']
+    for lane in cables['lanes']:
+        name, x = lane['name'], lane['x_mm']
+        width, height = (size-.24 for size in lane['pocket_mm'])
+        plug = Part.makeBox(width, 15., height, V(x-width/2, stop-15.1, center_z-height/2))
+        width, height = (size-.4 for size in lane['slot_mm'])
+        cord = Part.makeBox(width, 7.6, height, V(x-width/2, stop-.1, center_z-height/2))
+        for static in (saddle, gate, base):
+            yield plug, static, f'{name} body in pocket'
+            yield cord, static, f'{name} cord at outlet'
+        width, height = lane['minimum_shoulder_mm']
+        shoulder = Part.makeBox(width, 15., height, V(x-width/2, stop-14.6, center_z-height/2))
+        if min(shoulder.common(part).Volume for part in (saddle, gate)) < .1:
+            raise RuntimeError(f'{name} shoulder has no backing on both halves')
     for name in ("Part069", "Part070", "Part071", "Part072"):
         for static in (base, doc.Part001.Shape):
             yield doc.getObject(name).Shape, static, "Board placement"
     for depth in (0, 1, 3, 6, 10, 15, 22, 30):
         for part in doc.HubInstalled.Group:
             moving = part.Shape.copy().translate(V(0, 0, -depth))
-            for static in (base, saddle, *fasteners):
+            for static in (base, saddle, gate, *fasteners):
                 yield moving, static, f"Hatch at {depth} mm, {part.Label}"
 
 
@@ -74,6 +96,33 @@ def actuator_pairs(doc):
             yield link, body, f"Right lid link at {angle} degrees and vertical offset {vertical} mm"
 
 
+def ballast_pairs(doc):
+    specs = json.loads(doc.R5.MotionGeometry)['ballast']
+    tray, cover, stack = (doc.getObject(name).Shape for name in ('BallastTray', 'BallastCover', 'BallastStack'))
+    frame = doc.Part019.Shape
+    yield tray, frame, 'Ballast tray on head frame'
+    yield tray, stack, 'Ballast stack in tray'
+    behind = V(0, 1, 0)
+    front_fixtures = [doc.getObject(name).Shape for name in ('Part041', 'Part045', 'Part063', 'Part064')]
+    for x, z in specs['mount_xz_mm']:
+        stem = Part.makeCylinder(1.5, 8., V(x, 35.3, z), -behind)
+        tool = Part.makeCylinder(3.9, 28., V(x, 35.3, z), behind)
+        seat = Part.makeCylinder(2.09, 4., V(x, 27., z), behind)
+        for hardware in (stem, tool, seat):
+            for static in (frame, tray, *front_fixtures):
+                yield hardware, static, f'Ballast mount hardware at {x}, {z} mm'
+    for static in front_fixtures:
+        yield frame, static, 'Head frame and actuator fixtures'
+    for count, dx, dy in product(range(specs['maximum_plates']+1), (-.2, 0., .2), (-.2, 0., .2)):
+        height = (count-specs['maximum_plates'])*specs['plate_mm'][2]
+        moved = cover.copy().translate(V(dx, dy, height))
+        yield moved, tray, f'Ballast cover at {count} plates, offset {dx}, {dy} mm'
+    for name in ('BallastLeftStud', 'BallastRightStud'):
+        stud = doc.getObject(name).Shape
+        for solid in (tray, cover, stack):
+            yield stud, solid, f'{name} clearance'
+
+
 def check_pass(pairs):
     count = 0
     peak = 0.
@@ -90,7 +139,8 @@ def check(cad):
     doc = App.openDocument(str(cad))
     try:
         doc.recompute()
-        for name, pairs in [('Base', check_pairs(doc)), ('Actuators', actuator_pairs(doc))]:
+        for name, pairs in [('Base', check_pairs(doc)), ('Actuators', actuator_pairs(doc)),
+                            ('Ballast', ballast_pairs(doc))]:
             count, peak = check_pass(pairs)
             print(f"{name}: {count} solid pairs, max residual volume {peak:.6f} mm³")
         print(f"Rotor lift clearance: {-32.45 - doc.Part007.Shape.BoundBox.ZMax:.3f} mm")

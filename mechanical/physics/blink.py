@@ -22,7 +22,7 @@ def build(layout, cap, extra_drag, dt):
     lid_arm=drive_arm*(layout['lid_radius_mm']/layout['radius_mm'])
     side=layout['link_x_mm']*MM
     center=.00585
-    root=ET.Element('mujoco',model='R5 B3 closed loop blink')
+    root=ET.Element('mujoco',model='R5 closed loop blink')
     ET.SubElement(root,'compiler',angle='radian',inertiafromgeom='false')
     ET.SubElement(root,'option',timestep=str(dt),gravity='0 0 -9.81',integrator='implicit',iterations='70')
     world=ET.SubElement(root,'worldbody')

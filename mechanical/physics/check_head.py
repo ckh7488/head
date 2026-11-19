@@ -25,8 +25,15 @@ PAIRS_BY_INTERFACE = {
     'jaw':(['Jaw_30_moving_jaw','Jaw_38_left_jaw_drive_arm','Jaw_39_right_jaw_pivot_arm'],['Part011','Part013','Part015','Part016','Part018','Part024','Part025','Part027','Part045','Part073','Part074','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw']),
     'neck':(['Part010','Part011','Part018'],['Part019','Part020','Part021','Part024','Part045','Part048','Part063','Part065','Part066','Part067','Part073','Part074','Jaw_30_moving_jaw','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw'])
 }
+BALLAST_PAIRS = (
+    ['BallastTray', 'BallastCover', 'BallastStack', 'BallastLeftStud', 'BallastRightStud'],
+    ['Part011', 'Part012', 'Part014', 'Part016', 'Part018', 'Part019', 'Part020', 'Part021',
+     'Part024', 'Part041', 'Part045', 'Part063', 'Part073', 'Part074', 'Jaw_30_moving_jaw',
+     'BallastTray', 'BallastCover', 'BallastStack', 'BallastLeftStud', 'BallastRightStud'],
+)
 
 MATES = set(tuple(sorted(a.split('/'))) for a in '''Part045/Part046 Part046/Part063 Part047/Part045 Part047/Part056 Part048/Part050 Part048/Part052 Part048/Part053 Part048/Part054 Part048/Part055 Part048/Part063 Part063/Part050 Part063/Part052 Part053/Part057 Part054/Part056 Part055/Part060 Part057/Part078 Part060/Part079 Part038/Part039 Part041/Part042 Part038/Part040 Part041/Part043 Part024/Part039 Part042/Part064 Part043/Part044 Part019/Part020 Part019/Part021 Part019/Part064 Part019/Part025 Part019/Part027 Part019/Part013 Part019/Part015 Part010/Part011 Part011/Part018 Part015/Part016 Part016/Part018 Part029/Part037 Part033/Part037 Part037/Part040 Jaw_30_moving_jaw/Jaw_38_left_jaw_drive_arm Jaw_30_moving_jaw/Jaw_39_right_jaw_pivot_arm Jaw_38_left_jaw_drive_arm/Jaw_XL330_M288_Jaw'''.split())
+MATES.update({('BallastTray', 'Part019'), ('BallastStack', 'BallastTray'), ('BallastCover', 'BallastStack')})
 ANGLES = (
     (-15., -10., -5., 0., 3., 6.),
     (-8., -4., 0., 4., 8.),
@@ -39,6 +46,7 @@ MEASURE_GAP = {
     ('Part024', 'Part057'), ('Part024', 'Part060'),
     ('Part041', 'Part060'), ('Part057', 'Part073'), ('Part060', 'Part073'),
     ('Part073', 'Part078'), ('Part073', 'Part079'), ('Part076', 'Part078'), ('Part077', 'Part079'),
+    ('BallastTray', 'Part074'), ('BallastCover', 'Part074'), ('BallastStack', 'Part074'),
 }
 
 
@@ -96,7 +104,10 @@ def pose(kind, angles, layout):
 def sweep(directory):
     layout = json.loads((directory/'cad_parts.json').read_text())
     kinds = layout['world_motion']
-    names = set(name for pair_lists in PAIRS_BY_INTERFACE.values() for names in pair_lists for name in names)
+    pairs = dict(PAIRS_BY_INTERFACE)
+    if 'BallastTray' in kinds:
+        pairs['ballast'] = BALLAST_PAIRS
+    names = set(name for pair_lists in pairs.values() for names in pair_lists for name in names)
     meshes = {name: tr.load_mesh(directory/'world'/f'{name}.stl') for name in names}
     objects = {name: fcl.CollisionObject(mesh_to_BVH(mesh)) for name, mesh in meshes.items()}
     request = fcl.CollisionRequest(num_max_contacts=1)
@@ -104,7 +115,7 @@ def sweep(directory):
     clearances = {}
     collisions = []
     samples = 0
-    for interface, (first, second) in PAIRS_BY_INTERFACE.items():
+    for interface, (first, second) in pairs.items():
         for a, b in product(first, second):
             pair = tuple(sorted((a, b)))
             if a == b or pair in MATES or pair in visited:

@@ -1,4 +1,4 @@
-"""Build R5 B3 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B4 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -14,22 +14,13 @@ import MeshPart
 import Part
 import trimesh as tr
 
+from primitives import box, cylinder, holes, print_mesh
+from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
+
 V = App.Vector
 HERE = Path(__file__).resolve().parent
 BUILD = HERE.parent / 'build' / 'mechanical'
 SOURCE = HERE / 'inputs' / 'R5-B1-Jaw-Assembly.FCStd'
-
-
-def box(x0, x1, y0, y1, z0, z1):
-    return Part.makeBox(x1-x0, y1-y0, z1-z0, V(x0, y0, z0))
-
-
-def cylinder(radius, height, start, direction=(0, 0, 1)):
-    return Part.makeCylinder(radius, height, V(*start), V(*direction))
-
-
-def holes(shape, radius, depth, centres, direction=(0, 0, 1)):
-    return shape.cut([cylinder(radius, depth, point, direction) for point in centres])
 
 
 def rounded_beam(a, b, radius):
@@ -164,32 +155,6 @@ def fix_motors(doc):
     return repaired, pitch_pin, yaw_case
 
 
-def cable_restraint(base):
-    saddle = box(-34, 34, 93.12, 118, -77.7, -67.0).fuse([
-        box(-34, -22.8, 83.0, 97.2, -77.7, -62.4),
-        box(22.8, 34, 83.0, 97.2, -77.7, -62.4),
-    ]).cut(cylinder(93.12, 24., (0, 0, -82)))
-    saddle = saddle.cut(box(-3.85, 7.8, 92., 119., -73.7, -62.))
-    for x in (-11.5, 15.75):
-        saddle = saddle.cut(cylinder(4.18, 27., (x, 92., -67.0), (0, 1, 0)))
-        saddle = saddle.cut(Part.makeCone(5.15, 4.18, 2.6, V(x, 93.12, -67.), V(0, 1, 0)))
-        saddle = saddle.cut(Part.makeCone(4.18, 5.15, 2.6, V(x, 115.4, -67.), V(0, 1, 0)))
-        for y in (99.4, 111.7):
-            for x_slot in (x-5.75, x+5.75):
-                saddle = saddle.cut(box(x_slot-1.38, x_slot+1.38, y-2.85, y+2.85, -78.2, -62.5))
-    for x in (-2.55, 6.55):
-        for y in (99.4, 111.7):
-            saddle = saddle.cut(box(x-1.18, x+1.18, y-2.85, y+2.85, -78.2, -73.0))
-
-    head_seats = [(-28.5, 93.6, -71.), (28.5, 93.6, -71.)]
-    saddle = holes(saddle, 1.74, 18., [(x, 81.5, z) for x,y,z in head_seats], (0, 1, 0))
-    saddle = holes(saddle, 4.35, 8., head_seats, (0, 1, 0))
-
-    base = holes(base, 1.74, 19., [(x, 77.5, z) for x,y,z in head_seats], (0, 1, 0))
-    base = holes(base, 4.35, 6.25, [(x, 77.5, z) for x,y,z in head_seats], (0, 1, 0))
-    return base.removeSplitter(), saddle.removeSplitter()
-
-
 def yaw_bearing_retention(doc):
     seat = doc.Part001.Shape.cut(cylinder(48.60, 1.15, (0, 0, -49.1)))
     pad = box(49.15, 51.10, -4.15, 4.15, -37.80, -36.8).common(cylinder(49.96, 2., (0, 0, -38.)))
@@ -243,20 +208,6 @@ def board_mounts(doc, base):
     }
 
 
-def print_mesh(shape, path, direction=None):
-    model = shape.copy()
-    if direction == 'x+':
-        model.rotate(V(0, 0, 0), V(0, 1, 0), -90)
-    elif direction == 'y+':
-        model.rotate(V(0, 0, 0), V(1, 0, 0), 90)
-    elif direction == 'z-':
-        model.rotate(V(0, 0, 0), V(1, 0, 0), 180)
-    mesh = MeshPart.meshFromShape(Shape=model, LinearDeflection=.075, AngularDeflection=.10, Relative=False)
-    bound = mesh.BoundBox
-    mesh.translate(-bound.Center.x, -bound.Center.y, -bound.ZMin)
-    mesh.write(str(path))
-
-
 def apply_repairs(doc, repairs, folder):
     folder.mkdir(exist_ok=True, parents=True)
     base_parts = {'CableSaddle', 'Part000', 'Part001', 'Part002', 'Part007', 'Part008',
@@ -294,7 +245,7 @@ def blink_link(x,yz1,yz2):
 def blink_crank(x,yz,D=False,arm=DRIVE_ARM):
     y,z=yz
     solid=blink_link(x,yz,(y+arm[0],z+arm[1]))
-    hub=cylinder(4.85,3.1,(x-1.55,y,z),(1,0,0))
+    hub=cylinder(4.85,2.85,(x-1.3,y,z),(1,0,0))
     joined=solid.fuse(hub)
     bore=cylinder(2.13,6.,(x-3,y,z),(1,0,0))
     if D:
@@ -304,7 +255,7 @@ def blink_crank(x,yz,D=False,arm=DRIVE_ARM):
 
 def eyelid(side):
     x=34.*side
-    shell=Part.makeSphere(16.6).cut(Part.makeSphere(14.85))
+    shell=Part.makeSphere(16.6).cut(Part.makeSphere(15.12))
     poly=[(0,0)]+[(-40*cos(radians(a)),40*sin(radians(a))) for a in (42,67,96,125,151)]
     shell=shell.common(yz_prism(poly,-24.,48.))
     ring1=cylinder(3.55,4.25,(-19.15,0,0),(1,0,0))
@@ -425,14 +376,14 @@ def cut_running_clearance(doc):
                 dy,dz=LID_THROW*cos(a),LID_THROW*sin(a)
                 start=(-39.+dy,119.+dz)
                 end=(BLINK_SHAFT_YZ[0]+dy,BLINK_SHAFT_YZ[1]+dz)
-                blade.append(mesh(clearance_tool(side*49.25,start,end,3.60,4.1)))
-                ear=clearance_tool(side*52.2,(-39.,119.),start,3.30,3.95)
-                blade.append(mesh(ear.common(box(-60,60,-36.4,-23.0,104.0,133.0))))
+                blade.append(mesh(clearance_tool(side*49.25,start,end,4.0,4.5)))
+                ear=clearance_tool(side*52.2,(-39.,119.),start,4.1,4.8)
+                blade.append(mesh(ear.common(box(-60,60,-36.7,-20.5,103.2,134.0))))
             cutter=tr.boolean.union(blade,engine='manifold')
             x=34.*side
             targets['Part076' if side<0 else 'Part077']=[
-                mesh(box(x+19.08,x+19.83,-55.,-36.,112.8,125.2)),
-                mesh(box(x-19.83,x-19.08,-55.,-36.,112.8,125.2)),
+                mesh(box(x+19.04,x+20.43,-55.,-36.,112.8,125.2)),
+                mesh(box(x-20.43,x-19.04,-55.,-36.,112.8,125.2)),
             ]
             targets['Part073'].append(cutter)
             if side<0:
@@ -483,7 +434,7 @@ def revise_head(doc, output):
     parts.update(gaze_yaw_parts(doc))
     for x in (-49.25,49.25):
         rib=box(x-5.5,x+5.5,-20.8,-14.8,120.5,125.2)
-        parts['Part024']=parts['Part024'].fuse(rib).cut(box(x-2.6,x+2.6,-27.5,-17.95,114.,131.))
+        parts['Part024']=parts['Part024'].fuse(rib).cut(box(x-2.87,x+2.87,-27.5,-17.30,114.,131.))
     parts['Part024']=parts['Part024'].cut(box(-44.4,-39.7,-22.8,-18.0,118.8,122.55)).removeSplitter()
     for name,x in [('Part029',-34.),('Part033',34.)]:
         parts[name]=eyeball(x)
@@ -491,7 +442,7 @@ def revise_head(doc, output):
         parts[name]=cylinder(1.,24.,(x,-39,107.))
     parts['Part043']=doc.Part043.Shape.common(box(58.5,61.2,-50,40,130,170))
     parts['Part044']=doc.Part044.Shape.copy().translate(V(-1.05,0,0)).common(box(61.55,64.15,-45,29,100,161))
-    parts['Part019']=doc.Part019.Shape.cut(box(57.9,65.1,20.2,25.0,145.3,155.9))
+    parts['Part019']=ballast_mount(doc.Part019.Shape.cut(box(57.9,65.1,20.2,25.0,145.3,155.9)))
     tab=doc.Part021.Shape.cut([box(57.9,66.0,18.1,25.0,124.1,157.4),box(49.8,58.8,16.,20.8,126.,158.)])
     parts['Part021']=tab.fuse([
         box(54.9,57.7,21.8,23.7,153.3,160.5),
@@ -537,15 +488,20 @@ def revise_head(doc, output):
         obj.addProperty('App::PropertyString','Motion','Design')
         obj.Motion='blink_shaft_crank'
         doc.Synchronised_eyelids.addObject(obj)
+    for index in (58, 59, 61, 62):
+        pin = doc.getObject(f'Part{index:03}')
+        bounds = pin.Shape.BoundBox
+        x = bounds.XMin - (1. if index in (61,62) else 0.)
+        pin.Shape = cylinder(1., 9.5, (x, -39., 119.), (1,0,0))
     cut_running_clearance(doc)
     doc.JawMotion.setExpression('Placement','create(<<placement>>;vector(0mm;-9mm;92mm);create(<<rotation>>;vector(1;0;0);1.25deg+max(0deg;min(13deg;Opening))))')
-    doc.JawMotion.Label = 'Jaw — Opening 0 to 13 degrees above the B3 closed position'
+    doc.JawMotion.Label = 'Jaw — Opening 0 to 13 degrees above the closed position'
     doc.R5.addProperty('App::PropertyString', 'MotionGeometry', 'Design')
     doc.R5.MotionGeometry = json.dumps({
         'eye_yaw': {'pivot_mm': [-5.8, -35.5, 111.85], 'radius_mm': 13.5},
         'blink': {'servo_yz_mm': list(BLINK_SERVO[1:]), 'shaft_yz_mm': list(BLINK_SHAFT_YZ),
                   'phase_deg': BLINK_PHASE, 'radius_mm': DRIVE_THROW, 'lid_radius_mm': LID_THROW, 'link_x_mm': 49.25},
-        'jaw_travel_deg': 13.,
+        'jaw_travel_deg': 13., **fixture_parameters(),
     }, separators=(',', ':'))
     labels = {
         'Part024': '12 eye tilt cradle',
@@ -564,7 +520,8 @@ def revise_head(doc, output):
         'Part053': 'x+', 'Part054': 'x+', 'Part055': 'x+', 'Part056': 'x+',
         'Part057': 'x+', 'Part060': 'x+', 'Part063': 'y+',
         'Part011': 'y+', 'Part021': None, 'Part040': None,
-        'Part027': 'x+', 'Part029': 'y+', 'Part033': 'y+', 'Part037': None,
+        'Part016': 'x+', 'Part020': None, 'Part025': 'x+', 'Part027': 'x+',
+        'Part029': 'y+', 'Part033': 'y+', 'Part037': None, 'Part064': 'x+', 'Part066': 'y+',
     }
     output.mkdir(parents=True, exist_ok=True)
     for name, label in labels.items():
@@ -574,19 +531,43 @@ def revise_head(doc, output):
         if obj.Printed:
             stem = obj.Label.lower().replace(' ', '_')
             print_mesh(obj.Shape, output/f'{stem}.stl', rotation)
-    for name in ('Part073', 'Part076', 'Part077', 'Part078', 'Part079',
-                 'Jaw_36_left_jaw_servo_stay', 'Jaw_37_right_jaw_bearing_stay'):
+    mesh_exports = {
+        'Part065': (None, (0., 0., 0.)),
+        'Part073': (None, (-.5*pi, 0., 0.)),
+        'Part074': (None, (-.5*pi, 0., 0.)),
+        'Part076': (None, (.5*pi, 0., 0.)),
+        'Part077': (None, (.5*pi, 0., 0.)),
+        'Part078': (None, (0., 0., 0.)),
+        'Part079': (None, (0., 0., 0.)),
+        'Part080': (None, (-.5*pi, 0., 0.)),
+        'Jaw_30_moving_jaw': ('30_moving_jaw', (0., 0., 0.)),
+        'Jaw_36_left_jaw_servo_stay': (None, (0., -.5*pi, 0.)),
+        'Jaw_37_right_jaw_bearing_stay': (None, (0., -.5*pi, 0.)),
+        'Jaw_38_left_jaw_drive_arm': ('38_left_jaw_drive_arm', (0., -.5*pi, 0.)),
+        'Jaw_39_right_jaw_pivot_arm': ('39_right_jaw_pivot_arm', (0., -.5*pi, 0.)),
+    }
+    for name, (stem, rotation) in mesh_exports.items():
         obj = doc.getObject(name)
         mesh = obj.Mesh.copy()
-        if name in ('Part073','Part076','Part077','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay'):
-            radians_x = -.5*pi if name=='Part073' else .5*pi
-            if name.startswith('Jaw_'):
-                mesh.rotate(0.,-.5*pi,0.)
-            else:
-                mesh.rotate(radians_x,0.,0.)
+        mesh.rotate(*rotation)
         frame = mesh.BoundBox
         mesh.translate(-frame.Center.x, -frame.Center.y, -frame.ZMin)
-        mesh.write(str(output/f"{obj.Label.lower().replace(' ', '_')}.stl"))
+        stem = stem or obj.Label.lower().replace(' ', '_')
+        mesh.write(str(output/f'{stem}.stl'))
+
+
+def add_fixture(doc, group, name, label, shape, motion, printed):
+    if not shape.isValid() or len(shape.Solids) != 1:
+        raise ValueError(f'{label} is not one solid')
+    obj = doc.getObject(name) or doc.addObject('Part::Feature', name)
+    obj.Label = label
+    obj.Shape = shape
+    for key, kind, value in [('Motion', 'String', motion), ('Printed', 'Bool', printed)]:
+        if key not in obj.PropertiesList:
+            obj.addProperty(f'App::Property{kind}', key, 'Design')
+        setattr(obj, key, value)
+    group.addObject(obj)
+    return obj
 
 
 def main(output=BUILD):
@@ -595,30 +576,39 @@ def main(output=BUILD):
     doc.Part015.Shape = pitch_pin
     doc.Part038.Shape = yaw_case
     doc.Part015.Label = 'Right pitch pin · Ø8 × 27.3 with 1 mm D-flat'
-    base, saddle = cable_restraint(doc.Part000.Shape)
+    base, saddle, gate = captive_cables(doc.Part000.Shape)
     base, board_trays = board_mounts(doc, base)
     repairs.update(board_trays)
     bearing_seat, bearing_top, bearer = yaw_bearing_retention(doc)
     repairs['Part001'] = ('02_outer_bearing_seat', bearing_seat, None)
     repairs['Part002'] = ('03_base_top', bearing_top, 'z-')
-    repairs['Part000'] = ('01_base_cup_B2', base, None)
-    repairs['CableSaddle'] = ('40_rear_cable_saddle', saddle, None)
+    repairs['Part000'] = ('01_base_cup_B4', base, None)
+    repairs['CableSaddle'] = ('40_captive_cable_tray', saddle, None)
     apply_repairs(doc, repairs, output/'STL')
     print_mesh(bearer, output/'STL'/'41_outer_race_keeper.stl', 'z-')
-    section = base.common(box(-34.3, 34.3, 77.7, 94.0, -83., -61.5))
-    fixture = box(-34.3, 34.3, 75.5, 92.4, -86.2, -81.8)
-    fixture = section.fuse(fixture).removeSplitter()
-    assert fixture.isValid() and len(fixture.Solids)==1
-    print_mesh(fixture, output/'STL'/'Cable_saddle_test_fixture.stl')
-    doc.Base_and_neck.addObject(doc.CableSaddle)
-    doc.CableSaddle.addProperty('App::PropertyString', 'Mounting', 'Design')
-    doc.CableSaddle.Mounting = 'Two power lanes and a recessed USB lane. Two straps per lead over a full-length liner. M3 screws transfer pull to the fixed base.'
-    doc.Part000.Label = '01 Base cup B2 · rear saddle with flat washer seats'
+    base_group = doc.Base_and_neck
+    add_fixture(doc, base_group, 'CableSaddle', '40 captive cable tray', saddle, 'fixed', True)
+    add_fixture(doc, base_group, 'CableGate', '42 interlocking cable cover', gate, 'fixed', True)
+    print_mesh(gate, output/'STL'/'42_captive_cable_cover.stl', 'z-')
+    print_mesh(cable_wall_fixture(base), output/'STL'/'Cable_lock_wall_fixture.stl')
+    doc.Part000.Label = '01 Base cup B4 · four protected cable routes'
     revise_head(doc, output/'STL')
-    doc.R5.Label = 'R5 B3 · prototype'
-    doc.R5.Status = 'Digital verification baseline. Print-fit, load and wiring tests pending.'
+    tray, cover, stack = rear_ballast()
+    for name, label, shape in (
+        ('BallastTray', '43 neck ballast tray', tray),
+        ('BallastCover', '44 ballast cover', cover),
+        ('BallastStack', 'Steel plate capacity · 12 plates', stack),
+        ('BallastLeftStud', 'Ballast M3 threaded stud left', ballast_stud(-24.2)),
+        ('BallastRightStud', 'Ballast M3 threaded stud right', ballast_stud(24.2)),
+    ):
+        printed = name in ('BallastTray', 'BallastCover')
+        add_fixture(doc, doc.Head_frame, name, label, shape, 'head', printed)
+        if printed:
+            print_mesh(shape, output/'STL'/f'{label.replace(" ", "_")}.stl', 'y+' if name == 'BallastTray' else None)
+    doc.R5.Label = 'R5 B4 · prototype'
+    doc.R5.Status = 'Tolerance and load-path checks. Plate count is adjustable. Hardware measurements pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B3-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B4-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

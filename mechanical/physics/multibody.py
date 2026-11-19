@@ -1,6 +1,7 @@
 """MuJoCo screening of the loaded neck/jaw and both lids."""
 from argparse import ArgumentParser
 from dataclasses import dataclass
+from itertools import product
 from math import radians
 from pathlib import Path
 import json
@@ -117,11 +118,19 @@ def quintic(t, duration, start, goal):
     return q,v,a
 
 
-def motion_trace(t):
+def motion_trace(t, fast_pitch=False):
     if t<3.5:
         q,v,a = quintic(t,3.0,np.zeros(2),np.radians([55.,-14.]))
     else:
         q,v,a = quintic(t-3.5,5.8,np.radians([55.,-14.]),np.radians([-55.,5.]))
+    if fast_pitch:
+        if t < 2.8:
+            pitch = quintic(t, 1.6, 0., radians(-15.))
+        elif t < 6.1:
+            pitch = quintic(t-2.8, 1.66, radians(-15.), radians(6.))
+        else:
+            pitch = quintic(t-6.1, .8, radians(6.), 0.)
+        q[1], v[1], a[1] = pitch
     jaw_q = jaw_v = jaw_a = 0.
     for start,peak in ((2.75,10.),(3.21,13.),(7.05,12.)):
         local=t-start
@@ -133,7 +142,7 @@ def motion_trace(t):
     return np.r_[q,jaw_q],np.r_[v,jaw_v],np.r_[a,jaw_a]
 
 
-def dynamic_trial(xml, budget, friction, backlash_deg):
+def dynamic_trial(xml, budget, friction, backlash_deg, fast_pitch=False):
     model = mj.MjModel.from_xml_string(xml)
     actual = mj.MjData(model)
     reference = mj.MjData(model)
@@ -145,7 +154,7 @@ def dynamic_trial(xml, budget, friction, backlash_deg):
     step=model.opt.timestep
     for i in range(round(10.2/step)):
         t=i*step
-        goal,velocity,accel=motion_trace(t)
+        goal,velocity,accel=motion_trace(t, fast_pitch)
         reference.qpos[:] = goal
         reference.qvel[:] = velocity
         reference.qacc[:] = accel
@@ -176,10 +185,67 @@ def shifted_mass(part, pivot, new_mass, offset):
     return Mass(new_mass, pivot+np.array(offset),part.inertia*new_mass/part.mass)
 
 
+def ballast_mass(layout, plates):
+    size = pos(layout['plate_mm'])
+    size[2] *= plates
+    mass = plates * layout['plate_mass_kg']
+    center = np.array([0., layout['center_y_mm']*.001, layout['floor_z_mm']*.001+size[2]/2])
+    inertia = np.diag(mass/12*(np.sum(size**2)-size**2))
+    return Mass(mass, center, inertia)
+
+
+def worst_gravity(assembly, ballast, angles):
+    moment = assembly.mass*(assembly.center-NECK_PIVOT) + ballast.mass*(ballast.center-NECK_PIVOT)
+    torque = 9.81*(moment[1]*np.cos(angles)-moment[2]*np.sin(angles))
+    return float(np.max(np.abs(torque)))
+
+
+def balance_trials(layout, masses, hinge, output):
+    pitch_range = np.radians(np.linspace(-15, 6, 211))
+    budget, friction = np.array([.28,.20,.050]), np.array([.045,.042,.012])
+    nominal = combine(masses[1:])
+    groups = {
+        'cad': (nominal.mass, nominal.center-NECK_PIVOT),
+        'forward': (.75, np.array([0., -.030, .026])),
+    }
+    reports = {}
+    for name, (mass, center) in groups.items():
+        loads = [(mass, center)]
+        loads.extend((mass+dm, center+np.array([0.,dy,dz]))
+                     for dm,dy,dz in product((-.025,.025),(-.003,.003),(-.006,.006)))
+        assemblies = [shifted_mass(nominal, NECK_PIVOT, m, c) for m,c in loads]
+        settings = range(layout['maximum_plates']+1)
+        options = [max(worst_gravity(body, ballast_mass(layout, n), pitch_range)
+                       for body in assemblies) for n in settings]
+        selected = int(np.argmin(options))
+        weight = ballast_mass(layout, selected)
+        results = []
+        for i, assembly in enumerate(assemblies):
+            head_mass = assembly.mass-masses[2].mass
+            head_center = (assembly.mass*assembly.center-masses[2].mass*masses[2].center)/head_mass
+            shifted = shifted_mass(masses[1], NECK_PIVOT, head_mass, head_center-NECK_PIVOT)
+            balanced = [masses[0], combine([shifted, weight]), masses[2]]
+            xml = gimbal_model(balanced, hinge, budget, friction, DT)
+            result = dynamic_trial(xml, budget, friction, .75, fast_pitch=True)
+            results.append(result)
+            if i == 0:
+                (output/f'balanced_{name}.xml').write_text(xml)
+        peak = max(row['torque_demand_bound_Nm'][1] for row in results)
+        error = max(row['max_error_deg'][1] for row in results)
+        print(f'Ballast {name}: {selected} plates, {len(results)} load cases, {peak:.3f} N·m peak, '
+              f'{error:.2f}° maximum pitch error', flush=True)
+        reports[name] = {'plate_count': selected, 'plate_mass_kg': weight.mass,
+                         'worst_gravity_Nm': options[selected], 'worst_unbalanced_gravity_Nm': options[0],
+                         'max_pitch_demand_Nm': peak, 'max_pitch_error_deg': error, 'trials': results}
+    return reports
+
+
 def run_gimbal(cad_data, input_dir, output):
     bins = {'yaw':[], 'head':[], 'jaw':[]}
     records = cad_data['parts']
     for row in records:
+        if row['name'] == 'BallastStack':
+            continue
         group = {'pan':'yaw','jaw':'jaw'}.get(row['motion'],'head')
         bins[group].append(cad_part_mass(row,input_dir,.72))
     masses=[combine(bins[k]) for k in ('yaw','head','jaw')]
@@ -207,7 +273,10 @@ def run_gimbal(cad_data, input_dir, output):
     summary={name:{'mass_kg':part.mass,'com_mm':(part.center*1000).tolist(),
                    'inertia_kg_m2':part.inertia.tolist()}
              for name,part in zip(('yaw_carrier','head','jaw'),masses)}
-    return {'mass_properties':summary,'joint_order':['neck yaw','neck pitch','jaw'],'trials':runs}
+    layout = cad_data['motion_geometry'].get('ballast')
+    balanced = balance_trials(layout, masses, pivot, output) if layout else {}
+    return {'mass_properties':summary,'joint_order':['neck yaw','neck pitch','jaw'],
+            'trials':runs,'balanced':balanced}
 
 
 if __name__=='__main__':

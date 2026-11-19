@@ -84,6 +84,9 @@ def extract(path, output, include_world):
                   'world_motion': motion_by_part, 'parts': records}
         (output/'cad_parts.json').write_text(json.dumps(masses, ensure_ascii=False, indent=2))
         doc.CableSaddle.Shape.exportStep(str(output/'cable_saddle.step'))
+        if doc.getObject('CableGate'):
+            doc.CableGate.Shape.exportStep(str(output/'cable_gate.step'))
+            doc.BallastTray.Shape.exportStep(str(output/'ballast_tray.step'))
         for name in ('Part073', 'Part074'):
             world_mesh(doc.getObject(name)).write(str(output/f'{name}.stl'))
         print(f'{len(records)} moving CAD parts and {len(motion_by_part)} world meshes exported')
@@ -93,7 +96,7 @@ def extract(path, output, include_world):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B3-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B4-Assembly.FCStd')
     parser.add_argument('--world', action='store_true', help='Export world meshes for the clearance sweep')
     parser.add_argument('output', type=Path)
     args = parser.parse_args()

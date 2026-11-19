@@ -19,9 +19,11 @@ COLORS = {
 TRIANGLE_LIMITS = {'bone': 35000, 'jaw': 11000, 'eye': 9000, 'gear': 9500}
 
 
-def export(cad, output):
-    manifest = json.loads((ASSETS / 'assembly.json').read_text())
-    motions = json.loads((cad / 'cad_parts.json').read_text())['world_motion']
+def export(cad, output, manifest_path):
+    manifest = json.loads(manifest_path.read_text())
+    layout = json.loads((cad / 'cad_parts.json').read_text())
+    motions = layout['world_motion']
+    manifest['cad_sha256'] = layout['source_sha256']
     materials = {
         name: trimesh.visual.material.PBRMaterial(
             name=name, baseColorFactor=np.array((*rgb, 255), dtype=np.uint8),
@@ -49,5 +51,6 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('cad', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--manifest', type=Path, default=ASSETS / 'assembly.json')
     args = parser.parse_args()
-    export(args.cad, args.output)
+    export(args.cad, args.output, args.manifest)

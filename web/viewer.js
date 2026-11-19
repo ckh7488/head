@@ -22,7 +22,7 @@ const views = {
 const closeups = {
   eyes: { view: "mechanism", position: [95, -235, 148], center: [0, -14, 120], anchor: [-35, -45, 121], motion: "tilt", title: "눈·눈꺼풀", subtitle: "XL330 · 안구 2개 · 공용 깜빡임 축" },
   camera: { view: "assembled", position: [52, -260, 114], center: [0, -40, 103], anchor: [0, -67, 91], motion: "head", title: "코 카메라", subtitle: "U20CAM-1080P-S1 · 렌즈 약 2 mm 안쪽" },
-  neck: { view: "mechanism", position: [146, 253, 138], center: [0, 16, 69], anchor: [37, 13, 99], motion: "pan", title: "목 구동부", subtitle: "XL430 직결 · 6816 및 688 베어링" },
+  neck: { view: "mechanism", position: [146, 253, 138], center: [0, 27, 110], anchor: [21, 53, 131], motion: "head", title: "목 구동부", subtitle: "XL430 직결 · 뒤쪽에 끼우는 강철 균형추" },
   jaw: { view: "mechanism", position: [-170, -224, 132], center: [0, -24, 75], anchor: [-47, ...jawPivot.slice(1)], motion: "head", title: "턱 힌지", subtitle: "볼 안쪽 XL330 · 반대쪽 Ø4 mm 힌지" },
   hub: { view: "electronics", position: [74, 145, 122], center: [0, 57, -68], anchor: [0, 65, -69], motion: "hatch", title: "서보 허브", subtitle: "70 × 35 mm · 5 V 눈 / 12 V 목" }
 };
@@ -51,7 +51,7 @@ export class AssemblyViewer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.domElement.setAttribute("aria-label", "R5 B3 조립 3D 모델");
+    this.renderer.domElement.setAttribute("aria-label", "R5 B4 조립 3D 모델");
     this.host.appendChild(this.renderer.domElement);
     this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
     this.orbit.target.set(...views.assembled.oblique[1]);

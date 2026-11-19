@@ -1,42 +1,55 @@
-# B3 기구 및 물리 검증
+# B4 기구 조립
 
-`R5-B3-Assembly.FCStd`를 FreeCAD에서 엽니다. `revise.py`는 `inputs/`의 B1 조립본에서 B3와 변경 부품 STL을 생성합니다. CAD 트리의 턱 `Opening`은 닫힘 기준에서 0~13° 움직입니다.
+FreeCAD에서 [B4 조립본](R5-B4-Assembly.FCStd)을 엽니다. `revise.py`가 B1 원본에서 B4 CAD와 출력용 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 시험판](R5-B4-Fit-P1S.3mf)
 
-| 항목 | 확인값 |
+출력 프로젝트는 P1S 0.4 mm 노즐, PETG HF, 0.20 mm 레이어, 벽 4줄을 사용합니다. 노즐 245 °C, 텍스처 PEI 베드 70 °C, 최대 유량 14 mm³/s를 설정했습니다.
+
+| 부위 | 제작 전 확인 |
 |---|---|
-| 받침·보드·덮개 | 고체 1,876쌍 검사 통과. 목 좌우 −60~+60°, 덮개 0~30 mm |
-| 눈·눈꺼풀 | 위쪽 공용축과 짧은 링크. 링크와 눈 받침 사이 최소 0.45 mm. MuJoCo에서 토크 상한과 마찰을 바꿔 60회 왕복 |
-| 턱 | 뒤쪽 외장과 오른쪽 베어링 받침에 여유를 냄. 힌지 높이 ±0.4 mm와 영점 ±0.7°의 180개 자세에서 치아 간격 최소 0.77 mm |
-| 목 | 머리 0.75 kg, 무게중심이 끄덕임 축 앞 30 mm인 조건에서 최대 약 0.28 N·m 필요 |
-| 케이블 | 45°로 10 N을 가한 해석에서 받침 변위는 볼트 두 개로 지지할 때 0.008~0.010 mm. 낮은 마찰 조건에서는 10 N 이전에 미끄러짐 |
+| 눈꺼풀 | 힌지 받침 간격 0.93 mm. 상대 조립 위치가 축마다 ±0.25 mm 어긋나면 계산상 최소 0.50 mm. MuJoCo 60회 왕복 |
+| 목 | CAD 무게 조건에서 균형추 0장, 최대 0.092 N·m. 0.75 kg 머리와 축 앞 30 mm 무게중심 조건에서 12장, 오차를 포함해 최대 0.183 N·m |
+| 케이블 | 마찰 0으로 10 N·30초와 20 N·6초를 가한 24개 접촉 해석에서 커넥터 축방향 이동 최대 0.27 mm. PETG 탄성계수 1 GPa 조건에서 트레이 변형 약 0.05 mm |
+| 턱 | 힌지 높이 ±0.4 mm와 영점 ±0.7°를 넣은 180개 자세에서 치아 간격 최소 0.77 mm |
 
-상부 조립체는 부품 쌍과 자세 조합 26,830건을 검사해 충돌 0건을 확인했습니다. 기존 두 모터 간섭은 고체 쌍 2,565건으로 다시 확인했습니다. 눈꺼풀 한쪽 링크가 모터의 0.12 N·m를 전부 받는 조건에서 축 방향 하중은 약 19 N이며, PETG 유효 탄성계수 1.45 GPa로 계산한 좌굴 하중은 약 82 N입니다.
+상부 27,052개 부품·자세 조합, 받침과 구동부·체결부 고체 쌍 4,867개에서 간섭이 없었습니다.
 
-## 시험편과 조립
+## 조립
 
-- **눈꺼풀** · P1S용 맞춤 시험편은 PETG HF 약 26 g, 예상 2시간 27분입니다. Orbit 받침에 Ø2 핀을 끼워 손으로 90° 움직이고 링크 끝과 와셔가 걸리는지 확인합니다. Ø4 축에 MR104ZZ를 넣을 때 바깥쪽 턱이 외륜을 받습니다. 안쪽의 Ø4 칼라와 시임은 내륜만 받치고, 축에 예압이 걸리지 않게 맞춥니다. [눈꺼풀 시험편](R5-B3-Blink-Fit-P1S.3mf)
-- **케이블** · 시험편을 P1S 0.4 mm, PETG HF, 레이어 0.20 mm, 벽 4줄로 출력합니다. 실제 케이블마다 22 mm가량의 EPDM 라이너와 4.8 mm 스트랩 두 개를 씁니다. M3×18 두 개, Ø7 mm 와셔, 잠금너트로 받침을 고정합니다. 전원을 끄고 직선과 옆 45°에서 각각 10 N을 30초 유지합니다. 이동 0.5 mm 이하, 피복 눌림과 커넥터 이동이 없는 상태를 통과로 봅니다.
-- **목** · 6816 외륜은 고정 받침과 고정판 3개에, 내륜은 회전판에 닿게 조립합니다. 시임으로 씰에 닿지 않게 맞추고 회전판 들뜸 0.25~0.65 mm를 확인합니다. 오른쪽 Ø8 축 D-flat으로 토크를 받고 옆 나사로 빠짐을 막습니다. 실제 머리의 무게중심을 재고 축 고정부에 0.35 N·m를 서서히 걸어 밀림·갈라짐을 봅니다. 목 전 범위와 덮개 30 mm 열림에서 케이블이 당기는지도 확인합니다.
-- **턱** · 왼쪽 모터 혼과 오른쪽 Ø4 핀을 같은 축으로 맞춥니다. 본딩 전에 손으로 움직여 턱 뒤쪽을 확인하고 치아 간격을 재서 닫힘을 정합니다. XL330 케이스 나사 삽입은 3 mm 이내, XL430 혼은 3.5 mm 이내입니다.
+- **눈꺼풀** · Ø2 × 9.5 mm 핀을 끼워 손으로 90° 움직입니다. Ø4 축의 MR104ZZ 외륜은 받침 턱으로, 내륜은 Ø4 칼라와 시임으로 고정합니다. 축이 자유롭게 돌도록 맞춥니다.
+- **목** · 6816 외륜은 고정판 3개에, 내륜은 회전판에 받칩니다. 회전판 들뜸은 0.25~0.65 mm로 맞춥니다. 끄덕임 축은 Ø8 D-flat에서 힘을 받고 옆 나사가 축을 고정합니다. 균형추 트레이는 머리 프레임 뒤의 인서트 4개에 M3×8로 고정합니다. 외장과 모터를 조립한 뒤 전원을 끄고 수평에서 균형을 잡도록 연강판을 0~12장 추가합니다. 누름판을 맨 위 강철판에 대고 두 나사로 고정합니다. 목 전체 각도와 서비스 덮개 30 mm 개방에 걸쳐 케이블에 여유를 둡니다.
+- **턱** · 왼쪽 혼과 오른쪽 Ø4 핀을 같은 축으로 맞춥니다. 본딩 전에 손으로 움직여 뒤쪽과 치아가 닿지 않는 닫힘 위치를 찾습니다. XL330 케이스 나사 삽입은 3 mm 이내, XL430 혼은 3.5 mm 이내입니다.
+
+### 케이블 고정
+
+평평한 뒤턱이 있는 플러그나 연장선을 고릅니다. 표의 치수는 폭 × 높이이고 단위는 mm입니다. 몸체 길이는 15 mm 이상이며 내부 배선과 구부림 공간을 남겨야 합니다.
+
+| 위치 | 뒤턱 최소 | 몸체 최대 | 고정부를 통과하는 선·목 최대 |
+|---|---:|---:|---:|
+| 5 V XT30 | 10.5 × 5.8 | 13.1 × 6.9 | 7.0 × 4.0 |
+| 목 전원 XT60 | 16.0 × 8.1 | 19.3 × 10.1 | 11.1 × 5.0 |
+| 카메라·OpenRB USB-A | 12.4 × 7.0 | 18.5 × 10.3 | 6.4 × 5.2 |
+
+케이블 트레이는 M3×18 두 개와 평와셔·잠금너트로 받침에 고정합니다. 덮개는 M3 인서트를 넣고 M3×12 다섯 개로 조입니다. 실제 커넥터에 시임을 대어 좌우·상하 유격을 편측 약 0.12 mm로 맞추고 뒤턱을 받침에 밀착시킵니다. 전원을 끄고 케이블을 직선과 45°에서 10 N으로 30초씩 당겨 0.5 mm 이하 이동과 피복 상태를 확인합니다. [허브 극성](../electronics/README.md#허브-배선)
 
 ## 재현
 
-아래는 저장소 루트에서 실행합니다. `fc`는 Debian에서 FreeCAD 1.0 모듈을 불러오는 예입니다. 해석은 Python 3.12와 Linux Gmsh용 `libGLU`를 사용합니다.
+저장소 루트에서 실행합니다. FreeCAD 1.0과 Python 3.12가 필요하며 Linux에서 Gmsh는 `libGLU`를 사용합니다.
 
 ```sh
 /usr/bin/python3 -m venv build/freecad-venv
 build/freecad-venv/bin/pip install trimesh==4.10.1 manifold3d==3.3.2 'scipy<2'
-fc() { PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python "$@"; }
+fc() { QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python "$@"; }
 fc mechanical/revise.py
-fc mechanical/physics/base_clearance.py
-fc mechanical/physics/export_cad.py --world build/physics/cad
+fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B4-Assembly.FCStd
+fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B4-Assembly.FCStd --world build/physics/cad
 
 python3.12 -m venv build/physics-venv
 . build/physics-venv/bin/activate
 python -m pip install -r mechanical/physics/requirements.txt
 python mechanical/physics/check_head.py build/physics/cad build/physics/clearance.json
+python mechanical/physics/tolerances.py build/physics/cad build/physics/tolerance.json
 python mechanical/physics/multibody.py build/physics/cad build/physics/motion
 python mechanical/physics/jaw_clearance.py build/physics/cad build/physics/jaw
+python mechanical/physics/retainer.py build/physics/cad build/physics/retention.json
 python mechanical/physics/cable_fea.py build/physics/cad build/physics/fea
-python mechanical/physics/grip.py build/physics/grip
 ```
