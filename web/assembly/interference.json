@@ -1,0 +1,51 @@
+{
+  "cad_sha256": "d7875a4875d6a7c43fd34b5ca7eabe2070f1d362313987c99f73535deb1685ee",
+  "stops": {
+    "rotor": {
+      "remaining": 0.5,
+      "volume": 30.06,
+      "nodes": [
+        "rotor-1",
+        "rotor-2",
+        "rotor-3"
+      ]
+    },
+    "mast": {
+      "remaining": 0.5,
+      "volume": 11.64,
+      "nodes": [
+        "mast-1"
+      ]
+    },
+    "eye-pin": {
+      "remaining": 5.0,
+      "volume": 6.19,
+      "nodes": [
+        "eye-pin-1"
+      ]
+    },
+    "front-shell": {
+      "remaining": 15.0,
+      "volume": 337.1,
+      "nodes": [
+        "front-shell-1",
+        "front-shell-2",
+        "front-shell-3"
+      ]
+    },
+    "front-orbit": {
+      "remaining": 5.0,
+      "volume": 236.0,
+      "nodes": [
+        "front-orbit-1"
+      ]
+    },
+    "rear-shell": {
+      "remaining": 0.5,
+      "volume": 1.27,
+      "nodes": [
+        "rear-shell-1"
+      ]
+    }
+  }
+}

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101417">
+  <meta name="description" content="R5 B7의 실제 CAD로 조립 순서, 부품 삽입과 간섭을 단계별로 확인합니다.">
+  <title>R5 B7 · 단계별 조립</title>
+  <link rel="stylesheet" href="./assembly.css">
+  <script type="importmap">
+    {"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="top-inner">
+      <a class="brand" href="../">R5 <span>B7</span></a>
+      <nav aria-label="검토 화면">
+        <a href="../">구동 검토</a>
+        <a href="./" aria-current="page">조립 순서</a>
+      </nav>
+      <button id="stock-open" class="button">볼트 규격</button>
+    </div>
+  </header>
+  <main>
+    <div class="page-heading">
+      <div>
+        <h1>단계별 조립</h1>
+        <p>부품을 하나씩 끼워 보고, 간섭 위치에서 돌려 봅니다.</p>
+      </div>
+      <label class="step-picker">
+        <span>조립 단계</span>
+        <select id="step-select"></select>
+      </label>
+    </div>
+
+    <div class="workbench">
+      <aside class="steps-panel" aria-labelledby="steps-title">
+        <div class="steps-head">
+          <h2 id="steps-title">작업 순서</h2>
+          <button id="issues-only" class="button compact" aria-pressed="false">간섭만</button>
+        </div>
+        <nav id="step-list" aria-label="조립 단계"></nav>
+      </aside>
+
+      <section class="viewer" id="viewer" aria-label="단계별 3D 조립">
+        <div class="viewer-top">
+          <div class="step-heading">
+            <span id="step-number"></span>
+            <h2 id="step-title">CAD 불러오는 중</h2>
+          </div>
+          <button id="expand" type="button" class="button compact" aria-label="3D 뷰어 전체 화면">전체 화면</button>
+        </div>
+        <div class="stage" id="stage">
+          <div id="canvas" class="canvas" aria-label="드래그로 회전하고 스크롤로 확대하는 조립 CAD"></div>
+          <div id="model-status" class="model-status" role="status"><span></span><p>실제 B7 CAD를 불러오는 중</p></div>
+          <div class="stage-tag" id="stage-tag" hidden></div>
+          <div class="legend">
+            <span><i class="moving"></i>이동 부품</span>
+            <span><i class="fastener"></i>나사·너트</span>
+            <span id="hit-legend" hidden><i class="hit"></i>겹치는 체적</span>
+          </div>
+          <div id="picked" class="picked" hidden></div>
+        </div>
+        <div class="view-controls">
+          <div class="view-buttons" role="group" aria-label="CAD 표시 방식">
+            <button class="button compact" id="reset-view">시점 복원</button>
+            <button class="button compact" id="ghost" aria-pressed="false">주변 투명</button>
+            <button class="button compact" id="section" aria-pressed="false" hidden>절개 보기</button>
+          </div>
+          <span class="orbit-hint">드래그로 회전 · 스크롤로 확대</span>
+        </div>
+        <div class="player">
+          <div class="timeline">
+            <button id="play" class="button primary" aria-pressed="false" disabled>재생</button>
+            <div class="slider-area">
+              <label for="position">조립 위치</label>
+              <output id="distance" for="position"></output>
+              <input id="position" type="range" min="0" max="1000" value="0" disabled>
+            </div>
+          </div>
+          <div class="player-actions">
+            <div>
+              <button id="start" class="button compact" disabled>처음 위치</button>
+              <button id="stop" class="button compact danger" hidden>간섭 위치</button>
+              <button id="finish" class="button compact" disabled>목표 위치</button>
+            </div>
+            <div>
+              <button id="prev" class="button compact">이전 단계</button>
+              <button id="next" class="button compact">다음 단계</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="details-panel" aria-labelledby="detail-title">
+        <div class="detail-head">
+          <span id="detail-group"></span>
+          <span id="detail-status" class="status" role="status"></span>
+        </div>
+        <h2 id="detail-title">조립 작업</h2>
+        <p id="task"></p>
+        <div id="interference" class="interference" hidden>
+          <h3>이 위치에서 겹침</h3>
+          <dl>
+            <div><dt>남은 거리</dt><dd id="stop-distance"></dd></div>
+            <div><dt>겹친 부피</dt><dd id="stop-volume"></dd></div>
+          </dl>
+        </div>
+        <div class="detail-block">
+          <h3>손으로 확인</h3>
+          <p id="check"></p>
+          <p id="note" class="note" hidden></p>
+        </div>
+        <div class="detail-block" id="gear-block">
+          <h3>이 단계의 체결품</h3>
+          <p id="gear"></p>
+        </div>
+        <button id="ream" class="button ream" aria-pressed="false" hidden>Ø3.2 가공 미리보기</button>
+        <p class="evidence">B7 CAD 기준. 출력 공차와 작동 소음은 실물 가조립에서 확인합니다.</p>
+      </aside>
+    </div>
+
+    <footer>
+      <span>R5 B7 · FreeCAD 조립 형상</span>
+      <a href="https://github.com/ckh7488/head/blob/main/mechanical/ASSEMBLY.md">인쇄용 조립절차서</a>
+    </footer>
+  </main>
+
+  <dialog id="stock-dialog" aria-labelledby="stock-title">
+    <div class="dialog-head">
+      <div>
+        <h2 id="stock-title">기본 볼트 7가지</h2>
+        <p>눈꺼풀 축에 M2×8을 공용으로 쓰고, 일반 육각너트는 M2·M3 두 가지를 씁니다.</p>
+      </div>
+      <form method="dialog"><button class="button">닫기</button></form>
+    </div>
+    <table class="stock-table">
+      <thead><tr><th scope="col">규격</th><th scope="col">기본 수량</th><th scope="col">사용 위치</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">M2×6</th><td>1</td><td><button data-jump="blink-links">가운데 링크의 모터 쪽</button></td></tr>
+        <tr><th scope="row">M2×8</th><td>10</td><td><button data-jump="blink-clamp-bolts">축 고정 3</button> · 링크 5 · C3 2</td></tr>
+        <tr><th scope="row">M3×8</th><td>11</td><td>캐리어 8 · 베어링 눌림판 3</td></tr>
+        <tr><th scope="row">M3×10</th><td>4</td><td><button data-jump="hub-board">허브 PCB</button></td></tr>
+        <tr><th scope="row">M3×10 접시머리</th><td>4</td><td><button data-jump="hatch-fit">받침 바닥 덮개</button></td></tr>
+        <tr><th scope="row">M3×16</th><td>10</td><td><button data-jump="yoke-fit">목 요크 3</button> · 케이블 고정부 7</td></tr>
+        <tr><th scope="row">M3×20</th><td>6</td><td><button data-jump="blink-rail">눈꺼풀 레일 4</button> · 모터판 2</td></tr>
+      </tbody>
+    </table>
+    <p class="stock-note">M2×8은 모터 쪽 한 곳에서 케이스에 닿습니다. M3×16은 레일 너트까지 닿지 않고, M3×20은 요크에서 기둥을 파고듭니다.</p>
+    <p class="stock-note">길이까지 지정된 기본 체결품 기준입니다. 모터 지정 나사, 선택 균형추와 목 회전판의 보류 항목은 각 단계와 BOM을 봅니다.</p>
+  </dialog>
+  <script type="module" src="./assembly.js"></script>
+</body>
+</html>

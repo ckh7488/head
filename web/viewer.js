@@ -35,7 +35,7 @@ partLabel(["Part046"], "모터 장착판", "PETG 출력 · 두께 2.7 mm");
 partLabel(["Part047"], "모터 혼", "PETG 출력 · 두께 3.1 mm");
 partLabel(["Part048"], "눈꺼풀 공용 가로축", "강철 환봉 · Ø4 × 112 mm");
 partLabel(["Part050", "Part052"], "가로축 베어링", "구매품 · MR104ZZ 4 × 10 × 4 mm");
-partLabel(["Part053", "Part054", "Part055"], "가로축 크랭크", "PETG 출력 · M2×4 나사와 일반 너트로 축 고정");
+partLabel(["Part053", "Part054", "Part055"], "가로축 크랭크", "PETG 출력 · 공용 M2×8 나사와 일반 너트로 축 고정");
 partLabel(["Part056"], "가운데 구동 링크", "PETG 출력 · 두께 2.6 mm · 밀고 당기는 막대");
 partLabel(["Part057", "Part060"], "좌우 눈꺼풀 링크", "PETG 출력 · 각 두께 2.6 mm");
 partLabel(["Part058", "Part059", "Part061", "Part062"], "눈꺼풀 힌지핀", "강철 핀 · Ø2 × 9.5 mm · 눈꺼풀마다 좌우 한 개");

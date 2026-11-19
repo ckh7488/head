@@ -10,6 +10,7 @@ from primitives import box, cylinder, print_mesh
 X, Y, Z = (1, 0, 0), (0, 1, 0), (0, 0, 1)
 BLINK_MOUNTS = tuple((x, z) for x in (-20., 20.) for z in (143., 150.))
 BLINK_CLAMPS = ((-53.9, -56., -50.9, -1), (10.2, 7.65, 13., 1), (54.15, 51.15, 56.25, 1))
+BLINK_CLAMP_LENGTH = 8.
 HATCH_MOUNTS = ((-41.85,55.), (41.85,55.), (-26.9,82.25), (26.9,82.25))
 HUB_MOUNTS = tuple((x, y) for x in (-30.8, 30.8) for y in (46.2, 72.8))
 BALLAST_MOUNTS = tuple((x, z) for x in (-28., 28.) for z in (143., 150.))

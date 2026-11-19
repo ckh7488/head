@@ -16,7 +16,7 @@ from trimesh.collision import mesh_to_BVH
 
 from export_cad import world_shape
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from stock import BLINK_CLAMPS, nut, socket_screw
+from stock import BLINK_CLAMPS, BLINK_CLAMP_LENGTH, nut, socket_screw
 
 V = App.Vector
 X = V(1, 0, 0)
@@ -108,7 +108,7 @@ def check(cad, meshes):
         shaft_parts = ('Part050','Part052','Part053','Part054','Part055','BlinkCollarLeft','BlinkCollarRight')
         for name in shaft_parts:
             record(f'axial shaft insertion / {name}', inserted.common(world_shape(doc.getObject(name))).Volume)
-        radial = [socket_screw(2,4.,(x,y,z+5.55),(0,0,-1)).fuse(nut(2,(x,y,z+2.60),(0,0,1),(0,1,0)))
+        radial = [socket_screw(2,BLINK_CLAMP_LENGTH,(x,y,z+1.55+BLINK_CLAMP_LENGTH),(0,0,-1)).fuse(nut(2,(x,y,z+2.60),(0,0,1),(0,1,0)))
                   for x,_,_,_ in BLINK_CLAMPS]
         for part, hardware, (x,_,_,side) in zip(('Part053','Part054','Part055'),radial,BLINK_CLAMPS):
             crank = world_shape(doc.getObject(part))

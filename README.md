@@ -11,11 +11,11 @@
 | 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
-| 브라우저에서 6축 조작 | [B7 웹 뷰어](web/) |
+| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b7/assembly/) · [B7 웹 뷰어](web/) |
 
 ## 웹 뷰어
 
-저장소 루트에서 실행하면 브라우저에서 조립 형상과 6축 움직임을 볼 수 있습니다. [로컬 주소](http://localhost:8000)
+저장소 루트에서 실행하면 브라우저에서 조립 형상과 6축 움직임을 볼 수 있습니다. [구동 검토](http://localhost:8000) · [단계별 조립](http://localhost:8000/assembly/)
 
 ```sh
 npm ci --prefix web
