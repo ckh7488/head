@@ -4,8 +4,6 @@
 #include <string.h>
 #include "Calibration.h"
 
-using namespace ControlTableItem;
-
 constexpr uint8_t trackerCount = 5;
 constexpr uint8_t count = trackerCount + 1;
 constexpr uint16_t model[count] = {1190, 1190, 1200, 1060, 1060, 1200};
@@ -15,19 +13,50 @@ constexpr uint16_t pwm[count] = {180, 180, 200, 270, 300, 160};
 constexpr uint16_t velocity[count] = {75, 60, 160, 29, 19, 95};
 constexpr uint16_t acceleration[count] = {20, 16, 62, 12, 10, 40};
 static_assert(sizeof(calibration)/sizeof(calibration[0]) == count, "One calibration row per axis");
-constexpr unsigned long timeoutMs = 400;
-constexpr unsigned long reportMs = 90;
+constexpr uint32_t busBaud = 57600;
+constexpr uint32_t busTimeoutMs = 14;
+constexpr uint32_t timeoutMs = 400;
+constexpr uint32_t goalPeriodMs = 60;
+constexpr uint32_t reportMs = 120;
+constexpr uint8_t holdTolerance = 3;
+constexpr uint8_t positionTolerance = 8;
+
+struct Register {
+  uint16_t address;
+  uint8_t size;
+};
+
+// Protocol 2.0 control-table addresses shared by the XL330 and XL430.
+constexpr Register modelNumber{0, 2}, driveMode{10, 1}, operatingMode{11, 1};
+constexpr Register torqueEnable{64, 1}, statusReturnLevel{68, 1};
+constexpr Register goalPwm{100, 2}, profileAcceleration{108, 4}, profileVelocity{112, 4};
+constexpr Register goalPosition{116, 4}, presentPosition{132, 4};
+
+enum class Transfer { ok, bus, servo };
+
+struct AxisStatus {
+  int32_t model = -1;
+  int32_t mode = -1;
+  int32_t drive = -1;
+  int32_t returnLevel = -1;
+  int32_t torque = -1;
+  int32_t position = -1;
+};
 
 Dynamixel2Arduino dxl(Serial1, -1);
 uint8_t armed = 0;
+bool faulted = false;
 bool moving = false;
-unsigned long lastCommand = 0;
-unsigned long lastReport = 0;
+bool pending = false;
+uint32_t lastCommand = 0;
+uint32_t lastGoal = 0;
+uint32_t lastReport = 0;
 char line[112];
 size_t length = 0;
 bool overflow = false;
 int32_t raw[count] = {0};
 int32_t targets[count] = {0};
+int32_t queued[count] = {0};
 
 bool axisEnabled(uint8_t mask, uint8_t i) {
   return (mask & (1u << i)) != 0;
@@ -56,7 +85,7 @@ bool inside(uint8_t i, int32_t value, uint8_t tolerance) {
   const auto& c = calibration[i];
   int32_t a = c.low<c.high ? c.low : c.high;
   int32_t b = c.low<c.high ? c.high : c.low;
-  return value>=a-tolerance && value<=b+tolerance;
+  return value>=0 && value<=4095 && value>=a-tolerance && value<=b+tolerance;
 }
 
 int32_t toTicks(uint8_t i, float degrees) {
@@ -77,44 +106,183 @@ float toDegrees(uint8_t i,int32_t ticks) {
   return limited(highDeg[i]*(ticks-c.zero)/float(c.high-c.zero),0,highDeg[i]);
 }
 
-bool readTick(uint8_t id,int32_t& value) {
-  value=dxl.readControlTableItem(static_cast<uint8_t>(PRESENT_POSITION),id,static_cast<uint32_t>(14));
-  return dxl.getLastLibErrCode()==0 && value>=0 && value<=4095;
+Transfer transferResult(bool complete) {
+  if (dxl.getLastLibErrCode()!=DXL_LIB_OK) return Transfer::bus;
+  if (dxl.getLastStatusPacketError()!=0) return Transfer::servo;
+  return complete ? Transfer::ok : Transfer::bus;
+}
+
+bool retryable(Transfer result) {
+  if (result==Transfer::servo) return dxl.getLastStatusPacketError()==DXL2_0_ERR_CRC_ERROR;
+  switch (dxl.getLastLibErrCode()) {
+    case DXL_LIB_OK:
+    case DXL_LIB_ERROR_TIMEOUT:
+    case DXL_LIB_ERROR_CRC:
+    case DXL_LIB_ERROR_WRONG_PACKET:
+    case DXL_LIB_ERROR_PORT_WRITE:
+      return true;
+    default:
+      return false;
+  }
+}
+
+void drainBusInput() {
+  for (int buffered=Serial1.available();buffered>0;buffered--) Serial1.read();
+}
+
+Transfer readRegister(uint8_t id, Register reg, int32_t& value) {
+  Transfer result;
+  for (uint8_t attempt=0;attempt<2;attempt++) {
+    uint8_t bytes[4] = {};
+    drainBusInput();
+    result=transferResult(dxl.read(id,reg.address,reg.size,bytes,sizeof(bytes),busTimeoutMs)==reg.size);
+    if (result==Transfer::ok) {
+      uint32_t decoded=0;
+      for (uint8_t n=0;n<reg.size;n++) decoded|=uint32_t(bytes[n])<<(8*n);
+      value=static_cast<int32_t>(decoded);
+      return result;
+    }
+    if (!retryable(result)) break;
+  }
+  return result;
+}
+
+Transfer writeRegister(uint8_t id, Register reg, int32_t value, bool retry=true) {
+  const uint32_t encoded=static_cast<uint32_t>(value);
+  uint8_t bytes[4];
+  for (uint8_t n=0;n<reg.size;n++) bytes[n]=static_cast<uint8_t>(encoded>>(8*n));
+  drainBusInput();
+  Transfer result=transferResult(dxl.write(id,reg.address,bytes,reg.size,busTimeoutMs));
+  if (retry && result!=Transfer::ok && retryable(result)) {
+    drainBusInput();
+    result=transferResult(dxl.write(id,reg.address,bytes,reg.size,busTimeoutMs));
+  }
+  return result;
+}
+
+bool readAxis(uint8_t i, AxisStatus& status) {
+  const uint8_t id=i+1;
+  if (readRegister(id,modelNumber,status.model)!=Transfer::ok) return false;
+  if (status.model!=model[i]) return true;
+  return readRegister(id,operatingMode,status.mode)==Transfer::ok &&
+         readRegister(id,driveMode,status.drive)==Transfer::ok &&
+         readRegister(id,statusReturnLevel,status.returnLevel)==Transfer::ok &&
+         readRegister(id,torqueEnable,status.torque)==Transfer::ok &&
+         readRegister(id,presentPosition,status.position)==Transfer::ok;
+}
+
+bool readyToArm(uint8_t i, const AxisStatus& status) {
+  return status.model==model[i] && status.mode==3 && (status.drive&12)==0 &&
+         status.returnLevel==2 && status.torque==0 && inside(i,status.position,0);
+}
+
+void cancelMotion() {
+  pending=false;
+  moving=false;
 }
 
 void release() {
-  uint8_t previous=armed;
-  armed=0;
-  moving=false;
+  cancelMotion();
   for (uint8_t i=0;i<count;i++) {
-    if (axisEnabled(previous,i)) dxl.torqueOff(i+1);
+    if (!axisEnabled(armed,i)) continue;
+    int32_t torque=-1;
+    writeRegister(i+1,torqueEnable,0);
+    if (readRegister(i+1,torqueEnable,torque)==Transfer::ok && torque==0) {
+      armed&=~(1u<<i);
+    }
   }
+  faulted=armed!=0;
+  Serial.println(faulted ? "ERROR RELEASE_UNCONFIRMED" : "RELEASED");
 }
 
-void fault(const char* reason) {
-  release();
+void printAxisError(const char* reason, uint8_t id) {
+  Serial.print(reason);
+  Serial.print(" ID");
+  Serial.println(id);
+}
+
+void latchFault(const char* reason, uint8_t id=0) {
+  cancelMotion();
+  faulted=true;
   Serial.print("ERROR ");
-  Serial.println(reason);
+  if (id) printAxisError(reason,id);
+  else Serial.println(reason);
+}
+
+bool holdAxes() {
+  bool held=true;
+  for (uint8_t i=0;i<count;i++) {
+    if (!axisEnabled(armed,i)) continue;
+    if (readRegister(i+1,presentPosition,raw[i])!=Transfer::ok || !inside(i,raw[i],holdTolerance)) {
+      held=false;
+      continue;
+    }
+    const auto& c=calibration[i];
+    const int32_t lower=c.low<c.high ? c.low : c.high;
+    const int32_t upper=c.low<c.high ? c.high : c.low;
+    const int32_t goal=raw[i]<lower ? lower : (raw[i]>upper ? upper : raw[i]);
+    if (writeRegister(i+1,goalPosition,goal)!=Transfer::ok) {
+      held=false;
+      continue;
+    }
+    targets[i]=goal;
+  }
+  return held;
+}
+
+void stopOnFault(const char* reason, uint8_t id) {
+  latchFault(reason,id);
+  if (!holdAxes()) Serial.println("ERROR HOLD_UNCONFIRMED");
 }
 
 bool freeze() {
-  moving=false;
-  for (uint8_t i=0;i<count;i++) {
-    if (!axisEnabled(armed,i)) continue;
-    if (!readTick(i+1,raw[i]) || !inside(i,raw[i],3) ||
-        !dxl.setGoalPosition(i+1,raw[i],UNIT_RAW)) {
-      fault("HOLD_BUS");
-      return false;
-    }
-    targets[i]=raw[i];
+  cancelMotion();
+  if (holdAxes()) return true;
+  latchFault("HOLD_UNCONFIRMED");
+  return false;
+}
+
+void checkAxis(uint8_t i) {
+  AxisStatus status;
+  if (!readAxis(i,status)) {
+    printAxisError("ERROR CHECK_BUS_OR_STATUS",i+1);
+    return;
   }
-  return true;
+  Serial.print("CHECK ");
+  Serial.print(i+1);
+  const bool calibrated=validCalibration(i);
+  const int32_t values[] = {status.model,status.mode,status.drive,status.returnLevel,status.torque,status.position,
+                            calibrated,!faulted && calibrated && readyToArm(i,status)};
+  for (int32_t value : values) {
+    Serial.print(' ');
+    Serial.print(value);
+  }
+  Serial.println();
+}
+
+void emitGoals() {
+  for (uint8_t i=0;i<count;i++) {
+    if (!axisEnabled(armed,i) || targets[i]==queued[i]) continue;
+    Transfer result=writeRegister(i+1,goalPosition,queued[i]);
+    if (result!=Transfer::ok) {
+      stopOnFault(result==Transfer::servo ? "WRITE_STATUS" : "WRITE_BUS",i+1);
+      return;
+    }
+    targets[i]=queued[i];
+  }
+  pending=false;
 }
 
 void report() {
   for (uint8_t i=0;i<count;i++) {
-    if (axisEnabled(armed,i) && (!readTick(i+1,raw[i]) || !inside(i,raw[i],8))) {
-      fault("READ_OR_LIMIT");
+    if (!axisEnabled(armed,i)) continue;
+    Transfer result=readRegister(i+1,presentPosition,raw[i]);
+    if (result!=Transfer::ok) {
+      stopOnFault(result==Transfer::servo ? "READ_STATUS" : "READ_BUS",i+1);
+      return;
+    }
+    if (!inside(i,raw[i],positionTolerance)) {
+      stopOnFault("POSITION_LIMIT",i+1);
       return;
     }
   }
@@ -128,6 +296,10 @@ void report() {
 }
 
 void arm(uint8_t mask) {
+  if (faulted) {
+    Serial.println("LOCKED RELEASE_AFTER_FAULT");
+    return;
+  }
   if (armed!=0 && armed!=mask) {
     Serial.println("ERROR RELEASE_BEFORE_MASK_CHANGE");
     return;
@@ -142,33 +314,49 @@ void arm(uint8_t mask) {
         Serial.println(i+1);
         return;
       }
-      const uint8_t id=i+1;
-      if (!dxl.ping(id) || dxl.getModelNumber(id)!=model[i] ||
-          dxl.readControlTableItem(OPERATING_MODE,id)!=3 ||
-          (dxl.readControlTableItem(DRIVE_MODE,id)&4)!=0 ||
-          !readTick(id,raw[i]) || !inside(i,raw[i],0)) {
-        Serial.print("LOCKED MODEL_MODE_OR_POSITION ID");
-        Serial.println(id);
+    }
+    for (uint8_t i=0;i<count;i++) {
+      if (!axisEnabled(mask,i)) continue;
+      AxisStatus status;
+      if (!readAxis(i,status) || !readyToArm(i,status)) {
+        printAxisError("LOCKED SERVO_CHECK",i+1);
         return;
       }
     }
-    armed=mask;
     for (uint8_t i=0;i<count;i++) {
       if (!axisEnabled(mask,i)) continue;
       const uint8_t id=i+1;
-      if (!dxl.torqueOff(id) ||
-          !dxl.writeControlTableItem(GOAL_PWM,id,pwm[i]) ||
-          !dxl.writeControlTableItem(PROFILE_VELOCITY,id,velocity[i]) ||
-          !dxl.writeControlTableItem(PROFILE_ACCELERATION,id,acceleration[i]) ||
-          !dxl.setGoalPosition(id,raw[i],UNIT_RAW) ||
-          !dxl.torqueOn(id)) {
-        fault("ARM_BUS");
+      int32_t confirmedPwm=-1;
+      if (writeRegister(id,goalPwm,pwm[i])!=Transfer::ok ||
+          readRegister(id,goalPwm,confirmedPwm)!=Transfer::ok || confirmedPwm!=pwm[i] ||
+          writeRegister(id,profileVelocity,velocity[i])!=Transfer::ok ||
+          writeRegister(id,profileAcceleration,acceleration[i])!=Transfer::ok) {
+        printAxisError("LOCKED ARM_CONFIG",id);
+        return;
+      }
+    }
+    for (uint8_t i=0;i<count;i++) {
+      if (!axisEnabled(mask,i)) continue;
+      const uint8_t id=i+1;
+      if (readRegister(id,presentPosition,raw[i])!=Transfer::ok ||
+          !inside(i,raw[i],0) || writeRegister(id,goalPosition,raw[i])!=Transfer::ok) {
+        stopOnFault("ARM_POSITION_OR_BUS",id);
+        return;
+      }
+      // An enable may have reached the servo even if its acknowledgement is lost.
+      armed|=1u<<i;
+      int32_t torque=-1;
+      if (writeRegister(id,torqueEnable,1,false)!=Transfer::ok ||
+          readRegister(id,torqueEnable,torque)!=Transfer::ok || torque!=1) {
+        stopOnFault("ARM_ENABLE_UNCONFIRMED",id);
         return;
       }
       targets[i]=raw[i];
     }
   }
-  moving=false;
+  cancelMotion();
+  lastGoal=static_cast<uint32_t>(millis())-goalPeriodMs;
+  lastReport=millis();
   Serial.print("ARMED ");
   Serial.println(mask);
   report();
@@ -186,18 +374,25 @@ void command(char* text) {
     return;
   }
   if (!strcmp(text,"HOLD")) {
-    if (armed!=0) freeze();
+    if (armed!=0 && !faulted) freeze();
     return;
   }
   if (!strcmp(text,"RELEASE")) {
     release();
-    Serial.println("RELEASED");
+    return;
+  }
+  if (!strncmp(text,"CHECK ",6)) {
+    long id=0;
+    if (moving) Serial.println("ERROR CHECK_DURING_MOVE");
+    else if (getUnsigned(text+6,1,count,id)) checkAxis(id-1);
+    else Serial.println("ERROR CHECK_ID");
     return;
   }
   if (!strncmp(text,"READ ",5)) {
     long id=0;
     int32_t value=0;
-    if (getUnsigned(text+5,1,count,id) && dxl.ping(id) && readTick(id,value)) {
+    if (getUnsigned(text+5,1,count,id) &&
+        readRegister(id,presentPosition,value)==Transfer::ok && value>=0 && value<=4095) {
       Serial.print("RAW ");
       Serial.print(id);
       Serial.print(' ');
@@ -212,7 +407,7 @@ void command(char* text) {
     if (getUnsigned(text+4,1,(1u << count)-1,mask)) arm(mask);
     return;
   }
-  if (armed==0 || strncmp(text,"GO ",3)) return;
+  if (armed==0 || faulted || strncmp(text,"GO ",3)) return;
 
   float goals[count];
   uint8_t active = commandAxisCount();
@@ -229,16 +424,11 @@ void command(char* text) {
 
   for (uint8_t i=0;i<active;i++) {
     if (!axisEnabled(armed,i)) continue;
-    int32_t goal=toTicks(i,goals[i]);
-    if (targets[i]==goal) continue;
-    if (!dxl.setGoalPosition(i+1,goal,UNIT_RAW)) {
-      fault("WRITE_BUS");
-      return;
-    }
-    targets[i]=goal;
+    queued[i]=toTicks(i,goals[i]);
   }
   lastCommand=millis();
   moving=true;
+  pending=true;
 }
 
 void setup() {
@@ -247,28 +437,37 @@ void setup() {
   pinMode(BDPIN_DXL_PWR_EN,OUTPUT);
   digitalWrite(BDPIN_DXL_PWR_EN,HIGH);
 #endif
-  dxl.begin(57600);
+  dxl.begin(busBaud);
   dxl.setPortProtocolVersion(2.0);
 }
 
+void checkCommandTimeout() {
+  if (moving && static_cast<uint32_t>(millis()-lastCommand)>=timeoutMs) freeze();
+}
+
 void loop() {
-  if (moving && millis()-lastCommand>=timeoutMs) freeze();
-  while (Serial.available()) {
+  checkCommandTimeout();
+  for (size_t remaining=sizeof(line);remaining>0 && Serial.available();remaining--) {
     char c=static_cast<char>(Serial.read());
-    if (c=='\r') continue;
     if (c=='\n') {
+      if (length>0 && line[length-1]=='\r') length--;
       if (!overflow && length>0) {
         line[length]='\0';
-        command(line);
+        if (!memchr(line,'\r',length)) command(line);
       }
       length=0;
       overflow=false;
     } else if (!overflow) {
-      if (length+1<sizeof(line)) line[length++]=c;
+      if ((c=='\r' || (c>=' ' && c<='~')) && length+1<sizeof(line)) line[length++]=c;
       else overflow=true;
     }
   }
-  if (armed!=0 && millis()-lastReport>=reportMs) {
+  checkCommandTimeout();
+  if (pending && static_cast<uint32_t>(millis()-lastGoal)>=goalPeriodMs) {
+    lastGoal=millis();
+    emitGoals();
+  }
+  if (armed!=0 && !faulted && static_cast<uint32_t>(millis()-lastReport)>=reportMs) {
     lastReport=millis();
     report();
   }
