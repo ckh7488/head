@@ -40,7 +40,7 @@ function fastener(part) {
     return { node, label: size === 3 ? "5.5 mm 오픈 스패너" : "4 mm 오픈 스패너", materials: [material], kind: "fastener" };
   }
   node.quaternion.setFromUnitVectors(up, vector(axis));
-  const material = (type === "tool" ? toolColor : gold).clone();
+  const material = (part.tool ? toolColor : gold).clone();
   const radius = size / 2;
   const isSmall = size === 2;
   const add = (geometry, elevation, verticalCylinder = true) => {
@@ -55,8 +55,12 @@ function fastener(part) {
     add(ring(across / Math.sqrt(3), radius, isSmall ? 1.6 : 2.4, 6, 24, phase), 0, false);
   } else if (type === "washer") {
     add(ring(isSmall ? 2.5 : 3.5, isSmall ? 1.1 : 1.6, isSmall ? .3 : .5, 30, 24), 0, false);
+  } else if (type === "socket") {
+    material.color.set(0x83e8ce);
+    add(ring(part.radius, part.opening, part.depth, 36, 30), 0, false);
+    add(new THREE.CylinderGeometry(part.radius, part.radius, length - part.depth, 36), (length + part.depth) / 2);
   } else if (type === "tool") {
-    add(new THREE.CylinderGeometry(1, 1, length, 12), length / 2);
+    add(new THREE.CylinderGeometry(part.radius, part.radius, length, 6), length / 2);
   } else {
     const height = isSmall ? 2 : 3;
     const head = isSmall ? 1.93 : 2.78;
@@ -66,7 +70,8 @@ function fastener(part) {
     add(ring(head, recess, height / 2, 30, 6), -height, false);
   }
 
-  const labels = { nut: `M${size} 일반 육각너트`, washer: `M${size} 평와셔`, tool: "육각렌치 접근 공간", head: `M${size} 육각렌치 원통머리 외형` };
+  const labels = { nut: `M${size} 일반 육각너트`, washer: `M${size} 평와셔`, socket: "5.5 mm 소켓",
+    tool: "2.5 mm 육각렌치", head: `M${size} 육각렌치 원통머리 외형` };
   const label = labels[type] || `M${size}×${length} 육각렌치 원통머리`;
   return { node, label, materials: [material], kind: "fastener" };
 }
@@ -95,7 +100,7 @@ export class WalkthroughScene {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     this.renderer.localClippingEnabled = true;
-    this.renderer.domElement.setAttribute("aria-label", "B13 움직이는 CAD 형상");
+    this.renderer.domElement.setAttribute("aria-label", "B14 움직이는 CAD 형상");
     this.host.append(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = false;

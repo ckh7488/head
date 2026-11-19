@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "04e918176db1d5a27954347f2567e47620a77de37185368e805ae9d7b6313b33",
+  "cad_sha256": "3d0bc16c6f986c17e84fea8ee2b133b729aeed1de5c0a2f9b64b90216db83eed",
   "stops": {},
   "service_hatch": {
     "base_centers": [
@@ -183,7 +183,7 @@
       [
         2,
         [
-          -0.2499999999999999,
+          -0.7999999999999999,
           -22.0,
           162.5
         ],
@@ -412,7 +412,9 @@
         ]
       ],
       "thickness": 3.0,
-      "socket_bore": 4.35
+      "socket_bore": 4.35,
+      "socket_radius": 3.7,
+      "key_radius": 0.89
     },
     "3": {
       "profile": [
@@ -466,7 +468,9 @@
         ]
       ],
       "thickness": 4.2,
-      "socket_bore": 5.3
+      "socket_bore": 5.3,
+      "socket_radius": 4.65,
+      "key_radius": 1.48
     }
   },
   "neck": {
@@ -574,7 +578,7 @@
       54.15
     ],
     "crank_nut_z": 158.6,
-    "crank_wrench": 3.6,
+    "crank_wrench": 4.2,
     "plate_y": 2.2,
     "plate_z": [
       182.0,

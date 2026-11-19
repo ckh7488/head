@@ -49,7 +49,7 @@ export function withAssemblyState(definitions, joints, hardware) {
     return assembled;
   });
   for (const item of hardware) {
-    if (item.type !== "spanner" && !parents.has(item.id)) throw Error(`Missing installation stage for ${item.id}`);
+    if (!item.tool && !parents.has(item.id)) throw Error(`Missing installation stage for ${item.id}`);
   }
   return stages;
 }

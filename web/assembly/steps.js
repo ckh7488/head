@@ -107,7 +107,7 @@ const blinkRods = "Part056 Part057 Part060";
 
 function spanner(id, nut, outward, offset, thickness = review.tools[nut.size].thickness) {
   const { profile } = review.tools[nut.size];
-  return { id, type: "spanner", size: nut.size, axis: nut.axis, outward, profile, thickness,
+  return { id, type: "spanner", tool: true, size: nut.size, axis: nut.axis, outward, profile, thickness,
     seat: nut.seat.map((coordinate, i) => coordinate + offset * nut.axis[i]) };
 }
 const cableSpanner = spanner("cableSpanner", cableNuts[2], [0, 1, 0], 2.4 - review.tools[3].thickness - .26);
@@ -115,6 +115,17 @@ const hatchSpanner = spanner("hatchSpanner", hatchNuts[3], [1, 0, 0], .24);
 const mastSpanner = spanner("mastSpanner", rotorNuts[3], [1, 0, 0], .24);
 const lowerSpanner = spanner("lowerSpanner", linkNuts.find(item => item.id === "linkLeftLowerNut0"), [0, 0, -1], .12);
 const crankSpanner = spanner("crankSpanner", crankNuts[1], [0, -1, 0], 2.4 - blink.crank_wrench - .15, blink.crank_wrench);
+const hubTool = review.tools[3];
+const hubSocket = {
+  id: "hubSocket", type: "socket", tool: true, size: 3, axis: [0, 0, -1],
+  seat: [hubNuts[0].seat[0], hubNuts[0].seat[1], service.board_nut_seat + 2.33],
+  radius: hubTool.socket_radius, opening: 3.25, depth: 5.6, length: 22,
+};
+const hubKey = {
+  id: "hubKey", type: "tool", tool: true, size: 3, axis: [0, 0, 1],
+  seat: [hubBolts[0].seat[0], hubBolts[0].seat[1], service.board_screw_seat + 3.02],
+  radius: hubTool.key_radius, length: 29,
+};
 
 export const hardware = [
   ...hatchNuts, ...hatchBolts, ...hubBolts, ...hubNuts, ...cableNuts, ...cableBolts,
@@ -124,7 +135,7 @@ export const hardware = [
   ...rotorNuts, ...mastStuds, ...mastNuts, ...hornBolts, ...pitchHornBolts, ...yokeNuts, ...yokeBolts, ...railNuts, ...railBolts,
   ...crankNuts, ...crankBolts, ...linkBolts, ...linkNuts, ...linkWashers, ...blinkMotorHeads, ...blinkPlateBolts, ...blinkPlateNuts,
   ...eyeYawHeads, ...eyePitchHeads, ...jawHeads,
-  cableSpanner, hatchSpanner, mastSpanner, crankSpanner, lowerSpanner,
+  cableSpanner, hatchSpanner, mastSpanner, crankSpanner, lowerSpanner, hubSocket, hubKey,
 ];
 
 const PCB = "HubPCB HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2";
@@ -188,19 +199,22 @@ const definitions = [
     check: "보드 아래 납땜부가 기둥에 닿는지와 네 구멍을 확인합니다.",
   },
   {
-    id: "hub-nuts", group: "받침", title: "허브 너트는 덮개 아래에서", base: "HubHolder",
-    moves: [move(names(hubBolts), 0, 0, 17), move(names(hubNuts), 0, 0, -17)],
-    seatOffsets: handStarted(hubNuts, -.80),
-    focus: [0, 59, -69], view: [1, -1.15, 1.05], span: 103,
-    task: "기판 위에서 M3×8을 넣고 덮개 아래 열린 원형 구멍에서 일반 너트를 겁니다.",
-    check: "작업대에서 덮개를 옆으로 세우면 양쪽에 손이 닿습니다.",
+    id: "hub-nuts", group: "받침", title: "소켓에 너트를 담아 허브에 걸기", base: "HubHolder",
+    moves: [move(names(hubBolts), 0, 0, 17), move(`${hubSocket.id} ${hubNuts[0].id}`, 0, 0, -17),
+      move(names(hubNuts.slice(1)), 0, 0, -17)],
+    seatOffsets: handStarted([...hubNuts, hubSocket], -.80),
+    focus: [-15, 53, -78], view: [-1, -1.15, -.78], span: 107,
+    task: "5.5 mm 소켓에 일반 M3 너트를 담아 덮개 아래에서 넣습니다. 기판 쪽에서 M3×8을 두 바퀴 걸어 둡니다.",
+    check: "덮개 양끝만 받쳐 밑을 비웁니다. 그림은 네 곳 중 왼쪽 한 곳의 소켓을 보여 줍니다.",
+    note: `덮개 구멍 Ø${2 * hubTool.socket_bore} mm · 확인한 소켓 앞쪽 외경 Ø${2 * hubTool.socket_radius} mm`,
     stock: "M3×8 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
   },
   {
     id: "hub-bolts", group: "받침", title: "허브를 양쪽에서 조이기", base: "HubHolder",
-    moves: [move(names(hubNuts), 0, 0, -.80)], focus: [0, 59, -69], view: [1, -1.15, .8], span: 97,
+    moves: [move(hubSocket.id, 0, 0, -15), move(hubKey.id, 0, 0, 13), move(names(hubNuts), 0, 0, -.80)],
+    focus: [-15, 53, -73], view: [-1, -1.35, -.48], span: 111,
     task: "아래에서 5.5 mm 소켓으로 너트를 잡고 위에서 2.5 mm 육각렌치로 조입니다.",
-    check: "기판이 휘지 않게 네 곳을 조금씩 조입니다. 볼트와 너트 끝은 덮개 바닥 안에 있습니다.",
+    check: "초록색 소켓을 그대로 잡고 위쪽 육각렌치를 돌립니다. 기판이 휘지 않게 네 곳을 조금씩 조입니다.",
     checked: true, inspectFasteners: true,
   },
   {
@@ -535,7 +549,7 @@ const definitions = [
     moves: [move(crankSpanner.id, 0, -17, 0), move(names(crankNuts), 0, 0, -.55), move(names(crankBolts), 0, 0, 5)],
     focus: [0, -25, 159], view: [1, -1.3, .68], span: 129,
     task: "앞에서 너트를 스패너로 잡고 위에서 육각렌치로 나사를 조입니다.",
-    check: "크랭크에는 머리 두께 3.6 mm 이하의 5.5 mm 스패너가 들어갑니다.",
+    check: `머리 바깥 폭 16 mm·두께 ${blink.crank_wrench} mm의 스패너로 정면과 좌우 15° 경로를 확인했습니다.`,
     checked: true, inspectFasteners: true,
   },
   {

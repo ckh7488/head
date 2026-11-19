@@ -36,7 +36,7 @@ def washer_dimensions(size):
 
 def fastener(row):
     kind, size = row['type'], row['size']
-    if kind == 'spanner':
+    if row.get('tool'):
         points, faces = exact_fastener(row).tessellate(.025)
         return tr.Trimesh(vertices=[tuple(point) for point in points], faces=faces)
     length = row.get('length', 0)
@@ -71,6 +71,12 @@ def exact_fastener(row):
     axis, seat, size = row['axis'], row['seat'], row['size']
     if row['type'] == 'spanner':
         return wrench_shape(seat, axis, row['outward'], row['profile'], row['thickness'])
+    if row.get('tool'):
+        body = cylinder(row['radius'], row['length'], seat, axis)
+        if row['type'] == 'socket':
+            opening = App.Vector(*seat) - .04*App.Vector(*axis)
+            body = body.cut(cylinder(row['opening'], row['depth']+.04, tuple(opening), axis))
+        return body
     if row['type'] == 'head':
         radius, height = {2: (1.93, 2.), 3: (2.78, 3.)}[size]
         return cylinder(radius, height, seat, tuple(-App.Vector(*axis)))

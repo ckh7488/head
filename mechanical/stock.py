@@ -11,7 +11,7 @@ from fixtures import (
 from neck_joint import neck_base
 from primitives import box, cylinder, print_mesh
 from service_hatch import HUB_MOUNTS, HUB_SCREW_SEAT, revise_service, service_coupon
-from tool_access import NUT_HEIGHT, SOCKET_BORE
+from tool_access import NUT_HEIGHT, SOCKET_BORE, WRENCH_THICKNESS
 
 X, Y, Z = (1, 0, 0), (0, 1, 0), (0, 0, 1)
 BLINK_MOUNTS = tuple((x, z) for x in (-20., 20.) for z in (141.5, 151.5))
@@ -21,7 +21,7 @@ BLINK_RAIL_LENGTH = 16.
 BLINK_CLAMPS = ((-53.9, -56., -50.9, -1), (10.2, 7.65, 13., 1), (54.15, 51.15, 56.25, 1))
 BLINK_CLAMP_LENGTH = 8.
 BLINK_CLAMP_NUT_Z = 158.60
-BLINK_CLAMP_WRENCH = 3.60
+BLINK_CLAMP_WRENCH = WRENCH_THICKNESS[3]
 BLINK_HORN_SCREW_X = 3.42
 BLINK_HORN_NUT_X = 9.45
 BLINK_PLATE_Z = (182., 190.8)
@@ -99,10 +99,10 @@ def blink_stock(doc, folder, layout):
         hub = cylinder(4.85, hi-lo, (lo,shaft_y,shaft_z), X)
         pad_lo, pad_hi = min(lo, screw_x-3.85), max(hi, screw_x+3.85)
         pad = box(pad_lo,pad_hi,shaft_y-4.2,shaft_y+5.9,shaft_z+2.10,shaft_z+9.34)
-        strut = box(pad_lo,pad_hi,shaft_y+3.7,shaft_y+6.2,shaft_z+.50,shaft_z+9.34)
+        strut = box(pad_lo,pad_hi,shaft_y+3.7,shaft_y+7.7,shaft_z+.50,shaft_z+9.34)
         crank = crank.fuse([hub,pad,strut])
         roof = BLINK_CLAMP_NUT_Z + NUT_HEIGHT[3]
-        slot = box(screw_x-8.85,screw_x+8.85,shaft_y-10.,shaft_y+5.0,roof-BLINK_CLAMP_WRENCH-.35,roof)
+        slot = box(screw_x-13.,screw_x+13.,shaft_y-12.,shaft_y+6.25,roof-BLINK_CLAMP_WRENCH-.37,roof)
         tools = [cylinder(2.13, hi-lo+.45, (lo-.2,shaft_y,shaft_z), X),
                  cylinder(1.78, 9., (screw_x,shaft_y,shaft_z+1.52)), slot]
         if i == 2:
@@ -123,8 +123,9 @@ def blink_stock(doc, folder, layout):
         part.addProperty('App::PropertyBool','Printed','Design')
         part.Printed = True
         collar = shoulder.fuse(sleeve).cut(bore)
-        span = (1.8, 7.65) if label == 'Left' else (13.1, 19.1)
-        collar = collar.cut(box(*span, shaft_y-4.2, shaft_y+4.2, shaft_z+2.94, shaft_z+4.0))
+        span = (.9, 7.65) if label == 'Left' else (13.1, 20.2)
+        wrench_floor = BLINK_CLAMP_NUT_Z + NUT_HEIGHT[3] - BLINK_CLAMP_WRENCH - .37
+        collar = collar.cut(box(*span, shaft_y-4.2, shaft_y+4.2, wrench_floor, shaft_z+4.0))
         printed(doc,part.Name,collar,
                 folder/f'45_blink_shaft_spacer_{label.lower()}.stl','x+')
 

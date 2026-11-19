@@ -35,7 +35,7 @@ from stock import (
     BLINK_CLAMPS, BLINK_CLAMP_NUT_Z, BLINK_CLAMP_WRENCH, BLINK_HORN_NUT_X, BLINK_HORN_SCREW_X, BLINK_MOUNTS,
     BLINK_PLATE_Y, BLINK_PLATE_Z, BLINK_RAIL_LENGTH, BLINK_RAIL_NUT_Y, BLINK_RAIL_SEAT_Y, YOKE_MOUNTS,
 )
-from tool_access import SOCKET_BORE, WRENCH_THICKNESS, wrench_profile
+from tool_access import KEY_RADIUS, SOCKET_BORE, SOCKET_RADIUS, WRENCH_THICKNESS, wrench_profile
 
 V = App.Vector
 
@@ -65,7 +65,8 @@ def export(cad, output):
             'c3': {'centers': [board_xy(*corner) for corner in C3_HOLES], 'nut_z': C3_NUT_SEAT, 'bolt_z': C3_TOP},
             'openrb': {'centers': [rb_xy(*corner) for corner in HOLES], 'nut_z': NUT_SEAT, 'bolt_z': TOP},
         },
-        'tools': {size: {'profile': wrench_profile(size), 'thickness': thickness, 'socket_bore': SOCKET_BORE[size]}
+        'tools': {size: {'profile': wrench_profile(size), 'thickness': thickness, 'socket_bore': SOCKET_BORE[size],
+                         'socket_radius': SOCKET_RADIUS[size], 'key_radius': KEY_RADIUS[size]}
                   for size, thickness in WRENCH_THICKNESS.items()},
     }
     result['neck'] = {
@@ -102,7 +103,7 @@ def export(cad, output):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B13-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B14-Assembly.FCStd')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     export(args.cad, args.output)

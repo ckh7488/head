@@ -19,7 +19,7 @@ from neck_joint import MOUNTS, ROTOR_TOP, STUD_BOLT_SEAT, MAST_LENGTH
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B13-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B14-Assembly.FCStd"
 
 
 def check_pairs(doc):

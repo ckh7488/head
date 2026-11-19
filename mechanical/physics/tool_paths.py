@@ -2,6 +2,7 @@
 
 from argparse import ArgumentParser
 from functools import cache
+from itertools import product
 import json
 from pathlib import Path
 
@@ -13,7 +14,7 @@ from trimesh.collision import mesh_to_BVH
 from assembly_sweeps import exact_fastener, manifold, MESH_VOLUME_LIMIT
 from export_cad import world_shape
 from primitives import cylinder
-from tool_access import NUT_HEIGHT, WRENCH_THICKNESS, wrench_profile, wrench_shape
+from tool_access import KEY_RADIUS, NUT_HEIGHT, SOCKET_RADIUS, WRENCH_THICKNESS, wrench_profile, wrench_shape
 
 V = App.Vector
 Z = (0., 0., 1.)
@@ -55,7 +56,7 @@ def straight_key(row, length):
     axis = V(*row['axis'])
     height = {2: 2., 3: 3.}[row['size']]
     face = V(*row['seat']) - (height + .02)*axis
-    return cylinder({2: .89, 3: 1.48}[row['size']], length, tuple(face), tuple(-axis))
+    return cylinder(KEY_RADIUS[row['size']], length, tuple(face), tuple(-axis))
 
 
 def socket_gauge(row, mode, radius, length=45.):
@@ -94,9 +95,9 @@ def bent_key(row):
         yield [tool.translated(i*axis) for i in range(0, 17, 2)], outward
 
 
-def wrench_gauges(row, mode):
+def wrench_gauges(row, mode, angle=0., rise=0.):
     size = row['size']
-    depth = 3.60 if mode == 'front' else WRENCH_THICKNESS[size]
+    depth = WRENCH_THICKNESS[size]
     side = -1 if row['seat'][0] < 0 else 1
     outward = V(*(dict(rear=(0,1,0), front=(0,-1,0)).get(mode, (side,0,0))))
     distance = {'rear': 23, 'front': 18, 'side': 51, 'under-side': 20, 'mast': 75}[mode]
@@ -105,7 +106,8 @@ def wrench_gauges(row, mode):
         seat.z += NUT_HEIGHT[size] - depth - .17
     else:
         seat.z += .24
-    shape = wrench_shape(tuple(seat), Z, tuple(outward), wrench_profile(size), depth)
+    seat.z += rise
+    shape = wrench_shape(tuple(seat), Z, tuple(outward), wrench_profile(size, angle), depth)
     return [shape.translated(outward * (distance*i/round(distance/2))) for i in range(round(distance/2)+1)]
 
 
@@ -116,7 +118,8 @@ def trimesh_of(solid):
 
 def check(doc, directory, plan, selected):
     steps = {step['id']: step for step in plan['steps']}
-    hardware = {row['id']: row for row in plan['hardware'] if row['type'] != 'spanner'}
+    hardware = {row['id']: row for row in plan['hardware'] if not row.get('tool')}
+    tools = {row['id'] for row in plan['hardware'] if row.get('tool')}
     request = fcl.CollisionRequest(num_max_contacts=1)
 
     @cache
@@ -131,9 +134,7 @@ def check(doc, directory, plan, selected):
 
     def hit(shape, step, skip):
         mesh = None
-        for name in sorted(present(step) - skip):
-            if name.endswith('Spanner'):
-                continue
+        for name in sorted(present(step) - skip - tools):
             other, obj, solid = geometry(name)
             limit = shape.BoundBox
             if other is not None:
@@ -184,7 +185,7 @@ def check(doc, directory, plan, selected):
                     break
         nut_direction = None
         if mode in ('+', '-'):
-            nut_tool = socket_gauge(nut, mode, {2: 3.7, 3: 4.65}[nut['size']])
+            nut_tool = socket_gauge(nut, mode, SOCKET_RADIUS[nut['size']])
             tail_hit = hit(nut_tool, step, skip)
             if tail_hit and stage in ('blink-links', 'blink-upper-links'):
                 for poses, outward in link_wrenches(nut):
@@ -194,6 +195,9 @@ def check(doc, directory, plan, selected):
         else:
             poses = wrench_gauges(nut, mode)
             nut_tool = poses[0]
+            if mode == 'front':
+                poses += [shape for angle, rise in product((-15., 0., 15.), (-.12, .12))
+                          for shape in wrench_gauges(nut, mode, angle, rise)]
             tail_hit = next((obstacle for shape in poses if (obstacle := hit(shape, step, skip))), None)
         if stage == 'mast-bolts' and tail_hit is None:
             lower = hardware[nut['id'].replace('mastNut', 'rotorNut')]

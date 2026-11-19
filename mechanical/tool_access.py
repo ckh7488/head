@@ -7,6 +7,8 @@ import Part
 
 NUT_HEIGHT = {2: 1.60, 3: 2.40}
 SOCKET_BORE = {2: 4.35, 3: 5.30}
+SOCKET_RADIUS = {2: 3.70, 3: 4.65}
+KEY_RADIUS = {2: .89, 3: 1.48}
 WRENCH_THICKNESS = {2: 3.0, 3: 4.2}
 
 
