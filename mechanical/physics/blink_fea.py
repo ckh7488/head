@@ -30,8 +30,9 @@ def measure(directory, layout, size_mm):
     ring=np.hypot(vertices[1]-shaft_y,vertices[2]-shaft_z)
     bore=np.all(abs(ring-5.12)<.015,axis=0)
     patches=[boundary[bore & (abs(x-a)<2.01)] for a in layout['bearing_x_mm']]
-    pads=(183.,189.)
-    patches.extend(boundary[on(0,-1.8) & (np.hypot(y,z-a)<2.9)] for a in pads)
+    pads=layout.get('motor_mount_z_mm',(183.,189.))
+    mount_y=layout.get('motor_mount_y_mm',0.)
+    patches.extend(boundary[on(0,-1.8) & (np.hypot(y-mount_y,z-a)<2.9)] for a in pads)
     if len(fixed)<6 or any(len(p)<6 for p in patches):
         raise RuntimeError('Unresolved blink rail screw or bearing patch')
 
@@ -56,7 +57,7 @@ def measure(directory, layout, size_mm):
             input_force,_,left,right=-linkage_forces(layout,torque,angle,end)
             phase=radians(angle+layout['phase_deg'])
             crank=layout['radius_mm']*np.array([cos(phase),sin(phase)])
-            y,z=np.array(layout['servo_yz_mm'])+crank-[0.,np.mean(pads)]
+            y,z=np.array(layout['servo_yz_mm'])+crank-[mount_y,np.mean(pads)]
             couple=(y*input_force[1]-z*input_force[0])/(pads[1]-pads[0])
             offset=np.array([couple,0.])
             loads=np.r_[left,right,input_force/2+offset,input_force/2-offset]

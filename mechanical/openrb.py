@@ -5,7 +5,7 @@ LENGTH = 66.
 ORIGIN = (40., -44.25)
 # Orthographic pinout in the ROBOTIS manual, scaled to the stated 25 × 66 mm board.
 HOLES = tuple((x, y) for x in (2.25, 22.75) for y in (2.25, 63.75))
-BOTTOM = -68.5
+BOTTOM = -70.65
 TOP = BOTTOM + 1.6
 NUT_SEAT = BOTTOM - 5.86
 HEADER_PINS = ((1.2, 3.4), (21.6, 23.8))

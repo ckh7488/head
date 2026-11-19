@@ -7,33 +7,23 @@ import sys
 
 import FreeCAD as App
 import Part
-from scipy.spatial import ConvexHull
 
 from base_clearance import check_pass
 from export_cad import world_shape
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixtures import (
-    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS, CAP_NUT_FLOOR_Z,
-    CAP_NUT_ROOF_Z, CAP_NUT_TRAVEL, CAP_TRAVEL, SADDLE_BOLT_TRAVEL,
+    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS, CAP_NUT_FACE_Z,
+    CAP_WRENCH_TRAVEL, CAP_TRAVEL, SADDLE_BOLT_TRAVEL,
     SADDLE_INNER_TRAVEL, SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_TRAVEL, SADDLE_WASHER_Y,
 )
 from primitives import cylinder
-from stock import hexagon, nut
+from stock import hexagon
+from tool_access import NUT_HEIGHT, WRENCH_THICKNESS, wrench_profile, wrench_shape
 
 V = App.Vector
 Y, Z = (0, 1, 0), (0, 0, 1)
-NUT_THICKNESS = 2.4
-
-
-def nut_sweep(x, dx, dy, lift, angle):
-    z = CAP_NUT_FLOOR_Z + lift
-    tail = nut(3, (x + dx, CAP_BOLT_Y + dy, z))
-    tail.rotate(V(x + dx, CAP_BOLT_Y + dy, z), V(*Z), angle)
-    points = [(v.Point.x, v.Point.y) for v in tail.Vertexes if abs(v.Point.z - z) < 1e-6]
-    points += [(px, py + CAP_NUT_TRAVEL) for px, py in points]
-    perimeter = [V(*points[i], z) for i in ConvexHull(points).vertices]
-    return Part.Face(Part.makePolygon(perimeter + perimeter[:1])).extrude(V(0, 0, NUT_THICKNESS))
+NUT_THICKNESS = NUT_HEIGHT[3]
 
 
 def fastener_sweep(seat, length, outward, travel):
@@ -45,24 +35,22 @@ def fastener_sweep(seat, length, outward, travel):
 
 def check_paths(doc):
     base, tray, cover = map(world_shape, (doc.Part000, doc.CableSaddle, doc.CableGate))
-    nut_paths = (
-        (nut_sweep(x, dx, dy, lift, angle), tray,
-         f'M3 nut at x={x:g}, offset ({dx:g}, {dy:g}, {lift:g}) and angle {angle:g}°')
-        for x, dx, dy, lift, angle in product(CAP_BOLTS, (-.12, 0., .12), (-.12, 0., .12),
-                                              (.015, .22, .58), (-2., 0., 2.))
-    )
-    results = {'nut_paths': check_pass(nut_paths)}
-    for x, dy, z in product(CAP_BOLTS, (-.18, 0., .18), (CAP_NUT_FLOOR_Z+.02, CAP_NUT_ROOF_Z-2.19)):
-        smallest = hexagon(5.32, 2.15, (x, CAP_BOLT_Y + dy, z))
-        smallest.rotate(V(x, CAP_BOLT_Y + dy, z), V(*Z), 30.)
-        if smallest.common(tray).Volume <= .015:
-            raise ValueError(f'M3 nut at x={x:g} can spin while tightening')
+    def wrench_paths():
+        thickness = WRENCH_THICKNESS[3]
+        for x, angle, dx, dz in product(CAP_BOLTS, (-15., 0., 15.), (-.24, .24), (-.15, .15)):
+            tool = wrench_shape((x+dx, CAP_BOLT_Y, CAP_NUT_FACE_Z-thickness-.26+dz),
+                                Z, Y, wrench_profile(3, angle), thickness)
+            for travel in range(int(CAP_WRENCH_TRAVEL)+1):
+                placed = tool.translated(V(0, travel, 0))
+                for fixed in (tray, cover, base):
+                    yield placed, fixed, f'5.5 mm cable spanner at x={x:g}, y+{travel:g}, {angle:g}°'
 
-    if CAP_BOLT_SEAT_Z - CAP_BOLT_LENGTH > CAP_NUT_ROOF_Z - NUT_THICKNESS - .45:
+    results = {'wrench_paths': check_pass(wrench_paths())}
+    if CAP_BOLT_SEAT_Z - CAP_BOLT_LENGTH > CAP_NUT_FACE_Z - NUT_THICKNESS - .45:
         raise ValueError('Cover screw has insufficient engagement in the nut')
     bearing_areas = []
     for x in CAP_BOLTS:
-        center = x, CAP_BOLT_Y, CAP_NUT_ROOF_Z
+        center = x, CAP_BOLT_Y, CAP_NUT_FACE_Z
         footprint = hexagon(5.32, .08, center)
         bearing_areas.append(footprint.common(tray).Volume / .08)
     if min(bearing_areas) < 14.:
@@ -80,6 +68,11 @@ def check_paths(doc):
         (fastener_sweep((x, CAP_BOLT_Y, CAP_BOLT_SEAT_Z), CAP_BOLT_LENGTH, Z, CAP_TRAVEL),
          fixed, f'Cover screw at x={x:g}')
         for x, fixed in product(CAP_BOLTS, (tray, cover, base))
+    )
+    results['nut_paths'] = check_pass(
+        (hexagon(5.50, NUT_THICKNESS+12., (x, CAP_BOLT_Y, CAP_NUT_FACE_Z-NUT_THICKNESS-12.)),
+         tray, f'Hand-started M3 nut from below at x={x:g}')
+        for x in CAP_BOLTS
     )
     for seat in SADDLE_MOUNTS:
         x, _, z = seat

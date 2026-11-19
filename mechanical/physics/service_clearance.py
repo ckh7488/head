@@ -1,4 +1,4 @@
-"""Check B8 service hardware insertion, seating and cover removal in millimetres."""
+"""Check service hardware, tool access and hatch removal in millimetres."""
 
 from argparse import ArgumentParser
 from itertools import product
@@ -16,7 +16,9 @@ from service_hatch import (
     HATCH_BOTTOM, HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT,
     HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT,
 )
-from stock import hexagon, socket_screw
+from stock import nut, socket_screw
+from primitives import cylinder
+from tool_access import WRENCH_THICKNESS, wrench_profile, wrench_shape
 
 V = App.Vector
 
@@ -26,26 +28,32 @@ def thickness(shape, x, y, from_z, to_z):
     return ray.common(shape).Length
 
 
-def insertion_pairs(doc):
-    for receiver, mounts, seat in [
-        (doc.Part000, HATCH_MOUNTS, HATCH_NUT_SEAT),
-        (doc.HubHolder, HUB_MOUNTS, HUB_NUT_SEAT),
-    ]:
-        body = world_shape(receiver)
-        for x, y in mounts:
-            # An extruded nut profile covers the full straight insertion stroke.
-            path = hexagon(5.5, 24.4, (x, y, seat + .01))
-            for dx, dy, angle in product((-.12, 0, .12), (-.12, 0, .12), (-2., 0., 2.)):
-                swept = path.copy().rotate(V(x, y, 0), V(0, 0, 1), angle).translate(V(dx, dy, 0))
-                yield swept, body, f'{receiver.Label}: nut insertion at {x}, {y}, shift {dx}, {dy}, {angle}°'
-            smallest = hexagon(5.32, 2.4, (x, y, seat + .01)).rotate(V(x, y, 0), V(0, 0, 1), 30.)
-            if smallest.common(body).Volume < .05:
-                raise ValueError(f'{receiver.Label}: nut can turn through the pocket')
+def tool_pairs(doc):
+    base = [world_shape(doc.getObject(name)) for name in ('Part000','Part001','Part002','CableSaddle','CableGate')]
+    hatch, board = map(world_shape, (doc.HubHolder, doc.HubPCB))
+    bodies = [world_shape(obj) for obj in doc.HubInstalled.Group if obj.Name.startswith('HubBody')]
+    for x, y in HATCH_MOUNTS:
+        sense = 1 if x > 0 else -1
+        for angle, offset in product((-15.,0.,15.), (-.2,.2)):
+            wrench = wrench_shape((x,y+offset,HATCH_NUT_SEAT+.24), (0,0,1), (sense,0,0),
+                                  wrench_profile(3, angle), WRENCH_THICKNESS[3])
+            for travel in range(0, 49, 2):
+                for fixed in (*base, hatch, board, *bodies):
+                    yield wrench.translated(V(sense*travel,0,0)), fixed, f'Hatch spanner ({x},{y}), {angle:g}°'
+        driver = cylinder(1.48, 50., (x,y,HATCH_SCREW_SEAT-3.), (0,0,-1))
+        for fixed in (hatch, *base):
+            yield driver, fixed, f'Hatch hex key at ({x},{y})'
+    for x, y in HUB_MOUNTS:
+        socket = cylinder(4.65, 40., (x,y,HUB_NUT_SEAT+2.33), (0,0,-1))
+        driver = cylinder(1.48, 40., (x,y,HUB_SCREW_SEAT+3.))
+        for tool, fixed in product((socket, driver), (hatch, board, *bodies)):
+            yield tool, fixed, f'Hub bench tools at ({x},{y})'
 
 
 def travel_pairs(doc):
     fixed = [world_shape(obj) for obj in (doc.Part000, doc.CableSaddle, doc.CableGate)]
     installed = [world_shape(obj) for obj in doc.HubInstalled.Group]
+    installed += [nut(3, (x, y, HUB_NUT_SEAT)) for x, y in HUB_MOUNTS]
     installed += [world_shape(obj) for obj in doc.HubCableSpace.Group if obj.Name.startswith('HubPlug')]
     package = Part.Compound(installed)
     for depth, dx, dy, angle in product((0., .23, -1., -4., -12., -30.), (-.20, 0, .20), (-.20, 0, .20), (-.22, .22)):
@@ -73,9 +81,11 @@ def check(cad):
         if min(heads) < .20 or min(cover_seats) < 2.7 or min(base_seats) < 1.8:
             raise ValueError('Countersocket or nut seat has insufficient depth')
         for x, y in HUB_MOUNTS:
-            if thickness(cover, x, y, HATCH_BOTTOM, -80.5) < 1.6:
-                raise ValueError('Board bolt pocket broke the underside of the cover')
-        for label, pairs in [('Straight nut paths', insertion_pairs(doc)), ('Closed and withdrawing hatch', travel_pairs(doc))]:
+            bolt = socket_screw(3, 8., (x,y,HUB_SCREW_SEAT), (0,0,-1))
+            land = thickness(cover, x+2.5, y, HUB_NUT_SEAT+2.4, -74.0)
+            if bolt.BoundBox.ZMin < HATCH_BOTTOM + .3 or bolt.BoundBox.ZMin > HUB_NUT_SEAT - .35 or land < 3.1:
+                raise ValueError('Hub screw needs a full nut and a solid land beneath the PCB')
+        for label, pairs in [('Assembly tools', tool_pairs(doc)), ('Closed and withdrawing hatch', travel_pairs(doc))]:
             count, maximum = check_pass(pairs)
             print(f'{label}: {count} pairs, max overlap {maximum:.6f} mm³', flush=True)
         print(f'Cover: {flange:.2f} mm edge, {middle:.2f} mm center, {cover.Volume/1000:.2f} cm³')

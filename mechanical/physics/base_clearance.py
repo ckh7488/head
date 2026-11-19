@@ -11,22 +11,25 @@ import FreeCAD as App
 import Part
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixtures import (
-    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_NUT_ROOF_Z,
+    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_NUT_FACE_Z,
     SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_WASHER_Y,
 )
 from stock import YOKE_MOUNTS, nut, socket_screw
+from neck_joint import MOUNTS, ROTOR_TOP, STUD_BOLT_SEAT, MAST_LENGTH
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B12-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B13-Assembly.FCStd"
 
 
 def check_pairs(doc):
     rotors = [doc.Part007.Shape, doc.Part010.Shape]
+    studs = [socket_screw(3, MAST_LENGTH, (x,y,STUD_BOLT_SEAT), (0,0,1)).fuse(nut(3,(x,y,ROTOR_TOP)))
+             for x,y in MOUNTS]
     keepers = [doc.getObject(f"YawBearingRetainer{i}").Shape for i in range(1, 4)]
     fixed = [doc.getObject(name).Shape for name in ("Part000", "Part001", "Part002", "Part006")]
     for angle in range(-60, 61, 5):
-        for rotor in rotors:
+        for rotor in (*rotors, *studs):
             moving = rotor.copy().rotate(V(), V(0, 0, 1), angle)
             for static in fixed + keepers:
                 yield moving, static, f"Yaw at {angle} degrees"
@@ -54,7 +57,7 @@ def check_pairs(doc):
     cables = json.loads(doc.R5.MotionGeometry)['cables']
     for x in cables['cap_bolts_x_mm']:
         screw = socket_screw(3,CAP_BOLT_LENGTH,(x,CAP_BOLT_Y,CAP_BOLT_SEAT_Z),(0,0,-1))
-        tail = nut(3,(x,CAP_BOLT_Y,CAP_NUT_ROOF_Z-2.4))
+        tail = nut(3,(x,CAP_BOLT_Y,CAP_NUT_FACE_Z-2.4))
         for static, tool in product((base,saddle,gate),(screw,tail)):
             yield tool, static, f"Cable cover {x:g} screw and nut"
     for x,y in HATCH_MOUNTS:
@@ -138,6 +141,8 @@ def ballast_pairs(doc):
         for hardware in (stem, tool, seat):
             for static in (frame, tray, *front_fixtures):
                 yield hardware, static, f'Ballast mount hardware at {x}, {z} mm'
+        socket = Part.makeCylinder(4.65, 35., V(x,25.9,z), -behind)
+        yield socket, frame, f'Ballast bench nut driver at {x}, {z} mm'
     for static in front_fixtures:
         yield frame, static, 'Head frame and actuator fixtures'
     for count, dx, dy in product(range(specs['maximum_plates']+1), (-.2, 0., .2), (-.2, 0., .2)):

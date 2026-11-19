@@ -28,6 +28,17 @@ function fastener(part) {
   const { seat, axis, type, size, length, phase } = part;
   const node = new THREE.Group();
   node.position.copy(vector(seat));
+  if (type === "spanner") {
+    const outline = new THREE.Shape(part.profile.map(point => new THREE.Vector2(...point)));
+    const shape = new THREE.ExtrudeGeometry(outline, { depth: part.thickness, bevelEnabled: false });
+    const normal = vector(axis);
+    const handle = vector(part.outward);
+    shape.applyMatrix4(new THREE.Matrix4().makeBasis(handle.clone().cross(normal), handle, normal));
+    const material = toolColor.clone();
+    material.color.set(0x83e8ce);
+    node.add(new THREE.Mesh(shape, material));
+    return { node, label: size === 3 ? "5.5 mm 오픈 스패너" : "4 mm 오픈 스패너", materials: [material], kind: "fastener" };
+  }
   node.quaternion.setFromUnitVectors(up, vector(axis));
   const material = (type === "tool" ? toolColor : gold).clone();
   const radius = size / 2;
@@ -84,7 +95,7 @@ export class WalkthroughScene {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     this.renderer.localClippingEnabled = true;
-    this.renderer.domElement.setAttribute("aria-label", "B12 움직이는 CAD 형상");
+    this.renderer.domElement.setAttribute("aria-label", "B13 움직이는 CAD 형상");
     this.host.append(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = false;

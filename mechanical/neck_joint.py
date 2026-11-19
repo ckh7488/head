@@ -1,4 +1,4 @@
-"""Captive rotor nuts and top-access mast fasteners."""
+"""Bench-installed mast studs with accessible nuts above the rotor."""
 
 from primitives import box, cylinder
 
@@ -6,16 +6,16 @@ MOUNTS = tuple((x, y) for x in (-23., 23.) for y in (13., 26.))
 HORN = ((-8., 0.), (0., -8.), (8., 0.), (0., 8.))
 ROTOR_TOP = -32.9
 ROTOR_BOTTOM = -37.9
-NUT_ROOF = -35.10
-MAST_SEAT = -29.80
+STUD_BOLT_SEAT = -38.75
+MAST_SEAT = -25.60
 HORN_SEAT = ROTOR_TOP
-MAST_LENGTH = 8.
+MAST_LENGTH = 16.
 HORN_LENGTH = 8.
 PITCH_HORN = ((8., 112.), (-8., 112.), (0., 120.), (0., 104.))
 PITCH_HORN_SEAT = 41.20
 
 
-def neck_base(rotor, mast, hexagon):
+def neck_base(rotor, mast):
     for x in (-12., 12.):
         for y in (11., 31.):
             rotor = rotor.fuse(cylinder(1.77, 5., (x, y, ROTOR_BOTTOM)))
@@ -25,16 +25,19 @@ def neck_base(rotor, mast, hexagon):
 
     wings = [box(left, right, 8.3, 34.5, ROTOR_TOP, MAST_SEAT)
              for left, right in ((-27.65, -13.0), (13., 27.65))]
-    rim_limit = cylinder(41.7, 5., (0., 0., -33.8))
+    rim_limit = cylinder(41.7, 8.5, (0., 0., -33.8))
     braces = [box(left, right, 9., 33., MAST_SEAT-.45, -23.2)
               for left, right in ((-19.70, -15.8), (15.8, 19.70))]
     mast = mast.fuse([wing.common(rim_limit) for wing in wings] + braces)
     mast = mast.cut(cylinder(3.43, 4.53, (0., 8., ROTOR_TOP-.12)))
     for x, y in MOUNTS:
-        rotor = rotor.cut([
-            hexagon(5.93, NUT_ROOF - ROTOR_BOTTOM + .12, (x, y, ROTOR_BOTTOM-.12)),
-            cylinder(1.70, 2.40, (x, y, NUT_ROOF-.1)),
+        pad = cylinder(4.52, 1.12, (x, y, STUD_BOLT_SEAT))
+        rotor = rotor.fuse(pad).cut(cylinder(1.80, 6.5, (x, y, STUD_BOLT_SEAT-.22)))
+        left,right = (x-20., x+5.0) if x < 0 else (x-5.0,x+20.)
+        mast = mast.cut([
+            box(left,right,y-8.9,y+8.9,ROTOR_TOP-.18,-28.15),
+            cylinder(1.80, 8., (x, y, ROTOR_TOP-.18)),
+            cylinder(5.30, 7.5, (x, y, MAST_SEAT)),
         ])
-        mast = mast.cut(cylinder(1.70, 3.5, (x, y, ROTOR_TOP-.18)))
 
     return rotor.removeSplitter(), mast.removeSplitter()

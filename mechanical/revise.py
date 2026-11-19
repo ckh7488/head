@@ -1,4 +1,4 @@
-"""Build R5 B12 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B13 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -14,16 +14,16 @@ import MeshPart
 import Part
 import trimesh as tr
 
-from base_stack import mounting_stack
+from base_stack import CARRIER_MOUNTS, mounting_stack
 from primitives import box, cylinder, holes, print_mesh
 from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
 from motor_seats import JAW_STAY, head_pockets
-from neck_joint import PITCH_HORN, PITCH_HORN_SEAT
+from neck_joint import MOUNTS, PITCH_HORN, PITCH_HORN_SEAT
 from openrb import board_model as openrb_model, carrier as openrb_carrier
 from openrb import usb_plug as openrb_usb_plug
 from outer_fit import finish_camera, front_loading_clearance
 from radio import c3_mount
-from stock import ballast_stock, blink_stock, cable_stock, hatch_stock, hexagon, neck_stock, radio_board_stock
+from stock import BLINK_MOUNTS, BLINK_PLATE_Y, BLINK_PLATE_Z, ballast_stock, blink_stock, cable_stock, hatch_stock, neck_stock, radio_board_stock
 
 V = App.Vector
 HERE = Path(__file__).resolve().parent
@@ -184,23 +184,31 @@ def yaw_bearing_retention(doc):
 
 
 def board_mounts(doc, base):
-    """Move both boards clear of the three vertical bearing supports."""
-    tray_holes = {side: [(side*55+x, y-14.) for x in (-13, 13) for y in (-21, 21)] for side in (-1, 1)}
     for side in (-1, 1):
         for x in (side*55-13, side*55+13):
             for y in (-21, 21):
                 base = base.cut(cylinder(4.08, 3.1, (x, y, -78.0)))
                 base = base.fuse(cylinder(1.35, 4.4, (x, y, -82.4)))
-        for x, y in tray_holes[side]:
-            base = base.fuse(cylinder(4., 2.7, (x, y, -80.0)))
-            base = base.cut(cylinder(1.35, 5.2, (x, y, -82.2)))
-    radio, radio_base = c3_mount(doc.Part071.Shape.copy().translated(V(0, -14, 0)))
+    for x, y in CARRIER_MOUNTS:
+        base = base.fuse(cylinder(4.75, 2.7, (x, y, -80.0)))
+    source_tray = doc.Part071.Shape.copy().translated(V(0, -14, 0))
+    source_tray = source_tray.fuse([cylinder(2.0, 3., (x,y,-77.3)) for x in (-68., -42.) for y in (-35., 7.)])
+    radio, radio_base = c3_mount(source_tray)
     doc.Part070.Label = 'ESP32-C3 board · front-facing USB-C'
 
     rb_base = box(37, 73, -46.5, 24.5, -77.3, -74.3).common(cylinder(85.85, 5., (0,0,-78)))
-    rb_base = holes(rb_base, 1.7, 5., [(x,y,-78.2) for x,y in tray_holes[1]])
     rb_base = rb_base.cut(box(44.0, 59.0, -37.2, 17.5, -78, -73.7))
     rb_base = openrb_carrier(rb_base)
+    for x, y in CARRIER_MOUNTS:
+        if x < 0:
+            y0,y1 = y-4.75, y+4.75
+            a,b = (x, -71.) if x < -50 else (-39., x)
+            radio_base = radio_base.fuse([box(a, b, y0, y1, -77.3, -74.3),
+                                         cylinder(4.75, 3., (x,y,-77.3))])
+            radio_base = radio_base.cut(cylinder(1.80, 4., (x,y,-77.7)))
+        else:
+            rb_base = rb_base.fuse(cylinder(4.75, 3., (x,y,-77.3)))
+            rb_base = rb_base.cut(cylinder(1.80, 4., (x,y,-77.7)))
     doc.Part069.Shape = openrb_model()
     doc.Part070.Shape = radio
     return base, {
@@ -237,7 +245,7 @@ HINGE_YZ=(-39.,119.)
 HINGE_PINS={58:-57.25,59:10.75,61:-18.75,62:49.25}
 LID_PIN_LENGTH = 8.
 EYE_PITCH_PIN_LENGTH = 13.
-BLINK_MOUNT_XZ=tuple((x,z) for x in (-20.,20.) for z in (143.,150.))
+BLINK_MOUNT_XZ=BLINK_MOUNTS
 DRIVE_ARM=(DRIVE_THROW*cos(radians(BLINK_PHASE)),DRIVE_THROW*sin(radians(BLINK_PHASE)))
 LID_ARM=(LID_THROW*cos(radians(BLINK_PHASE)),LID_THROW*sin(radians(BLINK_PHASE)))
 
@@ -282,8 +290,10 @@ def blink_bearing_arm(x):
     sleeve=cylinder(7.3,6.,(x-3,y,z),(1,0,0))
     arm=yz_prism([(y-4,z+5.8),(y+1,z+10.8),(8.,z+10.8),(18.,z+7.5),(23.,z+2.),
            (23.,z-14.5),(9.,z-12.),(y-1.5,z-6.4),(y-4.,z-4.)],x-3,6)
+    rib=yz_prism([(-21.,158.8),(-17.,166.8),(9.,168.),(18.,165.),
+                  (22.5,156.),(18.,153.),(8.,160.2),(-17.,159.2)],x-2.3,4.6)
     sign=1 if x>0 else -1
-    return sleeve.fuse(arm).cut([
+    return sleeve.fuse([arm,rib]).cut([
         cylinder(5.12,5.1,(x-3.1*sign,y,z),(sign,0,0)),
         cylinder(4.68,8.,(x-4,y,z),(1,0,0)),
     ]).removeSplitter()
@@ -352,6 +362,10 @@ def eyeball(x):
     crank=flat_xy([(x,y),(x,y+13.5)],2.4,z-7.2,5.4)
     cut=[cylinder(1.13,32.,(x,y,z-16)),cylinder(1.16,7.,(x,y+13.5,z-10))]
     cut.extend(box(x-8,x+8,y+2.8,y+14,z+lo,z+hi) for lo,hi in [(-11.65,-7.4),(7.1,11.0)])
+    side = -1 if x < 0 else 1
+    lo, hi = sorted((side*44.22, side*47.96))
+    lid_y, lid_z = y + LID_ARM[0], z + LID_ARM[1]
+    cut.append(box(lo,hi,lid_y-5.58,lid_y+5.58,z-16.,lid_z+3.51))
     return shell.fuse([*ribs,crank]).cut(cut).removeSplitter()
 
 def clearance_tool(x, a, b, radius, depth):
@@ -511,7 +525,7 @@ def revise_head(doc, output):
     brace=yz_prism([(1.5,147.),(22.98,145.),(22.98,156.),(14.,174.),(4.2,194.5),
                     (-2.9,194.5),(-2.9,180.8),(-2.7,156.)],-12.4,8.4)
     stay=stay.fuse(brace)
-    stay=holes(stay,1.65,12.,[(-13.3,57.+dy,a+dz) for a in (101.,107.)],(1,0,0))
+    stay=holes(stay,1.78,12.,[(-13.3,BLINK_PLATE_Y,z) for z in BLINK_PLATE_Z],(1,0,0))
     parts['Part063']=rail.fuse(stay).removeSplitter()
     for name,shape in parts.items():
         check=shape.isValid() and (not doc.getObject(name).Printed or len(shape.Solids)==1)
@@ -556,7 +570,7 @@ def revise_head(doc, output):
         'blink': {'servo_yz_mm': list(BLINK_SERVO[1:]), 'shaft_yz_mm': list(BLINK_SHAFT_YZ),
                   'phase_deg': BLINK_PHASE, 'radius_mm': DRIVE_THROW, 'lid_radius_mm': LID_THROW,
                   'link_x_mm': 49.25, 'crank_x_mm': [-52.45,8.95,52.45], 'bearing_x_mm': [-32.,26.],
-                  'mount_xz_mm': BLINK_MOUNT_XZ},
+                  'mount_xz_mm': BLINK_MOUNT_XZ, 'motor_mount_z_mm': BLINK_PLATE_Z, 'motor_mount_y_mm': BLINK_PLATE_Y},
         'jaw_travel_deg': 13., **fixture_parameters(),
     }, separators=(',', ':'))
     labels = {
@@ -637,7 +651,10 @@ def main(output=BUILD):
     base, board_trays = board_mounts(doc, base)
     repairs.update(board_trays)
     bearing_seat, bearing_top, bearer = yaw_bearing_retention(doc)
-    base, bearing_seat, bearing_top = mounting_stack(base, bearing_seat, bearing_top, hexagon)
+    base, bearing_seat, bearing_top = mounting_stack(base, bearing_seat, bearing_top)
+    for x, y in MOUNTS:
+        opening = (x-74., x+1.) if x < 0 else (x-1., x+74.)
+        bearing_top = bearing_top.cut(box(*opening, y-9., y+9., -33.1, -28.0))
     for spacer in ('Part003', 'Part004', 'Part005'):
         doc.removeObject(spacer)
     repairs['Part001'] = ('02_outer_bearing_seat', bearing_seat, None)
@@ -652,7 +669,7 @@ def main(output=BUILD):
     add_fixture(doc, base_group, 'CableGate', '42 interlocking cable cover', gate, 'fixed', True)
     print_mesh(gate, output/'STL'/'42_captive_cable_cover.stl', 'z-')
     print_mesh(cable_wall_fixture(base), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.Part000.Label = '01 Base cup B8 · reinforced hatch and top-loaded nuts'
+    doc.Part000.Label = '01 Base cup · open fastener access'
     revise_head(doc, output/'STL')
     tray, cover, stack = rear_ballast()
     for name, label, shape in (
@@ -674,10 +691,10 @@ def main(output=BUILD):
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B12 · prototype'
+    doc.R5.Label = 'R5 B13 · prototype'
     doc.R5.Status = 'Cylindrical hex-socket heads only. DYNAMIXEL case thread fit pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B12-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B13-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

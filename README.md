@@ -1,19 +1,19 @@
-# R5 B12
+# R5 B13
 
 코 안의 USB 카메라로 얼굴을 보고 눈·목을 움직이는 해골 헤드입니다. OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 6축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
 구조물은 **M3×8·M3×16 육각렌치 원통머리 ISO 4762 (DIN 912)**와 일반 M3 육각너트를 씁니다. 작은 링크와 기판, 제조사 체결 구멍은 부품표에 적었습니다. [기구 부품표](mechanical/BOM.csv)
 
-**시험판 4번에서 보드 두 장을 캐리어와 먼저 맞춥니다.** 시험판 2번은 케이블 너트 홈, 3번은 바닥 덮개용입니다. 모터 케이스 나사산도 가조립에서 확인합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B12-Fit-P1S.3mf)
+시험판 2번은 케이블 덮개 공구 통로, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어용입니다. 모터 케이스 나사산과 OpenRB 구멍 간격은 가조립에서 확인합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B13-Fit-P1S.3mf)
 
 | 작업 | 시작 파일 |
 |---|---|
-| 기구 확인 및 수정 | [B12 FreeCAD 조립본](mechanical/R5-B12-Assembly.FCStd) |
-| P1S 전체 출력 | [B12 출력판 12장과 선택 1장](mechanical/R5-B12-P1S.3mf) |
+| 기구 확인 및 수정 | [B13 FreeCAD 조립본](mechanical/R5-B13-Assembly.FCStd) |
+| P1S 전체 출력 | [B13 출력판 12장과 선택 1장](mechanical/R5-B13-P1S.3mf) |
 | 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
-| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b12/assembly/) · [B12 웹 뷰어](web/) |
+| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b13/assembly/) · [B13 웹 뷰어](web/) |
 
 ## 웹 뷰어
 
@@ -30,7 +30,7 @@ CAD를 수정하면 기구 문서의 `--world` 내보내기와 해석 환경을 
 python web/export_cad.py build/physics/cad build/web
 npx --yes gltfpack@0.24.0 -i build/web/assembly.glb -o web/assets/assembly.glb -cc -kn -km -noq
 cp build/web/assembly.json web/assets/assembly.json
-QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python web/assembly/export_review.py --cad build/mechanical/R5-B12-Assembly.FCStd
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python web/assembly/export_review.py --cad build/mechanical/R5-B13-Assembly.FCStd
 ```
 
 외장 메시를 BoneHub의 Visible Human Full-Skeleton 3D Bone Models에서 개작했습니다. [원본](https://doi.org/10.57967/hf/10464) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

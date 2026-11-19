@@ -10,21 +10,18 @@ const names = items => items.map(item => item.id).join(" ");
 const service = review.service_hatch;
 const at = (centers, z) => centers.map(([x, y]) => [x, y, z]);
 const baseStack = review.base_stack;
-const radialNuts = (prefix, layout) => layout.centers.flatMap(([x, y, angle], index) =>
-  gear(`${prefix}${index}-`, "nut", 3, 0, [0, 0, 1], [[x, y, layout.nut_z]], angle * Math.PI / 180));
-const radialMoves = (items, layout) => items.map((item, index) => {
-  const angle = layout.centers[index][2] * Math.PI / 180;
-  return move(item.id, Math.cos(angle) * layout.nut_stroke, Math.sin(angle) * layout.nut_stroke, 0);
-});
-const stackBolts = (prefix, layout) => gear(prefix, "bolt", 3, layout.length, [0, 0, -1], at(layout.centers, layout.bolt_z));
-const seatNuts = radialNuts("seatNut", baseStack.seat);
+const stackNuts = (prefix, layout) => gear(prefix, "nut", 3, 0, [0, 0, 1], at(layout.centers, layout.nut_z), Math.PI / 6);
+const stackBolts = (prefix, layout) => gear(prefix, "bolt", 3, layout.length, [0, 0, 1], at(layout.centers, layout.bolt_z));
+const seatNuts = stackNuts("seatNut", baseStack.seat);
 const seatBolts = stackBolts("seatBolt", baseStack.seat);
-const lidNuts = radialNuts("lidNut", baseStack.lid);
+const lidNuts = stackNuts("lidNut", baseStack.lid);
 const lidBolts = stackBolts("lidBolt", baseStack.lid);
-const keeperNuts = radialNuts("keeperNut", baseStack.keepers);
+const keeperNuts = stackNuts("keeperNut", baseStack.keepers);
 const keeperBolts = stackBolts("keeperBolt", baseStack.keepers);
-const carrierNuts = gear("carrierNut", "nut", 3, 0, [0, 0, 1], at(baseStack.carriers.centers, baseStack.carriers.nut_z), Math.PI / 6);
-const carrierBolts = gear("carrierBolt", "bolt", 3, 8, [0, 0, -1], at(baseStack.carriers.centers, baseStack.carriers.bolt_z));
+const carrierNuts = stackNuts("carrierNut", baseStack.carriers);
+const carrierBolts = stackBolts("carrierBolt", { ...baseStack.carriers, length: 8 });
+const c3CarrierNuts = carrierNuts.slice(0, 4);
+const openrbCarrierNuts = carrierNuts.slice(4);
 const c3CarrierBolts = carrierBolts.slice(0, 4);
 const openrbCarrierBolts = carrierBolts.slice(4);
 const boardMounts = (key, suffix, type, length, axis, phase) => {
@@ -35,15 +32,14 @@ const c3Nuts = boardMounts("c3", "Nut", "nut", 0, [0, 0, 1], Math.PI / 6);
 const c3Bolts = boardMounts("c3", "Bolt", "bolt", 8, [0, 0, -1], 0);
 const openrbNuts = boardMounts("openrb", "Nut", "nut", 0, [0, 0, 1], Math.PI / 6);
 const openrbBolts = boardMounts("openrb", "Bolt", "bolt", 8, [0, 0, -1], 0);
-const hatchNuts = gear("hatchNut", "nut", 3, 0, [0, 0, 1], at(service.base_centers, service.base_nut_seat), Math.PI / 6);
+const hatchNuts = gear("hatchNut", "nut", 3, 0, [0, 0, 1], at(service.base_centers, service.base_nut_seat));
 const hatchBolts = gear("hatchBolt", "bolt", 3, 8, [0, 0, 1], at(service.base_centers, service.base_screw_seat));
 const hubBolts = gear("hubBolt", "bolt", 3, 8, [0, 0, -1], at(service.board_centers, service.board_screw_seat));
 const hubNuts = gear("hubNut", "nut", 3, 0, [0, 0, 1], at(service.board_centers, service.board_nut_seat), Math.PI / 6);
 const cable = review.cable_assembly;
 const cableSeats = z => cable.x.map(x => [x, cable.y, z]);
-const cableNuts = gear("cableNut", "nut", 3, 0, [0, 0, 1], cableSeats(cable.nut_roof - 2.4), Math.PI / 6);
-const looseCableNutDrop = cable.nut_floor - (cable.nut_roof - 2.4);
-const looseCableNuts = Object.fromEntries(cableNuts.map(nut => [nut.id, [0, 0, looseCableNutDrop]]));
+const cableNuts = gear("cableNut", "nut", 3, 0, [0, 0, 1], cableSeats(cable.nut_face - 2.4), Math.PI / 6);
+const handStarted = (nuts, rise) => Object.fromEntries(nuts.map(nut => [nut.id, [0, 0, rise]]));
 const cableBolts = gear("cableBolt", "bolt", 3, cable.bolt_length, [0, 0, -1], cableSeats(cable.bolt_seat));
 const clipBolts = gear("clipBolt", "bolt", 3, 16, [0, -1, 0], cable.tray_mounts);
 const clipSeats = y => cable.tray_mounts.map(([x, , z]) => [x, y, z]);
@@ -51,14 +47,16 @@ const clipWashers = gear("clipWasher", "washer", 3, 0, [0, -1, 0], clipSeats(cab
 const clipNuts = gear("clipNut", "nut", 3, 0, [0, -1, 0], clipSeats(cable.tray_nut_y));
 const neck = review.neck;
 const rotorNuts = gear("rotorNut", "nut", 3, 0, [0, 0, 1],
-  neck.mast_mounts.map(([x, y]) => [x, y, neck.nut_roof - 2.4]), Math.PI / 6);
-const mastBolts = gear("mastBolt", "bolt", 3, neck.mast_length, [0, 0, -1],
+  at(neck.mast_mounts, neck.rotor_nut_seat));
+const mastStuds = gear("mastStud", "bolt", 3, neck.mast_length, [0, 0, 1],
+  at(neck.mast_mounts, neck.stud_seat));
+const mastNuts = gear("mastNut", "nut", 3, 0, [0, 0, 1],
   neck.mast_mounts.map(([x, y]) => [x, y, neck.mast_seat]));
 const hornBolts = gear("hornBolt", "bolt", 2, neck.horn_length, [0, 0, -1],
   neck.horn_mounts.map(([x, y]) => [x, y, neck.horn_seat]));
 const pitchHornBolts = gear("pitchHornBolt", "bolt", 2, neck.horn_length, [-1, 0, 0],
   neck.pitch_horn_mounts.map(([y, z]) => [neck.pitch_horn_seat, y, z]));
-const yokeSeats = [[-12, 17], [-12, 27.3], [12, 24.3]];
+const yokeSeats = neck.yoke_mounts;
 const yokeNuts = gear("yokeNut", "nut", 3, 0, [0, 0, 1], yokeSeats.map(([x, y]) => [x, y, 59.64]));
 const yokeBolts = gear("yokeBolt", "bolt", 3, 16, [0, 0, -1], yokeSeats.map(([x, y]) => [x, y, 75]));
 const blink = review.blink_mounts;
@@ -66,52 +64,67 @@ const railSeats = blink.rail_xz.map(([x, z]) => [x, blink.rail_screw_y, z]);
 const railBolts = gear("railBolt", "bolt", 3, blink.rail_length, [0, -1, 0], railSeats);
 const railNuts = gear("railNut", "nut", 3, 0, [0, 1, 0], railSeats.map(([x, , z]) => [x, blink.rail_nut_y, z]));
 const crankBolts = gear("crankBolt", "bolt", 3, 8, [0, 0, -1], blink.crank_x.map(x => [x, -24, 163.55]));
-const crankNuts = gear("crankNut", "nut", 3, 0, [0, 0, 1], blink.crank_x.map(x => [x, -24, blink.crank_nut_z]));
+const crankNuts = gear("crankNut", "nut", 3, 0, [0, 0, 1], blink.crank_x.map(x => [x, -24, blink.crank_nut_z]), Math.PI / 6);
 const motorHeads = (prefix, part) => review.motor_caps[part].map(([size, seat, axis], index) =>
   ({id: `${prefix}Head${index}`, type: "head", size, seat, axis, phase: 0}));
 const blinkMotorHeads = motorHeads("blinkMotor", "Part046");
 const eyeYawHeads = motorHeads("eyeYaw", "Part039");
 const eyePitchHeads = motorHeads("eyePitch", "Part042");
 const jawHeads = motorHeads("jawMotor", "Jaw_36_left_jaw_servo_stay");
-const blinkPlateBolts = gear("blinkPlateBolt", "bolt", 3, 16, [-1, 0, 0], [[.9, 0, 183], [.9, 0, 189]]);
-const blinkPlateNuts = gear("blinkPlateNut", "nut", 3, 0, [-1, 0, 0], [[-12.4, 0, 183], [-12.4, 0, 189]], Math.PI / 6);
-const clampX = [-1, 1, 1];
+const blinkPlateBolts = gear("blinkPlateBolt", "bolt", 3, 16, [-1, 0, 0], blink.plate_z.map(z => [.9, blink.plate_y, z]));
+const blinkPlateNuts = gear("blinkPlateNut", "nut", 3, 0, [-1, 0, 0], blink.plate_z.map(z => [-12.4, blink.plate_y, z]), Math.PI / 6);
 const arm = (y, z, r) => [y + r * Math.cos(-56 * Math.PI / 180), z + r * Math.sin(-56 * Math.PI / 180)];
 const [servoY, servoZ] = arm(-14, 170, 8.25);
 const [crankY, crankZ] = arm(-24, 154, 8.25);
 const [sideY, sideZ] = arm(-24, 154, 11.5);
 const [lidY, lidZ] = arm(-39, 119, 11.5);
 const linkBolts = [
-  ...gear("middleServo", "bolt", 2, 8, [-1, 0, 0], [[9.45, servoY, servoZ]]),
-  ...gear("centerLink", "bolt", 2, 8, [1, 0, 0], [[4.55, crankY, crankZ], [-53.75, sideY, sideZ], [-53.5, lidY, lidZ]]),
-  ...gear("rightLink", "bolt", 2, 8, [-1, 0, 0], [[53.75, sideY, sideZ], [53.5, lidY, lidZ]]),
+  ...gear("middleServo", "bolt", 2, 8, [1, 0, 0], [[blink.horn_screw_x, servoY, servoZ]]),
+  ...gear("centerLink", "bolt", 2, 8, [1, 0, 0], [[4.55, crankY, crankZ], [-53.75, sideY, sideZ], ]),
+  ...gear("centerLower", "bolt", 2, 8, [1, 0, 0], [[-53.5, lidY, lidZ]]),
+  ...gear("rightLink", "bolt", 2, 8, [-1, 0, 0], [[53.75, sideY, sideZ]]),
+  ...gear("rightLower", "bolt", 2, 8, [-1, 0, 0], [[53.5, lidY, lidZ]]),
 ];
 const linkNuts = [
-  ...gear("middleNut", "nut", 2, 0, [1, 0, 0], [[1.25, servoY, servoZ]], Math.PI / 6),
-  ...gear("linkNutPos", "nut", 2, 0, [1, 0, 0], [[10.55, crankY, crankZ], [-47.65, sideY, sideZ], [-47.65, lidY, lidZ]]),
-  ...gear("linkNutNeg", "nut", 2, 0, [-1, 0, 0], [[47.65, sideY, sideZ], [47.65, lidY, lidZ]]),
+  ...gear("middleNut", "nut", 2, 0, [1, 0, 0], [[blink.horn_nut_x, servoY, servoZ]], Math.PI / 6),
+  ...gear("linkNutPos", "nut", 2, 0, [1, 0, 0], [[10.55, crankY, crankZ], [-47.65, sideY, sideZ], ]),
+  ...gear("linkNutNeg", "nut", 2, 0, [-1, 0, 0], [[47.65, sideY, sideZ]]),
+  ...gear("linkLeftLowerNut", "nut", 2, 0, [1, 0, 0], [[-47.65, lidY, lidZ]]),
+  ...gear("linkRightLowerNut", "nut", 2, 0, [-1, 0, 0], [[47.65, lidY, lidZ]]),
 ];
-const lidJointIds = new Set(["centerLink2", "rightLink1"]);
-const upperLinkBolts = linkBolts.filter(item => !lidJointIds.has(item.id));
+const lidJointIds = new Set(["centerLower0", "rightLower0"]);
+const upperLinkBolts = linkBolts.filter(item => !lidJointIds.has(item.id) && !["middleServo0", "centerLink0"].includes(item.id));
 const lowerLinkBolts = linkBolts.filter(item => lidJointIds.has(item.id));
-const upperLinkNuts = "middleNut0 linkNutPos0 linkNutPos1 linkNutNeg0";
+const upperLinkNuts = "linkNutPos1 linkNutNeg0";
 const linkWashers = [
-  ...gear("middleWasher", "washer", 2, 0, [-1, 0, 0], [[9.45, servoY, servoZ]]),
+  ...gear("middleWasher", "washer", 2, 0, [1, 0, 0], [[blink.horn_nut_x - .3, servoY, servoZ]]),
   ...gear("linkWasherPos", "washer", 2, 0, [-1, 0, 0], [[10.55, crankY, crankZ], [-47.65, sideY, sideZ], [-47.65, lidY, lidZ]]),
   ...gear("linkWasherNeg", "washer", 2, 0, [1, 0, 0], [[47.65, sideY, sideZ], [47.65, lidY, lidZ]]),
 ];
 const lowerLinkWasherIds = "linkWasherPos2 linkWasherNeg1";
-const upperLinkWasherIds = "middleWasher0 linkWasherPos0 linkWasherPos1 linkWasherNeg0";
+const upperLinkWasherIds = "linkWasherPos1 linkWasherNeg0";
 const blinkRods = "Part056 Part057 Part060";
+
+function spanner(id, nut, outward, offset, thickness = review.tools[nut.size].thickness) {
+  const { profile } = review.tools[nut.size];
+  return { id, type: "spanner", size: nut.size, axis: nut.axis, outward, profile, thickness,
+    seat: nut.seat.map((coordinate, i) => coordinate + offset * nut.axis[i]) };
+}
+const cableSpanner = spanner("cableSpanner", cableNuts[2], [0, 1, 0], 2.4 - review.tools[3].thickness - .26);
+const hatchSpanner = spanner("hatchSpanner", hatchNuts[3], [1, 0, 0], .24);
+const mastSpanner = spanner("mastSpanner", rotorNuts[3], [1, 0, 0], .24);
+const lowerSpanner = spanner("lowerSpanner", linkNuts.find(item => item.id === "linkLeftLowerNut0"), [0, 0, -1], .12);
+const crankSpanner = spanner("crankSpanner", crankNuts[1], [0, -1, 0], 2.4 - blink.crank_wrench - .15, blink.crank_wrench);
 
 export const hardware = [
   ...hatchNuts, ...hatchBolts, ...hubBolts, ...hubNuts, ...cableNuts, ...cableBolts,
   ...clipBolts, ...clipWashers, ...clipNuts,
   ...seatNuts, ...seatBolts, ...lidNuts, ...lidBolts, ...keeperNuts, ...keeperBolts, ...carrierNuts, ...carrierBolts,
   ...c3Nuts, ...c3Bolts, ...openrbNuts, ...openrbBolts,
-  ...rotorNuts, ...mastBolts, ...hornBolts, ...pitchHornBolts, ...yokeNuts, ...yokeBolts, ...railNuts, ...railBolts,
+  ...rotorNuts, ...mastStuds, ...mastNuts, ...hornBolts, ...pitchHornBolts, ...yokeNuts, ...yokeBolts, ...railNuts, ...railBolts,
   ...crankNuts, ...crankBolts, ...linkBolts, ...linkNuts, ...linkWashers, ...blinkMotorHeads, ...blinkPlateBolts, ...blinkPlateNuts,
   ...eyeYawHeads, ...eyePitchHeads, ...jawHeads,
+  cableSpanner, hatchSpanner, mastSpanner, crankSpanner, lowerSpanner,
 ];
 
 const PCB = "HubPCB HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2";
@@ -146,154 +159,137 @@ const definitions = [
     stock: "M3×16 원통머리 · 일반 너트 · 평와셔 각 2개", checked: true,
   },
   {
-    id: "cable-nuts", group: "받침", title: "케이블 너트를 뒤에서 넣기", base: mountedCableTray,
-    moves: [move(names(cableNuts), 0, cable.nut_travel, 0)], focus: [0, 127, -62],
-    seatOffsets: looseCableNuts,
-    view: [.5, 2, .3], span: 119, cut: ["z", -63.55],
-    task: "트레이 뒤에 열린 가로 홈 다섯 곳에 M3 너트를 한 개씩 밀어 넣습니다.",
-    check: "너트의 평평한 면을 홈 벽과 나란히 맞추고, 위에서 봤을 때 너트 구멍이 보이게 놓습니다.",
-    stock: "M3 일반 육각너트 ×5", note: `홈 폭 ${cable.nut_width.toFixed(2)} mm · P1S 시험판 2번`, checked: true,
+    id: "cable-cover", group: "받침", title: "커넥터 위에 덮개 내리기", base: mountedCableTray,
+    moves: [move("CableGate", 0, 0, cable.cover_travel)], focus: [0, 113, -53], view: [.7, 1.6, .95], span: 115,
+    task: "플러그 뒤턱을 홈에 밀착시킨 다음 42번 덮개를 위에서 내립니다.",
+    check: "각 커넥터 뒤턱이 받침에 걸립니다. 덮개 아래쪽은 손과 스패너가 들어가도록 열려 있습니다.", checked: true,
   },
   {
-    id: "cable-cover", group: "받침", title: "커넥터 위에 덮개 내리기", base: `${mountedCableTray} ${names(cableNuts)}`,
-    moves: [move("CableGate", 0, 0, cable.cover_travel)], focus: [0, 113, -53], view: [1, 1.6, 1.05], span: 115,
-    seatOffsets: looseCableNuts,
-    task: "플러그 뒤턱을 홈에 밀착시킨 다음 42번 덮개를 위에서 내립니다.", check: "선만 누르지 않고 플러그 뒤턱이 걸려야 합니다. 실물에서는 10 N으로 당겨 봅니다.",
-    checked: true,
-  },
-  {
-    id: "cable-cover-bolts", group: "받침", title: "덮개 나사 다섯 개 조이기", base: `${mountedCableTray} CableGate`,
-    moves: [move(names(cableBolts), 0, 0, cable.cover_travel), move(names(cableNuts), 0, 0, looseCableNutDrop)],
-    focus: [0, 119, -53], view: [.65, 1.65, 1.05], span: 118,
-    task: "덮개가 내려앉은 뒤 M3×16을 위에서 걸고 육각렌치로 조입니다.",
-    check: "너트가 홈 벽에 잡힌 상태에서 나사가 돌고 덮개가 고르게 닫히는지 확인합니다.",
-    stock: "M3×16 일반 육각렌치 나사 ×5", checked: true,
-  },
-  {
-    id: "hatch-nuts", group: "받침", title: "바닥 덮개 너트", base: "Part000",
-    moves: [move(names(hatchNuts), 0, 0, 22)], focus: [0, 60, -64], view: [1, -.78, 2.5], span: 116,
-    task: "받침 안쪽에서 M3 너트 4개를 위에서 떨어뜨려 넣습니다.",
-    check: "평평한 면을 맞춰 내려놓습니다. 손이 좁으면 M3×8 한 개를 너트에 두어 바퀴 걸어 손잡이처럼 쓴 뒤 빼면 됩니다.",
-    stock: "M3 일반 육각너트 ×4", note: "홈 폭 5.95 mm · 입구 6.65 mm · 너트 맞은편 면 5.50 mm",
-    cut: ["x", 41.2], checked: true,
-  },
-  {
-    id: "hub-nuts", group: "받침", title: "덮개 기둥에 너트 넣기", base: "HubHolder",
-    moves: [move(names(hubNuts), 0, 0, 20)], focus: [0, 58, -72], view: [1.35, -1.25, .94], span: 100,
-    task: "덮개 안쪽 네 기둥에도 M3 너트를 위에서 넣습니다.",
-    check: "홈에 너트를 넣고 나면 허브 PCB가 위에서 눌러 잡습니다.",
-    stock: "M3 일반 육각너트 ×4", note: "덮개 가장자리 4.0 mm · 중앙 5.0 mm",
-    cut: ["x", 30.8], checked: true,
-  },
-  {
-    id: "hub-board", group: "받침", title: "허브 PCB를 덮개에", base: `HubHolder ${names(hubNuts)}`,
-    moves: [move(PCB, 0, 0, 30)], focus: [0, 62, -69], view: [1, -1.15, 1], span: 93,
-    task: "너트가 들어간 덮개 위에 기판을 얹습니다.", check: "기판의 네 구멍이 홈 중심과 맞고, 납땜부가 기둥에 닿지 않는지 확인합니다.",
-  },
-  {
-    id: "hub-bolts", group: "받침", title: "허브 기판 나사 체결", base: `HubHolder ${PCB} ${names(hubNuts)}`,
-    moves: [move(names(hubBolts), 0, 0, 19)], focus: [0, 59, -69], view: [1, -1.15, 1.45], span: 94,
-    task: "기판 위에서 M3×8 네 개를 넣어 너트에 잡습니다.",
-    check: "끝이 덮개 바닥까지 나오지 않습니다. 네 나사를 조금씩 번갈아 조입니다.",
-    stock: "M3×8 일반 육각렌치 나사 ×4", checked: true,
-  },
-  {
-    id: "hatch-fit", group: "받침", title: "아래에서 덮개 닫기", base: "Part000",
-    moves: [move(`HubHolder ${PCB} ${names(hubNuts)} ${names(hubBolts)}`, 0, 0, -30)], focus: [0, 63, -90], view: [1.25, .98, -.6], span: 133,
-    task: "허브와 덮개를 통째로 아래에서 들어 올립니다.",
-    check: "서포트를 떼어낸 받침 홈에 덮개가 힘 없이 들어가야 합니다. 배선에는 덮개를 30 mm 내릴 여유를 둡니다.",
-    note: "좌우·앞뒤에 편측 0.55 mm 여유를 뒀습니다.", cut: ["y", 51], checked: true,
-  },
-  {
-    id: "hatch-bolts", group: "받침", title: "덮개 바깥 나사 체결", base: `Part000 HubHolder ${PCB} ${names(hatchNuts)}`,
-    moves: [move(names(hatchBolts), 0, 0, -21)], focus: [0, 61, -82], view: [1.2, .88, -1], span: 118,
-    task: "아래에서 M3×8 두 쌍을 넣고 일반 육각렌치로 조입니다.",
-    check: "본체를 받쳐 세운 채 아래에서 조입니다. 뒤집어 작업한다면 열린 너트 홈을 종이테이프로 덮어 둡니다.",
-    stock: "M3×8 일반 육각렌치 나사 ×4", note: "나사 머리는 받침 밑면보다 0.35 mm 안쪽입니다.",
-    cut: ["y", 71], checked: true,
-  },
-  {
-    id: "carrier-nuts", group: "받침", title: "캐리어용 너트를 받침 밑에서", base: "Part000",
-    moves: [move(names(carrierNuts), 0, 0, -15)], focus: [0, -13, -82], view: [1, 1, -1.6], span: 181,
-    task: "받침 밑면의 여덟 홈에 일반 M3 너트를 넣습니다.",
-    check: "받침을 돌리기 전에 얇은 종이테이프로 너트를 고정합니다.", stock: "일반 M3 육각너트 ×8", checked: true,
-  },
-  {
-    id: "c3-carrier-nuts", group: "받침", title: "작업대에서 C3 너트 넣기", base: "Part071",
-    moves: [move(names(c3Nuts), 0, 0, -12)], focus: [-55, -8, -73], view: [.6, -1, -1.5], span: 84,
-    task: "C3 캐리어 밑면의 홈 두 곳에 M2 육각너트를 넣고 얇은 종이테이프로 잡습니다.",
-    check: "캐리어를 받침에 조인 다음에는 이 홈에 손이 닿지 않습니다.", stock: "M2 일반 육각너트 ×2", checked: true,
-  },
-  {
-    id: "base-boards", group: "받침", title: "왼쪽 C3 캐리어부터 내려놓기", base: "Part000",
-    moves: [move("Part071", 0, 0, 36)], focus: [-42, -8, -68], view: [1, -1.1, 1.5], span: 110,
-    task: "M2 너트 두 개를 끼운 왼쪽 캐리어를 놓고 받침의 M3 구멍 네 곳을 맞춥니다.",
-    check: "USB-C 쪽이 정면입니다. 캐리어를 손으로 눌러 기울거나 들뜨지 않는지 봅니다.",
+    id: "cable-nuts", group: "받침", title: "열린 턱에서 케이블 덮개 너트 걸기", base: "Part000",
+    moves: [move(names(cableBolts), 0, 0, 18), move(names(cableNuts), 0, 0, -11)],
+    seatOffsets: handStarted(cableNuts, -.85),
+    focus: [0, 122, -61], view: [.4, 2, -.38], span: 116,
+    task: "덮개 위에서 M3×16을 한 개씩 꽂고, 뒤쪽 열린 턱에서 너트를 손으로 두 바퀴 걸어 둡니다.",
+    check: "너트 밑이 열려 있어 손으로 받칠 수 있습니다.", stock: "M3×16 원통머리 · 일반 M3 육각너트 각 5개",
     checked: true, inspectFasteners: true,
   },
   {
-    id: "carrier-bolts", group: "받침", title: "왼쪽 캐리어 M3 체결", base: "Part000",
-    moves: [move(names(c3CarrierBolts), 0, 0, 18)], focus: [-48, -8, -68], view: [1, -1.15, 1.5], span: 110,
-    task: "보드를 올리기 전에 2.5 mm 육각렌치로 네 곳을 가볍게 조입니다.",
-    check: "네 나사를 조금씩 번갈아 조입니다.", stock: "M3×8 원통머리 ×4", checked: true, inspectFasteners: true,
+    id: "cable-cover-bolts", group: "받침", title: "뒤에서는 스패너, 위에서는 육각렌치", base: "Part000",
+    moves: [move(cableSpanner.id, 0, cable.wrench_travel, 0), move(names(cableNuts), 0, 0, -.85)],
+    focus: [0, 123, -61], view: [.9, 1.8, -.52], span: 136,
+    task: "뒤에서 5.5 mm 오픈 스패너로 너트를 잡고, 위에서 2.5 mm 육각렌치로 조입니다.",
+    check: "가운데 한 곳에서 공구가 들어오는 방향을 보여 줍니다. 다섯 곳을 한 개씩 조입니다.",
+    note: `뒤쪽 공구 통로 폭 ${cable.wrench_width} mm · P1S 시험판 2번`, checked: true, inspectFasteners: true,
   },
   {
-    id: "boards-fit", group: "받침", title: "C3를 두 지지점에 올리기", base: "Part000",
+    id: "hub-board", group: "받침", title: "작업대에서 허브 PCB 얹기", base: "HubHolder",
+    moves: [move(PCB, 0, 0, 26)], focus: [0, 59, -69], view: [1, -1.15, 1], span: 93,
+    task: "분리한 바닥 덮개를 작업대에 두고 허브를 네 기둥에 얹습니다.",
+    check: "보드 아래 납땜부가 기둥에 닿는지와 네 구멍을 확인합니다.",
+  },
+  {
+    id: "hub-nuts", group: "받침", title: "허브 너트는 덮개 아래에서", base: "HubHolder",
+    moves: [move(names(hubBolts), 0, 0, 17), move(names(hubNuts), 0, 0, -17)],
+    seatOffsets: handStarted(hubNuts, -.80),
+    focus: [0, 59, -69], view: [1, -1.15, 1.05], span: 103,
+    task: "기판 위에서 M3×8을 넣고 덮개 아래 열린 원형 구멍에서 일반 너트를 겁니다.",
+    check: "작업대에서 덮개를 옆으로 세우면 양쪽에 손이 닿습니다.",
+    stock: "M3×8 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "hub-bolts", group: "받침", title: "허브를 양쪽에서 조이기", base: "HubHolder",
+    moves: [move(names(hubNuts), 0, 0, -.80)], focus: [0, 59, -69], view: [1, -1.15, .8], span: 97,
+    task: "아래에서 5.5 mm 소켓으로 너트를 잡고 위에서 2.5 mm 육각렌치로 조입니다.",
+    check: "기판이 휘지 않게 네 곳을 조금씩 조입니다. 볼트와 너트 끝은 덮개 바닥 안에 있습니다.",
+    checked: true, inspectFasteners: true,
+  },
+  {
+    id: "hatch-fit", group: "받침", title: "아래에서 허브와 덮개 올리기", base: "Part000",
+    moves: [move("HubHolder", 0, 0, -30)], focus: [0, 63, -90], view: [1.25, .98, -.6], span: 133,
+    task: "허브를 체결한 덮개를 받침 아래에서 함께 들어 올립니다.",
+    check: "덮개가 힘 없이 들어가는지 확인합니다. 배선에는 덮개를 30 mm 내릴 여유를 둡니다.",
+    note: "덮개 둘레 편측 0.55 mm 여유", cut: ["y", 51], checked: true,
+  },
+  {
+    id: "hatch-nuts", group: "받침", title: "바닥 덮개에 일반 너트 걸기", base: "Part000",
+    moves: [move(names(hatchBolts), 0, 0, -18), move(names(hatchNuts), 0, 0, 17)],
+    seatOffsets: handStarted(hatchNuts, .80),
+    focus: [25, 61, -73], view: [1.5, .95, .34], span: 133,
+    task: "받침을 받쳐 둔 채 아래에서 M3×8을 넣고 위에서 보이는 자리에 너트를 손으로 겁니다.",
+    check: "옆 창에서 너트와 볼트 끝을 볼 수 있습니다.",
+    stock: "M3×8 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "hatch-bolts", group: "받침", title: "측면 스패너로 바닥 덮개 조이기", base: "Part000",
+    moves: [move(hatchSpanner.id, 48, 0, 0), move(names(hatchNuts), 0, 0, .80)],
+    focus: [42, 66, -74], view: [1.7, .94, .30], span: 145,
+    task: "바깥쪽 창으로 5.5 mm 스패너를 넣고 밑에서 2.5 mm 육각렌치로 조입니다.",
+    check: "허브를 다시 내릴 때도 같은 창으로 너트를 잡습니다. 받침을 받쳐 바닥과 측면을 모두 엽니다.",
+    note: `측면 공구 통로 폭 ${service.wrench_width} mm · P1S 시험판 3번`, checked: true, inspectFasteners: true,
+  },
+  {
+    id: "boards-fit", group: "받침", title: "작업대에서 C3를 지지점에", base: "Part071",
     moves: [move("Part070", 0, 0, 26)], focus: [-52, -7, -65], view: [1, -1.1, 1.5], span: 106,
-    task: "USB-C가 정면을 향하도록 보드를 내려 두 기둥에 맞춥니다.",
-    check: "받침을 조인 M3 머리와 보드 밑 납땜부의 여유를 봅니다.", checked: true, inspectFasteners: true,
+    task: "받침 밖에서 USB-C가 정면을 향하도록 보드를 두 기둥에 올립니다.",
+    check: "보드가 기둥에 바로 앉는지 봅니다.", checked: true,
   },
   {
-    id: "c3-bolts", group: "받침", title: "C3 보드 M2 체결", base: "Part000",
-    moves: [move(names(c3Bolts), 0, 0, 18)], focus: [-52, -7, -65], view: [1, -1.1, 1.5], span: 106,
-    task: "1.5 mm 육각렌치로 보드를 기둥 두 곳에 고정합니다.",
-    check: "보드가 휘기 전에 멈춥니다.", stock: "M2×8 원통머리 ×2", checked: true, inspectFasteners: true,
+    id: "c3-bolts", group: "받침", title: "C3 캐리어를 작업대에서 체결", base: "Part071",
+    moves: [move(names(c3Bolts), 0, 0, 17), move(names(c3Nuts), 0, 0, -13)],
+    focus: [-52, -7, -70], view: [1, -1.15, .65], span: 100,
+    task: "위에서 M2×8을 넣고 넓은 원형 구멍 아래에서 4 mm 소켓으로 일반 M2 너트를 잡습니다.",
+    check: "1.5 mm 육각렌치로 보드가 휘지 않을 만큼 조입니다.",
+    stock: "M2×8 원통머리 · 일반 M2 육각너트 각 2개", checked: true, inspectFasteners: true,
   },
   {
-    id: "openrb-carrier-nuts", group: "받침", title: "작업대에서 OpenRB 너트 넣기", base: "Part072",
-    moves: [move(names(openrbNuts), 0, 0, -12)], focus: [54, -11, -73], view: [-.6, -1, -1.5], span: 86,
-    task: "오른쪽 캐리어 밑에서 M2 육각너트를 넣고 얇은 종이테이프로 홈을 막습니다.",
-    check: "네 너트의 평평한 면을 홈에 맞춥니다.", stock: "M2 일반 육각너트 ×4", checked: true,
+    id: "base-boards", group: "받침", title: "C3를 고정한 캐리어 넣기", base: "Part000",
+    moves: [move("Part071", 0, 0, 36)], focus: [-44, -8, -68], view: [1, -1.1, 1.5], span: 120,
+    task: "C3를 조립한 왼쪽 캐리어를 받침에 놓습니다.",
+    check: "기판 양옆의 바깥 네 구멍에 위쪽 공구가 들어갈 공간이 보입니다.", checked: true, inspectFasteners: true,
   },
   {
-    id: "openrb-carrier", group: "받침", title: "오른쪽 OpenRB 캐리어 내려놓기", base: "Part000",
-    moves: [move("Part072", 0, 0, 36)], focus: [42, -8, -68], view: [-1, -1.1, 1.5], span: 115,
-    task: "너트를 넣은 캐리어를 오른쪽 받침에 내려놓습니다.",
-    check: "왼편 C3와 앞에서 조인 나사들은 이미 고정돼 있습니다.", checked: true, inspectFasteners: true,
-  },
-  {
-    id: "openrb-carrier-bolts", group: "받침", title: "오른쪽 캐리어 M3 체결", base: "Part000",
-    moves: [move(names(openrbCarrierBolts), 0, 0, 18)], focus: [48, -8, -68], view: [-1, -1.15, 1.5], span: 112,
-    task: "OpenRB를 얹기 전에 M3×8 네 개로 캐리어를 고정합니다.",
-    check: "위에서 2.5 mm 육각렌치로 체결합니다.", stock: "M3×8 원통머리 ×4", checked: true, inspectFasteners: true,
+    id: "carrier-bolts", group: "받침", title: "왼쪽 캐리어 M3 체결", base: "Part000",
+    moves: [move(names(c3CarrierBolts), 0, 0, -18), move(names(c3CarrierNuts), 0, 0, 18)],
+    focus: [-47, -8, -69], view: [1, -1.15, 1.0], span: 118,
+    task: "받침 아래에서 M3×8을 넣고 위에서 5.5 mm 소켓으로 너트를 잡아 조입니다.",
+    check: "보드 바깥에 체결 위치가 있어 보드를 조립한 채 공구가 들어갑니다.",
+    stock: "M3×8 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
   },
   {
     id: "openrb-usb", group: "받침", title: "USB-C를 보드에 먼저 꽂기", base: "Part069",
     moves: [move("OpenRBUSB", 0, -16, 0)], focus: [54, -42, -62], view: [-.8, -1.3, 1.5], span: 92,
     task: "작업대에서 OpenRB에 USB-C 데이터 케이블을 먼저 꽂습니다.",
-    check: "보드를 내린 다음에는 플러그를 밀어 넣을 공간이 부족합니다.",
+    check: "플러그와 보드가 같이 들어갈 방향을 확인합니다.",
     note: "플러그 몸체 12.4 × 18 × 6.2 mm 이내", checked: true,
   },
   {
-    id: "openrb-board", group: "받침", title: "OpenRB를 네 지지점에 올리기", base: "Part000",
+    id: "openrb-board", group: "받침", title: "작업대에서 OpenRB를 지지점에", base: "Part072",
     moves: [move("Part069", 0, 0, 26)], focus: [53, -9, -64], view: [-1, -1.1, 1.5], span: 110,
-    task: "USB-C를 꽂은 상태로 보드를 네 기둥에 얹습니다. 케이블은 받침 가운데 쪽으로 보냅니다.",
-    check: "기둥을 먼저 출력해서 실물 보드의 네 구멍이 모두 맞는지 확인합니다.",
+    task: "USB-C를 꽂은 OpenRB를 받침 밖에서 네 기둥에 올립니다.",
+    check: "시험판 4번에서 실물 보드의 구멍 네 곳을 먼저 맞춰 봅니다.",
     note: "OpenRB 홀 간격은 제조사 정면 그림에서 환산했습니다.", checked: true, inspectFasteners: true,
   },
   {
-    id: "openrb-bolts", group: "받침", title: "OpenRB 보드 M2 체결", base: "Part000",
-    moves: [move(names(openrbBolts), 0, 0, 18)], focus: [53, -9, -64], view: [-1, -1.1, 1.5], span: 110,
-    task: "M2×8 네 개를 손으로 먼저 걸어 보고 1.5 mm 육각렌치로 조입니다.",
-    check: "보드를 구부려 구멍을 맞추거나 너트를 억지로 끌어오지 않습니다.",
-    stock: "M2×8 원통머리 ×4", checked: true, inspectFasteners: true,
+    id: "openrb-bolts", group: "받침", title: "OpenRB 캐리어를 작업대에서 체결", base: "Part072",
+    moves: [move(names(openrbBolts), 0, 0, 17), move(names(openrbNuts), 0, 0, -13)],
+    focus: [53, -9, -68], view: [-1, -1.1, .65], span: 111,
+    task: "위에서 M2×8을 넣고 아래에서 4 mm 소켓으로 일반 M2 너트를 잡습니다.",
+    check: "1.5 mm 육각렌치로 보드를 당겨 휘게 하기 전에 멈춥니다.",
+    stock: "M2×8 원통머리 · 일반 M2 육각너트 각 4개", checked: true, inspectFasteners: true,
   },
   {
-    id: "base-stack-nuts", group: "받침", title: "베어링 받침과 상판 너트", base: "Part000",
-    moves: [...radialMoves(seatNuts, baseStack.seat), ...radialMoves(lidNuts, baseStack.lid)],
-    focus: [0, -2, -42], view: [1.1, -1.45, 1.4], span: 189,
-    task: "받침 안쪽에서 중간 높이의 너트 세 개와 벽 위쪽 너트 세 개를 옆 홈에 밀어 넣습니다.",
-    check: "높이가 다른 두 줄은 각각 베어링 받침과 맨 위 상판을 잡습니다.", stock: "일반 M3 육각너트 ×6", checked: true,
+    id: "openrb-carrier", group: "받침", title: "OpenRB를 고정한 캐리어 넣기", base: "Part000",
+    moves: [move("Part072", 0, 0, 36)], focus: [43, -8, -68], view: [-1, -1.1, 1.5], span: 120,
+    task: "OpenRB와 USB-C가 달린 오른쪽 캐리어를 받침에 내립니다.",
+    check: "케이블은 받침 가운데 쪽으로 보냅니다.", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "openrb-carrier-bolts", group: "받침", title: "오른쪽 캐리어 M3 체결", base: "Part000",
+    moves: [move(names(openrbCarrierBolts), 0, 0, -18), move(names(openrbCarrierNuts), 0, 0, 18)],
+    focus: [48, -8, -68], view: [-1, -1.15, 1.0], span: 112,
+    task: "받침 아래에서 M3×8을 넣고 위에서 5.5 mm 소켓으로 잡아 조입니다.",
+    check: "작업대에서 받침을 옆으로 지지하면 위아래 공구를 동시에 댈 수 있습니다.",
+    stock: "M3×8 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
   },
   {
     id: "yaw-motor", group: "목", title: "받침 안 목 모터", base: "Part000 Part008 Part009",
@@ -302,47 +298,52 @@ const definitions = [
     stock: "육각렌치 원통머리 · 본체 체결품 확인 대기", hold: true,
   },
   {
-    id: "keeper-nuts", group: "목", title: "베어링 눌림판 너트", base: "Part001",
-    moves: radialMoves(keeperNuts, baseStack.keepers), focus: [0, 0, -42], view: [1, -1.3, .56], span: 144,
-    task: "작업대에서 베어링 받침 바깥쪽 세 홈에 M3 너트를 넣습니다.",
-    check: "각 너트의 평평한 면을 홈에 맞춥니다.", stock: "일반 M3 육각너트 ×3", checked: true,
-  },
-  {
-    id: "bearing-seat", group: "목", title: "베어링 받침 02 올리기", base: `Part000 Part017 ${names(seatNuts)}`,
-    moves: [move(`Part001 ${names(keeperNuts)}`, 0, 0, 33)], focus: [0, 0, -48], view: [1.15, -1.4, 1.15], span: 180,
-    task: "베어링 받침을 세 개의 안쪽 기둥 위에 놓습니다.", check: "세 체결 구멍이 맞으면 위에서 M3×16으로 조입니다.", checked: true,
-  },
-  {
-    id: "bearing-seat-bolts", group: "목", title: "받침 02를 M3×16으로", base: `Part000 Part001 Part017 ${names(seatNuts)} ${names(keeperNuts)}`,
-    moves: [move(names(seatBolts), 0, 0, 34)], focus: [0, 0, -37], view: [1.1, -1.3, 1.1], span: 165,
-    task: "베어링을 넣기 전에 받침을 M3×16 세 개로 조입니다.",
-    check: "맨 위 상판의 짧은 나사는 바깥쪽의 별도 구멍으로 들어갑니다.", stock: "M3×16 원통머리 ×3", checked: true,
-  },
-  {
-    id: "yaw-bearing", group: "목", title: "6816 베어링 안착", base: "Part001 Part017",
+    id: "yaw-bearing", group: "목", title: "작업대에서 6816 베어링부터", base: "Part001",
     moves: [move("Part006", 0, 0, 28)], focus: [0, 2, -37], view: [1, -1.3, 1.4], span: 121,
-    task: "받침 02에 6816을 위에서 넣습니다.", check: "외륜이 균일하게 앉는지 확인한 뒤 41번 눌림판 세 개를 M3×8로 고정합니다.",
-    stock: "눌림판 M3×8 ×3", checked: true,
+    task: "분리된 베어링 받침 02에 6816을 위에서 올려 외륜을 앉힙니다.",
+    check: "이 상태에서 받침 위와 밑에 공구가 들어갑니다.", stock: "6816 ×1", checked: true,
   },
   {
-    id: "yaw-keepers", group: "목", title: "외륜 눌림판 세 개", base: `Part001 Part006 ${names(keeperNuts)}`,
-    moves: [move(keepers, 0, 0, 15), move(names(keeperBolts), 0, 0, 25)],
-    focus: [0, 0, -34], view: [1.15, -1.4, 1.2], span: 145,
-    task: "외륜 위에 눌림판을 올리고 M3×8로 고정합니다.",
-    check: "세 눌림판 모두 바깥 링에만 닿아야 합니다.", stock: "M3×8 원통머리 ×3", checked: true,
+    id: "yaw-keepers", group: "목", title: "외륜 눌림판 세 개", base: "Part001",
+    moves: [move(keepers, 0, 0, 12)], focus: [0, 0, -34], view: [1.15, -1.4, 1.2], span: 145,
+    task: "외륜 위에 눌림판 세 개를 올립니다.",
+    check: "세 눌림판 모두 바깥 링에 닿습니다.", checked: true,
   },
   {
-    id: "rotor-nuts", group: "목", title: "회전판 아래에 너트 넣기", base: "Part007",
-    moves: [move(names(rotorNuts), 0, 0, -15)], focus: [0, 15, -36], view: [1, .85, -1.55], span: 98,
-    task: "회전판을 작업대에서 뒤집어 일반 M3 너트 네 개를 밑면 홈에 넣습니다.",
-    check: "회전판을 돌려도 빠지지 않게 홈 위에 얇은 종이테이프를 붙입니다.",
-    stock: "일반 M3 육각너트 ×4", checked: true,
+    id: "keeper-nuts", group: "목", title: "작업대에서 눌림판 체결", base: "Part001",
+    moves: [move(names(keeperBolts), 0, 0, -17), move(names(keeperNuts), 0, 0, 14)],
+    focus: [0, 0, -34], view: [1.15, -1.4, .72], span: 145,
+    task: "아래에서 M3×8을 넣고 위의 일반 너트를 5.5 mm 소켓으로 잡아 조입니다.",
+    check: "조인 뒤에도 베어링 내륜이 돌아갑니다.", stock: "M3×8 원통머리 · 일반 M3 육각너트 각 3개",
+    checked: true, inspectFasteners: true,
+  },
+  {
+    id: "bearing-seat", group: "목", title: "조립한 베어링 받침 올리기", base: "Part000",
+    moves: [move("Part001", 0, 0, 33)], focus: [0, 0, -47], view: [1.15, -1.4, 1.15], span: 180,
+    task: "베어링과 눌림판을 조인 02번 받침을 세 안쪽 기둥에 내려놓습니다.",
+    check: "베어링 받침을 올릴 때 눌림판 볼트와 너트도 함께 움직입니다.", checked: true,
+  },
+  {
+    id: "bearing-seat-bolts", group: "목", title: "베어링 받침을 아래에서 체결", base: "Part000",
+    moves: [move(names(seatBolts), 0, 0, -45), move(names(seatNuts), 0, 0, 19)],
+    focus: [0, 0, -45], view: [1.1, -1.3, .76], span: 185,
+    task: "바닥의 원형 통로로 M3×16을 넣고 위에서 너트를 소켓으로 잡습니다.",
+    check: "긴 2.5 mm 육각렌치로 아래쪽에서 조입니다.", stock: "M3×16 원통머리 · 일반 M3 육각너트 각 3개",
+    checked: true, inspectFasteners: true,
+  },
+  {
+    id: "rotor-nuts", group: "목", title: "회전판에 M3 볼트 네 개 세우기", base: "Part007",
+    moves: [move(names(mastStuds), 0, 0, -18), move(names(rotorNuts), 0, 0, 17)],
+    focus: [0, 15, -35], view: [1, .85, .53], span: 99,
+    task: "작업대에서 회전판 밑의 M3×16을 육각렌치로 잡고 위쪽 너트로 볼트 네 개를 고정합니다.",
+    check: "머리는 아래, 나사산은 위로 나옵니다. 이 볼트에 나중에 목 기둥을 얹습니다.",
+    stock: "M3×16 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
   },
   {
     id: "rotor", group: "목", title: "회전판을 위에서 안착", base: "Part017 Part006 Part001",
-    moves: [move(`Part007 ${names(rotorNuts)}`, 0, 0, 26)], focus: [-4, 13, -37], view: [1, -1.35, .6], span: 94,
-    task: "너트를 넣은 회전판을 베어링 내륜에 내려 놓습니다.",
-    check: "너트와 기둥 나사 끝이 회전판 밑면보다 위에 있습니다.", checked: true,
+    moves: [move("Part007", 0, 0, 26)], focus: [-4, 13, -37], view: [1, -1.35, .6], span: 94,
+    task: "볼트 네 개를 세운 회전판을 베어링 내륜에 내려 놓습니다.",
+    check: "밑면 나사 머리가 모터와 베어링에 닿지 않고 돌아갑니다.", checked: true,
   },
   {
     id: "rotor-horn", group: "목", title: "혼에 회전판부터 체결", base: `Part001 Part006 Part007 Part017 ${names(rotorNuts)}`,
@@ -352,31 +353,37 @@ const definitions = [
     stock: "XL430 혼 · M2×8 원통머리 ×4", checked: true,
   },
   {
-    id: "base-deck", group: "목", title: "상판 03 닫기", base: `Part000 ${yawStack} ${keepers} ${names(lidNuts)}`,
+    id: "base-deck", group: "목", title: "상판 03 닫기", base: `Part000 ${yawStack} ${keepers}`,
     moves: [move("Part002", 0, 0, 29)], focus: [0, 0, -27], view: [1, -1.4, 1.1], span: 191,
     task: "기둥을 얹기 전에 상판 03을 위에서 내립니다.",
     check: "상판 바깥쪽 세 구멍을 받침 벽의 너트와 맞춥니다.", checked: true,
   },
   {
-    id: "base-deck-bolts", group: "목", title: "상판 바깥쪽을 M3×8로", base: `Part000 Part002 ${yawStack} ${names(lidNuts)}`,
-    moves: [move(names(lidBolts), 0, 0, 20)], focus: [0, 0, -24], view: [1, -1.4, 1.06], span: 191,
-    task: "바깥쪽 세 자리에서 짧은 볼트로 상판을 조입니다.",
-    check: "회전판을 손으로 움직여 상판에 닿지 않는지 봅니다.", stock: "M3×8 원통머리 ×3", checked: true,
+    id: "base-deck-bolts", group: "목", title: "상판을 아래에서 M3×8로", base: "Part000",
+    moves: [move(names(lidBolts), 0, 0, -65), move(names(lidNuts), 0, 0, 19)], focus: [0, 0, -24], view: [1, -1.4, 1.06], span: 191,
+    task: "바닥의 바깥 세 통로로 M3×8을 넣고 위에서 5.5 mm 소켓으로 너트를 잡습니다.",
+    check: "긴 2.5 mm 육각렌치로 조인 뒤 회전판을 손으로 돌려 봅니다.", stock: "M3×8 원통머리 ×3", checked: true,
   },
   {
-    id: "yoke-nuts", group: "목", title: "요크 너트를 옆으로", base: "Part010",
-    moves: [
-      move("yokeNut0 yokeNut1", -18, 0, 0),
-      move("yokeNut2", 18, 0, 0),
-    ], focus: [0, 23, 64], view: [1.2, -1.5, 1], span: 58,
-    task: "받침과 분리된 목 기둥을 작업대에 세우고 옆 홈에 일반 너트 세 개를 넣습니다.", check: "위에서 나사를 넣기 전에 너트 중심을 맞춥니다.",
-    stock: "M3 일반 육각너트 ×3", checked: true,
+    id: "yoke-fit", group: "목", title: "상하 요크 얹기", base: "Part010",
+    moves: [move("Part011", 0, 0, 28)], focus: [0, 16, 76], view: [1, -1.25, .87], span: 118,
+    task: "작업대에 놓은 목 기둥 위에 07번 요크를 얹습니다.",
+    check: "목 기둥 아래 쪽으로 두 손과 공구를 댈 수 있는 공간을 비웁니다.", checked: true,
   },
   {
-    id: "yoke-fit", group: "목", title: "상하 요크 얹기", base: `Part010 ${names(yokeNuts)}`,
-    moves: [move(`Part011 ${names(yokeBolts)}`, 0, 0, 28)], focus: [0, 9, 86], view: [1.1, -1.25, .87], span: 124,
-    task: "07번 요크를 위에서 얹고 M3×16 세 개로 조입니다.", check: "세 볼트를 손으로 한 바퀴씩 걸고 차례로 조입니다.",
-    stock: "M3×16 일반 육각렌치 나사 ×3",
+    id: "yoke-nuts", group: "목", title: "기둥 옆에서 스패너로 요크 체결", base: "Part010",
+    moves: [move("yokeNut0 yokeNut1", -18, 0, 0), move("yokeNut2", 18, 0, 0),
+      move(names(yokeBolts), 0, 0, 25)],
+    seatOffsets: handStarted(yokeBolts, 6), focus: [0, 23, 67], view: [1.3, -1.35, .53], span: 100,
+    task: "요크 위에서 볼트를 들고 있는 동안 옆 통로에 스패너로 너트를 댑니다.",
+    check: "왼쪽 두 개는 한 개씩 맞춥니다.",
+    stock: "M3×16 원통머리 · 일반 M3 육각너트 각 3개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "yoke-bolts", group: "목", title: "너트를 잡고 요크 조이기", base: "Part010",
+    moves: [move(names(yokeBolts), 0, 0, 6)], focus: [0, 23, 68], view: [1.3, -1.35, .68], span: 99,
+    task: "스패너로 너트를 잡은 상태에서 볼트를 내려 2.5 mm 육각렌치로 조입니다.",
+    check: "기둥 옆이 열린 상태에서 세 곳에 차례로 공구를 댑니다.", checked: true, inspectFasteners: true,
   },
   {
     id: "pitch-horn", group: "목", title: "끄덕임 모터의 혼을 먼저", base: "Part016 Part018",
@@ -419,14 +426,6 @@ const definitions = [
     check: "프레임 쪽 체결 방식과 나사 길이는 가조립에서 대조합니다.", hold: true,
   },
   {
-    id: "blink-bearings", group: "눈·눈꺼풀", title: "레일의 작은 베어링", base: "Part063",
-    moves: [move("Part050", 18, 0, 0), move("Part052", -18, 0, 0)],
-    focus: [0, -22, 156], view: [1.25, -1.65, .75], span: 82,
-    task: "MR104ZZ 두 개를 레일 중앙에서 양 바깥쪽으로 눌러 넣습니다.",
-    check: "간격통의 얇은 턱은 베어링 안쪽 링에 닿습니다.",
-    stock: "MR104ZZ ×2", checked: true,
-  },
-  {
     id: "blink-motor-heads", group: "눈·눈꺼풀", title: "눈꺼풀 모터 원통머리 자리", base: "Part045 Part046",
     moves: [move(names(blinkMotorHeads), 14, 0, 0)], focus: [1, -14, 177], view: [1.45, -.8, .53], span: 53,
     task: "모터 브래킷 앞면에 일반 M2 원통머리 외형을 대 봅니다.",
@@ -434,23 +433,26 @@ const definitions = [
     stock: "1.5 mm 육각렌치 · XL330 나사산 실물 대조 대기", cut: ["y", -6], hold: true,
   },
   {
-    id: "blink-rail-nuts", group: "눈·눈꺼풀", title: "레일 앞에서 너트 넣기", base: "Part063",
-    moves: [move(names(railNuts), 0, -16, 0)], focus: [0, 11, 150], view: [1, -1.5, 1], span: 89,
-    task: "레일을 프레임에 붙이기 전에 앞쪽 홈에 M3 너트 네 개를 넣습니다.",
-    check: "너트를 홈에 넣고 앞을 위로 향하게 잡습니다.", stock: "M3 일반 육각너트 ×4", checked: true,
-  },
-  {
     id: "blink-rail", group: "눈·눈꺼풀", title: "레일을 프레임에", base: frame,
     moves: [move("Part063", 0, -27, 0)],
     focus: [0, 8, 157], view: [1, 1.6, 1.1], span: 136,
-    task: "베어링을 넣은 레일을 앞쪽에서 밀어 프레임에 댑니다. 눈 상하 모터를 먼저 넣고 공용축은 나중에 끼웁니다.",
-    check: "뒤쪽 나사 구멍과 레일 너트가 맞으면 다음 단계에서 조입니다.", checked: true,
+    task: "빈 레일을 앞쪽에서 밀어 프레임에 댑니다. 먼저 레일을 체결한 다음 작은 베어링을 넣습니다.",
+    check: "레일과 프레임 구멍을 맞춥니다. 레일 앞쪽에는 소켓이 들어가는 원형 통로가 보입니다.", checked: true,
   },
   {
-    id: "blink-rail-bolts", group: "눈·눈꺼풀", title: "레일 뒤쪽 나사 네 개", base: "Part063",
-    moves: [move(names(railBolts), 0, 21, 0)], focus: [0, 25, 147], view: [1, 1.6, 1.1], span: 106,
-    task: "프레임 뒤에서 M3×16으로 레일을 고정합니다.",
-    check: "레일 네 곳과 모터판 두 곳에 같은 길이를 씁니다.", stock: "M3×16 원통머리", checked: true,
+    id: "blink-rail-bolts", group: "눈·눈꺼풀", title: "앞뒤에서 레일 나사 네 개", base: "Part063",
+    moves: [move(names(railBolts), 0, 21, 0), move(names(railNuts), 0, -24, 0)], focus: [0, 25, 147], view: [1, 1.6, 1.1], span: 106,
+    task: "뒤에서 M3×16을 넣고 앞쪽 원형 통로에서 5.5 mm 소켓으로 일반 너트를 잡습니다.",
+    check: "공용축과 모터를 놓기 전에 앞뒤에서 네 개를 조입니다.",
+    stock: "M3×16 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "blink-bearings", group: "눈·눈꺼풀", title: "레일의 작은 베어링", base: "Part063",
+    moves: [move("Part050", 18, 0, 0), move("Part052", -18, 0, 0)],
+    focus: [0, -22, 156], view: [1.25, -1.65, .75], span: 82,
+    task: "MR104ZZ 두 개를 레일 중앙에서 양 바깥쪽으로 눌러 넣습니다.",
+    check: "간격통의 얇은 턱은 베어링 안쪽 링에 닿습니다.",
+    stock: "MR104ZZ ×2", checked: true,
   },
   {
     id: "eye-pitch-motor-heads", group: "눈·눈꺼풀", title: "눈 상하 모터와 모터판", base: "Part041 Part042",
@@ -477,32 +479,64 @@ const definitions = [
     check: "지지대 쪽 파일럿 구멍은 체결 방식을 실물에서 대조합니다.", hold: true,
   },
   {
-    id: "blink-clamps", group: "눈·눈꺼풀", title: "빈 크랭크에 너트 먼저", base: "Part053 Part054 Part055",
-    moves: crankNuts.map((item, i) => move(item.id, clampX[i] * 8, 0, 0)),
-    focus: [2, -22, 156], view: [1, -1.35, 1.3], span: 125,
-    task: "크랭크를 축에 넣기 전에 일반 M3 너트를 각각 옆 홈에 밀어 넣습니다.",
-    check: "가운데 크랭크도 빈 상태에서 너트를 넣습니다.", stock: "M3 일반 육각너트 ×3", checked: true,
+    id: "blink-horn-nut", group: "눈·눈꺼풀", title: "작업대에서 혼과 가운데 링크 체결", base: "Part047 Part056",
+    moves: [move("middleServo0", -11, 0, 0), move("middleNut0 middleWasher0", 13, 0, 0)],
+    focus: [3, -12, 167], view: [1.2, -1.4, .75], span: 56,
+    task: "모터에 혼을 붙이기 전에 가운데 링크를 M2×8로 연결합니다. 바깥에서 4 mm 소켓으로 너트를 잡습니다.",
+    check: "안쪽에서 1.5 mm 육각렌치로 조이고 링크 유격을 확인합니다.",
+    stock: "M2×8 원통머리 · 일반 M2 육각너트 · 평와셔 각 1개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "blink-center-link", group: "눈·눈꺼풀", title: "작업대에서 가운데 크랭크까지 체결", base: "Part047 Part054",
+    moves: [move("centerLink0", -12, 0, 0), move("linkNutPos0 linkWasherPos0", 12, 0, 0)],
+    focus: [6, -18, 155], view: [1.2, -1.4, .75], span: 68,
+    task: "베어링 사이에 들어가기 전에 가운데 크랭크와 링크를 작업대에서 조입니다.",
+    check: "1.5 mm 육각렌치와 4 mm 소켓이 양옆에서 닿습니다.",
+    stock: "M2×8 원통머리 · 일반 M2 육각너트 · 평와셔 각 1개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "blink-motor-fit", group: "눈·눈꺼풀", title: "눈꺼풀 모터판을 레일에", base: "Part063",
+    moves: [move("Part045 Part046 Part047", 0, -31, 0)], focus: [0, -6, 177], view: [1.25, -1.5, .48], span: 103,
+    task: "혼과 가운데 링크, 크랭크를 단 모터판을 앞쪽에서 레일에 댑니다.",
+    check: "모터판이 붙으면 다음 단계에서 두 곳을 체결합니다.", checked: true,
+  },
+  {
+    id: "blink-motor-fasteners", group: "눈·눈꺼풀", title: "모터판 체결", base: "Part063",
+    moves: [move(names(blinkPlateBolts), 24, 0, 0), move(names(blinkPlateNuts), -12, 0, 0)],
+    focus: [-3, -2, 182], view: [1.2, -.9, .72], span: 91,
+    task: "몸체 양옆에서 M3×16과 일반 육각너트를 넣어 모터판을 고정합니다.",
+    check: "레일을 붙인 볼트와 같은 규격입니다.", stock: "M3×16 원통머리 · M3 일반 너트 각 2개", checked: true,
   },
   {
     id: "blink-shaft", group: "눈·눈꺼풀", title: "공용축을 옆에서 통과", base: "Part063 Part050 Part052 Part054 BlinkCollarLeft BlinkCollarRight",
     moves: [move("Part048", -87, 0, 0)], focus: [-28, -21, 154], view: [1.05, -1.55, .42], span: 168,
-    task: "눈 상하 모터가 자리 잡은 뒤 두 간격통과 가운데 크랭크를 대고 Ø4 축을 왼쪽에서 넣습니다.",
+    task: "눈 상하 모터가 자리 잡은 뒤 간격통과 이미 연결한 가운데 크랭크를 통과하도록 Ø4 축을 왼쪽에서 넣습니다.",
     check: "37.4 mm 간격통은 왼쪽, 짧은 간격통은 오른쪽입니다. 끼울 때 축이 휘도록 누르지 않습니다.",
     stock: "Ø4 × 112 mm 연마축", checked: true,
   },
   {
-    id: "blink-outer-cranks", group: "눈·눈꺼풀", title: "양끝 크랭크를 축에", base: "Part063 Part048 Part050 Part052 Part054 BlinkCollarLeft BlinkCollarRight crankNut1",
-    moves: [move("Part053 crankNut0", -16, 0, 0), move("Part055 crankNut2", 16, 0, 0)],
+    id: "blink-outer-cranks", group: "눈·눈꺼풀", title: "양끝 크랭크를 축에", base: "Part063 Part048 Part050 Part052 Part054 BlinkCollarLeft BlinkCollarRight",
+    moves: [move("Part053", -16, 0, 0), move("Part055", 16, 0, 0)],
     focus: [0, -23, 158], view: [1.2, -1.35, .72], span: 134,
-    task: "너트를 미리 넣은 양끝 크랭크를 축에 끼웁니다.",
+    task: "양끝 크랭크를 열린 면이 정면을 향하게 끼웁니다.",
     check: "볼트는 다음 단계에 넣어 축의 세 평면과 방향을 맞춥니다.", checked: true,
   },
   {
-    id: "blink-clamp-bolts", group: "눈·눈꺼풀", title: "축의 평면 세 곳 고정", base: `${rail} ${names(crankNuts)}`,
-    moves: [move(names(crankBolts), 0, 0, 13)], focus: [0, -24, 160], view: [1, -1.3, .88], span: 108,
-    task: "축 위쪽의 깊이 0.45 mm 평면에 나사 세 개를 맞춥니다.",
-    check: "손으로 축을 돌려 세 나사가 각각 평면에 닿는지 확인합니다.",
-    stock: "M3×8 일반 육각렌치 나사 ×3", checked: true,
+    id: "blink-clamps", group: "눈·눈꺼풀", title: "크랭크 너트를 정면에서 대기", base: rail,
+    moves: [move(names(crankNuts), 0, -15, 0), move(names(crankBolts), 0, 0, 13)],
+    seatOffsets: { ...handStarted(crankNuts, -.55), ...handStarted(crankBolts, 5) },
+    focus: [3, -24, 159], view: [1, -1.35, .7], span: 132,
+    task: "볼트를 조금 들어 두고 앞에서 5.5 mm 스패너로 너트를 댑니다.",
+    check: "나사 끝을 Ø4 축의 평평한 부분에 맞춥니다. 한 곳씩 작업합니다.",
+    stock: "M3×8 원통머리 · 일반 M3 육각너트 각 3개", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "blink-clamp-bolts", group: "눈·눈꺼풀", title: "크랭크 축을 공구로 조이기", base: rail,
+    moves: [move(crankSpanner.id, 0, -17, 0), move(names(crankNuts), 0, 0, -.55), move(names(crankBolts), 0, 0, 5)],
+    focus: [0, -25, 159], view: [1, -1.3, .68], span: 129,
+    task: "앞에서 너트를 스패너로 잡고 위에서 육각렌치로 나사를 조입니다.",
+    check: "크랭크에는 머리 두께 3.6 mm 이하의 5.5 mm 스패너가 들어갑니다.",
+    checked: true, inspectFasteners: true,
   },
   {
     id: "eye-pins", group: "눈·눈꺼풀", title: "안구의 위아래 핀", base: "Part024 Part029 Part030 Part031 Part033 Part034 Part035",
@@ -553,31 +587,12 @@ const definitions = [
     stock: "Ø2 × 8 mm 핀 ×2", checked: true,
   },
   {
-    id: "blink-horn-nut", group: "눈·눈꺼풀", title: "혼에 작은 너트 먼저", base: "Part047",
-    moves: [move("middleNut0", -9, 0, 0)], focus: [1, -14, 167], view: [-1.25, -1.5, .8], span: 42,
-    task: "혼을 모터에 붙이기 전에 안쪽 홈에 M2 너트를 넣습니다.",
-    check: "너트가 들어간 뒤 혼을 모터에 체결할 준비를 합니다.", stock: "M2 일반 육각너트 ×1", checked: true,
-  },
-  {
-    id: "blink-motor-fit", group: "눈·눈꺼풀", title: "눈꺼풀 모터판을 레일에", base: rail,
-    moves: [move("Part045 Part046 Part047 middleNut0", 0, -31, 0)], focus: [0, -6, 177], view: [1.25, -1.5, .48], span: 103,
-    task: "케이스와 혼을 단 모터판을 레일 앞쪽에서 받침에 댑니다.",
-    check: "모터판이 붙으면 다음 단계에서 두 곳을 체결합니다.", checked: true,
-  },
-  {
-    id: "blink-motor-fasteners", group: "눈·눈꺼풀", title: "모터판 체결", base: `${rail} Part045 Part046 Part047`,
-    moves: [move(names(blinkPlateBolts), 24, 0, 0), move(names(blinkPlateNuts), -12, 0, 0)],
-    focus: [-3, -2, 182], view: [1.2, -.9, .72], span: 91,
-    task: "몸체 양옆에서 M3×16과 일반 육각너트를 넣어 모터판을 고정합니다.",
-    check: "레일을 붙인 볼트와 같은 규격입니다.", stock: "M3×16 원통머리 · M3 일반 너트 각 2개", checked: true,
-  },
-  {
     id: "blink-upper-links", group: "눈·눈꺼풀", title: "외장 전 링크 윗부분 체결", base: `${rail} Part045 Part046 Part047 ${blinkRods} ${upperLinkNuts} ${upperLinkWasherIds}`,
-    moves: upperLinkBolts.map(item => move(item.id + (item.id === "middleServo0" ? " middleWasher0" : ""), -item.axis[0] * (item.id === "middleServo0" ? 8.5 : 12), 0, 0)),
+    moves: upperLinkBolts.map(item => move(item.id, -item.axis[0] * 12, 0, 0)),
     focus: [0, -20, 151], view: [1.3, -1.7, .85], span: 128,
-    task: "가운데 구동 링크와 양옆 링크의 위쪽 끝을 외장 밖에서 조입니다.",
+    task: "양옆 링크의 위쪽 끝을 외장을 씌우기 전에 체결합니다.",
     check: "앞 외장을 넣는 동안 양쪽 링크를 그림의 위치에 가볍게 잡아 둡니다.",
-    stock: "M2×8 원통머리 · M2 평와셔 각 4개", checked: true,
+    stock: "M2×8 원통머리 · M2 평와셔 각 2개", checked: true,
   },
   {
     id: "jaw-motor-heads", group: "턱·외장", title: "턱 모터와 왼쪽 지지대", base: "Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw",
@@ -613,12 +628,20 @@ const definitions = [
     cut: ["x", 66.9], closedLids: true, checked: true,
   },
   {
-    id: "blink-links", group: "턱·외장", title: "링크 아래를 눈꺼풀에", base: `${rail} ${front} Part045 Part046 Part047 ${blinkRods} ${names(upperLinkBolts)} ${names(linkNuts)} ${lowerLinkWasherIds}`,
+    id: "blink-lower-nuts", group: "턱·외장", title: "눈꺼풀 아래에서 작은 너트 잡기", base: frame,
+    moves: [move("linkLeftLowerNut0 linkRightLowerNut0 " + lowerLinkWasherIds, 0, 0, -13),
+      move(lowerSpanner.id, 0, 0, -13)],
+    focus: [-29, -31, 112], view: [.7, -1.6, -.50], span: 113,
+    task: "앞 외장을 끼운 뒤 턱이 비어 있을 때 아래에서 4 mm 스패너를 올려 너트를 댑니다.",
+    check: "그림은 왼쪽 예입니다. 한쪽씩 와셔와 너트를 대고 바로 볼트를 겁니다.", checked: true, inspectFasteners: true,
+  },
+  {
+    id: "blink-links", group: "턱·외장", title: "양옆에서 눈꺼풀 링크 조이기", base: frame,
     moves: lowerLinkBolts.map(item => move(item.id, -item.axis[0] * 12, 0, 0)),
-    focus: [0, -23, 155], view: [1.4, -1.75, 1], span: 129,
-    task: "앞 외장을 맞춘 뒤 눈꺼풀을 열어 링크의 아래쪽 끝 두 곳을 조입니다.",
-    check: "관절에 축방향 유격 0.10~0.20 mm를 둡니다.",
-    stock: "M2×8 원통머리 ×2 · M2 평와셔", checked: true,
+    focus: [0, -29, 115], view: [1.4, -1.75, .63], span: 129,
+    task: "아래의 스패너로 너트를 잡은 채 옆에서 1.5 mm 육각렌치로 조입니다.",
+    check: "각 관절에 축방향 유격 0.10~0.20 mm를 둡니다.",
+    stock: "M2×8 원통머리 · M2 평와셔 각 2개", checked: true, inspectFasteners: true,
   },
   {
     id: "jaw-to-shell", group: "턱·외장", title: "턱 조립체를 아래에서", base: `${frame} ${yoke} ${eyes} ${front} Part013 Part015 ${blinkRods}`,
@@ -630,13 +653,15 @@ const definitions = [
     id: "mast", group: "턱·외장", title: "기둥과 머리를 받침 위로", base: `${yawStack} Part002`,
     moves: [move("Part010", 0, 0, 36)], focus: [0, 4, 65], view: [1.1, -1.15, .52], span: 288,
     task: "작업대에서 조립한 머리를 06번 기둥과 함께 들어 회전판 위에 낮춥니다.",
-    check: "기둥 발의 홈이 기존 혼 나사 위에 놓이게 맞춥니다. 한 사람이 머리를 받치고 다른 사람이 나사를 잡으면 편합니다.", cut: ["x", 0], checked: true,
+    check: "회전판에 세운 볼트 네 개에 기둥 발을 맞춥니다. 머리를 받친 채 너트를 손으로 겁니다.", cut: ["x", 0], checked: true,
   },
   {
-    id: "mast-bolts", group: "턱·외장", title: "기둥 양옆을 위에서 조이기", base: `${yawStack} Part002 Part010`,
-    moves: [move(names(mastBolts), 0, 0, 19)], focus: [0, 19, -26], view: [1.3, -1.05, 1.2], span: 100,
-    task: "기둥 양옆 날개 위에서 M3×8 네 개를 넣고 조입니다.",
-    check: "네 곳 모두 일반 2.5 mm 육각렌치가 위에서 닿습니다.", stock: "M3×8 원통머리 ×4", checked: true,
+    id: "mast-bolts", group: "턱·외장", title: "기둥 바깥 위아래 너트로 고정", base: "Part000",
+    moves: [move(names(mastNuts), 0, 0, 17), move(mastSpanner.id, 21, 0, 0)],
+    focus: [17, 19, -26], view: [1.3, -1.05, .68], span: 108,
+    task: "이미 세워 둔 M3 볼트에 기둥을 얹은 뒤 위쪽 일반 너트 네 개를 조입니다.",
+    check: "아래쪽 너트는 열린 홈에서 5.5 mm 스패너로 잡고 위쪽 너트는 소켓으로 조입니다.",
+    stock: "일반 M3 육각너트 ×4", checked: true, inspectFasteners: true,
   },
   {
     id: "rear-shell", group: "턱·외장", title: "뒤 해골을 씌우기", base: frame,
@@ -648,45 +673,38 @@ const definitions = [
 ];
 
 const joints = {
-  "hatch-nuts": [["Part000", names(hatchNuts)]],
-  "hub-nuts": [["HubHolder", names(hubNuts)]],
+  "hatch-nuts": [["HubHolder", `${names(hatchNuts)} ${names(hatchBolts)}`]],
+  "hub-nuts": [["HubHolder", `${names(hubNuts)} ${names(hubBolts)}`]],
   "hub-board": [["HubHolder", PCB]],
-  "hub-bolts": [["HubHolder", names(hubBolts)]],
   "hatch-fit": [["Part000", "HubHolder"]],
-  "hatch-bolts": [["HubHolder", names(hatchBolts)]],
   "cable-tray": [["Part000", "CableSaddle"]],
   "cable-tray-fasteners": [["CableSaddle", `${names(clipBolts)} ${names(clipNuts)} ${names(clipWashers)}`]],
-  "cable-nuts": [["CableSaddle", names(cableNuts)]],
+  "cable-nuts": [["CableGate", `${names(cableNuts)} ${names(cableBolts)}`]],
   "cable-cover": [["CableSaddle", "CableGate"]],
-  "cable-cover-bolts": [["CableGate", names(cableBolts)]],
-  "carrier-nuts": [["Part000", names(carrierNuts)]],
-  "c3-carrier-nuts": [["Part071", names(c3Nuts)]],
   "base-boards": [["Part000", "Part071"]],
-  "carrier-bolts": [["Part071", names(c3CarrierBolts)]],
+  "carrier-bolts": [["Part071", `${names(c3CarrierBolts)} ${names(c3CarrierNuts)}`]],
   "boards-fit": [["Part071", "Part070"]],
-  "c3-bolts": [["Part070", names(c3Bolts)]],
-  "openrb-carrier-nuts": [["Part072", names(openrbNuts)]],
+  "c3-bolts": [["Part071", `${names(c3Bolts)} ${names(c3Nuts)}`]],
   "openrb-carrier": [["Part000", "Part072"]],
-  "openrb-carrier-bolts": [["Part072", names(openrbCarrierBolts)]],
+  "openrb-carrier-bolts": [["Part072", `${names(openrbCarrierBolts)} ${names(openrbCarrierNuts)}`]],
   "openrb-usb": [["Part069", "OpenRBUSB"]],
   "openrb-board": [["Part072", "Part069"]],
-  "openrb-bolts": [["Part069", names(openrbBolts)]],
-  "base-stack-nuts": [["Part000", `${names(seatNuts)} ${names(lidNuts)}`]],
+  "openrb-bolts": [["Part072", `${names(openrbBolts)} ${names(openrbNuts)}`]],
   "yaw-motor": [["Part000", "Part008 Part009 Part017"]],
-  "keeper-nuts": [["Part001", names(keeperNuts)]],
+  "keeper-nuts": [["Part001", `${names(keeperNuts)} ${names(keeperBolts)}`]],
   "bearing-seat": [["Part000", "Part001"]],
-  "bearing-seat-bolts": [["Part001", names(seatBolts)]],
+  "bearing-seat-bolts": [["Part001", `${names(seatBolts)} ${names(seatNuts)}`]],
   "yaw-bearing": [["Part001", "Part006"]],
-  "yaw-keepers": [["Part001", `${keepers} ${names(keeperBolts)}`]],
-  "rotor-nuts": [["Part007", names(rotorNuts)]],
+  "yaw-keepers": [["Part001", keepers]],
+  "rotor-nuts": [["Part007", `${names(rotorNuts)} ${names(mastStuds)}`]],
   "rotor": [["Part006", "Part007"]],
   "rotor-horn": [["Part007", names(hornBolts)]],
   "base-deck": [["Part000", "Part002"]],
-  "base-deck-bolts": [["Part002", names(lidBolts)]],
+  "base-deck-bolts": [["Part002", `${names(lidBolts)} ${names(lidNuts)}`]],
   "mast": [["Part007", "Part010"]],
-  "mast-bolts": [["Part010", names(mastBolts)]],
-  "yoke-nuts": [["Part010", names(yokeNuts)]],
-  "yoke-fit": [["Part010", "Part011"], ["Part011", names(yokeBolts)]],
+  "mast-bolts": [["Part010", names(mastNuts)]],
+  "yoke-nuts": [["Part011", `${names(yokeNuts)} ${names(yokeBolts)}`]],
+  "yoke-fit": [["Part010", "Part011"]],
   "pitch-horn": [["Part018", "Part016"], ["Part016", names(pitchHornBolts)]],
   "pitch-drive": [["Part011", "Part018"]],
   "pitch-bearing": [["Part011", "Part012 Part014"]],
@@ -705,24 +723,24 @@ const joints = {
   "lids": [["Part076", "Part078 Part058 Part061"]],
   "right-lid": [["Part077", "Part079 Part059 Part062"]],
   "blink-bearings": [["Part063", "Part050 Part052"]],
-  "blink-clamps": [["Part053", "crankNut0"], ["Part054", "crankNut1"], ["Part055", "crankNut2"]],
-  "blink-shaft": [["Part063", "Part048"], ["Part048", "Part054 BlinkCollarLeft BlinkCollarRight"]],
+  "blink-clamps": [["Part053", "crankNut0 crankBolt0"], ["Part054", "crankNut1 crankBolt1"], ["Part055", "crankNut2 crankBolt2"]],
+  "blink-shaft": [["Part063", "Part048"], ["Part048", "BlinkCollarLeft BlinkCollarRight"]],
   "blink-outer-cranks": [["Part048", "Part053 Part055"]],
-  "blink-clamp-bolts": [["Part053", "crankBolt0"], ["Part054", "crankBolt1"], ["Part055", "crankBolt2"]],
   "blink-motor-heads": [["Part046", `Part045 ${names(blinkMotorHeads)}`]],
-  "blink-rail-nuts": [["Part063", names(railNuts)]],
   "blink-rail": [["Part019", "Part063"]],
-  "blink-rail-bolts": [["Part063", names(railBolts)]],
-  "blink-horn-nut": [["Part047", "middleNut0"]],
+  "blink-rail-bolts": [["Part063", `${names(railBolts)} ${names(railNuts)}`]],
+  "blink-horn-nut": [["Part047", "Part056 middleNut0 middleServo0 middleWasher0"]],
+  "blink-center-link": [["Part056", "Part054 centerLink0 linkNutPos0 linkWasherPos0"]],
   "blink-motor-fit": [["Part063", "Part046"], ["Part045", "Part047"]],
   "blink-motor-fasteners": [["Part046", `${names(blinkPlateBolts)} ${names(blinkPlateNuts)}`]],
-  "blink-upper-links": [["Part063", `${blinkRods} ${names(upperLinkBolts)} ${upperLinkWasherIds} linkNutPos0 linkNutPos1 linkNutNeg0`]],
+  "blink-upper-links": [["Part063", `Part057 Part060 ${names(upperLinkBolts)} ${upperLinkWasherIds} linkNutPos1 linkNutNeg0`]],
   "jaw-motor-heads": [["Jaw_36_left_jaw_servo_stay", `Jaw_XL330_M288_Jaw ${names(jawHeads)}`]],
   "jaw-fit": [["Jaw_36_left_jaw_servo_stay", jaw.replace("Jaw_36_left_jaw_servo_stay ", "").replace(" Jaw_XL330_M288_Jaw", "")]],
   "camera-fit": [["Part073", camera]],
   "front-orbit": [["Part073", "Part076 Part077"]],
   "front-shell": [["Part019", "Part073"]],
-  "blink-links": [["Part073", `${names(lowerLinkBolts)} ${lowerLinkWasherIds} linkNutPos2 linkNutNeg1`]],
+  "blink-lower-nuts": [["Part073", `${lowerLinkWasherIds} linkLeftLowerNut0 linkRightLowerNut0`]],
+  "blink-links": [["Part073", names(lowerLinkBolts)]],
   "jaw-to-shell": [["Part073", "Jaw_36_left_jaw_servo_stay"]],
   "rear-shell": [["Part019", "Part074"]],
 };

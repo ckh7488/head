@@ -1,4 +1,4 @@
-"""B8 removable service hatch with top-loaded standard M3 nuts."""
+"""Removable service hatch with through bolts and side tool access."""
 
 from math import hypot
 
@@ -12,10 +12,10 @@ HUB_MOUNTS = tuple((x, y) for x in (-30.8, 30.8) for y in (46.2, 72.8))
 HATCH_BOTTOM = -82.90
 HATCH_SCREW_SEAT = -79.65
 HATCH_NUT_SEAT = -74.78
-HUB_NUT_SEAT = -76.80
+HUB_NUT_SEAT = -80.05
 HUB_SCREW_SEAT = -72.50
-NUT_WIDTH = 5.95
-NUT_MOUTH = 6.65
+HATCH_WRENCH_WIDTH = 18.
+HATCH_WRENCH_HEIGHT = 7.2
 LEGACY_HATCH_MOUNTS = ((-41.85, 55.), (41.85, 55.), (-26.9, 82.25), (26.9, 82.25))
 OPENING = [
     (-37., 39.5), (37., 39.5), (37., 73.7), (32., 79.4), (19.4, 79.4), (19.4, 86.5),
@@ -51,25 +51,27 @@ def prism(points, bottom, top):
     return Part.Face(wire(points, bottom)).extrude(V(0, 0, top - bottom))
 
 
-def nut_pocket(x, y, bottom, top, hexagon, mouth=NUT_MOUTH):
-    flat = hexagon(NUT_WIDTH, top - bottom + .10, (x, y, bottom))
-    entry_wires = []
-    for size, z in ((NUT_WIDTH, top - .5), (mouth, top), (mouth, top + .16)):
-        faces = hexagon(size, .2, (x, y, z)).Faces
-        face = next(f for f in faces if abs(f.BoundBox.ZMax - z) < .0001)
-        entry_wires.append(face.OuterWire)
-    entry = Part.makeLoft(entry_wires, True, True)
-    return flat.fuse(entry)
+def wrench_window(x, y):
+    sense = 1 if x > 0 else -1
+    z = HATCH_NUT_SEAT
+    half_width = HATCH_WRENCH_WIDTH / 2
+    sections = []
+    for at, half in ((x - sense*6.1, half_width), (x+sense*14., half_width), (sense*95., 18.5)):
+        section = [(y-half,z), (y+half,z), (y+half,z+HATCH_WRENCH_HEIGHT),
+                   (y+half-4.5,z+HATCH_WRENCH_HEIGHT+4.5),
+                   (y-half+4.5,z+HATCH_WRENCH_HEIGHT+4.5), (y-half,z+HATCH_WRENCH_HEIGHT)]
+        sections.append(Part.makePolygon([V(at,a,b) for a,b in section + section[:1]]))
+    return Part.makeLoft(sections, True, True)
 
 
-def revise_service(base, hexagon):
+def revise_service(base):
     healed = [cylinder(4.08, 4.3, (x, y, -80.30)) for x, y in LEGACY_HATCH_MOUNTS]
     band = prism(inset(FLANGE, -2.7), -79.5, -76.0).common(cylinder(90.6, 3.8, (0, 0, -79.65)))
     bosses = [cylinder(5.7, 6.98, (x, y, -78.38)) for x, y in HATCH_MOUNTS]
     cable_fastener_reliefs = [
         cutter for x in (-28.5, 28.5) for cutter in (
             cylinder(1.82, 16.4, (x, 93.8, -71.), (0, -1, 0)),
-            cylinder(3.8, 3.75, (x, 84.05, -71.), (0, -1, 0)),
+            cylinder(5.30, 15., (x, 84.05, -71.), (0, -1, 0)),
         )
     ]
     base = base.fuse([band, *healed, *bosses]).cut([
@@ -82,7 +84,7 @@ def revise_service(base, hexagon):
         base = base.cut([
             cylinder(5.4, 3.0, (x, y, -79.66)),
             cylinder(1.85, 4.5, (x, y, -78.8)),
-            nut_pocket(x, y, HATCH_NUT_SEAT, -71.4, hexagon),
+            wrench_window(x, y),
         ])
 
     flange = prism(inset(FLANGE, .55), HATCH_BOTTOM + .34, -78.9)
@@ -100,9 +102,11 @@ def revise_service(base, hexagon):
     for x, y in HUB_MOUNTS:
         foot = cylinder(4.9, 2.8, (x, y, -77.96))
         crown = Part.makeCone(4.9, 4.38, 1.12, V(x, y, -75.22))
-        hatch = hatch.fuse([foot, crown]).cut([
-            cylinder(1.85, 5.2, (x, y, -81.25)),
-            nut_pocket(x, y, HUB_NUT_SEAT, -74.10, hexagon, 6.35),
+        collar = cylinder(6.85, 2.2, (x, y, -79.12)).common(prism(inset(OPENING, .58), -79.4, -76.8))
+        face = HUB_NUT_SEAT + 2.4
+        hatch = hatch.fuse([foot, crown, collar]).cut([
+            cylinder(5.30, face + 83.2, (x, y, -83.2)),
+            cylinder(1.80, 4.1, (x, y, face-.12)),
         ])
     return base.removeSplitter(), hatch.removeSplitter()
 

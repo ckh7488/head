@@ -19,6 +19,7 @@ from export_cad import world_shape
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from primitives import cylinder
 from stock import hexagon, socket_screw
+from tool_access import wrench_shape
 
 WORLD_Z = np.array((0., 0., 1.))
 MESH_VOLUME_LIMIT = .035
@@ -35,6 +36,9 @@ def washer_dimensions(size):
 
 def fastener(row):
     kind, size = row['type'], row['size']
+    if kind == 'spanner':
+        points, faces = exact_fastener(row).tessellate(.025)
+        return tr.Trimesh(vertices=[tuple(point) for point in points], faces=faces)
     length = row.get('length', 0)
     if kind in ('nut', 'washer'):
         if kind == 'nut':
@@ -65,6 +69,8 @@ def fastener(row):
 
 def exact_fastener(row):
     axis, seat, size = row['axis'], row['seat'], row['size']
+    if row['type'] == 'spanner':
+        return wrench_shape(seat, axis, row['outward'], row['profile'], row['thickness'])
     if row['type'] == 'head':
         radius, height = {2: (1.93, 2.), 3: (2.78, 3.)}[size]
         return cylinder(radius, height, seat, tuple(-App.Vector(*axis)))

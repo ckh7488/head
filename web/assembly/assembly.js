@@ -2,7 +2,14 @@ import { WalkthroughScene } from "./scene.js";
 import { hardware, steps } from "./steps.js";
 
 const el = id => document.getElementById(id);
-const choose = id => steps.findIndex(step => step.id === id);
+const previousStages = {
+  "carrier-nuts": "carrier-bolts",
+  "c3-carrier-nuts": "c3-bolts",
+  "openrb-carrier-nuts": "openrb-bolts",
+  "base-stack-nuts": "bearing-seat-bolts",
+  "blink-rail-nuts": "blink-rail-bolts",
+};
+const choose = id => steps.findIndex(step => step.id === (previousStages[id] || id));
 const fmt = value => new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 2 }).format(value);
 const mm = value => `${fmt(value)} mm`;
 const state = {

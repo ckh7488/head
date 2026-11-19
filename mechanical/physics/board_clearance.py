@@ -11,7 +11,7 @@ from base_clearance import check_pass
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from primitives import box, cylinder
-from base_stack import CARRIER_BOLT_Z, CARRIER_MOUNTS
+from base_stack import CARRIER_BOLT_Z, CARRIER_MOUNTS, CARRIER_NUT_Z
 from openrb import BOTTOM as RB_BOTTOM, HOLES as RB_HOLES, NUT_SEAT as RB_NUT_SEAT, TOP as RB_TOP
 from openrb import board_xy as rb_xy
 from radio import C3_BOTTOM, C3_HOLES, C3_NUT_SEAT, C3_ORIGIN, C3_TOP, board_xy, usb_plug
@@ -75,7 +75,7 @@ def board_support(tray, board, x, y, bottom):
 def carrier_checks(doc, c3):
     cup, c3_tray, rb_tray = doc.Part000.Shape, doc.Part071.Shape, doc.Part072.Shape
     openrb = doc.Part069.Shape
-    anchors = [socket_screw(3, 8., (x, y, CARRIER_BOLT_Z), (0, 0, -1)) for x, y in CARRIER_MOUNTS]
+    anchors = [nut(3, (x, y, CARRIER_NUT_Z)) for x, y in CARRIER_MOUNTS]
     for tray, board, other, centers, bottom, top, nut_z, mount_points in (
         (c3_tray, c3, rb_tray, [board_xy(*p) for p in C3_HOLES], C3_BOTTOM, C3_TOP, C3_NUT_SEAT,
          CARRIER_MOUNTS[:4]),
@@ -94,9 +94,11 @@ def carrier_checks(doc, c3):
                 yield bolt, fixed, 'PCB M2×8 screw'
                 yield driver, fixed, '1.5 mm hex driver at PCB'
         for x, y in mount_points:
-            driver = cylinder(1.45, 30., (x, y, CARRIER_BOLT_Z+3.))
-            for fixed in (cup, tray, other):
-                yield driver, fixed, '2.5 mm hex driver at empty carrier'
+            driver = cylinder(1.45, 30., (x, y, CARRIER_BOLT_Z-3.), (0, 0, -1))
+            socket = cylinder(4.60, 30., (x, y, CARRIER_NUT_Z), (0, 0, 1))
+            for fixed in (cup, tray, other, board):
+                yield driver, fixed, '2.5 mm hex driver below carrier'
+                yield socket, fixed, '5.5 mm socket at completed carrier'
         for bolt in anchors:
             yield board, bolt, 'PCB underside above installed M3 heads'
     plug = doc.OpenRBUSB.Shape
@@ -111,10 +113,10 @@ def check(cad, c3_step, hub_step):
     doc = App.openDocument(str(cad.resolve()))
     try:
         expected = [board_xy(x, y) for x, y in C3_HOLES]
-        if not same_centers(centers(c3, 1.10), expected) or not same_centers(centers(doc.Part071.Shape, 1.13), expected):
+        if not same_centers(centers(c3, 1.10), expected) or not same_centers(centers(doc.Part071.Shape, 1.22), expected):
             raise ValueError('C3 KiCad drill does not match the two new through holes')
         expected = [rb_xy(x, y) for x, y in RB_HOLES]
-        if not same_centers(centers(doc.Part069.Shape, 1.20), expected) or not same_centers(centers(doc.Part072.Shape, 1.13), expected):
+        if not same_centers(centers(doc.Part069.Shape, 1.20), expected) or not same_centers(centers(doc.Part072.Shape, 1.22), expected):
             raise ValueError('Four modeled OpenRB mounting holes do not match the carrier')
         expected = [(x, y) for x in (-30.8, 30.8) for y in (46.2, 72.8)]
         if not same_centers(centers(hub, 1.60), expected):

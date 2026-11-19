@@ -17,8 +17,8 @@ from trimesh.collision import mesh_to_BVH
 from export_cad import world_shape
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from stock import (
-    BLINK_CLAMPS, BLINK_CLAMP_LENGTH, BLINK_CLAMP_NUT_Z, BLINK_RAIL_LENGTH,
-    BLINK_RAIL_NUT_Y, BLINK_RAIL_SEAT_Y, nut, socket_screw,
+    BLINK_CLAMPS, BLINK_CLAMP_LENGTH, BLINK_CLAMP_NUT_Z, BLINK_HORN_NUT_X, BLINK_HORN_SCREW_X, BLINK_PLATE_Y, BLINK_PLATE_Z,
+    BLINK_RAIL_LENGTH, BLINK_RAIL_NUT_Y, BLINK_RAIL_SEAT_Y, nut, socket_screw,
 )
 
 V = App.Vector
@@ -27,7 +27,7 @@ HINGE = V(0, -39, 119)
 PINS = ('Part058', 'Part059', 'Part061', 'Part062')
 PITCH_PINS = ('Part026', 'Part028')
 LINKS = (
-    (9.45, 1.25, -1, 'servo_yz_mm', 'radius_mm', 8.),
+    (BLINK_HORN_SCREW_X, BLINK_HORN_NUT_X, 1, 'servo_yz_mm', 'radius_mm', 8.),
     (4.55, 10.55, 1, 'shaft_yz_mm', 'radius_mm', 8.),
     (-53.75, -47.65, 1, 'shaft_yz_mm', 'lid_radius_mm', 8.),
     (53.75, 47.65, -1, 'shaft_yz_mm', 'lid_radius_mm', 8.),
@@ -48,11 +48,8 @@ def fastener(joint, layout, angle):
     z += layout[arm] * sin(phase)
     axis = (sense,0,0)
     bolt = socket_screw(2,length,(start,y,z),axis)
-    tail = nut(2,(nut_x,y,z),(1,0,0) if center == 'servo_yz_mm' else axis)
-    if center == 'servo_yz_mm':
-        washer = Part.makeCylinder(2.50,.3,V(start,y,z),-X)
-    else:
-        washer = Part.makeCylinder(2.50,.3,V(nut_x,y,z),-V(*axis))
+    tail = nut(2,(nut_x,y,z),axis)
+    washer = Part.makeCylinder(2.50,.3,V(nut_x,y,z),-V(*axis))
     return bolt.fuse([washer,tail]).removeSplitter()
 
 
@@ -108,9 +105,9 @@ def check(cad, meshes):
                 for solid in (bolt,trapped):
                     record(f'{axis} / {name}', solid.common(housing).Volume)
             record(f'{axis} / tool to frame', tool.common(frame).Volume)
-        for z in (183.,189.):
-            bolt = socket_screw(3,16.,(.9,0,z),(-1,0,0))
-            tail = nut(3,(-12.4,0,z),(-1,0,0))
+        for z in BLINK_PLATE_Z:
+            bolt = socket_screw(3,16.,(.9,BLINK_PLATE_Y,z),(-1,0,0))
+            tail = nut(3,(-12.4,BLINK_PLATE_Y,z),(-1,0,0))
             for name, housing in (('motor', fixed['Part045']), ('plate', fixed['Part046']), ('rail',rail)):
                 for solid in (bolt,tail):
                     record(f'motor mount {z:g} / {name}', solid.common(housing).Volume)
@@ -130,7 +127,7 @@ def check(cad, meshes):
             if any(hardware.common(shaft.copy().rotate(V(0,y,z),X,a)).Volume < .005 for a in (-5.,5.)):
                 raise RuntimeError(f'{part} screw failed to capture the shaft flat')
             for travel in (0.,.5,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.):
-                sliding = nut(3,(x+side*travel,y,BLINK_CLAMP_NUT_Z),(0,0,1),(0,1,0))
+                sliding = nut(3,(x,y-travel,BLINK_CLAMP_NUT_Z),(0,0,1),(1,0,0))
                 record(f'installing nut / {part}',sliding.common(crank).Volume)
 
         for angle in (-1, *range(0, 91, 3), 91):
