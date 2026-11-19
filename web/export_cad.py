@@ -18,6 +18,7 @@ COLORS = {
 }
 TRIANGLE_LIMITS = {'bone': 35000, 'jaw': 11000, 'eye': 9000, 'gear': 9500}
 ASSEMBLY_MATING_PARTS = {'Part000', 'HubHolder', 'Part019', 'Part073'}
+ROBOTIS_MOTORS = {'Part017', 'Part018', 'Part038', 'Part041', 'Part045', 'Jaw_XL330_M288_Jaw'}
 
 
 def export(cad, output, manifest_path):
@@ -37,7 +38,9 @@ def export(cad, output, manifest_path):
         identifier = part['cad_id']
         mesh = trimesh.load_mesh(cad / 'world' / f'{identifier}.stl')
         limit = TRIANGLE_LIMITS.get(part['finish'], 5500)
-        if identifier not in ASSEMBLY_MATING_PARTS and len(mesh.faces) > limit:
+        if identifier in ROBOTIS_MOTORS:
+            mesh = mesh.smooth_shaded
+        elif identifier not in ASSEMBLY_MATING_PARTS and len(mesh.faces) > limit:
             mesh = mesh.simplify_quadric_decimation(face_count=limit)
         mesh.visual = trimesh.visual.TextureVisuals(material=materials[part['finish']])
         part['motion'] = motions[identifier]
