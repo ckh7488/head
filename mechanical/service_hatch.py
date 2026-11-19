@@ -16,6 +16,9 @@ HUB_NUT_SEAT = -80.05
 HUB_SCREW_SEAT = -72.50
 HATCH_WRENCH_WIDTH = 18.
 HATCH_WRENCH_HEIGHT = 7.2
+HATCH_WINDOW_CENTER_Y = 61.
+HATCH_WINDOW_EDGE_X = 95.
+HATCH_WINDOW_ROOF = 4.5
 LEGACY_HATCH_MOUNTS = ((-41.85, 55.), (41.85, 55.), (-26.9, 82.25), (26.9, 82.25))
 OPENING = [
     (-37., 39.5), (37., 39.5), (37., 73.7), (32., 79.4), (19.4, 79.4), (19.4, 86.5),
@@ -54,13 +57,31 @@ def prism(points, bottom, top):
 def wrench_window(x, y):
     sense = 1 if x > 0 else -1
     z = HATCH_NUT_SEAT
+    shoulder = z + HATCH_WRENCH_HEIGHT
     half_width = HATCH_WRENCH_WIDTH / 2
     sections = []
-    for at, half in ((x - sense*6.1, half_width), (x+sense*14., half_width), (sense*95., 18.5)):
-        section = [(y-half,z), (y+half,z), (y+half,z+HATCH_WRENCH_HEIGHT),
-                   (y+half-4.5,z+HATCH_WRENCH_HEIGHT+4.5),
-                   (y-half+4.5,z+HATCH_WRENCH_HEIGHT+4.5), (y-half,z+HATCH_WRENCH_HEIGHT)]
+    for at, half in ((x - sense*6.1, half_width), (x+sense*14., half_width),
+                     (sense*HATCH_WINDOW_EDGE_X, 18.5)):
+        low = y - (half if y < HATCH_WINDOW_CENTER_Y else half_width)
+        high = y + (half_width if y < HATCH_WINDOW_CENTER_Y else half)
+        section = [(low, z), (high, z), (high, shoulder),
+                   (high-HATCH_WINDOW_ROOF, shoulder+HATCH_WINDOW_ROOF),
+                   (low+HATCH_WINDOW_ROOF, shoulder+HATCH_WINDOW_ROOF), (low, shoulder)]
         sections.append(Part.makePolygon([V(at,a,b) for a,b in section + section[:1]]))
+    return Part.makeLoft(sections, True, True)
+
+
+def wrench_window_mouth(side):
+    shoulder = HATCH_NUT_SEAT + HATCH_WRENCH_HEIGHT
+    taper_start = -70.05
+    sections = []
+    # Keep the outer entries open around the wrench and grow the web at 45° above it.
+    for z in (HATCH_NUT_SEAT, taper_start, shoulder, shoulder+HATCH_WINDOW_ROOF):
+        inner_x = 62. + max(0., z-taper_start)
+        lo, hi = sorted((side*inner_x, side*HATCH_WINDOW_EDGE_X))
+        half_width = 1.24 + max(0., z-shoulder)
+        y_lo, y_hi = HATCH_WINDOW_CENTER_Y-half_width, HATCH_WINDOW_CENTER_Y+half_width
+        sections.append(wire([(lo, y_lo), (hi, y_lo), (hi, y_hi), (lo, y_hi)], z))
     return Part.makeLoft(sections, True, True)
 
 
@@ -86,6 +107,7 @@ def revise_service(base):
             cylinder(1.85, 4.5, (x, y, -78.8)),
             wrench_window(x, y),
         ])
+    base = base.cut([wrench_window_mouth(-1), wrench_window_mouth(1)])
 
     flange = prism(inset(FLANGE, .55), HATCH_BOTTOM + .34, -78.9)
     chamfer = Part.makeLoft([

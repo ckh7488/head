@@ -18,12 +18,12 @@ M3에는 2.5 mm 육각렌치와 5.5 mm 스패너 또는 소켓, M2에는 1.5 mm 
 | 카메라·OpenRB USB | **StarTech USBEXTAA6IN** 두 개. 암 커넥터 도면은 몸체 16.0 × 9.1 mm, 금속부 돌출 9.5 mm, 케이블 Ø4.8 mm입니다. 시험판에서 뒤턱과 뒷목을 대조합니다. 카메라 모듈에는 동봉 케이블을 사용합니다. [StarTech 치수도](https://media.startech.com/downloads/image/USBEXTAA6IN_Diagram.pdf) |
 
 1. **작업대에서 단자를 만듭니다.** 접점 한 개에 한 가닥을 압착합니다. 앞쪽 날개는 구리, 뒤쪽 날개는 피복을 잡습니다. 단자를 하우징 뒤에서 끝까지 넣고 한 가닥씩 가볍게 당겨 잠겼는지 확인합니다. 하우징의 1번 표시를 기준으로 연속성을 잽니다. 빨강은 전원, 검정은 GND, 흰색은 DATA로 두고 양끝에 5 V·목 전원·모터 ID를 붙입니다. [핀 순서](../electronics/README.md#전원과-배선)
-2. **트레이에 전원 커넥터를 먼저 얹습니다.** XT30U는 암수를 결합해 앉힙니다. XT60U는 바깥쪽 암 커넥터를 앉히고 허브를 넣기 전에 받침 안에서 수 커넥터를 꽂습니다. 납땜부를 한 가닥씩 열수축하고 완성 외경이 XT30U **Ø4.0 mm**, XT60U **Ø5.6 mm** 이하인지 확인합니다. 몸체 뒤턱을 고정부에 붙이고 두 전선을 각자 홈으로 뺀 뒤 덮개를 닫습니다. [트레이에 배선 올리기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-plugs) · [XT60U 안쪽 꽂기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#xt60-mate) · [AMASS XT30U 도면](https://www.china-amass.com/public/upload/20240608/810c62b3f7ace2287989748538eb2a6b.pdf) · [열수축 튜브](https://www.te.com/en/product-CAT-HST-RNF100-2.html)
+2. **케이블 트레이는 작업대에서 조립합니다.** XT30U와 XT60U 암수를 각각 꽂고, USB 연장선 두 개와 함께 열린 트레이에 위에서 얹습니다. 납땜부를 한 가닥씩 열수축하고 완성 외경을 XT30U **Ø4.0 mm**, XT60U **Ø5.6 mm** 이내로 맞춥니다. 몸체 뒤턱을 홈에 붙이고 덮개를 조인 다음, 안쪽으로 들어갈 선을 진행 방향으로 폅니다. 플러그와 덮개가 달린 트레이를 받침 뒤에서 수평으로 밀어 넣습니다. [작업대에서 전원 연결](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#xt60-mate) · [트레이에 배선 올리기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-plugs) · [트레이 넣기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-tray)
 3. **허브를 눕힌 상태에서 먼저 연결합니다.** J4–J6은 PH–EH, J7–J8은 EH–EH입니다. OpenRB에서 J3으로는 GND와 DATA 두 가닥을 연결합니다. 5 V와 GND는 WAGO 221-413 두 개에서 허브와 턱으로 나누고, 턱의 5 V에 Littelfuse 0FHM0003ZXJV-F2를 넣습니다. J6 DATA는 별도 221-413에 분기합니다. 레버 단자는 11 mm 벗겨 넣습니다. 덮개를 30 mm 내려도 단자를 당기지 않도록 여유를 둡니다. [허브 배선](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-wiring) · [221-413](https://www.wago.com/gb/installation-terminal-blocks-and-connectors/splicing-connector-with-levers/p/221-413) · [2 A 인라인 퓨즈](https://www.littelfuse.com/assetdocs/0fhm0003zxjv-f2-2d-prints?assetguid=0cf40f2e-7338-4c1d-bce2-d9255753058c)
 4. **회전판 앞쪽 통로로 선부터 보냅니다.** 목 좌우 ±60°에서 Ø9 mm 검사봉이 지났습니다. 선 다발은 Ø8 mm 이내로 묶고, 통과시킨 뒤 JST 하우징을 끼웁니다. 받침과 목 사이에서 움직일 수 있는 구간을 60 mm 이상 확보하고 상하축에도 따로 여유를 둡니다. 고정 전원선은 18 AWG에서 굽힘 반경 21 mm, 12 AWG에서 16 mm 이상으로 둡니다. WAGO와 턱 퓨즈는 받침 안의 고정 배선에 결속합니다. 퓨즈는 앞쪽, 5 V 분기는 왼쪽, 12 V 연결은 오른쪽에 자리가 있습니다.
 5. **뒤 해골을 닫기 전에 확인합니다.** 시험판 2번에서 XT 몸체의 뒤턱이 움직이지 않는지 봅니다. 전원을 뺀 채 직선과 45° 방향으로 각각 10 N을 30초 가했을 때 이동량 0.5 mm 이하와 피복 상태를 확인합니다. 회전판과 머리를 손으로 끝까지 움직여 선을 물거나 당기는지 봅니다. 첫 전압과 부하 전압은 보드와 모터에서 각각 잽니다. [P1S 시험판](R5-B15-Fit-P1S.3mf) · [전원 측정](../electronics/README.md#전원과-배선)
 
-구매품 목록에서 커넥터를 누르면 해당 부품이 강조됩니다. XT60U 암수는 공급사 STEP, 허브의 JST 핀 헤더는 KiCad STEP을 썼습니다. XT30U·StarTech·JST 케이블 하우징은 각 제조사 도면을 기준으로 그렸습니다. XT60U 수 커넥터 삽입 경로는 다섯 위치에서 간섭이 없었습니다. [뒤쪽 커넥터](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-plugs) · [JST 하네스](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-wiring)
+구매품 목록에서 커넥터를 누르면 해당 부품이 강조됩니다. XT60U 암수는 공급사 STEP, 허브의 JST 핀 헤더는 KiCad STEP을 썼습니다. XT30U·StarTech·JST 케이블 하우징은 각 제조사 도면을 기준으로 그렸습니다. 트레이가 수평으로 들어가는 26 mm 구간에서 체결품과 커넥터 외형의 간섭을 검사했습니다. [뒤쪽 커넥터](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-plugs) · [JST 하네스](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-wiring)
 
 ## 배선과 체결품을 단 상태의 구동 검사
 
@@ -39,9 +39,9 @@ B15 전체 출력은 구동 간섭과 출력 경로 문제를 수정한 뒤 진�
 
 ## 받침
 
-받침의 뒤쪽 M3 통로 두 곳과 바닥 덮개 체결부 네 곳에서 서포트를 제거합니다. 시험판 2번 시편의 뒤쪽 통로 두 곳도 정리합니다. 볼트가 힘을 주지 않고 통과하는지 확인한 뒤 조립합니다.
+받침의 바닥 덮개 체결부 네 곳과 시험판 2번 시편의 뒤쪽 통로 두 곳에서 서포트를 제거합니다. 볼트가 힘을 주지 않고 통과하는지 확인한 뒤 조립합니다.
 
-1. 허브를 넣기 전에 트레이 40을 M3×16 두 개로 붙입니다. 뒤에서 긴 육각렌치를 넣고 받침 안에서 소켓으로 와셔 뒤의 너트를 잡습니다. 커넥터 뒤턱을 맞추고 덮개 42를 얹습니다. 위에서 덮개 볼트를 조이는 동안 뒤쪽 열린 턱에서 너트를 스패너로 잡습니다. [케이블 덮개 체결](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-cover-bolts)
+1. 작업대에서 트레이 40에 케이블과 덮개 42를 조립합니다. 덮개 볼트를 위에서 조이는 동안 아래 열린 턱에서 너트를 스패너로 잡습니다. 트레이째 받침 뒤쪽에 밀어 넣고 M3×16 두 개로 붙입니다. 뒤에서 긴 육각렌치를 넣고, 허브를 넣기 전에 받침 안에서 와셔와 너트를 잡습니다. [트레이 넣기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-tray)
 2. 작업대에서 바닥 덮개를 양끝만 받쳐 밑을 비웁니다. 5.5 mm 소켓에 너트를 담아 덮개 아래 Ø10.6 mm 구멍에 올리고 기판 쪽에서 볼트를 겁니다. 소켓 앞쪽 외경 Ø9.3 mm까지 확인했습니다. 허브가 달린 덮개를 받침에 올린 다음에는 옆 창에서 스패너로 너트를 잡고 아래에서 M3×8을 조입니다. 배선에는 덮개를 30 mm 내릴 여유를 둡니다. [허브 소켓 경로](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-nuts) · [외경 Ø8 mm 복스 드라이버 예](https://digicat.wiha.com/au/en/tools/screwdrivers/mechanic-s-screwdrivers/softfinish/hex/screwdriver-softfinish/01076)
 3. 각 PCB를 분리된 캐리어에 M2×8로 조입니다. 4 mm 소켓은 아래에서 들어갑니다. 보드가 달린 캐리어를 놓고 양옆 M3×8을 아래에서 넣어 위의 너트를 잡습니다. OpenRB는 USB-C를 꽂은 채 내려놓습니다. 플러그 몸체는 12.4 × 18 × 6.2 mm 이내입니다. OpenRB의 홀 간격은 제조사 그림에서 환산한 20.5 × 61.5 mm로, 시험판 4번에서 실물과 맞춥니다. [보드 캐리어 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#base-boards) · [ROBOTIS 보드 그림](https://docs.robotis.com/docs/parts/controller/openrb-150/#pinout)
 

@@ -151,53 +151,35 @@ const outer = review.outer_loading;
 const yawStack = `Part001 Part006 Part007 Part017 ${names(rotorNuts)} ${names(hornBolts)}`;
 const keepers = "YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3";
 const cableTray = "Part000 CableSaddle";
-const mountedCableTray = `${cableTray} ${names(clipBolts)} ${names(clipWashers)} ${names(clipNuts)}`;
 
 const cablePlugs = "InputXT30 InputXT60 CameraUSB ControlUSB";
 const hubPlugs = "HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8";
 
 const definitions = [
   {
-    id: "cable-tray", group: "받침", title: "트레이를 뒤에서 대기", base: "Part000",
-    moves: [move("CableSaddle", 0, cable.tray_travel, 0)], focus: [0, 95, -64], view: [1, 1.4, .83], span: 130,
-    task: "40번 트레이를 받침 뒤쪽에서 수평으로 밀어 붙입니다.",
-    check: "두 나사 구멍을 맞춥니다. 안쪽 너트 자리를 확보하려고 허브 덮개를 끼우기 전에 이 작업을 합니다.", checked: true,
+    id: "xt60-mate", group: "받침", title: "작업대에서 전원 암수 연결", base: "InputXT30 InputXT60",
+    moves: [move("InputXT60Mate", 0, -16, 0)], focus: [-24, 104, -57], view: [1.05, -.8, 1.5], span: 94,
+    task: "작업대에서 XT30U와 XT60U 암수를 끝까지 꽂습니다.",
+    check: "XT30U 열수축부는 한 가닥당 Ø4.0 mm, XT60U는 Ø5.6 mm까지입니다.",
+    ports: ["InputXT30", "InputXT60", "InputXT60Mate"], checked: true,
   },
   {
-    id: "cable-tray-fasteners", group: "받침", title: "트레이 나사와 안쪽 너트", base: cableTray,
-    moves: [move(names(clipBolts), 0, cable.tray_bolt_travel, 0),
-      move(`${names(clipWashers)} ${names(clipNuts)}`, 0, -cable.tray_inner_travel, 0)],
-    focus: [0, 105, -69], view: [1.1, 1.6, .9], span: 132, cut: ["x", -28.5],
-    task: "뒤쪽 큰 구멍으로 M3×16을 넣고, 받침 안쪽에서 평와셔와 너트를 끼웁니다.",
-    check: "2.5 mm 육각렌치의 긴 쪽으로 조입니다. 절개 보기에서 나사 머리와 안쪽 너트 자리를 확인할 수 있습니다.",
-    stock: "M3×16 원통머리 · 일반 너트 · 평와셔 각 2개", checked: true,
-  },
-  {
-    id: "cable-plugs", group: "받침", title: "전원·USB 케이블을 트레이에", base: mountedCableTray,
-    moves: [move(cablePlugs, 0, 0, 25)], focus: [0, 105, -51], view: [.95, -.90, 1.5], span: 132,
-    task: "XT30U는 암수를 결합해 올립니다. XT60U는 바깥쪽 암 커넥터만 올리고, 두 전용 홈으로 전원선을 빼냅니다.",
-    check: "열수축을 마친 한 가닥의 최대 외경은 XT30U Ø4.0 mm, XT60U Ø5.6 mm입니다. USB의 뒤턱과 뒷목은 시험판에서 대조합니다.",
+    id: "cable-plugs", group: "받침", title: "트레이 위에 커넥터 얹기", base: "CableSaddle",
+    moves: [move(cablePlugs, 0, 0, 25)], focus: [0, 106, -53], view: [.95, -.90, 1.5], span: 132,
+    task: "연결한 전원 두 쌍과 USB 연장선 두 개를 열린 트레이 위에서 내려놓습니다.",
+    check: "커넥터 뒤턱을 받침 턱에 붙이고, 받침으로 들어갈 선 끝을 같은 방향으로 펴 둡니다.",
     stock: "Alpha Wire 3055 · 18 AWG, 6718 · XT60U용 12 AWG",
-    ports: ids(cablePlugs),
-    note: "USB-A 연장선은 StarTech USBEXTAA6IN입니다. P1S 시험판 2번에서 뒤턱과 뒷목을 대조합니다.",
-    hold: true, status: "실물 뒤턱 확인",
+    ports: [...ids(cablePlugs), "InputXT60Mate"], checked: true,
   },
   {
-    id: "xt60-mate", group: "받침", title: "받침 안에서 목 전원 꽂기", base: mountedCableTray,
-    moves: [move("InputXT60Mate", 0, -16, 0)], focus: [-15.5, 102, -56], view: [1.05, -.8, 1.5], span: 99,
-    task: "허브를 넣기 전에 안쪽 XT60U-M을 받침 안에서 뒤로 밀어서, 트레이에 앉은 암 커넥터에 꽂습니다.",
-    check: "두 몸체가 끝까지 맞물리고 바깥쪽 뒤턱이 트레이에 닿는지 확인합니다. 양쪽 납땜 꼬리는 12 AWG입니다.",
-    ports: ["InputXT60", "InputXT60Mate"], checked: true,
-  },
-  {
-    id: "cable-cover", group: "받침", title: "커넥터 위에 덮개 내리기", base: mountedCableTray,
+    id: "cable-cover", group: "받침", title: "작업대에서 덮개 닫기", base: "CableSaddle",
     moves: [move("CableGate", 0, 0, cable.cover_travel)], focus: [0, 113, -53], view: [.7, 1.6, .95], span: 115,
-    task: "플러그 뒤턱을 홈에 밀착시킨 다음 42번 덮개를 위에서 내립니다.",
-    check: "각 커넥터 뒤턱이 받침에 걸립니다. 덮개 아래쪽은 손과 스패너가 들어가도록 열려 있습니다.",
+    task: "트레이를 작업대에 둔 채 42번 덮개를 위에서 내립니다.",
+    check: "전선 피복이 덮개 사이에 끼지 않고 각 커넥터 뒤턱이 홈에 걸립니다.",
     ports: ids(cablePlugs), checked: true,
   },
   {
-    id: "cable-nuts", group: "받침", title: "열린 턱에서 케이블 덮개 너트 걸기", base: "Part000",
+    id: "cable-nuts", group: "받침", title: "트레이 밖에서 덮개 너트 걸기", base: "CableSaddle",
     moves: [move(names(cableBolts), 0, 0, 18), move(names(cableNuts), 0, 0, -11)],
     seatOffsets: handStarted(cableNuts, -.85),
     focus: [0, 122, -61], view: [.4, 2, -.38], span: 116,
@@ -206,12 +188,28 @@ const definitions = [
     checked: true, inspectFasteners: true,
   },
   {
-    id: "cable-cover-bolts", group: "받침", title: "뒤에서는 스패너, 위에서는 육각렌치", base: "Part000",
+    id: "cable-cover-bolts", group: "받침", title: "작업대에서 덮개 조이기", base: "CableSaddle",
     moves: [move(cableSpanner.id, 0, cable.wrench_travel, 0), move(names(cableNuts), 0, 0, -.85)],
     focus: [0, 123, -61], view: [.9, 1.8, -.52], span: 136,
     task: "뒤에서 5.5 mm 오픈 스패너로 너트를 잡고, 위에서 2.5 mm 육각렌치로 조입니다.",
-    check: "가운데 한 곳에서 공구가 들어오는 방향을 보여 줍니다. 다섯 곳을 한 개씩 조입니다.",
+    check: "트레이를 작업대 끝에 두고 아래가 보이는 상태에서 다섯 곳을 조입니다.",
     note: `뒤쪽 공구 통로 폭 ${cable.wrench_width} mm · P1S 시험판 2번`, checked: true, inspectFasteners: true,
+  },
+  {
+    id: "cable-tray", group: "받침", title: "연결한 트레이를 통째로 넣기", base: "Part000",
+    moves: [move("CableSaddle", 0, cable.tray_travel, 0)], focus: [0, 98, -58], view: [1, 1.4, 1.03], span: 142,
+    task: "선 끝을 받침 뒤쪽 창에 맞추고, 덮개까지 조립한 트레이를 수평으로 밀어 붙입니다.",
+    check: "전원 암수는 이미 연결돼 있습니다. 받침 안쪽에서 네 선이 각 창을 지나 꺾이지 않는지 봅니다.",
+    ports: [...ids(cablePlugs), "InputXT60Mate"], checked: true,
+  },
+  {
+    id: "cable-tray-fasteners", group: "받침", title: "완성 트레이를 M3 두 개로 고정", base: cableTray,
+    moves: [move(names(clipBolts), 0, cable.tray_bolt_travel, 0),
+      move(`${names(clipWashers)} ${names(clipNuts)}`, 0, -cable.tray_inner_travel, 0)],
+    focus: [0, 105, -69], view: [1.1, 1.6, .9], span: 132, cut: ["x", -28.5],
+    task: "뒤에서 M3×16 두 개를 넣고, 덮개가 열린 받침 안쪽에서 평와셔와 너트를 끼웁니다.",
+    check: "2.5 mm 긴 육각렌치와 5.5 mm 공구로 조입니다. 허브를 장착하기 전에 작업합니다.",
+    stock: "M3×16 원통머리 · 일반 너트 · 평와셔 각 2개", checked: true,
   },
   {
     id: "hub-board", group: "받침", title: "작업대에서 허브 PCB 얹기", base: "HubHolder",
@@ -733,7 +731,7 @@ const definitions = [
 
 const joints = {
   "cable-plugs": [["CableSaddle", cablePlugs]],
-  "xt60-mate": [["CableSaddle", "InputXT60Mate"]],
+  "xt60-mate": [["InputXT60", "InputXT60Mate"]],
   "hub-wiring": [["HubPCB", hubPlugs]],
   "hatch-nuts": [["HubHolder", `${names(hatchNuts)} ${names(hatchBolts)}`]],
   "hub-nuts": [["HubHolder", `${names(hubNuts)} ${names(hubBolts)}`]],

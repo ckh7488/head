@@ -13,12 +13,12 @@ from export_cad import world_shape
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixtures import (
-    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS, CAP_NUT_FACE_Z,
+    CABLE_CENTER_Z, CABLE_LANES, CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS, CAP_NUT_FACE_Z,
     CAP_WRENCH_TRAVEL, CAP_TRAVEL, SADDLE_BOLT_TRAVEL,
     SADDLE_INNER_TRAVEL, SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_TRAVEL, SADDLE_WASHER_Y,
 )
-from primitives import cylinder
-from stock import hexagon
+from primitives import box, cylinder
+from stock import hexagon, nut, socket_screw
 from tool_access import NUT_HEIGHT, WRENCH_THICKNESS, wrench_profile, wrench_shape
 
 V = App.Vector
@@ -56,9 +56,23 @@ def check_paths(doc):
     if min(bearing_areas) < 14.:
         raise ValueError('Insufficient flat material above the cover nut')
 
-    results['tray_positions'] = check_pass(
-        (tray.translated(V(0, i / 2, 0)), base, f'Tray at {i/2:g} mm')
-        for i in range(round(SADDLE_TRAVEL * 2) + 1)
+    connectors = ('InputXT30', 'InputXT60', 'InputXT60Mate', 'CameraUSB', 'ControlUSB')
+    module = [('tray', tray), ('cover', cover)]
+    module.extend((name, world_shape(doc.getObject(name))) for name in connectors)
+    for x in CAP_BOLTS:
+        screw = socket_screw(3, CAP_BOLT_LENGTH, (x, CAP_BOLT_Y, CAP_BOLT_SEAT_Z), (0, 0, -1))
+        tail = nut(3, (x, CAP_BOLT_Y, CAP_NUT_FACE_Z - NUT_THICKNESS))
+        module.append((f'cover fastener x={x:g}', screw.fuse(tail)))
+    offsets = [(0., 0.), *product((-.12, .12), repeat=2)]
+    results['populated_tray_positions'] = check_pass(
+        (part.translated(V(dx, i / 2, dz)), base, f'Tray with {name} at y+{i/2:g} mm')
+        for ((name, part), (dx, dz), i) in product(module, offsets, range(round(SADDLE_TRAVEL * 2) + 1))
+    )
+    usb_ends = [box(x-8.5, x+8.5, 72., 104., CABLE_CENTER_Z-4.9, CABLE_CENTER_Z+4.9)
+                for _, x, *_ in CABLE_LANES[2:]]
+    results['usb_passage'] = check_pass(
+        (plug.translated(V(dx, 0, dz)), base, f'USB-A end at x={plug.BoundBox.Center.x:g} mm')
+        for plug, dx, dz in product(usb_ends, (-.3, 0., .3), (-.3, 0., .3))
     )
     results['cover_positions'] = check_pass(
         (cover.translated(V(0, 0, i / 2)), fixed, f'Cover at {i/2:g} mm')
