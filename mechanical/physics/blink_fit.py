@@ -6,6 +6,7 @@ from itertools import product
 import json
 from math import cos, radians, sin, sqrt
 from pathlib import Path
+import sys
 
 import FreeCAD as App
 import fcl
@@ -14,18 +15,20 @@ import trimesh as tr
 from trimesh.collision import mesh_to_BVH
 
 from export_cad import world_shape
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from stock import BLINK_CLAMPS, nut, socket_screw
 
 V = App.Vector
 X = V(1, 0, 0)
 HINGE = V(0, -39, 119)
 PINS = ('Part058', 'Part059', 'Part061', 'Part062')
 LINKS = (
-    (1.2, 7.15, 1, 'servo_yz_mm', 'radius_mm', True),
-    (4.55, 10.25, 1, 'shaft_yz_mm', 'radius_mm', False),
-    (-53.75, -47.95, 1, 'shaft_yz_mm', 'lid_radius_mm', True),
-    (53.75, 47.95, -1, 'shaft_yz_mm', 'lid_radius_mm', True),
-    (-53.5, -47.95, 1, 'hinge', 'lid_radius_mm', True),
-    (53.5, 47.95, -1, 'hinge', 'lid_radius_mm', True),
+    (7.45, 1.25, -1, 'servo_yz_mm', 'radius_mm', 6.),
+    (4.55, 10.55, 1, 'shaft_yz_mm', 'radius_mm', 8.),
+    (-53.75, -47.65, 1, 'shaft_yz_mm', 'lid_radius_mm', 8.),
+    (53.75, 47.65, -1, 'shaft_yz_mm', 'lid_radius_mm', 8.),
+    (-53.5, -47.65, 1, 'hinge', 'lid_radius_mm', 8.),
+    (53.5, 47.65, -1, 'hinge', 'lid_radius_mm', 8.),
 )
 FIXED = ('Part041', 'Part042', 'Part045', 'Part046', 'Part050', 'Part052', 'Part063',
          'Part064', 'Part048', 'Part025', 'Part027')
@@ -34,18 +37,19 @@ MESHES = ('Part073', 'Part074', 'Part076', 'Part077',
 
 
 def fastener(joint, layout, angle):
-    start, end, sense, center, arm, flush = joint
+    start, nut_x, sense, center, arm, length = joint
     y, z = (HINGE.y, HINGE.z) if center == 'hinge' else layout[center]
     phase = radians(layout['phase_deg'] + angle)
     y += layout[arm] * cos(phase)
     z += layout[arm] * sin(phase)
-    axis = X * sense
-    origin = V(start, y, z)
-    head = (Part.makeCone(1.95, 1., .95, origin, axis) if flush else
-            Part.makeCylinder(2., 1.4, origin, -axis))
-    bolt = Part.makeCylinder(1., 10., origin, axis)
-    nut = Part.makeCylinder(2.32, 2.70, V(end, y, z), axis)
-    return head.fuse([bolt, nut]).removeSplitter()
+    axis = (sense,0,0)
+    bolt = socket_screw(2,length,(start,y,z),axis)
+    tail = nut(2,(nut_x,y,z),(1,0,0) if length == 6. else axis)
+    if length == 6.:
+        washer = Part.makeCylinder(2.50,.3,V(start,y,z),-X)
+    else:
+        washer = Part.makeCylinder(2.50,.3,V(nut_x,y,z),-V(*axis))
+    return bolt.fuse([washer,tail]).removeSplitter()
 
 
 def check(cad, meshes):
@@ -85,28 +89,45 @@ def check(cad, meshes):
         rear = V(0, 1, 0)
         for x, z in rig['mount_xz_mm']:
             axis = f'rail mount {x:g},{z:g}'
-            bolt = Part.makeCylinder(1.5, 8., V(x, 19.7, z), rear)
-            head = Part.makeCylinder(2.8, 3., V(x, 27.7, z), rear)
-            brass_seat = Part.makeCylinder(2.09, 4., V(x, 19., z), rear)
+            bolt = socket_screw(3,20.,(x,27.7,z),(0,-1,0))
+            trapped = nut(3,(x,8.74,z),(0,1,0))
             tool = Part.makeCylinder(1.4, 20., V(x, 30.6, z), rear)
             for name, housing in (('frame', frame), ('rail', rail), ('ballast', ballast)):
-                for solid in (bolt, head, brass_seat):
+                for solid in (bolt,trapped):
                     record(f'{axis} / {name}', solid.common(housing).Volume)
             record(f'{axis} / tool to frame', tool.common(frame).Volume)
         for z in (183.,189.):
-            entry = V(.9,0,z)
-            head = Part.makeCone(3.,1.5,1.5,entry,-X)
-            bolt = Part.makeCylinder(1.5,18.,entry,-X)
-            nut = Part.makeCylinder(3.2,4.,V(-12.4,0,z),-X)
+            bolt = socket_screw(3,20.,(.9,0,z),(-1,0,0))
+            tail = nut(3,(-12.4,0,z),(-1,0,0))
             for name, housing in (('motor', fixed['Part045']), ('plate', fixed['Part046']), ('rail',rail)):
-                for solid in (bolt, head, nut):
+                for solid in (bolt,tail):
                     record(f'motor mount {z:g} / {name}', solid.common(housing).Volume)
 
+        y, z = rig['shaft_yz_mm']
+        inserted = Part.makeCylinder(2.,116.,V(-58.,y,z),X)
+        shaft_parts = ('Part050','Part052','Part053','Part054','Part055','BlinkCollarLeft','BlinkCollarRight')
+        for name in shaft_parts:
+            record(f'axial shaft insertion / {name}', inserted.common(world_shape(doc.getObject(name))).Volume)
+        radial = [socket_screw(2,4.,(x,y,z+5.55),(0,0,-1)).fuse(nut(2,(x,y,z+2.60),(0,0,1),(0,1,0)))
+                  for x,_,_,_ in BLINK_CLAMPS]
+        for part, hardware, (x,_,_,side) in zip(('Part053','Part054','Part055'),radial,BLINK_CLAMPS):
+            crank = world_shape(doc.getObject(part))
+            record(f'clamp screw / {part}',hardware.common(crank).Volume)
+            shaft = fixed['Part048']
+            record(f'clamp screw / shaft at {part}',hardware.common(shaft).Volume)
+            if any(hardware.common(shaft.copy().rotate(V(0,y,z),X,a)).Volume < .005 for a in (-5.,5.)):
+                raise RuntimeError(f'{part} screw failed to capture the shaft flat')
+            for travel in (0.,.5,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.):
+                sliding = nut(2,(x+side*travel,y,z+2.60),(0,0,1),(0,1,0))
+                record(f'installing nut / {part}',sliding.common(crank).Volume)
+
         for angle in (-1, *range(0, 91, 3), 91):
-            for index, joint in enumerate(LINKS):
-                hardware = fastener(joint, rig, angle)
-                name = f'link {index+1}'
+            links = [(f'link {i}',fastener(joint,rig,angle)) for i,joint in enumerate(LINKS,start=1)]
+            clamps = [(f'clamp {i}',shape.copy().rotate(V(0,y,z),X,angle)) for i,shape in enumerate(radial,start=1)]
+            for name, hardware in links+clamps:
                 for other, solid in fixed.items():
+                    if name.startswith('clamp') and other == 'Part048':
+                        continue
                     if hardware.BoundBox.intersect(solid.BoundBox):
                         record(f'{name} / {other}', hardware.common(solid).Volume)
                 for tilted_cradle in tilts:

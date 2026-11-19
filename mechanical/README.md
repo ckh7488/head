@@ -1,32 +1,36 @@
-# B6 기구 조립
+# B7 기구 조립
 
-FreeCAD에서 [B6 조립본](R5-B6-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B6-P1S.3mf) · [시험판](R5-B6-Fit-P1S.3mf)
+FreeCAD에서 [B7 조립본](R5-B7-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B7-P1S.3mf) · [시험판](R5-B7-Fit-P1S.3mf)
 
-출력 프로젝트는 P1S 0.4 mm 노즐, PETG HF, 0.20 mm 레이어, 벽 4줄을 사용합니다. 노즐 245 °C, 텍스처 PEI 베드 70 °C, 최대 유량 14 mm³/s를 설정했습니다. 눈꺼풀 레일은 내부 채움 100%입니다.
+출력 프로젝트는 P1S 0.4 mm 노즐, PETG HF, 0.20 mm 레이어, 벽 4줄을 사용합니다. 노즐 245 °C, 텍스처 PEI 베드 70 °C, 최대 유량 14 mm³/s를 설정했습니다. 눈꺼풀 레일은 내부 채움 100%입니다. 머리 프레임과 목의 지지 부품은 벽 6줄과 내부 채움 35%로 출력합니다. 13번 균형추 트레이는 선택입니다.
 
 | 부위 | 제작 전 확인 |
 |---|---|
 | 눈꺼풀 | 핀 4개, 링크 체결부 6개, 레일 나사 4개의 장착과 회전 여유를 확인. 핀은 축마다 ±0.25 mm 오차를 포함. 한쪽에만 최대 0.04 N·m 저항을 준 MuJoCo 시험에서 좌우 각도 차 최대 0.43°. 같은 하중의 탄성 해석에서 PETG 레일 변위 최대 0.14 mm, Ø4 강철축 비틀림 최대 0.09° |
-| 목 | CAD 무게 조건에서 균형추 0장, 최대 0.092 N·m. 0.75 kg 머리와 축 앞 30 mm 무게중심 조건에서 12장, 오차를 포함해 최대 0.183 N·m |
+| 목 | 끄덕임으로 움직이는 머리 약 629 g, 무게중심은 축 앞쪽 4.2 mm. 목의 좌우 회전부에 걸리는 이동 질량은 약 853 g. 균형추 없이 끄덕이는 모델에서 조립 오차를 포함해 최고 요구 토크 0.101 N·m |
 | 케이블 | 마찰 0으로 10 N·30초와 20 N·6초를 가한 24개 접촉 해석에서 커넥터 축방향 이동 최대 0.32 mm. PETG 탄성계수 1 GPa 조건에서 트레이 변형 약 0.05 mm |
 | 턱 | 힌지 높이 ±0.4 mm와 영점 ±0.7°를 넣은 180개 자세에서 치아 간격 최소 0.77 mm |
 | PCB | KiCad STEP의 나사 구멍 6개가 받침과 일치. C3 USB-C 삽입과 허브 덮개 0~30 mm에서 플러그 간섭 0건 |
 
-상부 27,052개 부품·자세 조합, 받침과 구동부·체결부 고체 쌍 4,867개에서 간섭이 없었습니다.
+출력 무게는 G-code에서 서포트와 브림을 제외해 구했습니다. 앞뒤 해골과 턱만 약 314 g입니다. 모터 사양 질량을 사용했고 머리의 나사·배선·접착제에 40 g을 잡았습니다. 목 받침에 아래로 14 N과 앞뒤로 5 N을 가한 탄성 해석에서 베어링 자리의 최대 변위는 약 0.29 mm였습니다. PETG 탄성계수는 1 GPa로 가정했습니다.
+
+상부 27,052개 부품·자세 조합, 받침과 구동부·체결부 고체 쌍 4,984개에서 간섭이 없었습니다.
 
 ## 조립
 
 - **눈꺼풀** · 가운데 링크가 Ø4 강철축을 돌리고 양끝 링크가 각각 눈꺼풀을 밀고 당깁니다. 아래 순서로 조립합니다.
-- **목** · 6816 외륜은 고정판 3개에, 내륜은 회전판에 받칩니다. 회전판 들뜸은 0.25~0.65 mm로 맞춥니다. 끄덕임 축은 Ø8 D-flat에서 힘을 받고 옆 나사가 축을 고정합니다. 균형추 트레이는 머리 프레임 뒤의 인서트 4개에 M3×8로 고정합니다. 외장과 모터를 조립한 뒤 전원을 끄고 수평에서 균형을 잡도록 연강판을 0~12장 추가합니다. 누름판을 맨 위 강철판에 대고 두 나사로 고정합니다. 목 전체 각도와 서비스 덮개 30 mm 개방에 걸쳐 케이블에 여유를 둡니다.
-- **턱** · 왼쪽 혼과 오른쪽 Ø4 핀을 같은 축으로 맞춥니다. 본딩 전에 손으로 움직여 뒤쪽과 치아가 닿지 않는 닫힘 위치를 찾습니다. XL330 케이스 나사 삽입은 3 mm 이내, XL430 혼은 3.5 mm 이내입니다.
-- **보드** · C3는 부품 면 위, USB-C 입구 앞쪽으로 두고 M2×5 두 개로 고정합니다. 허브는 밑 덮개에 M3×5로 고정합니다. 덮개를 내릴 수 있게 안쪽에 배선 여유를 둡니다. [전원·배선](../electronics/README.md)
+- **목** · 6816 외륜은 고정판 3개에, 내륜은 회전판에 받칩니다. 회전판 들뜸은 0.25~0.65 mm로 맞춥니다. 목 기둥 옆 홈에 M3 너트를 넣고 위에서 M3×16 세 개로 상하 받침을 체결합니다. Ø8 끄덕임 축은 옆 나사로 고정합니다. 외장과 모터를 조립한 뒤 전원을 끈 수평 상태에서 균형을 확인합니다. 앞이 많이 무거울 때 13번 출력판의 트레이와 연강판을 추가합니다. 목 전체 각도와 서비스 덮개 30 mm 개방에 걸쳐 케이블에 여유를 둡니다.
+- **턱** · 왼쪽 혼과 오른쪽 Ø4 핀을 같은 축으로 맞춥니다. 본딩 전에 손으로 움직여 뒤쪽과 치아가 닿지 않는 닫힘 위치를 찾습니다. 모터 본체와 혼에는 ROBOTIS에서 지정한 체결품을 사용합니다.
+- **보드** · C3는 부품 면 위, USB-C 입구 앞쪽으로 두고 M2×8 두 개와 일반 너트로 고정합니다. 허브 받침은 M3×10과 일반 너트 네 개로 체결합니다. 서비스 덮개 너트는 받침 조립 초기에 위쪽 홈에 넣습니다. [전원·배선](../electronics/README.md)
 
 ### 눈꺼풀 조립
 
-1. 시험판으로 안구 받침의 핀 여유와 좌우 눈꺼풀의 회전을 확인합니다. Ø2 핀 4개는 고정 받침에만 붙이고 눈꺼풀의 구멍은 자유롭게 돕니다. 안구의 홍채와 동공은 흰색 출력물에 도색합니다.
-2. MR104ZZ 두 개를 레일의 턱에 앉히고, 중앙 크랭크와 내륜 시임·칼라를 통과해 Ø4 축을 끼웁니다. 좌우 크랭크를 끼운 뒤 각 D-flat의 반대쪽에서 평끝 무두나사를 조입니다. D-flat 세 곳의 중심은 축 중앙 기준 −52.45, +8.95, +52.45 mm입니다. 좌우 흔들림을 줄이되 시임이 베어링 외륜에 닿지 않게 합니다.
-3. 레일에 M3 인서트 네 개를 넣고 머리 프레임 뒤에서 M3×8을 체결한 뒤 균형추 트레이를 설치합니다. 모터 장착판은 M3×18 접시머리 두 개와 잠금너트로 레일 보강대에 고정합니다. 가운데 링크의 가로축 쪽에는 낮은 머리 나사를 링크에서 크랭크 쪽으로 넣습니다. 나머지 다섯 곳은 접시머리를 홈에 묻습니다. 평와셔와 잠금너트로 이탈을 막고 조립한 뒤 각 관절에 0.10–0.20 mm 축방향 유격이 남게 맞춥니다.
-4. 가운데 링크의 모터 쪽 끝을 풀어 놓고 손으로 열림에서 닫힘까지 돌립니다. 프레임에 끼운 상태에서 한쪽 눈꺼풀에 가볍게 저항을 주고도 양쪽이 걸림 없이 함께 움직이는지 봅니다. 이후 실물의 양 끝 위치로 ID 3을 보정합니다. [제어와 보정](../control/README.md)
+1. Ø2 핀으로 양쪽 눈꺼풀을 받칩니다. 핀은 고정 받침에 붙이고 눈꺼풀은 핀 위에서 회전하게 합니다.
+2. 출력 서포트를 떼고 크랭크 세 개에 M2 육각너트를 옆에서 밀어 넣습니다. 베어링 두 개, 출력한 간격통 두 개 및 중앙 크랭크를 맞춘 상태로 Ø4 원형 축을 옆에서 통과시킵니다. 양끝 크랭크를 끼우고, 축 가운데를 기준으로 −53.90, +10.20, +54.15 mm에 같은 방향으로 만든 깊이 0.45 mm 평면을 M2×4로 눌러 고정합니다.
+3. 레일 앞쪽 홈의 M3 육각너트에 머리 프레임 뒤에서 M3×20 네 개를 체결합니다. 같은 길이 나사 두 개로 모터 장착판을 레일에 붙입니다. 링크 관절은 M2×8 다섯 개를 사용하고, 모터 혼 뒤 홈에는 M2 너트를 먼저 넣은 뒤 링크 쪽에서 M2×6을 끼웁니다. 평와셔를 쓰고 0.10–0.20 mm 축방향 여유를 남깁니다. 풀림은 금속 나사산에 바르는 낮은 강도의 나사고정제로 막습니다.
+4. 가운데 링크의 모터 쪽 끝을 풀어 놓고 손으로 열림에서 닫힘까지 돌립니다. 조립된 상태에서 걸림을 확인한 뒤 ID 3의 실제 끝 위치를 보정합니다. [제어와 보정](../control/README.md)
+
+육각렌치는 일반 1.5·2.0·2.5 mm를 사용합니다. 너트 한 변 사이 거리는 M2 4 mm, M3 5.5 mm입니다.
 
 ### 케이블 고정
 
@@ -38,7 +42,7 @@ FreeCAD에서 [B6 조립본](R5-B6-Assembly.FCStd)을 엽니다. `revise.py`가 
 | 목 전원 XT60U | 15.0 × 7.7 | 15.75 × 8.45 | 11.1 × 5.0 |
 | 카메라·OpenRB USB-A | 12.4 × 7.0 | 18.5 × 10.3 | 6.4 × 5.2 |
 
-케이블 트레이는 M3×18 두 개와 평와셔·잠금너트로 받침에 고정합니다. 덮개는 M3 인서트를 넣고 M3×12 다섯 개로 조입니다. 실제 커넥터에 시임을 대어 좌우·상하 유격을 편측 약 0.12 mm로 맞추고 뒤턱을 받침에 밀착시킵니다. 전원을 끄고 케이블을 직선과 45°에서 10 N으로 30초씩 당겨 0.5 mm 이하 이동과 피복 상태를 확인합니다. [허브 극성](../electronics/README.md#전원과-배선)
+케이블 트레이는 M3×16 두 개와 평와셔·일반 너트로 받침에 고정합니다. 덮개는 트레이 아래 홈에 일반 너트 다섯 개를 미리 넣고 M3×16으로 조입니다. 실제 커넥터에 시임을 대어 좌우·상하 유격을 편측 약 0.12 mm로 맞추고 뒤턱을 받침에 밀착시킵니다. 전원을 끄고 케이블을 직선과 45°에서 10 N으로 30초씩 당겨 0.5 mm 이하 이동과 피복 상태를 확인합니다. [허브 극성](../electronics/README.md#전원과-배선)
 
 ## 재현
 
@@ -49,19 +53,22 @@ FreeCAD에서 [B6 조립본](R5-B6-Assembly.FCStd)을 엽니다. `revise.py`가 
 build/freecad-venv/bin/pip install trimesh==4.10.1 manifold3d==3.3.2 'scipy<2'
 fc() { QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python "$@"; }
 fc mechanical/revise.py
-fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B6-Assembly.FCStd
+fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B7-Assembly.FCStd
 kicad-cli pcb export step --board-only --user-origin 65x42mm -o build/mechanical/c3.step electronics/c3-rf/C3_Antenna.kicad_pcb
 kicad-cli pcb export step --board-only --user-origin 100x80mm -o build/mechanical/hub.step electronics/servo-hub/R5_Servo_Hub.kicad_pcb
-fc mechanical/physics/board_clearance.py build/mechanical/R5-B6-Assembly.FCStd build/mechanical/c3.step build/mechanical/hub.step
-fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B6-Assembly.FCStd --world build/physics/cad
+fc mechanical/physics/board_clearance.py build/mechanical/R5-B7-Assembly.FCStd build/mechanical/c3.step build/mechanical/hub.step
+fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B7-Assembly.FCStd --world build/physics/cad
 
 python3.12 -m venv build/physics-venv
 . build/physics-venv/bin/activate
 python -m pip install -r mechanical/physics/requirements.txt
-QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B6-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B7-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
 python mechanical/physics/check_head.py build/physics/cad build/physics/clearance.json
 python mechanical/physics/tolerances.py build/physics/cad build/physics/tolerance.json
-python mechanical/physics/multibody.py build/physics/cad build/physics/motion
+mkdir -p build/p1s
+bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B7-P1S.3mf
+python mechanical/physics/slicer_mass.py build/p1s/sliced-grams.json build/p1s/plate_{4,5,6,7,8,9,10,12,13}.gcode
+python mechanical/physics/multibody.py build/physics/cad build/physics/motion --sliced-grams build/p1s/sliced-grams.json
 python mechanical/physics/blink_fea.py build/physics/cad build/physics/blink-fea.json
 python mechanical/physics/jaw_clearance.py build/physics/cad build/physics/jaw
 python mechanical/physics/retainer.py build/physics/cad build/physics/retention.json

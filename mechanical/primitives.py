@@ -19,6 +19,8 @@ def print_mesh(shape, path, direction=None):
     model = shape.copy()
     if direction == 'x+':
         model.rotate(V(0, 0, 0), V(0, 1, 0), -90)
+    elif direction == 'x-':
+        model.rotate(V(0, 0, 0), V(0, 1, 0), 90)
     elif direction == 'y+':
         model.rotate(V(0, 0, 0), V(1, 0, 0), 90)
     elif direction == 'z-':

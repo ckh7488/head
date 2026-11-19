@@ -1,4 +1,4 @@
-"""Build R5 B6 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B7 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -17,6 +17,7 @@ import trimesh as tr
 from primitives import box, cylinder, holes, print_mesh
 from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
 from radio import c3_mount
+from stock import ballast_stock, blink_stock, cable_stock, hatch_stock, neck_stock, radio_board_stock
 
 V = App.Vector
 HERE = Path(__file__).resolve().parent
@@ -270,10 +271,8 @@ def eyelid(side):
     ring1=cylinder(3.55,4.25,(-19.15,0,0),(1,0,0))
     ring2=cylinder(3.55,4.25,(14.9,0,0),(1,0,0))
     horn=blink_link(18.2,(0,0),LID_ARM)
-    body=shell.fuse([ring1,ring2,horn]).cut([
-        cylinder(1.12,42.,(-21,0,0),(1,0,0)),
-        countersink(19.5,LID_ARM,-1),
-    ]).removeSplitter()
+    body=shell.fuse([ring1,ring2,horn]).cut(
+        cylinder(1.12,42.,(-21,0,0),(1,0,0))).removeSplitter()
     if side<0:
         body=body.mirror(V(),V(1,0,0))
     return body.translate(V(x,-39,119))
@@ -391,6 +390,7 @@ def cut_running_clearance(doc):
                 axis=(-side,0,0)
                 blade.append(mesh(cylinder(3.05,3.2,(side*48.2,*start),axis)))
                 blade.append(mesh(cylinder(1.75,5.,(side*48.2,*start),axis)))
+                blade.append(mesh(cylinder(2.68,2.85,(side*53.20,*start),(side,0,0))))
             cutter=tr.boolean.union(blade,engine='manifold')
             x=34.*side
             targets['Part076' if side<0 else 'Part077']=[
@@ -629,10 +629,18 @@ def main(output=BUILD):
         add_fixture(doc, doc.Head_frame, name, label, shape, 'head', printed)
         if printed:
             print_mesh(shape, output/'STL'/f'{label.replace(" ", "_")}.stl', 'y+' if name == 'BallastTray' else None)
-    doc.R5.Label = 'R5 B6 · prototype'
-    doc.R5.Status = 'Blink hinge and pivot hardware clearances checked. Hardware measurements pending.'
+    rig = json.loads(doc.R5.MotionGeometry)
+    blink_stock(doc, output/'STL', rig['blink'])
+    cable_stock(doc, output/'STL', rig['cables'])
+    hatch_stock(doc, output/'STL')
+    ballast_stock(doc, output/'STL')
+    radio_board_stock(doc, output/'STL')
+    neck_stock(doc, output/'STL')
+    print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
+    doc.R5.Label = 'R5 B7 · prototype'
+    doc.R5.Status = 'Standard socket screws and plain hex nuts. Hardware measurements pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B6-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B7-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

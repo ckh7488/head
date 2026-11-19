@@ -16,6 +16,13 @@ from blink import run_blink
 DT = .001
 NECK_PIVOT = np.array([0., 0., .112])
 YAW_PIVOT = np.array([0., 0., -.0379])
+OPTIONAL_BALLAST = {'BallastTray', 'BallastCover', 'BallastLeftStud', 'BallastRightStud'}
+PRINT_NAMES = {
+    'Part042': 'xl330_m077_eye_pitch_front_plate',
+    'Jaw_30_moving_jaw': '30_moving_jaw',
+    'Jaw_38_left_jaw_drive_arm': '38_left_jaw_drive_arm',
+    'Jaw_39_right_jaw_pivot_arm': '39_right_jaw_pivot_arm',
+}
 
 
 def fmt(items):
@@ -44,7 +51,7 @@ def combine(items):
     return Mass(total, center, inertia)
 
 
-def cad_part_mass(row, directory, fraction):
+def cad_part_mass(row, directory, sliced_g):
     if row.get('solids'):
         solids = row['solids']
         volume = sum(s['volume'] for s in solids)
@@ -62,9 +69,8 @@ def cad_part_mass(row, directory, fraction):
         inertia = [mesh.moment_inertia*1e-6/volume]
         weights = np.ones(1)
     if row['printed']:
-        shell = row['name'] in {'Part073','Part074','Jaw_30_moving_jaw','Part076','Part077','Part078','Part079'}
-        effective_fraction = .92 if shell else fraction
-        m = volume * 1.27e-6 * effective_fraction
+        print_name = PRINT_NAMES.get(row['name'], row['label'].lower().replace(' ', '_'))
+        m = sliced_g[print_name] / 1000.
     else:
         name = row['label']
         nominal_g = 57.2 if name.startswith('XL430') else 18. if name.startswith('XL330') else row['reference_g']
@@ -200,7 +206,7 @@ def worst_gravity(assembly, ballast, angles):
     return float(np.max(np.abs(torque)))
 
 
-def balance_trials(layout, masses, hinge, output):
+def balance_trials(layout, masses, ballast_kit, hinge, output):
     pitch_range = np.radians(np.linspace(-15, 6, 211))
     budget, friction = np.array([.28,.20,.050]), np.array([.045,.042,.012])
     nominal = combine(masses[1:])
@@ -215,10 +221,11 @@ def balance_trials(layout, masses, hinge, output):
                      for dm,dy,dz in product((-.025,.025),(-.003,.003),(-.006,.006)))
         assemblies = [shifted_mass(nominal, NECK_PIVOT, m, c) for m,c in loads]
         settings = range(layout['maximum_plates']+1)
-        options = [max(worst_gravity(body, ballast_mass(layout, n), pitch_range)
-                       for body in assemblies) for n in settings]
-        selected = int(np.argmin(options))
-        weight = ballast_mass(layout, selected)
+        weights = [combine([ballast_kit,ballast_mass(layout,n)]) if n else ballast_mass(layout,0)
+                   for n in settings]
+        options = [max(worst_gravity(body, weight, pitch_range) for body in assemblies) for weight in weights]
+        selected = 0 if options[0] <= .105 else int(np.argmin(options))
+        weight = weights[selected]
         results = []
         for i, assembly in enumerate(assemblies):
             head_mass = assembly.mass-masses[2].mass
@@ -234,20 +241,25 @@ def balance_trials(layout, masses, hinge, output):
         error = max(row['max_error_deg'][1] for row in results)
         print(f'Ballast {name}: {selected} plates, {len(results)} load cases, {peak:.3f} N·m peak, '
               f'{error:.2f}° maximum pitch error', flush=True)
-        reports[name] = {'plate_count': selected, 'plate_mass_kg': weight.mass,
+        reports[name] = {'plate_count': selected, 'ballast_with_mount_kg': weight.mass,
                          'worst_gravity_Nm': options[selected], 'worst_unbalanced_gravity_Nm': options[0],
                          'max_pitch_demand_Nm': peak, 'max_pitch_error_deg': error, 'trials': results}
     return reports
 
 
-def run_gimbal(cad_data, input_dir, output):
-    bins = {'yaw':[], 'head':[], 'jaw':[]}
+def run_gimbal(cad_data, input_dir, output, sliced_g):
+    bins = {'yaw':[], 'head':[], 'jaw':[], 'optional':[]}
     records = cad_data['parts']
     for row in records:
         if row['name'] == 'BallastStack':
             continue
-        group = {'pan':'yaw','jaw':'jaw'}.get(row['motion'],'head')
-        bins[group].append(cad_part_mass(row,input_dir,.72))
+        group = 'optional' if row['name'] in OPTIONAL_BALLAST else {'pan':'yaw','jaw':'jaw'}.get(row['motion'],'head')
+        bins[group].append(cad_part_mass(row,input_dir,sliced_g))
+    # Fasteners and harness are distributed over the frame and descend through the pitch yoke.
+    head_allowance = .040
+    yaw_allowance = .012
+    bins['head'].append(Mass(head_allowance,pos((0.,8.,129.)),head_allowance*np.diag((.001,.001,.0015))))
+    bins['yaw'].append(Mass(yaw_allowance,pos((0.,5.,70.)),yaw_allowance*np.diag((.001,.001,.0015))))
     masses=[combine(bins[k]) for k in ('yaw','head','jaw')]
     pivot=pos(cad_data['jaw_pivot_mm'])
     center=NECK_PIVOT+np.array([0,-.030,.026])
@@ -274,19 +286,26 @@ def run_gimbal(cad_data, input_dir, output):
                    'inertia_kg_m2':part.inertia.tolist()}
              for name,part in zip(('yaw_carrier','head','jaw'),masses)}
     layout = cad_data['motion_geometry'].get('ballast')
-    balanced = balance_trials(layout, masses, pivot, output) if layout else {}
+    balanced = balance_trials(layout, masses, combine(bins['optional']), pivot, output)
+    pitching = combine(masses[1:])
+    turning = combine(masses)
+    total = {'pitch_mass_kg': pitching.mass, 'yaw_mass_kg': turning.mass,
+             'pitch_com_from_axis_mm': ((pitching.center-NECK_PIVOT)*1000).tolist(),
+             'yaw_com_from_axis_mm': ((turning.center-YAW_PIVOT)*1000).tolist(),
+             'pitch_hardware_allowance_g':head_allowance*1000, 'yaw_hardware_allowance_g':yaw_allowance*1000}
     return {'mass_properties':summary,'joint_order':['neck yaw','neck pitch','jaw'],
-            'trials':runs,'balanced':balanced}
+            'trials':runs,'balanced':balanced,'assembled':total}
 
 
 if __name__=='__main__':
     parser=ArgumentParser(description=__doc__)
     parser.add_argument('cad',type=Path)
     parser.add_argument('output',type=Path)
+    parser.add_argument('--sliced-grams',type=Path,required=True)
     args=parser.parse_args()
     args.output.mkdir(parents=True,exist_ok=True)
     cad=json.loads((args.cad/'cad_parts.json').read_text())
-    gimbal=run_gimbal(cad,args.cad,args.output)
+    gimbal=run_gimbal(cad,args.cad,args.output,json.loads(args.sliced_grams.read_text()))
     blink=run_blink(cad['motion_geometry']['blink'],args.output/'blink')
     (args.output/'motion_results.json').write_text(json.dumps({'source_sha256':cad['source_sha256'],
         'mujoco_version':mj.__version__,'gimbal':gimbal,'blink':blink},indent=2))

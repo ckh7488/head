@@ -12,6 +12,7 @@ from base_clearance import check_pass
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from primitives import box, cylinder
 from radio import C3_BOTTOM, C3_HOLES, C3_ORIGIN, board_xy, usb_plug
+from stock import nut, socket_screw
 
 V = App.Vector
 
@@ -52,6 +53,12 @@ def clearance_pairs(doc, c3, hub):
         for depth in (0., 4., 8.):
             moved = usb_plug().translate(V(0, -depth, 0))
             yield moved, obstacle, f'C3 USB-C insertion, {depth} mm from seated'
+    for x,y in (board_xy(*corner) for corner in C3_HOLES):
+        screw = socket_screw(2,8.,(x,y,C3_BOTTOM+1.6),(0,0,-1))
+        tail = nut(2,(x,y,-76.86))
+        for hardware in (screw,tail):
+            for obstacle in (*fixed,tray,c3,usb_plug()):
+                yield hardware, obstacle, 'C3 M2 screw and plain hex nut'
     for obstacle in (*fixed, doc.HubHolder.Shape):
         yield hub, obstacle, 'Hub PCB at its four mounting points'
     for x in (-68., -42.):
@@ -65,8 +72,8 @@ def check(cad, c3_step, hub_step):
     doc = App.openDocument(str(cad.resolve()))
     try:
         expected = [board_xy(x, y) for x, y in C3_HOLES]
-        if not same_centers(centers(c3, 1.10), expected) or not same_centers(centers(doc.Part071.Shape, .83), expected):
-            raise ValueError('C3 KiCad drill does not match the two carrier pilots')
+        if not same_centers(centers(c3, 1.10), expected) or not same_centers(centers(doc.Part071.Shape, 1.13), expected):
+            raise ValueError('C3 KiCad drill does not match the two new through holes')
         expected = [(x, y) for x in (-30.8, 30.8) for y in (46.2, 72.8)]
         if not same_centers(centers(hub, 1.60), expected):
             raise ValueError('Hub KiCad drill does not match the four hatch positions')

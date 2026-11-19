@@ -5,12 +5,15 @@ from itertools import product
 from math import cos, pi, radians, sin
 from pathlib import Path
 import json
+import sys
 
 import FreeCAD as App
 import Part
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from stock import HATCH_MOUNTS, HUB_MOUNTS, YOKE_MOUNTS, nut, socket_screw
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B6-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B7-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -37,20 +40,32 @@ def check_pairs(doc):
     along = V(0, -1, 0)
     fasteners = []
     for x in (-28.5, 28.5):
-        screw = Part.makeCylinder(1.5, 18, V(x, 93.6, -71), along)
+        screw = socket_screw(3,16.,(x,93.6,-71.),(0,-1,0))
         washer = Part.makeCylinder(3.55, .8, V(x, 83.75, -71), along)
         washer = washer.cut(Part.makeCylinder(1.64, 1., V(x, 83.85, -71), along))
-        nut = Part.makeCylinder(3.25, 4., V(x, 82.95, -71), along)
-        nut = nut.cut(Part.makeCylinder(1.62, 4.2, V(x, 83.05, -71), along))
-        fasteners.extend((screw, washer, nut))
+        tail = nut(3,(x,82.95,-71.),(0,-1,0))
+        fasteners.extend((screw, washer, tail))
     for fastener in fasteners:
         for static in (base, saddle, doc.Part001.Shape, doc.Part069.Shape, doc.Part070.Shape):
             yield fastener, static, "Saddle fastener envelope"
     cables = json.loads(doc.R5.MotionGeometry)['cables']
     for x in cables['cap_bolts_x_mm']:
-        stem = Part.makeCylinder(1.5, 13., V(x,121.6,-49.1), V(0,0,-1))
-        for static in (base, saddle, gate):
-            yield stem, static, "Cable cover screw clearance"
+        screw = socket_screw(3,16.,(x,121.6,-49.1),(0,0,-1))
+        tail = nut(3,(x,121.6,-64.43),flat_normal=(0,1,0))
+        for static, tool in product((base,saddle,gate),(screw,tail)):
+            yield tool, static, f"Cable cover {x:g} screw and nut"
+    for x,y in HATCH_MOUNTS:
+        start = V(x,y,-82.97)
+        axis = V(0,0,1)
+        screw = Part.makeCone(3.,1.5,1.5,start,axis).fuse(Part.makeCylinder(1.5,8.5,start+1.5*axis,axis))
+        tail = nut(3,(x,y,-76.61))
+        for tool, static in product((screw, tail),(base,doc.HubHolder.Shape,saddle,gate)):
+            yield tool, static, "M3 service hatch fasteners"
+    for x,y in HUB_MOUNTS:
+        screw = socket_screw(3,10.,(x,y,-72.5),(0,0,-1))
+        tail = nut(3,(x,y,-80.72))
+        for tool, static in product((screw,tail),(doc.HubHolder.Shape,doc.HubPCB.Shape)):
+            yield tool, static, "M3 hub PCB fasteners"
     stop, center_z = cables['stop_y_mm'], cables['center_z_mm']
     for lane in cables['lanes']:
         name, x = lane['name'], lane['x_mm']
@@ -77,6 +92,16 @@ def check_pairs(doc):
 
 
 def actuator_pairs(doc):
+    for x,y in YOKE_MOUNTS:
+        bolt=socket_screw(3,16.,(x,y,75.),(0,0,-1))
+        tail=nut(3,(x,y,59.64),flat_normal=(0,1,0))
+        tool=Part.makeCylinder(1.45,25.,V(x,y,77.8))
+        for hardware, part in product((bolt,tail,tool),(doc.Part010,doc.Part011,doc.Part018)):
+            yield hardware, part.Shape, f"Neck mast fastener {x:g},{y:g} / {part.Name}"
+        for offset in range(1,10):
+            translated=tail.copy().translate(V(offset if x>0 else -offset,0,0))
+            yield translated, doc.Part010.Shape, "Plain nut insertion into neck mast"
+
     yaw_motor = doc.Part038.Shape
     yoke = doc.Part011.Shape
     x_axis = V(1, 0, 0)
@@ -106,9 +131,9 @@ def ballast_pairs(doc):
     behind = V(0, 1, 0)
     front_fixtures = [doc.getObject(name).Shape for name in ('Part041', 'Part045', 'Part063', 'Part064')]
     for x, z in specs['mount_xz_mm']:
-        stem = Part.makeCylinder(1.5, 8., V(x, 35.3, z), -behind)
+        stem = socket_screw(3,12.,(x,35.3,z),(0,-1,0))
         tool = Part.makeCylinder(3.9, 28., V(x, 35.3, z), behind)
-        seat = Part.makeCylinder(2.09, 4., V(x, 27., z), behind)
+        seat = nut(3,(x,23.6,z),(0,1,0))
         for hardware in (stem, tool, seat):
             for static in (frame, tray, *front_fixtures):
                 yield hardware, static, f'Ballast mount hardware at {x}, {z} mm'
