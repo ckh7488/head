@@ -83,6 +83,7 @@ def extract(path, output, include_world):
                   'jaw_pivot_mm': list(hinge), 'motion_geometry': motion_geometry,
                   'world_motion': motion_by_part, 'parts': records}
         (output/'cad_parts.json').write_text(json.dumps(masses, ensure_ascii=False, indent=2))
+        doc.Part063.Shape.exportStep(str(output/'blink_rail.step'))
         doc.CableSaddle.Shape.exportStep(str(output/'cable_saddle.step'))
         if doc.getObject('CableGate'):
             doc.CableGate.Shape.exportStep(str(output/'cable_gate.step'))
@@ -96,7 +97,7 @@ def extract(path, output, include_world):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B5-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B6-Assembly.FCStd')
     parser.add_argument('--world', action='store_true', help='Export world meshes for the clearance sweep')
     parser.add_argument('output', type=Path)
     args = parser.parse_args()

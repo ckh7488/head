@@ -4,8 +4,11 @@ import xml.etree.ElementTree as ET
 
 import mujoco as mj
 import numpy as np
+from scipy.integrate import cumulative_trapezoid
 
 MM=.001
+SHAFT_DIAMETER_M=.004
+STEEL_SHEAR_PA=77e9
 
 
 def vector(values):
@@ -54,12 +57,13 @@ def build(layout, cap, extra_drag, dt):
     shaft=body(world,'shaft',(0,*shaft_yz),.016,(.0000006,.000023,.000023),.002*extra_drag,.0003)
     site(shaft,'shaft_center',center,drive_arm)
     rod(motor,'drive_rod',center,servo_yz,shaft_yz,.00085,drive_arm)
-    ET.SubElement(equal,'connect',site1='drive_rod_tip',site2='shaft_center',solref='.0014 1')
+    pin_response={'solref':'.0008 1','solimp':'.96 .998 .0003'}
+    ET.SubElement(equal,'connect',site1='drive_rod_tip',site2='shaft_center',**pin_response)
     for name,x in [('left',-side),('right',side)]:
         lid=body(world,name+'_lid',(x,*eye_yz),.0033,(.00000043,.0000006,.00000062),.003*extra_drag,.00035,(0,-.005,.007))
         site(lid,name+'_eye_pin',0,lid_arm)
         rod(shaft,name+'_rod',x,shaft_yz,eye_yz,.001,lid_arm)
-        ET.SubElement(equal,'connect',site1=name+'_rod_tip',site2=name+'_eye_pin',solref='.0014 1')
+        ET.SubElement(equal,'connect',site1=name+'_rod_tip',site2=name+'_eye_pin',**pin_response)
     motor_actuator=ET.SubElement(root,'actuator')
     ET.SubElement(motor_actuator,'motor',name='blink',joint='motor',ctrlrange=vector((-cap,cap)),ctrllimited='true')
     ET.indent(root)
@@ -80,10 +84,12 @@ def requested(t,stroke):
     return 0.,0.
 
 
-def run(xml, cap, stroke, cycles=20):
+def run(xml, cap, stroke, cycles=20, lid_loads=(0., 0.)):
     model=mj.MjModel.from_xml_string(xml)
     data=mj.MjData(model)
     indexes=[model.joint(n).qposadr[0] for n in ('motor','shaft','left_lid','right_lid')]
+    lid_dofs=[model.joint(name).dofadr[0] for name in ('left_lid','right_lid')]
+    loads=np.asarray(lid_loads)
     sites=[(model.site(a).id,model.site(b).id) for a,b in (('drive_rod_tip','shaft_center'),
                 ('left_rod_tip','left_eye_pin'),('right_rod_tip','right_eye_pin'))]
     dt=model.opt.timestep
@@ -94,6 +100,7 @@ def run(xml, cap, stroke, cycles=20):
     max_close_force=0.
     max_error=0.
     max_torque=0.
+    max_lid_difference=0.
     contact_count=0
     for i in range(round(cycles*length/dt)):
         t=i*dt
@@ -101,6 +108,7 @@ def run(xml, cap, stroke, cycles=20):
         now=data.qpos[indexes]
         requested_torque=.85*(target-now[0])+.018*(speed-data.qvel[indexes[0]])
         data.ctrl[0]=np.clip(requested_torque,-cap,cap)
+        data.qfrc_applied[lid_dofs]=-np.tanh(data.qvel[lid_dofs]/.4)*loads
         mj.mj_step(model,data)
         phase=t%length
         current=min(int(t//length),cycles-1)
@@ -109,6 +117,7 @@ def run(xml, cap, stroke, cycles=20):
         if length-.045 < phase < length:
             opened[current].append(float(np.max(np.abs(np.degrees(now[2:])))))
         max_error=max(max_error,float(np.max(abs(target-now[2:]))))
+        max_lid_difference=max(max_lid_difference,float(abs(now[2]-now[3])))
         max_joint_error=max(max_joint_error,max(float(np.linalg.norm(data.site_xpos[a]-data.site_xpos[b])) for a,b in sites))
         max_torque=max(max_torque,float(abs(data.ctrl[0])))
         contact_count+=data.ncon
@@ -119,20 +128,81 @@ def run(xml, cap, stroke, cycles=20):
     return {'cycles':cycles,'stroke_seconds':stroke,'torque_cap_Nm':cap,'min_closed_deg':min(max(a) for a in closed),
             'max_return_error_deg':max(min(a) for a in opened),'max_tracking_error_deg':degrees(max_error),
             'max_loop_gap_mm':max_joint_error*1000,'max_drive_torque_Nm':max_torque,
+            'max_lid_difference_deg':degrees(max_lid_difference),
             'contact_count':contact_count,'max_contact_force_N':max_close_force}
+
+
+def linkage_forces(layout, torque_Nm, angle, crank_end):
+    """Forces on the shaft in its YZ plane, including both bearing reactions."""
+    drive = layout['crank_x_mm'][1]
+    left, right = layout['bearing_x_mm']
+    phase = radians(angle+layout['phase_deg'])
+    shaft = np.array(layout['shaft_yz_mm'])
+    lever = np.array([layout['radius_mm'],layout['lid_radius_mm']])
+    directions = np.array([layout['servo_yz_mm'],[-39.,119.]])-shaft
+    directions /= np.linalg.norm(directions,axis=1)[:,None]
+    throw = lever*(cos(phase)*directions[:,1]-sin(phase)*directions[:,0])
+    forces = directions*(np.array([torque_Nm,-torque_Nm])/(MM*throw))[:,None]
+    right_reaction = -(np.array([drive-left,crank_end-left])@forces)/(right-left)
+    left_reaction = -forces.sum(axis=0)-right_reaction
+    return np.vstack((forces,left_reaction,right_reaction))
+
+
+def shaft_load(layout, torque_Nm):
+    crank_left, drive, crank_right = layout['crank_x_mm']
+    support_left, support_right = layout['bearing_x_mm']
+    samples = np.linspace(-56.,56.,449)
+    diameter = SHAFT_DIAMETER_M / MM
+    area_inertia = pi*diameter**4/64.
+    flat_inertia = pi*(diameter-.9)**4/64.
+    flats = np.min(abs(samples[:,None]-layout['crank_x_mm']),axis=1) <= 1.8
+    inertia = np.where(flats, flat_inertia, area_inertia)
+    young_MPa = 195000.
+    torque = torque_Nm/MM
+    bend = 0.
+    drive_load = 0.
+    peak_reaction = 0.
+    for end in (crank_left,crank_right):
+        stations = np.array([drive,end,support_left,support_right])
+        slope = np.maximum(samples[:,None]-stations,0.)
+        for angle in range(91):
+            forces = linkage_forces(layout,torque_Nm,angle,end)
+            moment = slope@forces
+            curvature = moment/(young_MPa*inertia[:,None])
+            displacement = cumulative_trapezoid(cumulative_trapezoid(curvature, samples, axis=0, initial=0.),
+                                               samples, axis=0, initial=0.)
+            fraction = (samples-support_left)/(support_right-support_left)
+            a,b = (np.array([np.interp(x,samples,c) for c in displacement.T]) for x in (support_left,support_right))
+            displacement -= a+fraction[:,None]*(b-a)
+            bend = max(bend,float(np.linalg.norm(displacement,axis=1).max()))
+            drive_load = max(drive_load,float(np.linalg.norm(forces[0])))
+            peak_reaction = max(peak_reaction,float(np.linalg.norm(forces[2:],axis=1).max()))
+    span = max(drive-crank_left,crank_right-drive)
+    shear_MPa = STEEL_SHEAR_PA*MM**2
+    twist = torque*((span-7.2)/area_inertia+7.2/flat_inertia)/(2*shear_MPa)
+    return {'peak_shaft_bend_mm':bend,'worst_shaft_twist_deg':degrees(twist),
+            'peak_drive_link_force_N':drive_load,'peak_bearing_force_N':peak_reaction}
 
 
 def run_blink(layout, out):
     out.mkdir(parents=True, exist_ok=True)
     report={}
-    for name, cap, drag, step in [('nominal',.12,1.,.00025),('higher_drag',.085,2.0,.00025),('half_step',.12,1.,.000125)]:
+    for name, cap, drag, step, loads in [
+        ('nominal',.12,1.,.000125,(0.,0.)), ('higher_drag',.085,2.,.000125,(0.,0.)),
+        ('left_drag',.085,1.,.000125,(.040,0.)), ('right_drag',.085,1.,.000125,(0.,.040)),
+        ('left_drag_half_step',.085,1.,.0000625,(.040,0.)),
+    ]:
         xml=build(layout,cap,drag,step)
-        stats=run(xml,cap,.68)
+        stats=run(xml,cap,.68,lid_loads=loads)
+        stats['additional_lid_load_Nm']=loads
         report[name]=stats
         (out/f'{name}.xml').write_text(xml)
         print(name,stats,flush=True)
-    if any(r['min_closed_deg']<87.5 or r['max_return_error_deg']>2.5 or r['max_loop_gap_mm']>.2 or r['contact_count'] for r in report.values()):
+    if any(r['min_closed_deg']<87.5 or r['max_return_error_deg']>2.5 or
+           r['max_loop_gap_mm']>.2 or r['max_lid_difference_deg']>2. or r['contact_count'] for r in report.values()):
         raise RuntimeError('Blink did not meet travel, contact or pin-closure criteria')
+    if any(report[name]['max_drive_torque_Nm'] <= .04 for name in ('left_drag','right_drag')):
+        raise RuntimeError('The commanded asymmetric load did not reach the motor')
 
     dy, dz = np.asarray(layout['shaft_yz_mm']) - np.array([-39., 119.])
     rod_direction = atan2(dz, dy)
@@ -147,8 +217,11 @@ def run_blink(layout, out):
     weak_axis_mm4 = 5.7 * 2.6**3 / 12
     buckling_load = pi**2 * 1450 * weak_axis_mm4 / hypot(dy, dz)**2
     load_screen = {'minimum_lever_mm': lever_mm, 'single_link_stalled_load_N': stalled_load,
-                   'pinned_link_buckling_N': buckling_load, 'assumed_modulus_MPa': 1450}
-    if stalled_load >= buckling_load:
-        raise RuntimeError('Estimated lid link buckling under the modelled stall load')
+                   'pinned_link_buckling_N': buckling_load, 'assumed_modulus_MPa': 1450,
+                   'asymmetric_motion':shaft_load(layout,.04), 'at_0p12_Nm':shaft_load(layout,.12)}
+    drive_length=np.linalg.norm(np.array(layout['servo_yz_mm'])-np.array(layout['shaft_yz_mm']))
+    drive_buckling=pi**2*1450*weak_axis_mm4/drive_length**2
+    if stalled_load >= buckling_load or load_screen['at_0p12_Nm']['peak_drive_link_force_N'] >= drive_buckling:
+        raise RuntimeError('Estimated link buckling under the modelled stall load')
     print('Lid link load estimate', load_screen, flush=True)
     return {'trials': report, 'load_screen': load_screen}

@@ -345,7 +345,7 @@ function animate(now) {
 
 async function start() {
   try {
-    scene = new AssemblyViewer(at("view-canvas"), at("part-anchor"));
+    scene = new AssemblyViewer(at("view-canvas"), at("part-anchor"), setCaption);
     requestAnimationFrame(animate);
     await scene.load();
     found = true;
@@ -354,7 +354,7 @@ async function start() {
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
   } catch (error) {
-    console.error("R5 B3 viewer could not load:", error);
+    console.error("R5 B6 viewer could not load:", error);
     loader.classList.add("failed");
     loader.querySelector(".loader").hidden = true;
     status.textContent = "3D 모델을 표시할 수 없습니다. WebGL을 지원하는 브라우저에서 다시 열어 주세요.";

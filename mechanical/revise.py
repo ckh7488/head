@@ -1,4 +1,4 @@
-"""Build R5 B5 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B6 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -229,6 +229,9 @@ BLINK_SERVO=(1.2,-14.,170.)
 BLINK_PHASE=-56.
 DRIVE_THROW=8.25
 LID_THROW=11.5
+HINGE_YZ=(-39.,119.)
+HINGE_PINS={58:-58.75,59:9.25,61:-18.75,62:49.25}
+BLINK_MOUNT_XZ=tuple((x,z) for x in (-20.,20.) for z in (143.,150.))
 DRIVE_ARM=(DRIVE_THROW*cos(radians(BLINK_PHASE)),DRIVE_THROW*sin(radians(BLINK_PHASE)))
 LID_ARM=(LID_THROW*cos(radians(BLINK_PHASE)),LID_THROW*sin(radians(BLINK_PHASE)))
 
@@ -239,16 +242,25 @@ def yz_prism(polygon, x, thickness):
 def blink_link(x,yz1,yz2):
     return lid_link(x, [yz1,yz2])
 
-def blink_crank(x,yz,D=False,arm=DRIVE_ARM):
+def pin_tip(pivot, arm):
+    return tuple(center+offset for center,offset in zip(pivot,arm))
+
+def countersink(x, yz, direction):
+    return Part.makeCone(2.05,1.20,.85,V(x,*yz),V(direction,0,0))
+
+def blink_crank(x, arm, screw_direction=None):
+    yz=BLINK_SHAFT_YZ
     y,z=yz
-    solid=blink_link(x,yz,(y+arm[0],z+arm[1]))
+    tip=pin_tip(yz,arm)
+    solid=blink_link(x,yz,tip)
     hub=cylinder(4.85,2.85,(x-1.3,y,z),(1,0,0))
     joined=solid.fuse(hub)
     bore=cylinder(2.13,6.,(x-3,y,z),(1,0,0))
-    if D:
-        bore=bore.common(box(x-3.1,x+3.1,y-3,y+3,z-3,z+1.67))
-    tip=cylinder(1.15,6.,(x-3,y+arm[0],z+arm[1]),(1,0,0))
-    return joined.cut([bore,tip,cylinder(1.14,5,(x,y,z-5),(0,0,1))]).removeSplitter()
+    bore=bore.common(box(x-3.1,x+3.1,y-3,y+3,z-3,z+1.67))
+    cuts=[bore,cylinder(1.14,5,(x,y,z-5),(0,0,1))]
+    if screw_direction is not None:
+        cuts.append(countersink(x-1.3*screw_direction,tip,screw_direction))
+    return joined.cut(cuts).removeSplitter()
 
 def eyelid(side):
     x=34.*side
@@ -260,7 +272,7 @@ def eyelid(side):
     horn=blink_link(18.2,(0,0),LID_ARM)
     body=shell.fuse([ring1,ring2,horn]).cut([
         cylinder(1.12,42.,(-21,0,0),(1,0,0)),
-        cylinder(1.12,6.,(15,LID_ARM[0],LID_ARM[1]),(1,0,0)),
+        countersink(19.5,LID_ARM,-1),
     ]).removeSplitter()
     if side<0:
         body=body.mirror(V(),V(1,0,0))
@@ -269,8 +281,8 @@ def eyelid(side):
 def blink_bearing_arm(x):
     y,z=BLINK_SHAFT_YZ
     sleeve=cylinder(7.3,6.,(x-3,y,z),(1,0,0))
-    arm=yz_prism([(y-3,z+6.2),(18,156),(23,153.9),(23,143.2),
-           (y-1.5,z-6.4),(y-4.0,z-4.)],x-3,6)
+    arm=yz_prism([(y-4,z+5.8),(y+1,z+10.8),(8.,z+10.8),(18.,z+7.5),(23.,z+2.),
+           (23.,z-14.5),(9.,z-12.),(y-1.5,z-6.4),(y-4.,z-4.)],x-3,6)
     sign=1 if x>0 else -1
     return sleeve.fuse(arm).cut([
         cylinder(5.12,5.1,(x-3.1*sign,y,z),(sign,0,0)),
@@ -376,6 +388,9 @@ def cut_running_clearance(doc):
                 blade.append(mesh(clearance_tool(side*49.25,start,end,4.0,4.5)))
                 ear=clearance_tool(side*52.2,(-39.,119.),start,4.1,4.8)
                 blade.append(mesh(ear.common(box(-60,60,-36.7,-20.5,103.2,134.0))))
+                axis=(-side,0,0)
+                blade.append(mesh(cylinder(3.05,3.2,(side*48.2,*start),axis)))
+                blade.append(mesh(cylinder(1.75,5.,(side*48.2,*start),axis)))
             cutter=tr.boolean.union(blade,engine='manifold')
             x=34.*side
             targets['Part076' if side<0 else 'Part077']=[
@@ -412,13 +427,15 @@ def cut_running_clearance(doc):
 
 def revise_head(doc, output):
     dy,dz=BLINK_SERVO[1]-43.,BLINK_SERVO[2]-88.
+    horn=doc.Part047.Shape.copy().rotate(V(1.2,43,88),V(1,0,0),BLINK_PHASE).translate(V(0,dy,dz))
+    horn=horn.cut(countersink(BLINK_SERVO[0],pin_tip(BLINK_SERVO[1:],DRIVE_ARM),1)).removeSplitter()
     parts={
         'Part045':doc.Part045.Shape.copy().translate(V(0,dy,dz)),
         'Part046':doc.Part046.Shape.copy().translate(V(0,dy,dz)),
-        'Part047':doc.Part047.Shape.copy().rotate(V(1.2,43,88),V(1,0,0),BLINK_PHASE).translate(V(0,dy,dz)),
-        'Part053':blink_crank(-52.45,BLINK_SHAFT_YZ,True,LID_ARM),
-        'Part054':blink_crank(8.95,BLINK_SHAFT_YZ,True),
-        'Part055':blink_crank(52.45,BLINK_SHAFT_YZ,True,LID_ARM),
+        'Part047':horn,
+        'Part053':blink_crank(-52.45,LID_ARM,1),
+        'Part054':blink_crank(8.95,DRIVE_ARM),
+        'Part055':blink_crank(52.45,LID_ARM,-1),
         'Part056':blink_link(5.85,(BLINK_SERVO[1]+DRIVE_ARM[0],BLINK_SERVO[2]+DRIVE_ARM[1]),(BLINK_SHAFT_YZ[0]+DRIVE_ARM[0],BLINK_SHAFT_YZ[1]+DRIVE_ARM[1])),
         'Part057':blink_link(-49.25,(-39.+LID_ARM[0],119.+LID_ARM[1]),(BLINK_SHAFT_YZ[0]+LID_ARM[0],BLINK_SHAFT_YZ[1]+LID_ARM[1])),
         'Part060':blink_link(49.25,(-39.+LID_ARM[0],119.+LID_ARM[1]),(BLINK_SHAFT_YZ[0]+LID_ARM[0],BLINK_SHAFT_YZ[1]+LID_ARM[1])),
@@ -432,14 +449,18 @@ def revise_head(doc, output):
     for x in (-49.25,49.25):
         rib=box(x-5.5,x+5.5,-20.8,-14.8,120.5,125.2)
         parts['Part024']=parts['Part024'].fuse(rib).cut(box(x-2.87,x+2.87,-27.5,-17.30,114.,131.))
-    parts['Part024']=parts['Part024'].cut(box(-44.4,-39.7,-22.8,-18.0,118.8,122.55)).removeSplitter()
+    cradle=parts['Part024'].cut(box(-44.4,-39.7,-22.8,-18.0,118.8,122.55))
+    parts['Part024']=cradle.cut([cylinder(1.62,10.5,(x-.5,*HINGE_YZ),(1,0,0))
+                               for x in HINGE_PINS.values()]).removeSplitter()
     for name,x in [('Part029',-34.),('Part033',34.)]:
         parts[name]=eyeball(x)
     for name,x in [('Part032',-34.),('Part036',34.)]:
         parts[name]=cylinder(1.,24.,(x,-39,107.))
     parts['Part043']=doc.Part043.Shape.common(box(58.5,61.2,-50,40,130,170))
     parts['Part044']=doc.Part044.Shape.copy().translate(V(-1.05,0,0)).common(box(61.55,64.15,-45,29,100,161))
-    parts['Part019']=ballast_mount(doc.Part019.Shape.cut(box(57.9,65.1,20.2,25.0,145.3,155.9)))
+    frame=ballast_mount(doc.Part019.Shape.cut(box(57.9,65.1,20.2,25.0,145.3,155.9)))
+    frame=holes(frame,1.65,8.5,[(x,22.8,z) for x,z in BLINK_MOUNT_XZ],(0,1,0))
+    parts['Part019']=holes(frame,3.15,4.,[(x,27.7,z) for x,z in BLINK_MOUNT_XZ],(0,1,0)).removeSplitter()
     tab=doc.Part021.Shape.cut([box(57.9,66.0,18.1,25.0,124.1,157.4),box(49.8,58.8,16.,20.8,126.,158.)])
     parts['Part021']=tab.fuse([
         box(54.9,57.7,21.8,23.7,153.3,160.5),
@@ -452,15 +473,20 @@ def revise_head(doc, output):
         parts[bracket]=blink_bearing_arm(x)
         parts[bearing]=cylinder(5.,4.,(x-2,y,z),(1,0,0)).cut(cylinder(2.,4.,(x-2,y,z),(1,0,0)))
     rail=box(-34,34,18.5,23,139,154.5).cut(box(29.5,35.,17.4,21.25,135.,157.))
+    rail=rail.fuse(box(-34.,29.,5.,18.7,139.5,153.8))
     rail=rail.fuse([parts.pop('Part049'),parts.pop('Part051')])
-    rail=holes(rail,1.65,8.,[(x,17,z) for x in (-28.,28.) for z in (143.,150.)],(0,1,0))
+    rail=rail.fuse([cylinder(3.4,1.9,(x,16.7,z),(0,1,0)) for x,z in BLINK_MOUNT_XZ])
+    rail=holes(rail,2.10,4.25,[(x,18.8,z) for x,z in BLINK_MOUNT_XZ],(0,1,0))
     doc.removeObject('Part049')
     doc.removeObject('Part051')
     stay=yz_prism([(18,151),(23,151),(23,155),(6,192),(4,195),(-4.8,195),(-4.8,182),(1.5,181)],
            -6.4,4.6)
     stay=stay.cut([parts['Part046'],box(-7.,2.,-8.,-3.1,158.,202.)])
     stay=stay.cut(box(-7.,2.,-3.2,4.7,158.,180.))
-    stay=holes(stay,1.65,7.,[(-7.5,57.+dy,a+dz) for a in (101.,107.)],(1,0,0))
+    brace=yz_prism([(1.5,147.),(22.98,145.),(22.98,156.),(14.,174.),(4.2,194.5),
+                    (-2.9,194.5),(-2.9,180.8),(-2.7,156.)],-12.4,8.4)
+    stay=stay.fuse(brace)
+    stay=holes(stay,1.65,12.,[(-13.3,57.+dy,a+dz) for a in (101.,107.)],(1,0,0))
     parts['Part063']=rail.fuse(stay).removeSplitter()
     for name,shape in parts.items():
         check=shape.isValid() and (not doc.getObject(name).Printed or len(shape.Solids)==1)
@@ -485,11 +511,9 @@ def revise_head(doc, output):
         obj.addProperty('App::PropertyString','Motion','Design')
         obj.Motion='blink_shaft_crank'
         doc.Synchronised_eyelids.addObject(obj)
-    for index in (58, 59, 61, 62):
+    for index,x in HINGE_PINS.items():
         pin = doc.getObject(f'Part{index:03}')
-        bounds = pin.Shape.BoundBox
-        x = bounds.XMin - (1. if index in (61,62) else 0.)
-        pin.Shape = cylinder(1., 9.5, (x, -39., 119.), (1,0,0))
+        pin.Shape = cylinder(1., 9.5, (x,*HINGE_YZ), (1,0,0))
     cut_running_clearance(doc)
     doc.JawMotion.setExpression('Placement','create(<<placement>>;vector(0mm;-9mm;92mm);create(<<rotation>>;vector(1;0;0);1.25deg+max(0deg;min(13deg;Opening))))')
     doc.JawMotion.Label = 'Jaw — Opening 0 to 13 degrees above the closed position'
@@ -497,7 +521,9 @@ def revise_head(doc, output):
     doc.R5.MotionGeometry = json.dumps({
         'eye_yaw': {'pivot_mm': [-5.8, -35.5, 111.85], 'radius_mm': 13.5},
         'blink': {'servo_yz_mm': list(BLINK_SERVO[1:]), 'shaft_yz_mm': list(BLINK_SHAFT_YZ),
-                  'phase_deg': BLINK_PHASE, 'radius_mm': DRIVE_THROW, 'lid_radius_mm': LID_THROW, 'link_x_mm': 49.25},
+                  'phase_deg': BLINK_PHASE, 'radius_mm': DRIVE_THROW, 'lid_radius_mm': LID_THROW,
+                  'link_x_mm': 49.25, 'crank_x_mm': [-52.45,8.95,52.45], 'bearing_x_mm': [-32.,26.],
+                  'mount_xz_mm': BLINK_MOUNT_XZ},
         'jaw_travel_deg': 13., **fixture_parameters(),
     }, separators=(',', ':'))
     labels = {
@@ -603,10 +629,10 @@ def main(output=BUILD):
         add_fixture(doc, doc.Head_frame, name, label, shape, 'head', printed)
         if printed:
             print_mesh(shape, output/'STL'/f'{label.replace(" ", "_")}.stl', 'y+' if name == 'BallastTray' else None)
-    doc.R5.Label = 'R5 B5 · prototype'
-    doc.R5.Status = 'Tolerance and load-path checks. Plate count is adjustable. Hardware measurements pending.'
+    doc.R5.Label = 'R5 B6 · prototype'
+    doc.R5.Status = 'Blink hinge and pivot hardware clearances checked. Hardware measurements pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B5-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B6-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

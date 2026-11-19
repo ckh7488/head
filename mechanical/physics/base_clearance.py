@@ -10,7 +10,7 @@ import FreeCAD as App
 import Part
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B5-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B6-Assembly.FCStd"
 
 
 def check_pairs(doc):

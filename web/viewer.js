@@ -20,12 +20,31 @@ const views = {
   }
 };
 const closeups = {
-  eyes: { view: "mechanism", position: [95, -235, 148], center: [0, -14, 120], anchor: [-35, -45, 121], motion: "tilt", title: "눈·눈꺼풀", subtitle: "XL330 · 안구 2개 · 공용 깜빡임 축" },
+  eyes: { view: "mechanism", position: [58, -220, 228], center: [0, -27, 151], anchor: [0, -24, 154], motion: "head", title: "눈꺼풀 구동", subtitle: "가운데 링크가 가로축을 돌리고 양끝 링크가 두 눈꺼풀을 움직입니다." },
   camera: { view: "assembled", position: [52, -260, 114], center: [0, -40, 103], anchor: [0, -67, 91], motion: "head", title: "코 카메라", subtitle: "U20CAM-1080P-S1 · 렌즈 약 2 mm 안쪽" },
   neck: { view: "mechanism", position: [146, 253, 138], center: [0, 27, 110], anchor: [21, 53, 131], motion: "head", title: "목 구동부", subtitle: "XL430 직결 · 뒤쪽에 끼우는 강철 균형추" },
   jaw: { view: "mechanism", position: [-170, -224, 132], center: [0, -24, 75], anchor: [-47, ...jawPivot.slice(1)], motion: "head", title: "턱 힌지", subtitle: "볼 안쪽 XL330 · 반대쪽 Ø4 mm 힌지" },
   hub: { view: "electronics", position: [74, 145, 122], center: [0, 57, -68], anchor: [0, 65, -69], motion: "hatch", title: "서보 허브", subtitle: "70 × 35 mm · 5 V 눈 / 12 V 목" }
 };
+const blinkParts = new Map();
+const partLabel = (ids, title, detail) => {
+  for (const id of ids) blinkParts.set(id, { title, detail });
+};
+partLabel(["Part045"], "눈꺼풀 모터", "구매품 · XL330-M288-T");
+partLabel(["Part046"], "모터 장착판", "PETG 출력 · 두께 2.7 mm");
+partLabel(["Part047"], "모터 혼", "PETG 출력 · 두께 3.1 mm");
+partLabel(["Part048"], "눈꺼풀 공용 가로축", "강철 환봉 · Ø4 × 112 mm");
+partLabel(["Part050", "Part052"], "가로축 베어링", "구매품 · MR104ZZ 4 × 10 × 4 mm");
+partLabel(["Part053", "Part054", "Part055"], "가로축 크랭크", "PETG 출력 · 축과 링크를 연결");
+partLabel(["Part056"], "가운데 구동 링크", "PETG 출력 · 두께 2.6 mm · 밀고 당기는 막대");
+partLabel(["Part057", "Part060"], "좌우 눈꺼풀 링크", "PETG 출력 · 각 두께 2.6 mm");
+partLabel(["Part058", "Part059", "Part061", "Part062"], "눈꺼풀 힌지핀", "강철 핀 · Ø2 × 9.5 mm · 눈꺼풀마다 좌우 한 개");
+partLabel(["Part063"], "모터와 베어링 받침", "PETG 출력 · 가로축을 두 곳에서 지지");
+partLabel(["Part076", "Part077"], "눈꺼풀 힌지 받침", "PETG 출력 · 눈꺼풀 양쪽 핀을 지지");
+partLabel(["Part078", "Part079"], "눈꺼풀", "PETG 출력 · 곡면 두께 1.48 mm");
+partLabel(["Part029", "Part033"], "안구", "PETG 출력 · Ø28 mm");
+partLabel(["Part030", "Part031", "Part034", "Part035"], "안구 도색 위치", "표면 색상 표시 · 흰 안구에 도색");
+partLabel(["BlinkCollarLeft", "BlinkCollarRight"], "가로축 칼라와 시임", "구매품 · 가로축 좌우 이동 제한");
 
 function light(scene, color, strength, position) {
   const beam = new THREE.DirectionalLight(color, strength);
@@ -36,7 +55,7 @@ function light(scene, color, strength, position) {
 }
 
 export class AssemblyViewer {
-  constructor(host, anchor) {
+  constructor(host, anchor, showPart) {
     this.host = host;
     this.anchor = anchor;
     this.scene = new THREE.Scene();
@@ -51,8 +70,17 @@ export class AssemblyViewer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.domElement.setAttribute("aria-label", "R5 B5 조립 3D 모델");
+    this.renderer.domElement.setAttribute("aria-label", "R5 B6 조립 3D 모델");
     this.host.appendChild(this.renderer.domElement);
+    const canvas = this.renderer.domElement;
+    let down;
+    canvas.addEventListener("pointerdown", event => { down = [event.clientX, event.clientY]; });
+    canvas.addEventListener("pointerup", event => {
+      if (event.button !== 0 || !down ||
+          Math.hypot(event.clientX - down[0], event.clientY - down[1]) > 5) return;
+      const label = this.pickBlinkPart(event.clientX, event.clientY);
+      if (label) showPart(label.title, label.detail);
+    });
     this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
     this.orbit.target.set(...views.assembled.oblique[1]);
     this.orbit.enableDamping = true;
@@ -112,6 +140,21 @@ export class AssemblyViewer {
     this.dirty = true;
   }
 
+  pickBlinkPart(x, y) {
+    if (this.detail !== closeups.eyes) return;
+    const rect = this.renderer.domElement.getBoundingClientRect();
+    const pointer = new THREE.Vector2(2 * (x - rect.left) / rect.width - 1, 1 - 2 * (y - rect.top) / rect.height);
+    const ray = new THREE.Raycaster();
+    ray.setFromCamera(pointer, this.camera);
+    const nodes = this.parts.filter(item => item.node.visible);
+    let object = ray.intersectObjects(nodes.map(item => item.node), true)[0]?.object;
+    while (object) {
+      const part = nodes.find(item => item.node === object);
+      if (part) return blinkParts.get(part.info.cad_id);
+      object = object.parent;
+    }
+  }
+
   async load() {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const [data, model] = await Promise.all([
@@ -152,8 +195,8 @@ export class AssemblyViewer {
     for (const item of this.parts) {
       const { node, info, materials } = item;
       const jawCloseup = this.detail === closeups.jaw && info.motion === "jaw" && info.shell;
-      node.visible = this.mode === "assembled" ||
-        (this.mode === "mechanism" && (!info.shell || jawCloseup)) ||
+      const inside = this.detail === closeups.eyes ? blinkParts.has(info.cad_id) : !info.shell || jawCloseup;
+      node.visible = this.mode === "assembled" || (this.mode === "mechanism" && inside) ||
         (this.mode === "electronics" && (info.motion === "fixed" || info.motion === "hatch") && !info.cover);
       if (info.name === "01_base_cup" || (info.motion === "jaw" && info.shell)) {
         const ghost = jawCloseup || (info.name === "01_base_cup" && this.mode === "electronics" && this.drop > .75);
@@ -255,7 +298,7 @@ export class AssemblyViewer {
     }
     if (!this.dirty) return;
 
-    if (this.detail && this.parts.length) {
+    if (this.detail && this.detail !== closeups.eyes && this.parts.length) {
       this.camera.updateMatrixWorld();
       const point = V(...this.detail.anchor).applyMatrix4(motionMatrix(this.detail.motion, pose, drop)).project(this.camera);
       this.anchor.hidden = point.z < -1 || point.z > 1 || Math.abs(point.x) > .76 || Math.abs(point.y) > .89;
