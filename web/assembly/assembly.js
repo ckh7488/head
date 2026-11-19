@@ -119,8 +119,8 @@ function details() {
   const stop = stopData();
   const status = el("detail-status");
   const corrected = state.alternative;
-  status.dataset.kind = step.blocker && !corrected ? "blocker" : step.checked || corrected ? "verified" : "reference";
-  status.textContent = corrected ? "가공 모델 핀 통과" : step.blocker ? "CAD 간섭" : step.checked ? "CAD 경로 확인" : "조립 방향";
+  status.dataset.kind = (step.blocker && !corrected) || step.hold ? "blocker" : step.checked || corrected ? "verified" : "reference";
+  status.textContent = corrected ? "가공 모델 핀 통과" : step.blocker ? "CAD 간섭" : step.hold ? "체결품 확인 대기" : step.checked ? "CAD 경로 확인" : "조립 방향";
   el("task").textContent = step.task;
   el("check").textContent = step.check;
   el("note").textContent = step.note || "";

@@ -28,6 +28,8 @@ const railBolts = gear("railBolt", "bolt", 3, 20, [0, -1, 0], railSeats);
 const railNuts = gear("railNut", "nut", 3, 0, [0, 1, 0], railSeats.map(([x, , z]) => [x, 8.74, z]));
 const crankBolts = gear("crankBolt", "bolt", 2, 8, [0, 0, -1], [-53.9, 10.2, 54.15].map(x => [x, -24, 163.55]));
 const crankNuts = gear("crankNut", "nut", 2, 0, [0, 0, 1], [-53.9, 10.2, 54.15].map(x => [x, -24, 156.6]));
+const blinkMotorHeads = review.motor_caps.Part046.map(([size, seat, axis], index) =>
+  ({id: `blinkMotorHead${index}`, type: "head", size, seat, axis, phase: 0}));
 const clampX = [-1, 1, 1];
 const arm = (y, z, r) => [y + r * Math.cos(-56 * Math.PI / 180), z + r * Math.sin(-56 * Math.PI / 180)];
 const [servoY, servoZ] = arm(-14, 170, 8.25);
@@ -48,7 +50,7 @@ const linkNuts = [
 export const hardware = [
   ...hatchNuts, ...hatchBolts, ...hubBolts, ...hubNuts, ...cableNuts, ...cableBolts, ...clipBolts,
   ...rotorBolts, ...mastBolt, ...mastTool, ...yokeNuts, ...yokeBolts, ...railNuts, ...railBolts,
-  ...crankNuts, ...crankBolts, ...linkBolts, ...linkNuts,
+  ...crankNuts, ...crankBolts, ...linkBolts, ...linkNuts, ...blinkMotorHeads,
 ];
 
 const PCB = "HubPCB HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2";
@@ -131,8 +133,8 @@ export const steps = [
   {
     id: "yaw-motor", group: "목", title: "받침 안 목 모터", base: "Part000 Part008 Part009",
     moves: [move("Part017", 0, 0, 34)], focus: [0, 12, -57], view: [1.15, -1.55, 1.5], span: 108,
-    task: "ID 4 XL430을 05번 좌우 브래킷 사이에 둡니다.", check: "뒷 단계에서 가려지기 전에 본체 나사와 케이블을 연결합니다.",
-    stock: "ROBOTIS 본체 지정 체결품",
+    task: "ID 4 XL430을 05번 좌우 브래킷 사이에 대 봅니다.", check: "본체에는 M2.6 성형 나사용 구멍이 있습니다. 맞는 나사산과 길이의 원통머리 볼트를 확인한 뒤 고정합니다.",
+    stock: "육각렌치 원통머리 · 본체 체결품 확인 대기", hold: true,
   },
   {
     id: "yaw-bearing", group: "목", title: "6816 베어링 안착", base: "Part001 Part017",
@@ -239,6 +241,13 @@ export const steps = [
     task: "축 위쪽의 깊이 0.45 mm 평면에 나사 세 개를 맞춥니다.",
     check: "M2×8 그대로 쓰면 기존 M2×4보다 머리가 4 mm 위로 올라옵니다. 실제 조립 후 전체 깜빡임에서 긁힘이 없는지 봅니다.",
     stock: "M2×8 일반 육각렌치 나사 ×3",
+  },
+  {
+    id: "blink-motor-heads", group: "눈·눈꺼풀", title: "눈꺼풀 모터 원통머리 자리", base: "Part045 Part046",
+    moves: [move(names(blinkMotorHeads), 14, 0, 0)], focus: [1, -14, 177], view: [1.45, -.8, .53], span: 53,
+    task: "모터 브래킷 앞면에 일반 M2 원통머리 외형을 대 봅니다.",
+    check: "혼과 가까운 한 곳은 1.85 mm 깊이의 평평한 홈으로 머리를 내립니다. 혼을 끼우기 전에 조이는 자리입니다.",
+    stock: "1.5 mm 육각렌치 · XL330 나사산 실물 대조 대기", cut: ["y", -6], hold: true,
   },
   {
     id: "blink-rail", group: "눈·눈꺼풀", title: "레일을 프레임에", base: `${frame} ${names(railNuts)}`,

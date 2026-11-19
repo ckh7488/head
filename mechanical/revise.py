@@ -1,4 +1,4 @@
-"""Build R5 B8 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B9 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -16,6 +16,7 @@ import trimesh as tr
 
 from primitives import box, cylinder, holes, print_mesh
 from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
+from motor_seats import JAW_STAY, head_pockets
 from radio import c3_mount
 from stock import ballast_stock, blink_stock, cable_stock, hatch_stock, neck_stock, radio_board_stock
 
@@ -64,10 +65,8 @@ def xl330_face(extra=None, extra_drills=(), half_width=13., far_edge=27.):
     for x in (-8, 8):
         for y in (-7.5, 22.5):
             plate = plate.cut(cylinder(1.12, 4, (x, y, -3.5)))
-            plate = plate.cut(Part.makeCone(1.12, 2.20, 1.08, V(x, y, -1.38)))
     for x, y in extra_drills:
         plate = plate.cut(cylinder(1.70, 5, (x, y, -4)))
-        plate = plate.cut(Part.makeCone(1.70, 3.15, 1.45, V(x, y, -1.75)))
     return plate.removeSplitter()
 
 
@@ -246,10 +245,7 @@ def blink_link(x,yz1,yz2):
 def pin_tip(pivot, arm):
     return tuple(center+offset for center,offset in zip(pivot,arm))
 
-def countersink(x, yz, direction):
-    return Part.makeCone(2.05,1.20,.85,V(x,*yz),V(direction,0,0))
-
-def blink_crank(x, arm, screw_direction=None):
+def blink_crank(x, arm):
     yz=BLINK_SHAFT_YZ
     y,z=yz
     tip=pin_tip(yz,arm)
@@ -259,8 +255,6 @@ def blink_crank(x, arm, screw_direction=None):
     bore=cylinder(2.13,6.,(x-3,y,z),(1,0,0))
     bore=bore.common(box(x-3.1,x+3.1,y-3,y+3,z-3,z+1.67))
     cuts=[bore,cylinder(1.14,5,(x,y,z-5),(0,0,1))]
-    if screw_direction is not None:
-        cuts.append(countersink(x-1.3*screw_direction,tip,screw_direction))
     return joined.cut(cuts).removeSplitter()
 
 def eyelid(side):
@@ -377,6 +371,8 @@ def cut_running_clearance(doc):
             MeshPart.meshFromShape(Shape=solid,LinearDeflection=.045,AngularDeflection=.12,Relative=False).write(str(path))
             return tr.load_mesh(path)
 
+        targets[JAW_STAY].extend(mesh(pocket) for pocket in head_pockets(JAW_STAY))
+
         for side in (-1,1):
             blade=[]
             for degrees in range(-1,93,3):
@@ -428,14 +424,13 @@ def cut_running_clearance(doc):
 def revise_head(doc, output):
     dy,dz=BLINK_SERVO[1]-43.,BLINK_SERVO[2]-88.
     horn=doc.Part047.Shape.copy().rotate(V(1.2,43,88),V(1,0,0),BLINK_PHASE).translate(V(0,dy,dz))
-    horn=horn.cut(countersink(BLINK_SERVO[0],pin_tip(BLINK_SERVO[1:],DRIVE_ARM),1)).removeSplitter()
     parts={
         'Part045':doc.Part045.Shape.copy().translate(V(0,dy,dz)),
         'Part046':doc.Part046.Shape.copy().translate(V(0,dy,dz)),
         'Part047':horn,
-        'Part053':blink_crank(-52.45,LID_ARM,1),
+        'Part053':blink_crank(-52.45,LID_ARM),
         'Part054':blink_crank(8.95,DRIVE_ARM),
-        'Part055':blink_crank(52.45,LID_ARM,-1),
+        'Part055':blink_crank(52.45,LID_ARM),
         'Part056':blink_link(5.85,(BLINK_SERVO[1]+DRIVE_ARM[0],BLINK_SERVO[2]+DRIVE_ARM[1]),(BLINK_SHAFT_YZ[0]+DRIVE_ARM[0],BLINK_SHAFT_YZ[1]+DRIVE_ARM[1])),
         'Part057':blink_link(-49.25,(-39.+LID_ARM[0],119.+LID_ARM[1]),(BLINK_SHAFT_YZ[0]+LID_ARM[0],BLINK_SHAFT_YZ[1]+LID_ARM[1])),
         'Part060':blink_link(49.25,(-39.+LID_ARM[0],119.+LID_ARM[1]),(BLINK_SHAFT_YZ[0]+LID_ARM[0],BLINK_SHAFT_YZ[1]+LID_ARM[1])),
@@ -469,6 +464,8 @@ def revise_head(doc, output):
     ]).removeSplitter()
     parts['Part011']=doc.Part011.Shape.cut([box(-14,24,-22.5,-16.5,100.0,115.9),box(5.2,14.8,-20.0,-16.75,84.,96.),box(14.4,19.8,-20.0,-17.5,83.,91.5)])
     doc.Part048.Motion='blink_shaft_crank'
+    for plate in ('Part039', 'Part046'):
+        parts[plate] = parts[plate].cut(head_pockets(plate)).removeSplitter()
     for x,bracket,bearing in [(-32,'Part049','Part050'),(26,'Part051','Part052')]:
         parts[bracket]=blink_bearing_arm(x)
         parts[bearing]=cylinder(5.,4.,(x-2,y,z),(1,0,0)).cut(cylinder(2.,4.,(x-2,y,z),(1,0,0)))
@@ -637,10 +634,10 @@ def main(output=BUILD):
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B8 · prototype'
-    doc.R5.Status = 'B8 service hatch and standard M3 × 8 screws. Hardware measurements pending.'
+    doc.R5.Label = 'R5 B9 · prototype'
+    doc.R5.Status = 'Cylindrical hex-socket heads only. DYNAMIXEL case thread fit pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B8-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B9-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

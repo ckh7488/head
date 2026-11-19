@@ -1,4 +1,4 @@
-"""Export interference solids for the B8 assembly walkthrough using FreeCAD."""
+"""Export interference solids and fastener seats for the assembly walkthrough."""
 
 from argparse import ArgumentParser
 from hashlib import sha256
@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'mechanical'))
 sys.path.insert(0, str(ROOT / 'mechanical' / 'physics'))
 from export_cad import world_shape
+from motor_seats import HEAD_SEATS
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 from stock import socket_screw
 
@@ -32,6 +33,11 @@ def export(cad, world, output):
         'service_hatch': {
             'base_centers': HATCH_MOUNTS, 'base_nut_seat': HATCH_NUT_SEAT, 'base_screw_seat': HATCH_SCREW_SEAT,
             'board_centers': HUB_MOUNTS, 'board_nut_seat': HUB_NUT_SEAT, 'board_screw_seat': HUB_SCREW_SEAT,
+        },
+        'motor_caps': {
+            part: [[size, list(V(*face) - depth * V(*outward)), list(-V(*outward))]
+                   for size, face, outward, depth in seats]
+            for part, seats in HEAD_SEATS.items()
         },
     }
     scene = trimesh.Scene()
@@ -109,7 +115,7 @@ def export(cad, world, output):
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('world', type=Path, help='Directory of world-coordinate STL files from export_cad.py')
-    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B8-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B9-Assembly.FCStd')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     export(args.cad, args.world, args.output)

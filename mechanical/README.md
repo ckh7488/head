@@ -1,15 +1,16 @@
-# B8 기구 조립
+# B9 기구 조립
 
-FreeCAD에서 [B8 조립본](R5-B8-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B8-P1S.3mf) · [시험판](R5-B8-Fit-P1S.3mf)
+FreeCAD에서 [B9 조립본](R5-B9-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B9-P1S.3mf) · [시험판](R5-B9-Fit-P1S.3mf)
 
 부품을 넣는 방향, 너트를 미리 넣을 자리, 가조립에서 확인할 곳은 [조립절차서](ASSEMBLY.md)를 따릅니다.
 
 출력 프로젝트는 P1S 0.4 mm 노즐, PETG HF, 0.20 mm 레이어, 벽 4줄을 사용합니다. 노즐 245 °C, 텍스처 PEI 베드 70 °C, 최대 유량 14 mm³/s를 설정했습니다. 눈꺼풀 레일은 내부 채움 100%입니다. 머리 프레임과 목의 지지 부품은 벽 6줄과 내부 채움 35%로 출력합니다. 13번 균형추 트레이는 선택입니다.
 
-받침과 허브 덮개는 벽 5줄, 내부 채움 35%입니다. 받침의 얕은 아래쪽 홈에 빌드판에서 올라오는 서포트를 쓰고 덮개는 바깥면을 바닥에 놓습니다. 시험판 3번에 같은 설정을 적용했습니다. [바닥 덮개 조립](https://r5-b1-review.ckh.chatgpt.site/b8/assembly/#hatch-nuts)
+받침과 허브 덮개는 벽 5줄, 내부 채움 35%입니다. 받침의 얕은 아래쪽 홈에 빌드판에서 올라오는 서포트를 쓰고 덮개는 바깥면을 바닥에 놓습니다. 시험판 3번에 같은 설정을 적용했습니다. [바닥 덮개 조립](https://r5-b1-review.ckh.chatgpt.site/b9/assembly/#hatch-nuts)
 
 | 부위 | 제작 전 확인 |
 |---|---|
+| 모터 체결부 | 표준 원통머리가 움직이는 부품에 닿는 네 곳에 평평한 홈을 가공. 원통머리 18곳에 지름 0.20 mm와 높이 0.10 mm 여유를 더해 13,488개 조합에서 간섭 0건. 머리 아래 남는 재료 최소 0.85 mm. 실제 모터 나사산과 출력물 강도 확인 후 체결 |
 | 눈꺼풀 | 핀 4개, 링크 체결부 6개, 레일 나사 4개의 장착과 회전 여유를 확인. 핀은 축마다 ±0.25 mm 오차를 포함. 한쪽에만 최대 0.04 N·m 저항을 준 MuJoCo 시험에서 좌우 각도 차 최대 0.43°. 같은 하중의 탄성 해석에서 PETG 레일 변위 최대 0.14 mm, Ø4 강철축 비틀림 최대 0.09° |
 | 목 | 끄덕임으로 움직이는 머리 약 629 g, 무게중심은 축 앞쪽 4.2 mm. 목의 좌우 회전부에 걸리는 이동 질량은 약 853 g. 균형추 없이 끄덕이는 모델에서 조립 오차를 포함해 최고 요구 토크 0.101 N·m |
 | 케이블 | 마찰 0으로 10 N·30초와 20 N·6초를 가한 24개 접촉 해석에서 커넥터 축방향 이동 최대 0.32 mm. PETG 탄성계수 1 GPa 조건에서 트레이 변형 약 0.05 mm |
@@ -41,21 +42,22 @@ FreeCAD에서 [B8 조립본](R5-B8-Assembly.FCStd)을 엽니다. `revise.py`가 
 build/freecad-venv/bin/pip install trimesh==4.10.1 manifold3d==3.3.2 'scipy<2'
 fc() { QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python "$@"; }
 fc mechanical/revise.py
-fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B8-Assembly.FCStd
-fc mechanical/physics/service_clearance.py build/mechanical/R5-B8-Assembly.FCStd
+fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B9-Assembly.FCStd
+fc mechanical/physics/service_clearance.py build/mechanical/R5-B9-Assembly.FCStd
 kicad-cli pcb export step --board-only --user-origin 65x42mm -o build/mechanical/c3.step electronics/c3-rf/C3_Antenna.kicad_pcb
 kicad-cli pcb export step --board-only --user-origin 100x80mm -o build/mechanical/hub.step electronics/servo-hub/R5_Servo_Hub.kicad_pcb
-fc mechanical/physics/board_clearance.py build/mechanical/R5-B8-Assembly.FCStd build/mechanical/c3.step build/mechanical/hub.step
-fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B8-Assembly.FCStd --world build/physics/cad
+fc mechanical/physics/board_clearance.py build/mechanical/R5-B9-Assembly.FCStd build/mechanical/c3.step build/mechanical/hub.step
+fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B9-Assembly.FCStd --world build/physics/cad
 
 python3.12 -m venv build/physics-venv
 . build/physics-venv/bin/activate
 python -m pip install -r mechanical/physics/requirements.txt
-QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B8-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/motor_head_fit.py build/physics/cad
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B9-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
 python mechanical/physics/check_head.py build/physics/cad build/physics/clearance.json
 python mechanical/physics/tolerances.py build/physics/cad build/physics/tolerance.json
 mkdir -p build/p1s
-bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B8-P1S.3mf
+bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B9-P1S.3mf
 python mechanical/physics/slicer_mass.py build/p1s/sliced-grams.json build/p1s/plate_{4,5,6,7,8,9,10,12,13}.gcode
 python mechanical/physics/multibody.py build/physics/cad build/physics/motion --sliced-grams build/p1s/sliced-grams.json
 python mechanical/physics/blink_fea.py build/physics/cad build/physics/blink-fea.json

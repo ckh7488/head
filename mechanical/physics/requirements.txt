@@ -4,6 +4,7 @@ mujoco==3.3.7
 gmsh==4.14.1
 scikit-fem==11.0.0
 trimesh==4.10.1
+rtree>=1.2,<2
 python-fcl==0.7.0.10
 manifold3d==3.3.2
 fast-simplification==0.1.13
