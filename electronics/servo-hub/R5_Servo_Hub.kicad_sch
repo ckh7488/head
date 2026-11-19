@@ -1,6 +1,6 @@
 (kicad_sch (version 20250114) (generator "eeschema") (generator_version "9.0")
 (uuid "51abc865-a09e-522c-884d-f375bbf8790b") (paper "A4")
-(title_block (title "R5 Servo Power and Signal Hub") (rev "A0") (comment 1 "Fit and bring-up prototype"))
+(title_block (title "R5 Servo Power and Signal Hub") (rev "A1") (comment 1 "Fit and bring-up prototype"))
 (lib_symbols
 (symbol "Connector_Generic:Conn_01x02"
 		(pin_names

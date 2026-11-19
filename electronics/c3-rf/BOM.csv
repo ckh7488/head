@@ -1,8 +1,8 @@
 ﻿Ref,Value,Footprint,Populate,Part or buying specification,Notes
 AE1,DN0007 IFA,C3_RF:IFA_DN0007,NATIVE,Copper feature or test pad,No part
-C1,10u / 10V,Capacitor_SMD:C_0805_2012Metric,YES,10u / 10V MLCC X5R or X7R,Use footprint package and >=rated voltage
-C2,10u / 6.3V,Capacitor_SMD:C_0805_2012Metric,YES,10u / 6.3V MLCC X5R or X7R,Use footprint package and >=rated voltage
-C3,10u / 6.3V,Capacitor_SMD:C_0805_2012Metric,YES,10u / 6.3V MLCC X5R or X7R,Use footprint package and >=rated voltage
+C1,10u / 10V,Capacitor_SMD:C_0805_2012Metric,YES,Murata GRM21BR71C106KE51L,"10 uF / 16 V X7R, 0805."
+C2,10u / 6.3V,Capacitor_SMD:C_0805_2012Metric,YES,Murata GRM21BR71C106KE51L,"10 uF / 16 V X7R, 0805."
+C3,10u / 6.3V,Capacitor_SMD:C_0805_2012Metric,YES,Murata GRM21BR71C106KE51L,"10 uF / 16 V X7R, 0805."
 C4,100n,Capacitor_SMD:C_0402_1005Metric,YES,100n MLCC X5R or X7R,Use footprint package and >=rated voltage
 C5,1u,Capacitor_SMD:C_0402_1005Metric,YES,1u MLCC X5R or X7R,Use footprint package and >=rated voltage
 C6,10n,Capacitor_SMD:C_0402_1005Metric,YES,10n MLCC X5R or X7R,Use footprint package and >=rated voltage
@@ -18,11 +18,13 @@ C15,DNP,Capacitor_SMD:C_0402_1005Metric,DNP,Leave empty,Reserved for tuning or m
 C16,DNP,Capacitor_SMD:C_0402_1005Metric,DNP,Leave empty,Reserved for tuning or measurements
 C17,DNP,Capacitor_SMD:C_0402_1005Metric,DNP,Leave empty,Reserved for tuning or measurements
 C18,DNP,Capacitor_SMD:C_0402_1005Metric,DNP,Leave empty,Reserved for tuning or measurements
-J1,USB4085-GF-A,C3_RF:USB4085_SilkAtEdge,YES,GCT USB4085-GF-A,Check actual connector orientation and retention tabs
+H1,MountingHole 2.2mm,MountingHole:MountingHole_2.2mm_M2,NATIVE,Ø2.2 mm NPTH,M2 carrier screw.
+H2,MountingHole 2.2mm,MountingHole:MountingHole_2.2mm_M2,NATIVE,Ø2.2 mm NPTH,M2 carrier screw.
+J1,USB4085-GF-A,C3_RF:USB4085_SilkAtEdge,YES,GCT USB4085-GF-A,Orient the opening toward the edge. Solder the plated anchors after reflow.
 J2,UART 3.3V,Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical,YES,Vertical 1x3 2.54 mm male header,"Hand-install. 1 GND, 2 TX, 3 RX, 3.3 V logic"
-L1,2.0nH / >=500mA,Inductor_SMD:L_0402_1005Metric,YES,2.0 nH 0402 >=500 mA,"Low DCR, reference value for supply path"
-L2,24nH,Inductor_SMD:L_0402_1005Metric,YES,24 nH 0402 RF inductor,Verify self-resonance and value with matched Espressif reference
-L3,2.2nH (start),Inductor_SMD:L_0402_1005Metric,YES,2.2 nH 0402 RF inductor,High Q startup tuning value
+L1,2.0nH / >=500mA,Inductor_SMD:L_0402_1005Metric,YES,Murata LQW15AN 2.0 nH 0402 rated at least 500 mA,Supply inductor. Low DCR.
+L2,24nH,Inductor_SMD:L_0402_1005Metric,YES,Murata LQW15AN24NG00D,"24 nH, 0402. Crystal series inductor."
+L3,2.2nH (start),Inductor_SMD:L_0402_1005Metric,YES,Murata LQW15AN 2.2 nH high-Q 0402,Initial RF tuning value.
 R1,0R / coax access,C3_RF:RF_Link_0603,YES,0603 0 ohm link,Bridge series pads exclusively. Adjacent pad is coax shield GND
 R2,0R,Resistor_SMD:R_0402_1005Metric,YES,0R resistor 1%,Verify package in footprint column
 R3,22R,Resistor_SMD:R_0402_1005Metric,YES,22R resistor 1%,Verify package in footprint column
@@ -34,10 +36,10 @@ R8,10k,Resistor_SMD:R_0603_1608Metric,YES,10k resistor 1%,Verify package in foot
 R9,10k,Resistor_SMD:R_0603_1608Metric,YES,10k resistor 1%,Verify package in footprint column
 R10,10k,Resistor_SMD:R_0603_1608Metric,YES,10k resistor 1%,Verify package in footprint column
 R11,499R,Resistor_SMD:R_0603_1608Metric,YES,499R resistor 1%,Verify package in footprint column
-SW1,BOOT,Button_Switch_SMD:SW_SPST_PTS647_Sx38,YES,C&K PTS647 series Sx38 compatible,Check front face and profile in supplier footprint
-SW2,RESET,Button_Switch_SMD:SW_SPST_PTS647_Sx38,YES,C&K PTS647 series Sx38 compatible,Check front face and profile in supplier footprint
+SW1,BOOT,Button_Switch_SMD:SW_SPST_PTS647_Sx38,YES,C&K PTS647SM38SMTR2 LFS,"4.5 mm SMT body, 3.8 mm actuator."
+SW2,RESET,Button_Switch_SMD:SW_SPST_PTS647_Sx38,YES,C&K PTS647SM38SMTR2 LFS,"4.5 mm SMT body, 3.8 mm actuator."
 TP1,3V3,TestPoint:TestPoint_Pad_D1.5mm,NATIVE,Copper feature or test pad,No part
 TP2,GND,TestPoint:TestPoint_Pad_D1.5mm,NATIVE,Copper feature or test pad,No part
-U1,ESP32-C3FH4X,Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.7x3.7mm,YES,Espressif ESP32-C3FH4X,QFN32 with exposed pad and internal 4 MB flash
-U2,AP2112K-3.3,Package_TO_SOT_SMD:SOT-23-5,YES,Diodes Inc. AP2112K-3.3TRG1,SOT-23-5 3.3 V
-Y1,40MHz / 10pF,Crystal:Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm,YES,Epson TSX-3225 series 40.000 MHz CL 10 pF,"3.2 x 2.5 mm, four pads, verify exact stocked suffix"
+U1,ESP32-C3FH4X,C3_RF:QFN32_5x5_MaskedThermalVias,YES,Espressif ESP32-C3FH4X,QFN32 with exposed pad and internal 4 MB flash
+U2,AP7361C-33E,Package_TO_SOT_SMD:SOT-223-3_TabPin2,YES,Diodes Inc. AP7361C-33E-13,SOT-223. Thermal tab is GND.
+Y1,40MHz / 9pF,Crystal:Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm,YES,Epson X1E000021017700,"40 MHz, CL 9 pF, ±10 ppm. Pins 2 and 4 GND."

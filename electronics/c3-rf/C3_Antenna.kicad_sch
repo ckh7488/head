@@ -1,7 +1,7 @@
 (kicad_sch (version 20250114) (generator "eeschema") (generator_version "9.0")
  (uuid "d3f62643-aec2-59e9-8b89-3a9f2f06aba3")
  (paper "A3")
- (title_block (title "ESP32-C3 2.4 GHz antenna evaluation") (rev "A0 REVIEW"))
+ (title_block (title "ESP32-C3 2.4 GHz antenna evaluation") (rev "A1"))
  (lib_symbols
 (symbol "C3_RF:Coax_Link"
 			(pin_names
@@ -189,7 +189,7 @@
 					)
 				)
 			)
-			(property "Footprint" "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.7x3.7mm"
+			(property "Footprint" "C3_RF:QFN32_5x5_MaskedThermalVias"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2642,184 +2642,144 @@
 			)
 			(embedded_fonts no)
 		)
-(symbol "Regulator_Linear:AP2112K-3.3"
-			(pin_names
-				(offset 0.254)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(symbol "AP2112K-3.3_0_1"
-				(rectangle
-					(start -5.08 4.445)
-					(end 5.08 -5.08)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-			)
-			(symbol "AP2112K-3.3_1_1"
-				(pin power_in line
-					(at -7.62 2.54 0)
-					(length 2.54)
-					(name "VIN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 0 0)
-					(length 2.54)
-					(name "EN"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "GND"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin no_connect line
-					(at 5.08 0 180)
-					(length 2.54)
-					(hide yes)
-					(name "NC"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin power_out line
-					(at 7.62 2.54 180)
-					(length 2.54)
-					(name "VOUT"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-			)
-			(embedded_fonts no)
-			(property "Reference" "U"
-				(at -5.08 5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Value" "AP2112K-3.3"
-				(at 0 5.715 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left)
-				)
-			)
-			(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
-				(at 0 8.255 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2112.pdf"
-				(at 0 2.54 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "600mA low dropout linear regulator, with enable pin, 3.8V-6V input voltage range, 3.3V fixed positive output, SOT-23-5"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_keywords" "linear regulator ldo fixed positive"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "ki_fp_filters" "SOT?23?5*"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
+	(symbol "Regulator_Linear:AP7361C-33E"
+		(pin_names (offset 0.254))
+		(exclude_from_sim no) (in_bom yes) (on_board yes)
+		(property "Reference" "U"
+			(at -3.81 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
 				)
 			)
 		)
+		(property "Value" "AP7361C-33E"
+			(at 0 3.175 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2"
+			(at 0 5.715 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+					(italic yes)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP7361C.pdf"
+			(at 0 -1.27 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_keywords" "linear regulator ldo fixed positive"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "ki_fp_filters" "SOT?223*"
+			(at 0 0 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(symbol "AP7361C-33E_0_1"
+			(rectangle
+				(start -5.08 -5.08)
+				(end 5.08 1.905)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+		)
+		(symbol "AP7361C-33E_1_1"
+			(pin power_in line
+				(at -7.62 0 0)
+				(length 2.54)
+				(name "VI"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_in line
+				(at 0 -7.62 90)
+				(length 2.54)
+				(name "GND"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin power_out line
+				(at 7.62 0 180)
+				(length 2.54)
+				(name "VO"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
+
 (symbol "Switch:SW_Push"
 			(pin_numbers
 				(hide yes)
@@ -3095,7 +3055,7 @@
  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "29e32f41-fd23-58d9-a6cb-c45c07ac7386")
  (property "Reference" "U1" (at 53.34 134.62 0) (effects (font (size 1.12 1.12)) (justify left) ))
  (property "Value" "ESP32-C3FH4X" (at 66.04 134.62 0) (effects (font (size 1.12 1.12)) (justify left) ))
- (property "Footprint" "Package_DFN_QFN:QFN-32-1EP_5x5mm_P0.5mm_EP3.7x3.7mm" (at 71.12 162.56 0) (effects (font (size 1.12 1.12))  (hide yes)))
+ (property "Footprint" "C3_RF:QFN32_5x5_MaskedThermalVias" (at 71.12 162.56 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (property "Datasheet" "https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf" (at 71.12 162.56 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (property "Description" "ESP32-C3FH4X, 4 MB in-package flash, QFN32 5x5 mm" (at 71.12 162.56 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (property "MPN" "ESP32-C3FH4X" (at 71.12 162.56 0) (effects (font (size 1.12 1.12))  (hide yes)))
@@ -3263,21 +3223,18 @@
 (label "CC2" (at 92.71 34.29 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "09ef9da8-efc0-53e5-aaca-9409d0644c0e"))
 (wire (pts (xy 92.71 45.72) (xy 92.71 49.53)) (stroke (width 0) (type default)) (uuid "911deeef-e5d7-5af4-b34c-95a1eaf35dca"))
 (label "GND" (at 92.71 49.53 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "2ffd9ba1-7b64-5322-a299-5b2c0d2a607a"))
-(symbol (lib_id "Regulator_Linear:AP2112K-3.3") (at 91.44 69.85 0) (unit 1)
+(symbol (lib_id "Regulator_Linear:AP7361C-33E") (at 91.44 67.31 0) (unit 1)
  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "ffb6e5af-b77b-5acc-8dc3-0baae53f195b")
  (property "Reference" "U2" (at 85.09 62.23 0) (effects (font (size 1.12 1.12)) (justify left) ))
- (property "Value" "AP2112K-3.3" (at 91.44 62.23 0) (effects (font (size 1.12 1.12)) (justify left) ))
- (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 91.44 69.85 0) (effects (font (size 1.12 1.12))  (hide yes)))
- (property "Datasheet" "https://www.diodes.com/assets/Datasheets/AP2112.pdf" (at 91.44 69.85 0) (effects (font (size 1.12 1.12))  (hide yes)))
- (property "Description" "600mA low dropout linear regulator, with enable pin, 3.8V-6V input voltage range, 3.3V fixed positive output, SOT-23-5" (at 91.44 69.85 0) (effects (font (size 1.12 1.12))  (hide yes)))
- (property "MPN" "AP2112K-3.3TRG1" (at 91.44 69.85 0) (effects (font (size 1.12 1.12))  (hide yes)))
+ (property "Value" "AP7361C-33E" (at 91.44 62.23 0) (effects (font (size 1.12 1.12)) (justify left) ))
+ (property "Footprint" "Package_TO_SOT_SMD:SOT-223-3_TabPin2" (at 91.44 67.31 0) (effects (font (size 1.12 1.12))  (hide yes)))
+ (property "Datasheet" "https://www.diodes.com/datasheet/download/AP7361C.pdf" (at 91.44 67.31 0) (effects (font (size 1.12 1.12))  (hide yes)))
+ (property "Description" "1A Low Dropout regulator, positive, 3.3V fixed output, SOT-223" (at 91.44 67.31 0) (effects (font (size 1.12 1.12))  (hide yes)))
+ (property "MPN" "AP7361C-33E-13" (at 91.44 67.31 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (pin "1" (uuid "87ed8993-322e-593f-9274-ea34b0d419c1"))
- (pin "3" (uuid "072da9d6-d70b-53ba-aa99-f96ddb990ede"))
  (pin "2" (uuid "f851d8fa-79fe-51ba-8a9b-7fad6b6aaf8e"))
- (pin "4" (uuid "cac9dccc-10dc-5ab5-a614-49850da1891d"))
- (pin "5" (uuid "d70bd1cb-837e-5605-b5ef-404d31f1e1c7"))
+ (pin "3" (uuid "d70bd1cb-837e-5605-b5ef-404d31f1e1c7"))
  (instances (project "C3_Antenna" (path "/d3f62643-aec2-59e9-8b89-3a9f2f06aba3" (reference "U2") (unit 1)))))
-(no_connect (at 96.52 69.85) (uuid "a20d7629-d697-5a5b-a1f8-92ca6fa5b41a"))
 (symbol (lib_id "Device:C") (at 63.5 82.55 0) (unit 1)
  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "93ad395b-a095-5040-af30-7e01bcd1da94")
  (property "Reference" "C1" (at 67.31 81.28 0) (effects (font (size 1.12 1.12)) (justify left) ))
@@ -3300,11 +3257,7 @@
  (pin "1" (uuid "aaaf471b-6218-5ec1-aca6-9e19c4a9e79c"))
  (pin "2" (uuid "e7366602-e600-5c9a-a987-87e8cf522fc4"))
  (instances (project "C3_Antenna" (path "/d3f62643-aec2-59e9-8b89-3a9f2f06aba3" (reference "C2") (unit 1)))))
-(wire (pts (xy 63.5 67.31) (xy 80.01 67.31)) (stroke (width 0) (type default)) (uuid "4dd43f7b-cd42-55ca-957c-790aab259533"))
-(wire (pts (xy 80.01 67.31) (xy 83.82 67.31)) (stroke (width 0) (type default)) (uuid "bb5074b9-2f3b-534c-8a40-1c476f5bf8bb"))
-(junction (at 80.01 67.31) (diameter 0) (color 0 0 0 0) (uuid "83d8137d-16b1-521c-b64b-6a6518cee4e8"))
-(wire (pts (xy 80.01 67.31) (xy 80.01 69.85)) (stroke (width 0) (type default)) (uuid "98be4173-aa2b-5463-b161-6bd7b76d0272"))
-(wire (pts (xy 80.01 69.85) (xy 83.82 69.85)) (stroke (width 0) (type default)) (uuid "e455ddc9-dd33-5dd8-bc04-d950fb5a1067"))
+(wire (pts (xy 63.5 67.31) (xy 83.82 67.31)) (stroke (width 0) (type default)) (uuid "4dd43f7b-cd42-55ca-957c-790aab259533"))
 (wire (pts (xy 63.5 67.31) (xy 63.5 78.74)) (stroke (width 0) (type default)) (uuid "1fd08174-ce7e-5b84-a24e-2c37efac829b"))
 (wire (pts (xy 99.06 67.31) (xy 118.11 67.31)) (stroke (width 0) (type default)) (uuid "1e70ea33-c9b5-5bf9-a866-27100ba5aeac"))
 (wire (pts (xy 118.11 67.31) (xy 118.11 78.74)) (stroke (width 0) (type default)) (uuid "cd89b8b0-06a7-5d82-bb6a-ffaee0b65250"))
@@ -3312,7 +3265,7 @@
 (label "3V3" (at 118.11 67.31 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "acd6ccf5-6e09-5ac6-aec1-bae98ea4b5b5"))
 (wire (pts (xy 63.5 86.36) (xy 63.5 93.98)) (stroke (width 0) (type default)) (uuid "5af5e643-aa6c-5994-9edc-525c13ec2cf1"))
 (label "GND" (at 63.5 93.98 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "eb9e1207-d554-5284-b740-0c0da9a4694e"))
-(wire (pts (xy 91.44 77.47) (xy 91.44 93.98)) (stroke (width 0) (type default)) (uuid "6ac36d68-df89-56ab-85fe-e9bbd8964343"))
+(wire (pts (xy 91.44 74.93) (xy 91.44 93.98)) (stroke (width 0) (type default)) (uuid "6ac36d68-df89-56ab-85fe-e9bbd8964343"))
 (label "GND" (at 91.44 93.98 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "75fd16b2-d4f8-5456-94ef-4e401033b2aa"))
 (wire (pts (xy 118.11 86.36) (xy 118.11 93.98)) (stroke (width 0) (type default)) (uuid "a0c5b40e-0eb3-5360-8d62-48cff35d08b9"))
 (label "GND" (at 118.11 93.98 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "c4234cfa-aa11-5ec2-b072-10b55565ae0d"))
@@ -3366,11 +3319,11 @@
 (symbol (lib_id "Device:Crystal_GND24") (at 196.85 48.26 0) (unit 1)
  (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "403faa8d-3fec-51da-a175-497135cabc2b")
  (property "Reference" "Y1" (at 196.85 30.48 0) (effects (font (size 1.12 1.12))  ))
- (property "Value" "40MHz / 10pF" (at 196.85 33.02 0) (effects (font (size 1.12 1.12))  ))
+ (property "Value" "40MHz / 9pF" (at 196.85 33.02 0) (effects (font (size 1.12 1.12))  ))
  (property "Footprint" "Crystal:Crystal_SMD_SeikoEpson_TSX3225-4Pin_3.2x2.5mm" (at 196.85 48.26 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (property "Datasheet" "~" (at 196.85 48.26 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (property "Description" "Four pin crystal, GND on pins 2 and 4" (at 196.85 48.26 0) (effects (font (size 1.12 1.12))  (hide yes)))
- (property "MPN" "TSX-3225 40.0000MF10Y-K0" (at 196.85 48.26 0) (effects (font (size 1.12 1.12))  (hide yes)))
+ (property "MPN" "X1E000021017700" (at 196.85 48.26 0) (effects (font (size 1.12 1.12))  (hide yes)))
  (pin "1" (uuid "83ae05dc-4cd7-5c1d-825a-2e04d24ee052"))
  (pin "2" (uuid "9ee6dafa-f564-518e-a778-d78df1a258ec"))
  (pin "4" (uuid "6a019cca-9f78-5abc-8691-9d70a797bc2d"))
@@ -3888,7 +3841,7 @@
 (label "GND" (at 364.49 193.04 0) (effects (font (size 1.016 1.016)) (justify left bottom)) (uuid "efcf795b-b500-5863-af13-ec3262f0150e"))
 (text "USB shunt caps start unpopulated." (at 317.5 204.47 0) (effects (font (size 1.25 1.25) ) (justify left)) (uuid "4a9f0e64-07d7-586e-8e6d-4993f69140d9"))
 (text "Fix the power lead position for radiated A/B tests." (at 257.81 217.17 0) (effects (font (size 1.3 1.3) ) (justify left)) (uuid "323ba898-3d6d-5d79-80db-a64585f53047"))
-(text "Review A0 | Bare chip evaluation board | 2.400-2.4835 GHz" (at 20.32 240.03 0) (effects (font (size 1.8 1.8) (bold yes)) (justify left)) (uuid "4046eaf9-7bb1-565e-98eb-70dcd7f8c923"))
+(text "A1 | Bare chip evaluation board | 2.400-2.4835 GHz" (at 20.32 240.03 0) (effects (font (size 1.8 1.8) (bold yes)) (justify left)) (uuid "4046eaf9-7bb1-565e-98eb-70dcd7f8c923"))
 (text "Initial RF and crystal component values are tuning starting points." (at 20.32 248.92 0) (effects (font (size 1.45 1.45) ) (justify left)) (uuid "c5444f1f-20b4-5459-997a-a1872a83373c"))
 (sheet_instances (path "/" (page "1")))
 (embedded_fonts no)

@@ -1,4 +1,4 @@
-"""Pull the captured plug shoulders against the B4 stop with zero friction."""
+"""Pull the captured plug shoulders against their stops with zero friction."""
 
 from argparse import ArgumentParser
 from itertools import product
@@ -50,7 +50,7 @@ def model(lane, dt):
         block(world, f'stop_z_{side}', (0., .00325, side*(slot_z/2+stop_z/2)),
               (slot_x, .0065, stop_z))
 
-    length = .015
+    length = lane['minimum_body_length_mm'] * MM
     body = ET.SubElement(world, 'body', name='plug', pos=f'0 {-length/2-FACE_GAP_MM*MM} 0')
     ET.SubElement(body, 'freejoint')
     block(body, 'shoulder', (0., 0., 0.), (width, length, height))
@@ -62,7 +62,7 @@ def pull(lane, force, direction, hold, dt=.001):
     data = mujoco.MjData(machine)
     initial = data.qpos[:3].copy()
     body = machine.body('plug').id
-    local_arm = np.array([0., .0075, 0.])
+    local_arm = np.array([0., lane['minimum_body_length_mm'] * MM / 2, 0.])
     vector = force * np.asarray(direction, dtype=float)
     peak = np.zeros(3)
     max_advance = 0.

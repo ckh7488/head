@@ -6,10 +6,10 @@ from primitives import box, cylinder, holes
 CABLE_CENTER_Z = -57.5
 CABLE_STOP_Y = 118.5
 CABLE_LANES = (
-    ('5V XT30', -38., 13.4, 7.2, 7.4, 4.4, 10.5, 5.8),
-    ('neck XT60', -15.5, 19.6, 10.4, 11.5, 5.4, 16.0, 8.1),
-    ('camera USB-A', 9.5, 18.8, 10.6, 6.8, 5.6, 12.4, 7.0),
-    ('OpenRB USB-A', 34.5, 18.8, 10.6, 6.8, 5.6, 12.4, 7.0),
+    ('5V XT30', -38., (10.7, 5.7), (7.4, 3.6), (10.0, 5.0), 12., (13.4, 7.2)),
+    ('neck XT60', -15.5, (16.0, 8.7), (11.5, 5.4), (15.0, 7.7), 16., (19.6, 10.4)),
+    ('camera USB-A', 9.5, (18.8, 10.6), (6.8, 5.6), (12.4, 7.0), 15., (18.8, 10.6)),
+    ('OpenRB USB-A', 34.5, (18.8, 10.6), (6.8, 5.6), (12.4, 7.0), 15., (18.8, 10.6)),
 )
 CAP_BOLTS = (-47., -28.3, -3., 22., 47.)
 CAP_KEYS = (-47.35, *CAP_BOLTS[1:])
@@ -31,14 +31,14 @@ def captive_cables(base):
     lower = lower.fuse([box(x-7.4, x+7.4, 77., 125., -78., -65.8) for x in (-28.5, 28.5)])
     lower = lower.cut(cylinder(93.14, 36., (0., 0., -83.)))
     cap = box(-50.5, 50.5, 99., 125., seam, -49.1)
-    for _, x, width, height, opening_x, opening_z, _, _ in CABLE_LANES:
+    for _, x, (width, height), (opening_x, opening_z), _, _, (pass_x, pass_z) in CABLE_LANES:
         pocket = box(x-width/2, x+width/2, 76., stop, seam-height/2, seam+height/2)
         exit_slot = box(x-opening_x/2, x+opening_x/2, stop-.1, 126.,
                         seam-opening_z/2, seam+opening_z/2)
         lower = lower.cut([pocket, exit_slot])
         cap = cap.cut([pocket, exit_slot])
-        base = base.cut(box(x-width/2-.2, x+width/2+.2, 74., 96.,
-                            seam-height/2-.2, seam+height/2+.2))
+        base = base.cut(box(x-pass_x/2-.2, x+pass_x/2+.2, 74., 96.,
+                            seam-pass_z/2-.2, seam+pass_z/2+.2))
 
     keys = [box(x-KEY_HALF_WIDTH, x+KEY_HALF_WIDTH, 106.5, 111.5, seam-.35, seam+2.6) for x in CAP_KEYS]
     lower = lower.fuse(keys)
@@ -115,9 +115,9 @@ def ballast_stud(x):
 
 def fixture_parameters():
     lanes = []
-    for name, x, width, height, slot_x, slot_z, shoulder_x, shoulder_z in CABLE_LANES:
-        lanes.append({'name': name, 'x_mm': x, 'pocket_mm': [width, height],
-                      'slot_mm': [slot_x, slot_z], 'minimum_shoulder_mm': [shoulder_x, shoulder_z]})
+    for name, x, pocket, outlet, shoulder, length, _ in CABLE_LANES:
+        lanes.append({'name': name, 'x_mm': x, 'pocket_mm': list(pocket), 'slot_mm': list(outlet),
+                      'minimum_shoulder_mm': list(shoulder), 'minimum_body_length_mm': length})
     return {
         'cables': {'lanes': lanes, 'stop_y_mm': CABLE_STOP_Y, 'center_z_mm': CABLE_CENTER_Z,
                    'cap_bolts_x_mm': list(CAP_BOLTS), 'cap_bolt_y_mm': 121.6,

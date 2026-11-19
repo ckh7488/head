@@ -10,7 +10,7 @@ import FreeCAD as App
 import Part
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B4-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B5-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -55,14 +55,15 @@ def check_pairs(doc):
     for lane in cables['lanes']:
         name, x = lane['name'], lane['x_mm']
         width, height = (size-.24 for size in lane['pocket_mm'])
-        plug = Part.makeBox(width, 15., height, V(x-width/2, stop-15.1, center_z-height/2))
+        length = lane['minimum_body_length_mm']
+        plug = Part.makeBox(width, length, height, V(x-width/2, stop-length-.1, center_z-height/2))
         width, height = (size-.4 for size in lane['slot_mm'])
         cord = Part.makeBox(width, 7.6, height, V(x-width/2, stop-.1, center_z-height/2))
         for static in (saddle, gate, base):
             yield plug, static, f'{name} body in pocket'
             yield cord, static, f'{name} cord at outlet'
         width, height = lane['minimum_shoulder_mm']
-        shoulder = Part.makeBox(width, 15., height, V(x-width/2, stop-14.6, center_z-height/2))
+        shoulder = Part.makeBox(width, length, height, V(x-width/2, stop-length+.4, center_z-height/2))
         if min(shoulder.common(part).Volume for part in (saddle, gate)) < .1:
             raise RuntimeError(f'{name} shoulder has no backing on both halves')
     for name in ("Part069", "Part070", "Part071", "Part072"):

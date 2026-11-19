@@ -1,4 +1,4 @@
-"""Build R5 B4 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B5 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -16,6 +16,7 @@ import trimesh as tr
 
 from primitives import box, cylinder, holes, print_mesh
 from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
+from radio import c3_mount
 
 V = App.Vector
 HERE = Path(__file__).resolve().parent
@@ -186,12 +187,8 @@ def board_mounts(doc, base):
         for x, y in tray_holes[side]:
             base = base.fuse(cylinder(4., 2.7, (x, y, -80.0)))
             base = base.cut(cylinder(1.35, 5.2, (x, y, -82.2)))
-    radio = doc.Part070.Shape.copy().translated(V(0, -14, 0))
-    radio_posts = [(-68., 9.3), (-40., -3.6)]
-    radio_base = doc.Part071.Shape.copy().translated(V(0, -14, 0))
-    for x,y in radio_posts:
-        radio_base = radio_base.fuse(cylinder(2.85, 3.4, (x, y, -74.4)))
-        radio_base = radio_base.cut(cylinder(.83, 4., (x, y, -74.4)))
+    radio, radio_base = c3_mount(doc.Part071.Shape.copy().translated(V(0, -14, 0)))
+    doc.Part070.Label = 'ESP32-C3 board · front-facing USB-C'
 
     openrb = doc.Part069.Shape.copy().translated(V(0, -14, 3.2))
     rb_base = box(37, 73, -46.5, 24.5, -77.3, -74.3).common(cylinder(85.85, 5., (0,0,-78)))
@@ -521,7 +518,7 @@ def revise_head(doc, output):
         'Part057': 'x+', 'Part060': 'x+', 'Part063': 'y+',
         'Part011': 'y+', 'Part021': None, 'Part040': None,
         'Part016': 'x+', 'Part020': None, 'Part025': 'x+', 'Part027': 'x+',
-        'Part029': 'y+', 'Part033': 'y+', 'Part037': None, 'Part064': 'x+', 'Part066': 'y+',
+        'Part029': 'y+', 'Part033': 'y+', 'Part037': None, 'Part064': 'x+', 'Part066': None,
     }
     output.mkdir(parents=True, exist_ok=True)
     for name, label in labels.items():
@@ -577,12 +574,13 @@ def main(output=BUILD):
     doc.Part038.Shape = yaw_case
     doc.Part015.Label = 'Right pitch pin · Ø8 × 27.3 with 1 mm D-flat'
     base, saddle, gate = captive_cables(doc.Part000.Shape)
+    base = base.cut(box(-14.1, -.7, 82., 88.1, -83.2, -69.0)).removeSplitter()
     base, board_trays = board_mounts(doc, base)
     repairs.update(board_trays)
     bearing_seat, bearing_top, bearer = yaw_bearing_retention(doc)
     repairs['Part001'] = ('02_outer_bearing_seat', bearing_seat, None)
     repairs['Part002'] = ('03_base_top', bearing_top, 'z-')
-    repairs['Part000'] = ('01_base_cup_B4', base, None)
+    repairs['Part000'] = ('01_base_cup_B5', base, None)
     repairs['CableSaddle'] = ('40_captive_cable_tray', saddle, None)
     apply_repairs(doc, repairs, output/'STL')
     print_mesh(bearer, output/'STL'/'41_outer_race_keeper.stl', 'z-')
@@ -591,7 +589,7 @@ def main(output=BUILD):
     add_fixture(doc, base_group, 'CableGate', '42 interlocking cable cover', gate, 'fixed', True)
     print_mesh(gate, output/'STL'/'42_captive_cable_cover.stl', 'z-')
     print_mesh(cable_wall_fixture(base), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.Part000.Label = '01 Base cup B4 · four protected cable routes'
+    doc.Part000.Label = '01 Base cup B5 · harness and hatch clearance'
     revise_head(doc, output/'STL')
     tray, cover, stack = rear_ballast()
     for name, label, shape in (
@@ -605,10 +603,10 @@ def main(output=BUILD):
         add_fixture(doc, doc.Head_frame, name, label, shape, 'head', printed)
         if printed:
             print_mesh(shape, output/'STL'/f'{label.replace(" ", "_")}.stl', 'y+' if name == 'BallastTray' else None)
-    doc.R5.Label = 'R5 B4 · prototype'
+    doc.R5.Label = 'R5 B5 · prototype'
     doc.R5.Status = 'Tolerance and load-path checks. Plate count is adjustable. Hardware measurements pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B4-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B5-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

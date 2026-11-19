@@ -9462,7 +9462,7 @@
 		(layer "Edge.Cuts")
 		(uuid "c0f6f597-6c80-4b38-8155-7748a85608d6")
 	)
-	(gr_text "NECK NOD"
+	(gr_text "5  12V"
 		(at 156.6 114.05 0)
 		(layer "F.SilkS")
 		(uuid "004174d6-0a02-4df0-b701-f2f1d590043d")
@@ -9506,7 +9506,7 @@
 			)
 		)
 	)
-	(gr_text "A0"
+	(gr_text "A1"
 		(at 117.9 85.25 0)
 		(layer "F.SilkS")
 		(uuid "434c5497-e2ee-45b5-87e4-f646c8524aef")
@@ -9517,7 +9517,7 @@
 			)
 		)
 	)
-	(gr_text "EYE YAW"
+	(gr_text "1  5V"
 		(at 112.55 114.05 0)
 		(layer "F.SilkS")
 		(uuid "54ad5926-aed7-4577-ada1-bc383f582729")
@@ -9539,7 +9539,7 @@
 			)
 		)
 	)
-	(gr_text "NECK YAW"
+	(gr_text "4  12V"
 		(at 144.95 114.05 0)
 		(layer "F.SilkS")
 		(uuid "a05903e9-3788-4e9e-8ad7-cd499aa37c88")
@@ -9561,7 +9561,7 @@
 			)
 		)
 	)
-	(gr_text "EYE TILT"
+	(gr_text "2  5V"
 		(at 122.5 114.05 0)
 		(layer "F.SilkS")
 		(uuid "e2a5c1c3-c042-4608-8ca4-faa928ae4ae9")
@@ -9583,7 +9583,7 @@
 			)
 		)
 	)
-	(gr_text "BLINK"
+	(gr_text "3  5V"
 		(at 132.199999 114.05 0)
 		(layer "F.SilkS")
 		(uuid "f44c6ff5-152f-4fed-9da5-18dc68af18e9")
