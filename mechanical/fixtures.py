@@ -13,6 +13,20 @@ CABLE_LANES = (
 )
 CAP_BOLTS = (-47., -28.3, -3., 22., 47.)
 CAP_KEYS = (-47.35, *CAP_BOLTS[1:])
+CAP_BOLT_Y = 121.6
+CAP_BOLT_SEAT_Z = -49.1
+CAP_BOLT_LENGTH = 16.
+CAP_NUT_WIDTH = 5.90
+CAP_NUT_FLOOR_Z = -65.15
+CAP_NUT_ROOF_Z = -62.
+CAP_NUT_TRAVEL = 18.
+CAP_TRAVEL = 25.
+SADDLE_MOUNTS = ((-28.5, 93.6, -71.), (28.5, 93.6, -71.))
+SADDLE_TRAVEL = 26.
+SADDLE_BOLT_TRAVEL = 51.
+SADDLE_WASHER_Y = 83.75
+SADDLE_NUT_Y = 82.95
+SADDLE_INNER_TRAVEL = 14.
 KEY_HALF_WIDTH = 1.60
 BALLAST_CENTER_Y = 52.5
 BALLAST_FLOOR_Z = 115.0
@@ -30,7 +44,7 @@ def captive_cables(base):
     lower = box(-50.5, 50.5, 77., 125., -68.5, seam)
     lower = lower.fuse([box(x-7.4, x+7.4, 77., 125., -78., -65.8) for x in (-28.5, 28.5)])
     lower = lower.cut(cylinder(93.14, 36., (0., 0., -83.)))
-    cap = box(-50.5, 50.5, 99., 125., seam, -49.1)
+    cap = box(-50.5, 50.5, 99., 125., seam, CAP_BOLT_SEAT_Z)
     for _, x, (width, height), (opening_x, opening_z), _, _, (pass_x, pass_z) in CABLE_LANES:
         pocket = box(x-width/2, x+width/2, 76., stop, seam-height/2, seam+height/2)
         exit_slot = box(x-opening_x/2, x+opening_x/2, stop-.1, 126.,
@@ -44,15 +58,12 @@ def captive_cables(base):
     lower = lower.fuse(keys)
     key_cut = KEY_HALF_WIDTH+.13
     cap = cap.cut([box(x-key_cut, x+key_cut, 106.37, 111.63, seam-.1, seam+2.73) for x in CAP_KEYS])
-    cap = holes(cap, 1.68, 10., [(x, 121.6, seam-.6) for x in CAP_BOLTS])
-    lower = holes(lower, 2.10, 4.25, [(x, 121.6, seam-4.20) for x in CAP_BOLTS])
-    lower = holes(lower, 1.68, 7.4, [(x, 121.6, seam-7.35) for x in CAP_BOLTS])
+    cap = holes(cap, 1.68, 10., [(x, CAP_BOLT_Y, seam-.6) for x in CAP_BOLTS])
 
-    seats = [(x, 93.6, -71.) for x in (-28.5, 28.5)]
-    lower = holes(lower, 1.74, 19., [(x, 81.5, z) for x, _, z in seats], (0, 1, 0))
-    lower = holes(lower, 4.35, 33., seats, (0, 1, 0))
-    base = holes(base, 1.74, 19., [(x, 77.5, z) for x, _, z in seats], (0, 1, 0))
-    base = holes(base, 4.35, 6.25, [(x, 77.5, z) for x, _, z in seats], (0, 1, 0))
+    lower = holes(lower, 1.74, 19., [(x, 81.5, z) for x, _, z in SADDLE_MOUNTS], (0, 1, 0))
+    lower = holes(lower, 4.35, 33., SADDLE_MOUNTS, (0, 1, 0))
+    base = holes(base, 1.74, 19., [(x, 77.5, z) for x, _, z in SADDLE_MOUNTS], (0, 1, 0))
+    base = holes(base, 4.35, 6.25, [(x, 77.5, z) for x, _, z in SADDLE_MOUNTS], (0, 1, 0))
     return base.removeSplitter(), lower.removeSplitter(), cap.removeSplitter()
 
 
@@ -120,7 +131,7 @@ def fixture_parameters():
                       'minimum_shoulder_mm': list(shoulder), 'minimum_body_length_mm': length})
     return {
         'cables': {'lanes': lanes, 'stop_y_mm': CABLE_STOP_Y, 'center_z_mm': CABLE_CENTER_Z,
-                   'cap_bolts_x_mm': list(CAP_BOLTS), 'cap_bolt_y_mm': 121.6,
+                   'cap_bolts_x_mm': list(CAP_BOLTS), 'cap_bolt_y_mm': CAP_BOLT_Y,
                    'cap_keys_x_mm': list(CAP_KEYS), 'cap_key_cut_half_width_mm': KEY_HALF_WIDTH+.13},
         'ballast': {'plate_mm': list(PLATE_MM), 'maximum_plates': PLATE_COUNT,
                     'plate_mass_kg': PLATE_MM[0]*PLATE_MM[1]*PLATE_MM[2]*STEEL_KG_MM3,

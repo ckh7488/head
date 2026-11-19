@@ -5,6 +5,10 @@ from math import cos, pi, sin
 from FreeCAD import Vector as V
 import Part
 
+from fixtures import (
+    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS,
+    CAP_NUT_FLOOR_Z, CAP_NUT_ROOF_Z, CAP_NUT_WIDTH,
+)
 from primitives import box, cylinder, print_mesh
 from service_hatch import HUB_MOUNTS, HUB_SCREW_SEAT, revise_service, service_coupon
 
@@ -118,14 +122,32 @@ def blink_stock(doc, folder, layout):
     printed(doc,'Part063',rail,folder/'24_blink_rail_with_bearing_shoulders.stl','y+')
 
 
-def cable_stock(doc, folder, layout):
-    saddle = doc.CableSaddle.Shape
-    for x in layout['cap_bolts_x_mm']:
-        y = layout['cap_bolt_y_mm']
-        plug = cylinder(2.12, 4.22, (x,y,-61.72))
-        saddle = saddle.fuse(plug)
-        saddle = saddle.cut(hexagon(5.8, 6.65, (x,y,-68.65), Z, Y))
-        saddle = saddle.cut(cylinder(1.70, 4.75, (x,y,-62.20)))
+def cable_stock(doc, folder):
+    floor, roof = CAP_NUT_FLOOR_Z, CAP_NUT_ROOF_Z
+    saddle = doc.CableSaddle.Shape.fuse([
+        box(lo, hi, 116.8, 125., -68.5, -57.5) for lo, hi in [(-52.25, -50.), (50., 52.25)]
+    ])
+
+    def mouth(x, y, half, clearance):
+        points = [V(x + dx, y, z) for dx, z in [
+            (-half, floor - clearance), (half, floor - clearance),
+            (half, roof + clearance), (-half, roof + clearance),
+        ]]
+        return Part.makePolygon(points + points[:1])
+
+    half = CAP_NUT_WIDTH / 2
+    tip = CAP_BOLT_SEAT_Z - CAP_BOLT_LENGTH
+    cuts = []
+    for x in CAP_BOLTS:
+        nose = hexagon(CAP_NUT_WIDTH+.12, roof - floor, (x, CAP_BOLT_Y, floor))
+        nose = nose.common(box(x-half, x+half, CAP_BOLT_Y-3.6, CAP_BOLT_Y+.1, floor, roof))
+        cuts.extend([
+            nose,
+            box(x-half, x+half, CAP_BOLT_Y, 125.2, floor, roof),
+            Part.makeLoft([mouth(x, 124.1, half, 0.), mouth(x, 125.2, half+.4, .25)], True, True),
+            cylinder(1.70, -57.35 - (tip-.7), (x, CAP_BOLT_Y, tip-.7)),
+        ])
+    saddle = saddle.cut(cuts)
     printed(doc,'CableSaddle',saddle,folder/'40_captive_cable_tray.stl')
 
 

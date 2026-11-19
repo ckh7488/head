@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "4f3746850ad5f6261f5e837421fef2063e85d2dbc08b35f5eb462be3b6cd2f4e",
+  "cad_sha256": "d5104525691fcb6a29eca3c833ef7af93d52a3c7518d9b2a1398ec2339e99ef5",
   "stops": {
     "rotor": {
       "remaining": 0.5,
@@ -333,5 +333,39 @@
         ]
       ]
     ]
+  },
+  "cable_assembly": {
+    "x": [
+      -47.0,
+      -28.3,
+      -3.0,
+      22.0,
+      47.0
+    ],
+    "y": 121.6,
+    "nut_floor": -65.15,
+    "nut_roof": -62.0,
+    "nut_width": 5.9,
+    "nut_travel": 18.0,
+    "bolt_seat": -49.1,
+    "bolt_length": 16.0,
+    "cover_travel": 25.0,
+    "tray_mounts": [
+      [
+        -28.5,
+        93.6,
+        -71.0
+      ],
+      [
+        28.5,
+        93.6,
+        -71.0
+      ]
+    ],
+    "tray_travel": 26.0,
+    "tray_bolt_travel": 51.0,
+    "tray_washer_y": 83.75,
+    "tray_nut_y": 82.95,
+    "tray_inner_travel": 14.0
   }
 }

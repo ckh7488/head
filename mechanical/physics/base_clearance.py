@@ -10,11 +10,15 @@ import sys
 import FreeCAD as App
 import Part
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from fixtures import (
+    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_NUT_ROOF_Z,
+    SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_WASHER_Y,
+)
 from stock import YOKE_MOUNTS, nut, socket_screw
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B9-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B10-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -40,19 +44,20 @@ def check_pairs(doc):
     yield gate, base, "Cable cover to base"
     along = V(0, -1, 0)
     fasteners = []
-    for x in (-28.5, 28.5):
-        screw = socket_screw(3,16.,(x,93.6,-71.),(0,-1,0))
-        washer = Part.makeCylinder(3.55, .8, V(x, 83.75, -71), along)
-        washer = washer.cut(Part.makeCylinder(1.64, 1., V(x, 83.85, -71), along))
-        tail = nut(3,(x,82.95,-71.),(0,-1,0))
+    for seat in SADDLE_MOUNTS:
+        x, _, z = seat
+        screw = socket_screw(3,16.,seat,(0,-1,0))
+        washer = Part.makeCylinder(3.55, .8, V(x, SADDLE_WASHER_Y, z), along)
+        washer = washer.cut(Part.makeCylinder(1.64, 1., V(x, SADDLE_WASHER_Y+.10, z), along))
+        tail = nut(3,(x,SADDLE_NUT_Y,z),(0,-1,0))
         fasteners.extend((screw, washer, tail))
     for fastener in fasteners:
         for static in (base, saddle, doc.Part001.Shape, doc.Part069.Shape, doc.Part070.Shape):
             yield fastener, static, "Saddle fastener envelope"
     cables = json.loads(doc.R5.MotionGeometry)['cables']
     for x in cables['cap_bolts_x_mm']:
-        screw = socket_screw(3,16.,(x,121.6,-49.1),(0,0,-1))
-        tail = nut(3,(x,121.6,-64.43),flat_normal=(0,1,0))
+        screw = socket_screw(3,CAP_BOLT_LENGTH,(x,CAP_BOLT_Y,CAP_BOLT_SEAT_Z),(0,0,-1))
+        tail = nut(3,(x,CAP_BOLT_Y,CAP_NUT_ROOF_Z-2.4))
         for static, tool in product((base,saddle,gate),(screw,tail)):
             yield tool, static, f"Cable cover {x:g} screw and nut"
     for x,y in HATCH_MOUNTS:

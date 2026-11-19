@@ -13,10 +13,15 @@ const hatchNuts = gear("hatchNut", "nut", 3, 0, [0, 0, 1], at(service.base_cente
 const hatchBolts = gear("hatchBolt", "bolt", 3, 8, [0, 0, 1], at(service.base_centers, service.base_screw_seat));
 const hubBolts = gear("hubBolt", "bolt", 3, 8, [0, 0, -1], at(service.board_centers, service.board_screw_seat));
 const hubNuts = gear("hubNut", "nut", 3, 0, [0, 0, 1], at(service.board_centers, service.board_nut_seat), Math.PI / 6);
-const cableX = [-47, -28.3, -3, 22, 47];
-const cableNuts = gear("cableNut", "nut", 3, 0, [0, 0, 1], cableX.map(x => [x, 121.6, -64.43]));
-const cableBolts = gear("cableBolt", "bolt", 3, 16, [0, 0, -1], cableX.map(x => [x, 121.6, -49.1]));
-const clipBolts = gear("clipBolt", "bolt", 3, 16, [0, -1, 0], [-28.5, 28.5].map(x => [x, 93.6, -71]));
+const cable = review.cable_assembly;
+const cableSeats = z => cable.x.map(x => [x, cable.y, z]);
+const cableNuts = gear("cableNut", "nut", 3, 0, [0, 0, 1], cableSeats(cable.nut_floor), Math.PI / 6);
+const cableTightNuts = gear("cableTightNut", "nut", 3, 0, [0, 0, 1], cableSeats(cable.nut_roof - 2.4), Math.PI / 6);
+const cableBolts = gear("cableBolt", "bolt", 3, cable.bolt_length, [0, 0, -1], cableSeats(cable.bolt_seat));
+const clipBolts = gear("clipBolt", "bolt", 3, 16, [0, -1, 0], cable.tray_mounts);
+const clipSeats = y => cable.tray_mounts.map(([x, , z]) => [x, y, z]);
+const clipWashers = gear("clipWasher", "washer", 3, 0, [0, -1, 0], clipSeats(cable.tray_washer_y));
+const clipNuts = gear("clipNut", "nut", 3, 0, [0, -1, 0], clipSeats(cable.tray_nut_y));
 const rotorBolts = gear("rotorBolt", "bolt", 3, 10, [0, 0, 1], across([-12, 12], [11, 31], (x, y) => [x, y, -37.9]));
 const mastBolt = gear("mastBolt", "bolt", 2, 6, [0, 0, -1], [[0, 8, -32.9]]);
 const mastTool = gear("mastTool", "tool", 2, 36, [0, 0, 1], [[0, 8, -30.9]]);
@@ -48,7 +53,8 @@ const linkNuts = [
 ];
 
 export const hardware = [
-  ...hatchNuts, ...hatchBolts, ...hubBolts, ...hubNuts, ...cableNuts, ...cableBolts, ...clipBolts,
+  ...hatchNuts, ...hatchBolts, ...hubBolts, ...hubNuts, ...cableNuts, ...cableTightNuts, ...cableBolts,
+  ...clipBolts, ...clipWashers, ...clipNuts,
   ...rotorBolts, ...mastBolt, ...mastTool, ...yokeNuts, ...yokeBolts, ...railNuts, ...railBolts,
   ...crankNuts, ...crankBolts, ...linkBolts, ...linkNuts, ...blinkMotorHeads,
 ];
@@ -61,6 +67,8 @@ const eyes = "Part024 Part025 Part026 Part027 Part028 Part029 Part030 Part031 Pa
 const yoke = "Part010 Part011 Part012 Part014 Part018 Part016";
 const jaw = "Jaw_30_moving_jaw Jaw_36_left_jaw_servo_stay Jaw_37_right_jaw_bearing_stay Jaw_38_left_jaw_drive_arm Jaw_39_right_jaw_pivot_arm Jaw_XL330_M288_Jaw Jaw_MR104ZZ_jaw_right Jaw_Pin_jaw_4x10";
 const camera = "Part065 Part066 Part067 Part068 Part080";
+const cableTray = "Part000 CableSaddle";
+const mountedCableTray = `${cableTray} ${names(clipBolts)} ${names(clipWashers)} ${names(clipNuts)}`;
 
 export const steps = [
   {
@@ -107,22 +115,40 @@ export const steps = [
     cut: ["y", 71], checked: true,
   },
   {
-    id: "cable-nuts", group: "받침", title: "케이블 너트 먼저", base: "CableSaddle",
-    moves: [move(names(cableNuts), 0, 0, -18)], focus: [0, 112, -65], view: [1, 1.65, -.8], span: 88,
-    task: "케이블 트레이 아래에서 M3 너트 5개를 넣습니다.", check: "40번 트레이를 받침에 붙이기 전에 작업합니다.",
-    stock: "M3 일반 육각너트 ×5",
+    id: "cable-tray", group: "받침", title: "트레이를 뒤에서 대기", base: "Part000",
+    moves: [move("CableSaddle", 0, cable.tray_travel, 0)], focus: [0, 95, -64], view: [1, 1.4, .83], span: 130,
+    task: "40번 트레이를 받침 뒤쪽에서 수평으로 밀어 붙입니다.",
+    check: "두 나사 구멍을 받침 구멍과 맞춥니다. 받침 위는 열어 둡니다.", checked: true,
   },
   {
-    id: "cable-tray", group: "받침", title: "트레이를 뒤에서 체결", base: "Part000",
-    moves: [move(`CableSaddle ${names(clipBolts)}`, 0, 26, 0)], focus: [0, 92, -64], view: [1, 1.4, .83], span: 130,
-    task: "받침 뒤에서 트레이를 대고 M3 나사 2개로 고정합니다.", check: "안쪽 평와셔와 육각너트를 놓을 자리가 있어야 합니다.",
-    stock: "M3×16 일반 육각렌치 나사 ×2",
+    id: "cable-tray-fasteners", group: "받침", title: "트레이 나사와 안쪽 너트", base: cableTray,
+    moves: [move(names(clipBolts), 0, cable.tray_bolt_travel, 0),
+      move(`${names(clipWashers)} ${names(clipNuts)}`, 0, -cable.tray_inner_travel, 0)],
+    focus: [0, 105, -69], view: [1.1, 1.6, .9], span: 132, cut: ["x", -28.5],
+    task: "뒤쪽 큰 구멍으로 M3×16을 넣고, 받침 안쪽에서 평와셔와 너트를 끼웁니다.",
+    check: "2.5 mm 육각렌치의 긴 쪽으로 조입니다. 절개 보기에서 나사 머리와 안쪽 너트 자리를 확인할 수 있습니다.",
+    stock: "M3×16 원통머리 · 일반 너트 · 평와셔 각 2개", checked: true,
   },
   {
-    id: "cable-cover", group: "받침", title: "커넥터를 덮개로 잡기", base: `Part000 CableSaddle ${names(cableNuts)}`,
-    moves: [move(`CableGate ${names(cableBolts)}`, 0, 0, 25)], focus: [0, 113, -53], view: [1, 1.6, 1.05], span: 97,
+    id: "cable-nuts", group: "받침", title: "케이블 너트를 뒤에서 넣기", base: mountedCableTray,
+    moves: [move(names(cableNuts), 0, cable.nut_travel, 0)], focus: [0, 127, -62],
+    view: [.5, 2, .3], span: 119, cut: ["z", -63.55],
+    task: "트레이 뒤에 열린 가로 홈 다섯 곳에 M3 너트를 한 개씩 밀어 넣습니다.",
+    check: "너트의 평평한 면을 홈 벽과 나란히 맞추고, 위에서 봤을 때 너트 구멍이 보이게 놓습니다.",
+    stock: "M3 일반 육각너트 ×5", note: `홈 폭 ${cable.nut_width.toFixed(2)} mm · P1S 시험판 2번`, checked: true,
+  },
+  {
+    id: "cable-cover", group: "받침", title: "커넥터 위에 덮개 내리기", base: `${mountedCableTray} ${names(cableNuts)}`,
+    moves: [move("CableGate", 0, 0, cable.cover_travel)], focus: [0, 113, -53], view: [1, 1.6, 1.05], span: 115,
     task: "플러그 뒤턱을 홈에 밀착시킨 다음 42번 덮개를 위에서 내립니다.", check: "선만 누르지 않고 플러그 뒤턱이 걸려야 합니다. 실물에서는 10 N으로 당겨 봅니다.",
-    stock: "M3×16 일반 육각렌치 나사 ×5",
+    checked: true,
+  },
+  {
+    id: "cable-cover-bolts", group: "받침", title: "덮개 나사 다섯 개 조이기", base: `${mountedCableTray} CableGate ${names(cableTightNuts)}`,
+    moves: [move(names(cableBolts), 0, 0, cable.cover_travel)], focus: [0, 119, -53], view: [.65, 1.65, 1.05], span: 118,
+    task: "덮개가 내려앉은 뒤 M3×16을 위에서 걸고 육각렌치로 조입니다.",
+    check: "너트가 홈 벽에 잡힌 상태에서 나사가 돌고 덮개가 고르게 닫히는지 확인합니다.",
+    stock: "M3×16 일반 육각렌치 나사 ×5", checked: true,
   },
   {
     id: "base-boards", group: "받침", title: "보드 캐리어 넣기", base: "Part000",

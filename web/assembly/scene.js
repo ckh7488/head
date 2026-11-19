@@ -42,6 +42,8 @@ function fastener(part) {
   if (type === "nut") {
     const across = isSmall ? 4 : 5.5;
     add(ring(across / Math.sqrt(3), radius, isSmall ? 1.6 : 2.4, 6, 24, phase), 0, false);
+  } else if (type === "washer") {
+    add(ring(3.5, 1.6, .5, 30, 24), 0, false);
   } else if (type === "tool") {
     add(new THREE.CylinderGeometry(1, 1, length, 12), length / 2);
   } else {
@@ -53,7 +55,7 @@ function fastener(part) {
     add(ring(head, recess, height / 2, 30, 6), -height, false);
   }
 
-  const labels = { nut: `M${size} 일반 육각너트`, tool: "육각렌치 접근 공간", head: `M${size} 육각렌치 원통머리 외형` };
+  const labels = { nut: `M${size} 일반 육각너트`, washer: `M${size} 평와셔`, tool: "육각렌치 접근 공간", head: `M${size} 육각렌치 원통머리 외형` };
   const label = labels[type] || `M${size}×${length} 육각렌치 원통머리`;
   return { node, label, materials: [material], kind: "fastener" };
 }
@@ -82,7 +84,7 @@ export class WalkthroughScene {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     this.renderer.localClippingEnabled = true;
-    this.renderer.domElement.setAttribute("aria-label", "B9 움직이는 CAD 형상");
+    this.renderer.domElement.setAttribute("aria-label", "B10 움직이는 CAD 형상");
     this.host.append(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = false;

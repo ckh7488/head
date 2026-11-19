@@ -13,7 +13,13 @@ import trimesh
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'mechanical'))
 sys.path.insert(0, str(ROOT / 'mechanical' / 'physics'))
+from cable_assembly import check_paths
 from export_cad import world_shape
+from fixtures import (
+    CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS, CAP_NUT_FLOOR_Z,
+    CAP_NUT_ROOF_Z, CAP_NUT_TRAVEL, CAP_NUT_WIDTH, CAP_TRAVEL, SADDLE_BOLT_TRAVEL,
+    SADDLE_INNER_TRAVEL, SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_TRAVEL, SADDLE_WASHER_Y,
+)
 from motor_seats import HEAD_SEATS
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 from stock import socket_screw
@@ -38,6 +44,13 @@ def export(cad, world, output):
             part: [[size, list(V(*face) - depth * V(*outward)), list(-V(*outward))]
                    for size, face, outward, depth in seats]
             for part, seats in HEAD_SEATS.items()
+        },
+        'cable_assembly': {
+            'x': CAP_BOLTS, 'y': CAP_BOLT_Y, 'nut_floor': CAP_NUT_FLOOR_Z, 'nut_roof': CAP_NUT_ROOF_Z,
+            'nut_width': CAP_NUT_WIDTH, 'nut_travel': CAP_NUT_TRAVEL,
+            'bolt_seat': CAP_BOLT_SEAT_Z, 'bolt_length': CAP_BOLT_LENGTH, 'cover_travel': CAP_TRAVEL,
+            'tray_mounts': SADDLE_MOUNTS, 'tray_travel': SADDLE_TRAVEL, 'tray_bolt_travel': SADDLE_BOLT_TRAVEL,
+            'tray_washer_y': SADDLE_WASHER_Y, 'tray_nut_y': SADDLE_NUT_Y, 'tray_inner_travel': SADDLE_INNER_TRAVEL,
         },
     }
     scene = trimesh.Scene()
@@ -79,6 +92,7 @@ def export(cad, world, output):
         return [trimesh.boolean.intersection([a, stl(identifier)], engine='manifold') for identifier in fixed_ids]
 
     try:
+        check_paths(doc)
         motor = shape('Part017')
         rotor_offset = .5
         record('rotor', rotor_offset, [
@@ -115,7 +129,7 @@ def export(cad, world, output):
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('world', type=Path, help='Directory of world-coordinate STL files from export_cad.py')
-    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B9-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B10-Assembly.FCStd')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     export(args.cad, args.world, args.output)

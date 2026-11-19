@@ -1,4 +1,4 @@
-"""Build R5 B9 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B10 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -628,16 +628,16 @@ def main(output=BUILD):
             print_mesh(shape, output/'STL'/f'{label.replace(" ", "_")}.stl', 'y+' if name == 'BallastTray' else None)
     rig = json.loads(doc.R5.MotionGeometry)
     blink_stock(doc, output/'STL', rig['blink'])
-    cable_stock(doc, output/'STL', rig['cables'])
+    cable_stock(doc, output/'STL')
     hatch_stock(doc, output/'STL')
     ballast_stock(doc, output/'STL')
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B9 · prototype'
+    doc.R5.Label = 'R5 B10 · prototype'
     doc.R5.Status = 'Cylindrical hex-socket heads only. DYNAMIXEL case thread fit pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B9-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B10-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

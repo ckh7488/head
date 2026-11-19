@@ -1,19 +1,19 @@
-# R5 B9
+# R5 B10
 
 코 안의 USB 카메라로 얼굴을 보고 눈·목을 움직이는 해골 헤드입니다. OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 6축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
 조립용 볼트 머리는 **육각렌치 원통머리 ISO 4762 (DIN 912)**로 고정합니다. 모터 본체와 혼의 체결품은 나사산을 확인하는 단계입니다. [기구 부품표](mechanical/BOM.csv)
 
-**시험판 3번에서 바닥 덮개와 너트 홈부터 확인합니다.** 전체 조립은 목 회전판 체결과 앞 해골 장착 문제를 해결한 뒤 진행합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B9-Fit-P1S.3mf)
+**시험판 2번은 케이블 너트 홈, 3번은 바닥 덮개용입니다.** 전체 조립은 목 회전판 체결과 앞 해골 장착 문제를 해결한 뒤 진행합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B10-Fit-P1S.3mf)
 
 | 작업 | 시작 파일 |
 |---|---|
-| 기구 확인 및 수정 | [B9 FreeCAD 조립본](mechanical/R5-B9-Assembly.FCStd) |
-| P1S 전체 출력 | [B9 출력판 12장과 선택 1장](mechanical/R5-B9-P1S.3mf) |
+| 기구 확인 및 수정 | [B10 FreeCAD 조립본](mechanical/R5-B10-Assembly.FCStd) |
+| P1S 전체 출력 | [B10 출력판 12장과 선택 1장](mechanical/R5-B10-P1S.3mf) |
 | 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
-| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b9/assembly/) · [B9 웹 뷰어](web/) |
+| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b10/assembly/) · [B10 웹 뷰어](web/) |
 
 ## 웹 뷰어
 
@@ -30,6 +30,7 @@ CAD를 수정하면 기구 문서의 `--world` 내보내기와 해석 환경을 
 python web/export_cad.py build/physics/cad build/web
 npx --yes gltfpack@0.24.0 -i build/web/assembly.glb -o web/assets/assembly.glb -cc -kn -km -noq
 cp build/web/assembly.json web/assets/assembly.json
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python web/assembly/export_review.py build/physics/cad/world
 ```
 
 외장 메시를 BoneHub의 Visible Human Full-Skeleton 3D Bone Models에서 개작했습니다. [원본](https://doi.org/10.57967/hf/10464) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

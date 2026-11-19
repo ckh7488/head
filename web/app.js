@@ -354,7 +354,7 @@ async function start() {
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
   } catch (error) {
-    console.error("R5 B9 viewer could not load:", error);
+    console.error("R5 B10 viewer could not load:", error);
     loader.classList.add("failed");
     loader.querySelector(".loader").hidden = true;
     status.textContent = "3D 모델을 표시할 수 없습니다. WebGL을 지원하는 브라우저에서 다시 열어 주세요.";
