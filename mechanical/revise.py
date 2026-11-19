@@ -1,4 +1,4 @@
-"""Build R5 B7 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B8 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -615,7 +615,7 @@ def main(output=BUILD):
     add_fixture(doc, base_group, 'CableGate', '42 interlocking cable cover', gate, 'fixed', True)
     print_mesh(gate, output/'STL'/'42_captive_cable_cover.stl', 'z-')
     print_mesh(cable_wall_fixture(base), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.Part000.Label = '01 Base cup B5 · harness and hatch clearance'
+    doc.Part000.Label = '01 Base cup B8 · reinforced hatch and top-loaded nuts'
     revise_head(doc, output/'STL')
     tray, cover, stack = rear_ballast()
     for name, label, shape in (
@@ -637,10 +637,10 @@ def main(output=BUILD):
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B7 · prototype'
-    doc.R5.Status = 'Standard socket screws and plain hex nuts. Hardware measurements pending.'
+    doc.R5.Label = 'R5 B8 · prototype'
+    doc.R5.Status = 'B8 service hatch and standard M3 × 8 screws. Hardware measurements pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B7-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B8-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

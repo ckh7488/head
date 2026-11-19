@@ -1,4 +1,4 @@
-"""Export interference solids for the B7 assembly walkthrough using FreeCAD."""
+"""Export interference solids for the B8 assembly walkthrough using FreeCAD."""
 
 from argparse import ArgumentParser
 from hashlib import sha256
@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'mechanical'))
 sys.path.insert(0, str(ROOT / 'mechanical' / 'physics'))
 from export_cad import world_shape
+from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 from stock import socket_screw
 
 V = App.Vector
@@ -26,7 +27,13 @@ def mesh(shape):
 
 def export(cad, world, output):
     doc = App.openDocument(str(cad.resolve()))
-    result = {'cad_sha256': sha256(cad.read_bytes()).hexdigest(), 'stops': {}}
+    result = {
+        'cad_sha256': sha256(cad.read_bytes()).hexdigest(), 'stops': {},
+        'service_hatch': {
+            'base_centers': HATCH_MOUNTS, 'base_nut_seat': HATCH_NUT_SEAT, 'base_screw_seat': HATCH_SCREW_SEAT,
+            'board_centers': HUB_MOUNTS, 'board_nut_seat': HUB_NUT_SEAT, 'board_screw_seat': HUB_SCREW_SEAT,
+        },
+    }
     scene = trimesh.Scene()
     red = trimesh.visual.material.PBRMaterial(
         baseColorFactor=[255, 79, 71, 255], emissiveFactor=[.72, .055, .045], roughnessFactor=.65,
@@ -102,7 +109,7 @@ def export(cad, world, output):
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('world', type=Path, help='Directory of world-coordinate STL files from export_cad.py')
-    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B7-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B8-Assembly.FCStd')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     export(args.cad, args.world, args.output)

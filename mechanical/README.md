@@ -1,10 +1,12 @@
-# B7 기구 조립
+# B8 기구 조립
 
-FreeCAD에서 [B7 조립본](R5-B7-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B7-P1S.3mf) · [시험판](R5-B7-Fit-P1S.3mf)
+FreeCAD에서 [B8 조립본](R5-B8-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B8-P1S.3mf) · [시험판](R5-B8-Fit-P1S.3mf)
 
 부품을 넣는 방향, 너트를 미리 넣을 자리, 가조립에서 확인할 곳은 [조립절차서](ASSEMBLY.md)를 따릅니다.
 
 출력 프로젝트는 P1S 0.4 mm 노즐, PETG HF, 0.20 mm 레이어, 벽 4줄을 사용합니다. 노즐 245 °C, 텍스처 PEI 베드 70 °C, 최대 유량 14 mm³/s를 설정했습니다. 눈꺼풀 레일은 내부 채움 100%입니다. 머리 프레임과 목의 지지 부품은 벽 6줄과 내부 채움 35%로 출력합니다. 13번 균형추 트레이는 선택입니다.
+
+받침과 허브 덮개는 벽 5줄, 내부 채움 35%입니다. 받침의 얕은 아래쪽 홈에 빌드판에서 올라오는 서포트를 쓰고 덮개는 바깥면을 바닥에 놓습니다. 시험판 3번에 같은 설정을 적용했습니다. [바닥 덮개 조립](https://r5-b1-review.ckh.chatgpt.site/b8/assembly/#hatch-nuts)
 
 | 부위 | 제작 전 확인 |
 |---|---|
@@ -39,20 +41,21 @@ FreeCAD에서 [B7 조립본](R5-B7-Assembly.FCStd)을 엽니다. `revise.py`가 
 build/freecad-venv/bin/pip install trimesh==4.10.1 manifold3d==3.3.2 'scipy<2'
 fc() { QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python "$@"; }
 fc mechanical/revise.py
-fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B7-Assembly.FCStd
+fc mechanical/physics/base_clearance.py --cad build/mechanical/R5-B8-Assembly.FCStd
+fc mechanical/physics/service_clearance.py build/mechanical/R5-B8-Assembly.FCStd
 kicad-cli pcb export step --board-only --user-origin 65x42mm -o build/mechanical/c3.step electronics/c3-rf/C3_Antenna.kicad_pcb
 kicad-cli pcb export step --board-only --user-origin 100x80mm -o build/mechanical/hub.step electronics/servo-hub/R5_Servo_Hub.kicad_pcb
-fc mechanical/physics/board_clearance.py build/mechanical/R5-B7-Assembly.FCStd build/mechanical/c3.step build/mechanical/hub.step
-fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B7-Assembly.FCStd --world build/physics/cad
+fc mechanical/physics/board_clearance.py build/mechanical/R5-B8-Assembly.FCStd build/mechanical/c3.step build/mechanical/hub.step
+fc mechanical/physics/export_cad.py --cad build/mechanical/R5-B8-Assembly.FCStd --world build/physics/cad
 
 python3.12 -m venv build/physics-venv
 . build/physics-venv/bin/activate
 python -m pip install -r mechanical/physics/requirements.txt
-QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B7-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
+QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B8-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
 python mechanical/physics/check_head.py build/physics/cad build/physics/clearance.json
 python mechanical/physics/tolerances.py build/physics/cad build/physics/tolerance.json
 mkdir -p build/p1s
-bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B7-P1S.3mf
+bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B8-P1S.3mf
 python mechanical/physics/slicer_mass.py build/p1s/sliced-grams.json build/p1s/plate_{4,5,6,7,8,9,10,12,13}.gcode
 python mechanical/physics/multibody.py build/physics/cad build/physics/motion --sliced-grams build/p1s/sliced-grams.json
 python mechanical/physics/blink_fea.py build/physics/cad build/physics/blink-fea.json

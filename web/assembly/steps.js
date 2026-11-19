@@ -1,16 +1,18 @@
+import review from "./interference.json" with { type: "json" };
+
 const ids = value => value.split(" ");
 const move = (names, ...offset) => ({ ids: ids(names), offset });
-const gear = (prefix, type, size, length, axis, seats) =>
-  seats.map((seat, i) => ({ id: prefix + i, type, size, length, axis, seat }));
+const gear = (prefix, type, size, length, axis, seats, phase = 0) =>
+  seats.map((seat, i) => ({ id: prefix + i, type, size, length, axis, seat, phase }));
 const names = items => items.map(item => item.id).join(" ");
 const across = (xs, ys, point) => xs.flatMap(x => ys.map(y => point(x, y)));
 
-const hatchSeats = [[-41.85, 55], [41.85, 55], [-26.9, 82.25], [26.9, 82.25]];
-const hubSeats = across([-30.8, 30.8], [46.2, 72.8], (x, y) => [x, y, -72.5]);
-const hatchNuts = gear("hatchNut", "nut", 3, 0, [0, 0, 1], hatchSeats.map(([x, y]) => [x, y, -76.61]));
-const hatchBolts = gear("hatchBolt", "flat", 3, 10, [0, 0, 1], hatchSeats.map(([x, y]) => [x, y, -82.97]));
-const hubBolts = gear("hubBolt", "bolt", 3, 10, [0, 0, -1], hubSeats);
-const hubNuts = gear("hubNut", "nut", 3, 0, [0, 0, 1], hubSeats.map(([x, y]) => [x, y, -80.72]));
+const service = review.service_hatch;
+const at = (centers, z) => centers.map(([x, y]) => [x, y, z]);
+const hatchNuts = gear("hatchNut", "nut", 3, 0, [0, 0, 1], at(service.base_centers, service.base_nut_seat), Math.PI / 6);
+const hatchBolts = gear("hatchBolt", "bolt", 3, 8, [0, 0, 1], at(service.base_centers, service.base_screw_seat));
+const hubBolts = gear("hubBolt", "bolt", 3, 8, [0, 0, -1], at(service.board_centers, service.board_screw_seat));
+const hubNuts = gear("hubNut", "nut", 3, 0, [0, 0, 1], at(service.board_centers, service.board_nut_seat), Math.PI / 6);
 const cableX = [-47, -28.3, -3, 22, 47];
 const cableNuts = gear("cableNut", "nut", 3, 0, [0, 0, 1], cableX.map(x => [x, 121.6, -64.43]));
 const cableBolts = gear("cableBolt", "bolt", 3, 16, [0, 0, -1], cableX.map(x => [x, 121.6, -49.1]));
@@ -38,7 +40,7 @@ const linkBolts = [
   ...gear("rightLink", "bolt", 2, 8, [-1, 0, 0], [[53.75, sideY, sideZ], [53.5, lidY, lidZ]]),
 ];
 const linkNuts = [
-  ...gear("middleNut", "nut", 2, 0, [1, 0, 0], [[1.25, servoY, servoZ]]),
+  ...gear("middleNut", "nut", 2, 0, [1, 0, 0], [[1.25, servoY, servoZ]], Math.PI / 6),
   ...gear("linkNutPos", "nut", 2, 0, [1, 0, 0], [[10.55, crankY, crankZ], [-47.65, sideY, sideZ], [-47.65, lidY, lidZ]]),
   ...gear("linkNutNeg", "nut", 2, 0, [-1, 0, 0], [[47.65, sideY, sideZ], [47.65, lidY, lidZ]]),
 ];
@@ -61,21 +63,46 @@ const camera = "Part065 Part066 Part067 Part068 Part080";
 export const steps = [
   {
     id: "hatch-nuts", group: "받침", title: "바닥 덮개 너트", base: "Part000",
-    moves: [move(names(hatchNuts), 0, 0, 22)], focus: [0, 68, -66], view: [1, -1.4, 1.6], span: 104,
-    task: "받침 안쪽에서 M3 너트 4개를 먼저 넣습니다.", check: "너트가 홈 바닥까지 앉아야 밑면에서 나사가 잡힙니다.",
-    stock: "M3 일반 육각너트 ×4", note: "B7 전체 출력판 11번에 35번 허브 덮개가 있습니다.",
+    moves: [move(names(hatchNuts), 0, 0, 22)], focus: [0, 60, -64], view: [1, -.78, 2.5], span: 116,
+    task: "받침 안쪽에서 M3 너트 4개를 위에서 떨어뜨려 넣습니다.",
+    check: "평평한 면을 맞춰 내려놓습니다. 손이 좁으면 M3×8 한 개를 너트에 두어 바퀴 걸어 손잡이처럼 쓴 뒤 빼면 됩니다.",
+    stock: "M3 일반 육각너트 ×4", note: "홈 폭 5.95 mm · 입구 6.65 mm · 너트 맞은편 면 5.50 mm",
+    cut: ["x", 41.2], checked: true,
+  },
+  {
+    id: "hub-nuts", group: "받침", title: "덮개 기둥에 너트 넣기", base: "HubHolder",
+    moves: [move(names(hubNuts), 0, 0, 20)], focus: [0, 58, -72], view: [1.35, -1.25, .94], span: 100,
+    task: "덮개 안쪽 네 기둥에도 M3 너트를 위에서 넣습니다.",
+    check: "홈에 너트를 넣고 나면 허브 PCB가 위에서 눌러 잡습니다.",
+    stock: "M3 일반 육각너트 ×4", note: "덮개 가장자리 4.0 mm · 중앙 5.0 mm",
+    cut: ["x", 30.8], checked: true,
   },
   {
     id: "hub-board", group: "받침", title: "허브 PCB를 덮개에", base: `HubHolder ${names(hubNuts)}`,
-    moves: [move(`${PCB} ${names(hubBolts)}`, 0, 0, 30)], focus: [0, 62, -69], view: [1, -1.15, 1], span: 93,
-    task: "덮개 위로 허브를 올리고 위에서 M3×10 나사 4개를 넣습니다.", check: "일반 너트는 덮개 아래 홈에 넣습니다. 커넥터가 받침 안을 향합니다.",
-    stock: "M3×10 일반 육각렌치 나사 ×4",
+    moves: [move(PCB, 0, 0, 30)], focus: [0, 62, -69], view: [1, -1.15, 1], span: 93,
+    task: "너트가 들어간 덮개 위에 기판을 얹습니다.", check: "기판의 네 구멍이 홈 중심과 맞고, 납땜부가 기둥에 닿지 않는지 확인합니다.",
+  },
+  {
+    id: "hub-bolts", group: "받침", title: "허브 기판 나사 체결", base: `HubHolder ${PCB} ${names(hubNuts)}`,
+    moves: [move(names(hubBolts), 0, 0, 19)], focus: [0, 59, -69], view: [1, -1.15, 1.45], span: 94,
+    task: "기판 위에서 M3×8 네 개를 넣어 너트에 잡습니다.",
+    check: "끝이 덮개 바닥까지 나오지 않습니다. 네 나사를 조금씩 번갈아 조입니다.",
+    stock: "M3×8 일반 육각렌치 나사 ×4", checked: true,
   },
   {
     id: "hatch-fit", group: "받침", title: "아래에서 덮개 닫기", base: `Part000 CableSaddle ${names(hatchNuts)}`,
-    moves: [move(`HubHolder ${PCB} ${names(hatchBolts)}`, 0, 0, -30)], focus: [0, 58, -92], view: [1, 1.2, -1.15], span: 135,
-    task: "허브와 덮개를 통째로 아래에서 들어 올립니다.", check: "배선을 당기지 않고 덮개를 30 mm 내릴 수 있게 여유를 둡니다. 바닥의 나사 머리는 평평하게 들어갑니다.",
-    stock: "M3×10 육각렌치 접시머리 ×4", checked: true,
+    moves: [move(`HubHolder ${PCB} ${names(hubNuts)} ${names(hubBolts)}`, 0, 0, -30)], focus: [0, 63, -90], view: [1.25, .98, -.6], span: 133,
+    task: "허브와 덮개를 통째로 아래에서 들어 올립니다.",
+    check: "서포트를 떼어낸 받침 홈에 덮개가 힘 없이 들어가야 합니다. 배선에는 덮개를 30 mm 내릴 여유를 둡니다.",
+    note: "좌우·앞뒤에 편측 0.55 mm 여유를 뒀습니다.", cut: ["y", 51], checked: true,
+  },
+  {
+    id: "hatch-bolts", group: "받침", title: "덮개 바깥 나사 체결", base: `Part000 HubHolder ${PCB} ${names(hatchNuts)}`,
+    moves: [move(names(hatchBolts), 0, 0, -21)], focus: [0, 61, -82], view: [1.2, .88, -1], span: 118,
+    task: "아래에서 M3×8 두 쌍을 넣고 일반 육각렌치로 조입니다.",
+    check: "본체를 받쳐 세운 채 아래에서 조입니다. 뒤집어 작업한다면 열린 너트 홈을 종이테이프로 덮어 둡니다.",
+    stock: "M3×8 일반 육각렌치 나사 ×4", note: "나사 머리는 받침 밑면보다 0.35 mm 안쪽입니다.",
+    cut: ["y", 71], checked: true,
   },
   {
     id: "cable-nuts", group: "받침", title: "케이블 너트 먼저", base: "CableSaddle",

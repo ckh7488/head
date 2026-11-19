@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "d7875a4875d6a7c43fd34b5ca7eabe2070f1d362313987c99f73535deb1685ee",
+  "cad_sha256": "deecbc339d36ef147402488437075f6315728bd9287664562a9da45c498cdd1d",
   "stops": {
     "rotor": {
       "remaining": 0.5,
@@ -47,5 +47,47 @@
         "rear-shell-1"
       ]
     }
+  },
+  "service_hatch": {
+    "base_centers": [
+      [
+        -41.2,
+        51.0
+      ],
+      [
+        -41.2,
+        71.0
+      ],
+      [
+        41.2,
+        51.0
+      ],
+      [
+        41.2,
+        71.0
+      ]
+    ],
+    "base_nut_seat": -74.78,
+    "base_screw_seat": -79.65,
+    "board_centers": [
+      [
+        -30.8,
+        46.2
+      ],
+      [
+        -30.8,
+        72.8
+      ],
+      [
+        30.8,
+        46.2
+      ],
+      [
+        30.8,
+        72.8
+      ]
+    ],
+    "board_nut_seat": -76.8,
+    "board_screw_seat": -72.5
   }
 }

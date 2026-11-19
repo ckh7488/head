@@ -97,7 +97,7 @@ def extract(path, output, include_world):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B7-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B8-Assembly.FCStd')
     parser.add_argument('--world', action='store_true', help='Export world meshes for the clearance sweep')
     parser.add_argument('output', type=Path)
     args = parser.parse_args()

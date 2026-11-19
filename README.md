@@ -1,17 +1,17 @@
-# R5 B7
+# R5 B8
 
 코 안의 USB 카메라로 얼굴을 보고 눈·목을 움직이는 해골 헤드입니다. OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 6축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
-**B7은 눈꺼풀과 케이블 고정부의 시험판부터 출력합니다.** 전체 조립은 목 회전판 체결과 앞 해골 장착 문제를 해결한 뒤 진행합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B7-Fit-P1S.3mf)
+**B8은 시험판 3번에서 바닥 덮개와 너트 홈부터 확인합니다.** 전체 조립은 목 회전판 체결과 앞 해골 장착 문제를 해결한 뒤 진행합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B8-Fit-P1S.3mf)
 
 | 작업 | 시작 파일 |
 |---|---|
-| 기구 확인 및 수정 | [B7 FreeCAD 조립본](mechanical/R5-B7-Assembly.FCStd) |
-| P1S 전체 출력 | [B7 출력판 12장과 선택 1장](mechanical/R5-B7-P1S.3mf) |
+| 기구 확인 및 수정 | [B8 FreeCAD 조립본](mechanical/R5-B8-Assembly.FCStd) |
+| P1S 전체 출력 | [B8 출력판 12장과 선택 1장](mechanical/R5-B8-P1S.3mf) |
 | 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
-| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b7/assembly/) · [B7 웹 뷰어](web/) |
+| 브라우저에서 조립 순서와 6축 조작 | [단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b8/assembly/) · [B8 웹 뷰어](web/) |
 
 ## 웹 뷰어
 

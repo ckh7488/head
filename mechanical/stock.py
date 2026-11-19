@@ -6,13 +6,12 @@ from FreeCAD import Vector as V
 import Part
 
 from primitives import box, cylinder, print_mesh
+from service_hatch import HUB_MOUNTS, HUB_SCREW_SEAT, revise_service, service_coupon
 
 X, Y, Z = (1, 0, 0), (0, 1, 0), (0, 0, 1)
 BLINK_MOUNTS = tuple((x, z) for x in (-20., 20.) for z in (143., 150.))
 BLINK_CLAMPS = ((-53.9, -56., -50.9, -1), (10.2, 7.65, 13., 1), (54.15, 51.15, 56.25, 1))
 BLINK_CLAMP_LENGTH = 8.
-HATCH_MOUNTS = ((-41.85,55.), (41.85,55.), (-26.9,82.25), (26.9,82.25))
-HUB_MOUNTS = tuple((x, y) for x in (-30.8, 30.8) for y in (46.2, 72.8))
 BALLAST_MOUNTS = tuple((x, z) for x in (-28., 28.) for z in (143., 150.))
 YOKE_MOUNTS = ((-12.,17.),(-12.,27.3),(12.,24.3))
 
@@ -131,24 +130,16 @@ def cable_stock(doc, folder, layout):
 
 
 def hatch_stock(doc, folder):
-    base = doc.Part000.Shape
-    for x,y in HATCH_MOUNTS:
-        base = base.fuse(cylinder(2.35, 4.66, (x,y,-80.29)))
-        base = base.cut(hexagon(5.8, 3.95, (x,y,-76.62)))
-        base = base.cut(cylinder(1.73, 4.2, (x,y,-80.6)))
-    printed(doc,'Part000',base,folder/'01_base_cup_B5.stl')
-
-    hatch = doc.HubHolder.Shape
-    for x,y in HUB_MOUNTS:
-        hatch = hatch.cut(hexagon(5.8, 4.80, (x,y,-83.10)))
-        hatch = hatch.cut(cylinder(1.7, 4.55, (x,y,-78.50)))
-    printed(doc,'HubHolder',hatch,folder/'35_hub_service_hatch_B1.stl')
-    for number in range(1,5):
+    base, hatch = revise_service(doc.Part000.Shape, hexagon)
+    printed(doc, 'Part000', base, folder/'01_base_cup_B8.stl')
+    printed(doc, 'HubHolder', hatch, folder/'35_hub_service_hatch_B8.stl')
+    service_coupon(base, folder)
+    for number, (x, y) in enumerate(HUB_MOUNTS, start=1):
         present = doc.getObject(f'HubBolt{number}')
-        center = present.Shape.BoundBox.Center
-        present.Shape = socket_screw(3,10.,(center.x,center.y,-72.5),(0,0,-1))
-        present.Label = f'H{number} M3 × 10 socket screw'
-    doc.HubHolder.Fasteners = 'Hatch ISO 10642 M3 × 10. PCB ISO 4762 M3 × 10. Plain M3 hex nuts.'
+        present.Shape = socket_screw(3, 8., (x, y, HUB_SCREW_SEAT), (0, 0, -1))
+        present.Label = f'H{number} M3 × 8 socket screw'
+    doc.HubHolder.Label = '35 B8 removable hub hatch · 4–5 mm plate'
+    doc.HubHolder.Fasteners = 'Eight ISO 4762 M3 × 8 socket screws and top-loaded M3 hex nuts.'
 
 
 def ballast_stock(doc, folder):

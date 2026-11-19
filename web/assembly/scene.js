@@ -10,22 +10,22 @@ const fixedTint = new THREE.Color(0xafb9bd);
 const gold = new THREE.MeshStandardMaterial({ color: 0xecae63, metalness: .32, roughness: .49 });
 const toolColor = new THREE.MeshStandardMaterial({ color: 0xffca6e, transparent: true, opacity: .55, depthWrite: false });
 
-function ring(outer, inner, depth, sides, innerSides) {
-  const polygon = (radius, n, target) => {
+function ring(outer, inner, depth, sides, innerSides, phase = 0) {
+  const polygon = (radius, n, target, angle = 0) => {
     for (let i = 0; i < n; i++) {
-      const theta = 2 * Math.PI * i / n;
+      const theta = angle + 2 * Math.PI * i / n;
       target[i ? "lineTo" : "moveTo"](radius * Math.cos(theta), radius * Math.sin(theta));
     }
     target.closePath();
     return target;
   };
-  const outline = polygon(outer, sides, new THREE.Shape());
+  const outline = polygon(outer, sides, new THREE.Shape(), phase);
   outline.holes.push(polygon(inner, innerSides, new THREE.Path()));
   return new THREE.ExtrudeGeometry(outline, { depth, bevelEnabled: false, curveSegments: 1 });
 }
 
 function fastener(part) {
-  const { seat, axis, type, size, length } = part;
+  const { seat, axis, type, size, length, phase } = part;
   const node = new THREE.Group();
   node.position.copy(vector(seat));
   node.quaternion.setFromUnitVectors(up, vector(axis));
@@ -41,13 +41,9 @@ function fastener(part) {
 
   if (type === "nut") {
     const across = isSmall ? 4 : 5.5;
-    add(ring(across / Math.sqrt(3), radius, isSmall ? 1.6 : 2.4, 6, 24), 0, false);
+    add(ring(across / Math.sqrt(3), radius, isSmall ? 1.6 : 2.4, 6, 24, phase), 0, false);
   } else if (type === "tool") {
     add(new THREE.CylinderGeometry(1, 1, length, 12), length / 2);
-  } else if (type === "flat") {
-    const height = 1.5;
-    add(new THREE.CylinderGeometry(1.5, 3, height, 28), height / 2);
-    add(new THREE.CylinderGeometry(radius, radius, length - height, 24), (height + length) / 2);
   } else {
     const height = isSmall ? 2 : 3;
     const head = isSmall ? 1.93 : 2.78;
@@ -58,7 +54,7 @@ function fastener(part) {
   }
 
   const label = type === "nut" ? `M${size} 일반 육각너트` :
-    type === "tool" ? "육각렌치 접근 공간" : `M${size}×${length} ${type === "flat" ? "접시머리" : "육각렌치 나사"}`;
+    type === "tool" ? "육각렌치 접근 공간" : `M${size}×${length} 육각렌치 나사`;
   return { node, label, materials: [material], kind: "fastener" };
 }
 
@@ -86,7 +82,7 @@ export class WalkthroughScene {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     this.renderer.localClippingEnabled = true;
-    this.renderer.domElement.setAttribute("aria-label", "B7 움직이는 CAD 형상");
+    this.renderer.domElement.setAttribute("aria-label", "B8 움직이는 CAD 형상");
     this.host.append(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = false;

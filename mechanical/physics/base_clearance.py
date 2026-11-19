@@ -10,10 +10,11 @@ import sys
 import FreeCAD as App
 import Part
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from stock import HATCH_MOUNTS, HUB_MOUNTS, YOKE_MOUNTS, nut, socket_screw
+from stock import YOKE_MOUNTS, nut, socket_screw
+from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B7-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B8-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -55,15 +56,13 @@ def check_pairs(doc):
         for static, tool in product((base,saddle,gate),(screw,tail)):
             yield tool, static, f"Cable cover {x:g} screw and nut"
     for x,y in HATCH_MOUNTS:
-        start = V(x,y,-82.97)
-        axis = V(0,0,1)
-        screw = Part.makeCone(3.,1.5,1.5,start,axis).fuse(Part.makeCylinder(1.5,8.5,start+1.5*axis,axis))
-        tail = nut(3,(x,y,-76.61))
+        screw = socket_screw(3,8.,(x,y,HATCH_SCREW_SEAT),(0,0,1))
+        tail = nut(3,(x,y,HATCH_NUT_SEAT))
         for tool, static in product((screw, tail),(base,doc.HubHolder.Shape,saddle,gate)):
             yield tool, static, "M3 service hatch fasteners"
     for x,y in HUB_MOUNTS:
-        screw = socket_screw(3,10.,(x,y,-72.5),(0,0,-1))
-        tail = nut(3,(x,y,-80.72))
+        screw = socket_screw(3,8.,(x,y,HUB_SCREW_SEAT),(0,0,-1))
+        tail = nut(3,(x,y,HUB_NUT_SEAT))
         for tool, static in product((screw,tail),(doc.HubHolder.Shape,doc.HubPCB.Shape)):
             yield tool, static, "M3 hub PCB fasteners"
     stop, center_z = cables['stop_y_mm'], cables['center_z_mm']

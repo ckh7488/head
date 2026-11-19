@@ -17,6 +17,7 @@ COLORS = {
     'terminal': (85, 145, 107), 'fuse': (181, 92, 67), 'capacitor': (112, 114, 117),
 }
 TRIANGLE_LIMITS = {'bone': 35000, 'jaw': 11000, 'eye': 9000, 'gear': 9500}
+SERVICE_MATING_PARTS = {'Part000', 'HubHolder'}
 
 
 def export(cad, output, manifest_path):
@@ -36,7 +37,7 @@ def export(cad, output, manifest_path):
         identifier = part['cad_id']
         mesh = trimesh.load_mesh(cad / 'world' / f'{identifier}.stl')
         limit = TRIANGLE_LIMITS.get(part['finish'], 5500)
-        if len(mesh.faces) > limit:
+        if identifier not in SERVICE_MATING_PARTS and len(mesh.faces) > limit:
             mesh = mesh.simplify_quadric_decimation(face_count=limit)
         mesh.visual = trimesh.visual.TextureVisuals(material=materials[part['finish']])
         part['motion'] = motions[identifier]
