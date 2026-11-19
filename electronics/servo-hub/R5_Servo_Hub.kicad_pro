@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "filename": "R5_Servo_Hub.kicad_pro",
+    "version": 1
+  },
+  "board": {
+    "design_settings": {
+      "rules": {
+        "min_clearance": 0.23,
+        "min_track_width": 0.3,
+        "min_via_diameter": 0.65,
+        "min_through_hole_diameter": 0.3,
+        "min_hole_clearance": 0.25,
+        "min_hole_to_hole": 0.28,
+        "min_via_annular_width": 0.13,
+        "min_copper_edge_clearance": 0.35,
+        "min_solder_mask_web": 0.1,
+        "min_text_height": 0.8,
+        "min_text_thickness": 0.12
+      },
+      "track_widths": [
+        0,
+        0.36,
+        0.55,
+        1.25,
+        1.8,
+        2.3,
+        2.4
+      ],
+      "via_dimensions": [
+        {
+          "diameter": 0,
+          "drill": 0
+        },
+        {
+          "diameter": 0.7,
+          "drill": 0.35
+        }
+      ],
+      "drc_exclusions": [],
+      "meta": {
+        "version": 2
+      }
+    }
+  },
+  "net_settings": {
+    "classes": [
+      {
+        "name": "Default",
+        "clearance": 0.23,
+        "track_width": 0.36,
+        "via_diameter": 0.7,
+        "via_drill": 0.35,
+        "diff_pair_width": 0.36,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.12,
+        "bus_width": 12,
+        "wire_width": 6
+      }
+    ],
+    "meta": {
+      "version": 3
+    },
+    "netclass_assignments": {},
+    "netclass_patterns": []
+  }
+}

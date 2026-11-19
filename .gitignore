@@ -1,0 +1,13 @@
+/build/
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+/control/pc/model/
+*.FCBak
+*.FCStd1
+*.kicad_prl
+*-backups/
+_autosave-*
+.env
+.DS_Store

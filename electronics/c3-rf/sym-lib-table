@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "C3_RF")(type "KiCad")(uri "${KIPRJMOD}/C3_RF.kicad_sym")(options "")(descr "Board-specific symbols"))
+)
