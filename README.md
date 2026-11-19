@@ -7,6 +7,7 @@
 | 작업 | 시작 파일 |
 |---|---|
 | 기구 확인 및 수정 | [B4 FreeCAD 조립본](mechanical/R5-B4-Assembly.FCStd) |
+| P1S 전체 출력 | [B4 출력판 12장](mechanical/R5-B4-P1S.3mf) |
 | 부품·조립·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 회로·PCB·Gerber 내보내기 | [KiCad 프로젝트](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
