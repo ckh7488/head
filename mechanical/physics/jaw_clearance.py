@@ -1,4 +1,4 @@
-"""Check clearance of the original B2 tooth surfaces under positioning errors."""
+"""Check tooth and skull clearance under hinge and zero-position errors."""
 from argparse import ArgumentParser
 from itertools import product
 from pathlib import Path
@@ -33,8 +33,11 @@ def inspect(input_dir):
     targets.add_object('upper teeth',upper_tooth)
     shell=CollisionManager()
     shell.add_object('upper shell',upper)
+    stays=CollisionManager()
+    stays.add_object('right bearing stay', trimesh.load_mesh(input_dir/'world'/'Jaw_37_right_jaw_bearing_stay.stl'))
+    pivot_arm=trimesh.load_mesh(input_dir/'world'/'Jaw_39_right_jaw_pivot_arm.stl')
     results=[]
-    angles=sorted(set(range(15)) | {0.25,0.50,0.75,1.25,1.5,1.75})
+    angles=sorted(set(range(14)) | {0.25,0.50,0.75,1.25,1.5,1.75})
     for z_offset,angle_error in product((-.4,0,.4),(-.7,0,.7)):
         for request in angles:
             tx=trimesh.transformations.rotation_matrix(np.radians(request+angle_error),(1,0,0),pivot)
@@ -42,9 +45,10 @@ def inspect(input_dir):
             collide=targets.in_collision_single(lower_tooth,transform=tx)
             dist=targets.min_distance_single(lower_tooth,transform=tx)
             other=shell.in_collision_single(lower,transform=tx)
+            arm_at_stay=stays.in_collision_single(pivot_arm,transform=tx)
             results.append({'jaw_deg':request,'hinge_vertical_mm':z_offset,'neutral_error_deg':angle_error,
                             'tooth_intersect':collide,'tooth_separation_mm':max(0.,float(dist)),
-                            'upper_shell_intersect':other})
+                            'upper_shell_intersect':other,'pivot_arm_intersect':arm_at_stay})
     nominal=[r for r in results if r['hinge_vertical_mm']==r['neutral_error_deg']==0]
     assert len(nominal)==len(angles)
     minima=[]
@@ -64,6 +68,8 @@ if __name__=='__main__':
     args.output.mkdir(parents=True,exist_ok=True)
     d=inspect(args.cad)
     (args.output/'jaw_clearance_results.json').write_text(json.dumps(d,indent=2))
-    print('Neutral pose at each positioning offset:')
-    for row in d['samples']:
-        if row['jaw_deg']==0:print(row)
+    min_gap = min(row['min_tooth_gap_mm'] for row in d['positioning_envelope'])
+    clashes = [row for row in d['samples'] if row['upper_shell_intersect'] or row['pivot_arm_intersect']]
+    print(f"{len(d['samples'])} jaw poses, minimum tooth gap {min_gap:.3f} mm")
+    if clashes or min_gap < .5:
+        raise SystemExit(f"{len(clashes)} jaw contacts, minimum required tooth gap 0.5 mm")

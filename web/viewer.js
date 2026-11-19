@@ -51,7 +51,7 @@ export class AssemblyViewer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.domElement.setAttribute("aria-label", "R5 B1 조립 3D 모델");
+    this.renderer.domElement.setAttribute("aria-label", "R5 B3 조립 3D 모델");
     this.host.appendChild(this.renderer.domElement);
     this.orbit = new OrbitControls(this.camera, this.renderer.domElement);
     this.orbit.target.set(...views.assembled.oblique[1]);

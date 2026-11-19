@@ -83,12 +83,12 @@ class Planner:
         u = seconds-self.next_blink
         if u < 0:
             return 0.
-        if u < .105:
-            v = u/.105
-        elif u < .155:
+        if u < .68:
+            v = u/.68
+        elif u < .80:
             return 90.
-        elif u < .34:
-            v = 1-(u-.155)/.185
+        elif u < 1.48:
+            v = 1-(u-.80)/.68
         else:
             self.next_blink = seconds+4.15
             return 0.

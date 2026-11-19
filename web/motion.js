@@ -6,7 +6,7 @@ export const axes = {
   eyeYaw:    { label: "좌우", lower: -20, upper: 20, rate: 128 },
   eyePitch:  { label: "상하", lower: -8, upper: 8, rate: 90 },
   blink:     { label: "눈꺼풀", lower: 0, upper: 90, rate: 900 },
-  jaw:       { label: "턱 열림", lower: 0, upper: 14, rate: 190 }
+  jaw:       { label: "턱 열림", lower: 0, upper: 13, rate: 190 }
 };
 export const jawPivot = [0, -9, 92];
 export const neutral = Object.freeze(Object.fromEntries(Object.keys(axes).map(key => [key, 0])));
@@ -25,11 +25,12 @@ export function advancePose(pose, target, dt) {
   return next;
 }
 
+export const blinkDuration = 1.48;
 export function blinkAt(time) {
-  if (time < 0 || time >= .34) return 0;
-  if (time < .105) return 90 * ease(time / .105);
-  if (time < .155) return 90;
-  return 90 * (1 - ease((time - .155) / .185));
+  if (time < 0 || time >= blinkDuration) return 0;
+  if (time < .68) return 90 * ease(time / .68);
+  if (time < .80) return 90;
+  return 90 * (1 - ease((time - .80) / .68));
 }
 
 export const clackDuration = .68;
@@ -92,11 +93,11 @@ export function motionMatrix(kind, pose, drop = 0) {
   const yaw = -pose.eyeYaw;
   const pitch = pose.eyePitch;
   const blink = pose.blink;
-  const eyeX = { look1: -34, look2: 34, look_horn: 0 };
+  const eyeX = { look1: -34, look2: 34, look_horn: -5.8 };
   if (kind in eyeX) {
-    result.premultiply(pivot("z", yaw, eyeX[kind], -39, 113));
+    result.premultiply(pivot("z", yaw, eyeX[kind], kind === "look_horn" ? -35.5 : -39, 113));
   } else if (kind === "look_link") {
-    result.premultiply(new Matrix4().makeTranslation(-16 * Math.sin(yaw * rad), 16 * (Math.cos(yaw * rad) - 1), 0));
+    result.premultiply(new Matrix4().makeTranslation(-13.5 * Math.sin(yaw * rad), 13.5 * (Math.cos(yaw * rad) - 1), 0));
   }
   if (kind === "tilt_horn") {
     result.premultiply(pivot("x", pitch, 58.65, 10, 151));
@@ -105,11 +106,12 @@ export function motionMatrix(kind, pose, drop = 0) {
   } else if (kind === "tilt" || kind === "look_link" || kind in eyeX) {
     result.premultiply(pivot("x", pitch, 0, -39, 119));
   }
-  const lids = { lid1: [-34, -39, 119], lid2: [34, -39, 119], blink_motor_horn: [1.2, 43, 88], blink_shaft_crank: [0, 25, 101] };
+  const lids = { lid1: [-34, -39, 119], lid2: [34, -39, 119], blink_motor_horn: [1.2, -14, 170], blink_shaft_crank: [0, -24, 154] };
   if (kind in lids) {
     result.premultiply(pivot("x", blink, ...lids[kind]));
   } else if (kind === "blink_lid_link" || kind === "blink_drive_link") {
-    result.premultiply(new Matrix4().makeTranslation(0, 8.25 * (Math.cos(blink * rad) - 1), 8.25 * Math.sin(blink * rad)));
+    const radius = kind === "blink_lid_link" ? 11.5 : 8.25;
+    result.premultiply(new Matrix4().makeTranslation(0, radius * (Math.cos((blink - 56) * rad) - Math.cos(-56 * rad)), radius * (Math.sin((blink - 56) * rad) - Math.sin(-56 * rad))));
   }
   if (kind !== "pan") result.premultiply(pivot("x", pose.neckPitch, 0, 0, 112));
   result.premultiply(pivot("z", -pose.neckYaw, 0, 0, 0));

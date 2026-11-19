@@ -1,4 +1,4 @@
-import { axes, neutral, clamp, blinkAt, clackAt, clackDuration, advancePose, demonstration, TargetFollower } from "./motion.js";
+import { axes, neutral, clamp, blinkAt, blinkDuration, clackAt, clackDuration, advancePose, demonstration, TargetFollower } from "./motion.js";
 import { AssemblyViewer } from "./viewer.js";
 
 const at = id => document.getElementById(id);
@@ -31,7 +31,7 @@ const tracker = new TargetFollower();
 const ranges = new Map();
 const gestures = [
   { key: "blink", input: at("axis-blink"), output: at("value-blink"), button: at("blink-once"),
-    sample: blinkAt, duration: .34, scale: .9, unit: "%", started: null },
+    sample: blinkAt, duration: blinkDuration, scale: .9, unit: "%", started: null },
   { key: "jaw", input: at("axis-jaw"), output: at("value-jaw"), button: at("jaw-clack"),
     sample: clackAt, duration: clackDuration, scale: 1, unit: "°", started: null },
 ];
@@ -354,7 +354,7 @@ async function start() {
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
   } catch (error) {
-    console.error("R5 B1 viewer could not load:", error);
+    console.error("R5 B3 viewer could not load:", error);
     loader.classList.add("failed");
     loader.querySelector(".loader").hidden = true;
     status.textContent = "3D 모델을 표시할 수 없습니다. WebGL을 지원하는 브라우저에서 다시 열어 주세요.";

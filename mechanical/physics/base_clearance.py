@@ -1,14 +1,16 @@
-"""Sweep B2 base, board trays, and service hatch for solid intersections."""
+"""Sweep the base, board trays, and service hatch for solid intersections."""
 
 from argparse import ArgumentParser
-from math import pi
+from itertools import product
+from math import cos, pi, radians, sin
 from pathlib import Path
+import json
 
 import FreeCAD as App
 import Part
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B2-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B3-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -51,19 +53,46 @@ def check_pairs(doc):
                 yield moving, static, f"Hatch at {depth} mm, {part.Label}"
 
 
+def actuator_pairs(doc):
+    yaw_motor = doc.Part038.Shape
+    yoke = doc.Part011.Shape
+    x_axis = V(1, 0, 0)
+    for neck, eye in product((-15.25, -10., -5., 0., 3., 6.25), (-8.25, -4., 0., 4., 8.25)):
+        motor = yaw_motor.copy().rotate(V(0, -39, 119), x_axis, eye).rotate(V(0, 0, 112), x_axis, neck)
+        for body in motor.Solids:
+            yield body, yoke, f"Eye yaw motor at neck {neck}, eye pitch {eye}"
+
+    blink = json.loads(doc.R5.MotionGeometry)['blink']
+    phase = radians(blink['phase_deg'])
+    radius = blink['lid_radius_mm']
+    motor = doc.Part041.Shape
+    for angle, vertical in product(range(-1, 92, 2), (-.4, 0., .4)):
+        moved = radians(angle) + phase
+        offset = V(0, radius*(cos(moved)-cos(phase)), radius*(sin(moved)-sin(phase))+vertical)
+        link = doc.Part060.Shape.copy().translate(offset)
+        for body in motor.Solids:
+            yield link, body, f"Right lid link at {angle} degrees and vertical offset {vertical} mm"
+
+
+def check_pass(pairs):
+    count = 0
+    peak = 0.
+    for count, (moving, static, label) in enumerate(pairs, start=1):
+        if moving.BoundBox.intersect(static.BoundBox):
+            volume = moving.common(static).Volume
+            if volume > .003:
+                raise RuntimeError(f"{label}: {volume:.4f} mm³ overlap")
+            peak = max(volume, peak)
+    return count, peak
+
+
 def check(cad):
     doc = App.openDocument(str(cad))
     try:
         doc.recompute()
-        count = 0
-        peak = 0.
-        for count, (moving, static, label) in enumerate(check_pairs(doc), start=1):
-            if moving.BoundBox.intersect(static.BoundBox):
-                volume = moving.common(static).Volume
-                if volume > .003:
-                    raise RuntimeError(f"{label}: {volume:.4f} mm³ overlap")
-                peak = max(volume, peak)
-        print(f"{count} pairs, max residual volume {peak:.6f} mm³")
+        for name, pairs in [('Base', check_pairs(doc)), ('Actuators', actuator_pairs(doc))]:
+            count, peak = check_pass(pairs)
+            print(f"{name}: {count} solid pairs, max residual volume {peak:.6f} mm³")
         print(f"Rotor lift clearance: {-32.45 - doc.Part007.Shape.BoundBox.ZMax:.3f} mm")
         print(f"Cable path from neutral to 60 degrees: {25 * pi / 3:.3f} mm")
     finally:

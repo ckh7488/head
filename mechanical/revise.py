@@ -1,14 +1,18 @@
-"""Build the manufacturing-review parts from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B3 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
 from pathlib import Path
-from math import cos, hypot, sin, radians
+from math import cos, hypot, pi, radians, sin
 import sys
+import json
+from tempfile import TemporaryDirectory
 
 import FreeCAD as App
+import Mesh
 import MeshPart
 import Part
+import trimesh as tr
 
 V = App.Vector
 HERE = Path(__file__).resolve().parent
@@ -272,6 +276,319 @@ def apply_repairs(doc, repairs, folder):
         print(f'{slug} · volume {solid.Volume:.1f} mm³', flush=True)
 
 
+BLINK_SHAFT_YZ=(-24.,154.)
+BLINK_SERVO=(1.2,-14.,170.)
+BLINK_PHASE=-56.
+DRIVE_THROW=8.25
+LID_THROW=11.5
+DRIVE_ARM=(DRIVE_THROW*cos(radians(BLINK_PHASE)),DRIVE_THROW*sin(radians(BLINK_PHASE)))
+LID_ARM=(LID_THROW*cos(radians(BLINK_PHASE)),LID_THROW*sin(radians(BLINK_PHASE)))
+
+def yz_prism(polygon, x, thickness):
+    pt=[V(x,y,z) for y,z in polygon]
+    return Part.Face(Part.makePolygon(pt+[pt[0]])).extrude(V(thickness,0,0))
+
+def blink_link(x,yz1,yz2):
+    return lid_link(x, [yz1,yz2])
+
+def blink_crank(x,yz,D=False,arm=DRIVE_ARM):
+    y,z=yz
+    solid=blink_link(x,yz,(y+arm[0],z+arm[1]))
+    hub=cylinder(4.85,3.1,(x-1.55,y,z),(1,0,0))
+    joined=solid.fuse(hub)
+    bore=cylinder(2.13,6.,(x-3,y,z),(1,0,0))
+    if D:
+        bore=bore.common(box(x-3.1,x+3.1,y-3,y+3,z-3,z+1.67))
+    tip=cylinder(1.15,6.,(x-3,y+arm[0],z+arm[1]),(1,0,0))
+    return joined.cut([bore,tip,cylinder(1.14,5,(x,y,z-5),(0,0,1))]).removeSplitter()
+
+def eyelid(side):
+    x=34.*side
+    shell=Part.makeSphere(16.6).cut(Part.makeSphere(14.85))
+    poly=[(0,0)]+[(-40*cos(radians(a)),40*sin(radians(a))) for a in (42,67,96,125,151)]
+    shell=shell.common(yz_prism(poly,-24.,48.))
+    ring1=cylinder(3.55,4.25,(-19.15,0,0),(1,0,0))
+    ring2=cylinder(3.55,4.25,(14.9,0,0),(1,0,0))
+    horn=blink_link(18.2,(0,0),LID_ARM)
+    body=shell.fuse([ring1,ring2,horn]).cut([
+        cylinder(1.12,42.,(-21,0,0),(1,0,0)),
+        cylinder(1.12,6.,(15,LID_ARM[0],LID_ARM[1]),(1,0,0)),
+    ]).removeSplitter()
+    if side<0:
+        body=body.mirror(V(),V(1,0,0))
+    return body.translate(V(x,-39,119))
+
+def blink_bearing_arm(x):
+    y,z=BLINK_SHAFT_YZ
+    sleeve=cylinder(7.3,6.,(x-3,y,z),(1,0,0))
+    arm=yz_prism([(y-3,z+6.2),(18,156),(23,153.9),(23,143.2),
+           (y-1.5,z-6.4),(y-4.0,z-4.)],x-3,6)
+    sign=1 if x>0 else -1
+    return sleeve.fuse(arm).cut([
+        cylinder(5.12,5.1,(x-3.1*sign,y,z),(sign,0,0)),
+        cylinder(4.68,8.,(x-4,y,z),(1,0,0)),
+    ]).removeSplitter()
+
+def support_cradle():
+    body=box(-61.,61.,-22.5,-18.5,120.5,125.2)
+    for inner,outer in [(-62.15,-57.65),(57.65,61.)]:
+        rim=yz_prism([(-42.9,116),(-42.5,122),(-22.,127),(-18.5,124),(-18.5,120.6),(-39.,115.2)],inner,outer-inner)
+        body=body.fuse(rim)
+        body=body.cut(cylinder(1.62,outer-inner+.3,(inner-.15,-39,119),(1,0,0)))
+    body=body.fuse(box(57.65,61.,-39.,-25.2,116.6,121.4))
+    body=body.cut(cylinder(1.18,6.,(56,-29,119),(1,0,0)))
+    for x in (-34.,34.):
+        top=box(x-2.4,x+2.4,-41.4,-33.4,126.6,129.15)
+        upper_root=box(x-2.4,x+2.4,-35.6,-32.7,120.9,128.3)
+        bottom=box(x-2.4,x+2.4,-41.4,-20.9,108.0,110.7)
+        spine=box(x-2.4,x+2.4,-22.2,-20.85,109.3,123.3)
+        bridge=box(x-2.4,x+2.4,-35.3,-19.7,121.0,123.1)
+        body=body.fuse([top,upper_root,bottom,spine,bridge]).cut(cylinder(1.13,25.2,(x,-39,106.5)))
+    for x in (-8.,8.):
+        foot=box(x-2.8,x+2.8,-50.2,-44.8,111.55,125.0)
+        rib=yz_prism([(-50.0,120.8),(-45.2,119.2),(-18.8,121.3),(-18.8,125.3),(-48,123.9)],x-2.65,5.3)
+        body=body.fuse([foot,rib]).cut(cylinder(1.30,9.5,(x,-47.6,111.3)))
+    return body.removeSplitter()
+
+
+def flat_xy(points, thickness, z, width):
+    rods=[]
+    for (x,y),(a,b) in zip(points,points[1:]):
+        delta=V(a-x,b-y,0)
+        n=V(-delta.y,delta.x,0)*(width/(2*delta.Length))
+        start=V(x,y,z)
+        end=V(a,b,z)
+        border=[start+n,end+n,end-n,start-n,start+n]
+        rods.append(Part.Face(Part.makePolygon(border)).extrude(V(0,0,thickness)))
+    rods.extend(cylinder(width/2,thickness,(x,y,z)) for x,y in points)
+    return rods[0].fuse(rods[1:]).removeSplitter()
+
+
+def gaze_yaw_parts(doc):
+    lift=V(-5.8,3.5,.4)
+    body=doc.Part038.Shape.copy().translate(lift)
+    source=doc.Part039.Shape.copy().translate(lift)
+    plate=source.common(box(-20,22,-53,-25.6,108,113))
+    feet=[box(x-3.0,x+3.0,-50.2,-44.8,108.85,111.55) for x in (-8.,8.)]
+    plate=plate.fuse(feet)
+    plate=holes(plate,1.56,5.,[(x,-47.6,108.) for x in (-8.,8.)]).removeSplitter()
+    mx,yaw=-5.8,-35.5
+    throw=13.5
+    horn=cylinder(8.8,2.4,(mx,yaw,111.85)).fuse(flat_xy([(mx,yaw),(mx,yaw+throw)],2.4,111.85,6.0))
+    horn=holes(horn,1.20,6.,[(mx+6*cos(radians(v)),yaw+6*sin(radians(v)),111.0) for v in range(0,360,90)])
+    horn=horn.cut([cylinder(2.8,5,(mx,yaw,111.0)),cylinder(1.12,9.,(mx,yaw+throw,111.5))]).removeSplitter()
+    points=[(-34,-25.5),(-18,-25.5),(-11,-22.),(0.,-22.),(16,-25.5),(34,-25.5)]
+    tie=flat_xy(points,2.9,114.55,4.6)
+    tie=holes(tie,1.17,6.,[(x,y,113.) for x,y in (points[0],(mx,yaw+throw),points[-1])]).removeSplitter()
+    return {'Part024':support_cradle(),'Part038':body,'Part039':plate,'Part040':horn,'Part037':tie}
+
+
+def eyeball(x):
+    y,z=-39.,119.
+    origin=V(x,y,z)
+    outer=Part.makeSphere(14.,origin)
+    inner=Part.makeSphere(12.35,origin)
+    shell=outer.cut([inner,box(x-20,x+20,y+7.5,y+35,z-20,z+20)])
+    ribs=[box(x-2.7,x+2.7,y-12.25,y+2.05,z+h-.95,z+h+.95).common(outer) for h in (-5.9,5.9)]
+    crank=flat_xy([(x,y),(x,y+13.5)],2.4,z-7.2,5.4)
+    cut=[cylinder(1.13,32.,(x,y,z-16)),cylinder(1.16,7.,(x,y+13.5,z-10))]
+    cut.extend(box(x-8,x+8,y+2.8,y+14,z+lo,z+hi) for lo,hi in [(-11.65,-7.4),(7.1,11.0)])
+    return shell.fuse([*ribs,crank]).cut(cut).removeSplitter()
+
+def clearance_tool(x, a, b, radius, depth):
+    left=x-depth/2.
+    dy,dz=b[0]-a[0],b[1]-a[1]
+    d=(dy**2+dz**2)**.5
+    ny,nz=-dz*radius/d,dy*radius/d
+    points=[(a[0]+ny,a[1]+nz),(b[0]+ny,b[1]+nz),(b[0]-ny,b[1]-nz),(a[0]-ny,a[1]-nz)]
+    bridge=yz_prism(points,left,depth)
+    return bridge.fuse([
+        cylinder(radius,depth,(left,*a),(1,0,0)),
+        cylinder(radius,depth,(left,*b),(1,0,0)),
+    ]).removeSplitter()
+
+
+def cut_running_clearance(doc):
+    targets = {'Part073': [], 'Jaw_36_left_jaw_servo_stay': [],
+               'Jaw_37_right_jaw_bearing_stay': [], 'Part076': [], 'Part077': []}
+    with TemporaryDirectory() as temp:
+        path=Path(temp)/'shape.stl'
+
+        def mesh(solid):
+            MeshPart.meshFromShape(Shape=solid,LinearDeflection=.045,AngularDeflection=.12,Relative=False).write(str(path))
+            return tr.load_mesh(path)
+
+        for side in (-1,1):
+            blade=[]
+            for degrees in range(-1,93,3):
+                a=radians(BLINK_PHASE+degrees)
+                dy,dz=LID_THROW*cos(a),LID_THROW*sin(a)
+                start=(-39.+dy,119.+dz)
+                end=(BLINK_SHAFT_YZ[0]+dy,BLINK_SHAFT_YZ[1]+dz)
+                blade.append(mesh(clearance_tool(side*49.25,start,end,3.60,4.1)))
+                ear=clearance_tool(side*52.2,(-39.,119.),start,3.30,3.95)
+                blade.append(mesh(ear.common(box(-60,60,-36.4,-23.0,104.0,133.0))))
+            cutter=tr.boolean.union(blade,engine='manifold')
+            x=34.*side
+            targets['Part076' if side<0 else 'Part077']=[
+                mesh(box(x+19.08,x+19.83,-55.,-36.,112.8,125.2)),
+                mesh(box(x-19.83,x-19.08,-55.,-36.,112.8,125.2)),
+            ]
+            targets['Part073'].append(cutter)
+            if side<0:
+                targets['Jaw_36_left_jaw_servo_stay'].append(cutter)
+        targets['Part076'].append(mesh(box(-15.4,-10.,-53.,-35.5,113.9,116.0)))
+        targets['Part073'].append(mesh(box(60.85,64.85,-20.0,-10.3,127.7,135.2)))
+        targets['Part073'].append(mesh(box(-10.,24.3,-36.4,-20.5,76.2,92.8)))
+        for inside, outside in [(-69., -56.7), (56.7, 69.)]:
+            targets['Part073'].append(mesh(box(inside, outside, -13.5, -5.7, 89.35, 96.9)))
+        targets['Jaw_37_right_jaw_bearing_stay'].append(mesh(box(44.18, 46.6, -15.2, -11.1, 90.9, 96.6)))
+        for inner,outer in [(-56.8,-53.2),(53.2,56.8)]:
+            strip=box(inner,outer,-23.1,-17.9,119.75,125.95)
+            moving=tr.boolean.union([mesh(strip.copy().rotate(V(0,-39,119),V(1,0,0),a))
+                                     for a in (-9,-6,-3,0,3,6,9)],engine='manifold')
+            targets['Part073'].append(moving)
+        for name,cutters in targets.items():
+            o=doc.getObject(name)
+            o.Mesh.write(str(path))
+            original=tr.load_mesh(path)
+            after=tr.boolean.difference([original,*cutters],engine='manifold')
+            lumps=after.split(only_watertight=True)
+            primary=max(lumps,key=lambda m:m.volume)
+            removed_ribs=after.volume-primary.volume
+            if not primary.is_volume or removed_ribs>min(.00035*original.volume,40.):
+                raise ValueError(f'{name} clearance cut detached a structural region')
+            primary.export(path)
+            o.Mesh=Mesh.Mesh(str(path))
+
+
+def revise_head(doc, output):
+    dy,dz=BLINK_SERVO[1]-43.,BLINK_SERVO[2]-88.
+    parts={
+        'Part045':doc.Part045.Shape.copy().translate(V(0,dy,dz)),
+        'Part046':doc.Part046.Shape.copy().translate(V(0,dy,dz)),
+        'Part047':doc.Part047.Shape.copy().rotate(V(1.2,43,88),V(1,0,0),BLINK_PHASE).translate(V(0,dy,dz)),
+        'Part053':blink_crank(-52.45,BLINK_SHAFT_YZ,True,LID_ARM),
+        'Part054':blink_crank(8.95,BLINK_SHAFT_YZ,True),
+        'Part055':blink_crank(52.45,BLINK_SHAFT_YZ,True,LID_ARM),
+        'Part056':blink_link(5.85,(BLINK_SERVO[1]+DRIVE_ARM[0],BLINK_SERVO[2]+DRIVE_ARM[1]),(BLINK_SHAFT_YZ[0]+DRIVE_ARM[0],BLINK_SHAFT_YZ[1]+DRIVE_ARM[1])),
+        'Part057':blink_link(-49.25,(-39.+LID_ARM[0],119.+LID_ARM[1]),(BLINK_SHAFT_YZ[0]+LID_ARM[0],BLINK_SHAFT_YZ[1]+LID_ARM[1])),
+        'Part060':blink_link(49.25,(-39.+LID_ARM[0],119.+LID_ARM[1]),(BLINK_SHAFT_YZ[0]+LID_ARM[0],BLINK_SHAFT_YZ[1]+LID_ARM[1])),
+    }
+    y,z=BLINK_SHAFT_YZ
+    shaft=cylinder(2.,112,(-56,y,z),(1,0,0))
+    for x in (-52.45,8.95,52.45):
+        shaft=shaft.cut(box(x-1.8,x+1.8,y-3,y+3,z+1.55,z+3))
+    parts['Part048']=shaft
+    parts.update(gaze_yaw_parts(doc))
+    for x in (-49.25,49.25):
+        rib=box(x-5.5,x+5.5,-20.8,-14.8,120.5,125.2)
+        parts['Part024']=parts['Part024'].fuse(rib).cut(box(x-2.6,x+2.6,-27.5,-17.95,114.,131.))
+    parts['Part024']=parts['Part024'].cut(box(-44.4,-39.7,-22.8,-18.0,118.8,122.55)).removeSplitter()
+    for name,x in [('Part029',-34.),('Part033',34.)]:
+        parts[name]=eyeball(x)
+    for name,x in [('Part032',-34.),('Part036',34.)]:
+        parts[name]=cylinder(1.,24.,(x,-39,107.))
+    parts['Part043']=doc.Part043.Shape.common(box(58.5,61.2,-50,40,130,170))
+    parts['Part044']=doc.Part044.Shape.copy().translate(V(-1.05,0,0)).common(box(61.55,64.15,-45,29,100,161))
+    parts['Part019']=doc.Part019.Shape.cut(box(57.9,65.1,20.2,25.0,145.3,155.9))
+    tab=doc.Part021.Shape.cut([box(57.9,66.0,18.1,25.0,124.1,157.4),box(49.8,58.8,16.,20.8,126.,158.)])
+    parts['Part021']=tab.fuse([
+        box(54.9,57.7,21.8,23.7,153.3,160.5),
+        box(66.2,71.7,17.9,23.0,153.3,160.5),
+        box(55.6,69.7,21.8,23.10,157.05,160.5),
+    ]).removeSplitter()
+    parts['Part011']=doc.Part011.Shape.cut([box(-14,24,-22.5,-16.5,100.0,115.9),box(5.2,14.8,-20.0,-16.75,84.,96.),box(14.4,19.8,-20.0,-17.5,83.,91.5)])
+    doc.Part048.Motion='blink_shaft_crank'
+    for x,bracket,bearing in [(-32,'Part049','Part050'),(26,'Part051','Part052')]:
+        parts[bracket]=blink_bearing_arm(x)
+        parts[bearing]=cylinder(5.,4.,(x-2,y,z),(1,0,0)).cut(cylinder(2.,4.,(x-2,y,z),(1,0,0)))
+    rail=box(-34,34,18.5,23,139,154.5).cut(box(29.5,35.,17.4,21.25,135.,157.))
+    rail=rail.fuse([parts.pop('Part049'),parts.pop('Part051')])
+    rail=holes(rail,1.65,8.,[(x,17,z) for x in (-28.,28.) for z in (143.,150.)],(0,1,0))
+    doc.removeObject('Part049')
+    doc.removeObject('Part051')
+    stay=yz_prism([(18,151),(23,151),(23,155),(6,192),(4,195),(-4.8,195),(-4.8,182),(1.5,181)],
+           -6.4,4.6)
+    stay=stay.cut([parts['Part046'],box(-7.,2.,-8.,-3.1,158.,202.)])
+    stay=stay.cut(box(-7.,2.,-3.2,4.7,158.,180.))
+    stay=holes(stay,1.65,7.,[(-7.5,57.+dy,a+dz) for a in (101.,107.)],(1,0,0))
+    parts['Part063']=rail.fuse(stay).removeSplitter()
+    for name,shape in parts.items():
+        check=shape.isValid() and (not doc.getObject(name).Printed or len(shape.Solids)==1)
+        if not check:
+            raise ValueError(f'{name} must contain one valid printed solid')
+        doc.getObject(name).Shape=shape
+    for side,name in [(-1,'Part078'),(1,'Part079')]:
+        brace=eyelid(side)
+        assert brace.isValid() and len(brace.Solids)==1, name
+        doc.getObject(name).Mesh=MeshPart.meshFromShape(Shape=brace,LinearDeflection=.075,AngularDeflection=.1,Relative=False)
+    for side,x in [(-1,-32.),(1,26.)]:
+        start=x-2*side
+        direction=(-side,0,0)
+        norm=V(*direction)
+        shim=cylinder(2.8,.5,(start,y,z),direction)
+        collar=cylinder(4.,4.5,tuple(V(start,y,z)+.5*norm),direction)
+        solid=shim.fuse(collar).cut(cylinder(2.03,5.2,(start,y,z),direction)).removeSplitter()
+        name='BlinkCollarLeft' if side<0 else 'BlinkCollarRight'
+        obj=doc.addObject('Part::Feature',name)
+        obj.Shape=solid
+        obj.Label='4 mm shaft collar and inner-race shim'
+        obj.addProperty('App::PropertyString','Motion','Design')
+        obj.Motion='blink_shaft_crank'
+        doc.Synchronised_eyelids.addObject(obj)
+    cut_running_clearance(doc)
+    doc.JawMotion.setExpression('Placement','create(<<placement>>;vector(0mm;-9mm;92mm);create(<<rotation>>;vector(1;0;0);1.25deg+max(0deg;min(13deg;Opening))))')
+    doc.JawMotion.Label = 'Jaw — Opening 0 to 13 degrees above the B3 closed position'
+    doc.R5.addProperty('App::PropertyString', 'MotionGeometry', 'Design')
+    doc.R5.MotionGeometry = json.dumps({
+        'eye_yaw': {'pivot_mm': [-5.8, -35.5, 111.85], 'radius_mm': 13.5},
+        'blink': {'servo_yz_mm': list(BLINK_SERVO[1:]), 'shaft_yz_mm': list(BLINK_SHAFT_YZ),
+                  'phase_deg': BLINK_PHASE, 'radius_mm': DRIVE_THROW, 'lid_radius_mm': LID_THROW, 'link_x_mm': 49.25},
+        'jaw_travel_deg': 13.,
+    }, separators=(',', ':'))
+    labels = {
+        'Part024': '12 eye tilt cradle',
+        'Part037': '15 eye yaw offset tie bar',
+        'Part039': 'XL330 eye yaw front plate',
+        'Part040': '16 eye yaw horn 13p5 mm',
+        'Part048': '4 mm blink shaft 112 mm with three flats',
+        'Part056': '22 blink drive link',
+        'Part057': '23 left short lid link',
+        'Part060': '23 right short lid link',
+        'Part063': '24 blink rail with bearing shoulders',
+    }
+    print_axes = {
+        'Part019': 'y+', 'Part024': 'y+', 'Part039': None, 'Part042': 'x+',
+        'Part043': 'x+', 'Part044': 'x+', 'Part046': 'x+', 'Part047': 'x+',
+        'Part053': 'x+', 'Part054': 'x+', 'Part055': 'x+', 'Part056': 'x+',
+        'Part057': 'x+', 'Part060': 'x+', 'Part063': 'y+',
+        'Part011': 'y+', 'Part021': None, 'Part040': None,
+        'Part027': 'x+', 'Part029': 'y+', 'Part033': 'y+', 'Part037': None,
+    }
+    output.mkdir(parents=True, exist_ok=True)
+    for name, label in labels.items():
+        doc.getObject(name).Label = label
+    for name, rotation in print_axes.items():
+        obj = doc.getObject(name)
+        if obj.Printed:
+            stem = obj.Label.lower().replace(' ', '_')
+            print_mesh(obj.Shape, output/f'{stem}.stl', rotation)
+    for name in ('Part073', 'Part076', 'Part077', 'Part078', 'Part079',
+                 'Jaw_36_left_jaw_servo_stay', 'Jaw_37_right_jaw_bearing_stay'):
+        obj = doc.getObject(name)
+        mesh = obj.Mesh.copy()
+        if name in ('Part073','Part076','Part077','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay'):
+            radians_x = -.5*pi if name=='Part073' else .5*pi
+            if name.startswith('Jaw_'):
+                mesh.rotate(0.,-.5*pi,0.)
+            else:
+                mesh.rotate(radians_x,0.,0.)
+        frame = mesh.BoundBox
+        mesh.translate(-frame.Center.x, -frame.Center.y, -frame.ZMin)
+        mesh.write(str(output/f"{obj.Label.lower().replace(' ', '_')}.stl"))
+
+
 def main(output=BUILD):
     doc = App.openDocument(str(SOURCE))
     repairs, pitch_pin, yaw_case = fix_motors(doc)
@@ -297,10 +614,11 @@ def main(output=BUILD):
     doc.CableSaddle.addProperty('App::PropertyString', 'Mounting', 'Design')
     doc.CableSaddle.Mounting = 'Two power lanes and a recessed USB lane. Two straps per lead over a full-length liner. M3 screws transfer pull to the fixed base.'
     doc.Part000.Label = '01 Base cup B2 · rear saddle with flat washer seats'
-    doc.R5.Label = 'R5 B2 · manufacturing review'
-    doc.R5.Status = 'Fit review. Do not release head: blink links need clearance and hardware load tests.'
+    revise_head(doc, output/'STL')
+    doc.R5.Label = 'R5 B3 · prototype'
+    doc.R5.Status = 'Digital verification baseline. Print-fit, load and wiring tests pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B2-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B3-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 
