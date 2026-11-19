@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "6a26cf49259aa5d12100f798171a18a46a3ec26cac46cc610daf915bdc0e3ba6",
+  "cad_sha256": "20d9409445e56fc15a898c89d17b5652789857935c2dcc1140762f435dd5850f",
   "stops": {},
   "service_hatch": {
     "base_centers": [
@@ -514,7 +514,7 @@
     "horn_seat": -32.9,
     "mast_length": 16.0,
     "horn_length": 8.0,
-    "stud_seat": -38.75,
+    "stud_seat": -36.2,
     "rotor_nut_seat": -32.9,
     "yoke_mounts": [
       [

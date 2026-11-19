@@ -187,6 +187,8 @@ function selectStep(index) {
   el("step-title").textContent = step.title;
   el("section").hidden = !step.cut;
   el("wire-legend").hidden = !step.wiring;
+  if (step.wiring) el("wire-legend").lastChild.textContent = scene?.wiringAvailable === false ?
+    "배선 데이터를 불러오지 못했습니다" : "전원·신호·USB 배선";
   el("ghost").textContent = step.wiring ? "배선·체결 보기" : "체결품 보기";
   const noMotion = !step.moves.length;
   el("play").closest(".timeline").hidden = noMotion;
@@ -301,5 +303,6 @@ try {
 } catch (error) {
   console.error("Assembly CAD load failed", error);
   el("model-status").setAttribute("data-error", "");
-  el("model-status").querySelector("p").textContent = "3D 모델을 열 수 없습니다. 페이지를 새로고침하고 WebGL이 켜져 있는지 확인하세요.";
+  el("model-status").querySelector("p").textContent = /WebGL/.test(error.message) ?
+    "이 브라우저에서 WebGL을 시작할 수 없습니다." : "3D 모델 파일을 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
 }

@@ -12,11 +12,17 @@ const palette = {
 };
 
 export async function loadWiring(url, cadHash) {
-  const response = await fetch(url);
-  if (!response.ok) throw Error("Wiring metadata");
-  const data = await response.json();
-  if (data.cad_sha256 !== cadHash) throw Error("CAD and wiring have different revisions");
-  return data;
+  try {
+    const response = await fetch(`${url}?rev=${cadHash}`, { cache: "no-cache" });
+    if (!response.ok) throw Error(`Wiring metadata · ${response.status}`);
+    const data = await response.json();
+    if (data.cad_sha256 !== cadHash) throw Error("CAD and wiring have different revisions");
+    if (!Array.isArray(data.blocks) || !Array.isArray(data.routes)) throw Error("Incomplete wiring metadata");
+    return { ...data, available: true };
+  } catch (error) {
+    console.warn("Wiring layer unavailable", error);
+    return { available: false, blocks: [], routes: [] };
+  }
 }
 
 export function routePoints(route, matrixFor) {

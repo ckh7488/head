@@ -60,19 +60,20 @@ export class WalkthroughScene {
   async load(hardware, steps) {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
     const json = async url => {
-      const result = await fetch(url);
+      const result = await fetch(url, { cache: "no-cache" });
       if (!result.ok) throw Error(url + " · " + result.status);
       return result.json();
     };
-    const [data, cad, audit] = await Promise.all([
-      json("../assets/assembly.json"), loader.loadAsync("../assets/assembly.glb"),
-      json("./interference.json"),
-    ]);
-    if (audit.cad_sha256 !== data.cad_sha256) throw Error("CAD and measurements have different revisions");
-    const [wiring, connectors] = await Promise.all([
+    const data = await json("../assets/assembly.json");
+    const revision = `?rev=${data.cad_sha256}`;
+    const [cad, audit, wiring, connectors] = await Promise.all([
+      loader.loadAsync("../assets/assembly.glb" + revision),
+      json("./interference.json" + revision),
       loadWiring("../assets/wiring.json", data.cad_sha256),
       loadConnectors(loader, new URL("../assets/", import.meta.url).href, data.cad_sha256),
     ]);
+    if (audit.cad_sha256 !== data.cad_sha256) throw Error("CAD and measurements have different revisions");
+    this.wiringAvailable = wiring.available;
     this.wiring = new WiringModel(wiring, this.scene, connectors);
     this.scene.add(cad.scene);
     for (const part of data.parts) {
@@ -94,7 +95,7 @@ export class WalkthroughScene {
       this.scene.add(entry.node);
       this.register(part.id, entry);
     }
-    const overlay = Object.keys(audit.stops).length ? (await loader.loadAsync("./interference.glb")).scene : null;
+    const overlay = Object.keys(audit.stops).length ? (await loader.loadAsync("./interference.glb" + revision)).scene : null;
     if (overlay) this.scene.add(overlay);
     for (const [id, data] of Object.entries(audit.stops)) {
       const nodes = data.nodes.map(name => {

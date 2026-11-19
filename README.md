@@ -4,7 +4,7 @@
 
 구조물은 **M3×8·M3×16 육각렌치 원통머리 ISO 4762 (DIN 912)**와 일반 M3 육각너트를 씁니다. 작은 링크와 기판, 제조사 체결 구멍은 부품표에 적었습니다. [기구 부품표](mechanical/BOM.csv)
 
-**B15 제작 보류.** 목 구동 중 간섭과 일부 부품의 출력 경로 문제를 확인했습니다. [구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사) · [출력 검사](mechanical/README.md#출력-경로-검사)
+P2S 출력판에는 앞 해골의 출력 경사, 눈꺼풀 축의 홈, 목 볼트와 JST 통로를 수정한 형상이 들어 있습니다. [구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사) · [출력 검사](mechanical/README.md#출력-경로-검사)
 
 출력 기준은 P2S 기본 0.4 mm 노즐과 Bambu PETG HF입니다. 시험판 2번은 케이블, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어용입니다. [P2S 출력 설정](mechanical/README.md#p2s-출력-설정) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [조립절차서](mechanical/ASSEMBLY.md)
 
@@ -26,7 +26,7 @@ npm ci --prefix web
 python -m http.server 8000 --directory web
 ```
 
-CAD를 수정하면 기구 문서의 `--world` 내보내기와 해석 환경을 사용해 웹 모델을 갱신합니다.
+CAD와 웹 모델을 갱신한 뒤 `node web/verify_assets.mjs`로 조립 형상, 간섭 검사, 배선과 커넥터가 같은 버전인지 검사합니다.
 
 ```sh
 python web/export_cad.py build/physics/cad build/web

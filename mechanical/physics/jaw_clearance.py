@@ -4,6 +4,7 @@ from itertools import product
 from pathlib import Path
 import json
 
+import manifold3d
 import numpy as np
 import trimesh
 from trimesh.collision import CollisionManager
@@ -19,11 +20,24 @@ def incisors(mesh, upper):
     return mesh.submesh([np.flatnonzero(region)],append=True,repair=False)
 
 
+def tooth_mesh(path):
+    mesh = trimesh.load_mesh(path)
+    if mesh.is_volume:
+        return mesh
+    source = manifold3d.Mesh(mesh.vertices.astype(np.float32), mesh.faces.astype(np.uint32))
+    source.merge()
+    solid = manifold3d.Manifold(source)
+    if solid.is_empty():
+        raise ValueError(f'{path.name} is not a closed tooth mesh')
+    checked = solid.simplify(.0003).to_mesh()
+    return trimesh.Trimesh(checked.vert_properties[:, :3], checked.tri_verts)
+
+
 def inspect(input_dir):
     source=json.loads((input_dir/'cad_parts.json').read_text())
     pivot=source['jaw_pivot_mm']
-    upper=trimesh.load_mesh(input_dir/'Part073.stl')
-    lower=trimesh.load_mesh(input_dir/'Jaw_30_moving_jaw.stl')
+    upper=tooth_mesh(input_dir/'Part073.stl')
+    lower=tooth_mesh(input_dir/'Jaw_30_moving_jaw.stl')
     for part in (upper,lower):
         if not part.is_volume:
             raise ValueError('Tooth meshes must be closed oriented meshes before trimming')

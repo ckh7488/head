@@ -162,14 +162,14 @@ for (const button of viewButtons) {
   });
 }
 
-at("show-rotor-clash").addEventListener("click", () => {
+at("show-yaw-studs").addEventListener("click", () => {
   changeMode("manual");
   stopDemo();
   stopGestures();
   desired = { ...neutral, neckYaw: 36 };
   updateReadouts(desired, true);
-  scene?.inspectRotorClash();
-  setCaption("회전판과 목 모터", "+36° · 붉은 체적 44.9 mm³");
+  scene?.inspectYawStuds();
+  setCaption("회전판 아래 볼트", "목 좌우 ±60° · CAD 최소 간격 0.70 mm");
   upright.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
 });
 
@@ -364,6 +364,12 @@ async function start() {
     found = true;
     loader.hidden = true;
     at("view-canvas").dataset.ready = "true";
+    if (!scene.wiringAvailable) {
+      const warning = document.createElement("p");
+      warning.textContent = "배선 데이터를 불러오지 못했습니다.";
+      warning.setAttribute("role", "status");
+      at("view-stage").after(warning);
+    }
     if (location.search === "?view=wiring") viewButtons.find(b => b.dataset.view === "wiring").click();
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
@@ -371,7 +377,8 @@ async function start() {
     console.error("R5 B15 viewer could not load:", error);
     loader.classList.add("failed");
     loader.querySelector(".loader").hidden = true;
-    status.textContent = "3D 모델을 표시할 수 없습니다. WebGL을 지원하는 브라우저에서 다시 열어 주세요.";
+    status.textContent = /WebGL/.test(error.message) ?
+      "이 브라우저에서 WebGL을 시작할 수 없습니다." : "3D 모델 파일을 불러오지 못했습니다. 페이지를 새로고침해 주세요.";
     at("view-stage").classList.add("fallback-poster");
     if (!found && scene) scene.renderer.domElement.hidden = true;
   }

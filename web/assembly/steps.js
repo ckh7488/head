@@ -336,8 +336,9 @@ const definitions = [
   {
     id: "yaw-motor", group: "목", title: "받침 안 목 모터", base: "Part000 Part008 Part009",
     moves: [move("Part017", 0, 0, 34)], focus: [0, 12, -57], view: [1.15, -1.55, 1.5], span: 108,
-    task: "ID 4 XL430을 05번 좌우 브래킷 사이에 대 봅니다.", check: "본체에는 M2.6 성형 나사용 구멍이 있습니다. 맞는 나사산과 길이의 원통머리 볼트를 확인한 뒤 고정합니다.",
-    stock: "육각렌치 원통머리 · 본체 체결품 확인 대기", hold: true,
+    task: "ID 4 XL430을 05번 좌우 브래킷 사이에 놓고 왼쪽 창에서 JST를 꽂습니다.",
+    check: "왼쪽 창에서 플러그가 12 mm 드나듭니다. 본체에는 M2.6 탭핑 나사 자리가 있습니다.",
+    stock: "JST EHR-3 · 본체용 육각 나사의 나사산 호환은 실물 검증 범위", hold: true,
   },
   {
     id: "yaw-bearing", group: "목", title: "작업대에서 6816 베어링부터", base: "Part001",
@@ -377,7 +378,7 @@ const definitions = [
     id: "rotor-nuts", group: "목", title: "회전판에 M3 볼트 네 개 세우기", base: "Part007",
     moves: [move(names(mastStuds), 0, 0, -18), move(names(rotorNuts), 0, 0, 17)],
     focus: [0, 15, -35], view: [1, .85, .53], span: 99,
-    task: "작업대에서 회전판 밑의 M3×16을 육각렌치로 잡고 위쪽 너트로 볼트 네 개를 고정합니다.",
+    task: "회전판 밑 볼트 자리 네 곳에서 서포트를 빼고 M3×16을 넣습니다. 육각렌치로 잡고 위쪽 너트를 조입니다.",
     check: "머리는 아래, 나사산은 위로 나옵니다. 이 볼트에 나중에 목 기둥을 얹습니다.",
     stock: "M3×16 원통머리 · 일반 M3 육각너트 각 4개", checked: true, inspectFasteners: true,
   },
@@ -437,7 +438,7 @@ const definitions = [
     id: "pitch-drive", group: "목", title: "끄덕임 모터를 요크 위에서", base: "Part011",
     moves: [move(`Part018 Part016 ${names(pitchHornBolts)}`, 0, 0, 52)], focus: [20, 0, 108], view: [1.2, -1.5, .88], span: 131,
     task: "혼을 조인 모터를 요크 위에서 내려 넣습니다.",
-    check: "본체의 기존 나사산과 장착 나사 길이를 대조한 뒤 고정합니다.", hold: true,
+    check: "JST를 요크의 뒤쪽 창에서 꽂습니다. 플러그 삽입 경로는 12 mm입니다.", hold: true,
   },
   {
     id: "pitch-bearing", group: "목", title: "688을 바깥쪽에서", base: "Part011 Part018 Part016",
@@ -709,8 +710,8 @@ const definitions = [
     id: "neck-wiring", group: "턱·외장", title: "목과 머리 배선 연결", base: "Part000",
     moves: [], focus: [0, 0, 55], view: [1.6, -1, .8], span: 310,
     task: "뒤 해골을 닫기 전에 받침에서 올라오는 선을 회전판 앞 통로로 보내고 모터 네 개와 카메라를 연결합니다.",
-    check: "받침, 목 좌우축, 목 상하축마다 여유를 따로 둡니다. 전원을 빼고 목을 끝까지 움직이며 선이 당기거나 끼는지 봅니다.",
-    inspectFasteners: true, wiring: true, hold: true, status: "배선 경로 검토",
+    check: "ID 4는 왼쪽 창, ID 5는 뒤쪽 창에 꽂습니다. ID 1의 뒤쪽 플러그는 눈 모듈을 만들 때 미리 꽂습니다.",
+    inspectFasteners: true, wiring: true, checked: true, status: "CAD 삽입 경로 확인",
   },
   {
     id: "rear-shell", group: "턱·외장", title: "뒤 해골을 씌우기", base: frame,
@@ -723,9 +724,9 @@ const definitions = [
     id: "complete", group: "턱·외장", title: "조립 완료 · 체결과 배선", base: "Part000",
     moves: [], focus: [0, 1, 58], view: [1.15, -1.45, .8], span: 325,
     task: "기본 체결품 140개와 체결 길이를 확인 중인 원통머리 18곳, 내부 전선 32가닥을 표시합니다.",
-    check: "회전판 아래 볼트와 목 모터 두 곳의 JST가 걸립니다. 카메라 고정 나사와 실제 배선 여유도 확인이 필요합니다.",
-    note: "상단 구동 검토에서 목 좌우 +36°의 볼트 간섭을 볼 수 있습니다.",
-    inspectFasteners: true, wiring: true, hold: true, status: "제작 전 수정",
+    check: "목 좌우 ±60°에서 회전판 아래 볼트와 모터 사이 최소 간격은 0.70 mm입니다.",
+    note: "구동 검토에서 배선과 체결품을 표시한 채 눈·목·턱을 움직일 수 있습니다.",
+    inspectFasteners: true, wiring: true, checked: true, status: "CAD 조립 상태",
   },
 ];
 

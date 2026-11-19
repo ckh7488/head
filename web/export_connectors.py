@@ -18,6 +18,7 @@ MECHANICAL = HERE.parent / 'mechanical'
 sys.path[:0] = [str(MECHANICAL), str(MECHANICAL / 'physics')]
 from export_cad import world_shape
 from fixtures import CABLE_CENTER_Z, CABLE_LANES, CABLE_STOP_Y
+from motor_ports import EHR_HEIGHT, EHR_LENGTH, EHR_PORTS, EHR_WIDTH
 from primitives import box, cylinder
 
 AMASS_XT30 = 'https://www.china-amass.com/public/upload/20240608/810c62b3f7ace2287989748538eb2a6b.pdf'
@@ -231,18 +232,12 @@ def export(cad_path, inputs, out, review_cad):
             pieces[header] = hub_header(doc, port, inputs)
             model = 'B2B-PH-K-S' if port == 3 else 'B3B-PH-K-S' if port <= 6 else 'B3B-EH-A'
             info[header] = (f'J{port} · JST {model}', 'KiCad STEP', KICAD_JST)
-        eh = jst_housing(3, 2.5, 9.5, 3.8, 7.1)
-        for label, origin, row, direction in (
-            ('ID1EH', (3.2, -22.9, 93.55), (1, 0, 0), (0, 1, 0)),
-            ('ID2EH', (40.35, -2.6, 142.), (0, 0, 1), (0, -1, 0)),
-            ('ID3EH', (-17.1, -1.4, 179.), (0, 0, 1), (0, 1, 0)),
-            ('ID4EH', (-16.85, 14.1, -62.1), (0, 1, 0), (-1, 0, 0)),
-            ('ID5EH', (11.8, -16.85, 97.9), (0, 0, 1), (0, -1, 0)),
-            ('ID6EH', (-25.5, 3.6, 101.), (0, 0, 1), (0, 1, 0)),
-            ('OpenRBEH', (34.4, -25., -65.5), (0, 1, 0), (-1, 0, 0)),
-        ):
+        eh = jst_housing(3, 2.5, EHR_WIDTH, EHR_HEIGHT, EHR_LENGTH)
+        for label, (_, origin, row, direction) in EHR_PORTS.items():
             pieces[label] = at_basis(eh, origin, row, direction)
             info[label] = (f'{label.replace("EH", "")} · JST EHR-3', 'JST 도면', JST_EH)
+        pieces['OpenRBEH'] = at_basis(eh, (34.4, -25., -65.5), (0, 1, 0), (-1, 0, 0))
+        info['OpenRBEH'] = ('OpenRB · JST EHR-3', 'JST 도면', JST_EH)
         fit_report(doc, pieces)
         scene = trimesh.Scene()
         materials = {key: trimesh.visual.material.PBRMaterial(name=key, baseColorFactor=linear_color(rgb),

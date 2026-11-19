@@ -162,24 +162,16 @@ export class AssemblyViewer {
 
   async load() {
     const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
-    const [data, model] = await Promise.all([
-      fetch("./assets/assembly.json").then(r => { if (!r.ok) throw Error("assembly metadata"); return r.json(); }),
-      loader.loadAsync("./assets/assembly.glb")
-    ]);
-    const [wiring, connectors] = await Promise.all([
+    const response = await fetch("./assets/assembly.json", { cache: "no-cache" });
+    if (!response.ok) throw Error("Assembly metadata");
+    const data = await response.json();
+    const [model, wiring, connectors] = await Promise.all([
+      loader.loadAsync(`./assets/assembly.glb?rev=${data.cad_sha256}`),
       loadWiring("./assets/wiring.json", data.cad_sha256),
       loadConnectors(loader, new URL("./assets/", import.meta.url).href, data.cad_sha256),
     ]);
+    this.wiringAvailable = wiring.available;
     this.wiring = new WiringModel(wiring, this.scene, connectors);
-    const overlap = new THREE.BufferGeometry();
-    overlap.setAttribute("position", new THREE.Float32BufferAttribute(wiring.rotorClash.vertices.flat(), 3));
-    overlap.setIndex(wiring.rotorClash.triangles.flat());
-    this.rotorClash = new THREE.Mesh(overlap, new THREE.MeshBasicMaterial({
-      color: 0xff493f, side: THREE.DoubleSide, depthTest: false, depthWrite: false, toneMapped: false,
-    }));
-    this.rotorClash.visible = false;
-    this.rotorClash.renderOrder = 10;
-    this.scene.add(this.rotorClash);
     const wiringFades = new Set(["Part000", "Part001", "Part002", "Part073", "Part074", "Part019"]);
     this.scene.add(model.scene);
     model.scene.updateMatrixWorld(true);
@@ -299,7 +291,7 @@ export class AssemblyViewer {
     return this.detail;
   }
 
-  inspectRotorClash() {
+  inspectYawStuds() {
     this.point([[68, 112, 28], [-9, 21, -45]]);
   }
 
@@ -360,7 +352,6 @@ export class AssemblyViewer {
       }
       for (const batch of this.fastenerBatches) batch.instanceMatrix.needsUpdate = true;
       this.wiring?.draw(matrixFor);
-      if (this.rotorClash) this.rotorClash.visible = this.mode === "wiring" && Math.abs(pose.neckYaw - 36) < .25;
       this.poseHash = hash;
       this.dirty = true;
       this.keepShadows = true;

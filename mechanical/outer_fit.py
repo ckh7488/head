@@ -37,6 +37,36 @@ def enclosure_motion(body, travel, clearance=.28):
     return md.Manifold.batch_boolean(cuts, md.OpType.Add)
 
 
+def skull_print_relief(shell):
+    printed = shell.rotate((-90., 0., 0.))
+    low, high = np.asarray(printed.bounding_box()).reshape(2, 3)
+    origin = np.r_[(low[:2]+high[:2])/2, low[2]]
+    left = (27.85, 37.4, 115.25, 132.2)
+    cheek = (55.6, 63.7, 129.72, 131.15)
+    orbit = (46.25, 51.55, 129.70, 131.15)
+    # Section coordinates are relative to the centred front-shell print mesh.
+    reference = np.array((92.204, 122.4372, 0.))
+
+    def taper(low, high, bottom, top):
+        corners = [(x, y, z) for (x0, x1, y0, y1), z in ((low, bottom), (high, top))
+                   for x in (x0, x1) for y in (y0, y1)]
+        return md.Manifold.hull_points(np.asarray(corners) + origin - reference)
+
+    sections = [
+        (left, left, 30., 42.),
+        (left, (37.38, *left[1:]), 42., 53.7),
+        (cheek, cheek, 69.0, 73.25),
+        (cheek, (cheek[0], 55.62, *cheek[2:]), 73.25, 83.3),
+        (orbit, orbit, 77.3, 78.5),
+        (orbit, (51.53, *orbit[1:]), 78.5, 85.1),
+    ]
+    result = printed - md.Manifold.batch_boolean([taper(*s) for s in sections], md.OpType.Add)
+    primary = max(result.decompose(), key=lambda piece: piece.volume())
+    if primary.volume() < .995 * shell.volume() or result.volume()-primary.volume() > .1:
+        raise ValueError("Front shell relief detached printable material")
+    return primary.rotate((90., 0., 0.)).simplify(.0003)
+
+
 def front_loading_clearance(doc):
     with TemporaryDirectory() as work:
         path = Path(work) / 'surface.stl'
@@ -83,7 +113,7 @@ def front_loading_clearance(doc):
             detached = sorted((round(p.volume(), 2), p.bounding_box()) for p in pieces if p is not primary)
             raise ValueError(f'Front shell relief: {base.volume():.1f} -> {primary.volume():.1f} mm³, '
                              f'detached {detached[-6:]}')
-        model = primary.to_mesh()
+        model = skull_print_relief(primary).to_mesh()
         mesh = tr.Trimesh(vertices=model.vert_properties[:, :3], faces=model.tri_verts, process=False)
         parent = shell.getGlobalPlacement().multiply(shell.Placement.inverse())
         mesh.apply_transform(np.array(parent.inverse().toMatrix().A).reshape(4, 4))

@@ -21,7 +21,7 @@ from fixtures import (
     captive_cables, fixture_parameters, rear_ballast, xt60_inner_sample,
 )
 from motor_seats import JAW_STAY, head_pockets
-from neck_joint import MOUNTS, PITCH_HORN, PITCH_HORN_SEAT
+from neck_joint import MOUNTS, PITCH_HORN, PITCH_HORN_SEAT, yaw_connector_opening
 from openrb import board_model as openrb_model, carrier as openrb_carrier
 from openrb import usb_plug as openrb_usb_plug
 from outer_fit import finish_camera, front_loading_clearance
@@ -85,7 +85,10 @@ def fix_motors(doc):
     ]:
         seat = doc.getObject(name).Shape
         side_clear = box(-14.55, 0, -6, 36, -72, -63.6) if side < 0 else box(0, 14.55, -6, 36, -72, -63.6)
-        repaired[name] = (slug, seat.cut(side_clear), None)
+        tools = [side_clear]
+        if side < 0:
+            tools.append(yaw_connector_opening())
+        repaired[name] = (slug, seat.cut(tools), None)
     yaw = doc.Part007.Shape.cut(cylinder(4.35, 9, (0, 0, -39)))
     yaw = yaw.cut(cylinder(46, .95, (0, 0, -38.0)).cut(cylinder(42.55, 1.1, (0, 0, -38.05))))
     pitch = doc.Part016.Shape.cut(box(45.0, 50, -15, 15, 98, 126))

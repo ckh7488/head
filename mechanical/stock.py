@@ -8,7 +8,7 @@ import Part
 from fixtures import (
     CAP_BOLT_Y, CAP_BOLTS, CAP_NUT_FACE_Z, CAP_WRENCH_WIDTH,
 )
-from neck_joint import neck_base
+from neck_joint import eye_connector_clearance, neck_base, pitch_connector_opening
 from primitives import box, cylinder, print_mesh
 from service_hatch import HUB_MOUNTS, HUB_SCREW_SEAT, revise_service, service_coupon
 from tool_access import NUT_HEIGHT, SOCKET_BORE, WRENCH_THICKNESS
@@ -22,6 +22,7 @@ BLINK_CLAMPS = ((-53.9, -56., -50.9, -1), (10.2, 7.65, 13., 1), (54.15, 51.15, 5
 BLINK_CLAMP_LENGTH = 8.
 BLINK_CLAMP_NUT_Z = 158.60
 BLINK_CLAMP_WRENCH = WRENCH_THICKNESS[3]
+BLINK_WRENCH_FLOOR = BLINK_CLAMP_NUT_Z + NUT_HEIGHT[3] - BLINK_CLAMP_WRENCH - .37
 BLINK_HORN_SCREW_X = 3.42
 BLINK_HORN_NUT_X = 9.45
 BLINK_PLATE_Z = (182., 190.8)
@@ -67,6 +68,12 @@ def crank_landing_face(crank):
     return crank.fuse(pad).removeSplitter()
 
 
+def shaft_wrench_relief(lo, hi, shaft_y, shaft_z):
+    half_opening = 1.58
+    return box(lo, hi, shaft_y-half_opening, shaft_y+half_opening,
+               shaft_z+.9, BLINK_WRENCH_FLOOR+.12)
+
+
 def blink_stock(doc, folder, layout):
     shaft_y, shaft_z = layout['shaft_yz_mm']
     angle = layout['phase_deg'] * pi / 180.
@@ -102,9 +109,10 @@ def blink_stock(doc, folder, layout):
         strut = box(pad_lo,pad_hi,shaft_y+3.7,shaft_y+7.7,shaft_z+.50,shaft_z+9.34)
         crank = crank.fuse([hub,pad,strut])
         roof = BLINK_CLAMP_NUT_Z + NUT_HEIGHT[3]
-        slot = box(screw_x-13.,screw_x+13.,shaft_y-12.,shaft_y+6.25,roof-BLINK_CLAMP_WRENCH-.37,roof)
+        slot = box(screw_x-13.,screw_x+13.,shaft_y-12.,shaft_y+6.25,BLINK_WRENCH_FLOOR,roof)
         tools = [cylinder(2.13, hi-lo+.45, (lo-.2,shaft_y,shaft_z), X),
-                 cylinder(1.78, 9., (screw_x,shaft_y,shaft_z+1.52)), slot]
+                 cylinder(1.78, 9., (screw_x,shaft_y,shaft_z+1.52)), slot,
+                 shaft_wrench_relief(lo-.20, hi+.25, shaft_y, shaft_z)]
         if i == 2:
             joint = (10.56, shaft_y + arm*cos(angle), shaft_z + arm*sin(angle))
             tools.append(cylinder(SOCKET_BORE[2], 8.0, joint, X))
@@ -124,8 +132,10 @@ def blink_stock(doc, folder, layout):
         part.Printed = True
         collar = shoulder.fuse(sleeve).cut(bore)
         span = (.9, 7.65) if label == 'Left' else (13.1, 20.2)
-        wrench_floor = BLINK_CLAMP_NUT_Z + NUT_HEIGHT[3] - BLINK_CLAMP_WRENCH - .37
-        collar = collar.cut(box(*span, shaft_y-4.2, shaft_y+4.2, wrench_floor, shaft_z+4.0))
+        collar = collar.cut([
+            box(*span, shaft_y-4.2, shaft_y+4.2, BLINK_WRENCH_FLOOR, shaft_z+4.0),
+            shaft_wrench_relief(*span, shaft_y, shaft_z),
+        ])
         printed(doc,part.Name,collar,
                 folder/f'45_blink_shaft_spacer_{label.lower()}.stl','x+')
 
@@ -214,6 +224,7 @@ def neck_stock(doc, folder):
         slot=box(*entrance,y-8.85,y+8.85,57.35,62.04)
         mast=mast.cut([slot,cylinder(1.80,10.0,(x,y,57.25))])
         yoke=yoke.cut(cylinder(1.7,8.25,(x,y,66.9)))
+    yoke = yoke.cut([pitch_connector_opening(), eye_connector_clearance()])
     rotor, mast = neck_base(doc.Part007.Shape, mast)
     printed(doc,'Part007',rotor,folder/'04_yaw_rotor.stl')
     printed(doc,'Part010',mast,folder/'06_neck_mast.stl')
