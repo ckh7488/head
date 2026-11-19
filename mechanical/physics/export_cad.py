@@ -56,13 +56,14 @@ def extract(path, output, include_world):
         motion_by_part = {}
         if include_world:
             world.mkdir(exist_ok=True)
+        hub_parts = {part.Name for part in doc.HubInstalled.Group + doc.HubCableSpace.Group}
         records = []
         for obj in doc.Objects:
             group = getattr(obj, 'Motion', None)
             shape = world_shape(obj) if obj.TypeId == 'Part::Feature' else None
             mesh = world_mesh(obj) if obj.TypeId == 'Mesh::Feature' else None
             if include_world and (shape is not None or mesh is not None):
-                motion_by_part[obj.Name] = group or ('hatch' if obj in doc.HubInstalled.Group else 'fixed')
+                motion_by_part[obj.Name] = group or ('hatch' if obj.Name in hub_parts else 'fixed')
                 (mesh if mesh is not None else tessellate(shape)).write(str(world/f'{obj.Name}.stl'))
             if not group or group == 'fixed':
                 continue
@@ -97,7 +98,7 @@ def extract(path, output, include_world):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B14-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=HERE.parent/'R5-B15-Assembly.FCStd')
     parser.add_argument('--world', action='store_true', help='Export world meshes for the clearance sweep')
     parser.add_argument('output', type=Path)
     args = parser.parse_args()

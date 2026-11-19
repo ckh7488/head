@@ -1,4 +1,4 @@
-"""Build R5 B14 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B15 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -16,7 +16,10 @@ import trimesh as tr
 
 from base_stack import CARRIER_MOUNTS, mounting_stack
 from primitives import box, cylinder, holes, print_mesh
-from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
+from fixtures import (
+    CABLE_LANES, CABLE_SAMPLES, ballast_mount, ballast_stud, cable_sample, cable_wall_fixture,
+    captive_cables, fixture_parameters, rear_ballast, xt60_inner_sample,
+)
 from motor_seats import JAW_STAY, head_pockets
 from neck_joint import MOUNTS, PITCH_HORN, PITCH_HORN_SEAT
 from openrb import board_model as openrb_model, carrier as openrb_carrier
@@ -667,6 +670,10 @@ def main(output=BUILD):
     add_fixture(doc, base_group, 'OpenRBUSB', 'OpenRB USB-C plug envelope', openrb_usb_plug(), 'fixed', False)
     add_fixture(doc, base_group, 'CableSaddle', '40 captive cable tray', saddle, 'fixed', True)
     add_fixture(doc, base_group, 'CableGate', '42 interlocking cable cover', gate, 'fixed', True)
+    for lane, sample in zip(CABLE_LANES, CABLE_SAMPLES, strict=True):
+        name, label, _, _ = sample
+        add_fixture(doc, base_group, name, label, cable_sample(lane, sample), 'fixed', False)
+    add_fixture(doc, base_group, 'InputXT60Mate', '목 전원 · 받침 안의 XT60U-M', xt60_inner_sample(), 'fixed', False)
     print_mesh(gate, output/'STL'/'42_captive_cable_cover.stl', 'z-')
     print_mesh(cable_wall_fixture(base), output/'STL'/'Cable_lock_wall_fixture.stl')
     doc.Part000.Label = '01 Base cup · open fastener access'
@@ -691,10 +698,10 @@ def main(output=BUILD):
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B14 · prototype'
+    doc.R5.Label = 'R5 B15 · prototype'
     doc.R5.Status = 'Cylindrical hex-socket heads only. DYNAMIXEL case thread fit pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B14-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B15-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

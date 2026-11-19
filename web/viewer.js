@@ -70,7 +70,7 @@ export class AssemblyViewer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.domElement.setAttribute("aria-label", "R5 B14 조립 3D 모델");
+    this.renderer.domElement.setAttribute("aria-label", "R5 B15 조립 3D 모델");
     this.host.appendChild(this.renderer.domElement);
     const canvas = this.renderer.domElement;
     let down;

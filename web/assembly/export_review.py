@@ -103,7 +103,7 @@ def export(cad, output):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B14-Assembly.FCStd')
+    parser.add_argument('--cad', type=Path, default=ROOT / 'mechanical' / 'R5-B15-Assembly.FCStd')
     parser.add_argument('--output', type=Path, default=Path(__file__).resolve().parent)
     args = parser.parse_args()
     export(args.cad, args.output)

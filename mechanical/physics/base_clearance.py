@@ -12,14 +12,14 @@ import Part
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from fixtures import (
     CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_NUT_FACE_Z,
-    SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_WASHER_Y,
+    SADDLE_MOUNTS, SADDLE_NUT_Y, SADDLE_WASHER_Y, cable_exits,
 )
 from stock import YOKE_MOUNTS, nut, socket_screw
 from neck_joint import MOUNTS, ROTOR_TOP, STUD_BOLT_SEAT, MAST_LENGTH
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B14-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B15-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -77,10 +77,11 @@ def check_pairs(doc):
         length = lane['minimum_body_length_mm']
         plug = Part.makeBox(width, length, height, V(x-width/2, stop-length-.1, center_z-height/2))
         width, height = (size-.4 for size in lane['slot_mm'])
-        cord = Part.makeBox(width, 7.6, height, V(x-width/2, stop-.1, center_z-height/2))
+        cords = cable_exits(x, stop-.1, center_z, 7.6, width, height, lane.get('pitch_mm', 0.))
         for static in (saddle, gate, base):
             yield plug, static, f'{name} body in pocket'
-            yield cord, static, f'{name} cord at outlet'
+            for cord in cords:
+                yield cord, static, f'{name} cord at outlet'
         width, height = lane['minimum_shoulder_mm']
         shoulder = Part.makeBox(width, length, height, V(x-width/2, stop-length+.4, center_z-height/2))
         if min(shoulder.common(part).Volume for part in (saddle, gate)) < .1:

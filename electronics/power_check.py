@@ -5,6 +5,11 @@ from pathlib import Path
 
 import pcbnew
 
+from harness import (
+    INPUT_5V_LOADED, MOTOR_LENGTH, MOTOR_WIRE, POWER_LENGTH, POWER_WIRE,
+    XT60_TAIL, XT60_TAIL_LENGTH, check_wire_sizes,
+)
+
 HERE = Path(__file__).resolve().parent
 HOT_COPPER_OHM_MM = 2.06e-5
 HUB_COPPER_MM = .070
@@ -61,14 +66,16 @@ def check_hub():
     check_net(parts, 'J2', {1: '12V_IN', 2: 'GND'})
     check_net(parts, 'J3', {1: 'GND', 2: 'DXL_CTL'})
     model = (
-        ('5V_IN', '5V_EYES', ('J1', 2), 'F1', range(4, 7), 1.47, 5.88, 4.90),
+        ('5V_IN', '5V_EYES', ('J1', 2), 'F1', range(4, 7), 1.47, 5.88, INPUT_5V_LOADED),
         ('12V_IN', '12V_NECK', ('J2', 1), 'F2', range(7, 9), 1.40, 2.80, 11.10),
     )
     for upstream, rail, entry, fuse, outputs, stall, trunk_current, supply in model:
         check_net(parts, fuse, {1: upstream, 2: rail})
         current = len(outputs)*stall
-        trunk_loss = trunk_current*(.60*.025 + .005)
-        wire_and_contacts = stall*(1.0*.100 + .080)
+        tail = XT60_TAIL_LENGTH if upstream == '12V_IN' else 0.
+        trunk_wire = 2*((POWER_LENGTH-tail)*POWER_WIRE.hot_ohms_per_m + tail*XT60_TAIL.hot_ohms_per_m)
+        trunk_loss = trunk_current*(trunk_wire + .012)
+        wire_and_contacts = stall*(2*MOTOR_LENGTH*MOTOR_WIRE.hot_ohms_per_m + .080)
         lead = copper_path(board, parts, upstream, entry, (fuse, 1))
         for output in outputs:
             part = f'J{output}'
@@ -78,7 +85,10 @@ def check_hub():
             if voltage < (4.25 if supply < 6 else 10.50):
                 raise ValueError(f'{part} has insufficient supply headroom')
             print(f'{part}: {1000*(lead+branch):.2f} mΩ positive PCB path, {voltage:.2f} V at the motor')
-    jaw = 4.90-5.88*(.60*.025+.005)-1.47*(1.0*.100+.080+.090)
+    jaw = (INPUT_5V_LOADED - 5.88*(2*POWER_LENGTH*POWER_WIRE.hot_ohms_per_m+.012)
+           - 1.47*(2*MOTOR_LENGTH*MOTOR_WIRE.hot_ohms_per_m+.080+.090))
+    if jaw < 4.25:
+        raise ValueError('ID6 has insufficient supply headroom')
     print(f'ID6 fused branch: {jaw:.2f} V at the motor')
 
 
@@ -94,5 +104,6 @@ def check_radio():
 
 
 if __name__ == '__main__':
+    check_wire_sizes()
     check_hub()
     check_radio()

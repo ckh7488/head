@@ -153,6 +153,9 @@ const keepers = "YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3";
 const cableTray = "Part000 CableSaddle";
 const mountedCableTray = `${cableTray} ${names(clipBolts)} ${names(clipWashers)} ${names(clipNuts)}`;
 
+const cablePlugs = "InputXT30 InputXT60 CameraUSB ControlUSB";
+const hubPlugs = "HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8";
+
 const definitions = [
   {
     id: "cable-tray", group: "받침", title: "트레이를 뒤에서 대기", base: "Part000",
@@ -168,6 +171,20 @@ const definitions = [
     task: "뒤쪽 큰 구멍으로 M3×16을 넣고, 받침 안쪽에서 평와셔와 너트를 끼웁니다.",
     check: "2.5 mm 육각렌치의 긴 쪽으로 조입니다. 절개 보기에서 나사 머리와 안쪽 너트 자리를 확인할 수 있습니다.",
     stock: "M3×16 원통머리 · 일반 너트 · 평와셔 각 2개", checked: true,
+  },
+  {
+    id: "cable-plugs", group: "받침", title: "전원·USB 케이블을 트레이에", base: mountedCableTray,
+    moves: [move(cablePlugs, 0, 0, 25)], focus: [0, 112, -51], view: [.65, 1.5, .92], span: 137,
+    task: "XT30U는 암수를 결합해 올립니다. XT60U는 바깥쪽 암 커넥터만 올리고, 두 전용 홈으로 전원선을 빼냅니다.",
+    check: "열수축을 마친 한 가닥의 최대 외경은 XT30U Ø4.0 mm, XT60U Ø5.6 mm입니다. USB의 뒤턱과 뒷목은 시험판에서 대조합니다.",
+    stock: "Alpha Wire 3055 · 18 AWG, 6718 · XT60U용 12 AWG, StarTech USBEXTAA6IN ×2",
+    note: "그림은 커넥터와 케이블이 차지할 공간입니다. P1S 시험판 2번에서 실물을 댑니다.", checked: true,
+  },
+  {
+    id: "xt60-mate", group: "받침", title: "받침 안에서 목 전원 꽂기", base: mountedCableTray,
+    moves: [move("InputXT60Mate", 0, -16, 0)], focus: [-15.5, 102, -56], view: [1.05, -.8, 1.5], span: 99,
+    task: "허브를 넣기 전에 안쪽 XT60U-M을 받침 안에서 뒤로 밀어서, 트레이에 앉은 암 커넥터에 꽂습니다.",
+    check: "두 몸체가 끝까지 맞물리고 바깥쪽 뒤턱이 트레이에 닿는지 확인합니다. 양쪽 납땜 꼬리는 12 AWG입니다.", checked: true,
   },
   {
     id: "cable-cover", group: "받침", title: "커넥터 위에 덮개 내리기", base: mountedCableTray,
@@ -216,6 +233,14 @@ const definitions = [
     task: "아래에서 5.5 mm 소켓으로 너트를 잡고 위에서 2.5 mm 육각렌치로 조입니다.",
     check: "초록색 소켓을 그대로 잡고 위쪽 육각렌치를 돌립니다. 기판이 휘지 않게 네 곳을 조금씩 조입니다.",
     checked: true, inspectFasteners: true,
+  },
+  {
+    id: "hub-wiring", group: "받침", title: "작업대에서 JST 하네스 꽂기", base: "HubHolder",
+    moves: [move(hubPlugs, 0, 0, 16)], focus: [0, 61, -66], view: [1, -1.15, 1.15], span: 103,
+    task: "J4–J6은 PH 3핀, J7–J8은 EH 3핀을 꽂습니다. J3 PH 2핀에는 OpenRB의 GND와 DATA를 연결합니다.",
+    check: "빨강은 2번 전원, 검정은 1번 GND, 흰색은 3번 DATA입니다. J3은 1번 GND·2번 DATA입니다. 모터별 전압과 ID를 대조합니다.",
+    stock: "Alpha Wire 6712 · 24 AWG · 피복 Ø1.04–1.14 mm · JST PHR-2/3, EHR-3",
+    note: "전원 J1은 XT30U-F를 꽂습니다. J2는 18 AWG 연선을 7 mm 벗겨 연결합니다. 허브를 30 mm 내려도 선이 당겨지지 않게 둡니다.", checked: true,
   },
   {
     id: "hatch-fit", group: "받침", title: "아래에서 허브와 덮개 올리기", base: "Part000",
@@ -687,6 +712,9 @@ const definitions = [
 ];
 
 const joints = {
+  "cable-plugs": [["CableSaddle", cablePlugs]],
+  "xt60-mate": [["CableSaddle", "InputXT60Mate"]],
+  "hub-wiring": [["HubPCB", hubPlugs]],
   "hatch-nuts": [["HubHolder", `${names(hatchNuts)} ${names(hatchBolts)}`]],
   "hub-nuts": [["HubHolder", `${names(hubNuts)} ${names(hubBolts)}`]],
   "hub-board": [["HubHolder", PCB]],

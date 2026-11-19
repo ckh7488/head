@@ -6,10 +6,17 @@ from primitives import box, cylinder, holes
 CABLE_CENTER_Z = -57.5
 CABLE_STOP_Y = 118.5
 CABLE_LANES = (
-    ('5V XT30', -38., (10.7, 5.7), (7.4, 3.6), (10.0, 5.0), 12., (13.4, 7.2)),
-    ('neck XT60', -15.5, (16.0, 8.7), (11.5, 5.4), (15.0, 7.7), 16., (19.6, 10.4)),
-    ('camera USB-A', 9.5, (18.8, 10.6), (6.8, 5.6), (12.4, 7.0), 15., (18.8, 10.6)),
-    ('OpenRB USB-A', 34.5, (18.8, 10.6), (6.8, 5.6), (12.4, 7.0), 15., (18.8, 10.6)),
+    ('5V XT30', -38., (11.1, 6.5), (9.6, 4.6), (9.7, 5.0), 12., (13.4, 7.2), 5.0),
+    ('neck XT60', -15.5, (16.7, 9.4), (13.4, 6.2), (14.6, 7.2), 16., (19.6, 10.4), 7.2),
+    ('camera USB-A', 9.5, (18.8, 10.6), (6.8, 5.6), (12.4, 7.0), 15., (18.8, 10.6), 0.),
+    ('OpenRB USB-A', 34.5, (18.8, 10.6), (6.8, 5.6), (12.4, 7.0), 15., (18.8, 10.6), 0.),
+)
+# Mated body bounds and finished heat-shrink / boot sizes used in the fit check.
+CABLE_SAMPLES = (
+    ('InputXT30', '5 V · AMASS XT30U', (10.50, 5.90, 21.0), (4.0, 4.0)),
+    ('InputXT60', '목 12 V · AMASS XT60U-F', (16.00, 8.60, 17.0), (5.6, 5.6)),
+    ('CameraUSB', '카메라 · StarTech USBEXTAA6IN', (16.2, 8.3, 19.0), (6.4, 5.2)),
+    ('ControlUSB', 'OpenRB · StarTech USBEXTAA6IN', (16.2, 8.3, 19.0), (6.4, 5.2)),
 )
 CAP_BOLTS = (-47., -28.3, -3., 22., 47.)
 CAP_KEYS = (-47.35, *CAP_BOLTS[1:])
@@ -37,6 +44,29 @@ PLATE_COUNT = 12
 STEEL_KG_MM3 = 7.85e-6
 
 
+def cable_exits(x, y, z, length, width, height, pitch):
+    if pitch:
+        return [cylinder(height/2, length, (x + sign*pitch/2, y, z), (0, 1, 0))
+                for sign in (-1, 1)]
+    return [box(x-width/2, x+width/2, y, y+length, z-height/2, z+height/2)]
+
+
+def cable_sample(lane, sample):
+    _, x, _, _, _, _, _, pitch = lane
+    _, _, (width, height, length), boot = sample
+    y, z = CABLE_STOP_Y - .08, CABLE_CENTER_Z
+    body = box(x-width/2, x+width/2, y-length, y, z-height/2, z+height/2)
+    return body.fuse(cable_exits(x, y-.15, z, 23., *boot, pitch)).removeSplitter()
+
+
+def xt60_inner_sample():
+    _, x, _, _, _, _, _, pitch = CABLE_LANES[1]
+    _, _, (width, height, outer), boot = CABLE_SAMPLES[1]
+    y, z = CABLE_STOP_Y-.18-outer, CABLE_CENTER_Z
+    body = box(x-width/2, x+width/2, y-13., y, z-height/2, z+height/2)
+    return body.fuse(cable_exits(x, y-26., z, 13.15, *boot, pitch)).removeSplitter()
+
+
 def captive_cables(base):
     seam = CABLE_CENTER_Z
     stop = CABLE_STOP_Y
@@ -44,12 +74,11 @@ def captive_cables(base):
     lower = lower.fuse([box(x-7.4, x+7.4, 77., 125., -78., -65.8) for x in (-28.5, 28.5)])
     lower = lower.cut(cylinder(93.14, 36., (0., 0., -83.)))
     cap = box(-50.5, 50.5, 99., 125., seam, CAP_BOLT_SEAT_Z)
-    for _, x, (width, height), (opening_x, opening_z), _, _, (pass_x, pass_z) in CABLE_LANES:
+    for _, x, (width, height), (opening_x, opening_z), _, _, (pass_x, pass_z), pitch in CABLE_LANES:
         pocket = box(x-width/2, x+width/2, 76., stop, seam-height/2, seam+height/2)
-        exit_slot = box(x-opening_x/2, x+opening_x/2, stop-.1, 126.,
-                        seam-opening_z/2, seam+opening_z/2)
-        lower = lower.cut([pocket, exit_slot])
-        cap = cap.cut([pocket, exit_slot])
+        exits = cable_exits(x, stop-.1, seam, 126.-stop+.1, opening_x, opening_z, pitch)
+        lower = lower.cut([pocket, *exits])
+        cap = cap.cut([pocket, *exits])
         base = base.cut(box(x-pass_x/2-.2, x+pass_x/2+.2, 74., 96.,
                             seam-pass_z/2-.2, seam+pass_z/2+.2))
 
@@ -125,9 +154,9 @@ def ballast_stud(x):
 
 def fixture_parameters():
     lanes = []
-    for name, x, pocket, outlet, shoulder, length, _ in CABLE_LANES:
+    for name, x, pocket, outlet, shoulder, length, _, pitch in CABLE_LANES:
         lanes.append({'name': name, 'x_mm': x, 'pocket_mm': list(pocket), 'slot_mm': list(outlet),
-                      'minimum_shoulder_mm': list(shoulder), 'minimum_body_length_mm': length})
+                      'pitch_mm': pitch, 'minimum_shoulder_mm': list(shoulder), 'minimum_body_length_mm': length})
     return {
         'cables': {'lanes': lanes, 'stop_y_mm': CABLE_STOP_Y, 'center_z_mm': CABLE_CENTER_Z,
                    'cap_bolts_x_mm': list(CAP_BOLTS), 'cap_bolt_y_mm': CAP_BOLT_Y,
