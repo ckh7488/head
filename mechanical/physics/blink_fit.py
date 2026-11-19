@@ -16,14 +16,18 @@ from trimesh.collision import mesh_to_BVH
 
 from export_cad import world_shape
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from stock import BLINK_CLAMPS, BLINK_CLAMP_LENGTH, nut, socket_screw
+from stock import (
+    BLINK_CLAMPS, BLINK_CLAMP_LENGTH, BLINK_CLAMP_NUT_Z, BLINK_RAIL_LENGTH,
+    BLINK_RAIL_NUT_Y, BLINK_RAIL_SEAT_Y, nut, socket_screw,
+)
 
 V = App.Vector
 X = V(1, 0, 0)
 HINGE = V(0, -39, 119)
 PINS = ('Part058', 'Part059', 'Part061', 'Part062')
+PITCH_PINS = ('Part026', 'Part028')
 LINKS = (
-    (7.45, 1.25, -1, 'servo_yz_mm', 'radius_mm', 6.),
+    (9.45, 1.25, -1, 'servo_yz_mm', 'radius_mm', 8.),
     (4.55, 10.55, 1, 'shaft_yz_mm', 'radius_mm', 8.),
     (-53.75, -47.65, 1, 'shaft_yz_mm', 'lid_radius_mm', 8.),
     (53.75, 47.65, -1, 'shaft_yz_mm', 'lid_radius_mm', 8.),
@@ -44,8 +48,8 @@ def fastener(joint, layout, angle):
     z += layout[arm] * sin(phase)
     axis = (sense,0,0)
     bolt = socket_screw(2,length,(start,y,z),axis)
-    tail = nut(2,(nut_x,y,z),(1,0,0) if length == 6. else axis)
-    if length == 6.:
+    tail = nut(2,(nut_x,y,z),(1,0,0) if center == 'servo_yz_mm' else axis)
+    if center == 'servo_yz_mm':
         washer = Part.makeCylinder(2.50,.3,V(start,y,z),-X)
     else:
         washer = Part.makeCylinder(2.50,.3,V(nut_x,y,z),-V(*axis))
@@ -63,8 +67,16 @@ def check(cad, meshes):
         for name in PINS:
             pin = world_shape(doc.getObject(name))
             start = V(pin.BoundBox.XMin - slack, HINGE.y, HINGE.z)
-            envelope = Part.makeCylinder(1. + sqrt(2) * slack, 9.5 + 2 * slack, start, X)
+            envelope = Part.makeCylinder(1. + sqrt(2) * slack, pin.BoundBox.XLength + 2 * slack, start, X)
             shape_pairs.append((name, envelope, 'eye cradle', cradle))
+            for pitch_id in PITCH_PINS:
+                pitch_pin = world_shape(doc.getObject(pitch_id))
+                if pin.BoundBox.XMax <= pitch_pin.BoundBox.XMin:
+                    axial_gap = pitch_pin.BoundBox.XMin - pin.BoundBox.XMax
+                else:
+                    axial_gap = pin.BoundBox.XMin - pitch_pin.BoundBox.XMax
+                if axial_gap < 2*slack:
+                    raise RuntimeError(f'{name} axial installation conflicts with {pitch_id}')
         fixed = {name: world_shape(doc.getObject(name)) for name in FIXED}
         eye_parts = [world_shape(doc.getObject(name)) for name in ('Part029', 'Part033')]
         tilts = [cradle.copy().rotate(HINGE, X, pitch) for pitch in (-8., 0., 8.)]
@@ -89,15 +101,15 @@ def check(cad, meshes):
         rear = V(0, 1, 0)
         for x, z in rig['mount_xz_mm']:
             axis = f'rail mount {x:g},{z:g}'
-            bolt = socket_screw(3,20.,(x,27.7,z),(0,-1,0))
-            trapped = nut(3,(x,8.74,z),(0,1,0))
+            bolt = socket_screw(3,BLINK_RAIL_LENGTH,(x,BLINK_RAIL_SEAT_Y,z),(0,-1,0))
+            trapped = nut(3,(x,BLINK_RAIL_NUT_Y,z),(0,1,0))
             tool = Part.makeCylinder(1.4, 20., V(x, 30.6, z), rear)
             for name, housing in (('frame', frame), ('rail', rail), ('ballast', ballast)):
                 for solid in (bolt,trapped):
                     record(f'{axis} / {name}', solid.common(housing).Volume)
             record(f'{axis} / tool to frame', tool.common(frame).Volume)
         for z in (183.,189.):
-            bolt = socket_screw(3,20.,(.9,0,z),(-1,0,0))
+            bolt = socket_screw(3,16.,(.9,0,z),(-1,0,0))
             tail = nut(3,(-12.4,0,z),(-1,0,0))
             for name, housing in (('motor', fixed['Part045']), ('plate', fixed['Part046']), ('rail',rail)):
                 for solid in (bolt,tail):
@@ -108,7 +120,7 @@ def check(cad, meshes):
         shaft_parts = ('Part050','Part052','Part053','Part054','Part055','BlinkCollarLeft','BlinkCollarRight')
         for name in shaft_parts:
             record(f'axial shaft insertion / {name}', inserted.common(world_shape(doc.getObject(name))).Volume)
-        radial = [socket_screw(2,BLINK_CLAMP_LENGTH,(x,y,z+1.55+BLINK_CLAMP_LENGTH),(0,0,-1)).fuse(nut(2,(x,y,z+2.60),(0,0,1),(0,1,0)))
+        radial = [socket_screw(3,BLINK_CLAMP_LENGTH,(x,y,z+1.55+BLINK_CLAMP_LENGTH),(0,0,-1)).fuse(nut(3,(x,y,BLINK_CLAMP_NUT_Z),(0,0,1),(0,1,0)))
                   for x,_,_,_ in BLINK_CLAMPS]
         for part, hardware, (x,_,_,side) in zip(('Part053','Part054','Part055'),radial,BLINK_CLAMPS):
             crank = world_shape(doc.getObject(part))
@@ -118,7 +130,7 @@ def check(cad, meshes):
             if any(hardware.common(shaft.copy().rotate(V(0,y,z),X,a)).Volume < .005 for a in (-5.,5.)):
                 raise RuntimeError(f'{part} screw failed to capture the shaft flat')
             for travel in (0.,.5,1.,1.5,2.,2.5,3.,3.5,4.,4.5,5.):
-                sliding = nut(2,(x+side*travel,y,z+2.60),(0,0,1),(0,1,0))
+                sliding = nut(3,(x+side*travel,y,BLINK_CLAMP_NUT_Z),(0,0,1),(0,1,0))
                 record(f'installing nut / {part}',sliding.common(crank).Volume)
 
         for angle in (-1, *range(0, 91, 3), 91):

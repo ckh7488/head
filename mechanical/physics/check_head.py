@@ -16,23 +16,23 @@ AXES_BY_MOTION = {'fixed':(), 'head':(), 'pan':(0,), 'tilt':(1,), 'tilt_link':(1
        'blink_motor_horn':(3,), 'blink_shaft_crank':(3,), 'blink_drive_link':(3,), 'blink_lid_link':(3,), 'jaw':(4,)}
 
 PAIRS_BY_INTERFACE = {
-    'links':(['Part057','Part060'],['Part011','Part012','Part013','Part014','Part015','Part016','Part019','Part020','Part021','Part024','Part025','Part027','Part029','Part033','Part041','Part042','Part044','Part048','Part063','Part064','Part073','Part074','Part076','Part077','Part078','Part079','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_38_left_jaw_drive_arm','Jaw_39_right_jaw_pivot_arm','Jaw_30_moving_jaw']),
+    'links':(['Part057','Part060'],['Part011','Part012','Part013','Part014','Part015','Part016','Part019','Part024','Part025','Part027','Part029','Part033','Part041','Part042','Part044','Part048','Part063','Part064','Part073','Part074','Part076','Part077','Part078','Part079','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_38_left_jaw_drive_arm','Jaw_39_right_jaw_pivot_arm','Jaw_30_moving_jaw']),
     'blink':(['Part045','Part046','Part047','Part048','Part053','Part054','Part055','Part056','Part063'],
-             ['Part019','Part020','Part021','Part041','Part042','Part043','Part044','Part045','Part046','Part047','Part048','Part053','Part054','Part055','Part056','Part063','Part064','Part073','Part074']),
+             ['Part019','Part041','Part042','Part043','Part044','Part045','Part046','Part047','Part048','Part053','Part054','Part055','Part056','Part063','Part064','Part073','Part074']),
     'lids':(['Part078','Part079'],['Part025','Part027','Part029','Part030','Part031','Part033','Part034','Part035','Part037','Part073','Part074','Part076','Part077']),
     'gaze':(['Part024','Part029','Part033','Part037','Part038','Part039','Part040','Part041','Part042','Part043','Part044','Part064'],
-            ['Part010','Part011','Part013','Part015','Part016','Part018','Part019','Part020','Part021','Part024','Part025','Part027','Part029','Part033','Part037','Part038','Part039','Part040','Part041','Part042','Part043','Part044','Part045','Part057','Part060','Part063','Part064','Part066','Part067','Part073','Part074','Part076','Part077','Part078','Part079','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw']),
+            ['Part010','Part011','Part013','Part015','Part016','Part018','Part019','Part024','Part025','Part027','Part029','Part033','Part037','Part038','Part039','Part040','Part041','Part042','Part043','Part044','Part045','Part057','Part060','Part063','Part064','Part066','Part067','Part073','Part074','Part076','Part077','Part078','Part079','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw']),
     'jaw':(['Jaw_30_moving_jaw','Jaw_38_left_jaw_drive_arm','Jaw_39_right_jaw_pivot_arm'],['Part011','Part013','Part015','Part016','Part018','Part024','Part025','Part027','Part045','Part073','Part074','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw']),
-    'neck':(['Part010','Part011','Part018'],['Part019','Part020','Part021','Part024','Part045','Part048','Part063','Part065','Part066','Part067','Part073','Part074','Jaw_30_moving_jaw','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw'])
+    'neck':(['Part010','Part011','Part018'],['Part019','Part024','Part045','Part048','Part063','Part065','Part066','Part067','Part073','Part074','Jaw_30_moving_jaw','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_XL330_M288_Jaw'])
 }
 BALLAST_PAIRS = (
     ['BallastTray', 'BallastCover', 'BallastStack', 'BallastLeftStud', 'BallastRightStud'],
-    ['Part011', 'Part012', 'Part014', 'Part016', 'Part018', 'Part019', 'Part020', 'Part021',
+    ['Part011', 'Part012', 'Part014', 'Part016', 'Part018', 'Part019',
      'Part024', 'Part041', 'Part045', 'Part063', 'Part073', 'Part074', 'Jaw_30_moving_jaw',
      'BallastTray', 'BallastCover', 'BallastStack', 'BallastLeftStud', 'BallastRightStud'],
 )
 
-MATES = set(tuple(sorted(a.split('/'))) for a in '''Part045/Part046 Part046/Part063 Part047/Part045 Part047/Part056 Part048/Part050 Part048/Part052 Part048/Part053 Part048/Part054 Part048/Part055 Part048/Part063 Part063/Part050 Part063/Part052 Part053/Part057 Part054/Part056 Part055/Part060 Part057/Part078 Part060/Part079 Part038/Part039 Part041/Part042 Part038/Part040 Part041/Part043 Part024/Part039 Part042/Part064 Part043/Part044 Part019/Part020 Part019/Part021 Part019/Part064 Part019/Part025 Part019/Part027 Part019/Part013 Part019/Part015 Part010/Part011 Part011/Part018 Part015/Part016 Part016/Part018 Part029/Part037 Part033/Part037 Part037/Part040 Jaw_30_moving_jaw/Jaw_38_left_jaw_drive_arm Jaw_30_moving_jaw/Jaw_39_right_jaw_pivot_arm Jaw_38_left_jaw_drive_arm/Jaw_XL330_M288_Jaw'''.split())
+MATES = set(tuple(sorted(a.split('/'))) for a in '''Part045/Part046 Part046/Part063 Part047/Part045 Part047/Part056 Part048/Part050 Part048/Part052 Part048/Part053 Part048/Part054 Part048/Part055 Part048/Part063 Part063/Part050 Part063/Part052 Part053/Part057 Part054/Part056 Part055/Part060 Part057/Part078 Part060/Part079 Part038/Part039 Part041/Part042 Part038/Part040 Part041/Part043 Part024/Part039 Part042/Part064 Part043/Part044 Part019/Part064 Part019/Part025 Part019/Part027 Part019/Part013 Part019/Part015 Part010/Part011 Part011/Part018 Part015/Part016 Part016/Part018 Part029/Part037 Part033/Part037 Part037/Part040 Jaw_30_moving_jaw/Jaw_38_left_jaw_drive_arm Jaw_30_moving_jaw/Jaw_39_right_jaw_pivot_arm Jaw_38_left_jaw_drive_arm/Jaw_XL330_M288_Jaw'''.split())
 MATES.update({('BallastTray', 'Part019'), ('BallastStack', 'BallastTray'), ('BallastCover', 'BallastStack')})
 ANGLES = (
     (-15., -10., -5., 0., 3., 6.),

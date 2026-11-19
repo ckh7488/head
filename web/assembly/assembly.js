@@ -6,9 +6,10 @@ const choose = id => steps.findIndex(step => step.id === id);
 const fmt = value => new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 2 }).format(value);
 const mm = value => `${fmt(value)} mm`;
 const state = {
-  index: 0, position: 0, ghost: false, section: false, alternative: false, issues: false,
+  index: 0, position: 0, ghost: false, section: false, issues: false,
 };
 let scene, stops, animation;
+const needsCheck = step => Boolean(step.blocker || step.hold);
 
 function makeIndex() {
   const list = el("step-list");
@@ -17,7 +18,7 @@ function makeIndex() {
   select.replaceChildren();
   const groups = new Map();
   for (const [index, step] of steps.entries()) {
-    if (state.issues && !step.blocker) continue;
+    if (state.issues && !needsCheck(step)) continue;
     if (!groups.has(step.group)) {
       const group = document.createElement("section");
       group.className = "step-group";
@@ -59,8 +60,8 @@ function makeIndex() {
 const current = () => steps[state.index];
 const span = () => Math.hypot(...current().moves[0].offset);
 const stopData = () => stops?.[current().id];
-const limit = () => stopData() && !state.alternative ? 1 - stopData().remaining / span() : 1;
-const candidates = () => steps.map((step, index) => ({step, index})).filter(({step}) => !state.issues || step.blocker);
+const limit = () => stopData() ? 1 - stopData().remaining / span() : 1;
+const candidates = () => steps.map((step, index) => ({step, index})).filter(({step}) => !state.issues || needsCheck(step));
 const stepButton = () => el("step-list").querySelector(`[data-step="${current().id}"]`);
 
 function updateNavigation() {
@@ -87,14 +88,13 @@ function position(value) {
   state.position = Math.max(0, Math.min(1, value));
   const remain = (1 - state.position) * span();
   const stop = stopData();
-  const hit = Boolean(stop && !state.alternative && Math.abs(remain - stop.remaining) < .09);
-  const target = Boolean(stop && !state.alternative && remain < .05);
+  const hit = Boolean(stop && Math.abs(remain - stop.remaining) < .09);
+  const target = Boolean(stop && remain < .05);
   el("position").value = Math.round(state.position * 1000);
   el("position").setAttribute("aria-valuetext", `목표까지 ${mm(remain)}`);
   el("distance").textContent = `목표까지 ${mm(remain)}`;
-  el("stage-tag").hidden = !(hit || target || state.alternative);
-  el("stage-tag").textContent = state.alternative ? "Ø3.2 가공 미리보기" : hit ? "CAD 간섭 위치" : "목표 형상 · 장착 경로 필요";
-  el("stage-tag").toggleAttribute("data-alt", state.alternative);
+  el("stage-tag").hidden = !(hit || target);
+  el("stage-tag").textContent = hit ? "CAD 간섭 위치" : "목표 형상 · 장착 경로 필요";
   el("hit-legend").hidden = !hit;
   scene?.setPosition(state.position, hit);
 }
@@ -109,8 +109,6 @@ function pause() {
 function applyView() {
   el("ghost").setAttribute("aria-pressed", String(state.ghost));
   el("section").setAttribute("aria-pressed", String(state.section));
-  el("ream").setAttribute("aria-pressed", String(state.alternative));
-  el("ream").textContent = state.alternative ? "B7 원래 구멍 보기" : "Ø3.2 가공 미리보기";
   scene?.applyStyle(state);
 }
 
@@ -118,9 +116,8 @@ function details() {
   const step = current();
   const stop = stopData();
   const status = el("detail-status");
-  const corrected = state.alternative;
-  status.dataset.kind = (step.blocker && !corrected) || step.hold ? "blocker" : step.checked || corrected ? "verified" : "reference";
-  status.textContent = corrected ? "가공 모델 핀 통과" : step.blocker ? "CAD 간섭" : step.hold ? "체결품 확인 대기" : step.checked ? "CAD 경로 확인" : "조립 방향";
+  status.dataset.kind = needsCheck(step) ? "blocker" : step.checked ? "verified" : "reference";
+  status.textContent = step.blocker ? "CAD 간섭" : step.hold ? "체결품 확인 대기" : step.checked ? "CAD 경로 확인" : "조립 방향";
   el("task").textContent = step.task;
   el("check").textContent = step.check;
   el("note").textContent = step.note || "";
@@ -128,24 +125,23 @@ function details() {
   el("gear").textContent = step.stock || "";
   el("gear-block").hidden = !step.stock;
   el("detail-group").textContent = step.group;
-  el("interference").hidden = !stop || corrected;
+  el("interference").hidden = !stop;
   if (stop) {
     el("stop-distance").textContent = mm(stop.remaining);
     el("stop-volume").textContent = `${fmt(stop.volume)} mm³`;
   }
-  el("stop").hidden = !stop || corrected;
+  el("stop").hidden = !stop;
 }
 
 function selectStep(index) {
   if (!steps[index]) return;
   pause();
-  if (state.issues && !steps[index].blocker) {
+  if (state.issues && !needsCheck(steps[index])) {
     state.issues = false;
     el("issues-only").setAttribute("aria-pressed", "false");
     makeIndex();
   }
   state.index = index;
-  state.alternative = false;
   state.ghost = Boolean(steps[index].blocker);
   state.section = false;
   const step = current();
@@ -153,7 +149,6 @@ function selectStep(index) {
   el("step-number").textContent = `${String(index + 1).padStart(2, "0")} / ${steps.length}`;
   el("step-title").textContent = step.title;
   el("section").hidden = !step.cut;
-  el("ream").hidden = step.id !== "eye-pin";
   el("picked").hidden = true;
   updateNavigation();
   details();
@@ -198,7 +193,7 @@ el("issues-only").addEventListener("click", () => {
   state.issues = !state.issues;
   el("issues-only").setAttribute("aria-pressed", String(state.issues));
   makeIndex();
-  if (state.issues && !current().blocker) selectStep(candidates()[0].index);
+  if (state.issues && !needsCheck(current())) selectStep(candidates()[0].index);
   else updateNavigation();
 });
 el("prev").addEventListener("click", () => go(-1));
@@ -211,13 +206,6 @@ el("finish").addEventListener("click", () => { pause(); position(1); });
 el("reset-view").addEventListener("click", () => scene?.resetView());
 el("ghost").addEventListener("click", () => { state.ghost = !state.ghost; applyView(); });
 el("section").addEventListener("click", () => { state.section = !state.section; applyView(); });
-el("ream").addEventListener("click", () => {
-  pause();
-  state.alternative = !state.alternative;
-  details();
-  applyView();
-  position(state.alternative ? 1 : limit());
-});
 
 const fullscreen = el("expand");
 fullscreen.hidden = !el("viewer").requestFullscreen;

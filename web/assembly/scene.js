@@ -84,7 +84,7 @@ export class WalkthroughScene {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.18;
     this.renderer.localClippingEnabled = true;
-    this.renderer.domElement.setAttribute("aria-label", "B10 움직이는 CAD 형상");
+    this.renderer.domElement.setAttribute("aria-label", "B11 움직이는 CAD 형상");
     this.host.append(this.renderer.domElement);
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = false;
@@ -113,12 +113,12 @@ export class WalkthroughScene {
       if (!result.ok) throw Error(url + " · " + result.status);
       return result.json();
     };
-    const [data, cad, audit, overlay] = await Promise.all([
+    const [data, cad, audit] = await Promise.all([
       json("../assets/assembly.json"), loader.loadAsync("../assets/assembly.glb"),
-      json("./interference.json"), loader.loadAsync("./interference.glb"),
+      json("./interference.json"),
     ]);
     if (audit.cad_sha256 !== data.cad_sha256) throw Error("CAD and measurements have different revisions");
-    this.scene.add(cad.scene, overlay.scene);
+    this.scene.add(cad.scene);
     for (const part of data.parts) {
       const node = cad.scene.getObjectByName(part.name);
       if (!node) throw Error(`Missing CAD part ${part.cad_id}`);
@@ -130,12 +130,11 @@ export class WalkthroughScene {
       this.scene.add(entry.node);
       this.register(part.id, entry);
     }
-    const alt = overlay.scene.getObjectByName("cradle-reamed");
-    if (!alt) throw Error("Missing eye cradle comparison");
-    this.register("cradle-reamed", { node: alt, label: "12 눈 크래들 · Ø3.2 CAD 가공 예시", center: this.entries.get("Part024").center });
+    const overlay = Object.keys(audit.stops).length ? (await loader.loadAsync("./interference.glb")).scene : null;
+    if (overlay) this.scene.add(overlay);
     for (const [id, data] of Object.entries(audit.stops)) {
       const nodes = data.nodes.map(name => {
-        const node = overlay.scene.getObjectByName(name);
+        const node = overlay.getObjectByName(name);
         if (!node) throw Error(`Missing interference solid ${name}`);
         node.visible = false;
         node.traverse(mesh => {
@@ -164,7 +163,9 @@ export class WalkthroughScene {
         materials.push(mesh.material);
       });
     }
-    entry.initial = entry.node.position.clone();
+    entry.original = entry.node.position.clone();
+    entry.initial = entry.original.clone();
+    entry.orientation = entry.node.quaternion.clone();
     entry.materials = materials.map(material => ({ material, color: material.color.clone(), opacity: material.opacity }));
     entry.node.userData.assemblyPart = id;
     entry.node.visible = false;
@@ -173,7 +174,17 @@ export class WalkthroughScene {
 
   show(step) {
     this.step = step;
-    for (const { node, initial } of this.entries.values()) node.position.copy(initial);
+    const hinge = vector([0, -39, 119]);
+    const closed = new THREE.Quaternion().setFromAxisAngle(vector([1, 0, 0]), Math.PI / 2);
+    for (const [id, { node, original, initial, orientation }] of this.entries) {
+      initial.copy(original);
+      node.quaternion.copy(orientation);
+      if (step.closedLids && (id === "Part078" || id === "Part079")) {
+        initial.sub(hinge).applyQuaternion(closed).add(hinge);
+        node.quaternion.premultiply(closed);
+      }
+      node.position.copy(initial);
+    }
     this.moveById = new Map(step.moves.flatMap(({ ids, offset }) => ids.map(id => [id, vector(offset)])));
     this.fixed = new Set(step.base.split(" "));
     for (const arrow of this.paths.children.slice()) {
@@ -210,7 +221,7 @@ export class WalkthroughScene {
     this.resize();
   }
 
-  applyStyle({ ghost, section, alternative }) {
+  applyStyle({ ghost, section }) {
     const { cut, view } = this.step;
     let planes = [];
     if (cut && section) {
@@ -222,8 +233,7 @@ export class WalkthroughScene {
     this.planes = planes;
     for (const [id, entry] of this.entries) {
       const isMoving = this.moveById.has(id);
-      const asCradle = id === "cradle-reamed" && alternative;
-      entry.node.visible = (this.fixed.has(id) || isMoving || asCradle) && !(id === "Part024" && alternative);
+      entry.node.visible = this.fixed.has(id) || isMoving;
       if (!entry.node.visible) continue;
       const translucent = ghost && !isMoving && entry.kind !== "fastener";
       for (const { material, color, opacity } of entry.materials) {

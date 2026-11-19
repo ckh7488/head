@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101417">
-  <meta name="description" content="R5 B10의 실제 CAD로 조립 순서, 부품 삽입과 간섭을 단계별로 확인합니다.">
-  <title>R5 B10 · 단계별 조립</title>
+  <meta name="description" content="R5 B11의 실제 CAD로 조립 순서, 부품 삽입과 간섭을 단계별로 확인합니다.">
+  <title>R5 B11 · 단계별 조립</title>
   <link rel="stylesheet" href="./assembly.css">
   <script type="importmap">
     {"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}
@@ -14,7 +14,7 @@
 <body>
   <header class="topbar">
     <div class="top-inner">
-      <a class="brand" href="../">R5 <span>B10</span></a>
+      <a class="brand" href="../">R5 <span>B11</span></a>
       <nav aria-label="검토 화면">
         <a href="../">구동 검토</a>
         <a href="./" aria-current="page">조립 순서</a>
@@ -38,7 +38,7 @@
       <aside class="steps-panel" aria-labelledby="steps-title">
         <div class="steps-head">
           <h2 id="steps-title">작업 순서</h2>
-          <button id="issues-only" class="button compact" aria-pressed="false">간섭만</button>
+          <button id="issues-only" class="button compact" aria-pressed="false">확인 필요</button>
         </div>
         <nav id="step-list" aria-label="조립 단계"></nav>
       </aside>
@@ -53,7 +53,7 @@
         </div>
         <div class="stage" id="stage">
           <div id="canvas" class="canvas" aria-label="드래그로 회전하고 스크롤로 확대하는 조립 CAD"></div>
-          <div id="model-status" class="model-status" role="status"><span></span><p>실제 B10 CAD를 불러오는 중</p></div>
+          <div id="model-status" class="model-status" role="status"><span></span><p>실제 B11 CAD를 불러오는 중</p></div>
           <div class="stage-tag" id="stage-tag" hidden></div>
           <div class="legend">
             <span><i class="moving"></i>이동 부품</span>
@@ -116,14 +116,13 @@
           <h3>이 단계의 체결품</h3>
           <p id="gear"></p>
         </div>
-        <button id="ream" class="button ream" aria-pressed="false" hidden>Ø3.2 가공 미리보기</button>
-        <p class="evidence">B10 CAD 기준. 출력 공차와 작동 소음은 실물 가조립에서 확인합니다.</p>
+        <p class="evidence">B11 CAD 기준. 출력 공차와 작동 소음은 실물 가조립에서 확인합니다.</p>
       </aside>
     </div>
 
     <footer>
-      <span>R5 B10 · FreeCAD 조립 형상</span>
-      <a href="https://github.com/ckh7488/head/blob/main/mechanical/R5-B10-Fit-P1S.3mf">P1S 시험판</a>
+      <span>R5 B11 · FreeCAD 조립 형상</span>
+      <a href="https://github.com/ckh7488/head/blob/main/mechanical/R5-B11-Fit-P1S.3mf">P1S 시험판</a>
       <a href="https://github.com/ckh7488/head/blob/main/mechanical/ASSEMBLY.md">인쇄용 조립절차서</a>
     </footer>
   </main>
@@ -132,22 +131,19 @@
     <div class="dialog-head">
       <div>
         <h2 id="stock-title">육각렌치 원통머리로 통일</h2>
-        <p>기본 5규격은 모두 ISO 4762 (DIN 912) 원통머리입니다. M2는 1.5 mm, M3는 2.5 mm 육각렌치로 조입니다.</p>
+        <p>구조물은 M3 두 길이를 씁니다. 머리는 ISO 4762 (DIN 912) 원통머리입니다.</p>
       </div>
       <form method="dialog"><button class="button">닫기</button></form>
     </div>
     <table class="stock-table">
       <thead><tr><th scope="col">규격</th><th scope="col">기본 수량</th><th scope="col">사용 위치</th></tr></thead>
       <tbody>
-        <tr><th scope="row">M2×6</th><td>1</td><td><button data-jump="blink-links">가운데 링크의 모터 쪽</button></td></tr>
-        <tr><th scope="row">M2×8</th><td>10</td><td><button data-jump="blink-clamp-bolts">축 고정 3</button> · 링크 5 · C3 2</td></tr>
-        <tr><th scope="row">M3×8</th><td>19</td><td>캐리어 8 · 베어링 눌림판 3 · <button data-jump="hub-bolts">허브 4</button> · <button data-jump="hatch-bolts">덮개 4</button></td></tr>
-        <tr><th scope="row">M3×16</th><td>10</td><td><button data-jump="yoke-fit">목 요크 3</button> · 케이블 고정부 7</td></tr>
-        <tr><th scope="row">M3×20</th><td>6</td><td><button data-jump="blink-rail">눈꺼풀 레일 4</button> · 모터판 2</td></tr>
+        <tr><th scope="row">M3×8</th><td>29</td><td>캐리어·눌림판·허브·덮개·상판 · <button data-jump="mast-bolts">목 기둥</button> · <button data-jump="blink-clamp-bolts">눈꺼풀 축</button></td></tr>
+        <tr><th scope="row">M3×16</th><td>19</td><td>케이블 고정부·베어링 받침·요크 · <button data-jump="blink-rail-bolts">눈꺼풀 레일과 모터판</button></td></tr>
+        <tr><th scope="row">M2×8</th><td>16</td><td><button data-jump="blink-links">소형 링크</button> · <button data-jump="rotor-horn">XL430 혼</button> · C3</td></tr>
       </tbody>
     </table>
-    <p class="stock-note">M2×8은 모터 쪽 한 곳에서 케이스에 닿습니다. M3×16은 레일 너트까지 닿지 않고, M3×20은 요크에서 기둥을 파고듭니다.</p>
-    <p class="stock-note">모터 본체와 혼은 제조사 나사산과 맞는 원통머리 체결품을 확인한 뒤 고정합니다. <button data-jump="blink-motor-heads" class="button compact">모터 원통머리 자리</button></p>
+    <p class="stock-note">M3는 2.5 mm, M2는 1.5 mm 육각렌치로 조입니다. 모터 케이스의 성형 나사와 카메라 구멍은 부품에 대조합니다. <button data-jump="blink-motor-heads" class="button compact">모터 원통머리 자리</button></p>
   </dialog>
   <script type="module" src="./assembly.js"></script>
 </body>

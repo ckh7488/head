@@ -18,7 +18,7 @@ from stock import YOKE_MOUNTS, nut, socket_screw
 from service_hatch import HATCH_MOUNTS, HATCH_NUT_SEAT, HATCH_SCREW_SEAT, HUB_MOUNTS, HUB_NUT_SEAT, HUB_SCREW_SEAT
 
 V = App.Vector
-CAD = Path(__file__).resolve().parents[1] / "R5-B10-Assembly.FCStd"
+CAD = Path(__file__).resolve().parents[1] / "R5-B11-Assembly.FCStd"
 
 
 def check_pairs(doc):
@@ -33,9 +33,6 @@ def check_pairs(doc):
     for keeper in keepers:
         for static in fixed:
             yield keeper, static, "Outer-race keeper"
-    for column in (doc.Part003, doc.Part004, doc.Part005):
-        yield column.Shape, doc.Part002.Shape, "Top cap on standoffs"
-
     saddle = doc.CableSaddle.Shape
     base = doc.Part000.Shape
     yield saddle, base, "Saddle to base"
@@ -135,7 +132,7 @@ def ballast_pairs(doc):
     behind = V(0, 1, 0)
     front_fixtures = [doc.getObject(name).Shape for name in ('Part041', 'Part045', 'Part063', 'Part064')]
     for x, z in specs['mount_xz_mm']:
-        stem = socket_screw(3,12.,(x,35.3,z),(0,-1,0))
+        stem = socket_screw(3,16.,(x,35.3,z),(0,-1,0))
         tool = Part.makeCylinder(3.9, 28., V(x, 35.3, z), behind)
         seat = nut(3,(x,23.6,z),(0,1,0))
         for hardware in (stem, tool, seat):

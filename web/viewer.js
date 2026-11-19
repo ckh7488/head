@@ -38,8 +38,8 @@ partLabel(["Part050", "Part052"], "가로축 베어링", "구매품 · MR104ZZ 4
 partLabel(["Part053", "Part054", "Part055"], "가로축 크랭크", "PETG 출력 · 공용 M2×8 나사와 일반 너트로 축 고정");
 partLabel(["Part056"], "가운데 구동 링크", "PETG 출력 · 두께 2.6 mm · 밀고 당기는 막대");
 partLabel(["Part057", "Part060"], "좌우 눈꺼풀 링크", "PETG 출력 · 각 두께 2.6 mm");
-partLabel(["Part058", "Part059", "Part061", "Part062"], "눈꺼풀 힌지핀", "강철 핀 · Ø2 × 9.5 mm · 눈꺼풀마다 좌우 한 개");
-partLabel(["Part063"], "모터와 베어링 받침", "PETG 100% 채움 · M3×20과 일반 너트로 체결");
+partLabel(["Part058", "Part059", "Part061", "Part062"], "눈꺼풀 힌지핀", "강철 핀 · Ø2 × 8 mm · 눈꺼풀마다 좌우 한 개");
+partLabel(["Part063"], "모터와 베어링 받침", "PETG 100% 채움 · M3×16과 일반 너트로 체결");
 partLabel(["Part076", "Part077"], "눈꺼풀 힌지 받침", "PETG 출력 · 눈꺼풀 양쪽 핀을 지지");
 partLabel(["Part078", "Part079"], "눈꺼풀", "PETG 출력 · 곡면 두께 1.48 mm");
 partLabel(["Part029", "Part033"], "안구", "PETG 출력 · Ø28 mm");
@@ -70,7 +70,7 @@ export class AssemblyViewer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.domElement.setAttribute("aria-label", "R5 B10 조립 3D 모델");
+    this.renderer.domElement.setAttribute("aria-label", "R5 B11 조립 3D 모델");
     this.host.appendChild(this.renderer.domElement);
     const canvas = this.renderer.domElement;
     let down;

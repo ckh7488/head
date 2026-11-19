@@ -1,4 +1,4 @@
-"""Build R5 B10 from the six-axis R5 B1 FreeCAD assembly.
+"""Build R5 B11 from the six-axis R5 B1 FreeCAD assembly.
 
 Run with FreeCAD's Python modules available. Coordinates are millimetres.
 """
@@ -14,11 +14,14 @@ import MeshPart
 import Part
 import trimesh as tr
 
+from base_stack import mounting_stack
 from primitives import box, cylinder, holes, print_mesh
 from fixtures import ballast_mount, ballast_stud, cable_wall_fixture, captive_cables, fixture_parameters, rear_ballast
 from motor_seats import JAW_STAY, head_pockets
+from neck_joint import PITCH_HORN, PITCH_HORN_SEAT
+from outer_fit import finish_camera, front_loading_clearance
 from radio import c3_mount
-from stock import ballast_stock, blink_stock, cable_stock, hatch_stock, neck_stock, radio_board_stock
+from stock import ballast_stock, blink_stock, cable_stock, hatch_stock, hexagon, neck_stock, radio_board_stock
 
 V = App.Vector
 HERE = Path(__file__).resolve().parent
@@ -84,6 +87,8 @@ def fix_motors(doc):
     pitch = pitch.cut(cylinder(4.35, 2.45, (35.7, 0, 112), (1, 0, 0)))
     d_bore = cylinder(4.12, 7., (38.65, 0, 112), (1, 0, 0)).common(box(38.6, 46, -5, 5, 107, 115.15))
     pitch = pitch.cut(d_bore).cut(cylinder(1.34, 7., (43.3, 0, 113.7)))
+    pitch = pitch.cut([cylinder(2.16, 4.6, (PITCH_HORN_SEAT, y, z), (1, 0, 0))
+                       for y, z in PITCH_HORN])
     pitch_pin = cylinder(4., 27.3, (38.7, 0, 112), (1, 0, 0)).cut(box(38.5, 45.35, -5, 5, 115, 117))
     repaired['Part007'] = ('04_yaw_rotor', yaw, None)
     repaired['Part016'] = ('08_pitch_horn_to_8mm_clamp', pitch, 'x+')
@@ -230,7 +235,9 @@ BLINK_PHASE=-56.
 DRIVE_THROW=8.25
 LID_THROW=11.5
 HINGE_YZ=(-39.,119.)
-HINGE_PINS={58:-58.75,59:9.25,61:-18.75,62:49.25}
+HINGE_PINS={58:-57.25,59:10.75,61:-18.75,62:49.25}
+LID_PIN_LENGTH = 8.
+EYE_PITCH_PIN_LENGTH = 13.
 BLINK_MOUNT_XZ=tuple((x,z) for x in (-20.,20.) for z in (143.,150.))
 DRIVE_ARM=(DRIVE_THROW*cos(radians(BLINK_PHASE)),DRIVE_THROW*sin(radians(BLINK_PHASE)))
 LID_ARM=(LID_THROW*cos(radians(BLINK_PHASE)),LID_THROW*sin(radians(BLINK_PHASE)))
@@ -363,7 +370,8 @@ def clearance_tool(x, a, b, radius, depth):
 
 def cut_running_clearance(doc):
     targets = {'Part073': [], 'Jaw_36_left_jaw_servo_stay': [],
-               'Jaw_37_right_jaw_bearing_stay': [], 'Part076': [], 'Part077': []}
+               'Jaw_37_right_jaw_bearing_stay': [], 'Jaw_39_right_jaw_pivot_arm': [],
+               'Part076': [], 'Part077': []}
     with TemporaryDirectory() as temp:
         path=Path(temp)/'shape.stl'
 
@@ -372,6 +380,13 @@ def cut_running_clearance(doc):
             return tr.load_mesh(path)
 
         targets[JAW_STAY].extend(mesh(pocket) for pocket in head_pockets(JAW_STAY))
+        targets[JAW_STAY].append(mesh(box(-43.8, -40.52, 2.20, 4.2, 79.7, 119.2)))
+        targets['Jaw_37_right_jaw_bearing_stay'].append(mesh(box(54.53, 55.8, -7.21, -5.73, 107.66, 109.7)))
+        arm = doc.Jaw_39_right_jaw_pivot_arm
+        parent_to_world = arm.getGlobalPlacement().multiply(arm.Placement.inverse())
+        pin_bore = cylinder(2.07, 6.15, (43.75, -9., 92.), (1, 0, 0))
+        pin_bore.Placement = parent_to_world.inverse().multiply(pin_bore.Placement)
+        targets[arm.Name].append(mesh(pin_bore))
 
         for side in (-1,1):
             blade=[]
@@ -445,8 +460,12 @@ def revise_head(doc, output):
         rib=box(x-5.5,x+5.5,-20.8,-14.8,120.5,125.2)
         parts['Part024']=parts['Part024'].fuse(rib).cut(box(x-2.87,x+2.87,-27.5,-17.30,114.,131.))
     cradle=parts['Part024'].cut(box(-44.4,-39.7,-22.8,-18.0,118.8,122.55))
-    parts['Part024']=cradle.cut([cylinder(1.62,10.5,(x-.5,*HINGE_YZ),(1,0,0))
-                               for x in HINGE_PINS.values()]).removeSplitter()
+    parts['Part024']=cradle.cut([
+        *(cylinder(1.62,10.5,(x-.5,*HINGE_YZ),(1,0,0)) for x in HINGE_PINS.values()),
+        cylinder(1.62,11.,(56.,*HINGE_YZ),(1,0,0)),
+        box(-19.03, -10.47, -59., -38.75, 117.72, 120.28),
+        box(10.47, 19.03, -59., -38.75, 117.72, 120.28),
+    ]).removeSplitter()
     for name,x in [('Part029',-34.),('Part033',34.)]:
         parts[name]=eyeball(x)
     for name,x in [('Part032',-34.),('Part036',34.)]:
@@ -455,13 +474,22 @@ def revise_head(doc, output):
     parts['Part044']=doc.Part044.Shape.copy().translate(V(-1.05,0,0)).common(box(61.55,64.15,-45,29,100,161))
     frame=ballast_mount(doc.Part019.Shape.cut(box(57.9,65.1,20.2,25.0,145.3,155.9)))
     frame=holes(frame,1.65,8.5,[(x,22.8,z) for x,z in BLINK_MOUNT_XZ],(0,1,0))
-    parts['Part019']=holes(frame,3.15,4.,[(x,27.7,z) for x,z in BLINK_MOUNT_XZ],(0,1,0)).removeSplitter()
+    frame=holes(frame,3.15,4.,[(x,27.7,z) for x,z in BLINK_MOUNT_XZ],(0,1,0))
     tab=doc.Part021.Shape.cut([box(57.9,66.0,18.1,25.0,124.1,157.4),box(49.8,58.8,16.,20.8,126.,158.)])
-    parts['Part021']=tab.fuse([
+    crossover = [(55.6,21.8),(64.25,21.8),(65.35,19.65),(69.7,19.65),
+                 (69.7,21.65),(65.32,21.65),(64.25,23.10),(55.6,23.10)]
+    wire = [V(x,y,157.45) for x,y in crossover]
+    tab=tab.fuse([
         box(54.9,57.7,21.8,23.7,153.3,160.5),
         box(66.2,71.7,17.9,23.0,153.3,160.5),
-        box(55.6,69.7,21.8,23.10,157.05,160.5),
-    ]).removeSplitter()
+        Part.Face(Part.makePolygon(wire+wire[:1])).extrude(V(0,0,3.05)),
+    ]).cut([box(72.06,76.,9.,25.,140.,161.), box(65.3,76.,21.66,25.,140.,161.)])
+    left = doc.Part020.Shape.cut([box(-76.,-74.45,9.,25.,140.,161.), box(-76.,-65.3,21.66,25.,140.,161.)])
+    eye_loading = [box(x0, x1, 9.8, 20.0, 140.15, 151.82)
+                   for x0, x1 in [(-69.48, -64.52), (65.72, 69.48)]]
+    parts['Part019'] = frame.fuse([left,tab]).cut(eye_loading).removeSplitter()
+    doc.removeObject('Part020')
+    doc.removeObject('Part021')
     parts['Part011']=doc.Part011.Shape.cut([box(-14,24,-22.5,-16.5,100.0,115.9),box(5.2,14.8,-20.0,-16.75,84.,96.),box(14.4,19.8,-20.0,-17.5,83.,91.5)])
     doc.Part048.Motion='blink_shaft_crank'
     for plate in ('Part039', 'Part046'):
@@ -510,10 +538,18 @@ def revise_head(doc, output):
         doc.Synchronised_eyelids.addObject(obj)
     for index,x in HINGE_PINS.items():
         pin = doc.getObject(f'Part{index:03}')
-        pin.Shape = cylinder(1., 9.5, (x,*HINGE_YZ), (1,0,0))
+        pin.Shape = cylinder(1., LID_PIN_LENGTH, (x,*HINGE_YZ), (1,0,0))
+    for name, x in (('Part026', -71.), ('Part028', 58.)):
+        pin = doc.getObject(name)
+        pin.Shape = cylinder(1.5, EYE_PITCH_PIN_LENGTH, (x,*HINGE_YZ), (1,0,0))
+        pin.Label = 'Ø3 × 13 eye pitch pin'
+    parts['Part066'] = finish_camera(doc.Part066.Shape)
+    doc.Part066.Shape = parts['Part066']
     cut_running_clearance(doc)
     doc.JawMotion.setExpression('Placement','create(<<placement>>;vector(0mm;-9mm;92mm);create(<<rotation>>;vector(1;0;0);1.25deg+max(0deg;min(13deg;Opening))))')
     doc.JawMotion.Label = 'Jaw — Opening 0 to 13 degrees above the closed position'
+    doc.recompute()
+    front_loading_clearance(doc)
     doc.R5.addProperty('App::PropertyString', 'MotionGeometry', 'Design')
     doc.R5.MotionGeometry = json.dumps({
         'eye_yaw': {'pivot_mm': [-5.8, -35.5, 111.85], 'radius_mm': 13.5},
@@ -539,8 +575,8 @@ def revise_head(doc, output):
         'Part043': 'x+', 'Part044': 'x+', 'Part046': 'x+', 'Part047': 'x+',
         'Part053': 'x+', 'Part054': 'x+', 'Part055': 'x+', 'Part056': 'x+',
         'Part057': 'x+', 'Part060': 'x+', 'Part063': 'y+',
-        'Part011': 'y+', 'Part021': None, 'Part040': None,
-        'Part016': 'x+', 'Part020': None, 'Part025': 'x+', 'Part027': 'x+',
+        'Part011': 'y+', 'Part040': None,
+        'Part016': 'x+', 'Part025': 'x+', 'Part027': 'x+',
         'Part029': 'y+', 'Part033': 'y+', 'Part037': None, 'Part064': 'x+', 'Part066': None,
     }
     output.mkdir(parents=True, exist_ok=True)
@@ -601,6 +637,9 @@ def main(output=BUILD):
     base, board_trays = board_mounts(doc, base)
     repairs.update(board_trays)
     bearing_seat, bearing_top, bearer = yaw_bearing_retention(doc)
+    base, bearing_seat, bearing_top = mounting_stack(base, bearing_seat, bearing_top, hexagon)
+    for spacer in ('Part003', 'Part004', 'Part005'):
+        doc.removeObject(spacer)
     repairs['Part001'] = ('02_outer_bearing_seat', bearing_seat, None)
     repairs['Part002'] = ('03_base_top', bearing_top, 'z-')
     repairs['Part000'] = ('01_base_cup_B5', base, None)
@@ -634,10 +673,10 @@ def main(output=BUILD):
     radio_board_stock(doc, output/'STL')
     neck_stock(doc, output/'STL')
     print_mesh(cable_wall_fixture(doc.Part000.Shape), output/'STL'/'Cable_lock_wall_fixture.stl')
-    doc.R5.Label = 'R5 B10 · prototype'
+    doc.R5.Label = 'R5 B11 · prototype'
     doc.R5.Status = 'Cylindrical hex-socket heads only. DYNAMIXEL case thread fit pending.'
     doc.recompute()
-    doc.saveAs(str(output/'R5-B10-Assembly.FCStd'))
+    doc.saveAs(str(output/'R5-B11-Assembly.FCStd'))
     App.closeDocument(doc.Name)
 
 

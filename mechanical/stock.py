@@ -9,13 +9,18 @@ from fixtures import (
     CAP_BOLT_LENGTH, CAP_BOLT_SEAT_Z, CAP_BOLT_Y, CAP_BOLTS,
     CAP_NUT_FLOOR_Z, CAP_NUT_ROOF_Z, CAP_NUT_WIDTH,
 )
+from neck_joint import neck_base
 from primitives import box, cylinder, print_mesh
 from service_hatch import HUB_MOUNTS, HUB_SCREW_SEAT, revise_service, service_coupon
 
 X, Y, Z = (1, 0, 0), (0, 1, 0), (0, 0, 1)
 BLINK_MOUNTS = tuple((x, z) for x in (-20., 20.) for z in (143., 150.))
+BLINK_RAIL_NUT_Y = 12.80
+BLINK_RAIL_SEAT_Y = 27.70
+BLINK_RAIL_LENGTH = 16.
 BLINK_CLAMPS = ((-53.9, -56., -50.9, -1), (10.2, 7.65, 13., 1), (54.15, 51.15, 56.25, 1))
 BLINK_CLAMP_LENGTH = 8.
+BLINK_CLAMP_NUT_Z = 156.63
 BALLAST_MOUNTS = tuple((x, z) for x in (-28., 28.) for z in (143., 150.))
 YOKE_MOUNTS = ((-12.,17.),(-12.,27.3),(12.,24.3))
 
@@ -73,6 +78,9 @@ def blink_stock(doc, folder, layout):
     horn = horn.cut(hexagon(4.24, 1.78, (1.17,tip_y,tip_z), X))
     horn = horn.cut(cylinder(1.20, 3.4, (1.08,tip_y,tip_z), X))
     printed(doc,'Part047',horn,folder/'19_blink_servo_horn.stl','x+')
+    drive = doc.Part056.Shape.fuse(cylinder(2.83, 2.15, (7.,tip_y,tip_z), X))
+    drive = drive.cut(cylinder(1.19, 2.45, (6.90,tip_y,tip_z), X))
+    printed(doc,'Part056',drive,folder/'22_blink_drive_link.stl','x+')
 
     for i, (part, crank_x, (screw_x, lo, hi, side)) in enumerate(zip(
             ('Part053','Part054','Part055'), layout['crank_x_mm'], BLINK_CLAMPS), start=1):
@@ -84,13 +92,14 @@ def blink_stock(doc, folder, layout):
             crank = crank.fuse(cylinder(2.08, .95, (outer,y,z), (-side,0,0)))
             crank = crank.cut(cylinder(1.20, 2.9, (outer+side*.12,y,z), (-side,0,0)))
         hub = cylinder(4.85, hi-lo, (lo,shaft_y,shaft_z), X)
-        pad = box(lo,hi,shaft_y-3.0,shaft_y+3.0,shaft_z+2.8,shaft_z+5.3)
+        pad_lo, pad_hi = min(lo, screw_x-3.85), max(hi, screw_x+3.85)
+        pad = box(pad_lo,pad_hi,shaft_y-4.2,shaft_y+4.2,shaft_z+2.35,shaft_z+6.40)
         crank = crank.fuse([hub,pad])
-        lead = (lo-.15,screw_x+.30) if side < 0 else (screw_x-.30,hi+.15)
-        slot = box(*lead,shaft_y-2.13,shaft_y+2.13,shaft_z+2.55,shaft_z+4.30)
-        cavity = hexagon(4.26, 1.75, (screw_x,shaft_y,shaft_z+2.55), Z, Y)
+        lead = (pad_lo-.15,screw_x+.06) if side < 0 else (screw_x-.06,pad_hi+.15)
+        slot = box(*lead,shaft_y-2.96,shaft_y+2.96,shaft_z+2.48,shaft_z+5.13)
+        cavity = hexagon(5.94, 2.65, (screw_x,shaft_y,shaft_z+2.48), Z, Y)
         tools = [cylinder(2.13, hi-lo+.45, (lo-.2,shaft_y,shaft_z), X),
-                 cylinder(1.13, 4., (screw_x,shaft_y,shaft_z+1.52)), slot, cavity]
+                 cylinder(1.69, 5.15, (screw_x,shaft_y,shaft_z+1.52)), slot, cavity]
         crank = crank.cut(tools)
         if i == 1:
             crank = crank_landing_face(crank)
@@ -117,8 +126,9 @@ def blink_stock(doc, folder, layout):
     rail = doc.Part063.Shape
     for x,z in BLINK_MOUNTS:
         rail = rail.fuse(cylinder(2.12, 4.23, (x,18.77,z), Y))
-        rail = rail.cut(hexagon(5.80, 6.4, (x,4.85,z), Y))
-        rail = rail.cut(cylinder(1.70, 13., (x,10.8,z), Y))
+        rail = rail.cut(hexagon(5.87, BLINK_RAIL_NUT_Y+2.43+6.70, (x,-6.70,z), Y))
+        rail = rail.cut(cylinder(1.70, 8.1, (x,BLINK_RAIL_NUT_Y+2.30,z), Y))
+    rail = rail.cut([cylinder(1.73, 4.45, (x,18.95,z), Y) for x,z in BALLAST_MOUNTS])
     printed(doc,'Part063',rail,folder/'24_blink_rail_with_bearing_shoulders.stl','y+')
 
 
@@ -169,7 +179,7 @@ def ballast_stock(doc, folder):
     for x,z in BALLAST_MOUNTS:
         frame = frame.fuse(cylinder(2.12, 4.26, (x,26.74,z), Y))
         frame = frame.cut(hexagon(5.80, 3.27, (x,22.8,z),Y))
-        frame = frame.cut(cylinder(1.70, 5.30, (x,25.85,z),Y))
+        frame = frame.cut(cylinder(1.73, 12.3, (x,18.95,z),Y))
     printed(doc,'Part019',frame,folder/'09_head_frame.stl','y+')
 
 
@@ -197,5 +207,7 @@ def neck_stock(doc, folder):
         pocket=hexagon(5.8,2.7,(x,y,59.4),Z,Y)
         mast=mast.cut([slot,pocket,cylinder(1.7,8.6,(x,y,58.7))])
         yoke=yoke.cut(cylinder(1.7,8.25,(x,y,66.9)))
+    rotor, mast = neck_base(doc.Part007.Shape, mast, hexagon)
+    printed(doc,'Part007',rotor,folder/'04_yaw_rotor.stl')
     printed(doc,'Part010',mast,folder/'06_neck_mast.stl')
     printed(doc,'Part011',yoke,folder/'07_pitch_yoke.stl','y+')
