@@ -103,7 +103,7 @@ h1 { font-size: clamp(1.85rem, 3vw, 2.8rem); line-height: 1.13; letter-spacing: 
 .legend .wiring { background: #7fe6ef; }
 .port-parts { display: grid; gap: 5px; }
 .port-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; }
-.port-button { text-align: left; }
+.button.port-button { text-align: left; white-space: normal; overflow-wrap: anywhere; }
 .port-row a { color: var(--muted); font-size: .74rem; white-space: nowrap; }
 .legend .hit { background: var(--red); }
 .view-controls { padding: 9px 13px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
