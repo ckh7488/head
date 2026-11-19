@@ -193,7 +193,7 @@ const definitions = [
     focus: [0, 123, -61], view: [.9, 1.8, -.52], span: 136,
     task: "뒤에서 5.5 mm 오픈 스패너로 너트를 잡고, 위에서 2.5 mm 육각렌치로 조입니다.",
     check: "트레이를 작업대 끝에 두고 아래가 보이는 상태에서 다섯 곳을 조입니다.",
-    note: `뒤쪽 공구 통로 폭 ${cable.wrench_width} mm · P1S 시험판 2번`, checked: true, inspectFasteners: true,
+    note: `뒤쪽 공구 통로 폭 ${cable.wrench_width} mm · P2S 시험판 2번`, checked: true, inspectFasteners: true,
   },
   {
     id: "cable-tray", group: "받침", title: "연결한 트레이를 통째로 넣기", base: "Part000",
@@ -267,7 +267,7 @@ const definitions = [
     focus: [42, 66, -74], view: [1.7, .94, .30], span: 145,
     task: "바깥쪽 창으로 5.5 mm 스패너를 넣고 밑에서 2.5 mm 육각렌치로 조입니다.",
     check: "허브를 다시 내릴 때도 같은 창으로 너트를 잡습니다. 받침을 받쳐 바닥과 측면을 모두 엽니다.",
-    note: `측면 공구 통로 폭 ${service.wrench_width} mm · P1S 시험판 3번`, checked: true, inspectFasteners: true,
+    note: `측면 공구 통로 폭 ${service.wrench_width} mm · P2S 시험판 3번`, checked: true, inspectFasteners: true,
   },
   {
     id: "boards-fit", group: "받침", title: "작업대에서 C3를 지지점에", base: "Part071",

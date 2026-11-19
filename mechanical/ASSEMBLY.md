@@ -1,6 +1,6 @@
 # R5 B15 조립순서
 
-3D 조립에서 재생을 누르면 앞 단계에서 체결한 부품도 자리를 지킵니다. **체결품 보기**를 누르면 안쪽 볼트와 너트까지 볼 수 있습니다. 시험판 1번은 눈과 레일, 2번은 케이블, 3번은 바닥 덮개, 4번은 보드 캐리어입니다. [3D 단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/) · [P1S 시험판](R5-B15-Fit-P1S.3mf)
+3D 조립에서 재생을 누르면 앞 단계에서 체결한 부품도 자리를 지킵니다. **체결품 보기**를 누르면 안쪽 볼트와 너트까지 볼 수 있습니다. 시험판 1번은 눈과 레일, 2번은 케이블, 3번은 바닥 덮개, 4번은 보드 캐리어입니다. [3D 단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/) · [P2S 시험판](R5-B15-Fit-P2S.3mf)
 
 ## 체결품
 
@@ -21,7 +21,7 @@ M3에는 2.5 mm 육각렌치와 5.5 mm 스패너 또는 소켓, M2에는 1.5 mm 
 2. **케이블 트레이는 작업대에서 조립합니다.** XT30U와 XT60U 암수를 각각 꽂고, USB 연장선 두 개와 함께 열린 트레이에 위에서 얹습니다. 납땜부를 한 가닥씩 열수축하고 완성 외경을 XT30U **Ø4.0 mm**, XT60U **Ø5.6 mm** 이내로 맞춥니다. 몸체 뒤턱을 홈에 붙이고 덮개를 조인 다음, 안쪽으로 들어갈 선을 진행 방향으로 폅니다. 플러그와 덮개가 달린 트레이를 받침 뒤에서 수평으로 밀어 넣습니다. [작업대에서 전원 연결](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#xt60-mate) · [트레이에 배선 올리기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-plugs) · [트레이 넣기](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-tray)
 3. **허브를 눕힌 상태에서 먼저 연결합니다.** J4–J6은 PH–EH, J7–J8은 EH–EH입니다. OpenRB에서 J3으로는 GND와 DATA 두 가닥을 연결합니다. 5 V와 GND는 WAGO 221-413 두 개에서 허브와 턱으로 나누고, 턱의 5 V에 Littelfuse 0FHM0003ZXJV-F2를 넣습니다. J6 DATA는 별도 221-413에 분기합니다. 레버 단자는 11 mm 벗겨 넣습니다. 덮개를 30 mm 내려도 단자를 당기지 않도록 여유를 둡니다. [허브 배선](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-wiring) · [221-413](https://www.wago.com/gb/installation-terminal-blocks-and-connectors/splicing-connector-with-levers/p/221-413) · [2 A 인라인 퓨즈](https://www.littelfuse.com/assetdocs/0fhm0003zxjv-f2-2d-prints?assetguid=0cf40f2e-7338-4c1d-bce2-d9255753058c)
 4. **회전판 앞쪽 통로로 선부터 보냅니다.** 목 좌우 ±60°에서 Ø9 mm 검사봉이 지났습니다. 선 다발은 Ø8 mm 이내로 묶고, 통과시킨 뒤 JST 하우징을 끼웁니다. 받침과 목 사이에서 움직일 수 있는 구간을 60 mm 이상 확보하고 상하축에도 따로 여유를 둡니다. 고정 전원선은 18 AWG에서 굽힘 반경 21 mm, 12 AWG에서 16 mm 이상으로 둡니다. WAGO와 턱 퓨즈는 받침 안의 고정 배선에 결속합니다. 퓨즈는 앞쪽, 5 V 분기는 왼쪽, 12 V 연결은 오른쪽에 자리가 있습니다.
-5. **뒤 해골을 닫기 전에 확인합니다.** 시험판 2번에서 XT 몸체의 뒤턱이 움직이지 않는지 봅니다. 전원을 뺀 채 직선과 45° 방향으로 각각 10 N을 30초 가했을 때 이동량 0.5 mm 이하와 피복 상태를 확인합니다. 회전판과 머리를 손으로 끝까지 움직여 선을 물거나 당기는지 봅니다. 첫 전압과 부하 전압은 보드와 모터에서 각각 잽니다. [P1S 시험판](R5-B15-Fit-P1S.3mf) · [전원 측정](../electronics/README.md#전원과-배선)
+5. **뒤 해골을 닫기 전에 확인합니다.** 시험판 2번에서 XT 몸체의 뒤턱이 움직이지 않는지 봅니다. 전원을 뺀 채 직선과 45° 방향으로 각각 10 N을 30초 가했을 때 이동량 0.5 mm 이하와 피복 상태를 확인합니다. 회전판과 머리를 손으로 끝까지 움직여 선을 물거나 당기는지 봅니다. 첫 전압과 부하 전압은 보드와 모터에서 각각 잽니다. [P2S 시험판](R5-B15-Fit-P2S.3mf) · [전원 측정](../electronics/README.md#전원과-배선)
 
 구매품 목록에서 커넥터를 누르면 해당 부품이 강조됩니다. XT60U 암수는 공급사 STEP, 허브의 JST 핀 헤더는 KiCad STEP을 썼습니다. XT30U·StarTech·JST 케이블 하우징은 각 제조사 도면을 기준으로 그렸습니다. 트레이가 수평으로 들어가는 26 mm 구간에서 체결품과 커넥터 외형의 간섭을 검사했습니다. [뒤쪽 커넥터](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-plugs) · [JST 하네스](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hub-wiring)
 

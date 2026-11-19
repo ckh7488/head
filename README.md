@@ -6,12 +6,12 @@
 
 **B15 제작 보류.** 목 구동 중 간섭과 일부 부품의 출력 경로 문제를 확인했습니다. [구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사) · [출력 검사](mechanical/README.md#출력-경로-검사)
 
-시험판 2번은 케이블 덮개 공구 통로, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어용입니다. 모터 케이스 나사산과 OpenRB 구멍 간격은 가조립에서 확인합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B15-Fit-P1S.3mf)
+출력 기준은 P2S 기본 0.4 mm 노즐과 Bambu PETG HF입니다. 시험판 2번은 케이블, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어용입니다. [P2S 출력 설정](mechanical/README.md#p2s-출력-설정) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [조립절차서](mechanical/ASSEMBLY.md)
 
 | 작업 | 시작 파일 |
 |---|---|
 | 기구 확인 및 수정 | [B15 FreeCAD 조립본](mechanical/R5-B15-Assembly.FCStd) |
-| P1S 전체 출력 | [B15 출력판 12장과 선택 1장](mechanical/R5-B15-P1S.3mf) |
+| P2S 전체판 | [B15 출력판 12장과 선택 1장](mechanical/R5-B15-P2S.3mf) |
 | 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |

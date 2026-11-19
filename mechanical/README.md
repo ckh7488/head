@@ -1,12 +1,35 @@
 # B15 기구 조립
 
-FreeCAD에서 [B15 조립본](R5-B15-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P1S 전체 출력판](R5-B15-P1S.3mf) · [시험판](R5-B15-Fit-P1S.3mf)
+FreeCAD에서 [B15 조립본](R5-B15-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P2S 전체판](R5-B15-P2S.3mf) · [P2S 시험판](R5-B15-Fit-P2S.3mf)
 
 부품을 넣는 순서와 양쪽 공구가 들어가는 방향은 [조립절차서](ASSEMBLY.md)를 따릅니다.
 
-출력 프로젝트는 P1S 0.4 mm 노즐, PETG HF, 0.20 mm 레이어, 벽 4줄을 사용합니다. 노즐 245 °C, 텍스처 PEI 베드 70 °C, 최대 유량 14 mm³/s를 설정했습니다. 눈꺼풀 레일은 내부 채움 100%입니다. 머리 프레임과 목의 지지 부품은 벽 6줄과 내부 채움 35%로 출력합니다. 13번 균형추 트레이는 선택입니다.
+## P2S 출력 설정
 
-받침과 허브 덮개는 벽 5줄, 내부 채움 35%입니다. 전체판 1번 받침과 시험판 3번 시편의 서포트는 빌드판에서 세웁니다. 덮개는 두 판 모두 바깥면을 바닥에 놓습니다. [바닥 덮개 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#hatch-nuts)
+3MF를 Bambu Studio에서 **프로젝트로 열고**, **P2S 0.4 mm · Textured PEI Plate · Bambu PETG HF**를 확인합니다. 모델 방향, 판 배치, 부품별 서포트가 저장돼 있습니다. 배치를 유지하고 한 장씩 슬라이스합니다. 같은 PETG HF를 서포트에도 사용하며 단일 스풀로 출력할 수 있습니다. [P2S 프린터 프리셋](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20P2S%200.4%20nozzle.json) · [PETG HF 프리셋](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/filament/Bambu%20PETG%20HF%20%40BBL%20P2S%200.4%20nozzle.json)
+
+기본은 **0.20 mm 레이어, 벽 4줄, 자이로이드 내부 채움 20%**입니다. 노즐은 첫 층 230 °C, 이후 245 °C, 베드는 70 °C입니다. 큰 외장 표면과 첫 층을 위해 외벽 100 mm/s, 첫 층 외곽 35 mm/s, 최대 유량 14 mm³/s로 설정했습니다. 받침과 맞춤 부품의 설정은 아래와 같이 저장했습니다.
+
+| 부품 | 출력 방향과 설정 |
+|---|---|
+| 1번 받침, 11번 바닥 덮개 | 바닥면을 플레이트에 두고 벽 5줄과 채움 35%. 받침 서포트는 빌드판에서만 세움 |
+| 4번 앞 해골, 5번 뒤 해골과 턱 | 저장된 방향을 사용. 앞 해골은 얼굴이 위를 향하고, 외장에는 트리 서포트 적용 |
+| 6·7번 목 기둥, 머리 프레임, 요크, 피치 클램프 | 벽 6줄과 채움 35%. 7번 눈꺼풀 레일은 채움 100% |
+| 8번 눈꺼풀 축 간격통 | 세로로 놓고 바깥 브림 4 mm 적용 |
+| 11번 케이블 트레이 | 트레이 바닥을 플레이트 쪽으로 두고, 빌드판에서만 서포트를 세움 |
+| 13번 균형추 트레이 | 균형추를 달 때 사용 |
+
+구매 기준은 **Bambu PETG HF 같은 색 1 kg 두 롤**입니다. Bambu Studio가 산출한 양과 시간에는 브림과 서포트가 포함됩니다.
+
+| 출력 범위 | 필라멘트 | 예상 시간 |
+|---|---:|---:|
+| 전체판 1–12번 | 약 1.16 kg | 약 60시간 30분 |
+| 시험판 1–4번 | 약 229 g | 약 12시간 46분 |
+| 선택 13번 균형추 트레이 | 약 34 g | 약 1시간 49분 |
+
+전체 제작 보류 항목은 [출력 경로 검사](#출력-경로-검사)와 [구동 검사](ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사)에 있습니다.
+
+## 기구 검증
 
 | 부위 | 제작 전 확인 |
 |---|---|
@@ -15,9 +38,9 @@ FreeCAD에서 [B15 조립본](R5-B15-Assembly.FCStd)을 엽니다. `revise.py`�
 | 목 | 끄덕임으로 움직이는 머리 약 623 g, 무게중심은 축 앞쪽 4.2 mm. 목의 좌우 회전부에 걸리는 이동 질량은 약 847 g. 균형추 없이 끄덕이는 모델에서 조립 오차를 포함해 최고 요구 토크 0.100 N·m |
 | 케이블 | 뒤쪽 스패너 통로 폭 18 mm. XT30U·XT60U 몸체와 열수축 부위, 허브의 JST 공간, 목 회전판의 Ø9 mm 통로를 검사. PETG 탄성계수 1 GPa에서 10–20 N 하중을 준 트레이 최대 변위 0.061 mm |
 | 턱 | 힌지 높이 ±0.4 mm와 영점 ±0.7°를 넣은 180개 자세에서 치아 간격 최소 0.77 mm |
-| PCB | C3와 허브는 KiCad STEP의 구멍 6개를 대조. OpenRB는 지지점 4개, USB-C를 꽂은 채 내려가는 경로, 보드 바깥 M3 공구 공간을 검사. 실물 홀은 [시험판 4번](R5-B15-Fit-P1S.3mf)에서 먼저 맞춤 |
+| PCB | C3와 허브는 KiCad STEP의 구멍 6개를 대조. OpenRB는 지지점 4개, USB-C를 꽂은 채 내려가는 경로, 보드 바깥 M3 공구 공간을 검사. 홀 맞춤은 [시험판 4번](R5-B15-Fit-P2S.3mf)에서 확인 |
 
-출력 무게는 G-code에서 서포트와 브림을 제외해 추정했습니다. 앞뒤 해골과 턱만 약 312 g입니다. 모터 사양 질량을 사용했고 머리의 나사·배선·접착제에 40 g을 잡았습니다.
+앞뒤 해골과 턱의 P2S 출력 무게는 서포트와 브림을 빼고 약 311 g입니다. 기구 계산에는 모터 사양 질량을 사용했고 머리의 나사·배선·접착제에 40 g을 잡았습니다.
 
 CAD 조립 78단계의 배치 35,665쌍과 체결 위치 72곳의 공구 경로를 검사했습니다. 이미 체결한 부품과 설치한 커넥터를 포함해 간섭 0건이었습니다. 눈꺼풀 크랭크는 바깥 폭 16 mm, 두께 4.2 mm의 스패너로 좌우 15° 경로까지 확인했습니다. [공구가 들어가는 순서](ASSEMBLY.md)
 
@@ -35,17 +58,17 @@ AMASS 두 커넥터에 각 전선의 납땜 컵 간격을 맞춘 둥근 홈을 �
 
 작업대에서 전원 암수와 덮개까지 조립한 트레이가 받침 뒤에서 26 mm 들어가는 경로를 0.5 mm 간격으로 검사했습니다. 트레이의 좌우·상하 ±0.12 mm 오차와 USB-A 안쪽 끝 17.0 × 9.8 mm를 적용했습니다. 바뀐 케이블·바닥 덮개 조립 10단계에서 배치 3,195쌍을 검사해 간섭 0건이었습니다. [트레이 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#cable-tray)
 
-덮개를 얹은 뒤 위에서 M3×16을 넣고, 트레이 뒤쪽 열린 공간에서 5.5 mm 스패너로 너트를 잡습니다. [시험판 2번](R5-B15-Fit-P1S.3mf)에서 공구와 실제 커넥터를 맞춥니다. 시임으로 좌우·상하 유격을 편측 약 0.12 mm로 맞추고 커넥터 뒤턱을 밀착시킵니다. 전원을 끄고 케이블을 직선과 45°에서 10 N으로 30초씩 당겨 0.5 mm 이하 이동과 피복 상태를 확인합니다. [허브 극성](../electronics/README.md#전원과-배선)
+덮개를 얹은 뒤 위에서 M3×16을 넣고, 트레이 뒤쪽 열린 공간에서 5.5 mm 스패너로 너트를 잡습니다. [시험판 2번](R5-B15-Fit-P2S.3mf)에서 공구와 실제 커넥터를 맞춥니다. 시임으로 좌우·상하 유격을 편측 약 0.12 mm로 맞추고 커넥터 뒤턱을 밀착시킵니다. 전원을 끄고 케이블을 직선과 45°에서 10 N으로 30초씩 당겨 0.5 mm 이하 이동과 피복 상태를 확인합니다. [허브 극성](../electronics/README.md#전원과-배선)
 
 ## 출력 경로 검사
 
-Bambu Studio 2.9.1.70에서 P1S 0.4 mm·PETG HF·0.20 mm 설정으로 전체 13판과 시험판 4판을 슬라이스했습니다. 전체 57개와 시험 24개 배치에 모두 압출 경로가 있습니다. 분리된 고형 조각은 없었고, 받침과 바닥 덮개 맞춤용 시편에는 약 0.20 mm³의 내부 빈 공간이 두 곳씩 있습니다. 실물 출력은 아직입니다.
+Bambu Studio 2.9.1.70에서 P2S 0.4 mm·PETG HF·0.20 mm 설정으로 전체판 13장과 시험판 4장을 슬라이스했습니다. 전체판 57개와 시험판 24개의 형상, 방향, 배치를 대조했습니다. 아래 기록은 슬라이스와 CAD 기준입니다.
 
 | 출력판 | 확인한 내용 |
 |---|---|
-| 시험 2 · 케이블 고정 벽 | 열린 메시를 닫힌 솔리드로 복구하고 돌출부 아래에 일반 서포트가 닿도록 수정. 수정한 시험판 4장 모두 Bambu 경고 없이 슬라이스됨 |
-| 전체 1 · 받침 | 스패너 입구 사이를 45° 경사로 연결. Z 16.6 mm 오류 위치 두 곳의 새 경로는 서포트 없이 아래층과 각각 약 12.1 mm² 겹침. 수정 판 전체에 고립 압출 경로 0건 |
-| 전체 4 · 앞 해골 | CAD X 음수 쪽에 아래층과 서포트가 없는 외벽 시작점 다섯 곳. Z 33.0·33.4·71.4·73.6·78.8 mm에 있고 가장 긴 폭은 약 2.5 mm |
+| 시험 2 · 케이블 고정 벽 | 닫힌 메시를 사용하며 돌출부 아래에는 일반 서포트 적용. P2S 시험판 4장 모두 슬라이스 경고와 고립 압출 경로 0건 |
+| 전체 1 · 받침 | 스패너 입구 사이를 45° 경사로 연결. Z 16.6 mm 오류 위치 두 곳의 새 경로는 서포트 없이 아래층과 각각 약 12 mm² 겹침. P2S 고립 압출 경로 0건 |
+| 전체 4 · 앞 해골 | P2S에서 아래층과 서포트가 없는 외벽 시작점 4곳. Z 33.0·33.4·71.4·78.8 mm에 있고 가장 긴 폭은 약 2.5 mm |
 | 전체 6 · 목 기둥·머리 프레임 | 목 기둥의 0.35 mm 가장자리와 머리 프레임의 0.10 mm 가장자리가 일부 층에서 빠짐 |
 | 전체 7 · 모터 앞판 | 눈·눈꺼풀 모터 앞판 3개의 약 0.10 mm 잔여벽이 출력 경로에서 빠짐 |
 | 전체 8 / 시험 1 · 눈꺼풀 축 | G-code 좌표를 보정해 다시 대조한 결과 크랭크 3개와 간격통 2개 모두 축 구멍과 스패너 홈 사이의 0.30 mm 벽이 대부분 빠짐 |
@@ -85,11 +108,11 @@ QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechani
 QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib python mechanical/physics/blink_fit.py build/mechanical/R5-B15-Assembly.FCStd build/physics/cad build/physics/blink-fit.json
 python mechanical/physics/check_head.py build/physics/cad build/physics/clearance.json
 python mechanical/physics/tolerances.py build/physics/cad build/physics/tolerance.json
-mkdir -p build/p1s build/p1s-fit
-bambu-studio --slice 0 --outputdir build/p1s mechanical/R5-B15-P1S.3mf
-bambu-studio --slice 0 --outputdir build/p1s-fit mechanical/R5-B15-Fit-P1S.3mf
-python mechanical/physics/slicer_mass.py build/p1s/sliced-grams.json build/p1s/plate_{4,5,6,7,8,9,10,12,13}.gcode
-python mechanical/physics/multibody.py build/physics/cad build/physics/motion --sliced-grams build/p1s/sliced-grams.json
+mkdir -p build/p2s-full build/p2s-fit
+bambu-studio --slice 0 --outputdir build/p2s-full mechanical/R5-B15-P2S.3mf
+bambu-studio --slice 0 --outputdir build/p2s-fit mechanical/R5-B15-Fit-P2S.3mf
+python mechanical/physics/slicer_mass.py build/p2s-full/sliced-grams.json build/p2s-full/plate_{4,5,6,7,8,9,10,12,13}.gcode
+python mechanical/physics/multibody.py build/physics/cad build/physics/motion --sliced-grams build/p2s-full/sliced-grams.json
 python mechanical/physics/blink_fea.py build/physics/cad build/physics/blink-fea.json
 python mechanical/physics/jaw_clearance.py build/physics/cad build/physics/jaw
 python mechanical/physics/retainer.py build/physics/cad build/physics/retention.json
