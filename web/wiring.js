@@ -90,7 +90,7 @@ function updateTube(node, samples, radius) {
 }
 
 export class WiringModel {
-  constructor(data, scene) {
+  constructor(data, scene, connectors = new Map()) {
     this.routes = data.routes.map(route => {
       const material = this.material(route.kind);
       const node = new THREE.Mesh(new THREE.BufferGeometry(), material);
@@ -98,7 +98,13 @@ export class WiringModel {
       return { ...route, node, material, moving: route.points.some(point => point.length > 3) };
     });
     this.blocks = data.blocks.map(block => {
-      const node = new THREE.Group();
+      const replacement = connectors.get(block.id);
+      const node = replacement || new THREE.Group();
+      const base = new THREE.Matrix4();
+      if (replacement) {
+        scene.add(node);
+        return { ...block, node, base };
+      }
       const material = this.material(block.kind);
       node.add(new THREE.Mesh(new THREE.BoxGeometry(...block.size), material));
       if (block.kind === "splice" && block.levers) {
@@ -108,7 +114,7 @@ export class WiringModel {
         node.add(lever);
       }
       scene.add(node);
-      return { ...block, node, material, base: new THREE.Matrix4().makeTranslation(...block.center) };
+      return { ...block, node, material, base: base.makeTranslation(...block.center) };
     });
     this.entries = [...this.routes, ...this.blocks];
     this.visible = false;

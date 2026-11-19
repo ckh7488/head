@@ -56,7 +56,9 @@
           <div id="model-status" class="model-status" role="status"><span></span><p>실제 B15 CAD를 불러오는 중</p></div>
           <div class="stage-tag" id="stage-tag" hidden></div>
           <div class="legend">
-            <span><i class="moving"></i>이동 부품</span>
+            <span id="moving-legend"><i class="moving"></i>이동 부품</span>
+            <span id="print-legend" hidden><i class="print"></i>출력물</span>
+            <span id="port-legend" hidden><i class="port"></i>구매 커넥터·케이블</span>
             <span><i class="fastener"></i>나사·너트</span>
             <span id="wire-legend" hidden><i class="wiring"></i>전원·신호·USB 배선</span>
             <span id="hit-legend" hidden><i class="hit"></i>겹치는 체적</span>
@@ -101,6 +103,10 @@
         </div>
         <h2 id="detail-title">조립 작업</h2>
         <p id="task"></p>
+        <div id="port-block" class="detail-block" hidden>
+          <h3>구매품</h3>
+          <div id="port-parts" class="port-parts"></div>
+        </div>
         <div id="interference" class="interference" hidden>
           <h3>이 위치에서 겹침</h3>
           <dl>
@@ -114,7 +120,7 @@
           <p id="note" class="note" hidden></p>
         </div>
         <div class="detail-block" id="gear-block">
-          <h3>이 단계의 체결품</h3>
+          <h3 id="gear-title">이 단계의 체결품</h3>
           <p id="gear"></p>
         </div>
         <p class="evidence">B15 CAD 기준. 출력 공차와 작동 소음은 실물 가조립에서 확인합니다.</p>

@@ -1,5 +1,6 @@
 import { WalkthroughScene } from "./scene.js";
 import { hardware, steps } from "./steps.js";
+import { connectorInfo } from "../connectors.js";
 
 const el = id => document.getElementById(id);
 const previousStages = {
@@ -13,7 +14,7 @@ const choose = id => steps.findIndex(step => step.id === (previousStages[id] || 
 const fmt = value => new Intl.NumberFormat("ko-KR", { maximumFractionDigits: 2 }).format(value);
 const mm = value => `${fmt(value)} mm`;
 const state = {
-  index: 0, position: 0, ghost: false, section: false, issues: false,
+  index: 0, position: 0, ghost: false, section: false, issues: false, port: null,
 };
 let scene, stops, animation;
 const needsCheck = step => Boolean(step.blocker || step.hold);
@@ -116,6 +117,9 @@ function pause() {
 function applyView() {
   el("ghost").setAttribute("aria-pressed", String(state.ghost));
   el("section").setAttribute("aria-pressed", String(state.section));
+  for (const button of el("port-parts").querySelectorAll("button")) {
+    button.setAttribute("aria-pressed", String(button.dataset.port === state.port));
+  }
   scene?.applyStyle(state);
 }
 
@@ -131,6 +135,31 @@ function details() {
   el("note").hidden = !step.note;
   el("gear").textContent = step.stock || "";
   el("gear-block").hidden = !step.stock;
+  el("port-block").hidden = !step.ports;
+  el("print-legend").hidden = !step.ports;
+  el("port-legend").hidden = !step.ports;
+  el("moving-legend").hidden = Boolean(step.ports);
+  const portList = el("port-parts");
+  portList.replaceChildren();
+  for (const id of step.ports || []) {
+    const { name, source, url } = connectorInfo[id];
+    const row = document.createElement("div");
+    row.className = "port-row";
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "button port-button";
+    button.dataset.port = id;
+    button.textContent = name;
+    const hint = document.createElement("a");
+    hint.href = url;
+    hint.target = "_blank";
+    hint.rel = "noreferrer";
+    hint.setAttribute("aria-label", `${name} · ${source}`);
+    hint.textContent = source;
+    row.append(button, hint);
+    portList.append(row);
+  }
+  el("gear-title").textContent = step.ports ? "전선 규격" : "이 단계의 체결품";
   el("detail-group").textContent = step.group;
   el("interference").hidden = !stop;
   if (stop) {
@@ -151,6 +180,7 @@ function selectStep(index) {
   state.index = index;
   state.ghost = Boolean(steps[index].blocker || steps[index].inspectFasteners);
   state.section = false;
+  state.port = null;
   const step = current();
   history.replaceState(null, "", `#${step.id}`);
   el("step-number").textContent = `${String(index + 1).padStart(2, "0")} / ${steps.length}`;
@@ -219,6 +249,12 @@ el("finish").addEventListener("click", () => { pause(); position(1); });
 el("reset-view").addEventListener("click", () => scene?.resetView());
 el("ghost").addEventListener("click", () => { state.ghost = !state.ghost; applyView(); });
 el("section").addEventListener("click", () => { state.section = !state.section; applyView(); });
+el("port-parts").addEventListener("click", event => {
+  const id = event.target.closest("button")?.dataset.port;
+  if (!id) return;
+  state.port = state.port === id ? null : id;
+  applyView();
+});
 
 const fullscreen = el("expand");
 fullscreen.hidden = !el("viewer").requestFullscreen;

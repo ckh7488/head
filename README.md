@@ -39,4 +39,6 @@ QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-
 
 목의 XL430 두 개와 눈·눈꺼풀·턱의 XL330 네 개는 ROBOTIS STEP을 사용합니다. 웹 내보내기에서도 모터의 케이스 윤곽과 장착 구멍을 유지합니다. [XL330 원본 도면](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#drawings) · [XL430 원본 도면](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/#xl430-w250-new)
 
+구매품 형상은 `web/export_connectors.py`로 내보냅니다. 스크립트의 두 번째 인수는 아래 STEP 다섯 파일이 들어 있는 폴더입니다. `--review-cad`로 구매품을 교체한 FreeCAD 참고본도 만들 수 있습니다. [XT60U-F](https://modules.easyeda.com/qAxj6KHrDKw4blvCG8QJPs7Y/7e3f76bd9e1344f68e653ea7d528bc08) · [XT60U-M](https://modules.easyeda.com/qAxj6KHrDKw4blvCG8QJPs7Y/8e19b37684634468b185c41bc1fdfa75) · [KiCad JST 3종](https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes) · [KiCad 라이선스](https://www.kicad.org/libraries/license/)
+
 영상 예제는 scikit-image의 NASA 우주비행사 샘플이고, 한국어 서체는 Noto Sans CJK입니다. [샘플](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut) · [서체 라이선스](web/assets/noto-sans-cjk-license.txt)

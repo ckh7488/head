@@ -5,6 +5,7 @@ import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { clamp, ease, jawPivot, motionMatrix } from "./motion.js";
 import { installedHardware } from "./assembly/steps.js";
 import { fastener } from "./hardware.js";
+import { loadConnectors, useConnector } from "./connectors.js";
 import { loadWiring, WiringModel } from "./wiring.js";
 
 const V = (...coords) => new THREE.Vector3(...coords);
@@ -165,8 +166,11 @@ export class AssemblyViewer {
       fetch("./assets/assembly.json").then(r => { if (!r.ok) throw Error("assembly metadata"); return r.json(); }),
       loader.loadAsync("./assets/assembly.glb")
     ]);
-    const wiring = await loadWiring("./assets/wiring.json", data.cad_sha256);
-    this.wiring = new WiringModel(wiring, this.scene);
+    const [wiring, connectors] = await Promise.all([
+      loadWiring("./assets/wiring.json", data.cad_sha256),
+      loadConnectors(loader, new URL("./assets/", import.meta.url).href, data.cad_sha256),
+    ]);
+    this.wiring = new WiringModel(wiring, this.scene, connectors);
     const overlap = new THREE.BufferGeometry();
     overlap.setAttribute("position", new THREE.Float32BufferAttribute(wiring.rotorClash.vertices.flat(), 3));
     overlap.setIndex(wiring.rotorClash.triangles.flat());
@@ -180,12 +184,13 @@ export class AssemblyViewer {
     this.scene.add(model.scene);
     model.scene.updateMatrixWorld(true);
     for (const info of data.parts) {
-      const node = model.scene.getObjectByName(info.name);
-      if (!node) throw Error("Missing CAD part " + info.name);
+      const original = model.scene.getObjectByName(info.name);
+      if (!original) throw Error("Missing CAD part " + info.name);
       if (/^HubBolt[1-4]$/.test(info.cad_id)) {
-        node.visible = false;
+        original.visible = false;
         continue;
       }
+      const node = useConnector(original, connectors.get(info.cad_id));
       info.wiringFade = wiringFades.has(info.cad_id) || info.shell || info.cover;
       node.updateMatrix();
       const materials = [];

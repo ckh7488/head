@@ -1,0 +1,125 @@
+{
+  "cad_sha256": "b555acfa73edc2b7d1379504810b76c13cdcfb1caf3966998893d5f3194d9173",
+  "parts": {
+    "InputXT30": {
+      "name": "5 V · XT30U 암수",
+      "source": "AMASS 도면",
+      "url": "https://www.china-amass.com/public/upload/20240608/810c62b3f7ace2287989748538eb2a6b.pdf"
+    },
+    "InputXT60": {
+      "name": "목 전원 · XT60U-F",
+      "source": "공급사 STEP",
+      "url": "https://www.lcsc.com/product-detail/C19191801.html"
+    },
+    "InputXT60Mate": {
+      "name": "목 전원 · XT60U-M",
+      "source": "공급사 STEP",
+      "url": "https://www.lcsc.com/product-detail/C129184.html"
+    },
+    "CameraUSB": {
+      "name": "카메라 · USB-A 연장선",
+      "source": "StarTech 도면",
+      "url": "https://media.startech.com/downloads/image/USBEXTAA6IN_Diagram.pdf"
+    },
+    "ControlUSB": {
+      "name": "OpenRB · USB-A 연장선",
+      "source": "StarTech 도면",
+      "url": "https://media.startech.com/downloads/image/USBEXTAA6IN_Diagram.pdf"
+    },
+    "HubPlugJ3": {
+      "name": "J3 · JST PHR-2",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=en&series=199"
+    },
+    "HubBodyJ3": {
+      "name": "J3 · JST B2B-PH-K-S",
+      "source": "KiCad STEP",
+      "url": "https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes"
+    },
+    "HubPlugJ4": {
+      "name": "J4 · JST PHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=en&series=199"
+    },
+    "HubBodyJ4": {
+      "name": "J4 · JST B3B-PH-K-S",
+      "source": "KiCad STEP",
+      "url": "https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes"
+    },
+    "HubPlugJ5": {
+      "name": "J5 · JST PHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=en&series=199"
+    },
+    "HubBodyJ5": {
+      "name": "J5 · JST B3B-PH-K-S",
+      "source": "KiCad STEP",
+      "url": "https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes"
+    },
+    "HubPlugJ6": {
+      "name": "J6 · JST PHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=en&series=199"
+    },
+    "HubBodyJ6": {
+      "name": "J6 · JST B3B-PH-K-S",
+      "source": "KiCad STEP",
+      "url": "https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes"
+    },
+    "HubPlugJ7": {
+      "name": "J7 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "HubBodyJ7": {
+      "name": "J7 · JST B3B-EH-A",
+      "source": "KiCad STEP",
+      "url": "https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes"
+    },
+    "HubPlugJ8": {
+      "name": "J8 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "HubBodyJ8": {
+      "name": "J8 · JST B3B-EH-A",
+      "source": "KiCad STEP",
+      "url": "https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes"
+    },
+    "ID1EH": {
+      "name": "ID1 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "ID2EH": {
+      "name": "ID2 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "ID3EH": {
+      "name": "ID3 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "ID4EH": {
+      "name": "ID4 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "ID5EH": {
+      "name": "ID5 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "ID6EH": {
+      "name": "ID6 · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    },
+    "OpenRBEH": {
+      "name": "OpenRB · JST EHR-3",
+      "source": "JST 도면",
+      "url": "https://www.jst-mfg.com/product/index.php?lang=2&series=58"
+    }
+  }
+}

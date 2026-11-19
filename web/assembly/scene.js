@@ -3,6 +3,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { MeshoptDecoder } from "three/addons/libs/meshopt_decoder.module.js";
 import { fastener } from "../hardware.js";
+import { connectorInfo, loadConnectors, useConnector } from "../connectors.js";
 import { loadWiring, WiringModel } from "../wiring.js";
 
 const vector = xyz => new THREE.Vector3(...xyz);
@@ -68,16 +69,24 @@ export class WalkthroughScene {
       json("./interference.json"),
     ]);
     if (audit.cad_sha256 !== data.cad_sha256) throw Error("CAD and measurements have different revisions");
-    this.wiring = new WiringModel(await loadWiring("../assets/wiring.json", data.cad_sha256), this.scene);
+    const [wiring, connectors] = await Promise.all([
+      loadWiring("../assets/wiring.json", data.cad_sha256),
+      loadConnectors(loader, new URL("../assets/", import.meta.url).href, data.cad_sha256),
+    ]);
+    this.wiring = new WiringModel(wiring, this.scene, connectors);
     this.scene.add(cad.scene);
     for (const part of data.parts) {
-      const node = cad.scene.getObjectByName(part.name);
-      if (!node) throw Error(`Missing CAD part ${part.cad_id}`);
+      const original = cad.scene.getObjectByName(part.name);
+      if (!original) throw Error(`Missing CAD part ${part.cad_id}`);
       if (/^HubBolt[1-4]$/.test(part.cad_id)) {
-        node.visible = false;
+        original.visible = false;
         continue;
       }
-      this.register(part.cad_id, { node, label: part.label, center: new THREE.Box3(...part.bounds.map(vector)).getCenter(new THREE.Vector3()) });
+      const connector = connectorInfo[part.cad_id];
+      const node = useConnector(original, connectors.get(part.cad_id));
+      const center = new THREE.Box3().setFromObject(node).getCenter(new THREE.Vector3());
+      const label = connector ? `구매품 · ${connector.name}` : part.label;
+      this.register(part.cad_id, { node, label, center, kind: connector ? "connector" : null });
     }
     for (const part of hardware) {
       const entry = fastener(part);
@@ -122,7 +131,6 @@ export class WalkthroughScene {
     entry.initial = entry.original.clone();
     entry.orientation = entry.node.quaternion.clone();
     entry.materials = materials.map(material => ({ material, color: material.color.clone(), opacity: material.opacity }));
-    entry.node.userData.assemblyPart = id;
     entry.node.visible = false;
     this.entries.set(id, entry);
   }
@@ -178,7 +186,7 @@ export class WalkthroughScene {
     this.resize();
   }
 
-  applyStyle({ ghost, section }) {
+  applyStyle({ ghost, section, port }) {
     const { cut, view } = this.step;
     let planes = [];
     if (cut && section) {
@@ -200,11 +208,12 @@ export class WalkthroughScene {
       const isMoving = this.moveById.has(id);
       entry.node.visible = this.fixed.has(id) || isMoving;
       if (!entry.node.visible) continue;
-      const translucent = ghost && entry.kind !== "fastener";
+      const translucent = ghost && !entry.kind;
+      const dim = port && entry.kind === "connector" && port !== id;
       for (const { material, color, opacity } of entry.materials) {
         material.clippingPlanes = planes;
-        material.opacity = translucent ? (isMoving ? .42 : this.step.wiring ? .13 : .19) : opacity;
-        material.transparent = translucent || opacity < 1;
+        material.opacity = dim ? .24 : translucent ? (isMoving ? .42 : this.step.wiring ? .13 : .19) : opacity;
+        material.transparent = Boolean(dim || translucent || opacity < 1);
         material.depthWrite = !material.transparent;
         material.color.copy(color);
         if (!entry.kind) material.color.lerp(isMoving ? sky : fixedTint, isMoving ? .62 : .20);
