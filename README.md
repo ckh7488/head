@@ -2,13 +2,13 @@
 
 코 안의 USB 카메라로 얼굴을 보고 눈·목을 움직이는 해골 헤드입니다. OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 6축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
-**B7는 표준 육각렌치 나사와 일반 육각너트로 조립하는 제작판입니다.** 출력판에서 머리 무게를 계산했고 13번 균형추 트레이는 필요할 때 출력합니다. [P1S 시험판](mechanical/R5-B7-Fit-P1S.3mf)
+**B7은 눈꺼풀과 케이블 고정부의 시험판부터 출력합니다.** 전체 조립은 목 회전판 체결과 앞 해골 장착 문제를 해결한 뒤 진행합니다. [조립절차서](mechanical/ASSEMBLY.md) · [P1S 시험판](mechanical/R5-B7-Fit-P1S.3mf)
 
 | 작업 | 시작 파일 |
 |---|---|
 | 기구 확인 및 수정 | [B7 FreeCAD 조립본](mechanical/R5-B7-Assembly.FCStd) |
 | P1S 전체 출력 | [B7 출력판 12장과 선택 1장](mechanical/R5-B7-P1S.3mf) |
-| 부품·조립·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
+| 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
 | 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
 | 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
 | 브라우저에서 6축 조작 | [B7 웹 뷰어](web/) |
