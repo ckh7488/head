@@ -1,0 +1,28 @@
+{
+  "static_overlap_mm3": {},
+  "mesh_min_gap_mm": {
+    "PitchPinDowelLeft / 28 skull front": 1.948,
+    "PitchPinDowelRight / 28 skull front": 0.402
+  },
+  "sweep_overlap_mm3": {},
+  "sweep_min_gap_mm": 4.097,
+  "pitch_pins": [
+    {
+      "x_mm": -60.5,
+      "pin": "Part013",
+      "from_outer_end_mm": 5.5,
+      "frame_hub_mm": 12.8,
+      "dowel_recess_each_end_mm": 0.4
+    },
+    {
+      "x_mm": 60.5,
+      "pin": "Part015",
+      "from_outer_end_mm": 5.5,
+      "frame_hub_mm": 12.8,
+      "dowel_recess_each_end_mm": 0.4
+    }
+  ],
+  "blink_flat_depth_mm": 0.3,
+  "blink_screw_head_clearance_mm": 0.36,
+  "blink_screw_length_mm": 8.0
+}
