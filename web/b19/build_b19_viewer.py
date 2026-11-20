@@ -1,4 +1,4 @@
-"""Build the B19 assembly walkthrough (model.glb + steps.json) from the checked assembly plan.
+"""Build the assembly walkthrough (model.glb + steps.json) from the checked assembly plan.
 
 Every step, part, offset and note comes from mechanical/physics/check_b19_assembly.py and its report,
 so the viewer shows exactly the order that was checked and written into mechanical/ASSEMBLY.md.
@@ -7,6 +7,7 @@ so the viewer shows exactly the order that was checked and written into mechanic
         mechanical/revisions/b19/print/hardware-spec.json mechanical/revisions/b19/assembly-check.json
 """
 from argparse import ArgumentParser
+from hashlib import sha256
 from pathlib import Path
 import json
 import re
@@ -32,6 +33,7 @@ COLORS = {
 }
 FACE_LIMIT = {'bone': 30000, 'jaw': 12000, 'eye': 8000}
 BLOCKED = re.compile(r'(.+): stated approach \((.+?)\) is blocked; \((.+?)\) is clear')
+REAR_WIRING = ('RearLead', 'CableTie', 'InputXT', 'SupplyXT30', 'CameraUSB', 'ControlUSB')
 
 
 def numbers(text):
@@ -44,25 +46,72 @@ def finish_of(name, manifest):
     return 'steel'
 
 
-def build(cad, hardware, spec, report, output):
+def load_wires(source, cad_hash):
+    if source is None:
+        return []
+    if sha256(source.read_bytes()).hexdigest() != cad_hash:
+        raise ValueError('Cable paths and CAD export use different revisions')
+
+    import FreeCAD as App
+
+    doc = App.openDocument(str(source.resolve()))
+    try:
+        wires = []
+        for obj in doc.Objects:
+            if not obj.Name.startswith('HarnessWire') or not hasattr(obj, 'JacketDiameter'):
+                continue
+            shape = obj.Shape.copy()
+            shape.Placement = obj.getGlobalPlacement()
+            points = [[round(float(coord), 3) for coord in vertex.Point] for vertex in shape.Vertexes]
+            diameter = float(obj.JacketDiameter)
+            if len(points) < 2 or diameter <= 0:
+                raise ValueError(f'{obj.Label} must have a path and a positive diameter')
+            name = obj.Label.split('  ·  ', 1)[0]
+            color = 0x5cdef1 if name.startswith('USB') else 0xf0e5b0
+            if name == 'fuse-in' or name.endswith(('-power', '+')):
+                color = 0xef5447
+            elif name.endswith(('-return', '-')):
+                color = 0x485463
+            wires.append({'id': obj.Name, 'label': obj.Label, 'diameter': diameter,
+                          'points': points, 'color': color})
+        if not wires:
+            raise ValueError('Source CAD has no internal cable paths')
+        return wires
+    finally:
+        App.closeDocument(doc.Name)
+
+
+def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None):
     data = json.loads(hardware.read_text())
     world = C.World(cad, data['hardware'], json.loads(spec.read_text()))
-    checked = {row['id']: row for row in json.loads(report.read_text())}
+    checked = json.loads(report.read_text())
+    plan = C.PLANS[revision.lower()]
+    if [(row['id'], row['context'], row['text']) for row in checked] != [
+            (step['id'], step['ctx'], step['text']) for step in plan]:
+        raise ValueError('Assembly report does not match the current assembly plan')
     manifest = {p['cad_id']: p['finish'] for p in json.loads((ROOT/'web/assets/assembly.json').read_text())['parts']}
     layout = json.loads((cad/'cad_parts.json').read_text())
+    if revision != 'B19' and checked[0].get('cad_sha256') != layout['source_sha256']:
+        raise ValueError('Assembly report and CAD export use different revisions')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
     b19_names = {item['name'] for item in json.loads(spec.read_text())} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
+    rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
+    hub_plugs = [name for name in layout['world_motion'] if name.startswith('HubPlug')]
+    wires = load_wires(assembly_cad, layout['source_sha256'])
 
     installed, used, steps = {}, set(), []
     number, last_text, sub = 0, '', 0
-    for st in C.PLAN:
-        row = checked[st['id']]
+    for st, row in zip(plan, checked, strict=True):
         ctx = installed.setdefault(st['ctx'], [])
+        if st['id'] == 'rear-cover':
+            ctx.extend(rear_wiring)
+        elif st['id'] == 'head-on-base':
+            ctx.extend(hub_plugs)
         alternatives = {}
         for note in row['notes']:
             match = BLOCKED.match(note)
             if match:
-                alternatives[match.group(1).replace(' assembly', '')] = numbers(match.group(3))
+                alternatives[match.group(1).removesuffix(' assembly')] = numbers(match.group(3))
         fixed = list(ctx)
         moves = []
         for key in ('merge', 'merge2'):
@@ -72,7 +121,7 @@ def build(cad, hardware, spec, report, output):
                 offset = alternatives.get(other, offset)
                 moves.append({'ids': parts, 'path': [list(map(float, offset)), [0, 0, 0]]})
                 ctx.extend(parts)
-        for key in ('place', 'place2', 'pins', 'pins2', 'nuts', 'nuts2'):
+        for key in ('place', 'place2', 'pins', 'pins2'):
             if key in st:
                 parts, offset = st[key]
                 offset = alternatives.get(', '.join(parts), offset)
@@ -82,6 +131,12 @@ def build(cad, hardware, spec, report, output):
             parts, points = st['path']
             moves.append({'ids': list(parts), 'path': [list(map(float, p)) for p in points]})
             ctx.extend(parts)
+        for key in ('nuts', 'nuts2'):
+            if key in st:
+                parts, offset = st[key]
+                offset = alternatives.get(', '.join(parts), offset)
+                moves.append({'ids': list(parts), 'path': [list(map(float, offset)), [0, 0, 0]]})
+                ctx.extend(parts)
         for name in st.get('bolts', []):
             size, length, seat, axis = world.screw(name)
             moves.append({'ids': [name], 'path': [(-np.asarray(axis, float)*(length+3.)).round(2).tolist(), [0, 0, 0]]})
@@ -92,15 +147,18 @@ def build(cad, hardware, spec, report, output):
         else:
             sub += 1
             label = f'{number}-{sub + 1}'
-        moving = [i for m in moves for i in m['ids']]
-        used.update(fixed + moving)
+        names = fixed + [name for move in moves for name in move['ids']]
+        if len(names) != len(set(names)):
+            raise ValueError(f'Duplicate parts in {st["id"]}')
+        used.update(names)
         steps.append({
             'id': st['id'], 'label': label, 'section': SECTIONS[st['ctx']], 'bench': st['ctx'] in BENCH,
             'text': row['text'] or last_text, 'continued': not row['text'],
             'notes': list(dict.fromkeys(note_text(n) for n in row['notes'])),
-            'issues': row['issues'], 'fixed': [i for i in fixed if world.mesh(i) is not None],
-            'moves': [m for m in ({**m, 'ids': [i for i in m['ids'] if world.mesh(i) is not None]} for m in moves) if m['ids']],
+            'issues': row['issues'], 'fixed': fixed, 'moves': moves,
             'closedLids': bool(st.get('closed_lids')),
+            'showWires': st['id'] == 'rear-skull',
+            **({'insertionClearance': row['insertion_clearance']} if 'insertion_clearance' in row else {}),
         })
 
     scene = trimesh.Scene()
@@ -111,9 +169,10 @@ def build(cad, hardware, spec, report, output):
     for name in sorted(used):
         mesh = world.mesh(name)
         if mesh is None:
-            continue
+            raise ValueError(f'Empty assembly mesh: {name}')
         mesh = mesh.copy()
-        finish = 'b19' if name in b19_names else finish_of(name, manifest)
+        finish = ('b19' if name in b19_names else 'power' if name.startswith('RearLead')
+                  else 'connector' if name in rear_wiring or name in hub_plugs else finish_of(name, manifest))
         limit = FACE_LIMIT.get(finish, 4000)
         if len(mesh.faces) > limit:
             # Decimation can tear closed parts; torn faces render as black patches.
@@ -130,17 +189,21 @@ def build(cad, hardware, spec, report, output):
                        'size': float(np.linalg.norm(mesh.extents).round(2))}
     output.mkdir(parents=True, exist_ok=True)
     (output/'model.glb').write_bytes(trimesh.exchange.gltf.export_glb(scene, include_normals=True))
-    (output/'steps.json').write_text(json.dumps({'source': report.name, 'parts': parts, 'steps': steps},
-                                                ensure_ascii=False, separators=(',', ':')))
+    (output/'steps.json').write_text(json.dumps({
+        'source': report.name, 'revision': revision, 'cadSha256': layout['source_sha256'],
+        'parts': parts, 'steps': steps, 'wires': wires,
+    }, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(f'{len(steps)} steps, {len(parts)} parts, model {(output/"model.glb").stat().st_size/1e6:.1f} MB')
 
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('cad', type=Path, help='mechanical/physics/export_cad.py --world output for B19')
+    parser.add_argument('cad', type=Path, help='mechanical/physics/export_cad.py --world output')
     parser.add_argument('hardware', type=Path, help='web/assembly/steps.js hardware as JSON')
     parser.add_argument('spec', type=Path, help='hardware-spec.json from build_b19_review_fixes.py')
     parser.add_argument('report', type=Path, help='assembly-check.json from check_b19_assembly.py')
     parser.add_argument('--output', type=Path, default=HERE)
+    parser.add_argument('--revision', choices=[key.upper() for key in C.PLANS], default='B19')
+    parser.add_argument('--assembly-cad', type=Path, help='Matching FCStd for internal cable paths')
     args = parser.parse_args()
-    build(args.cad, args.hardware, args.spec, args.report, args.output)
+    build(args.cad, args.hardware, args.spec, args.report, args.output, args.revision, args.assembly_cad)

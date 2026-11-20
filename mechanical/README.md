@@ -1,12 +1,12 @@
 # R5 기구 설계와 조립
 
-[B16 배선, B17 목과 시선, B18 후면 연결부 및 개선 시안](revisions/)에서 각 조립본과 검사 범위를 확인할 수 있습니다. B18의 고정 허브와 목 가림막은 제작 전 검토 단계입니다.
+[B20 FreeCAD·P2S 출력판과 검사](revisions/b20/) · [이전 CAD 개정](revisions/)
 
 ## B15 조립
 
 FreeCAD에서 [B15 조립본](R5-B15-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P2S 전체판](R5-B15-P2S.3mf) · [P2S 시험판](R5-B15-Fit-P2S.3mf)
 
-부품을 넣는 순서와 양쪽 공구가 들어가는 방향은 [조립절차서](ASSEMBLY.md)를 따릅니다.
+최신 조립 순서와 공구 방향은 [B20 조립 절차서](ASSEMBLY.md)에 있습니다.
 
 ## P2S 출력 설정
 

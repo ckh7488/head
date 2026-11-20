@@ -1,0 +1,170 @@
+{
+  "fasteners": {
+    "XL430YawSideL0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430YawSideL1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430YawSideR0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430YawSideR1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot2": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot3": {
+      "collisions": [],
+      "under_1mm": {
+        "HarnessWdata": 0.92
+      }
+    },
+    "XL430PitchSide0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430PitchSide1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430PitchKeeper0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430PitchKeeper1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawFoot0": {
+      "collisions": [],
+      "under_1mm": {
+        "Part038": 0.75,
+        "Part073": 0.466,
+        "Part076": 0.195
+      }
+    },
+    "EyeYawFoot1": {
+      "collisions": [],
+      "under_1mm": {
+        "Part038": 0.75,
+        "Part077": 0.195
+      }
+    },
+    "EyePitchStayFrame0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchStayFrame1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CradleMountFrameL": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CradleMountFrameR": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawTieHorn": {
+      "collisions": [],
+      "under_1mm": {
+        "Part024": 0.75,
+        "Part039": 0.856
+      }
+    },
+    "EyeYawHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew2": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkHornScrew0": {
+      "collisions": [],
+      "under_1mm": {
+        "Part056": 0.787
+      }
+    },
+    "BlinkHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "JawHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "JawHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawTiePinL": {
+      "collisions": [],
+      "under_1mm": {
+        "Jaw_36_left_jaw_servo_stay": 0.989
+      }
+    },
+    "EyeYawTiePinR": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchLinkHornPin": {
+      "collisions": [],
+      "under_1mm": {
+        "Part019": 0.75,
+        "Part027": 0.15,
+        "Part042": 0.317
+      }
+    },
+    "EyePitchLinkCradlePin": {
+      "collisions": [],
+      "under_1mm": {
+        "Part027": 0.8
+      }
+    }
+  },
+  "yaw_gap_mm": {
+    "XL430YawSideL0": 10.75,
+    "XL430YawSideL1": 3.691,
+    "XL430YawSideR0": 10.75,
+    "XL430YawSideR1": 3.691,
+    "YawBracketFoot0": 19.509,
+    "YawBracketFoot1": 15.096,
+    "YawBracketFoot2": 19.509,
+    "YawBracketFoot3": 15.096
+  },
+  "joint_pairs": {
+    "Part047 / Part056": 0.0,
+    "Part054 / Part056": 0.0,
+    "Part053 / Part057": 0.0,
+    "Part055 / Part060": 0.0
+  }
+}

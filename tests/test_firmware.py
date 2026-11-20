@@ -1,7 +1,7 @@
 import pytest
 
 
-POSITION, GOAL, TORQUE = 132, 116, 64
+POSITION, GOAL, TORQUE, STARTUP = 132, 116, 64, 60
 
 
 def writes(events, register):
@@ -198,7 +198,10 @@ def test_reboot_recovers_an_axis_that_latched_a_hardware_alert(firmware):
     assert firmware.command('ARM 24') == ['LOCKED RELEASE_AFTER_FAULT']
     firmware.trace()
     assert firmware.command('REBOOT 5') == ['REBOOTED 5']
-    assert [(e.direction, e.id) for e in firmware.trace()] == [('b', 5)]
+    assert [(e.direction, e.id, e.register) for e in firmware.trace()] == [
+        ('r', 5, 0), ('r', 5, STARTUP), ('r', 5, TORQUE), ('b', 5, 0),
+    ]
+    assert firmware.command('ARM 24') == ['LOCKED RELEASE_AFTER_FAULT']
     assert firmware.command('RELEASE') == ['RELEASED']
     arm(firmware, 24)
 
@@ -209,6 +212,70 @@ def test_reboot_is_refused_on_a_healthy_armed_axis(firmware):
     assert firmware.command('REBOOT 7') == ['ERROR REBOOT_ID']
     assert not any(e.direction == 'b' for e in firmware.trace())
     assert firmware.command('REBOOT 6') == ['REBOOTED 6']
+
+
+def test_another_axis_fault_does_not_authorize_rebooting_healthy_pitch(firmware):
+    arm(firmware, 24)
+    firmware.fail('r', 4, POSITION, 'alert', 100)
+    assert firmware.tick(120)[0] == 'ERROR READ_STATUS ID4'
+    firmware.trace()
+    assert firmware.command('REBOOT 5') == ['ERROR REBOOT_WHILE_ARMED ID5']
+    assert all(e.direction == 'r' for e in firmware.trace())
+    assert firmware.command('CHECK 5') == ['CHECK 5 1060 3 0 2 1 2048 1 0']
+
+
+def test_cleared_alert_does_not_authorize_reboot_for_same_axis(firmware):
+    arm(firmware, 16)
+    firmware.fail('r', 5, POSITION, 'alert')
+    assert firmware.tick(120)[0] == 'ERROR READ_STATUS ID5'
+    firmware.set(5, TORQUE, 0)
+    firmware.trace()
+    assert firmware.command('REBOOT 5') == ['ERROR REBOOT_WHILE_ARMED ID5']
+    assert all(e.direction == 'r' for e in firmware.trace())
+
+
+def test_live_alert_with_torque_still_enabled_does_not_authorize_reboot(firmware):
+    arm(firmware, 16)
+    firmware.fail('r', 5, POSITION, 'alert', 100)
+    firmware.fail('r', 5, TORQUE, 'alert', 100)
+    assert firmware.tick(120)[0] == 'ERROR READ_STATUS ID5'
+    firmware.trace()
+    assert firmware.command('REBOOT 5') == ['ERROR REBOOT_TORQUE_ON ID5']
+    assert all(e.direction == 'r' for e in firmware.trace())
+    firmware.set(5, TORQUE, 0)
+    assert firmware.command('REBOOT 5') == ['REBOOTED 5']
+
+
+@pytest.mark.parametrize('kind', ['timeout', 'short', 'crc', 'instruction_crc', 'alert_denied', 'wrong_id'])
+def test_reboot_refuses_an_unconfirmed_torque_read(firmware, kind):
+    firmware.fail('r', 5, TORQUE, kind)
+    assert firmware.command('REBOOT 5') == ['ERROR REBOOT_CHECK ID5']
+    assert all(e.direction == 'r' for e in firmware.trace())
+
+
+@pytest.mark.parametrize(('register', 'value', 'error'), [
+    (0, 1190, 'REBOOT_CHECK'), (TORQUE, 1, 'REBOOT_TORQUE_ON'),
+    (STARTUP, 1, 'REBOOT_STARTUP_CONFIG'), (STARTUP, 2, 'REBOOT_STARTUP_CONFIG'),
+])
+def test_reboot_checks_physical_state_even_when_not_armed(firmware, register, value, error):
+    firmware.set(5, register, value)
+    assert firmware.command('REBOOT 5') == [f'ERROR {error} ID5']
+    assert all(e.direction == 'r' for e in firmware.trace())
+
+
+def test_reboot_is_never_retried_when_acknowledgement_is_lost(firmware):
+    firmware.fail('b', 5, 0, 'lost')
+    assert firmware.command('REBOOT 5') == ['ERROR REBOOT ID5']
+    assert [(e.id, e.result) for e in firmware.trace() if e.direction == 'b'] == [(5, 'lost')]
+
+
+@pytest.mark.parametrize(('servo', 'delta'), [(4, 22), (4, -22), (5, 22), (5, -22)])
+def test_neck_neutral_guard_accepts_at_most_two_degrees(firmware, servo, delta):
+    firmware.set(servo, POSITION, 2048 + delta)
+    assert firmware.command('CHECK_NECK') == ['NECK_NEUTRAL']
+    firmware.set(servo, POSITION, 2048 + delta + (1 if delta > 0 else -1))
+    assert firmware.command('CHECK_NECK') == [f'ERROR NECK_NOT_NEUTRAL ID{servo}']
+    assert all(e.direction == 'r' for e in firmware.trace())
 
 
 def test_pacing_applies_latest_goal_as_reports_continue(firmware):

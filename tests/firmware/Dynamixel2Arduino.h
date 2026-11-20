@@ -42,6 +42,14 @@ enum {
     DXL_LIB_ERROR_WRONG_PACKET,
     DXL_LIB_ERROR_PORT_WRITE,
     DXL2_0_ERR_CRC_ERROR = 3,
+    DXL_INST_READ = 2,
+    DXL_INST_REBOOT = 8,
+};
+
+struct InfoToParseDXLPacket {
+    uint8_t id;
+    uint8_t err_idx;
+    uint16_t recv_param_len;
 };
 
 struct Motor {
@@ -95,6 +103,7 @@ struct Dynamixel2Arduino {
         if (result == "crc") libError = DXL_LIB_ERROR_CRC;
         if (result == "instruction_crc") status = DXL2_0_ERR_CRC_ERROR;
         if (result == "alert") status = 0x80;
+        if (result == "alert_denied") status = 0x87;
         if (result == "denied") status = 7;
         events.push_back({direction, id, address, value, result, clockMs});
         if (libError == DXL_LIB_ERROR_TIMEOUT) clockMs += timeout;
@@ -129,9 +138,40 @@ struct Dynamixel2Arduino {
         return libError == DXL_LIB_OK && (status == 0 || status == 0x80);
     }
 
-    bool reboot(uint8_t id, uint32_t timeout) {
-        exchange('b', id, 0, 0, timeout);
-        if (libError != DXL_LIB_OK) return false;
+protected:
+    bool txInstPacket(uint8_t id, uint8_t instruction, uint8_t* parameters, uint16_t size) {
+        instructionId = id;
+        instructionType = instruction;
+        if (instruction == DXL_INST_REBOOT) return size == 0;
+        if (instruction != DXL_INST_READ || size != 4) return false;
+        instructionAddress = parameters[0] | (uint16_t(parameters[1]) << 8);
+        instructionLength = parameters[2] | (uint16_t(parameters[3]) << 8);
+        return true;
+    }
+
+    const InfoToParseDXLPacket* rxStatusPacket(uint8_t* response, uint16_t capacity, uint32_t timeout) {
+        const auto id = instructionId;
+        const auto length = instructionType == DXL_INST_READ
+            ? read(id, instructionAddress, instructionLength, response, capacity, timeout)
+            : reboot(id, timeout);
+        if (length < 0) return nullptr;
+        const auto replyId = events.back().result == "wrong_id" ? uint8_t(id % 6 + 1) : id;
+        reply = {replyId, status, static_cast<uint16_t>(length)};
+        return &reply;
+    }
+
+private:
+    uint8_t instructionId = 0;
+    uint8_t instructionType = 0;
+    uint16_t instructionAddress = 0;
+    uint16_t instructionLength = 0;
+    InfoToParseDXLPacket reply = {};
+
+    int32_t reboot(uint8_t id, uint32_t timeout) {
+        const auto result = exchange('b', id, 0, 0, timeout);
+        if (result != "ok" && result != "lost" && result != "alert") {
+            return libError == DXL_LIB_OK ? 0 : -1;
+        }
         auto& registers = motors.at(id-1).registers;
         registers.at(64) = 0;
         registers.at(100) = 885;
@@ -141,13 +181,13 @@ struct Dynamixel2Arduino {
         for (auto& failure : failures) {
             if (failure.id == id && failure.kind == "alert") failure.remaining = 0;
         }
-        return status == 0 || status == 0x80;
+        return libError == DXL_LIB_OK ? 0 : -1;
     }
 
     static uint16_t registerSize(uint16_t address) {
         switch (address) {
             case 0: case 100: return 2;
-            case 10: case 11: case 64: case 68: return 1;
+            case 10: case 11: case 60: case 64: case 68: return 1;
             case 108: case 112: case 116: case 132: return 4;
             default: return 0;
         }

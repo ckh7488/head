@@ -95,6 +95,24 @@ def test_commission_does_not_report_a_failed_release_as_complete(firmware):
     assert released.stdout.strip() == 'RELEASED'
 
 
+def test_commission_reboots_only_the_confirmed_torque_off_faulted_axis(firmware):
+    firmware.command('ARM 24')
+    firmware.fail('r', 4, 132, 'alert', 100)
+    firmware.fail('r', 4, 64, 'alert', 100)
+    assert firmware.tick(120)[0] == 'ERROR READ_STATUS ID4'
+    firmware.trace()
+    with terminal(firmware) as port:
+        unrelated = pc('commission.py', port, '--reboot', '5')
+        still_energized = pc('commission.py', port, '--reboot', '4')
+        firmware.set(4, 64, 0)
+        recovered = pc('commission.py', port, '--reboot', '4')
+    assert unrelated.returncode == 1 and 'REBOOT_WHILE_ARMED ID5' in unrelated.stderr
+    assert still_energized.returncode == 1 and 'REBOOT_TORQUE_ON ID4' in still_energized.stderr
+    assert recovered.returncode == 0, recovered.stderr
+    assert recovered.stdout.strip() == 'REBOOTED 4'
+    assert [e.id for e in firmware.trace() if e.direction == 'b'] == [4]
+
+
 def test_jaw_clack_runs_through_the_compiled_sketch(firmware):
     with terminal(firmware) as port:
         result = pc('jaw_clack.py', port, '--drive')
@@ -102,6 +120,20 @@ def test_jaw_clack_runs_through_the_compiled_sketch(firmware):
     commands = [e for e in firmware.trace() if e.direction == 'w' and e.register == 116]
     assert {e.id for e in commands} == {6}
     assert [e.value for e in commands[:5]] == [2000, 1886, 2000, 1852, 2000]
+
+
+@pytest.mark.parametrize(('failure', 'message'), [
+    ('off_center', 'NECK_NOT_NEUTRAL'), ('no_position', 'NECK_CHECK'),
+])
+def test_jaw_clack_refuses_to_arm_without_neutral_neck_confirmation(firmware, failure, message):
+    if failure == 'off_center':
+        firmware.set(5, 132, 1980)
+    else:
+        firmware.fail('r', 5, 132, 'timeout', 2)
+    with terminal(firmware) as port:
+        result = pc('jaw_clack.py', port, '--drive')
+    assert result.returncode == 1 and f'{message} ID5' in result.stderr
+    assert all(e.direction == 'r' for e in firmware.trace())
 
 
 def test_tracking_usb_receives_feedback_and_propagates_bus_fault(firmware):

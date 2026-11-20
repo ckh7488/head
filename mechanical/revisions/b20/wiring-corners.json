@@ -1,0 +1,358 @@
+{
+  "cad_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "pose_fields": [
+    "neck_yaw_deg",
+    "neck_pitch_deg",
+    "eye_pitch_deg",
+    "hatch_drop_mm",
+    "jaw_deg"
+  ],
+  "clearance_mm": 0.25,
+  "routing_model": "wiring_check.py --packed; cable paths fitted separately at each pose",
+  "quick_cases": [
+    {
+      "pose": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        0,
+        0,
+        0,
+        15,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        0,
+        0,
+        0,
+        30,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        -60,
+        -15,
+        0,
+        0,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        -60,
+        6,
+        0,
+        0,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        -15,
+        0,
+        0,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        0,
+        0,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        -60,
+        -15,
+        0,
+        30,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        -60,
+        6,
+        0,
+        30,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        -15,
+        0,
+        30,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        0,
+        30,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        -60,
+        -15,
+        8,
+        30,
+        13
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        30,
+        13
+      ],
+      "nominal_contacts": [
+        "motor5-power"
+      ],
+      "near_jaw_wires": [
+        "motor5-data",
+        "motor6-return"
+      ],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    }
+  ],
+  "closed_hatch_cases": [
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        0,
+        4
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        0,
+        8
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        0,
+        10
+      ],
+      "nominal_contacts": [],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        0,
+        12
+      ],
+      "nominal_contacts": [
+        "motor5-power"
+      ],
+      "near_jaw_wires": [
+        "motor5-data"
+      ],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        60,
+        6,
+        -8,
+        0,
+        13
+      ],
+      "nominal_contacts": [
+        "motor3-power",
+        "motor5-return",
+        "motor5-power",
+        "motor5-data"
+      ],
+      "near_jaw_wires": [],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        0,
+        6,
+        -8,
+        0,
+        13
+      ],
+      "nominal_contacts": [
+        "motor3-data",
+        "motor5-power",
+        "motor5-data",
+        "USB-Camera"
+      ],
+      "near_jaw_wires": [
+        "motor5-return"
+      ],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        45,
+        6,
+        -8,
+        0,
+        13
+      ],
+      "nominal_contacts": [
+        "motor5-return",
+        "motor5-power",
+        "motor5-data",
+        "USB-Camera"
+      ],
+      "near_jaw_wires": [
+        "motor3-power",
+        "motor6-return"
+      ],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        50,
+        6,
+        -8,
+        0,
+        13
+      ],
+      "nominal_contacts": [
+        "motor5-return",
+        "motor5-power",
+        "motor5-data"
+      ],
+      "near_jaw_wires": [
+        "motor3-power",
+        "motor6-return",
+        "USB-Camera"
+      ],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    },
+    {
+      "pose": [
+        55,
+        6,
+        -8,
+        0,
+        13
+      ],
+      "nominal_contacts": [
+        "motor5-return",
+        "motor5-power",
+        "motor5-data"
+      ],
+      "near_jaw_wires": [
+        "motor3-power"
+      ],
+      "wire_pair_contacts": 0,
+      "wire_self_contacts": 0
+    }
+  ]
+}

@@ -6,6 +6,18 @@ import time
 from track import AXES, UsbController
 
 
+def check_neck_neutral(controller):
+    controller.send('CHECK_NECK')
+    deadline = time.monotonic() + 1
+    while time.monotonic() < deadline:
+        for line in controller.lines():
+            if line == 'NECK_NEUTRAL':
+                return
+            if line.startswith('ERROR'):
+                raise RuntimeError(line)
+    raise RuntimeError('OpenRB did not confirm neck position. Update the firmware and retry.')
+
+
 def move(controller, target):
     deadline = time.monotonic() + 1.45
     goal = 'GO ' + '0 ' * len(AXES) + str(target)
@@ -28,7 +40,7 @@ def main():
     controller = UsbController(args.serial, 1 << len(AXES))
     ready = False
     try:
-        controller.start()
+        controller.start(before_arm=check_neck_neutral)
         ready = True
         for angle in (0, 10, 0, 13, 0):
             move(controller, angle)

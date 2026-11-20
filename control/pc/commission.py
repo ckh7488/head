@@ -43,7 +43,7 @@ def main():
     action.add_argument('--check',action='store_true',help='Read readiness and torque status for all six servos')
     action.add_argument('--release',action='store_true')
     action.add_argument('--reboot',type=int,choices=range(1,7),
-                        help='Clear a latched hardware error (overload, voltage, heat) on one servo')
+                        help='Reboot one servo after its torque is verified off. Support the head first.')
     args=argument.parse_args()
     with serial.Serial(args.serial,115200,timeout=.2,write_timeout=.3) as port:
         until=time.monotonic()+4

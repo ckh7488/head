@@ -1,0 +1,71 @@
+{
+  "p2s_project_sha256": "371d4abe531aef736925c94203b1df8f16245dca71791f13fb1dc23690e28750",
+  "slicer_version": "Bambu Studio 2.9.1.70",
+  "layer_height_mm": 0.2,
+  "raster_mm": 0.2,
+  "resliced_plates": [
+    {
+      "plate": 5,
+      "objects_with_extrusion": 2,
+      "estimated_g": 184.01,
+      "estimated_s": 40572,
+      "layers": 518,
+      "plate_warnings": 0,
+      "isolated_starts": 0
+    },
+    {
+      "plate": 6,
+      "objects_with_extrusion": 7,
+      "estimated_g": 169.66,
+      "estimated_s": 26214,
+      "layers": 500,
+      "plate_warnings": 0,
+      "isolated_starts": 0
+    },
+    {
+      "plate": 7,
+      "objects_with_extrusion": 9,
+      "estimated_g": 121.49,
+      "estimated_s": 24393,
+      "layers": 271,
+      "plate_warnings": 0,
+      "isolated_starts": 0
+    },
+    {
+      "plate": 8,
+      "objects_with_extrusion": 15,
+      "estimated_g": 44.79,
+      "estimated_s": 10953,
+      "layers": 175,
+      "plate_warnings": 0,
+      "isolated_starts": 0
+    },
+    {
+      "plate": 11,
+      "objects_with_extrusion": 3,
+      "estimated_g": 66.08,
+      "estimated_s": 11780,
+      "layers": 115,
+      "plate_warnings": 0,
+      "isolated_starts": 0
+    },
+    {
+      "plate": 12,
+      "objects_with_extrusion": 2,
+      "estimated_g": 8.76,
+      "estimated_s": 3168,
+      "layers": 183,
+      "plate_warnings": 0,
+      "isolated_starts": 0
+    }
+  ],
+  "unchanged_b16_plates": [
+    1,
+    2,
+    3,
+    4,
+    9,
+    10,
+    13
+  ]
+}

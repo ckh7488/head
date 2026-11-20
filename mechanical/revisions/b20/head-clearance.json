@@ -1,0 +1,20 @@
+{
+  "cad_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "pose_samples": 26408,
+  "pairs": 644,
+  "clearance_mm": {
+    "Part024 / Part057": 1.009,
+    "Part057 / Part073": 0.95,
+    "Part024 / Part060": 1.009,
+    "Part041 / Part060": 9.652,
+    "Part060 / Part073": 0.95,
+    "Part073 / Part078": 1.1,
+    "Part076 / Part078": 0.93,
+    "Part073 / Part079": 1.1,
+    "Part077 / Part079": 0.93,
+    "BallastTray / Part074": 1.835,
+    "BallastCover / Part074": 3.974,
+    "BallastStack / Part074": 5.655
+  },
+  "collisions": []
+}

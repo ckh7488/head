@@ -20,6 +20,8 @@ constexpr uint32_t goalPeriodMs = 60;
 constexpr uint32_t reportMs = 120;
 constexpr uint8_t holdTolerance = 3;
 constexpr uint8_t positionTolerance = 8;
+constexpr uint8_t hardwareAlert = 0x80;
+constexpr uint8_t neckNeutralTolerance = 4096u*2u/360u;  // Direct drive, up to 2 degrees.
 
 struct Register {
   uint16_t address;
@@ -28,6 +30,7 @@ struct Register {
 
 // Protocol 2.0 control-table addresses shared by the XL330 and XL430.
 constexpr Register modelNumber{0, 2}, driveMode{10, 1}, operatingMode{11, 1};
+constexpr Register startupConfiguration{60, 1};
 constexpr Register torqueEnable{64, 1}, statusReturnLevel{68, 1};
 constexpr Register goalPwm{100, 2}, profileAcceleration{108, 4}, profileVelocity{112, 4};
 constexpr Register goalPosition{116, 4}, presentPosition{132, 4};
@@ -43,7 +46,44 @@ struct AxisStatus {
   int32_t position = -1;
 };
 
-Dynamixel2Arduino dxl(Serial1, -1);
+void drainBusInput() {
+  for (int buffered=Serial1.available();buffered>0;buffered--) Serial1.read();
+}
+
+class ServoBus : public Dynamixel2Arduino {
+public:
+  using Dynamixel2Arduino::Dynamixel2Arduino;
+
+  bool readForReboot(uint8_t id, Register reg, uint16_t& value, uint8_t& status) {
+    uint8_t request[] = {static_cast<uint8_t>(reg.address),
+                         static_cast<uint8_t>(reg.address>>8),reg.size,0};
+    uint8_t response[2] = {};
+    if (!rebootTransaction(id,DXL_INST_READ,request,sizeof(request),response,reg.size,status)) {
+      return false;
+    }
+    value=static_cast<uint16_t>(response[0]) | (static_cast<uint16_t>(response[1])<<8);
+    return true;
+  }
+
+  bool requestReboot(uint8_t id) {
+    uint8_t status=0;
+    return rebootTransaction(id,DXL_INST_REBOOT,nullptr,0,nullptr,0,status);
+  }
+
+private:
+  bool rebootTransaction(uint8_t id, uint8_t instruction, uint8_t* request, uint8_t requestSize,
+                         uint8_t* response, uint8_t responseSize, uint8_t& status) {
+    // The library's high-level read and reboot methods do not check the reply's ID.
+    drainBusInput();
+    if (!txInstPacket(id,instruction,request,requestSize)) return false;
+    const auto* reply=rxStatusPacket(response,responseSize,busTimeoutMs);
+    if (!reply || reply->id!=id || reply->recv_param_len!=responseSize) return false;
+    status=reply->err_idx;
+    return status==0 || status==hardwareAlert;
+  }
+};
+
+ServoBus dxl(Serial1, -1);
 uint8_t armed = 0;
 bool faulted = false;
 bool moving = false;
@@ -124,10 +164,6 @@ bool retryable(Transfer result) {
     default:
       return false;
   }
-}
-
-void drainBusInput() {
-  for (int buffered=Serial1.available();buffered>0;buffered--) Serial1.read();
 }
 
 Transfer readRegister(uint8_t id, Register reg, int32_t& value) {
@@ -260,6 +296,23 @@ void checkAxis(uint8_t i) {
   Serial.println();
 }
 
+void checkNeckNeutral() {
+  for (uint8_t i=3;i<=4;i++) {
+    const uint8_t id=i+1;
+    AxisStatus status;
+    if (!validCalibration(i) || !readAxis(i,status) || status.model!=model[i] ||
+        status.position<0 || status.position>4095) {
+      printAxisError("ERROR NECK_CHECK",id);
+      return;
+    }
+    if (abs(status.position-calibration[i].zero)>neckNeutralTolerance) {
+      printAxisError("ERROR NECK_NOT_NEUTRAL",id);
+      return;
+    }
+  }
+  Serial.println("NECK_NEUTRAL");
+}
+
 void emitGoals() {
   for (uint8_t i=0;i<count;i++) {
     if (!axisEnabled(armed,i) || targets[i]==queued[i]) continue;
@@ -364,15 +417,35 @@ void arm(uint8_t mask) {
 
 void rebootAxis(uint8_t i) {
   const uint8_t id=i+1;
-  // A servo that latched a hardware error (overload, voltage, heat) keeps the alert
-  // bit until it reboots, so every later read on that axis fails. Allow the reboot
-  // on an idle axis, or on an armed axis once a fault has already stopped motion.
-  if (axisEnabled(armed,i) && !faulted) {
+  const bool targetArmed=axisEnabled(armed,i);
+  if (targetArmed && !faulted) {
     printAxisError("ERROR REBOOT_WHILE_ARMED",id);
     return;
   }
-  drainBusInput();
-  if (!dxl.reboot(id,busTimeoutMs)) {
+  uint16_t value=0;
+  uint8_t status=0;
+  if (!dxl.readForReboot(id,modelNumber,value,status) || value!=model[i] ||
+      !dxl.readForReboot(id,startupConfiguration,value,status)) {
+    printAxisError("ERROR REBOOT_CHECK",id);
+    return;
+  }
+  if (value!=0) {
+    printAxisError("ERROR REBOOT_STARTUP_CONFIG",id);
+    return;
+  }
+  if (!dxl.readForReboot(id,torqueEnable,value,status)) {
+    printAxisError("ERROR REBOOT_CHECK",id);
+    return;
+  }
+  if (targetArmed && status!=hardwareAlert) {
+    printAxisError("ERROR REBOOT_WHILE_ARMED",id);
+    return;
+  }
+  if (value!=0) {
+    printAxisError("ERROR REBOOT_TORQUE_ON",id);
+    return;
+  }
+  if (!dxl.requestReboot(id)) {
     printAxisError("ERROR REBOOT",id);
     return;
   }
@@ -397,6 +470,11 @@ void command(char* text) {
   }
   if (!strcmp(text,"RELEASE")) {
     release();
+    return;
+  }
+  if (!strcmp(text,"CHECK_NECK")) {
+    if (moving) Serial.println("ERROR CHECK_DURING_MOVE");
+    else checkNeckNeutral();
     return;
   }
   if (!strncmp(text,"CHECK ",6)) {

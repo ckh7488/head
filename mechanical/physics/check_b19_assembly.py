@@ -1,4 +1,4 @@
-"""Walk the B19 assembly procedure step by step and check every move against the parts already in place.
+"""Walk the B19/B20 assembly procedure and check each move against the installed parts.
 
 Each step places parts, drives screws, starts nuts or pushes pins. The checker keeps one
 set of installed parts per work context (the base, the neck on the bench, the eye module
@@ -9,14 +9,15 @@ on the bench and so on) and tests:
   swept in along the screw axis, then a straight hex key from the head outwards;
 * nuts: the nut swept along its approach, then whether an open-end spanner or fingers can
   reach it from any side;
-* pins: the pin swept in along its approach.
+* pins: the pin swept in along its approach;
+* eye tie bar: clearance around the horizontal approach, including transverse misalignment.
 
-Run export_cad.py --world on the B19 assembly and dump steps.js hardware first (see the B19
-README). The report lists every collision and every screw whose key has less than 12 mm of
-straight access.
+Run export_cad.py --world on the assembly and dump steps.js hardware first. The report lists
+collisions and short tool access. Pass --revision b19 to reproduce the earlier plan.
 """
 from argparse import ArgumentParser
 import json
+import re
 from pathlib import Path
 
 import fcl
@@ -29,6 +30,8 @@ from trimesh.collision import mesh_to_BVH
 FLEXIBLE = ('Harness', 'RearLead', 'CableTie', 'HubPlug', 'HubRearClearance', 'InputXT', 'SupplyXT30',
             'CameraUSB', 'ControlUSB', 'HubBolt', 'Ballast')
 OVERLAP_LIMIT = .05
+PATH_SAMPLE_MM = .25
+EYE_TIE_TRAVEL_ERRORS_MM = {'slide': .5, 'lower': .15}
 KEY_RADIUS = {2: .8, 2.5: 1.05, 3: 1.3}
 HEAD = {2: (1.93, 2.), 2.5: (2.25, 2.5), 3: (2.78, 3.)}
 NUT = {2: (4., 1.6), 2.5: (5., 2.), 3: (5.5, 2.4)}
@@ -52,7 +55,7 @@ def step(sid, ctx, text, **kw):
     return dict(id=sid, ctx=ctx, text=text, **kw)
 
 
-PLAN = [
+B19_PLAN = [
     # ---------------- base ----------------
     step('base-cup', 'base', '받침 01을 작업대에 뒤집어 놓지 않고 바로 세웁니다.', place=(['Part000'], (0, 0, 0))),
     step('rear-guide', 'base', 'USB 두 개와 전원 꼬리선을 받침 뒤 벽으로 뺀 뒤, 열린 케이블 가이드 40을 받침 뒤에서 수평으로 밀어 넣습니다.',
@@ -237,6 +240,27 @@ PLAN = [
     step('rear-skull', 'base', '배선을 마치고 뒤 해골 29를 이음면에 수직으로 밀어 넣습니다.', place=(['Part074'], (0, 68, 0))),
 ]
 
+B20_CHANGES = {
+    'neck-pins': {
+        'text': '접착제를 바르기 전에 실측한 Ø3 연마 평행핀이 두 축의 직교 구멍에 잘 들어가는지 확인합니다. Ø8 축을 양쪽에서 끼우고 오른쪽 D-flat을 08번 클램프에 맞춥니다.',
+    },
+    'neck-dowels': {
+        'text': '축의 직교 구멍을 프레임 허브 세로 구멍에 맞추고 위에서 Ø3×12 평행핀을 넣습니다. 위아래 끝이 허브 면에서 각각 0.4 mm 들어가게 맞춥니다. 손으로 움직여 걸림을 확인한 뒤 핀은 회전하는 허브 안에만 고정합니다. 고정제가 베어링에 닿지 않게 하고, 오른쪽 D-flat 끝과 08번 클램프는 K2 에폭시로 고정합니다. 경화 후 손으로 다시 움직여 확인합니다.',
+    },
+    'eye-cradle': {
+        'text': '작업대에 B20 크래들 12를 둡니다.',
+    },
+    'eye-tie': {
+        'text': '두 눈을 정면으로 둡니다. 핀을 끼우지 않은 타이바 15의 들어가는 쪽 구멍 중심을 크래들 왼쪽 입구의 표시 홈에 맞춥니다. 타이바 윗면을 입구 천장보다 약 1.5 mm 낮게 두고 오른쪽으로 수평으로 밉니다. 두 크랭크 구멍과 좌우 위치가 맞으면 뒤로 밀면서 내려 구멍을 맞춥니다. 고정제 없이 경로를 확인한 뒤 타이바를 빼고, 크랭크 구멍에 경화가 느린 고정제를 소량 넣어 다시 끼웁니다.',
+        'path': (['Part037'], [(-110, -2.8, .8), (0, -2.8, .8), (0, 0, 0)]),
+    },
+    'eye-yaw-feet': {
+        'text': '모터판 39 다리의 Ø2.6 구멍은 조립 전에 M3 탭을 냅니다. 크래들 위 카운터보어에서 M3×16 두 개를 모터판 다리의 탭에 조입니다.',
+    },
+}
+PLAN = [dict(row, **B20_CHANGES.get(row['id'], {})) for row in B19_PLAN]
+PLANS = {'b19': B19_PLAN, 'b20': PLAN}
+
 
 def cylinder(radius, height, start, axis):
     axis = np.asarray(axis, float) / np.linalg.norm(axis)
@@ -318,7 +342,9 @@ class World:
                 mesh = hexagon(outer*np.sqrt(3), height, row['seat'], axis, row['size']/2+.1)
         else:
             mesh = tr.load_mesh(self.world/f'{name}.stl')
-        if not len(mesh.faces):
+        if not isinstance(mesh, tr.Trimesh) or not len(mesh.faces) or not np.isfinite(mesh.vertices).all():
+            if not name.startswith(FLEXIBLE):
+                raise ValueError(f'{name}: missing or invalid assembly mesh')
             mesh = None
         self.cache[name] = mesh
         return mesh
@@ -381,6 +407,47 @@ def sweep_shifted(world, moving, fixed, shift, base):
                 world.cache.pop(a, None)
             else:
                 world.cache[a] = saved[a]
+
+
+def travel_clearance(world, moving, fixed, start, end, *, starts_outside):
+    """Lower-bound clearance between separated meshes along a straight translation."""
+    length = np.linalg.norm(np.subtract(end, start))
+    count = max(1, int(np.ceil(length / PATH_SAMPLE_MM)))
+    positions = np.linspace(start, end, count + 1)
+    request = fcl.DistanceRequest()
+    nearest = np.inf
+    nearest_pair = None
+    nearest_position = None
+    for a in moving:
+        ma = world.mesh(a)
+        if not ma.is_volume:
+            raise ValueError(f'{a}: clearance requires a closed, oriented mesh')
+        oa = fcl.CollisionObject(mesh_to_BVH(ma))
+        lows, highs = ma.bounds[:, None, :] + positions
+        for b in fixed:
+            mb = world.mesh(b)
+            if not mb.is_volume:
+                raise ValueError(f'{b}: clearance requires a closed, oriented mesh')
+            # Positive separation at the start rules out containment that surface tests miss.
+            bounds_distances = np.linalg.norm(np.maximum(np.maximum(
+                mb.bounds[0] - highs, lows - mb.bounds[1]), 0), axis=1)
+            if starts_outside and bounds_distances[0] <= 0:
+                raise ValueError(f'{a} and {b}: clearance travel must begin outside the assembly')
+            ob = fcl.CollisionObject(mesh_to_BVH(mb))
+            for position, bounds_gap in zip(positions, bounds_distances):
+                if bounds_gap >= nearest:
+                    continue
+                oa.setTransform(fcl.Transform(position))
+                distance = fcl.distance(oa, ob, request, fcl.DistanceResult())
+                if not np.isfinite(distance):
+                    raise ValueError(f'{a} and {b}: invalid clearance result')
+                if distance < nearest:
+                    nearest, nearest_pair, nearest_position = max(0., distance), [a, b], position
+    if nearest_pair is None:
+        raise ValueError('Clearance travel requires both moving and fixed geometry')
+    # Every unsampled position differs from a sampled position by at most half a step.
+    lower_bound = max(0., nearest - length / (2 * count))
+    return nearest, lower_bound, nearest_pair, nearest_position.round(3).tolist()
 
 
 def key_access(world, name, installed):
@@ -448,7 +515,7 @@ DIRECTIONS = [np.array(v, float)/np.linalg.norm(v) for v in
 
 
 def find_clear(world, parts, rigid, offset):
-    """Try the stated approach first, then the six axis directions at the same distance."""
+    """Try the stated approach first, then axis and diagonal directions."""
     hits = sweep(world, parts, rigid, offset)
     if not hits:
         return None, {}
@@ -489,16 +556,22 @@ def socket_open(world, name, rigid):
     return False
 
 
-def run(cad, hardware, spec):
+def run(cad, hardware, spec, revision='b19'):
     world = World(cad, hardware, spec)
+    cad_sha256 = None
+    if revision == 'b20':
+        cad_sha256 = json.loads((cad/'cad_parts.json').read_text())['source_sha256']
+        if not re.fullmatch(r'[0-9a-f]{64}', cad_sha256):
+            raise ValueError('Invalid exported CAD source hash')
     installed = {}
     report = []
-    for st in PLAN:
+    for st in PLANS[revision]:
         ctx = installed.setdefault(st['ctx'], [])
         world.limit = st.get('limit', OVERLAP_LIMIT)
         rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
         issues = []
         notes = []
+        clearance = None
         for key in ('merge', 'merge2'):
             if key in st:
                 other, offset = st[key]
@@ -531,6 +604,22 @@ def run(cad, hardware, spec):
                 moving_end = np.asarray(end, float)
                 for (a, b), hit in sweep_shifted(world, parts, rigid, shift, moving_end).items():
                     issues.append(f'{a} ↔ {b} on the path segment ending at {tuple(end)} ({hit["overlap_mm3"]} mm³)')
+            if revision == 'b20' and st['id'] == 'eye-tie':
+                clearance = {}
+                legs = zip(EYE_TIE_TRAVEL_ERRORS_MM.items(), points[:-1], points[1:], strict=True)
+                for (leg, error), start, end in legs:
+                    nearest, lower_bound, pair, position = travel_clearance(
+                        world, parts, rigid, start, end, starts_outside=(leg == 'slide'))
+                    clearance[leg] = {
+                        'parts': pair,
+                        'offset_mm': position,
+                        'sampled_min_mm': round(nearest, 3),
+                        'continuous_lower_bound_mm': round(lower_bound, 3),
+                        'required_transverse_error_per_axis_mm': error,
+                    }
+                    if lower_bound < np.sqrt(2) * error:
+                        issues.append(f'{pair[0]} ↔ {pair[1]}: eye tie {leg} clearance only {lower_bound:.3f} mm; '
+                                      f'allow ±{error:g} mm on both transverse axes')
             ctx.extend(parts)
             rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
         for key in ('nuts', 'nuts2'):
@@ -561,20 +650,27 @@ def run(cad, hardware, spec):
                     if dirs == [] and not socket_open(world, nut, rigid):
                         notes.append(f'{nut}: no open side for a spanner, fingers or a socket; needs a pocket that holds it')
         row = {'id': st['id'], 'context': st['ctx'], 'text': st['text'], 'issues': issues, 'notes': notes}
+        if clearance is not None:
+            row['insertion_clearance'] = clearance
         report.append(row)
         print(st['id'], 'CLEAR' if not issues else issues, notes if notes else '', flush=True)
+    if cad_sha256 is not None:
+        report[0]['cad_sha256'] = cad_sha256
     return report
 
 
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
-    parser.add_argument('cad', type=Path, help='export_cad.py --world output for B19')
+    parser.add_argument('cad', type=Path, help='export_cad.py --world output for the selected revision')
     parser.add_argument('hardware', type=Path, help='steps.js hardware dumped as JSON {"hardware": [...]}')
     parser.add_argument('spec', type=Path, help='hardware-spec.json from build_b19_review_fixes.py')
     parser.add_argument('report', type=Path)
+    parser.add_argument('--revision', choices=PLANS, default='b19')
     args = parser.parse_args()
     data = json.loads(args.hardware.read_text())
-    result = run(args.cad, data['hardware'], json.loads(args.spec.read_text()))
+    result = run(args.cad, data['hardware'], json.loads(args.spec.read_text()), args.revision)
     args.report.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n')
     bad = [row['id'] for row in result if row['issues']]
-    print(f'{len(result)} steps, {len(bad)} with collisions', bad)
+    print(f'{len(result)} steps, {len(bad)} with blocking issues', bad)
+    if bad:
+        raise SystemExit(1)

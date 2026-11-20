@@ -141,7 +141,7 @@ class UsbController:
         if len(self.buffer)>512:
             self.buffer.clear()
 
-    def start(self):
+    def start(self, before_arm=None):
         deadline=time.monotonic()+6.
         next_ping=0.
         while time.monotonic()<deadline:
@@ -153,6 +153,8 @@ class UsbController:
                 break
         else:
             raise RuntimeError('OpenRB R5 B1 firmware did not respond to PING.')
+        if before_arm is not None:
+            before_arm(self)
         self.send(f'ARM {self.mask}')
         deadline=time.monotonic()+3.
         acknowledged=False

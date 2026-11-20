@@ -8,3 +8,5 @@ rtree>=1.2,<2
 python-fcl==0.7.0.10
 manifold3d==3.3.2
 fast-simplification==0.1.13
+shapely>=2,<3
+lxml>=5,<7

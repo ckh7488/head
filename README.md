@@ -16,7 +16,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 
 ## 최근 CAD
 
-- **B19 체결품과 조립 불가 지점** · 모든 모터·링크 체결품의 길이를 정하고, 나사를 넣을 수 없던 자리와 머리가 끄덕이지 않던 목 상하축을 고쳤습니다. 조립 순서 122단계를 하나씩 넣어 보며 막히는 곳을 모두 고쳤습니다. [B19 조립 절차](mechanical/ASSEMBLY.md) · [부품표](mechanical/BOM.csv) · [제작할 파일 목록](mechanical/revisions/#제작할-파일-b19-기준) · [B19 검사](mechanical/revisions/b19/)
+- **B20 제작·조립** · 눈 타이바를 왼쪽에서 곧게 넣도록 크래들을 바꿨습니다. B19 목 상하축, 체결품, 턱 수정도 포함합니다. [FreeCAD와 P2S 출력판](mechanical/revisions/b20/) · [조립 순서](mechanical/ASSEMBLY.md) · [부품표](mechanical/BOM.csv) · [3D 조립](web/README.md#b20-조립-순서)
 - **B18 후면 연결부** · 외부에서 USB 두 개와 5 V·12 V 전원 플러그를 잡고 뺄 수 있는 배치입니다. [조립본과 뒤쪽 3D 보기](mechanical/revisions/b18/)
 - **B18 개선 시안** · 고정 허브, 30 mm 내려가는 덮개, 목 12 V 경로와 가림막을 비교합니다. 제작 전에 남은 확인 사항을 함께 기록했습니다. [FreeCAD와 전후 비교](mechanical/revisions/b18/study/)
 
@@ -26,7 +26,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 
 - [FreeCAD 조립본](mechanical/R5-B15-Assembly.FCStd) · [기구 부품표](mechanical/BOM.csv)
 - [P2S 전체판 12장과 선택 1장](mechanical/R5-B15-P2S.3mf) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [출력 설정](mechanical/README.md#p2s-출력-설정)
-- [조립 절차](mechanical/ASSEMBLY.md) · [체결품과 배선을 장착한 상태의 구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사)
+- [B15 기구 검증과 출력 설정](mechanical/README.md)
 
 P2S 출력판은 **0.4 mm 노즐과 Bambu PETG HF** 기준입니다.
 앞 해골의 출력 경사, 눈꺼풀 축 홈, 목 볼트와 JST 통로를 수정한 형상이 들어 있습니다.

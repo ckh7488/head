@@ -9,7 +9,7 @@ int main() {
     for (uint8_t i = 0; i < count; ++i) {
         const int32_t zero = calibration[i].zero < 0 ? 2048 : calibration[i].zero;
         dxl.motors[i].registers = {
-            {0, model[i]}, {10, 0}, {11, 3}, {64, 0}, {68, 2}, {100, 885},
+            {0, model[i]}, {10, 0}, {11, 3}, {60, 0}, {64, 0}, {68, 2}, {100, 885},
             {108, 0}, {112, 0}, {116, zero}, {132, zero},
         };
     }
