@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R5 B19 조립 순서</title>
+  <link rel="stylesheet" href="viewer.css">
+  <script type="importmap">
+    {"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}
+  </script>
+</head>
+<body>
+  <header>
+    <strong>R5 <span>B19</span> 조립 순서</strong>
+    <span class="sub">CAD에서 122단계를 하나씩 넣어 확인한 순서 · <a href="https://github.com/ckh7488/head/blob/main/mechanical/ASSEMBLY.md">조립 절차서</a></span>
+  </header>
+  <main>
+    <nav id="list" aria-label="조립 단계"></nav>
+    <section id="stage">
+      <canvas id="view"></canvas>
+      <div id="loading">모델을 불러오는 중…</div>
+      <div id="legend"><i class="b19"></i>B19에서 새로 넣은 체결품·핀 <i class="moving"></i>이번 단계에 넣는 부품</div>
+    </section>
+    <aside id="card">
+      <div id="meta"></div>
+      <h2 id="title"></h2>
+      <p id="text"></p>
+      <ul id="notes"></ul>
+      <div id="controls">
+        <button id="prev" title="이전 단계 (←)">◀</button>
+        <button id="play" title="재생/멈춤 (Space)">❚❚</button>
+        <button id="next" title="다음 단계 (→)">▶</button>
+        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="부품 위치">
+      </div>
+      <p class="hint">드래그로 돌리고, 휠로 확대합니다. 오른쪽 버튼 드래그로 옮깁니다.</p>
+    </aside>
+  </main>
+  <script type="module" src="viewer.js"></script>
+</body>
+</html>

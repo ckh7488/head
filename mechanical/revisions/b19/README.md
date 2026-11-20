@@ -1,6 +1,6 @@
 # B19 체결품 정의와 조립 불가 지점 수정
 
-[FreeCAD 조립본](R5-B19-review-fixes.FCStd) · [조립 절차](../../ASSEMBLY.md) · [바뀐 출력물](print/) · 검사 기록: [정적](review-fixes-check.json) · [구동 중 체결품](hardware-sweep.json) · [머리 간섭](head-clearance.json) · [단계별 조립](assembly-check.json) · [제자리 겹침](static-pairs.json)
+[FreeCAD 조립본](R5-B19-review-fixes.FCStd) · [조립 절차](../../ASSEMBLY.md) · [바뀐 출력물](print/) · 검사 기록: [정적](review-fixes-check.json) · [구동 중 체결품](hardware-sweep.json) · [머리 간섭](head-clearance.json) · [단계별 조립](assembly-check.json) · [제자리 겹침](static-pairs.json) · [3D 조립 순서](../../../web/README.md#b19-조립-순서)
 
 B19는 B18 조립본에서 시작합니다. 이전 개정까지는 모터를 고정하는 나사, 눈 링크 관절, 목 상하축과 머리 프레임 연결처럼 구멍만 있고 넣을 부품이 정해지지 않은 자리가 많았습니다. 그중 일부는 나사를 넣을 공간 자체가 없었습니다. B19는 이런 자리를 모두 CAD에 넣고 구동 범위 전체에서 다른 부품과 겹치지 않는지 확인했습니다. 이어서 조립 순서대로 부품과 나사를 하나씩 넣어 보며 막히는 곳을 찾았습니다.
 
@@ -79,4 +79,6 @@ python check_head.py ../../build/b19-cad ../../build/b19-clearance.json
 python check_b19_assembly.py ../../build/b19-cad ../../build/hardware.json ../../build/b19-print/hardware-spec.json ../../build/b19-assembly.json
 python render_b19_assembly.py ../../build/b19-assembly.json ../../build/b19-steps.md
 python check_static_pairs.py ../../build/b19-cad ../../build/b19-static.json
+cd ../..
+python web/b19/build_b19_viewer.py build/b19-cad build/hardware.json mechanical/revisions/b19/print/hardware-spec.json build/b19-assembly.json
 ```

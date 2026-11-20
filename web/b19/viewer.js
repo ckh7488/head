@@ -1,0 +1,257 @@
+import * as THREE from "three";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+const el = id => document.getElementById(id);
+const data = await (await fetch("steps.json")).json();
+const steps = data.steps;
+
+const renderer = new THREE.WebGLRenderer({ canvas: el("view"), antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setClearColor(0xf4f2ee);
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(32, 1, 1, 5000);
+camera.up.set(0, 0, 1);
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 2.2));
+const sun = new THREE.DirectionalLight(0xffffff, 1.6);
+sun.position.set(200, -300, 400);
+scene.add(sun);
+const paths = new THREE.Group();
+scene.add(paths);
+
+const gltf = await new GLTFLoader().loadAsync("model.glb");
+scene.add(gltf.scene);
+const nodes = new Map();
+for (const name of Object.keys(data.parts)) {
+  const node = gltf.scene.getObjectByName(name);
+  if (!node) continue;
+  const materials = [];
+  node.traverse(mesh => {
+    if (!mesh.isMesh) return;
+    mesh.material = mesh.material.clone();
+    mesh.material.side = THREE.DoubleSide;
+    materials.push(mesh.material);
+  });
+  nodes.set(name, { node, materials, position: node.position.clone(), quaternion: node.quaternion.clone() });
+}
+el("loading").remove();
+
+const hinge = new THREE.Vector3(0, -39, 119);
+const closed = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
+const state = { index: 0, t: 1, playing: true, last: 0 };
+const MOVE_SECONDS = 1.3;
+const HOLD_SECONDS = .9;
+
+function pathPoint(path, u) {
+  const points = path.map(p => new THREE.Vector3(...p));
+  const lengths = points.slice(1).map((p, i) => p.distanceTo(points[i]));
+  const total = lengths.reduce((a, b) => a + b, 0) || 1;
+  let left = u * total;
+  for (let i = 0; i < lengths.length; i++) {
+    if (left <= lengths[i] || i === lengths.length - 1) {
+      return points[i].clone().lerp(points[i + 1], lengths[i] ? Math.min(1, left / lengths[i]) : 1);
+    }
+    left -= lengths[i];
+  }
+  return new THREE.Vector3();
+}
+
+function makeList() {
+  const list = el("list");
+  let section = null;
+  for (const [index, step] of steps.entries()) {
+    if (step.section !== section) {
+      section = step.section;
+      const heading = document.createElement("h3");
+      heading.textContent = section;
+      list.append(heading);
+    }
+    const button = document.createElement("button");
+    button.dataset.index = index;
+    button.className = (step.continued ? "continued " : "") + (step.bench ? "bench" : "");
+    const short = step.continued ? "이어서" : step.text.split(/(?<=[.다])\s/)[0];
+    button.innerHTML = `<span class="n">${step.label}</span><span class="t"></span>`;
+    button.querySelector(".t").textContent = short;
+    button.addEventListener("click", () => go(index));
+    list.append(button);
+  }
+}
+
+function tint(entry, color, amount) {
+  for (const material of entry.materials) {
+    material.emissive = new THREE.Color(color);
+    material.emissiveIntensity = amount;
+  }
+}
+
+function show(step) {
+  for (const entry of nodes.values()) {
+    entry.node.visible = false;
+    entry.node.position.copy(entry.position);
+    entry.node.quaternion.copy(entry.quaternion);
+    tint(entry, 0x000000, 0);
+  }
+  const lids = step.closedLids ? ["Part078", "Part079"] : [];
+  for (const id of step.fixed) {
+    const entry = nodes.get(id);
+    if (entry) entry.node.visible = true;
+  }
+  for (const move of step.moves) {
+    for (const id of move.ids) {
+      const entry = nodes.get(id);
+      if (!entry) continue;
+      entry.node.visible = true;
+      tint(entry, 0x1e6bff, .5);
+    }
+  }
+  for (const id of lids) {
+    const entry = nodes.get(id);
+    if (!entry) continue;
+    entry.node.position.copy(entry.position).sub(hinge).applyQuaternion(closed).add(hinge);
+    entry.node.quaternion.premultiply(closed);
+  }
+  paths.clear();
+  for (const move of step.moves) {
+    const center = new THREE.Vector3(...data.parts[move.ids[0]].center);
+    const points = move.path.map(p => center.clone().add(new THREE.Vector3(...p)));
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),
+      new THREE.LineDashedMaterial({ color: 0x1e6bff, dashSize: 2, gapSize: 1.4, depthTest: false, transparent: true, opacity: .8 }));
+    line.computeLineDistances();
+    line.renderOrder = 5;
+    paths.add(line);
+  }
+}
+
+function place(step, t) {
+  const count = step.moves.length;
+  step.moves.forEach((move, k) => {
+    const u = Math.min(1, Math.max(0, t * count - k));
+    const offset = pathPoint(move.path, u);
+    for (const id of move.ids) {
+      const entry = nodes.get(id);
+      if (!entry || (step.closedLids && (id === "Part078" || id === "Part079"))) continue;
+      entry.node.position.copy(entry.position).add(offset);
+    }
+  });
+  el("scrub").value = Math.round(t * 1000);
+}
+
+function frame(step) {
+  const box = new THREE.Box3();
+  for (const move of step.moves) {
+    for (const id of move.ids) {
+      const part = data.parts[id];
+      if (!part) continue;
+      const c = new THREE.Vector3(...part.center);
+      const r = Math.max(part.size / 2, 4);
+      for (const p of move.path) {
+        const at = c.clone().add(new THREE.Vector3(...p));
+        box.expandByPoint(at.clone().addScalar(r));
+        box.expandByPoint(at.clone().addScalar(-r));
+      }
+    }
+  }
+  if (box.isEmpty()) return;
+  const middle = box.getCenter(new THREE.Vector3());
+  const small = box.getSize(new THREE.Vector3()).length() < 40;
+  for (const id of small ? [] : step.fixed) {
+    const part = data.parts[id];
+    if (!part || part.size > 160) continue;
+    const c = new THREE.Vector3(...part.center);
+    if (c.distanceTo(middle) < 70) {
+      box.expandByPoint(c.clone().addScalar(part.size / 2));
+      box.expandByPoint(c.clone().addScalar(-part.size / 2));
+    }
+  }
+  const center = box.getCenter(new THREE.Vector3());
+  const radius = Math.max(box.getSize(new THREE.Vector3()).length() / 2, 30);
+  const approach = new THREE.Vector3();
+  for (const move of step.moves) approach.add(new THREE.Vector3(...move.path[0]).normalize());
+  const dir = new THREE.Vector3(.55, -1, .65).normalize();
+  if (approach.lengthSq() > 1e-6) dir.add(approach.normalize().multiplyScalar(.7)).normalize();
+  const target = { center, position: center.clone().add(dir.multiplyScalar(radius * 3.1)) };
+  const from = { center: controls.target.clone(), position: camera.position.clone() };
+  const start = performance.now();
+  const tween = now => {
+    const k = Math.min(1, (now - start) / 450);
+    const e = k * (2 - k);
+    controls.target.lerpVectors(from.center, target.center, e);
+    camera.position.lerpVectors(from.position, target.position, e);
+    if (k < 1) requestAnimationFrame(tween);
+  };
+  requestAnimationFrame(tween);
+}
+
+function go(index) {
+  state.index = Math.max(0, Math.min(steps.length - 1, index));
+  const step = steps[state.index];
+  history.replaceState(null, "", "#" + step.id);
+  for (const button of document.querySelectorAll("#list button")) {
+    button.classList.toggle("active", Number(button.dataset.index) === state.index);
+  }
+  document.querySelector("#list button.active")?.scrollIntoView({ block: "nearest" });
+  el("meta").innerHTML = `<b>${step.label}</b> / ${steps.filter(s => !s.continued).length} · ${step.section}` +
+    (step.bench ? '<span class="bench">작업대</span>' : "");
+  el("title").textContent = step.continued ? `${step.label} 이어서` : `${step.label}단계`;
+  el("text").textContent = step.text;
+  el("notes").replaceChildren(...step.notes.map(note => Object.assign(document.createElement("li"), { textContent: note })));
+  show(step);
+  state.t = 0;
+  state.last = performance.now();
+  place(step, 0);
+  frame(step);
+}
+
+function resize() {
+  const canvas = renderer.domElement;
+  const { clientWidth: w, clientHeight: h } = canvas.parentElement;
+  renderer.setSize(w, h, false);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+
+function tick(now) {
+  const step = steps[state.index];
+  if (state.playing && step.moves.length) {
+    const duration = MOVE_SECONDS * step.moves.length;
+    state.t += (now - state.last) / 1000 / duration;
+    if (state.t > 1 + HOLD_SECONDS / duration) state.t = 0;
+    place(step, Math.min(1, state.t));
+  }
+  state.last = now;
+  controls.update();
+  renderer.render(scene, camera);
+  requestAnimationFrame(tick);
+}
+
+el("prev").onclick = () => go(state.index - 1);
+el("next").onclick = () => go(state.index + 1);
+el("play").onclick = () => {
+  state.playing = !state.playing;
+  el("play").textContent = state.playing ? "❚❚" : "▶︎";
+};
+el("scrub").oninput = event => {
+  state.playing = false;
+  el("play").textContent = "▶︎";
+  state.t = event.target.value / 1000;
+  place(steps[state.index], state.t);
+};
+addEventListener("keydown", event => {
+  if (event.key === "ArrowRight") go(state.index + 1);
+  if (event.key === "ArrowLeft") go(state.index - 1);
+  if (event.key === " ") { event.preventDefault(); el("play").click(); }
+});
+
+addEventListener("hashchange", () => {
+  const index = steps.findIndex(step => step.id === location.hash.slice(1));
+  if (index >= 0 && index !== state.index) go(index);
+});
+makeList();
+resize();
+camera.position.set(250, -400, 300);
+const start = steps.findIndex(step => step.id === location.hash.slice(1));
+go(start < 0 ? 0 : start);
+requestAnimationFrame(tick);

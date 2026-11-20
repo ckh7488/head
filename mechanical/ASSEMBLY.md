@@ -1,6 +1,6 @@
 # R5 조립 절차 (B19)
 
-[B19 조립본](revisions/b19/R5-B19-review-fixes.FCStd) · [출력할 파일](revisions/README.md#제작할-파일-b19-기준) · [부품표](BOM.csv) · [전선 재단표](WIRING-CUT-LIST.csv) · [B19 검사 기록](revisions/b19/) · [3D 조립 보기](../web/README.md#로컬-실행)
+[B19 조립본](revisions/b19/R5-B19-review-fixes.FCStd) · [출력할 파일](revisions/README.md#제작할-파일-b19-기준) · [부품표](BOM.csv) · [전선 재단표](WIRING-CUT-LIST.csv) · [B19 검사 기록](revisions/b19/) · [3D 조립 순서 (B19)](../web/README.md#b19-조립-순서)
 
 이 절차는 B19 CAD에서 122단계마다 실제로 부품을 움직여 확인한 순서입니다. 막히는 단계는 없습니다.
 
@@ -47,7 +47,7 @@
 4. ID4 하네스(W22~W24)는 플러그를 포함한 전체 길이를 120 mm 이하로 만듭니다. 그래야 실수로 12 V 단자를 5 V 모터에 꽂을 수 없습니다.
 5. WAGO 레버 단자에는 피복을 11 mm 벗겨 넣습니다. 턱 5 V에는 인라인 2 A 퓨즈(Littelfuse 0FHM0003ZXJV-F2)를 넣습니다. [221-413](https://www.wago.com/gb/installation-terminal-blocks-and-connectors/splicing-connector-with-levers/p/221-413)
 
-(작업대)가 붙은 단계는 본체와 떨어진 작업대에서 따로 조립하는 단계입니다. 혼 구멍 위치의 괄호 숫자는 CAD 좌표(mm)이며, 3D 조립 보기에서 체결품을 켜면 빈 구멍이 보입니다.
+(작업대)가 붙은 단계는 본체와 떨어진 작업대에서 따로 조립하는 단계입니다. 혼 구멍 위치의 괄호 숫자는 CAD 좌표(mm)이며, 3D 조립 순서 화면에서 확인할 수 있습니다.
 
 ## 받침
 
