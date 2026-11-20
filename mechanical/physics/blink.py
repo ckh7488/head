@@ -84,7 +84,7 @@ def requested(t,stroke):
     return 0.,0.
 
 
-def run(xml, cap, stroke, cycles=20, lid_loads=(0., 0.)):
+def run(xml, cap, stroke, cycles=20, lid_loads=(0., 0.), closing_touch=None):
     model=mj.MjModel.from_xml_string(xml)
     data=mj.MjData(model)
     indexes=[model.joint(n).qposadr[0] for n in ('motor','shaft','left_lid','right_lid')]
@@ -104,13 +104,17 @@ def run(xml, cap, stroke, cycles=20, lid_loads=(0., 0.)):
     contact_count=0
     for i in range(round(cycles*length/dt)):
         t=i*dt
+        phase=t%length
         target, speed=requested(t,stroke)
         now=data.qpos[indexes]
         requested_torque=.85*(target-now[0])+.018*(speed-data.qvel[indexes[0]])
         data.ctrl[0]=np.clip(requested_torque,-cap,cap)
         data.qfrc_applied[lid_dofs]=-np.tanh(data.qvel[lid_dofs]/.4)*loads
+        if closing_touch is not None:
+            start, end, resisting_torques = closing_touch
+            if start <= phase < end:
+                data.qfrc_applied[lid_dofs] -= resisting_torques
         mj.mj_step(model,data)
-        phase=t%length
         current=min(int(t//length),cycles-1)
         if stroke+.07 < phase < stroke+.12:
             closed[current].append(float(np.min(np.degrees(now[2:]))))
@@ -127,6 +131,7 @@ def run(xml, cap, stroke, cycles=20, lid_loads=(0., 0.)):
             max_close_force=max(max_close_force,force[0])
     return {'cycles':cycles,'stroke_seconds':stroke,'torque_cap_Nm':cap,'min_closed_deg':min(max(a) for a in closed),
             'max_return_error_deg':max(min(a) for a in opened),'max_tracking_error_deg':degrees(max_error),
+            'min_closed_end_deg':min(a[-1] for a in closed),'max_return_end_error_deg':max(a[-1] for a in opened),
             'max_loop_gap_mm':max_joint_error*1000,'max_drive_torque_Nm':max_torque,
             'max_lid_difference_deg':degrees(max_lid_difference),
             'contact_count':contact_count,'max_contact_force_N':max_close_force}

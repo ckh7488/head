@@ -1,0 +1,35 @@
+{
+  "source_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "support_plane_mm": -83.0,
+  "support_area_mm2": 27162.31201418561,
+  "base_cup_g": 231.71554761280083,
+  "included_mass_kg": 1.0698179502847724,
+  "pose_samples": 12628,
+  "limiting_pose_deg": [
+    -51,
+    6,
+    0
+  ],
+  "minimum_edge_margin_mm": 89.35169486019801,
+  "minimum_restoring_moment_Nm": 0.9377383615586112,
+  "horizontal_pull": [
+    {
+      "height_mm": 35,
+      "tip_force_N": 26.792524615960318,
+      "first_motion_N_by_friction": {
+        "0.15": 1.5742371138440425,
+        "0.3": 3.148474227688085,
+        "0.5": 5.247457046146809
+      }
+    },
+    {
+      "height_mm": 290,
+      "tip_force_N": 3.2335805570986595,
+      "first_motion_N_by_friction": {
+        "0.15": 1.5742371138440425,
+        "0.3": 3.148474227688085,
+        "0.5": 3.2335805570986595
+      }
+    }
+  ]
+}

@@ -1,0 +1,370 @@
+{
+  "cad_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "project_sha256": "371d4abe531aef736925c94203b1df8f16245dca71791f13fb1dc23690e28750",
+  "sources": {
+    "servo": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+    "filament_coupons": "https://store.bblcdn.com/s6/default/20423d7f839c4a66b9712508549c68b4/Bambu_PETG_HF_TDS.pdf"
+  },
+  "layer_normal_world": [
+    0.0,
+    -0.021814885034561173,
+    0.999762027079909
+  ],
+  "print_profile": {
+    "printer_settings_id": "Bambu Lab P2S 0.4 nozzle",
+    "layer_height": "0.2",
+    "filament_settings_id": [
+      "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+    ],
+    "wall_loops": "4",
+    "sparse_infill_density": "20%"
+  },
+  "catalog_tensile_strength_MPa": {
+    "XY": [
+      34.0,
+      4.0
+    ],
+    "Z": [
+      23.0,
+      4.0
+    ]
+  },
+  "moduli_MPa": {
+    "in_plane": 1300.0,
+    "layer_normal": 650.0,
+    "layer_shear": 235.0
+  },
+  "screening_strength_MPa": {
+    "layer_tension": 8.0,
+    "layer_shear": 5.0
+  },
+  "drive_neck_sections": {
+    "centroid_axis_world": [
+      -0.37290285568571524,
+      -0.47421172399339523,
+      -0.7975378994434374
+    ],
+    "minimum_mm2": 48.195273947089554,
+    "stations": 19,
+    "equivalent_circular_diameter_mm": 7.833525940391003,
+    "circular_nominal_bending_stress_MPa": 10.22395448086606,
+    "circular_nominal_torsion_shear_MPa": 2.0544581788194143
+  },
+  "loads": {
+    "mass_g": 45.961,
+    "max_gravity_Nm": 0.01645486018305511,
+    "drive_acceleration_rad_s2": 14.98030059620749,
+    "inertia_about_hinge_kg_m2": 0.00019438167370207203,
+    "max_inertial_Nm": 0.0029118959024509593,
+    "unloaded_acceleration_plus_gravity_Nm": 0.01936675608550607,
+    "teeth_vertical_lever_mm": 58.00052837098872,
+    "jam_force_N_per_horn_screw": 61.28258764029877,
+    "horn_nominal_bearing_pressure_MPa": 9.884288329080446,
+    "stall_equivalent_vertical_force_N_at_tooth": 8.965435567654222,
+    "10_N_vertical_contact_torque_Nm": 0.5800052837098872,
+    "20_N_vertical_contact_torque_Nm": 1.1600105674197745,
+    "teeth_max_tangential_lever_mm": 82.70060920323903
+  },
+  "local_arm_trials": [
+    {
+      "cell_edges_mm": [
+        1.171875,
+        1.189189189189186,
+        1.1749999999999972
+      ],
+      "cells": 4046,
+      "cases": [
+        {
+          "torque_Nm": -0.52,
+          "force_N_per_screw": 61.993967708194276,
+          "bearing_patch_area_mm2": [
+            11.048880912162204,
+            11.11539273648653
+          ],
+          "reaction_force_residual_N": 1.5815539876840684e-10,
+          "reaction_torque_residual_Nmm": 8.130852194109388e-09,
+          "relative_twist_deg": 6.537765701590629,
+          "horn_patch_max_displacement_mm": 1.907454539806671,
+          "drive_arm_layer_tension_p95_MPa": 5.474094627965825,
+          "drive_arm_layer_shear_p95_MPa": 4.5301494161393645,
+          "drive_arm_screening_utilization_p95": 1.104889631311046,
+          "horn_layer_tension_p95_MPa": 4.556079297445406,
+          "horn_layer_shear_p95_MPa": 3.179960173479768,
+          "horn_screening_utilization_p95": 0.8771890260459042
+        },
+        {
+          "torque_Nm": 0.52,
+          "force_N_per_screw": 61.826270619722024,
+          "bearing_patch_area_mm2": [
+            11.115392736486477,
+            11.048880912162273
+          ],
+          "reaction_force_residual_N": 1.6796002074407023e-10,
+          "reaction_torque_residual_Nmm": 8.550778970023649e-09,
+          "relative_twist_deg": 6.84835819588569,
+          "horn_patch_max_displacement_mm": 2.059082509473945,
+          "drive_arm_layer_tension_p95_MPa": 4.7262477268722565,
+          "drive_arm_layer_shear_p95_MPa": 4.648437176991772,
+          "drive_arm_screening_utilization_p95": 1.0450519603732775,
+          "horn_layer_tension_p95_MPa": 5.422613373104773,
+          "horn_layer_shear_p95_MPa": 4.102884359818039,
+          "horn_screening_utilization_p95": 0.970304353533378
+        }
+      ]
+    },
+    {
+      "cell_edges_mm": [
+        0.9375,
+        0.9361702127659584,
+        0.9399999999999977
+      ],
+      "cells": 8434,
+      "cases": [
+        {
+          "torque_Nm": -0.52,
+          "force_N_per_screw": 63.990688701872166,
+          "bearing_patch_area_mm2": [
+            7.035638297872339,
+            14.071276595744715
+          ],
+          "reaction_force_residual_N": 1.6053842397596838e-10,
+          "reaction_torque_residual_Nmm": 8.005653005571777e-09,
+          "relative_twist_deg": 5.505184321992687,
+          "horn_patch_max_displacement_mm": 1.7463975242308463,
+          "drive_arm_layer_tension_p95_MPa": 5.592148318814527,
+          "drive_arm_layer_shear_p95_MPa": 4.171782466198345,
+          "drive_arm_screening_utilization_p95": 1.0433666194545148,
+          "horn_layer_tension_p95_MPa": 4.062075412529864,
+          "horn_layer_shear_p95_MPa": 1.9187076184525353,
+          "horn_screening_utilization_p95": 0.6564848536917518
+        },
+        {
+          "torque_Nm": 0.52,
+          "force_N_per_screw": 60.557731260020034,
+          "bearing_patch_area_mm2": [
+            14.07127659574465,
+            14.071276595744681
+          ],
+          "reaction_force_residual_N": 1.6643748253463348e-10,
+          "reaction_torque_residual_Nmm": 8.310312230277844e-09,
+          "relative_twist_deg": 6.132669650509295,
+          "horn_patch_max_displacement_mm": 1.8882547765892765,
+          "drive_arm_layer_tension_p95_MPa": 4.985161196104928,
+          "drive_arm_layer_shear_p95_MPa": 4.169886150603151,
+          "drive_arm_screening_utilization_p95": 0.9502524192383635,
+          "horn_layer_tension_p95_MPa": 3.555087690442163,
+          "horn_layer_shear_p95_MPa": 2.5807169892433306,
+          "horn_screening_utilization_p95": 0.6880027827698005
+        }
+      ]
+    },
+    {
+      "cell_edges_mm": [
+        0.6944444444444429,
+        0.6984126984126959,
+        0.691176470588232
+      ],
+      "cells": 20209,
+      "cases": [
+        {
+          "torque_Nm": -0.52,
+          "force_N_per_screw": 59.51072256563135,
+          "bearing_patch_area_mm2": [
+            11.579909741674461,
+            11.600010374520146
+          ],
+          "reaction_force_residual_N": 6.109713546516562e-10,
+          "reaction_torque_residual_Nmm": 3.140642898205921e-08,
+          "relative_twist_deg": 6.136099924454848,
+          "horn_patch_max_displacement_mm": 1.7822756777618465,
+          "drive_arm_layer_tension_p95_MPa": 5.142925754612277,
+          "drive_arm_layer_shear_p95_MPa": 4.216453203844706,
+          "drive_arm_screening_utilization_p95": 1.0512413893576107,
+          "horn_layer_tension_p95_MPa": 4.5797077825459205,
+          "horn_layer_shear_p95_MPa": 2.7041287373858487,
+          "horn_screening_utilization_p95": 0.8575792992859285
+        },
+        {
+          "torque_Nm": 0.52,
+          "force_N_per_screw": 62.00416556564149,
+          "bearing_patch_area_mm2": [
+            11.579909741674447,
+            15.43987965556585
+          ],
+          "reaction_force_residual_N": 6.08132742041173e-10,
+          "reaction_torque_residual_Nmm": 3.1334212104392505e-08,
+          "relative_twist_deg": 6.184052805825565,
+          "horn_patch_max_displacement_mm": 1.9069975074975278,
+          "drive_arm_layer_tension_p95_MPa": 4.696572372591601,
+          "drive_arm_layer_shear_p95_MPa": 4.206988447023801,
+          "drive_arm_screening_utilization_p95": 0.9710323271126253,
+          "horn_layer_tension_p95_MPa": 4.627644819250242,
+          "horn_layer_shear_p95_MPa": 3.555700883495647,
+          "horn_screening_utilization_p95": 0.8525283827882734
+        }
+      ]
+    },
+    {
+      "cell_edges_mm": [
+        0.5434782608695627,
+        0.5499999999999972,
+        0.5465116279069733
+      ],
+      "cells": 42718,
+      "cases": [
+        {
+          "torque_Nm": -0.52,
+          "force_N_per_screw": 60.739705986875464,
+          "bearing_patch_area_mm2": [
+            14.302325581395298,
+            12.52022244691604
+          ],
+          "reaction_force_residual_N": 3.2765813754333326e-10,
+          "reaction_torque_residual_Nmm": 1.6598816637757225e-08,
+          "relative_twist_deg": 5.908220753303963,
+          "horn_patch_max_displacement_mm": 1.7652559888985928,
+          "drive_arm_layer_tension_p95_MPa": 5.261933504930356,
+          "drive_arm_layer_shear_p95_MPa": 4.19364952140304,
+          "drive_arm_screening_utilization_p95": 1.0226538754807295,
+          "horn_layer_tension_p95_MPa": 3.5724668888912423,
+          "horn_layer_shear_p95_MPa": 2.5922461009361135,
+          "horn_screening_utilization_p95": 0.7602661748934895
+        },
+        {
+          "torque_Nm": 0.52,
+          "force_N_per_screw": 61.08267697709875,
+          "bearing_patch_area_mm2": [
+            10.726744186046506,
+            10.726744186046469
+          ],
+          "reaction_force_residual_N": 3.360627465210559e-10,
+          "reaction_torque_residual_Nmm": 1.6867685711896065e-08,
+          "relative_twist_deg": 6.161398309365342,
+          "horn_patch_max_displacement_mm": 1.8698537768746573,
+          "drive_arm_layer_tension_p95_MPa": 4.642839732317739,
+          "drive_arm_layer_shear_p95_MPa": 4.1948099875636995,
+          "drive_arm_screening_utilization_p95": 0.9473324934598961,
+          "horn_layer_tension_p95_MPa": 3.996505556777565,
+          "horn_layer_shear_p95_MPa": 3.0901063032879024,
+          "horn_screening_utilization_p95": 0.7184957151964393
+        }
+      ]
+    }
+  ],
+  "model_assumptions": [
+    "The cropped mandible fixes three cut faces. Compliance of the rest of the jaw and the horn is excluded.",
+    "Opposite bearing tractions model both torque directions after clamp friction is lost.",
+    "20% infill is homogenized using assumed effective moduli. Beads, bonds and notches are not resolved.",
+    "Layer screening stresses are engineering assumptions, with no coupon qualification for this print.",
+    "Light touch adds its opposing moment to routine torque. The local linear estimates omit radial force and impact.",
+    "Light touch adds its opposing moment to routine torque. The local linear estimates omit radial force and impact."
+  ],
+  "independent_gcode_moment_check": {
+    "mass_g": 45.96075799088272,
+    "center_mm": [
+      -0.2186621,
+      -31.29137982,
+      40.45477197
+    ],
+    "hinge_inertia_kg_m2": 0.00018471735468920093,
+    "gravity_Nm": 0.015717863345466,
+    "programmed_inertia_Nm": 0.0027671213884506367,
+    "sum_before_friction_Nm": 0.01848498473391664,
+    "method": "Integrate actual model-labelled Bambu Studio extrusion segments on plate 5, excluding support and brim."
+  },
+  "motion_crosscheck": {
+    "firmware_profile_demand_with_friction_Nm": 0.02333379509685186,
+    "firmware_profile_joint_friction_assumption_Nm": 0.005,
+    "analytical_sum_without_friction_Nm": 0.01936675608550607,
+    "aggressive_quintic_with_friction_Nm": 0.02198876863093153,
+    "warm_firmware_profile_with_friction_Nm": 0.030333795096851857
+  },
+  "fixture_cut_bounds_mm": [
+    [
+      -72.5,
+      -42.0,
+      57.0
+    ],
+    [
+      -35.0,
+      2.0,
+      104.0
+    ]
+  ],
+  "linear_use_cases": [
+    {
+      "opposing_touch_N": 0.0,
+      "touch_moment_Nm": 0.0,
+      "combined_moment_Nm": 0.030333795096851857,
+      "horn_patch_local_deflection_mm": 0.1090764640938277,
+      "relative_twist_deg": 0.35942037274303407,
+      "arm_layer_utilization_p95": 0.05965571752660366,
+      "horn_layer_utilization_p95": 0.04434953532362778
+    },
+    {
+      "opposing_touch_N": 0.25,
+      "touch_moment_Nm": 0.01450013209274718,
+      "combined_moment_Nm": 0.04483392718959904,
+      "horn_patch_local_deflection_mm": 0.16121709247614452,
+      "relative_twist_deg": 0.531230159977316,
+      "arm_layer_utilization_p95": 0.08817228729512368,
+      "horn_layer_utilization_p95": 0.06554945832671091
+    },
+    {
+      "opposing_touch_N": 0.5,
+      "touch_moment_Nm": 0.02900026418549436,
+      "combined_moment_Nm": 0.05933405928234622,
+      "horn_patch_local_deflection_mm": 0.2133577208584613,
+      "relative_twist_deg": 0.703039947211598,
+      "arm_layer_utilization_p95": 0.11668885706364368,
+      "horn_layer_utilization_p95": 0.08674938132979404
+    },
+    {
+      "opposing_touch_N": 1.0,
+      "touch_moment_Nm": 0.05800052837098872,
+      "combined_moment_Nm": 0.08833432346784058,
+      "horn_patch_local_deflection_mm": 0.31763897762309495,
+      "relative_twist_deg": 1.046659521680162,
+      "arm_layer_utilization_p95": 0.1737219966006837,
+      "horn_layer_utilization_p95": 0.1291492273359603
+    }
+  ],
+  "linear_use_cases_any_tangent": [
+    {
+      "opposing_touch_N": 0.0,
+      "touch_moment_Nm": 0.0,
+      "combined_moment_Nm": 0.030333795096851857,
+      "horn_patch_local_deflection_mm": 0.1090764640938277,
+      "relative_twist_deg": 0.35942037274303407,
+      "arm_layer_utilization_p95": 0.05965571752660366,
+      "horn_layer_utilization_p95": 0.04434953532362778
+    },
+    {
+      "opposing_touch_N": 0.25,
+      "touch_moment_Nm": 0.020675152300809758,
+      "combined_moment_Nm": 0.05100894739766161,
+      "horn_patch_local_deflection_mm": 0.18342167874215054,
+      "relative_twist_deg": 0.6043970043431882,
+      "arm_layer_utilization_p95": 0.10031634180848331,
+      "horn_layer_utilization_p95": 0.07457764869877577
+    },
+    {
+      "opposing_touch_N": 0.5,
+      "touch_moment_Nm": 0.041350304601619516,
+      "combined_moment_Nm": 0.07168409969847137,
+      "horn_patch_local_deflection_mm": 0.2577668933904734,
+      "relative_twist_deg": 0.8493736359433425,
+      "arm_layer_utilization_p95": 0.14097696609036295,
+      "horn_layer_utilization_p95": 0.10480576207392377
+    },
+    {
+      "opposing_touch_N": 1.0,
+      "touch_moment_Nm": 0.08270060920323903,
+      "combined_moment_Nm": 0.11303440430009089,
+      "horn_patch_local_deflection_mm": 0.4064573226871191,
+      "relative_twist_deg": 1.3393268991436509,
+      "arm_layer_utilization_p95": 0.22229821465412228,
+      "horn_layer_utilization_p95": 0.16526198882421977
+    }
+  ]
+}

@@ -1,0 +1,1806 @@
+{
+  "source_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "sliced_grams_sha256": "9a9631fd30b27ba4a35b55a18280f1191fe26f7b2e01a4ad69464eaedd9dbb3f",
+  "mujoco_version": "3.3.7",
+  "joint_order": [
+    "neck yaw",
+    "neck pitch",
+    "jaw"
+  ],
+  "pivots_mm": {
+    "neck_yaw": [
+      0.0,
+      0.0,
+      -37.900000000000006
+    ],
+    "neck_pitch": [
+      0.0,
+      0.0,
+      112.0
+    ],
+    "jaw": [
+      0.0,
+      -9.0,
+      92.0
+    ]
+  },
+  "mass_properties": {
+    "yaw_carrier": {
+      "mass_kg": 0.2261390765387608,
+      "com_mm": [
+        5.456427059156677,
+        9.931232746071517,
+        53.753457007029326
+      ],
+      "inertia_kg_m2": [
+        [
+          0.0006341949115318762,
+          1.0962510283193063e-05,
+          -5.506787477246885e-05
+        ],
+        [
+          1.0962510283193063e-05,
+          0.0007207768454092284,
+          5.144866916110557e-05
+        ],
+        [
+          -5.506787477246885e-05,
+          5.144866916110557e-05,
+          0.00020037283213164277
+        ]
+      ]
+    },
+    "head": {
+      "mass_kg": 0.5643632320656009,
+      "com_mm": [
+        0.12813636632235473,
+        -2.1641073895949434,
+        128.23305931983194
+      ],
+      "inertia_kg_m2": [
+        [
+          0.0015715553766328717,
+          -1.76633960167162e-05,
+          -2.4254150581083215e-05
+        ],
+        [
+          -1.76633960167162e-05,
+          0.0016854209439435572,
+          -0.00010807205989926684
+        ],
+        [
+          -2.4254150581083215e-05,
+          -0.00010807205989926684,
+          0.0018850873352892158
+        ]
+      ]
+    },
+    "jaw": {
+      "mass_kg": 0.047600094067609885,
+      "com_mm": [
+        0.357387581498407,
+        -31.635633257993796,
+        40.16695816074846
+      ],
+      "inertia_kg_m2": [
+        [
+          4.213271700784218e-05,
+          -1.895390161872429e-07,
+          1.0387922962791148e-06
+        ],
+        [
+          -1.895390161872429e-07,
+          9.964556392574948e-05,
+          -1.3549539324317822e-05
+        ],
+        [
+          1.0387922962791148e-06,
+          -1.3549539324317822e-05,
+          8.228380968369466e-05
+        ]
+      ]
+    }
+  },
+  "pitch_assembly": {
+    "mass_kg": 0.6119633261332108,
+    "com_mm": [
+      0.14596812018977287,
+      -4.4564790787873365,
+      121.38304965368485
+    ],
+    "inertia_kg_m2": [
+      [
+        0.001992270475910309,
+        -1.7556345790525167e-05,
+        -2.2329097480439437e-05
+      ],
+      [
+        -1.7556345790525167e-05,
+        0.0021255229913545266,
+        -0.00023555538230919619
+      ],
+      [
+        -2.2329097480439437e-05,
+        -0.00023555538230919619,
+        0.0020055016579360375
+      ]
+    ]
+  },
+  "pitch_com_from_axis_mm": [
+    0.14596812018977287,
+    -4.4564790787873365,
+    9.383049653684846
+  ],
+  "parts": {
+    "Part007": {
+      "group": "yaw",
+      "mass_g": 22.506988349913975
+    },
+    "Part010": {
+      "group": "yaw",
+      "mass_g": 74.14307091667337
+    },
+    "Part011": {
+      "group": "yaw",
+      "mass_g": 44.399224459651435
+    },
+    "Part012": {
+      "group": "yaw",
+      "mass_g": 5.88106144752022
+    },
+    "Part013": {
+      "group": "head",
+      "mass_g": 7.99634283672427
+    },
+    "Part014": {
+      "group": "yaw",
+      "mass_g": 5.88106144752022
+    },
+    "Part015": {
+      "group": "head",
+      "mass_g": 10.082246692629957
+    },
+    "Part016": {
+      "group": "head",
+      "mass_g": 2.544343343242631
+    },
+    "Part018": {
+      "group": "yaw",
+      "mass_g": 57.2
+    },
+    "Part019": {
+      "group": "head",
+      "mass_g": 29.24811523015108
+    },
+    "Part024": {
+      "group": "head",
+      "mass_g": 7.203206451074975
+    },
+    "Part025": {
+      "group": "head",
+      "mass_g": 3.309411861596369
+    },
+    "Part026": {
+      "group": "head",
+      "mass_g": 0.7167543639165114
+    },
+    "Part027": {
+      "group": "head",
+      "mass_g": 3.309411861596369
+    },
+    "Part028": {
+      "group": "head",
+      "mass_g": 0.7167543639165114
+    },
+    "Part029": {
+      "group": "head",
+      "mass_g": 3.58544604279426
+    },
+    "Part032": {
+      "group": "head",
+      "mass_g": 0.5881061447520091
+    },
+    "Part033": {
+      "group": "head",
+      "mass_g": 3.5853968134090346
+    },
+    "Part036": {
+      "group": "head",
+      "mass_g": 0.5881061447520091
+    },
+    "Part037": {
+      "group": "head",
+      "mass_g": 0.9991218564175404
+    },
+    "Part038": {
+      "group": "head",
+      "mass_g": 18.000000000000004
+    },
+    "Part039": {
+      "group": "head",
+      "mass_g": 1.6510605086785037
+    },
+    "Part040": {
+      "group": "head",
+      "mass_g": 0.6809771238925643
+    },
+    "Part041": {
+      "group": "head",
+      "mass_g": 18.000000000000007
+    },
+    "Part042": {
+      "group": "head",
+      "mass_g": 2.0435332386265603
+    },
+    "Part043": {
+      "group": "head",
+      "mass_g": 0.6962330301989053
+    },
+    "Part044": {
+      "group": "head",
+      "mass_g": 1.1041595384098835
+    },
+    "Part045": {
+      "group": "head",
+      "mass_g": 18.000000000000007
+    },
+    "Part046": {
+      "group": "head",
+      "mass_g": 2.2355094607057313
+    },
+    "Part047": {
+      "group": "head",
+      "mass_g": 0.7880881049832084
+    },
+    "Part048": {
+      "group": "head",
+      "mass_g": 10.941911233295071
+    },
+    "Part050": {
+      "group": "head",
+      "mass_g": 2.0583715066320307
+    },
+    "Part052": {
+      "group": "head",
+      "mass_g": 2.0583715066320307
+    },
+    "Part053": {
+      "group": "head",
+      "mass_g": 0.8042105900920421
+    },
+    "Part054": {
+      "group": "head",
+      "mass_g": 0.6996296730520489
+    },
+    "Part055": {
+      "group": "head",
+      "mass_g": 0.7812185275842146
+    },
+    "Part056": {
+      "group": "head",
+      "mass_g": 0.4024721447891996
+    },
+    "Part057": {
+      "group": "head",
+      "mass_g": 0.6579275809205584
+    },
+    "Part058": {
+      "group": "head",
+      "mass_g": 0.19603538158400316
+    },
+    "Part059": {
+      "group": "head",
+      "mass_g": 0.19603538158400316
+    },
+    "Part060": {
+      "group": "head",
+      "mass_g": 0.6579275809205584
+    },
+    "Part061": {
+      "group": "head",
+      "mass_g": 0.19603538158400316
+    },
+    "Part062": {
+      "group": "head",
+      "mass_g": 0.19603538158400316
+    },
+    "Part063": {
+      "group": "head",
+      "mass_g": 34.60824169383644
+    },
+    "Part064": {
+      "group": "head",
+      "mass_g": 1.9660142903593614
+    },
+    "Part065": {
+      "group": "head",
+      "mass_g": 2.7151882442663324
+    },
+    "Part066": {
+      "group": "head",
+      "mass_g": 4.559717989286584
+    },
+    "Part067": {
+      "group": "head",
+      "mass_g": 13.5
+    },
+    "Part068": {
+      "group": "head",
+      "mass_g": 5.5
+    },
+    "Part073": {
+      "group": "head",
+      "mass_g": 149.66766696317796
+    },
+    "Part074": {
+      "group": "head",
+      "mass_g": 119.9531733499712
+    },
+    "Part076": {
+      "group": "head",
+      "mass_g": 2.714543059153037
+    },
+    "Part077": {
+      "group": "head",
+      "mass_g": 2.8049327053714777
+    },
+    "Part078": {
+      "group": "head",
+      "mass_g": 2.193802873583368
+    },
+    "Part079": {
+      "group": "head",
+      "mass_g": 2.1940043784777687
+    },
+    "Part080": {
+      "group": "head",
+      "mass_g": 0.6278222878839921
+    },
+    "Jaw_30_moving_jaw": {
+      "group": "jaw",
+      "mass_g": 41.100409495995656
+    },
+    "Jaw_36_left_jaw_servo_stay": {
+      "group": "head",
+      "mass_g": 6.229342286450583
+    },
+    "Jaw_37_right_jaw_bearing_stay": {
+      "group": "head",
+      "mass_g": 3.8777498430799313
+    },
+    "Jaw_38_left_jaw_drive_arm": {
+      "group": "jaw",
+      "mass_g": 2.4571580701445557
+    },
+    "Jaw_39_right_jaw_pivot_arm": {
+      "group": "jaw",
+      "mass_g": 2.4031904247425238
+    },
+    "Jaw_XL330_M288_Jaw": {
+      "group": "head",
+      "mass_g": 18.000000000000004
+    },
+    "Jaw_MR104ZZ_jaw_right": {
+      "group": "head",
+      "mass_g": 2.058371506632077
+    },
+    "Jaw_Pin_jaw_4x10": {
+      "group": "jaw",
+      "mass_g": 0.9801769079200149
+    },
+    "BlinkCollarLeft": {
+      "group": "head",
+      "mass_g": 0.9953037927858618
+    },
+    "BlinkCollarRight": {
+      "group": "head",
+      "mass_g": 0.21397424508729707
+    },
+    "BallastTray": {
+      "group": "ballast_mount",
+      "mass_g": 23.73859885657668
+    },
+    "BallastCover": {
+      "group": "ballast_mount",
+      "mass_g": 2.2632644585347403
+    },
+    "BallastLeftStud": {
+      "group": "ballast_mount",
+      "mass_g": 4.195233742218599
+    },
+    "BallastRightStud": {
+      "group": "ballast_mount",
+      "mass_g": 4.195233742218599
+    },
+    "ID5EHKeeper": {
+      "group": "yaw",
+      "mass_g": 0.48730906117832073
+    },
+    "ID5KeeperScrew1": {
+      "group": "yaw",
+      "mass_g": 0.37858842979956653
+    },
+    "ID5KeeperNut1": {
+      "group": "yaw",
+      "mass_g": 0.13213691042767717
+    },
+    "ID5KeeperScrew2": {
+      "group": "yaw",
+      "mass_g": 0.37858842979956653
+    },
+    "ID5KeeperNut2": {
+      "group": "yaw",
+      "mass_g": 0.13213691042767717
+    },
+    "XL430PitchSide0": {
+      "group": "yaw",
+      "mass_g": 0.616439383496572
+    },
+    "XL430PitchSide1": {
+      "group": "yaw",
+      "mass_g": 0.616439383496572
+    },
+    "XL430PitchKeeper0": {
+      "group": "yaw",
+      "mass_g": 0.6930157044278233
+    },
+    "XL430PitchKeeper1": {
+      "group": "yaw",
+      "mass_g": 0.6930157044278233
+    },
+    "EyeYawFoot0": {
+      "group": "head",
+      "mass_g": 1.4502991582656926
+    },
+    "EyeYawFoot1": {
+      "group": "head",
+      "mass_g": 1.4502991582656926
+    },
+    "EyePitchStayFrame0": {
+      "group": "head",
+      "mass_g": 1.009219549701685
+    },
+    "EyePitchStayFrame1": {
+      "group": "head",
+      "mass_g": 1.009219549701685
+    },
+    "CradleMountFrameL": {
+      "group": "head",
+      "mass_g": 1.4502991582656914
+    },
+    "CradleMountFrameR": {
+      "group": "head",
+      "mass_g": 1.4502991582656912
+    },
+    "EyeYawTieHorn": {
+      "group": "head",
+      "mass_g": 0.37858842979956636
+    },
+    "EyeYawTieHornNut": {
+      "group": "head",
+      "mass_g": 0.1337208763108761
+    },
+    "EyeYawTieHornWasher": {
+      "group": "head",
+      "mass_g": 0.03705068711937646
+    },
+    "EyeYawHornScrew0": {
+      "group": "head",
+      "mass_g": 0.30507516170556503
+    },
+    "EyeYawHornScrew1": {
+      "group": "head",
+      "mass_g": 0.3050751617055652
+    },
+    "EyeYawHornScrew2": {
+      "group": "head",
+      "mass_g": 0.30507516170556503
+    },
+    "EyePitchHornScrew0": {
+      "group": "head",
+      "mass_g": 0.3050751617055654
+    },
+    "EyePitchHornScrew1": {
+      "group": "head",
+      "mass_g": 0.30507516170556537
+    },
+    "BlinkHornScrew0": {
+      "group": "head",
+      "mass_g": 0.3295795844035658
+    },
+    "BlinkHornScrew1": {
+      "group": "head",
+      "mass_g": 0.3295795844035658
+    },
+    "JawHornScrew0": {
+      "group": "jaw",
+      "mass_g": 0.3295795844035658
+    },
+    "JawHornScrew1": {
+      "group": "jaw",
+      "mass_g": 0.3295795844035658
+    },
+    "EyeYawTiePinL": {
+      "group": "head",
+      "mass_g": 0.14702653618800232
+    },
+    "EyeYawTiePinR": {
+      "group": "head",
+      "mass_g": 0.14702653618800232
+    },
+    "EyePitchLinkHornPin": {
+      "group": "head",
+      "mass_g": 0.14702653618800257
+    },
+    "EyePitchLinkCradlePin": {
+      "group": "head",
+      "mass_g": 0.14702653618800246
+    },
+    "PitchPinDowelLeft": {
+      "group": "head",
+      "mass_g": 0.6616194128460102
+    },
+    "PitchPinDowelRight": {
+      "group": "head",
+      "mass_g": 0.6616194128460102
+    },
+    "head_additional_hardware": {
+      "group": "head",
+      "mass_g": 20.0
+    },
+    "yaw_additional_hardware": {
+      "group": "yaw",
+      "mass_g": 12.0
+    }
+  },
+  "torque_model": {
+    "firmware_pwm_duty": [
+      0.3050847457627119,
+      0.3389830508474576,
+      0.1807909604519774
+    ],
+    "proportional_gain_Nm_rad": [
+      3.8,
+      4.0,
+      0.85
+    ],
+    "derivative_gain_Nm_s_rad": [
+      0.33,
+      0.29,
+      0.018
+    ],
+    "firmware_jaw_profile_speed_deg_s": 130.53000000000003,
+    "firmware_jaw_profile_acceleration_deg_s2": 858.308,
+    "manufacturer_sources": [
+      "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/#specifications",
+      "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#specifications"
+    ],
+    "scope": [
+      "Rated stall and no-load speed are input points for a linear PWM/voltage/speed estimate. Derating is sensitivity, not a continuous motor rating.",
+      "Controller is a PD approximation without perfect gravity compensation. Actual Dynamixel gains, stiction and stall endurance need measurement.",
+      "Firmware-profile trials use the configured jaw velocity and acceleration setpoints, a triangle/trapezoid profile, and 120 ms at each opening. Other jaw traces are command stress cases.",
+      "Rigid links and an idealized pivot are modeled. Cable contacts, tooth interference, deformation and printed joint slip are excluded.",
+      "P2S slicer masses are applied to uniform CAD inertia. Decorative eye finishes are included in the eye allowance. Fused jaw mass is apportioned by the CAD volumes.",
+      "Forward sensitivity adds 75 g at (0, -70, +45) mm from the pitch pivot.",
+      "Power-cut traces stop at the first departure from the configured pitch range. The model does not predict the consequences of contact beyond that range."
+    ]
+  },
+  "pitch_joint_envelope": {
+    "pitch_torque_Nm": 0.08922901645253023,
+    "radial_reaction_N": 6.773524444600207,
+    "axial_reaction_N": 0.007013593213249047,
+    "non_drive_moment_Nm": 0.001812014164026559
+  },
+  "pitch_joint_envelopes": {
+    "nominal_static": {
+      "pitch_torque_Nm": 0.03249535914412592,
+      "radial_reaction_N": 6.003360229366798,
+      "axial_reaction_N": 0.0,
+      "non_drive_moment_Nm": 0.0008762992075027153
+    },
+    "forward_static": {
+      "pitch_torque_Nm": 0.08717652981854333,
+      "radial_reaction_N": 6.739110229366798,
+      "axial_reaction_N": 0.0,
+      "non_drive_moment_Nm": 0.0008762992075027153
+    },
+    "nominal_moving": {
+      "pitch_torque_Nm": 0.034093613891177675,
+      "radial_reaction_N": 6.040955530696268,
+      "axial_reaction_N": 0.00592900914131532,
+      "non_drive_moment_Nm": 0.0017774619641758719
+    },
+    "forward_moving": {
+      "pitch_torque_Nm": 0.08922901645253023,
+      "radial_reaction_N": 6.773524444600207,
+      "axial_reaction_N": 0.007013593213249047,
+      "non_drive_moment_Nm": 0.001812014164026559
+    }
+  },
+  "ballast_static_options": [
+    {
+      "plates": 0,
+      "nominal_pitch_gravity_Nm": 0.03249535914412592,
+      "forward_pitch_gravity_Nm": 0.08717652981854333
+    },
+    {
+      "plates": 1,
+      "nominal_pitch_gravity_Nm": 0.02404777399036883,
+      "forward_pitch_gravity_Nm": 0.059016764927318346
+    },
+    {
+      "plates": 2,
+      "nominal_pitch_gravity_Nm": 0.03621178607667196,
+      "forward_pitch_gravity_Nm": 0.047135484778732
+    },
+    {
+      "plates": 3,
+      "nominal_pitch_gravity_Nm": 0.04855517956088806,
+      "forward_pitch_gravity_Nm": 0.035326650851617576
+    },
+    {
+      "plates": 4,
+      "nominal_pitch_gravity_Nm": 0.06107795444301718,
+      "forward_pitch_gravity_Nm": 0.023590263145975076
+    },
+    {
+      "plates": 5,
+      "nominal_pitch_gravity_Nm": 0.07378011072305925,
+      "forward_pitch_gravity_Nm": 0.032601690914144596
+    },
+    {
+      "plates": 6,
+      "nominal_pitch_gravity_Nm": 0.08666164840101442,
+      "forward_pitch_gravity_Nm": 0.04548322859209965
+    },
+    {
+      "plates": 7,
+      "nominal_pitch_gravity_Nm": 0.09972256747688248,
+      "forward_pitch_gravity_Nm": 0.058544147667967825
+    },
+    {
+      "plates": 8,
+      "nominal_pitch_gravity_Nm": 0.11296286795066356,
+      "forward_pitch_gravity_Nm": 0.07178444814174893
+    },
+    {
+      "plates": 9,
+      "nominal_pitch_gravity_Nm": 0.1263825498223577,
+      "forward_pitch_gravity_Nm": 0.08520413001344297
+    },
+    {
+      "plates": 10,
+      "nominal_pitch_gravity_Nm": 0.13998161309196477,
+      "forward_pitch_gravity_Nm": 0.0988031932830501
+    },
+    {
+      "plates": 11,
+      "nominal_pitch_gravity_Nm": 0.15376005775948484,
+      "forward_pitch_gravity_Nm": 0.11258163795057018
+    },
+    {
+      "plates": 12,
+      "nominal_pitch_gravity_Nm": 0.16771788382491792,
+      "forward_pitch_gravity_Nm": 0.1265394640160033
+    }
+  ],
+  "forward_balanced_plates": 4,
+  "trials": {
+    "nominal": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.029505566638256084,
+        0.05499581336255495,
+        0.02198876863093153
+      ],
+      "applied_torque_peak_Nm": [
+        0.029508179818855354,
+        0.056430646588753734,
+        0.022117092989610072
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.560128083510115,
+        24.710981495509955,
+        126.49535879698072
+      ],
+      "simulated_travel_deg": [
+        [
+          -54.49420628453829,
+          54.49683860145021
+        ],
+        [
+          -14.429873739141795,
+          6.356381822838982
+        ],
+        [
+          0.0,
+          13.832750932271132
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.23561697160533857,
+        0.3284388775724849,
+        -0.010427569144242501
+      ],
+      "error_peak_deg": [
+        0.6194752695699078,
+        0.9382930981789721,
+        1.9958681209246358
+      ],
+      "error_p95_deg": [
+        0.6182425886899294,
+        0.8560168557777376,
+        1.1337954731003408
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        1.2253700617586512
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.034093613891177675,
+        "radial_reaction_N": 6.040955530696268,
+        "axial_reaction_N": 0.00592900914131532,
+        "non_drive_moment_Nm": 0.0017774619641758719
+      },
+      "static_inverse_torque_check_delta_Nm": 4.6514181395451715e-12,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 13.8185118506824
+    },
+    "low_voltage": {
+      "supply_V": [
+        9.0,
+        9.0,
+        3.7
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.029505566638256084,
+        0.05499581336255495,
+        0.02198876863093153
+      ],
+      "applied_torque_peak_Nm": [
+        0.02950817983503612,
+        0.05643073258419733,
+        0.022117092989610072
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.56012802284063,
+        24.32801767872656,
+        126.5116831322025
+      ],
+      "simulated_travel_deg": [
+        [
+          -54.49420600674621,
+          54.4968386255556
+        ],
+        [
+          -14.429873739141795,
+          6.356334868768456
+        ],
+        [
+          0.0,
+          13.832840687832903
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.2593220338983051,
+        0.28813559322033894,
+        0.06454237288135593
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.12264860989434245,
+        0.19253331725913178,
+        -0.0192940882478475
+      ],
+      "error_peak_deg": [
+        0.6194752526121753,
+        0.9382910974261587,
+        4.247901958644489
+      ],
+      "error_p95_deg": [
+        0.6182425892034396,
+        0.8560168227269841,
+        1.4040976145938937
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        4.862268405058328
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.034093613891177675,
+        "radial_reaction_N": 6.040955530696268,
+        "axial_reaction_N": 0.00592900914131532,
+        "non_drive_moment_Nm": 0.0017774619641758719
+      },
+      "static_inverse_torque_check_delta_Nm": 4.6514181395451715e-12,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 13.818603800271092
+    },
+    "warm": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.05250556663825608,
+        0.07699581336255495,
+        0.02898876863093153
+      ],
+      "applied_torque_peak_Nm": [
+        0.052508399048422576,
+        0.07940264416433034,
+        0.031226092833494118
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.57032529243226,
+        24.28140635136567,
+        108.39652466207215
+      ],
+      "simulated_travel_deg": [
+        [
+          -53.94741092798838,
+          53.95004344545448
+        ],
+        [
+          -13.901901289272178,
+          5.47578591058851
+        ],
+        [
+          -0.0010087969138840448,
+          13.05756284427453
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.2516949152542373,
+        0.2796610169491526,
+        0.05170621468926554
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.11905002597910294,
+        0.17376653870808156,
+        -0.02004064015047894
+      ],
+      "error_peak_deg": [
+        1.166381295173184,
+        1.4047933318627377,
+        4.7150057548872635
+      ],
+      "error_p95_deg": [
+        1.1649242530571136,
+        1.3590427918326058,
+        1.9630552572927806
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        4.715223997647289
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.034093613891177675,
+        "radial_reaction_N": 6.040955530696268,
+        "axial_reaction_N": 0.00592900914131532,
+        "non_drive_moment_Nm": 0.0017774619641758719
+      },
+      "static_inverse_torque_check_delta_Nm": 4.6514181395451715e-12,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 13.02974563055547
+    },
+    "forward_low_warm": {
+      "supply_V": [
+        9.0,
+        9.0,
+        3.7
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.05251887812627727,
+        0.13203397045758017,
+        0.028988768630931524
+      ],
+      "applied_torque_peak_Nm": [
+        0.052533072685880734,
+        0.13653096028988201,
+        0.030924229033084373
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.567394553496676,
+        24.45854855743518,
+        85.26046334789022
+      ],
+      "simulated_travel_deg": [
+        [
+          -53.94776814161534,
+          53.95082157860595
+        ],
+        [
+          -13.282214055954299,
+          7.0391399158643955
+        ],
+        [
+          -0.0008233600182922709,
+          12.668818236991019
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.16779661016949154,
+        0.1864406779661017,
+        0.04176271186440678
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.046006611731205384,
+        0.031075586739199856,
+        -0.026294088247847496
+      ],
+      "error_peak_deg": [
+        1.1667280024049214,
+        2.2293413690014736,
+        6.934482473556895
+      ],
+      "error_p95_deg": [
+        1.164990859220336,
+        2.121698719345145,
+        3.224641244948159
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        8.891285168120772
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.08922901645253023,
+        "radial_reaction_N": 6.773524444600207,
+        "axial_reaction_N": 0.007013593213249047,
+        "non_drive_moment_Nm": 0.001812014164026559
+      },
+      "static_inverse_torque_check_delta_Nm": 2.5796823011070558e-11,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 12.58222309877853
+    },
+    "forward_low_warm_slow": {
+      "supply_V": [
+        9.0,
+        9.0,
+        3.7
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 0.5,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.048727889820583264,
+        0.1298071056285969,
+        0.0284742000706521
+      ],
+      "applied_torque_peak_Nm": [
+        0.04873460186508904,
+        0.1329280469884158,
+        0.02705582139540147
+      ],
+      "shaft_speed_peak_deg_s": [
+        17.780380151078226,
+        12.466174418217715,
+        58.39919747390697
+      ],
+      "simulated_travel_deg": [
+        [
+          -53.94666388132566,
+          53.94713900924465
+        ],
+        [
+          -13.251827157049936,
+          7.033294920874638
+        ],
+        [
+          -0.0004159341642247651,
+          12.540239594346268
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.16779661016949154,
+        0.1864406779661017,
+        0.04176271186440678
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.08439913217033408,
+        0.04598672545419291,
+        -0.007644394292293008
+      ],
+      "error_peak_deg": [
+        1.1097651180566608,
+        2.2320935338189285,
+        3.2037656262695027
+      ],
+      "error_p95_deg": [
+        1.1088983434543436,
+        2.132194607689785,
+        1.8532957105088996
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        2.6224204695848243
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.08756693273191726,
+        "radial_reaction_N": 6.747696250713338,
+        "axial_reaction_N": 0.0017533983033122618,
+        "non_drive_moment_Nm": 0.0010087706156157682
+      },
+      "static_inverse_torque_check_delta_Nm": 2.5796823011070558e-11,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 12.539875346912197
+    },
+    "forward_low_warm_balanced": {
+      "supply_V": [
+        9.0,
+        9.0,
+        3.7
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.05256668967697905,
+        0.06863385522560399,
+        0.02898876863093153
+      ],
+      "applied_torque_peak_Nm": [
+        0.05257348010839025,
+        0.07463237681060782,
+        0.03109725325496352
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.575494998000636,
+        24.518712243437367,
+        88.71953277483745
+      ],
+      "simulated_travel_deg": [
+        [
+          -53.948133863445506,
+          53.95209887490814
+        ],
+        [
+          -14.273479216266551,
+          5.341881228833448
+        ],
+        [
+          -0.0006590246669445996,
+          12.740357182030039
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.16779661016949154,
+        0.1864406779661017,
+        0.04176271186440678
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.0459781574902927,
+        0.08970994211130735,
+        -0.0262940882478475
+      ],
+      "error_peak_deg": [
+        1.167082117668235,
+        1.2563180911146192,
+        7.154926921048333
+      ],
+      "error_p95_deg": [
+        1.165905189437982,
+        1.1786938655502022,
+        3.4001323392542107
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        8.979511812567395
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.025875091230455012,
+        "radial_reaction_N": 8.03901914892257,
+        "axial_reaction_N": 0.005633274833986791,
+        "non_drive_moment_Nm": 0.0020347568934765917
+      },
+      "static_inverse_torque_check_delta_Nm": 1.443335034823079e-12,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 12.667904521723594
+    },
+    "power_cut_nominal": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.02200621896303539,
+        0.0508634233442915,
+        0.015569865653323307
+      ],
+      "applied_torque_peak_Nm": [
+        9.098327233734581e-07,
+        0.010946135979192136,
+        0.00651836336589145
+      ],
+      "shaft_speed_peak_deg_s": [
+        0.0001579684094308875,
+        27.976349411055512,
+        14.066458197388034
+      ],
+      "simulated_travel_deg": [
+        [
+          -2.162331241345295e-05,
+          1.177389395693468e-06
+        ],
+        [
+          0.0,
+          6.007107163150992
+        ],
+        [
+          0.0,
+          0.5522156269937216
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.3669768318844222,
+        0.38133996648621693,
+        0.0643397388664507
+      ],
+      "error_peak_deg": [
+        2.162331241345295e-05,
+        2.0071071631509914,
+        0.5522156269937216
+      ],
+      "error_p95_deg": [
+        6.271852733816913e-06,
+        0.339239738815749,
+        0.5509255378245671
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.031013039134467704,
+        "radial_reaction_N": 6.0041476648031535,
+        "axial_reaction_N": 0.0,
+        "non_drive_moment_Nm": 0.0008806702551183161
+      },
+      "static_inverse_torque_check_delta_Nm": 4.945245601906123e-12,
+      "pitch_power_cut": {
+        "start_deg": 4.330201979810428,
+        "torque_cut_at_s": 2.0,
+        "first_outside_command_range_s_after_cut": 0.11299999999999999,
+        "angle_change_deg_after_cut": {
+          "20": 0.06056994650958103,
+          "50": 0.3541182075774536,
+          "100": 1.330304741175266
+        }
+      }
+    },
+    "power_cut_nominal_high_friction": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.042,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.02200621896303539,
+        0.07286342334429151,
+        0.015569865653323307
+      ],
+      "applied_torque_peak_Nm": [
+        5.111782882878799e-07,
+        0.01709823013507649,
+        0.006706581800179003
+      ],
+      "shaft_speed_peak_deg_s": [
+        8.87526015079309e-05,
+        6.087972275126493,
+        14.53163811030012
+      ],
+      "simulated_travel_deg": [
+        [
+          -7.90796006638024e-06,
+          1.7308671685626032e-06
+        ],
+        [
+          0.0,
+          3.6559329805410536
+        ],
+        [
+          0.0,
+          0.5550636779706104
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.3669768318844222,
+        0.3593399664862169,
+        0.0643397388664507
+      ],
+      "error_peak_deg": [
+        7.90796006638024e-06,
+        0.40075479267481523,
+        0.5550636779706104
+      ],
+      "error_p95_deg": [
+        6.620789047670091e-06,
+        0.3980077117973524,
+        0.5550544742328734
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.031013039134467704,
+        "radial_reaction_N": 6.0041476648031535,
+        "axial_reaction_N": 0.0,
+        "non_drive_moment_Nm": 0.0008806702551183161
+      },
+      "static_inverse_torque_check_delta_Nm": 4.945245601906123e-12,
+      "pitch_power_cut": {
+        "start_deg": 3.6558236308731873,
+        "torque_cut_at_s": 2.0,
+        "first_outside_command_range_s_after_cut": null,
+        "angle_change_deg_after_cut": {
+          "20": 2.3559429012109945e-06,
+          "50": 7.333252878716223e-06,
+          "100": 1.5830397007476904e-05,
+          "250": 4.1335683540033585e-05,
+          "500": 8.384445140041663e-05
+        }
+      }
+    },
+    "power_cut_forward": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": false,
+      "torque_demand_bound_Nm": [
+        0.022006218962337384,
+        0.10463156974086195,
+        0.015569865653323304
+      ],
+      "applied_torque_peak_Nm": [
+        2.9973509105580764e-06,
+        0.06602073675700525,
+        0.006798604557546102
+      ],
+      "shaft_speed_peak_deg_s": [
+        0.0005204107784687032,
+        48.280391804481255,
+        13.51779235530427
+      ],
+      "simulated_travel_deg": [
+        [
+          -1.6154026071820357e-05,
+          8.10362143053616e-08
+        ],
+        [
+          0.0,
+          6.001881304498195
+        ],
+        [
+          0.0,
+          0.5697268117293993
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.3669768318851202,
+        0.32757182008964647,
+        0.06433973886645071
+      ],
+      "error_peak_deg": [
+        1.6154026071820357e-05,
+        2.0018813044981942,
+        0.5697268117293993
+      ],
+      "error_p95_deg": [
+        2.3033576440376844e-06,
+        1.1185332853860146,
+        0.5681947597674476
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.0847786341536587,
+        "radial_reaction_N": 6.7412993872744975,
+        "axial_reaction_N": 0.0,
+        "non_drive_moment_Nm": 0.0008806702551183161
+      },
+      "static_inverse_torque_check_delta_Nm": 2.6554175525106416e-11,
+      "pitch_power_cut": {
+        "start_deg": 5.1185341441837755,
+        "torque_cut_at_s": 2.0,
+        "first_outside_command_range_s_after_cut": 0.03500000000000014,
+        "angle_change_deg_after_cut": {
+          "20": 0.2988576440275583
+        }
+      }
+    },
+    "nominal_firmware_profile": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": true,
+      "torque_demand_bound_Nm": [
+        0.029505566638256084,
+        0.05499581336255495,
+        0.02333379509685186
+      ],
+      "applied_torque_peak_Nm": [
+        0.029508197644664738,
+        0.0564953447020526,
+        0.022119676823232078
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.56011791994232,
+        24.919633039746042,
+        103.8339152323179
+      ],
+      "simulated_travel_deg": [
+        [
+          -54.494206152743004,
+          54.49685239713297
+        ],
+        [
+          -14.417667462938734,
+          6.354847697061239
+        ],
+        [
+          0.0,
+          13.437989811169226
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.23561697160533857,
+        0.3284388775724849,
+        -0.012039727513775569
+      ],
+      "error_peak_deg": [
+        0.619475542016925,
+        0.9390379612624591,
+        1.711402162689836
+      ],
+      "error_p95_deg": [
+        0.6182431610668787,
+        0.8561197836541836,
+        1.1495348548308886
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.9508871679247133
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.034093613891177675,
+        "radial_reaction_N": 6.0311056835305745,
+        "axial_reaction_N": 0.005300336562495681,
+        "non_drive_moment_Nm": 0.0017774619641758719
+      },
+      "static_inverse_torque_check_delta_Nm": 4.6514181395451715e-12,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 13.422380695823545
+    },
+    "forward_low_warm_firmware_profile": {
+      "supply_V": [
+        9.0,
+        9.0,
+        3.7
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": true,
+      "torque_demand_bound_Nm": [
+        0.05251887812627727,
+        0.13203397045758017,
+        0.030333795096851857
+      ],
+      "applied_torque_peak_Nm": [
+        0.052533075029911586,
+        0.13654012144874497,
+        0.029691386919552656
+      ],
+      "shaft_speed_peak_deg_s": [
+        35.56739903592194,
+        24.691474976965647,
+        82.69887010113753
+      ],
+      "simulated_travel_deg": [
+        [
+          -53.94776813898851,
+          53.95083160042156
+        ],
+        [
+          -13.272212401093988,
+          7.038165444630243
+        ],
+        [
+          -0.0008233600182922709,
+          12.441514115277196
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.16779661016949154,
+        0.1864406779661017,
+        0.04176271186440678
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.046006611731205384,
+        0.031075586739199856,
+        -0.030333795096851857
+      ],
+      "error_peak_deg": [
+        1.1667280351888403,
+        2.2294122906455036,
+        5.76081029979265
+      ],
+      "error_p95_deg": [
+        1.1649909326774504,
+        2.1218221247078324,
+        2.801271947193411
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        7.979609842172336
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.08922901645253023,
+        "radial_reaction_N": 6.765769217086854,
+        "axial_reaction_N": 0.006409529325287928,
+        "non_drive_moment_Nm": 0.001812014164026559
+      },
+      "static_inverse_torque_check_delta_Nm": 2.5796823011070558e-11,
+      "jaw_commanded_peak_deg": 13.0,
+      "jaw_angle_at_peak_command_deg": 12.424231804240415
+    },
+    "nominal_inward_slow_profile": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 0.5,
+      "command_amplitude_scale": [
+        1.0,
+        0.75,
+        0.9
+      ],
+      "uses_firmware_jaw_profile": true,
+      "torque_demand_bound_Nm": [
+        0.025734784664921993,
+        0.051533313901342304,
+        0.020088792407052435
+      ],
+      "applied_torque_peak_Nm": [
+        0.025731541086849472,
+        0.05246720769796403,
+        0.018586619899921143
+      ],
+      "shaft_speed_peak_deg_s": [
+        17.779909276296635,
+        9.09801565980846,
+        46.69019760537263
+      ],
+      "simulated_travel_deg": [
+        [
+          -54.4934076738198,
+          54.493783635529375
+        ],
+        [
+          -10.583067629456453,
+          4.83225492590458
+        ],
+        [
+          0.0,
+          11.994480352451296
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.3013123384599267,
+        0.36391630488990695,
+        0.03100191245815941
+      ],
+      "error_peak_deg": [
+        0.5629386567259163,
+        0.906528677955937,
+        1.4057786907509024
+      ],
+      "error_p95_deg": [
+        0.5621567178025859,
+        0.8498830368089605,
+        1.1232928027645215
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.03131547138280626,
+        "radial_reaction_N": 6.009053997087797,
+        "axial_reaction_N": 0.0012026430803042864,
+        "non_drive_moment_Nm": 0.0010032666168410139
+      },
+      "static_inverse_torque_check_delta_Nm": 4.6514181395451715e-12,
+      "jaw_commanded_peak_deg": 11.700000000000001,
+      "jaw_angle_at_peak_command_deg": 11.992267400841957
+    },
+    "forward_low_warm_inward_slow_profile": {
+      "supply_V": [
+        9.0,
+        9.0,
+        3.7
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 0.5,
+      "command_amplitude_scale": [
+        1.0,
+        0.75,
+        0.9
+      ],
+      "uses_firmware_jaw_profile": true,
+      "torque_demand_bound_Nm": [
+        0.04872952008956911,
+        0.12750062526864112,
+        0.027088792407052437
+      ],
+      "applied_torque_peak_Nm": [
+        0.048734590025424004,
+        0.1302567548391969,
+        0.02560144138180714
+      ],
+      "shaft_speed_peak_deg_s": [
+        17.78226346914475,
+        9.203099113597073,
+        45.23985013474761
+      ],
+      "simulated_travel_deg": [
+        [
+          -53.94666388602426,
+          53.94714658548515
+        ],
+        [
+          -9.397675251947765,
+          5.502144903688238
+        ],
+        [
+          -0.0003233279337017073,
+          10.973881704943416
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.16779661016949154,
+        0.1864406779661017,
+        0.04176271186440678
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.08439792255565495,
+        0.05100007552303967,
+        -0.00547263884517302
+      ],
+      "error_peak_deg": [
+        1.10976755492392,
+        2.1994099309194617,
+        2.2667994580900057
+      ],
+      "error_p95_deg": [
+        1.1088973737635397,
+        2.132498879229117,
+        1.7396280334273035
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.7499632370962208
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.0853236207515039,
+        "radial_reaction_N": 6.744586485581391,
+        "axial_reaction_N": 0.0014799412710023484,
+        "non_drive_moment_Nm": 0.000988450128695151
+      },
+      "static_inverse_torque_check_delta_Nm": 2.5796823011070558e-11,
+      "jaw_commanded_peak_deg": 11.700000000000001,
+      "jaw_angle_at_peak_command_deg": 10.971671924089744
+    }
+  }
+}

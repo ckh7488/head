@@ -1,0 +1,594 @@
+{
+  "cad_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "horn_radius_mm": 13.5,
+  "poisson_ratio": 0.37,
+  "nominal_yaw_bore_radial_clearance_mm": 0.13,
+  "material_and_support_are_sensitivity_cases": true,
+  "rigid_bridge_spring_N_per_mm": 5000.0,
+  "trials": [
+    {
+      "mesh_mm": 1.1,
+      "elements": 41247,
+      "fixture": "compliant",
+      "modulus_MPa": 700.0,
+      "bearing_and_link_spring_N_per_mm": 100.0,
+      "cases": 30,
+      "worst_case": {
+        "absolute_displacement_mm": {
+          "horn_deg": 20.0,
+          "direction": 1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "lower_bearing_to_motor_xy_mm": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "eye_pin_end_shift_xy_mm": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "bearing_wall_radial_change_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "von_mises_p99_MPa": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "left_rib_tension_p95_MPa": {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "left_rib_tension_p99_MPa": {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true
+        }
+      },
+      "case_groups_at_0p04_Nm": {
+        "both_eyes": {
+          "absolute_displacement_mm": 2.432517445483593,
+          "lower_bearing_to_motor_xy_mm": 2.193582743563772,
+          "eye_pin_end_shift_xy_mm": 1.4689851558831455,
+          "bearing_wall_radial_change_mm": 0.05916670400670763,
+          "von_mises_p99_MPa": 3.3166526818900812,
+          "left_rib_tension_p95_MPa": 2.9741194861871447,
+          "left_rib_tension_p99_MPa": 3.9576381867317796
+        },
+        "single_eye": {
+          "absolute_displacement_mm": 6.038720926101074,
+          "lower_bearing_to_motor_xy_mm": 4.507304622935994,
+          "eye_pin_end_shift_xy_mm": 3.0875441379061046,
+          "bearing_wall_radial_change_mm": 0.09089630668595912,
+          "von_mises_p99_MPa": 4.8502983092470195,
+          "left_rib_tension_p95_MPa": 5.954833733781098,
+          "left_rib_tension_p99_MPa": 7.85424311193835
+        },
+        "all": {
+          "absolute_displacement_mm": 6.803629480741867,
+          "lower_bearing_to_motor_xy_mm": 4.988612028430346,
+          "eye_pin_end_shift_xy_mm": 4.036523317754415,
+          "bearing_wall_radial_change_mm": 0.23257082591764686,
+          "von_mises_p99_MPa": 5.516198999290118,
+          "left_rib_tension_p95_MPa": 7.41692129565903,
+          "left_rib_tension_p99_MPa": 9.819707700018652
+        }
+      },
+      "results": [
+        {
+          "torque_Nm": 0.04,
+          "absolute_displacement_mm": 6.803629480741867,
+          "lower_bearing_to_motor_xy_mm": 4.988612028430346,
+          "eye_pin_end_shift_xy_mm": 4.036523317754415,
+          "bearing_wall_radial_change_mm": 0.23257082591764686,
+          "von_mises_p99_MPa": 5.516198999290118,
+          "left_rib_tension_p95_MPa": 7.41692129565903,
+          "left_rib_tension_p99_MPa": 9.819707700018652
+        },
+        {
+          "torque_Nm": 0.08,
+          "absolute_displacement_mm": 13.607258961483733,
+          "lower_bearing_to_motor_xy_mm": 9.977224056860692,
+          "eye_pin_end_shift_xy_mm": 8.07304663550883,
+          "bearing_wall_radial_change_mm": 0.4651416518352937,
+          "von_mises_p99_MPa": 11.032397998580237,
+          "left_rib_tension_p95_MPa": 14.83384259131806,
+          "left_rib_tension_p99_MPa": 19.639415400037304
+        },
+        {
+          "torque_Nm": 0.215,
+          "absolute_displacement_mm": 36.569508458987535,
+          "lower_bearing_to_motor_xy_mm": 26.813789652813114,
+          "eye_pin_end_shift_xy_mm": 21.69631283292998,
+          "bearing_wall_radial_change_mm": 1.250068189307352,
+          "von_mises_p99_MPa": 29.64956962118439,
+          "left_rib_tension_p95_MPa": 39.86595196416729,
+          "left_rib_tension_p99_MPa": 52.780928887600254
+        }
+      ],
+      "first_contact_trials": [
+        {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true,
+          "first_detected_contact": {
+            "torque_range_Nm": [
+              0.0239375,
+              0.024
+            ],
+            "parts": [
+              "Part029"
+            ]
+          },
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true,
+          "first_detected_contact": {
+            "torque_range_Nm": [
+              0.025750000000000002,
+              0.025812500000000002
+            ],
+            "parts": [
+              "Part029"
+            ]
+          },
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true,
+          "first_detected_contact": {
+            "torque_range_Nm": [
+              0.022625,
+              0.0226875
+            ],
+            "parts": [
+              "Part033"
+            ]
+          },
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "balanced",
+          "eccentric": false,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": 1,
+          "load_split": "right",
+          "eccentric": true,
+          "first_detected_contact": {
+            "torque_range_Nm": [
+              0.028812499999999998,
+              0.028874999999999998
+            ],
+            "parts": [
+              "Part033"
+            ]
+          },
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": 1,
+          "load_split": "balanced",
+          "eccentric": false,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        }
+      ]
+    },
+    {
+      "mesh_mm": 1.1,
+      "elements": 41247,
+      "fixture": "stiff_bridges",
+      "modulus_MPa": 1800.0,
+      "bearing_and_link_spring_N_per_mm": 2000.0,
+      "cases": 30,
+      "worst_case": {
+        "absolute_displacement_mm": {
+          "horn_deg": 20.0,
+          "direction": 1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "lower_bearing_to_motor_xy_mm": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "eye_pin_end_shift_xy_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "bearing_wall_radial_change_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "von_mises_p99_MPa": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "left_rib_tension_p95_MPa": {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "left_rib_tension_p99_MPa": {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true
+        }
+      },
+      "case_groups_at_0p04_Nm": {
+        "both_eyes": {
+          "absolute_displacement_mm": 0.4988355448164087,
+          "lower_bearing_to_motor_xy_mm": 0.4189397015180031,
+          "eye_pin_end_shift_xy_mm": 0.18530435589677516,
+          "bearing_wall_radial_change_mm": 0.012016722159930007,
+          "von_mises_p99_MPa": 1.6242649962891242,
+          "left_rib_tension_p95_MPa": 1.400964218152015,
+          "left_rib_tension_p99_MPa": 1.9027782872737924
+        },
+        "single_eye": {
+          "absolute_displacement_mm": 1.4258004047562005,
+          "lower_bearing_to_motor_xy_mm": 0.9105840998175634,
+          "eye_pin_end_shift_xy_mm": 0.4048441432497153,
+          "bearing_wall_radial_change_mm": 0.026366237735902364,
+          "von_mises_p99_MPa": 3.109822843928624,
+          "left_rib_tension_p95_MPa": 2.9397978900541717,
+          "left_rib_tension_p99_MPa": 3.886523704446939
+        },
+        "all": {
+          "absolute_displacement_mm": 1.5964614463703883,
+          "lower_bearing_to_motor_xy_mm": 0.9870630370927371,
+          "eye_pin_end_shift_xy_mm": 0.7336427460448257,
+          "bearing_wall_radial_change_mm": 0.051840055670872305,
+          "von_mises_p99_MPa": 3.43728285074563,
+          "left_rib_tension_p95_MPa": 3.3125460562994506,
+          "left_rib_tension_p99_MPa": 4.2040717401760705
+        }
+      },
+      "results": [
+        {
+          "torque_Nm": 0.04,
+          "absolute_displacement_mm": 1.5964614463703883,
+          "lower_bearing_to_motor_xy_mm": 0.9870630370927371,
+          "eye_pin_end_shift_xy_mm": 0.7336427460448257,
+          "bearing_wall_radial_change_mm": 0.051840055670872305,
+          "von_mises_p99_MPa": 3.43728285074563,
+          "left_rib_tension_p95_MPa": 3.3125460562994506,
+          "left_rib_tension_p99_MPa": 4.2040717401760705
+        },
+        {
+          "torque_Nm": 0.08,
+          "absolute_displacement_mm": 3.1929228927407767,
+          "lower_bearing_to_motor_xy_mm": 1.9741260741854743,
+          "eye_pin_end_shift_xy_mm": 1.4672854920896514,
+          "bearing_wall_radial_change_mm": 0.10368011134174461,
+          "von_mises_p99_MPa": 6.87456570149126,
+          "left_rib_tension_p95_MPa": 6.625092112598901,
+          "left_rib_tension_p99_MPa": 8.408143480352141
+        },
+        {
+          "torque_Nm": 0.215,
+          "absolute_displacement_mm": 8.580980274240838,
+          "lower_bearing_to_motor_xy_mm": 5.305463824373462,
+          "eye_pin_end_shift_xy_mm": 3.943329759990938,
+          "bearing_wall_radial_change_mm": 0.27864029923093864,
+          "von_mises_p99_MPa": 18.475395322757763,
+          "left_rib_tension_p95_MPa": 17.804935052609547,
+          "left_rib_tension_p99_MPa": 22.596885603446378
+        }
+      ],
+      "first_contact_trials": [
+        {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "balanced",
+          "eccentric": false,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": 1,
+          "load_split": "right",
+          "eccentric": true,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        },
+        {
+          "horn_deg": 0.0,
+          "direction": 1,
+          "load_split": "balanced",
+          "eccentric": false,
+          "first_detected_contact": null,
+          "upper_trial_Nm": 0.08
+        }
+      ]
+    },
+    {
+      "mesh_mm": 0.8,
+      "elements": 79045,
+      "fixture": "stiff_bridges",
+      "modulus_MPa": 1800.0,
+      "bearing_and_link_spring_N_per_mm": 2000.0,
+      "cases": 30,
+      "worst_case": {
+        "absolute_displacement_mm": {
+          "horn_deg": 20.0,
+          "direction": 1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "lower_bearing_to_motor_xy_mm": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "eye_pin_end_shift_xy_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "bearing_wall_radial_change_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "von_mises_p99_MPa": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "left_rib_tension_p95_MPa": {
+          "horn_deg": -20.0,
+          "direction": 1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "left_rib_tension_p99_MPa": {
+          "horn_deg": 20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        }
+      },
+      "case_groups_at_0p04_Nm": {
+        "both_eyes": {
+          "absolute_displacement_mm": 0.554699693552092,
+          "lower_bearing_to_motor_xy_mm": 0.4593867950490923,
+          "eye_pin_end_shift_xy_mm": 0.2051808576292141,
+          "bearing_wall_radial_change_mm": 0.013462668052491607,
+          "von_mises_p99_MPa": 1.67558624717014,
+          "left_rib_tension_p95_MPa": 1.4357667765279,
+          "left_rib_tension_p99_MPa": 2.1474432797012932
+        },
+        "single_eye": {
+          "absolute_displacement_mm": 1.5772626096756628,
+          "lower_bearing_to_motor_xy_mm": 0.9965043693914745,
+          "eye_pin_end_shift_xy_mm": 0.44486713056606564,
+          "bearing_wall_radial_change_mm": 0.02926067725872556,
+          "von_mises_p99_MPa": 3.3496499455275455,
+          "left_rib_tension_p95_MPa": 3.0268703445460714,
+          "left_rib_tension_p99_MPa": 4.570880192550183
+        },
+        "all": {
+          "absolute_displacement_mm": 1.767752641994168,
+          "lower_bearing_to_motor_xy_mm": 1.0803958429309226,
+          "eye_pin_end_shift_xy_mm": 0.8168499689544698,
+          "bearing_wall_radial_change_mm": 0.05789461956429552,
+          "von_mises_p99_MPa": 3.6650212546343344,
+          "left_rib_tension_p95_MPa": 3.5088601848270797,
+          "left_rib_tension_p99_MPa": 4.809683466214602
+        }
+      },
+      "results": [
+        {
+          "torque_Nm": 0.04,
+          "absolute_displacement_mm": 1.767752641994168,
+          "lower_bearing_to_motor_xy_mm": 1.0803958429309226,
+          "eye_pin_end_shift_xy_mm": 0.8168499689544698,
+          "bearing_wall_radial_change_mm": 0.05789461956429552,
+          "von_mises_p99_MPa": 3.6650212546343344,
+          "left_rib_tension_p95_MPa": 3.5088601848270797,
+          "left_rib_tension_p99_MPa": 4.809683466214602
+        },
+        {
+          "torque_Nm": 0.08,
+          "absolute_displacement_mm": 3.535505283988336,
+          "lower_bearing_to_motor_xy_mm": 2.1607916858618452,
+          "eye_pin_end_shift_xy_mm": 1.6336999379089396,
+          "bearing_wall_radial_change_mm": 0.11578923912859104,
+          "von_mises_p99_MPa": 7.330042509268669,
+          "left_rib_tension_p95_MPa": 7.0177203696541595,
+          "left_rib_tension_p99_MPa": 9.619366932429203
+        },
+        {
+          "torque_Nm": 0.215,
+          "absolute_displacement_mm": 9.501670450718652,
+          "lower_bearing_to_motor_xy_mm": 5.8071276557537095,
+          "eye_pin_end_shift_xy_mm": 4.390568583130276,
+          "bearing_wall_radial_change_mm": 0.31118358015808845,
+          "von_mises_p99_MPa": 19.699489243659546,
+          "left_rib_tension_p95_MPa": 18.860123493445553,
+          "left_rib_tension_p99_MPa": 25.852048630903482
+        }
+      ]
+    },
+    {
+      "mesh_mm": 0.65,
+      "elements": 132595,
+      "fixture": "stiff_bridges",
+      "modulus_MPa": 1800.0,
+      "bearing_and_link_spring_N_per_mm": 2000.0,
+      "cases": 30,
+      "worst_case": {
+        "absolute_displacement_mm": {
+          "horn_deg": 20.0,
+          "direction": 1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "lower_bearing_to_motor_xy_mm": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "eye_pin_end_shift_xy_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "bearing_wall_radial_change_mm": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "von_mises_p99_MPa": {
+          "horn_deg": 0.0,
+          "direction": -1,
+          "load_split": "right",
+          "eccentric": true
+        },
+        "left_rib_tension_p95_MPa": {
+          "horn_deg": -20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        },
+        "left_rib_tension_p99_MPa": {
+          "horn_deg": 20.0,
+          "direction": -1,
+          "load_split": "left",
+          "eccentric": true
+        }
+      },
+      "case_groups_at_0p04_Nm": {
+        "both_eyes": {
+          "absolute_displacement_mm": 0.6014758075939692,
+          "lower_bearing_to_motor_xy_mm": 0.4977536150299309,
+          "eye_pin_end_shift_xy_mm": 0.23015910250729973,
+          "bearing_wall_radial_change_mm": 0.015100665619573366,
+          "von_mises_p99_MPa": 1.7888616138175881,
+          "left_rib_tension_p95_MPa": 1.6659940760727607,
+          "left_rib_tension_p99_MPa": 2.2395784229658946
+        },
+        "single_eye": {
+          "absolute_displacement_mm": 1.6901014170328827,
+          "lower_bearing_to_motor_xy_mm": 1.0755639516483584,
+          "eye_pin_end_shift_xy_mm": 0.49377219992284643,
+          "bearing_wall_radial_change_mm": 0.03248677597558231,
+          "von_mises_p99_MPa": 3.60123215891758,
+          "left_rib_tension_p95_MPa": 3.4755291374065207,
+          "left_rib_tension_p99_MPa": 4.60576232844269
+        },
+        "all": {
+          "absolute_displacement_mm": 1.8930408136010022,
+          "lower_bearing_to_motor_xy_mm": 1.1658636485873255,
+          "eye_pin_end_shift_xy_mm": 0.8823151841506007,
+          "bearing_wall_radial_change_mm": 0.06267132707418134,
+          "von_mises_p99_MPa": 3.917732281613163,
+          "left_rib_tension_p95_MPa": 3.876844592205141,
+          "left_rib_tension_p99_MPa": 4.955858421630077
+        }
+      },
+      "results": [
+        {
+          "torque_Nm": 0.04,
+          "absolute_displacement_mm": 1.8930408136010022,
+          "lower_bearing_to_motor_xy_mm": 1.1658636485873255,
+          "eye_pin_end_shift_xy_mm": 0.8823151841506007,
+          "bearing_wall_radial_change_mm": 0.06267132707418134,
+          "von_mises_p99_MPa": 3.917732281613163,
+          "left_rib_tension_p95_MPa": 3.876844592205141,
+          "left_rib_tension_p99_MPa": 4.955858421630077
+        },
+        {
+          "torque_Nm": 0.08,
+          "absolute_displacement_mm": 3.7860816272020044,
+          "lower_bearing_to_motor_xy_mm": 2.331727297174651,
+          "eye_pin_end_shift_xy_mm": 1.7646303683012015,
+          "bearing_wall_radial_change_mm": 0.12534265414836268,
+          "von_mises_p99_MPa": 7.835464563226326,
+          "left_rib_tension_p95_MPa": 7.753689184410282,
+          "left_rib_tension_p99_MPa": 9.911716843260153
+        },
+        {
+          "torque_Nm": 0.215,
+          "absolute_displacement_mm": 10.175094373105388,
+          "lower_bearing_to_motor_xy_mm": 6.266517111156874,
+          "eye_pin_end_shift_xy_mm": 4.742444114809479,
+          "bearing_wall_radial_change_mm": 0.33685838302372473,
+          "von_mises_p99_MPa": 21.057811013670754,
+          "left_rib_tension_p95_MPa": 20.838039683102636,
+          "left_rib_tension_p99_MPa": 26.637739016261662
+        }
+      ]
+    }
+  ]
+}

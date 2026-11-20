@@ -1,0 +1,6214 @@
+{
+  "cad_sha256": "42eb60680cbe7cd2544db530844b51345afb5853ca573a57347994988e8ebfc1",
+  "jaw_angle_step_deg": 0.25,
+  "maximum_chin_displacement_to_nearest_sample_mm": 0.2278,
+  "guide_pan_frame_station_and_center_mm": {
+    "motor3-data": [
+      249.057158805004,
+      [
+        -43.0,
+        14.0,
+        17.5
+      ]
+    ],
+    "motor3-power": [
+      248.3253844827995,
+      [
+        -40.75,
+        14.0,
+        17.5
+      ]
+    ],
+    "motor5-return": [
+      270.6049216540417,
+      [
+        -38.5,
+        14.0,
+        17.5
+      ]
+    ],
+    "motor5-power": [
+      273.63844503009096,
+      [
+        -36.25,
+        14.0,
+        17.5
+      ]
+    ],
+    "motor3-return": [
+      246.5413105609149,
+      [
+        -34.0,
+        14.0,
+        17.5
+      ]
+    ],
+    "motor5-data": [
+      277.84421595345333,
+      [
+        -31.75,
+        14.0,
+        17.5
+      ]
+    ],
+    "USB-Camera": [
+      248.99640603482388,
+      [
+        35.0,
+        8.0,
+        6.0
+      ]
+    ]
+  },
+  "guide_sensitivity": "Capture position \u00b10.75 mm per axis and each span length 0.5 mm short. Chord slack only bounds extension; it cannot predict wire pull or friction.",
+  "rows": [
+    {
+      "fixed_pose": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "endpoint_transform_error_mm": {
+        "motor3-return": 0.0,
+        "motor3-power": 0.0,
+        "motor3-data": 0.0,
+        "motor5-return": 0.0,
+        "motor5-power": 0.0,
+        "motor5-data": 0.0,
+        "USB-Camera": 0.0
+      },
+      "frozen_wire_jaw_replay": {
+        "motor3-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "USB-Camera": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        }
+      },
+      "bend": {
+        "motor3-return": {
+          "raw_mm": 0.485,
+          "raw_point": [
+            -5.2,
+            46.56,
+            -54.02
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.435,
+            "point": [
+              -6.55,
+              46.53,
+              -54.9
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.327,
+              "point": [
+                -5.19,
+                46.55,
+                -54.03
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.785,
+              "point": [
+                -5.62,
+                46.65,
+                -54.24
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.128,
+              "point": [
+                -5.06,
+                46.48,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-power": {
+          "raw_mm": 0.968,
+          "raw_point": [
+            -3.21,
+            46.23,
+            -53.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 1.465,
+            "point": [
+              -3.07,
+              -24.57,
+              -31.99
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.722,
+              "point": [
+                -3.17,
+                46.27,
+                -54.05
+              ]
+            },
+            "1.0": {
+              "radius_mm": 1.21,
+              "point": [
+                -3.46,
+                45.99,
+                -53.82
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.831,
+              "point": [
+                -3.05,
+                46.4,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-data": {
+          "raw_mm": 2.155,
+          "raw_point": [
+            -17.06,
+            3.48,
+            181.42
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.54,
+            "point": [
+              -16.57,
+              4.79,
+              180.39
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.449,
+              "point": [
+                -16.89,
+                4.19,
+                181.06
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.156,
+              "point": [
+                -16.99,
+                3.76,
+                181.28
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.575,
+              "point": [
+                -16.99,
+                3.76,
+                181.28
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-return": {
+          "raw_mm": 0.771,
+          "raw_point": [
+            18.89,
+            46.3,
+            -54.7
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.331,
+            "point": [
+              -2.63,
+              -27.11,
+              -31.97
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.659,
+              "point": [
+                11.62,
+                22.13,
+                100.41
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.852,
+              "point": [
+                18.72,
+                46.36,
+                -54.62
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.38,
+              "point": [
+                11.25,
+                22.36,
+                100.43
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-power": {
+          "raw_mm": 0.854,
+          "raw_point": [
+            11.57,
+            22.29,
+            97.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.193,
+            "point": [
+              9.07,
+              21.83,
+              97.92
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.668,
+              "point": [
+                11.62,
+                22.13,
+                97.92
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.944,
+              "point": [
+                11.26,
+                22.37,
+                97.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                11.26,
+                22.37,
+                97.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-data": {
+          "raw_mm": 0.853,
+          "raw_point": [
+            11.58,
+            22.29,
+            95.44
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.232,
+            "point": [
+              9.08,
+              21.83,
+              95.64
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.662,
+              "point": [
+                11.62,
+                22.13,
+                95.43
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.942,
+              "point": [
+                11.26,
+                22.37,
+                95.49
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                11.26,
+                22.37,
+                95.49
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "USB-Camera": {
+          "raw_mm": 2.074,
+          "raw_point": [
+            9.71,
+            74.09,
+            -57.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.979,
+            "point": [
+              32.07,
+              72.7,
+              -50.49
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 2.124,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.198,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.837,
+              "point": [
+                10.24,
+                73.36,
+                -57.19
+              ]
+            }
+          },
+          "target_mm": 12.0
+        }
+      },
+      "guide_trial": {
+        "wires": {
+          "motor3-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 31.019,
+              "corner_and_cut_error_mm": 29.632
+            },
+            "length_fit": true,
+            "guide_shift_mm": 8.658,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.485,
+              "raw_point": [
+                -5.2,
+                46.56,
+                -54.02
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.435,
+                "point": [
+                  -6.55,
+                  46.53,
+                  -54.9
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.327,
+                  "point": [
+                    -5.19,
+                    46.55,
+                    -54.03
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.785,
+                  "point": [
+                    -5.62,
+                    46.65,
+                    -54.24
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.128,
+                  "point": [
+                    -5.06,
+                    46.48,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-return",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -14.09,
+                  -15.37,
+                  87.13
+                ]
+              }
+            ],
+            "new_nominal_contacts": []
+          },
+          "motor3-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 31.919,
+              "corner_and_cut_error_mm": 30.508
+            },
+            "length_fit": true,
+            "guide_shift_mm": 8.762,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.968,
+              "raw_point": [
+                -3.21,
+                46.23,
+                -53.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 1.461,
+                "point": [
+                  -3.12,
+                  -24.49,
+                  -31.95
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.722,
+                  "point": [
+                    -3.17,
+                    46.27,
+                    -54.05
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.21,
+                  "point": [
+                    -3.46,
+                    45.99,
+                    -53.82
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.831,
+                  "point": [
+                    -3.05,
+                    46.4,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -16.23,
+                  -13.36,
+                  84.7
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -16.23,
+                  -13.36,
+                  84.7
+                ]
+              }
+            ]
+          },
+          "motor3-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.386,
+              "corner_and_cut_error_mm": 33.969
+            },
+            "length_fit": true,
+            "guide_shift_mm": 8.784,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 2.155,
+              "raw_point": [
+                -17.06,
+                3.48,
+                181.42
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.54,
+                "point": [
+                  -16.57,
+                  4.79,
+                  180.39
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.449,
+                  "point": [
+                    -16.89,
+                    4.19,
+                    181.06
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.156,
+                  "point": [
+                    -16.99,
+                    3.76,
+                    181.28
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.575,
+                  "point": [
+                    -16.99,
+                    3.76,
+                    181.28
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -15.11,
+                  -16.54,
+                  87.22
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -15.08,
+                  -16.45,
+                  88.1
+                ]
+              }
+            ]
+          },
+          "motor5-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.264,
+              "corner_and_cut_error_mm": 31.689
+            },
+            "length_fit": true,
+            "guide_shift_mm": 10.969,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.771,
+              "raw_point": [
+                18.89,
+                46.3,
+                -54.7
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.298,
+                "point": [
+                  -2.79,
+                  -26.85,
+                  -31.87
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.659,
+                  "point": [
+                    11.62,
+                    22.13,
+                    100.41
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.852,
+                  "point": [
+                    18.72,
+                    46.36,
+                    -54.62
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.38,
+                  "point": [
+                    11.25,
+                    22.36,
+                    100.43
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -6.86,
+                  1.6,
+                  69.35
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -7.08,
+                  2.0,
+                  70.95
+                ]
+              }
+            ]
+          },
+          "motor5-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.527,
+              "corner_and_cut_error_mm": 33.953
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.57,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.854,
+              "raw_point": [
+                11.57,
+                22.29,
+                97.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 4.193,
+                "point": [
+                  9.07,
+                  21.83,
+                  97.92
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.668,
+                  "point": [
+                    11.62,
+                    22.13,
+                    97.92
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.944,
+                  "point": [
+                    11.26,
+                    22.37,
+                    97.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    11.26,
+                    22.37,
+                    97.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -5.57,
+                  1.58,
+                  70.6
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -5.7,
+                  1.86,
+                  71.37
+                ]
+              }
+            ]
+          },
+          "motor5-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 39.73,
+              "corner_and_cut_error_mm": 38.161
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.925,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.853,
+              "raw_point": [
+                11.58,
+                22.29,
+                95.44
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 4.232,
+                "point": [
+                  9.08,
+                  21.83,
+                  95.64
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.662,
+                  "point": [
+                    11.62,
+                    22.13,
+                    95.43
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.942,
+                  "point": [
+                    11.26,
+                    22.37,
+                    95.49
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    11.26,
+                    22.37,
+                    95.49
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -4.85,
+                  1.82,
+                  74.18
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -4.85,
+                  1.82,
+                  74.18
+                ]
+              }
+            ]
+          },
+          "USB-Camera": {
+            "chord_slack_mm": {
+              "nominal_mm": 16.858,
+              "corner_and_cut_error_mm": 15.135
+            },
+            "length_fit": true,
+            "guide_shift_mm": 8.111,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 2.074,
+              "raw_point": [
+                9.71,
+                74.09,
+                -57.41
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.962,
+                "point": [
+                  32.04,
+                  72.69,
+                  -50.49
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 2.124,
+                  "point": [
+                    9.68,
+                    74.15,
+                    -57.42
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.198,
+                  "point": [
+                    9.68,
+                    74.15,
+                    -57.42
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.837,
+                  "point": [
+                    10.24,
+                    73.36,
+                    -57.19
+                  ]
+                }
+              },
+              "target_mm": 12.0
+            },
+            "within_0_25mm": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  0.47,
+                  -35.01,
+                  -38.13
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  0.43,
+                  -34.92,
+                  -33.73
+                ]
+              }
+            ]
+          }
+        },
+        "pair_contacts_among_fitted_paths": [
+          {
+            "wire": "motor3-return",
+            "other": "motor5-return",
+            "point": [
+              -4.17,
+              -7.78,
+              39.35
+            ],
+            "overlap_mm": 0.883
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-power",
+            "point": [
+              -40.32,
+              14.48,
+              14.75
+            ],
+            "overlap_mm": 0.527
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor3-data",
+            "point": [
+              -13.45,
+              -9.9,
+              122.94
+            ],
+            "overlap_mm": 0.697
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-return",
+            "point": [
+              -31.26,
+              -24.23,
+              -67.92
+            ],
+            "overlap_mm": 0.101
+          },
+          {
+            "wire": "motor3-data",
+            "other": "USB-Camera",
+            "point": [
+              39.46,
+              40.14,
+              -52.85
+            ],
+            "overlap_mm": 0.22
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-power",
+            "point": [
+              -9.39,
+              -27.92,
+              -63.0
+            ],
+            "overlap_mm": 0.26
+          },
+          {
+            "wire": "motor5-power",
+            "other": "motor5-data",
+            "point": [
+              -46.68,
+              7.86,
+              4.34
+            ],
+            "overlap_mm": 0.172
+          }
+        ]
+      }
+    },
+    {
+      "fixed_pose": [
+        0,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "endpoint_transform_error_mm": {
+        "motor3-return": 0.0,
+        "motor3-power": 0.0,
+        "motor3-data": 0.0,
+        "motor5-return": 0.0,
+        "motor5-power": 0.0,
+        "motor5-data": 0.0,
+        "USB-Camera": 0.0
+      },
+      "frozen_wire_jaw_replay": {
+        "motor3-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-data": {
+          "first_contact_deg": 13.0,
+          "first_within_0_25mm_deg": 12.75,
+          "contact_point_mm": [
+            -40.0,
+            3.8,
+            20.04
+          ]
+        },
+        "motor5-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": 13.0
+        },
+        "motor5-power": {
+          "first_contact_deg": 12.0,
+          "first_within_0_25mm_deg": 11.75,
+          "contact_point_mm": [
+            -37.55,
+            1.49,
+            17.52
+          ]
+        },
+        "motor5-data": {
+          "first_contact_deg": 13.0,
+          "first_within_0_25mm_deg": 13.0,
+          "contact_point_mm": [
+            -34.9,
+            1.47,
+            17.46
+          ]
+        },
+        "USB-Camera": {
+          "first_contact_deg": 12.5,
+          "first_within_0_25mm_deg": 12.25,
+          "contact_point_mm": [
+            31.09,
+            0.94,
+            10.9
+          ]
+        }
+      },
+      "bend": {
+        "motor3-return": {
+          "raw_mm": 0.485,
+          "raw_point": [
+            -5.2,
+            46.56,
+            -54.02
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.435,
+            "point": [
+              -6.55,
+              46.53,
+              -54.9
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.327,
+              "point": [
+                -5.19,
+                46.55,
+                -54.03
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.785,
+              "point": [
+                -5.62,
+                46.65,
+                -54.24
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.128,
+              "point": [
+                -5.06,
+                46.48,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-power": {
+          "raw_mm": 0.968,
+          "raw_point": [
+            -3.21,
+            46.23,
+            -53.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 1.475,
+            "point": [
+              -3.07,
+              -24.57,
+              -31.99
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.722,
+              "point": [
+                -3.17,
+                46.27,
+                -54.05
+              ]
+            },
+            "1.0": {
+              "radius_mm": 1.21,
+              "point": [
+                -3.46,
+                45.99,
+                -53.82
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.831,
+              "point": [
+                -3.05,
+                46.4,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-data": {
+          "raw_mm": 2.147,
+          "raw_point": [
+            -17.06,
+            -3.79,
+            181.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.552,
+            "point": [
+              -16.57,
+              -2.38,
+              180.51
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.452,
+              "point": [
+                -16.89,
+                -3.05,
+                181.12
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.153,
+              "point": [
+                -16.99,
+                -3.51,
+                181.3
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.573,
+              "point": [
+                -16.99,
+                -3.51,
+                181.3
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-return": {
+          "raw_mm": 0.771,
+          "raw_point": [
+            18.89,
+            46.3,
+            -54.7
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.455,
+            "point": [
+              -2.62,
+              -27.11,
+              -31.97
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.659,
+              "point": [
+                11.62,
+                22.13,
+                100.41
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.852,
+              "point": [
+                18.72,
+                46.36,
+                -54.62
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.38,
+              "point": [
+                11.25,
+                22.36,
+                100.43
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-power": {
+          "raw_mm": 0.854,
+          "raw_point": [
+            11.57,
+            22.29,
+            97.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.193,
+            "point": [
+              9.07,
+              21.83,
+              97.92
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.668,
+              "point": [
+                11.62,
+                22.13,
+                97.92
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.944,
+              "point": [
+                11.26,
+                22.37,
+                97.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                11.26,
+                22.37,
+                97.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-data": {
+          "raw_mm": 0.853,
+          "raw_point": [
+            11.58,
+            22.29,
+            95.44
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.232,
+            "point": [
+              9.08,
+              21.83,
+              95.64
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.662,
+              "point": [
+                11.62,
+                22.13,
+                95.43
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.942,
+              "point": [
+                11.26,
+                22.37,
+                95.49
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                11.26,
+                22.37,
+                95.49
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "USB-Camera": {
+          "raw_mm": 2.074,
+          "raw_point": [
+            9.71,
+            74.09,
+            -57.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.979,
+            "point": [
+              32.07,
+              72.7,
+              -50.49
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 2.124,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.198,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.837,
+              "point": [
+                10.24,
+                73.36,
+                -57.19
+              ]
+            }
+          },
+          "target_mm": 12.0
+        }
+      },
+      "guide_trial": {
+        "wires": {
+          "motor3-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 30.59,
+              "corner_and_cut_error_mm": 29.175
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.552,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.485,
+              "raw_point": [
+                -5.2,
+                46.56,
+                -54.02
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.435,
+                "point": [
+                  -6.55,
+                  46.53,
+                  -54.9
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.327,
+                  "point": [
+                    -5.19,
+                    46.55,
+                    -54.03
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.785,
+                  "point": [
+                    -5.62,
+                    46.65,
+                    -54.24
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.128,
+                  "point": [
+                    -5.06,
+                    46.48,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [],
+            "new_nominal_contacts": []
+          },
+          "motor3-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 31.484,
+              "corner_and_cut_error_mm": 30.045
+            },
+            "length_fit": true,
+            "guide_shift_mm": 8.413,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.968,
+              "raw_point": [
+                -3.21,
+                46.23,
+                -53.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 1.464,
+                "point": [
+                  -3.2,
+                  -24.34,
+                  -31.9
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.722,
+                  "point": [
+                    -3.17,
+                    46.27,
+                    -54.05
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.21,
+                  "point": [
+                    -3.46,
+                    45.99,
+                    -53.82
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.831,
+                  "point": [
+                    -3.05,
+                    46.4,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -15.49,
+                  -12.97,
+                  85.08
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -15.49,
+                  -12.97,
+                  85.08
+                ]
+              }
+            ]
+          },
+          "motor3-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 34.945,
+              "corner_and_cut_error_mm": 33.499
+            },
+            "length_fit": true,
+            "guide_shift_mm": 8.774,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 2.147,
+              "raw_point": [
+                -17.06,
+                -3.79,
+                181.41
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.552,
+                "point": [
+                  -16.57,
+                  -2.38,
+                  180.51
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.452,
+                  "point": [
+                    -16.89,
+                    -3.05,
+                    181.12
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.153,
+                  "point": [
+                    -16.99,
+                    -3.51,
+                    181.3
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.573,
+                  "point": [
+                    -16.99,
+                    -3.51,
+                    181.3
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [],
+            "new_nominal_contacts": []
+          },
+          "motor5-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.264,
+              "corner_and_cut_error_mm": 31.689
+            },
+            "length_fit": true,
+            "guide_shift_mm": 10.951,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.771,
+              "raw_point": [
+                18.89,
+                46.3,
+                -54.7
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.421,
+                "point": [
+                  -2.79,
+                  -26.85,
+                  -31.86
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.659,
+                  "point": [
+                    11.62,
+                    22.13,
+                    100.41
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.852,
+                  "point": [
+                    18.72,
+                    46.36,
+                    -54.62
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.38,
+                  "point": [
+                    11.25,
+                    22.36,
+                    100.43
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -6.86,
+                  1.58,
+                  69.35
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -7.08,
+                  1.98,
+                  70.95
+                ]
+              }
+            ]
+          },
+          "motor5-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.527,
+              "corner_and_cut_error_mm": 33.953
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.57,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.854,
+              "raw_point": [
+                11.57,
+                22.29,
+                97.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 4.193,
+                "point": [
+                  9.07,
+                  21.83,
+                  97.92
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.668,
+                  "point": [
+                    11.62,
+                    22.13,
+                    97.92
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.944,
+                  "point": [
+                    11.26,
+                    22.37,
+                    97.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    11.26,
+                    22.37,
+                    97.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -5.57,
+                  1.57,
+                  70.6
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -5.7,
+                  1.86,
+                  71.37
+                ]
+              }
+            ]
+          },
+          "motor5-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 39.73,
+              "corner_and_cut_error_mm": 38.161
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.927,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.853,
+              "raw_point": [
+                11.58,
+                22.29,
+                95.44
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 4.232,
+                "point": [
+                  9.08,
+                  21.83,
+                  95.64
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.662,
+                  "point": [
+                    11.62,
+                    22.13,
+                    95.43
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.942,
+                  "point": [
+                    11.26,
+                    22.37,
+                    95.49
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    11.26,
+                    22.37,
+                    95.49
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -4.85,
+                  1.83,
+                  74.18
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -4.85,
+                  1.83,
+                  74.18
+                ]
+              }
+            ]
+          },
+          "USB-Camera": {
+            "chord_slack_mm": {
+              "nominal_mm": 22.365,
+              "corner_and_cut_error_mm": 20.635
+            },
+            "length_fit": true,
+            "guide_shift_mm": 5.033,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 2.074,
+              "raw_point": [
+                9.71,
+                74.09,
+                -57.41
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.971,
+                "point": [
+                  32.06,
+                  72.69,
+                  -50.49
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 2.124,
+                  "point": [
+                    9.68,
+                    74.15,
+                    -57.42
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.198,
+                  "point": [
+                    9.68,
+                    74.15,
+                    -57.42
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.837,
+                  "point": [
+                    10.24,
+                    73.36,
+                    -57.19
+                  ]
+                }
+              },
+              "target_mm": 12.0
+            },
+            "within_0_25mm": [],
+            "new_nominal_contacts": []
+          }
+        },
+        "pair_contacts_among_fitted_paths": [
+          {
+            "wire": "motor3-return",
+            "other": "motor5-return",
+            "point": [
+              -4.8,
+              -7.68,
+              37.7
+            ],
+            "overlap_mm": 0.205
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-power",
+            "point": [
+              -4.57,
+              -7.42,
+              36.68
+            ],
+            "overlap_mm": 0.455
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-data",
+            "point": [
+              -36.17,
+              14.43,
+              15.62
+            ],
+            "overlap_mm": 0.127
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor3-data",
+            "point": [
+              -13.04,
+              -11.93,
+              121.11
+            ],
+            "overlap_mm": 0.517
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-return",
+            "point": [
+              -21.38,
+              -0.78,
+              26.83
+            ],
+            "overlap_mm": 0.161
+          },
+          {
+            "wire": "motor3-data",
+            "other": "motor5-return",
+            "point": [
+              -11.45,
+              -6.58,
+              32.82
+            ],
+            "overlap_mm": 0.255
+          },
+          {
+            "wire": "motor3-data",
+            "other": "USB-Camera",
+            "point": [
+              39.52,
+              40.24,
+              -52.91
+            ],
+            "overlap_mm": 0.112
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-power",
+            "point": [
+              -9.39,
+              -27.91,
+              -62.99
+            ],
+            "overlap_mm": 0.253
+          },
+          {
+            "wire": "motor5-power",
+            "other": "motor5-data",
+            "point": [
+              -46.68,
+              7.86,
+              4.34
+            ],
+            "overlap_mm": 0.156
+          }
+        ]
+      }
+    },
+    {
+      "fixed_pose": [
+        45,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "endpoint_transform_error_mm": {
+        "motor3-return": 0.0,
+        "motor3-power": 0.0,
+        "motor3-data": 0.0,
+        "motor5-return": 0.0,
+        "motor5-power": 0.0,
+        "motor5-data": 0.0,
+        "USB-Camera": 0.0
+      },
+      "frozen_wire_jaw_replay": {
+        "motor3-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": 13.0
+        },
+        "motor3-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-return": {
+          "first_contact_deg": 12.75,
+          "first_within_0_25mm_deg": 12.5,
+          "contact_point_mm": [
+            -25.38,
+            29.99,
+            19.87
+          ]
+        },
+        "motor5-power": {
+          "first_contact_deg": 11.5,
+          "first_within_0_25mm_deg": 11.25,
+          "contact_point_mm": [
+            -26.8,
+            29.64,
+            19.87
+          ]
+        },
+        "motor5-data": {
+          "first_contact_deg": 12.25,
+          "first_within_0_25mm_deg": 12.0,
+          "contact_point_mm": [
+            -26.3,
+            29.67,
+            18.28
+          ]
+        },
+        "USB-Camera": {
+          "first_contact_deg": 13.0,
+          "first_within_0_25mm_deg": 13.0,
+          "contact_point_mm": [
+            14.72,
+            -17.97,
+            2.79
+          ]
+        }
+      },
+      "bend": {
+        "motor3-return": {
+          "raw_mm": 0.485,
+          "raw_point": [
+            -5.2,
+            46.56,
+            -54.02
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.435,
+            "point": [
+              -6.55,
+              46.53,
+              -54.9
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.327,
+              "point": [
+                -5.19,
+                46.55,
+                -54.03
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.785,
+              "point": [
+                -5.62,
+                46.65,
+                -54.24
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.128,
+              "point": [
+                -5.06,
+                46.48,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-power": {
+          "raw_mm": 0.968,
+          "raw_point": [
+            -3.21,
+            46.23,
+            -53.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.288,
+            "point": [
+              -19.52,
+              -15.0,
+              -31.89
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.722,
+              "point": [
+                -3.17,
+                46.27,
+                -54.05
+              ]
+            },
+            "1.0": {
+              "radius_mm": 1.21,
+              "point": [
+                -3.46,
+                45.99,
+                -53.82
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.831,
+              "point": [
+                -3.05,
+                46.4,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-data": {
+          "raw_mm": 2.131,
+          "raw_point": [
+            -14.74,
+            9.38,
+            181.4
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.307,
+            "point": [
+              -20.52,
+              -16.26,
+              -32.28
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.459,
+              "point": [
+                -14.1,
+                9.78,
+                181.11
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.147,
+              "point": [
+                -14.5,
+                9.53,
+                181.29
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.569,
+              "point": [
+                -14.5,
+                9.53,
+                181.29
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-return": {
+          "raw_mm": 0.771,
+          "raw_point": [
+            18.89,
+            46.3,
+            -54.7
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.628,
+            "point": [
+              -21.03,
+              -17.43,
+              -32.31
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.659,
+              "point": [
+                23.86,
+                7.43,
+                100.41
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.852,
+              "point": [
+                18.72,
+                46.36,
+                -54.62
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.38,
+              "point": [
+                23.77,
+                7.86,
+                100.43
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-power": {
+          "raw_mm": 0.854,
+          "raw_point": [
+            23.95,
+            7.58,
+            97.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.557,
+            "point": [
+              -33.83,
+              -22.64,
+              -66.59
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.668,
+              "point": [
+                23.86,
+                7.43,
+                97.92
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.944,
+              "point": [
+                23.77,
+                7.86,
+                97.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                23.77,
+                7.86,
+                97.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-data": {
+          "raw_mm": 0.853,
+          "raw_point": [
+            23.95,
+            7.58,
+            95.44
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.087,
+            "point": [
+              -30.33,
+              -22.94,
+              -66.39
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.662,
+              "point": [
+                23.86,
+                7.43,
+                95.43
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.942,
+              "point": [
+                23.78,
+                7.85,
+                95.49
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                23.78,
+                7.85,
+                95.49
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "USB-Camera": {
+          "raw_mm": 2.074,
+          "raw_point": [
+            9.71,
+            74.09,
+            -57.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.127,
+            "point": [
+              -24.98,
+              -24.98,
+              -32.13
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.659,
+              "point": [
+                -25.01,
+                -25.01,
+                -32.27
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.198,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.837,
+              "point": [
+                10.24,
+                73.36,
+                -57.19
+              ]
+            }
+          },
+          "target_mm": 12.0
+        }
+      },
+      "guide_trial": {
+        "wires": {
+          "motor3-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 30.59,
+              "corner_and_cut_error_mm": 29.215
+            },
+            "length_fit": true,
+            "guide_shift_mm": 10.932,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.485,
+              "raw_point": [
+                -5.2,
+                46.56,
+                -54.02
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.435,
+                "point": [
+                  -6.55,
+                  46.53,
+                  -54.9
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.327,
+                  "point": [
+                    -5.19,
+                    46.55,
+                    -54.03
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.785,
+                  "point": [
+                    -5.62,
+                    46.65,
+                    -54.24
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.128,
+                  "point": [
+                    -5.06,
+                    46.48,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [],
+            "new_nominal_contacts": []
+          },
+          "motor3-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 31.484,
+              "corner_and_cut_error_mm": 30.092
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.188,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.968,
+              "raw_point": [
+                -3.21,
+                46.23,
+                -53.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.275,
+                "point": [
+                  -19.51,
+                  -14.73,
+                  -31.81
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.722,
+                  "point": [
+                    -3.17,
+                    46.27,
+                    -54.05
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.21,
+                  "point": [
+                    -3.46,
+                    45.99,
+                    -53.82
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.831,
+                  "point": [
+                    -3.05,
+                    46.4,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -20.22,
+                  1.53,
+                  84.92
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -20.2,
+                  1.52,
+                  85.81
+                ]
+              }
+            ]
+          },
+          "motor3-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 34.945,
+              "corner_and_cut_error_mm": 33.542
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.044,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 2.131,
+              "raw_point": [
+                -14.74,
+                9.38,
+                181.4
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.232,
+                "point": [
+                  -20.15,
+                  -15.09,
+                  -31.91
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.459,
+                  "point": [
+                    -14.1,
+                    9.78,
+                    181.11
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.147,
+                  "point": [
+                    -14.5,
+                    9.53,
+                    181.29
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.569,
+                  "point": [
+                    -14.5,
+                    9.53,
+                    181.29
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -20.83,
+                  -0.57,
+                  89.38
+                ]
+              }
+            ],
+            "new_nominal_contacts": []
+          },
+          "motor5-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.264,
+              "corner_and_cut_error_mm": 31.573
+            },
+            "length_fit": true,
+            "guide_shift_mm": 11.002,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.771,
+              "raw_point": [
+                18.89,
+                46.3,
+                -54.7
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.644,
+                "point": [
+                  -21.05,
+                  -17.71,
+                  -32.4
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.659,
+                  "point": [
+                    23.86,
+                    7.43,
+                    100.41
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.852,
+                  "point": [
+                    18.72,
+                    46.36,
+                    -54.62
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.38,
+                  "point": [
+                    23.77,
+                    7.86,
+                    100.43
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -3.68,
+                  5.95,
+                  69.33
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -3.6,
+                  6.2,
+                  70.11
+                ]
+              }
+            ]
+          },
+          "motor5-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.527,
+              "corner_and_cut_error_mm": 33.84
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.905,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.854,
+              "raw_point": [
+                23.95,
+                7.58,
+                97.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.5,
+                "point": [
+                  -33.63,
+                  -22.1,
+                  -66.25
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.668,
+                  "point": [
+                    23.86,
+                    7.43,
+                    97.92
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.944,
+                  "point": [
+                    23.77,
+                    7.86,
+                    97.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    23.77,
+                    7.86,
+                    97.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -2.84,
+                  5.22,
+                  71.4
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -2.72,
+                  5.5,
+                  72.18
+                ]
+              }
+            ]
+          },
+          "motor5-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 39.73,
+              "corner_and_cut_error_mm": 38.059
+            },
+            "length_fit": true,
+            "guide_shift_mm": 13.55,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.853,
+              "raw_point": [
+                23.95,
+                7.58,
+                95.44
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.963,
+                "point": [
+                  -29.92,
+                  -21.77,
+                  -65.62
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.662,
+                  "point": [
+                    23.86,
+                    7.43,
+                    95.43
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.942,
+                  "point": [
+                    23.78,
+                    7.85,
+                    95.49
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    23.78,
+                    7.85,
+                    95.49
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -2.14,
+                  4.59,
+                  74.27
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -1.96,
+                  4.93,
+                  75.04
+                ]
+              }
+            ]
+          },
+          "USB-Camera": {
+            "chord_slack_mm": {
+              "nominal_mm": 22.365,
+              "corner_and_cut_error_mm": 20.698
+            },
+            "length_fit": true,
+            "guide_shift_mm": 22.883,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 1.666,
+              "raw_point": [
+                -22.68,
+                -23.81,
+                -31.02
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 1.666,
+                "point": [
+                  -22.68,
+                  -23.81,
+                  -31.02
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 2.018,
+                  "point": [
+                    31.66,
+                    -19.59,
+                    9.08
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.198,
+                  "point": [
+                    9.68,
+                    74.15,
+                    -57.42
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.449,
+                  "point": [
+                    31.71,
+                    -19.55,
+                    8.59
+                  ]
+                }
+              },
+              "target_mm": 12.0
+            },
+            "within_0_25mm": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part001",
+                "point": [
+                  37.9,
+                  35.02,
+                  -51.23
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part006",
+                "point": [
+                  37.08,
+                  29.21,
+                  -50.21
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  -22.0,
+                  -23.37,
+                  -40.13
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part001",
+                "point": [
+                  37.6,
+                  33.19,
+                  -50.92
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part006",
+                "point": [
+                  36.96,
+                  27.65,
+                  -50.0
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  -22.0,
+                  -23.37,
+                  -40.13
+                ]
+              }
+            ]
+          }
+        },
+        "pair_contacts_among_fitted_paths": [
+          {
+            "wire": "motor3-return",
+            "other": "motor3-power",
+            "point": [
+              -16.96,
+              -10.99,
+              -29.22
+            ],
+            "overlap_mm": 0.249
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor3-data",
+            "point": [
+              -24.25,
+              44.19,
+              12.06
+            ],
+            "overlap_mm": 0.761
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-return",
+            "point": [
+              -8.98,
+              -1.86,
+              37.83
+            ],
+            "overlap_mm": 0.386
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-power",
+            "point": [
+              -16.81,
+              37.47,
+              16.32
+            ],
+            "overlap_mm": 0.414
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-data",
+            "point": [
+              -15.17,
+              35.55,
+              16.39
+            ],
+            "overlap_mm": 0.327
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor3-data",
+            "point": [
+              -20.68,
+              -14.8,
+              -56.76
+            ],
+            "overlap_mm": 1.115
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-return",
+            "point": [
+              -16.4,
+              15.01,
+              27.49
+            ],
+            "overlap_mm": 0.243
+          },
+          {
+            "wire": "motor3-data",
+            "other": "motor5-return",
+            "point": [
+              -11.85,
+              1.62,
+              34.16
+            ],
+            "overlap_mm": 0.683
+          },
+          {
+            "wire": "motor3-data",
+            "other": "motor5-power",
+            "point": [
+              -12.58,
+              3.72,
+              31.93
+            ],
+            "overlap_mm": 0.312
+          },
+          {
+            "wire": "motor3-data",
+            "other": "USB-Camera",
+            "point": [
+              38.07,
+              36.33,
+              -51.56
+            ],
+            "overlap_mm": 2.343
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-power",
+            "point": [
+              -21.38,
+              -18.44,
+              -46.78
+            ],
+            "overlap_mm": 0.666
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-data",
+            "point": [
+              -23.86,
+              -17.89,
+              -66.63
+            ],
+            "overlap_mm": 0.145
+          },
+          {
+            "wire": "motor5-power",
+            "other": "motor5-data",
+            "point": [
+              -31.45,
+              44.04,
+              10.33
+            ],
+            "overlap_mm": 0.854
+          }
+        ]
+      }
+    },
+    {
+      "fixed_pose": [
+        60,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "endpoint_transform_error_mm": {
+        "motor3-return": 0.0,
+        "motor3-power": 0.0,
+        "motor3-data": 0.0,
+        "motor5-return": 0.0,
+        "motor5-power": 0.0,
+        "motor5-data": 0.0,
+        "USB-Camera": 0.0
+      },
+      "frozen_wire_jaw_replay": {
+        "motor3-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-power": {
+          "first_contact_deg": 13.0,
+          "first_within_0_25mm_deg": 12.75,
+          "contact_point_mm": [
+            -16.79,
+            38.19,
+            20.77
+          ]
+        },
+        "motor3-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-return": {
+          "first_contact_deg": 13.0,
+          "first_within_0_25mm_deg": 12.75,
+          "contact_point_mm": [
+            -16.85,
+            36.3,
+            19.16
+          ]
+        },
+        "motor5-power": {
+          "first_contact_deg": 11.5,
+          "first_within_0_25mm_deg": 11.25,
+          "contact_point_mm": [
+            -17.82,
+            33.85,
+            20.27
+          ]
+        },
+        "motor5-data": {
+          "first_contact_deg": 12.25,
+          "first_within_0_25mm_deg": 12.0,
+          "contact_point_mm": [
+            -17.59,
+            34.86,
+            18.47
+          ]
+        },
+        "USB-Camera": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        }
+      },
+      "bend": {
+        "motor3-return": {
+          "raw_mm": 0.486,
+          "raw_point": [
+            -5.2,
+            46.56,
+            -54.02
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.073,
+            "point": [
+              -34.08,
+              -18.48,
+              -68.28
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.327,
+              "point": [
+                -5.19,
+                46.55,
+                -54.03
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.785,
+              "point": [
+                -5.62,
+                46.65,
+                -54.24
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.128,
+              "point": [
+                -5.06,
+                46.48,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-power": {
+          "raw_mm": 0.968,
+          "raw_point": [
+            -3.21,
+            46.23,
+            -53.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.078,
+            "point": [
+              -23.03,
+              -9.82,
+              -32.66
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.722,
+              "point": [
+                -3.17,
+                46.27,
+                -54.05
+              ]
+            },
+            "1.0": {
+              "radius_mm": 1.21,
+              "point": [
+                -3.46,
+                45.99,
+                -53.82
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.831,
+              "point": [
+                -3.05,
+                46.4,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-data": {
+          "raw_mm": 2.123,
+          "raw_point": [
+            -11.81,
+            12.88,
+            181.4
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.499,
+            "point": [
+              -24.02,
+              -10.33,
+              -32.18
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.455,
+              "point": [
+                -11.09,
+                13.09,
+                181.11
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.139,
+              "point": [
+                -11.53,
+                12.96,
+                181.29
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.56,
+              "point": [
+                -11.53,
+                12.96,
+                181.29
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-return": {
+          "raw_mm": 0.771,
+          "raw_point": [
+            18.89,
+            46.3,
+            -54.7
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.31,
+            "point": [
+              -33.51,
+              -21.07,
+              -68.18
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.659,
+              "point": [
+                24.97,
+                1.0,
+                100.41
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.852,
+              "point": [
+                18.72,
+                46.36,
+                -54.62
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.38,
+              "point": [
+                24.99,
+                1.44,
+                100.43
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-power": {
+          "raw_mm": 0.854,
+          "raw_point": [
+            25.09,
+            1.13,
+            97.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.527,
+            "point": [
+              -33.96,
+              -22.36,
+              -66.57
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.668,
+              "point": [
+                24.97,
+                1.0,
+                97.92
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.944,
+              "point": [
+                25.0,
+                1.44,
+                97.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                25.0,
+                1.44,
+                97.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-data": {
+          "raw_mm": 0.853,
+          "raw_point": [
+            25.09,
+            1.12,
+            95.44
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.179,
+            "point": [
+              -30.77,
+              -22.2,
+              -66.18
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.662,
+              "point": [
+                24.97,
+                1.0,
+                95.43
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.942,
+              "point": [
+                25.0,
+                1.43,
+                95.49
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                25.0,
+                1.43,
+                95.49
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "USB-Camera": {
+          "raw_mm": 2.074,
+          "raw_point": [
+            9.71,
+            74.09,
+            -57.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.455,
+            "point": [
+              -30.51,
+              -17.61,
+              -31.99
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.481,
+              "point": [
+                -30.52,
+                -17.62,
+                -32.02
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.198,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.837,
+              "point": [
+                10.24,
+                73.36,
+                -57.19
+              ]
+            }
+          },
+          "target_mm": 12.0
+        }
+      },
+      "guide_trial": {
+        "wires": {
+          "motor3-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 30.59,
+              "corner_and_cut_error_mm": 29.191
+            },
+            "length_fit": true,
+            "guide_shift_mm": 10.69,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.486,
+              "raw_point": [
+                -5.2,
+                46.56,
+                -54.02
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.023,
+                "point": [
+                  -33.57,
+                  -17.22,
+                  -67.51
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.327,
+                  "point": [
+                    -5.19,
+                    46.55,
+                    -54.03
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.785,
+                  "point": [
+                    -5.62,
+                    46.65,
+                    -54.24
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.128,
+                  "point": [
+                    -5.06,
+                    46.48,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [],
+            "new_nominal_contacts": []
+          },
+          "motor3-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 31.484,
+              "corner_and_cut_error_mm": 30.08
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.951,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.968,
+              "raw_point": [
+                -3.21,
+                46.23,
+                -53.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.073,
+                "point": [
+                  -22.99,
+                  -9.66,
+                  -32.61
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.722,
+                  "point": [
+                    -3.17,
+                    46.27,
+                    -54.05
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.21,
+                  "point": [
+                    -3.46,
+                    45.99,
+                    -53.82
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.831,
+                  "point": [
+                    -3.05,
+                    46.4,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -18.92,
+                  6.97,
+                  85.08
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -18.92,
+                  6.97,
+                  85.08
+                ]
+              }
+            ]
+          },
+          "motor3-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 34.945,
+              "corner_and_cut_error_mm": 33.539
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.411,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 2.123,
+              "raw_point": [
+                -11.81,
+                12.88,
+                181.4
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.392,
+                "point": [
+                  -23.36,
+                  -9.07,
+                  -31.75
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.455,
+                  "point": [
+                    -11.09,
+                    13.09,
+                    181.11
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.139,
+                  "point": [
+                    -11.53,
+                    12.96,
+                    181.29
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.56,
+                  "point": [
+                    -11.53,
+                    12.96,
+                    181.29
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-data",
+                "part": "Part017",
+                "point": [
+                  -9.97,
+                  -12.18,
+                  -63.17
+                ]
+              },
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -20.31,
+                  4.91,
+                  88.52
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-data",
+                "part": "Part017",
+                "point": [
+                  -10.8,
+                  -11.9,
+                  -63.1
+                ]
+              }
+            ]
+          },
+          "motor5-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.264,
+              "corner_and_cut_error_mm": 31.576
+            },
+            "length_fit": true,
+            "guide_shift_mm": 10.947,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.771,
+              "raw_point": [
+                18.89,
+                46.3,
+                -54.7
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.328,
+                "point": [
+                  -33.61,
+                  -21.31,
+                  -68.33
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.659,
+                  "point": [
+                    24.97,
+                    1.0,
+                    100.41
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.852,
+                  "point": [
+                    18.72,
+                    46.36,
+                    -54.62
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.38,
+                  "point": [
+                    24.99,
+                    1.44,
+                    100.43
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -1.95,
+                  6.88,
+                  70.16
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -1.82,
+                  7.08,
+                  70.95
+                ]
+              }
+            ]
+          },
+          "motor5-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.527,
+              "corner_and_cut_error_mm": 33.842
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.834,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.854,
+              "raw_point": [
+                25.09,
+                1.13,
+                97.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.484,
+                "point": [
+                  -33.76,
+                  -21.9,
+                  -66.28
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.668,
+                  "point": [
+                    24.97,
+                    1.0,
+                    97.92
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.944,
+                  "point": [
+                    25.0,
+                    1.44,
+                    97.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    25.0,
+                    1.44,
+                    97.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -1.37,
+                  5.79,
+                  71.4
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -1.19,
+                  6.03,
+                  72.18
+                ]
+              }
+            ]
+          },
+          "motor5-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 39.73,
+              "corner_and_cut_error_mm": 38.059
+            },
+            "length_fit": true,
+            "guide_shift_mm": 13.528,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.853,
+              "raw_point": [
+                25.09,
+                1.12,
+                95.44
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.082,
+                "point": [
+                  -30.71,
+                  -20.91,
+                  -64.79
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.662,
+                  "point": [
+                    24.97,
+                    1.0,
+                    95.43
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.942,
+                  "point": [
+                    25.0,
+                    1.43,
+                    95.49
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    25.0,
+                    1.43,
+                    95.49
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -0.76,
+                  5.0,
+                  74.12
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -0.76,
+                  5.0,
+                  74.12
+                ]
+              }
+            ]
+          },
+          "USB-Camera": {
+            "chord_slack_mm": {
+              "nominal_mm": 22.365,
+              "corner_and_cut_error_mm": 20.804
+            },
+            "length_fit": true,
+            "guide_shift_mm": 29.611,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 1.1,
+              "raw_point": [
+                25.53,
+                -27.02,
+                8.46
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 1.1,
+                "point": [
+                  25.53,
+                  -27.02,
+                  8.46
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.145,
+                  "point": [
+                    25.48,
+                    -27.01,
+                    8.58
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.29,
+                  "point": [
+                    25.48,
+                    -27.01,
+                    8.58
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.7,
+                  "point": [
+                    25.48,
+                    -27.01,
+                    8.58
+                  ]
+                }
+              },
+              "target_mm": 12.0
+            },
+            "within_0_25mm": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part001",
+                "point": [
+                  37.53,
+                  58.95,
+                  -51.14
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part006",
+                "point": [
+                  36.18,
+                  32.06,
+                  -50.2
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  -27.31,
+                  -16.82,
+                  -40.52
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part001",
+                "point": [
+                  36.99,
+                  36.28,
+                  -51.04
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part006",
+                "point": [
+                  36.03,
+                  31.3,
+                  -50.04
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  -27.44,
+                  -16.89,
+                  -39.77
+                ]
+              }
+            ]
+          }
+        },
+        "pair_contacts_among_fitted_paths": [
+          {
+            "wire": "motor3-return",
+            "other": "motor3-power",
+            "point": [
+              -19.75,
+              -6.6,
+              -29.51
+            ],
+            "overlap_mm": 0.376
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor3-data",
+            "point": [
+              -11.52,
+              48.1,
+              12.04
+            ],
+            "overlap_mm": 0.851
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-return",
+            "point": [
+              -9.19,
+              0.64,
+              37.61
+            ],
+            "overlap_mm": 0.326
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-power",
+            "point": [
+              -9.02,
+              1.12,
+              36.07
+            ],
+            "overlap_mm": 0.262
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-data",
+            "point": [
+              -5.57,
+              38.56,
+              15.96
+            ],
+            "overlap_mm": 0.791
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor3-data",
+            "point": [
+              -9.96,
+              46.5,
+              15.25
+            ],
+            "overlap_mm": 0.782
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-return",
+            "point": [
+              -7.1,
+              37.57,
+              18.98
+            ],
+            "overlap_mm": 0.47
+          },
+          {
+            "wire": "motor3-data",
+            "other": "motor5-return",
+            "point": [
+              -10.68,
+              46.97,
+              14.21
+            ],
+            "overlap_mm": 0.666
+          },
+          {
+            "wire": "motor3-data",
+            "other": "motor5-power",
+            "point": [
+              -12.24,
+              15.91,
+              26.88
+            ],
+            "overlap_mm": 0.414
+          },
+          {
+            "wire": "motor3-data",
+            "other": "USB-Camera",
+            "point": [
+              37.74,
+              38.18,
+              -51.67
+            ],
+            "overlap_mm": 1.594
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-power",
+            "point": [
+              -8.57,
+              43.71,
+              15.57
+            ],
+            "overlap_mm": 0.562
+          },
+          {
+            "wire": "motor5-power",
+            "other": "motor5-data",
+            "point": [
+              -17.53,
+              49.42,
+              10.94
+            ],
+            "overlap_mm": 1.015
+          }
+        ]
+      }
+    },
+    {
+      "fixed_pose": [
+        60,
+        6,
+        -8,
+        30,
+        0
+      ],
+      "endpoint_transform_error_mm": {
+        "motor3-return": 0.0,
+        "motor3-power": 0.0,
+        "motor3-data": 0.0,
+        "motor5-return": 0.0,
+        "motor5-power": 0.0,
+        "motor5-data": 0.0,
+        "USB-Camera": 0.0
+      },
+      "frozen_wire_jaw_replay": {
+        "motor3-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-power": {
+          "first_contact_deg": 12.25,
+          "first_within_0_25mm_deg": 12.0,
+          "contact_point_mm": [
+            -17.38,
+            30.0,
+            14.41
+          ]
+        },
+        "motor5-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": 13.0
+        },
+        "USB-Camera": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        }
+      },
+      "bend": {
+        "motor3-return": {
+          "raw_mm": 2.172,
+          "raw_point": [
+            -33.52,
+            -18.56,
+            -68.6
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.172,
+            "point": [
+              -33.52,
+              -18.56,
+              -68.6
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.36,
+              "point": [
+                -33.57,
+                -18.56,
+                -68.58
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.094,
+              "point": [
+                -33.57,
+                -18.56,
+                -68.58
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.369,
+              "point": [
+                -34.48,
+                -18.33,
+                -68.28
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-power": {
+          "raw_mm": 2.235,
+          "raw_point": [
+            -23.01,
+            -9.81,
+            -32.57
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.235,
+            "point": [
+              -23.01,
+              -9.81,
+              -32.57
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.532,
+              "point": [
+                -34.13,
+                -19.48,
+                -67.09
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.379,
+              "point": [
+                -34.13,
+                -19.48,
+                -67.09
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.55,
+              "point": [
+                -33.3,
+                -19.89,
+                -67.46
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-data": {
+          "raw_mm": 2.123,
+          "raw_point": [
+            -11.81,
+            12.88,
+            181.4
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.323,
+            "point": [
+              -24.03,
+              -10.33,
+              -32.18
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.455,
+              "point": [
+                -11.09,
+                13.09,
+                181.11
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.139,
+              "point": [
+                -11.53,
+                12.96,
+                181.29
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.56,
+              "point": [
+                -11.53,
+                12.96,
+                181.29
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-return": {
+          "raw_mm": 0.848,
+          "raw_point": [
+            25.09,
+            1.12,
+            100.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.686,
+            "point": [
+              -24.76,
+              -11.36,
+              -32.05
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.659,
+              "point": [
+                24.97,
+                1.0,
+                100.41
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.938,
+              "point": [
+                24.99,
+                1.44,
+                100.43
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.38,
+              "point": [
+                24.99,
+                1.44,
+                100.43
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-power": {
+          "raw_mm": 0.854,
+          "raw_point": [
+            25.09,
+            1.13,
+            97.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.456,
+            "point": [
+              -34.18,
+              -22.21,
+              -66.22
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.668,
+              "point": [
+                24.97,
+                1.0,
+                97.92
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.944,
+              "point": [
+                25.0,
+                1.44,
+                97.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                25.0,
+                1.44,
+                97.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-data": {
+          "raw_mm": 0.853,
+          "raw_point": [
+            25.09,
+            1.12,
+            95.44
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.29,
+            "point": [
+              -30.96,
+              -22.24,
+              -65.89
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.662,
+              "point": [
+                24.97,
+                1.0,
+                95.43
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.942,
+              "point": [
+                25.0,
+                1.43,
+                95.49
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                25.0,
+                1.43,
+                95.49
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "USB-Camera": {
+          "raw_mm": 2.074,
+          "raw_point": [
+            9.71,
+            74.09,
+            -57.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.462,
+            "point": [
+              -30.51,
+              -17.61,
+              -31.99
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.485,
+              "point": [
+                -30.52,
+                -17.62,
+                -32.02
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.198,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.837,
+              "point": [
+                10.24,
+                73.36,
+                -57.19
+              ]
+            }
+          },
+          "target_mm": 12.0
+        }
+      },
+      "guide_trial": {
+        "wires": {
+          "motor3-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 30.59,
+              "corner_and_cut_error_mm": 29.191
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.269,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 2.119,
+              "raw_point": [
+                -32.91,
+                -17.17,
+                -67.89
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.119,
+                "point": [
+                  -32.91,
+                  -17.17,
+                  -67.89
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.5,
+                  "point": [
+                    -34.41,
+                    -16.56,
+                    -67.37
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.141,
+                  "point": [
+                    -33.14,
+                    -17.13,
+                    -67.82
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.336,
+                  "point": [
+                    -32.2,
+                    -16.99,
+                    -68.08
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [],
+            "new_nominal_contacts": []
+          },
+          "motor3-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 31.484,
+              "corner_and_cut_error_mm": 30.08
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.021,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 2.177,
+              "raw_point": [
+                -22.73,
+                -8.76,
+                -32.3
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.177,
+                "point": [
+                  -22.73,
+                  -8.76,
+                  -32.3
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.493,
+                  "point": [
+                    -33.97,
+                    -17.15,
+                    -66.08
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.347,
+                  "point": [
+                    -33.97,
+                    -17.15,
+                    -66.08
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.531,
+                  "point": [
+                    -32.49,
+                    -18.22,
+                    -66.74
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -18.79,
+                  7.36,
+                  84.49
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -18.79,
+                  7.36,
+                  84.49
+                ]
+              }
+            ]
+          },
+          "motor3-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 34.945,
+              "corner_and_cut_error_mm": 33.539
+            },
+            "length_fit": true,
+            "guide_shift_mm": 9.366,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 2.123,
+              "raw_point": [
+                -11.81,
+                12.88,
+                181.4
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.228,
+                "point": [
+                  -23.39,
+                  -9.1,
+                  -31.76
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.455,
+                  "point": [
+                    -11.09,
+                    13.09,
+                    181.11
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.139,
+                  "point": [
+                    -11.53,
+                    12.96,
+                    181.29
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.56,
+                  "point": [
+                    -11.53,
+                    12.96,
+                    181.29
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-data",
+                "part": "Part017",
+                "point": [
+                  -10.82,
+                  -11.95,
+                  -63.14
+                ]
+              },
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -20.24,
+                  5.06,
+                  88.61
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-data",
+                "part": "Part017",
+                "point": [
+                  -10.82,
+                  -11.95,
+                  -63.14
+                ]
+              },
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -20.16,
+                  5.05,
+                  89.49
+                ]
+              }
+            ]
+          },
+          "motor5-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.264,
+              "corner_and_cut_error_mm": 31.576
+            },
+            "length_fit": true,
+            "guide_shift_mm": 11.884,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.848,
+              "raw_point": [
+                25.09,
+                1.12,
+                100.41
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.581,
+                "point": [
+                  -24.3,
+                  -10.23,
+                  -31.69
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.659,
+                  "point": [
+                    24.97,
+                    1.0,
+                    100.41
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.938,
+                  "point": [
+                    24.99,
+                    1.44,
+                    100.43
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.38,
+                  "point": [
+                    24.99,
+                    1.44,
+                    100.43
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -2.04,
+                  6.72,
+                  69.42
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -1.78,
+                  7.13,
+                  70.99
+                ]
+              }
+            ]
+          },
+          "motor5-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.527,
+              "corner_and_cut_error_mm": 33.842
+            },
+            "length_fit": true,
+            "guide_shift_mm": 14.347,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.854,
+              "raw_point": [
+                25.09,
+                1.13,
+                97.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.262,
+                "point": [
+                  -32.63,
+                  -19.64,
+                  -64.85
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.668,
+                  "point": [
+                    24.97,
+                    1.0,
+                    97.92
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.944,
+                  "point": [
+                    25.0,
+                    1.44,
+                    97.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    25.0,
+                    1.44,
+                    97.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -1.27,
+                  5.49,
+                  69.1
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -1.15,
+                  5.7,
+                  69.88
+                ]
+              }
+            ]
+          },
+          "motor5-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 39.73,
+              "corner_and_cut_error_mm": 38.059
+            },
+            "length_fit": true,
+            "guide_shift_mm": 13.321,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.853,
+              "raw_point": [
+                25.09,
+                1.12,
+                95.44
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.156,
+                "point": [
+                  -29.99,
+                  -20.59,
+                  -65.0
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.662,
+                  "point": [
+                    24.97,
+                    1.0,
+                    95.43
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.942,
+                  "point": [
+                    25.0,
+                    1.43,
+                    95.49
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    25.0,
+                    1.43,
+                    95.49
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -0.72,
+                  4.83,
+                  73.32
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -0.72,
+                  4.83,
+                  73.32
+                ]
+              }
+            ]
+          },
+          "USB-Camera": {
+            "chord_slack_mm": {
+              "nominal_mm": 22.365,
+              "corner_and_cut_error_mm": 20.804
+            },
+            "length_fit": true,
+            "guide_shift_mm": 29.612,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 1.099,
+              "raw_point": [
+                25.53,
+                -27.02,
+                8.46
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 1.099,
+                "point": [
+                  25.53,
+                  -27.02,
+                  8.46
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.145,
+                  "point": [
+                    25.48,
+                    -27.01,
+                    8.58
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.29,
+                  "point": [
+                    25.48,
+                    -27.01,
+                    8.58
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.7,
+                  "point": [
+                    25.48,
+                    -27.01,
+                    8.58
+                  ]
+                }
+              },
+              "target_mm": 12.0
+            },
+            "within_0_25mm": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part001",
+                "point": [
+                  37.53,
+                  58.95,
+                  -51.14
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part006",
+                "point": [
+                  36.18,
+                  32.06,
+                  -50.2
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  -27.31,
+                  -16.82,
+                  -40.52
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "USB-Camera",
+                "part": "Part001",
+                "point": [
+                  36.99,
+                  36.28,
+                  -51.04
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part006",
+                "point": [
+                  36.03,
+                  31.3,
+                  -50.04
+                ]
+              },
+              {
+                "wire": "USB-Camera",
+                "part": "Part007",
+                "point": [
+                  -27.44,
+                  -16.89,
+                  -39.77
+                ]
+              }
+            ]
+          }
+        },
+        "pair_contacts_among_fitted_paths": [
+          {
+            "wire": "motor3-return",
+            "other": "motor5-return",
+            "point": [
+              -8.86,
+              -0.09,
+              38.54
+            ],
+            "overlap_mm": 0.073
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-power",
+            "point": [
+              -7.04,
+              41.5,
+              12.85
+            ],
+            "overlap_mm": 0.908
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-data",
+            "point": [
+              -5.29,
+              38.02,
+              15.78
+            ],
+            "overlap_mm": 0.387
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor3-data",
+            "point": [
+              -16.78,
+              5.58,
+              120.46
+            ],
+            "overlap_mm": 0.533
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-return",
+            "point": [
+              -31.97,
+              -18.49,
+              -67.06
+            ],
+            "overlap_mm": 0.684
+          },
+          {
+            "wire": "motor3-data",
+            "other": "motor5-return",
+            "point": [
+              -11.11,
+              5.12,
+              33.54
+            ],
+            "overlap_mm": 0.562
+          },
+          {
+            "wire": "motor3-data",
+            "other": "USB-Camera",
+            "point": [
+              37.74,
+              38.18,
+              -51.67
+            ],
+            "overlap_mm": 1.594
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-power",
+            "point": [
+              -9.94,
+              20.07,
+              24.5
+            ],
+            "overlap_mm": 0.437
+          },
+          {
+            "wire": "motor5-power",
+            "other": "motor5-data",
+            "point": [
+              -15.45,
+              30.16,
+              -4.37
+            ],
+            "overlap_mm": 0.798
+          }
+        ]
+      }
+    },
+    {
+      "fixed_pose": [
+        -60,
+        -15,
+        8,
+        0,
+        0
+      ],
+      "endpoint_transform_error_mm": {
+        "motor3-return": 0.0,
+        "motor3-power": 0.0,
+        "motor3-data": 0.0,
+        "motor5-return": 0.0,
+        "motor5-power": 0.0,
+        "motor5-data": 0.0,
+        "USB-Camera": 0.0
+      },
+      "frozen_wire_jaw_replay": {
+        "motor3-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor3-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-return": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-power": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "motor5-data": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        },
+        "USB-Camera": {
+          "first_contact_deg": null,
+          "first_within_0_25mm_deg": null
+        }
+      },
+      "bend": {
+        "motor3-return": {
+          "raw_mm": 0.486,
+          "raw_point": [
+            -5.2,
+            46.56,
+            -54.02
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.169,
+            "point": [
+              19.22,
+              -13.97,
+              -32.48
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.327,
+              "point": [
+                -5.19,
+                46.55,
+                -54.03
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.785,
+              "point": [
+                -5.62,
+                46.65,
+                -54.24
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.128,
+              "point": [
+                -5.06,
+                46.48,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-power": {
+          "raw_mm": 0.968,
+          "raw_point": [
+            -3.21,
+            46.23,
+            -53.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.881,
+            "point": [
+              -27.37,
+              -3.86,
+              174.34
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.722,
+              "point": [
+                -3.17,
+                46.27,
+                -54.05
+              ]
+            },
+            "1.0": {
+              "radius_mm": 1.21,
+              "point": [
+                -3.46,
+                45.99,
+                -53.82
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.831,
+              "point": [
+                -3.05,
+                46.4,
+                -54.51
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor3-data": {
+          "raw_mm": 2.162,
+          "raw_point": [
+            -27.01,
+            -4.11,
+            178.16
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.32,
+            "point": [
+              21.12,
+              -15.67,
+              -32.6
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 1.432,
+              "point": [
+                21.13,
+                -15.68,
+                -32.65
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.167,
+              "point": [
+                -27.17,
+                -3.94,
+                177.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.59,
+              "point": [
+                -27.17,
+                -3.94,
+                177.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-return": {
+          "raw_mm": 0.771,
+          "raw_point": [
+            18.89,
+            46.3,
+            -54.7
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.241,
+            "point": [
+              -14.37,
+              18.76,
+              100.33
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.659,
+              "point": [
+                -13.35,
+                21.12,
+                100.41
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.852,
+              "point": [
+                18.72,
+                46.36,
+                -54.62
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.38,
+              "point": [
+                -13.74,
+                20.93,
+                100.43
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-power": {
+          "raw_mm": 0.854,
+          "raw_point": [
+            -13.52,
+            21.17,
+            97.92
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 4.193,
+            "point": [
+              -14.37,
+              18.77,
+              97.92
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.668,
+              "point": [
+                -13.35,
+                21.12,
+                97.92
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.944,
+              "point": [
+                -13.74,
+                20.93,
+                97.95
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                -13.74,
+                20.93,
+                97.95
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "motor5-data": {
+          "raw_mm": 0.853,
+          "raw_point": [
+            -13.52,
+            21.17,
+            95.44
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 3.252,
+            "point": [
+              24.55,
+              -14.54,
+              -32.68
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 0.662,
+              "point": [
+                -13.35,
+                21.13,
+                95.43
+              ]
+            },
+            "1.0": {
+              "radius_mm": 0.942,
+              "point": [
+                -13.74,
+                20.94,
+                95.49
+              ]
+            },
+            "2.0": {
+              "radius_mm": 1.382,
+              "point": [
+                -13.74,
+                20.94,
+                95.49
+              ]
+            }
+          },
+          "target_mm": 5.715
+        },
+        "USB-Camera": {
+          "raw_mm": 2.074,
+          "raw_point": [
+            9.71,
+            74.09,
+            -57.41
+          ],
+          "outside_terminal_3mm": {
+            "radius_mm": 2.701,
+            "point": [
+              25.98,
+              -18.79,
+              -56.86
+            ]
+          },
+          "resampled": {
+            "0.5": {
+              "radius_mm": 2.079,
+              "point": [
+                25.98,
+                -18.77,
+                -56.82
+              ]
+            },
+            "1.0": {
+              "radius_mm": 2.198,
+              "point": [
+                9.68,
+                74.15,
+                -57.42
+              ]
+            },
+            "2.0": {
+              "radius_mm": 2.837,
+              "point": [
+                10.24,
+                73.36,
+                -57.19
+              ]
+            }
+          },
+          "target_mm": 12.0
+        }
+      },
+      "guide_trial": {
+        "wires": {
+          "motor3-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.916,
+              "corner_and_cut_error_mm": 32.564
+            },
+            "length_fit": true,
+            "guide_shift_mm": 12.718,
+            "span_length_error_mm": 0.0,
+            "bend": {
+              "raw_mm": 0.486,
+              "raw_point": [
+                -5.2,
+                46.56,
+                -54.02
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.037,
+                "point": [
+                  18.12,
+                  -13.76,
+                  -31.84
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.327,
+                  "point": [
+                    -5.19,
+                    46.55,
+                    -54.03
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.785,
+                  "point": [
+                    -5.62,
+                    46.65,
+                    -54.24
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.128,
+                  "point": [
+                    -5.06,
+                    46.48,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-return",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  1.98,
+                  -19.87,
+                  86.74
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-return",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  1.98,
+                  -19.87,
+                  86.74
+                ]
+              }
+            ]
+          },
+          "motor3-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 34.863,
+              "corner_and_cut_error_mm": 33.475
+            },
+            "length_fit": true,
+            "guide_shift_mm": 15.93,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.968,
+              "raw_point": [
+                -3.21,
+                46.23,
+                -53.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.881,
+                "point": [
+                  -27.37,
+                  -3.86,
+                  174.34
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.722,
+                  "point": [
+                    -3.17,
+                    46.27,
+                    -54.05
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 1.21,
+                  "point": [
+                    -3.46,
+                    45.99,
+                    -53.82
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.831,
+                  "point": [
+                    -3.05,
+                    46.4,
+                    -54.51
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -4.07,
+                  -19.82,
+                  83.51
+                ]
+              },
+              {
+                "wire": "motor3-power",
+                "part": "ID6EH",
+                "point": [
+                  -4.88,
+                  -19.09,
+                  96.58
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-power",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  -4.07,
+                  -19.82,
+                  83.51
+                ]
+              },
+              {
+                "wire": "motor3-power",
+                "part": "ID6EH",
+                "point": [
+                  -4.88,
+                  -19.09,
+                  96.58
+                ]
+              }
+            ]
+          },
+          "motor3-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 38.384,
+              "corner_and_cut_error_mm": 36.987
+            },
+            "length_fit": true,
+            "guide_shift_mm": 11.866,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 2.162,
+              "raw_point": [
+                -27.01,
+                -4.11,
+                178.16
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 2.358,
+                "point": [
+                  22.42,
+                  -16.69,
+                  -33.29
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 1.459,
+                  "point": [
+                    -27.43,
+                    -3.67,
+                    177.63
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 2.167,
+                  "point": [
+                    -27.17,
+                    -3.94,
+                    177.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 2.59,
+                  "point": [
+                    -27.17,
+                    -3.94,
+                    177.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  4.19,
+                  -22.06,
+                  85.39
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor3-data",
+                "part": "Jaw_XL330_M288_Jaw",
+                "point": [
+                  4.28,
+                  -22.14,
+                  86.23
+                ]
+              }
+            ]
+          },
+          "motor5-return": {
+            "chord_slack_mm": {
+              "nominal_mm": 33.264,
+              "corner_and_cut_error_mm": 31.608
+            },
+            "length_fit": true,
+            "guide_shift_mm": 16.057,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.771,
+              "raw_point": [
+                18.89,
+                46.3,
+                -54.7
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 4.241,
+                "point": [
+                  -14.37,
+                  18.76,
+                  100.33
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.659,
+                  "point": [
+                    -13.35,
+                    21.12,
+                    100.41
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.852,
+                  "point": [
+                    18.72,
+                    46.36,
+                    -54.62
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.38,
+                  "point": [
+                    -13.74,
+                    20.93,
+                    100.43
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -4.93,
+                  -4.83,
+                  66.39
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-return",
+                "part": "Part011",
+                "point": [
+                  -5.16,
+                  -4.79,
+                  67.15
+                ]
+              }
+            ]
+          },
+          "motor5-power": {
+            "chord_slack_mm": {
+              "nominal_mm": 35.527,
+              "corner_and_cut_error_mm": 33.875
+            },
+            "length_fit": true,
+            "guide_shift_mm": 18.021,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.854,
+              "raw_point": [
+                -13.52,
+                21.17,
+                97.92
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.066,
+                "point": [
+                  -30.42,
+                  -24.45,
+                  17.15
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.668,
+                  "point": [
+                    -13.35,
+                    21.12,
+                    97.92
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.944,
+                  "point": [
+                    -13.74,
+                    20.93,
+                    97.95
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    -13.74,
+                    20.93,
+                    97.95
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -4.1,
+                  -3.83,
+                  67.64
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-power",
+                "part": "Part011",
+                "point": [
+                  -4.54,
+                  -3.81,
+                  69.19
+                ]
+              }
+            ]
+          },
+          "motor5-data": {
+            "chord_slack_mm": {
+              "nominal_mm": 39.73,
+              "corner_and_cut_error_mm": 38.093
+            },
+            "length_fit": true,
+            "guide_shift_mm": 15.532,
+            "span_length_error_mm": -0.0,
+            "bend": {
+              "raw_mm": 0.853,
+              "raw_point": [
+                -13.52,
+                21.17,
+                95.44
+              ],
+              "outside_terminal_3mm": {
+                "radius_mm": 3.027,
+                "point": [
+                  23.51,
+                  -14.35,
+                  -31.97
+                ]
+              },
+              "resampled": {
+                "0.5": {
+                  "radius_mm": 0.662,
+                  "point": [
+                    -13.35,
+                    21.13,
+                    95.43
+                  ]
+                },
+                "1.0": {
+                  "radius_mm": 0.942,
+                  "point": [
+                    -13.74,
+                    20.94,
+                    95.49
+                  ]
+                },
+                "2.0": {
+                  "radius_mm": 1.382,
+                  "point": [
+                    -13.74,
+                    20.94,
+                    95.49
+                  ]
+                }
+              },
+              "target_mm": 5.715
+            },
+            "within_0_25mm": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -3.78,
+                  -3.0,
+                  72.76
+                ]
+              }
+            ],
+            "new_nominal_contacts": [
+              {
+                "wire": "motor5-data",
+                "part": "Part011",
+                "point": [
+                  -4.08,
+                  -2.97,
+                  73.54
+                ]
+              }
+            ]
+          },
+          "USB-Camera": {
+            "chord_slack_mm": {
+              "nominal_mm": 3.241,
+              "corner_and_cut_error_mm": 1.515
+            },
+            "length_fit": false
+          }
+        },
+        "pair_contacts_among_fitted_paths": [
+          {
+            "wire": "motor3-return",
+            "other": "motor3-power",
+            "point": [
+              18.31,
+              -14.31,
+              -45.54
+            ],
+            "overlap_mm": 0.171
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor3-data",
+            "point": [
+              -1.49,
+              -15.91,
+              115.26
+            ],
+            "overlap_mm": 0.33
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-return",
+            "point": [
+              3.22,
+              -7.68,
+              39.69
+            ],
+            "overlap_mm": 0.851
+          },
+          {
+            "wire": "motor3-return",
+            "other": "motor5-power",
+            "point": [
+              -30.26,
+              -24.42,
+              13.33
+            ],
+            "overlap_mm": 0.871
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor3-data",
+            "point": [
+              -10.22,
+              -10.37,
+              141.34
+            ],
+            "overlap_mm": 0.561
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-return",
+            "point": [
+              -27.98,
+              -22.48,
+              -65.2
+            ],
+            "overlap_mm": 1.135
+          },
+          {
+            "wire": "motor3-power",
+            "other": "motor5-power",
+            "point": [
+              -18.56,
+              -21.21,
+              24.02
+            ],
+            "overlap_mm": 0.908
+          },
+          {
+            "wire": "motor5-return",
+            "other": "motor5-power",
+            "point": [
+              -25.9,
+              -23.64,
+              22.13
+            ],
+            "overlap_mm": 1.123
+          },
+          {
+            "wire": "motor5-power",
+            "other": "motor5-data",
+            "point": [
+              -30.32,
+              -21.7,
+              -62.53
+            ],
+            "overlap_mm": 1.101
+          }
+        ]
+      }
+    }
+  ],
+  "chin_relief_probe": {
+    "ellipsoids_center_and_radii_mm": [
+      [
+        [
+          -39.5,
+          -23.5,
+          20.0
+        ],
+        [
+          11.0,
+          7.0,
+          8.0
+        ]
+      ],
+      [
+        [
+          29.0,
+          -31.0,
+          12.0
+        ],
+        [
+          14.0,
+          9.0,
+          8.5
+        ]
+      ]
+    ],
+    "removed_mm3": 1993.888,
+    "frontal_and_side_rays": {
+      "front": {
+        "shared_rays": 2172,
+        "changed_over_0_1mm": 6,
+        "lost_surface_rays": 34,
+        "maximum_difference_mm": 8.483
+      },
+      "left": {
+        "shared_rays": 433,
+        "changed_over_0_1mm": 58,
+        "lost_surface_rays": 6,
+        "maximum_difference_mm": 87.064
+      },
+      "right": {
+        "shared_rays": 433,
+        "changed_over_0_1mm": 78,
+        "lost_surface_rays": 6,
+        "maximum_difference_mm": 72.388
+      }
+    },
+    "remaining_wall_on_sampled_cut_faces": [
+      {
+        "samples": 267,
+        "inward_ray_min_mm": 0.642,
+        "inward_ray_p05_mm": 1.567
+      },
+      {
+        "samples": 242,
+        "inward_ray_min_mm": 0.716,
+        "inward_ray_p05_mm": 1.629
+      }
+    ],
+    "frozen_replays": [
+      {
+        "fixed_pose": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "wires": {
+          "motor3-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "USB-Camera": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          }
+        }
+      },
+      {
+        "fixed_pose": [
+          0,
+          6,
+          -8,
+          0,
+          0
+        ],
+        "wires": {
+          "motor3-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "USB-Camera": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          }
+        }
+      },
+      {
+        "fixed_pose": [
+          45,
+          6,
+          -8,
+          0,
+          0
+        ],
+        "wires": {
+          "motor3-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "USB-Camera": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          }
+        }
+      },
+      {
+        "fixed_pose": [
+          60,
+          6,
+          -8,
+          0,
+          0
+        ],
+        "wires": {
+          "motor3-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "USB-Camera": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          }
+        }
+      },
+      {
+        "fixed_pose": [
+          60,
+          6,
+          -8,
+          30,
+          0
+        ],
+        "wires": {
+          "motor3-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "USB-Camera": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          }
+        }
+      },
+      {
+        "fixed_pose": [
+          -60,
+          -15,
+          8,
+          0,
+          0
+        ],
+        "wires": {
+          "motor3-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor3-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-return": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-power": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "motor5-data": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          },
+          "USB-Camera": {
+            "first_contact_deg": null,
+            "first_within_0_25mm_deg": null
+          }
+        }
+      }
+    ]
+  }
+}
