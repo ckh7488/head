@@ -39,6 +39,24 @@ def test_nominal_check_flags_31_degrees_when_60_was_expected():
     ]
 
 
+@pytest.mark.parametrize('opening_tick', [1908, 1852, 2092])
+def test_jaw_calibration_rejects_more_than_91_ticks(opening_tick):
+    assert list(issues(replaced_axis(5, (2000, 2000, opening_tick)))) == [
+        'ID 6 jaw opening exceeds 8° (91 ticks). Recalibrate the jaw.',
+    ]
+
+
+@pytest.mark.parametrize('row', [(2219, 2048, 1979), (1877, 2048, 2117)])
+def test_pitch_calibration_rejects_more_than_68_ticks_of_positive_travel(row):
+    assert list(issues(replaced_axis(4, row))) == [
+        'ID 5 neck-pitch positive travel exceeds 6° (68 ticks). Recalibrate the positive endpoint.',
+    ]
+
+
+def test_pitch_positive_limit_does_not_change_negative_travel():
+    assert not list(issues(replaced_axis(4, (2276, 2048, 1980))))
+
+
 def test_initializer_requires_six_integer_rows(tmp_path: Path):
     path = tmp_path/'Calibration.h'
     path.write_text('constexpr Calibration calibration[] = {{0, 10, 20}};')

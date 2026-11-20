@@ -414,6 +414,7 @@ def simulate(cad_dir, grams_file, output):
 
 def simulate_jaw_touch(cad_dir, grams_file, output):
     cad = json.loads((cad_dir / 'cad_parts.json').read_text())
+    stop = cad['motion_geometry'].get('jaw_stop')
     bodies, _, _ = load_bodies(cad, cad_dir, json.loads(grams_file.read_text()))
     motor = motor_parameters([12., 12., 5.], .85)
     xml = ET.fromstring(model_xml(bodies, pos(cad['jaw_pivot_mm']), motor, NORMAL_FRICTION))
@@ -422,11 +423,16 @@ def simulate_jaw_touch(cad_dir, grams_file, output):
         body = xml.find(f'.//body[@name="{name}"]')
         body.remove(body.find('joint'))
         actuators.remove(actuators.find(f'motor[@joint="{name}"]'))
+    if stop:
+        stop_joint = xml.find('.//joint[@name="jaw"]')
+        stop_joint.set('limited', 'true')
+        stop_joint.set('range', f'{np.deg2rad(-10.)} {np.deg2rad(stop["nominal_contact_deg"])}')
     xml = ET.tostring(xml, encoding='unicode')
     (output / 'jaw-touch.xml').write_text(xml)
     model = mj.MjModel.from_xml_string(xml)
     dt = model.opt.timestep
-    lever, opening, cycle_start = .058, 10., .2
+    lever, cycle_start = .058, .2
+    opening = stop['software_open_deg'] if stop else 10.
     _, travel_time = jaw_profile_move(0., opening)
     close_start = cycle_start + travel_time + .12
     touch_start = close_start + .075
@@ -476,6 +482,7 @@ def simulate_jaw_touch(cad_dir, grams_file, output):
         trials[label] = {
             'external_peak_force_N': force,
             'external_peak_torque_Nm': force * lever,
+            'maximum_opening_deg': float(trace[:, 3].max()),
             'maximum_angle_lag_vs_baseline_deg': float(max(trace[in_touch, 3] - baseline[in_touch])),
             'motor_torque_peak_during_touch_Nm': float(max(abs(trace[in_touch, 7]))),
             'motor_saturation_during_touch_percent': float(100 * np.mean(trace[in_touch, 9])),
@@ -487,6 +494,7 @@ def simulate_jaw_touch(cad_dir, grams_file, output):
         'source_sha256': cad['source_sha256'], 'sliced_grams_sha256': sha256(grams_file.read_bytes()).hexdigest(),
         'mujoco_version': mj.__version__, 'nominal_jaw_supply_V': 5., 'motor_derating_factor': .85,
         'lever_mm': lever * 1000, 'jaw_opening_command_deg': opening,
+        'nominal_jaw_opening_stop_deg': stop['nominal_contact_deg'] if stop else None,
         'pulse_start_s': touch_start, 'pulse_duration_s': touch_time,
         'scope': ('Neck supported at neutral. A smooth opening torque resists closure and then releases. '
                   'The specified input force produces a modeled motion and motor demand. '

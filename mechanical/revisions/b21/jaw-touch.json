@@ -1,0 +1,59 @@
+{
+  "source_sha256": "9ed25081889f5846ff2d7c70c99e39580195da25de1857a4c046a16143fdfe02",
+  "sliced_grams_sha256": "4fd188ed06d905fc93260bb70d352ee309bc41a059a7fa8920203a25ef55ddd1",
+  "mujoco_version": "3.3.7",
+  "nominal_jaw_supply_V": 5.0,
+  "motor_derating_factor": 0.85,
+  "lever_mm": 58.0,
+  "jaw_opening_command_deg": 8.0,
+  "nominal_jaw_opening_stop_deg": 9.404137747628349,
+  "pulse_start_s": 0.5880871662728935,
+  "pulse_duration_s": 0.15,
+  "scope": "Neck supported at neutral. A smooth opening torque resists closure and then releases. The specified input force produces a modeled motion and motor demand. Pinch force and automatic stopping require separate evidence.",
+  "trials": {
+    "0N": {
+      "external_peak_force_N": 0.0,
+      "external_peak_torque_Nm": 0.0,
+      "maximum_opening_deg": 8.509881688734142,
+      "maximum_angle_lag_vs_baseline_deg": 0.0,
+      "motor_torque_peak_during_touch_Nm": 0.017624717735678384,
+      "motor_saturation_during_touch_percent": 0.0,
+      "pause_or_reversal_during_closing_ms": 0.0,
+      "angle_at_touch_release_deg": 0.9886466047367516,
+      "angle_250_ms_after_release_deg": 0.9878834867690018
+    },
+    "0.25N": {
+      "external_peak_force_N": 0.25,
+      "external_peak_torque_Nm": 0.0145,
+      "maximum_opening_deg": 8.509881688734142,
+      "maximum_angle_lag_vs_baseline_deg": 0.9032935798840822,
+      "motor_torque_peak_during_touch_Nm": 0.027900107957736765,
+      "motor_saturation_during_touch_percent": 0.0,
+      "pause_or_reversal_during_closing_ms": 0.0,
+      "angle_at_touch_release_deg": 1.381281467458976,
+      "angle_250_ms_after_release_deg": 1.1738732720949017
+    },
+    "0.5N": {
+      "external_peak_force_N": 0.5,
+      "external_peak_torque_Nm": 0.029,
+      "maximum_opening_deg": 8.509881688734142,
+      "maximum_angle_lag_vs_baseline_deg": 1.8064891660603366,
+      "motor_torque_peak_during_touch_Nm": 0.04347767740286815,
+      "motor_saturation_during_touch_percent": 0.0,
+      "pause_or_reversal_during_closing_ms": 0.0,
+      "angle_at_touch_release_deg": 1.6139821458956978,
+      "angle_250_ms_after_release_deg": 1.1513008480608051
+    },
+    "1N": {
+      "external_peak_force_N": 1.0,
+      "external_peak_torque_Nm": 0.058,
+      "maximum_opening_deg": 8.509881688734142,
+      "maximum_angle_lag_vs_baseline_deg": 3.1605506666094207,
+      "motor_torque_peak_during_touch_Nm": 0.06444068689356497,
+      "motor_saturation_during_touch_percent": 0.0,
+      "pause_or_reversal_during_closing_ms": 34.0,
+      "angle_at_touch_release_deg": 2.0912381245911202,
+      "angle_250_ms_after_release_deg": 1.1095849686146695
+    }
+  }
+}

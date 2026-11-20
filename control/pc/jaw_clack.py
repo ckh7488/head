@@ -3,19 +3,10 @@
 from argparse import ArgumentParser
 import time
 
-from track import AXES, UsbController
+from track import AXES, JAW_MAX_DEGREES, UsbController
 
 
-def check_neck_neutral(controller):
-    controller.send('CHECK_NECK')
-    deadline = time.monotonic() + 1
-    while time.monotonic() < deadline:
-        for line in controller.lines():
-            if line == 'NECK_NEUTRAL':
-                return
-            if line.startswith('ERROR'):
-                raise RuntimeError(line)
-    raise RuntimeError('OpenRB did not confirm neck position. Update the firmware and retry.')
+DEMO_MASK = (1 << AXES.index('neck-yaw')) | (1 << AXES.index('neck-pitch')) | (1 << len(AXES))
 
 
 def move(controller, target):
@@ -37,13 +28,15 @@ def main():
     parser.add_argument('--serial', required=True)
     parser.add_argument('--drive', action='store_true', required=True)
     args = parser.parse_args()
-    controller = UsbController(args.serial, 1 << len(AXES))
+    controller = UsbController(args.serial, DEMO_MASK)
     ready = False
     try:
-        controller.start(before_arm=check_neck_neutral)
+        controller.start(jaw_demo=True)
         ready = True
-        for angle in (0, 10, 0, 13, 0):
+        for angle in (0, 6, 0, JAW_MAX_DEGREES, 0):
             move(controller, angle)
+    except RuntimeError as error:
+        parser.exit(1, f'{error}\n')
     finally:
         if ready:
             controller.close()

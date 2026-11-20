@@ -1,0 +1,668 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "check": "fastener_stock",
+      "status": "pass",
+      "failures": [],
+      "unknown": [],
+      "vendor_interfaces": {
+        "openrbBolt0": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbBolt1": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbBolt2": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbBolt3": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbNut0": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbNut1": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbNut2": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "openrbNut3": {
+          "host": "Part069",
+          "mount": "supplied PCB through hole",
+          "source": "https://emanual.robotis.com/docs/en/parts/controller/openrb-150/",
+          "sections_at_0p20_mm": 8,
+          "diameter_mm_bounds": [
+            2.399,
+            2.4
+          ]
+        },
+        "XL430YawSideL0": {
+          "host": "Part017",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 19,
+          "diameter_mm_bounds": [
+            2.099,
+            2.5
+          ]
+        },
+        "XL430YawSideL1": {
+          "host": "Part017",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 19,
+          "diameter_mm_bounds": [
+            2.099,
+            2.5
+          ]
+        },
+        "XL430YawSideR0": {
+          "host": "Part017",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 18,
+          "diameter_mm_bounds": [
+            2.099,
+            2.1
+          ]
+        },
+        "XL430YawSideR1": {
+          "host": "Part017",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 18,
+          "diameter_mm_bounds": [
+            2.099,
+            2.1
+          ]
+        },
+        "hornBolt0": {
+          "host": "Part017",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 15,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "hornBolt1": {
+          "host": "Part017",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 15,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "hornBolt2": {
+          "host": "Part017",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 15,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "hornBolt3": {
+          "host": "Part017",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 15,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "pitchHornBolt0": {
+          "host": "Part018",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "pitchHornBolt1": {
+          "host": "Part018",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "pitchHornBolt2": {
+          "host": "Part018",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "pitchHornBolt3": {
+          "host": "Part018",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.999,
+            2.2
+          ]
+        },
+        "XL430PitchSide0": {
+          "host": "Part018",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 18,
+          "diameter_mm_bounds": [
+            2.099,
+            2.3
+          ]
+        },
+        "XL430PitchSide1": {
+          "host": "Part018",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 18,
+          "diameter_mm_bounds": [
+            2.099,
+            2.3
+          ]
+        },
+        "XL430PitchKeeper0": {
+          "host": "Part018",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 10,
+          "diameter_mm_bounds": [
+            2.099,
+            2.3
+          ]
+        },
+        "XL430PitchKeeper1": {
+          "host": "Part018",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/",
+          "sections_at_0p20_mm": 10,
+          "diameter_mm_bounds": [
+            2.099,
+            2.3
+          ]
+        },
+        "eyePitchHead0": {
+          "host": "Part041",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "eyePitchHead1": {
+          "host": "Part041",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "eyePitchHead2": {
+          "host": "Part041",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "eyePitchHead3": {
+          "host": "Part041",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "EyePitchHornScrew0": {
+          "host": "Part041",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 12,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "EyePitchHornScrew1": {
+          "host": "Part041",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 12,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "blinkMotorHead0": {
+          "host": "Part045",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 25,
+          "diameter_mm_bounds": [
+            1.599,
+            2.0
+          ]
+        },
+        "blinkMotorHead1": {
+          "host": "Part045",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "blinkMotorHead2": {
+          "host": "Part045",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 26,
+          "diameter_mm_bounds": [
+            1.599,
+            2.0
+          ]
+        },
+        "blinkMotorHead3": {
+          "host": "Part045",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "BlinkHornScrew0": {
+          "host": "Part045",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "BlinkHornScrew1": {
+          "host": "Part045",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "eyeYawHead0": {
+          "host": "Part038",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "eyeYawHead1": {
+          "host": "Part038",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 26,
+          "diameter_mm_bounds": [
+            1.599,
+            2.0
+          ]
+        },
+        "eyeYawHead2": {
+          "host": "Part038",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "eyeYawHead3": {
+          "host": "Part038",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "EyeYawHornScrew0": {
+          "host": "Part038",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 13,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "EyeYawHornScrew1": {
+          "host": "Part038",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 13,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "EyeYawHornScrew2": {
+          "host": "Part038",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+          "sections_at_0p20_mm": 13,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "jawMotorHead0": {
+          "host": "Jaw_XL330_M288_Jaw",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 26,
+          "diameter_mm_bounds": [
+            1.599,
+            2.0
+          ]
+        },
+        "jawMotorHead1": {
+          "host": "Jaw_XL330_M288_Jaw",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "jawMotorHead2": {
+          "host": "Jaw_XL330_M288_Jaw",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 16,
+          "diameter_mm_bounds": [
+            1.999,
+            2.0
+          ]
+        },
+        "jawMotorHead3": {
+          "host": "Jaw_XL330_M288_Jaw",
+          "mount": "case",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 24,
+          "diameter_mm_bounds": [
+            1.599,
+            2.0
+          ]
+        },
+        "JawHornScrew0": {
+          "host": "Jaw_XL330_M288_Jaw",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        },
+        "JawHornScrew1": {
+          "host": "Jaw_XL330_M288_Jaw",
+          "mount": "horn",
+          "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+          "sections_at_0p20_mm": 14,
+          "diameter_mm_bounds": [
+            1.599,
+            1.6
+          ]
+        }
+      },
+      "stock": {
+        "bolt M2 × 5": 5,
+        "bolt M2 × 6": 20,
+        "bolt M2 × 8": 12,
+        "bolt M2.5 × 8": 6,
+        "bolt M2.5 × 10": 2,
+        "bolt M3 × 3": 7,
+        "bolt M3 × 8": 37,
+        "bolt M3 × 16": 27,
+        "nut M2": 4,
+        "nut M3": 54,
+        "washer M3": 2
+      }
+    },
+    {
+      "check": "assembly_path_and_tools",
+      "status": "pass",
+      "failures": [],
+      "unknown": [],
+      "steps": 122
+    },
+    {
+      "check": "rigid_motion",
+      "status": "pass",
+      "failures": [],
+      "unknown": [],
+      "sampled_poses": 26408
+    },
+    {
+      "check": "smooth_pivot_fit",
+      "status": "pass",
+      "failures": [],
+      "unknown": [],
+      "mating_bores": {
+        "BlinkPivotDrive": {
+          "Part056": {
+            "sections_at_0p20_mm": 15,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part054": {
+            "sections_at_0p20_mm": 12,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        },
+        "BlinkPivotLowerL": {
+          "Part078": {
+            "sections_at_0p20_mm": 16,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part057": {
+            "sections_at_0p20_mm": 12,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        },
+        "BlinkPivotLowerR": {
+          "Part079": {
+            "sections_at_0p20_mm": 16,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part060": {
+            "sections_at_0p20_mm": 12,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        },
+        "BlinkPivotServo": {
+          "Part047": {
+            "sections_at_0p20_mm": 7,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part056": {
+            "sections_at_0p20_mm": 22,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        },
+        "BlinkPivotUpperL": {
+          "Part053": {
+            "sections_at_0p20_mm": 16,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part057": {
+            "sections_at_0p20_mm": 12,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        },
+        "BlinkPivotUpperR": {
+          "Part055": {
+            "sections_at_0p20_mm": 14,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part060": {
+            "sections_at_0p20_mm": 12,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        },
+        "EyeYawDrivePivot": {
+          "Part037": {
+            "sections_at_0p20_mm": 12,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          },
+          "Part040": {
+            "sections_at_0p20_mm": 11,
+            "diameter_mm_bounds": [
+              2.089,
+              2.09
+            ]
+          }
+        }
+      },
+      "axial_float_mm": {
+        "BlinkPivotDrive": 0.2,
+        "BlinkPivotLowerL": 0.2,
+        "BlinkPivotLowerR": 0.2,
+        "BlinkPivotServo": 0.2,
+        "BlinkPivotUpperL": 0.2,
+        "BlinkPivotUpperR": 0.2,
+        "EyeYawDrivePivot": 0.2
+      },
+      "scope": "CAD finished sizes and smooth pin geometry; machining fit remains a physical inspection"
+    },
+    {
+      "check": "light_touch",
+      "status": "pass",
+      "failures": [],
+      "unknown": [],
+      "cases": 8,
+      "scope": "numerical joint/load model, not measured servo output or printed durability"
+    }
+  ]
+}

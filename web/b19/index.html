@@ -19,7 +19,7 @@
     <section id="stage">
       <canvas id="view"></canvas>
       <div id="loading" role="status">모델을 불러오는 중…</div>
-      <div id="legend"><i class="b19"></i>추가 체결품·핀 <i class="moving"></i>이번 단계에 넣는 부품</div>
+      <div id="legend"><i class="b19"></i>추가 체결품·핀 <i class="moving"></i>이번 단계에 넣는 부품 <span id="tool-legend" hidden><i class="tool"></i>검사한 공구 경로</span></div>
     </section>
     <aside id="card">
       <div id="meta"></div>
@@ -33,6 +33,7 @@
         <button id="next" title="다음 단계 (→)">▶</button>
         <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="부품 위치">
       </div>
+      <label id="tool-view" hidden>공구 보기 <select id="tool-select"></select></label>
       <label id="display"><input id="hide-exterior" type="checkbox"> 외장 숨기기</label>
       <p class="hint">드래그로 돌리고, 휠로 확대합니다. 오른쪽 버튼 드래그로 옮깁니다.</p>
     </aside>

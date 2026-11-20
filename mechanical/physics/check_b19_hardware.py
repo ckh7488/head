@@ -16,7 +16,7 @@ from shapely.geometry import Polygon
 import trimesh as tr
 from trimesh.collision import mesh_to_BVH
 
-from check_head import ANGLES, AXES_BY_MOTION, pose
+from check_head import ANGLES, AXES_BY_MOTION, pose, sweep_angles
 
 
 def cylinder(radius, height, start, axis):
@@ -63,6 +63,7 @@ def yaw_gaps(world, kinds, items):
 
 def sweep(cad, spec):
     layout = json.loads((cad/'cad_parts.json').read_text())
+    sampled_angles = sweep_angles(layout)
     kinds = layout['world_motion']
     world = cad/'world'
     meshes = {}
@@ -92,7 +93,7 @@ def sweep(cad, spec):
             axes = sorted(set(AXES_BY_MOTION.get(mode, ())) | set(AXES_BY_MOTION.get(kinds[name], ()))) \
                 if mode != kinds[name] else []
             best = float('inf')
-            for values in product(*(ANGLES[i] for i in axes)):
+            for values in product(*(sampled_angles[i] for i in axes)):
                 angles = np.zeros(len(ANGLES))
                 angles[axes] = values
                 tx = np.linalg.solve(pose(kinds[name], angles, layout), pose(mode, angles, layout))

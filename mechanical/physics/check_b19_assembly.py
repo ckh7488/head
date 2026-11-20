@@ -1,4 +1,4 @@
-"""Walk the B19/B20 assembly procedure and check each move against the installed parts.
+"""Check each assembly move against the parts already installed.
 
 Each step places parts, drives screws, starts nuts or pushes pins. The checker keeps one
 set of installed parts per work context (the base, the neck on the bench, the eye module
@@ -16,6 +16,7 @@ Run export_cad.py --world on the assembly and dump steps.js hardware first. The 
 collisions and short tool access. Pass --revision b19 to reproduce the earlier plan.
 """
 from argparse import ArgumentParser
+from hashlib import sha256
 import json
 import re
 from pathlib import Path
@@ -33,6 +34,7 @@ OVERLAP_LIMIT = .05
 PATH_SAMPLE_MM = .25
 EYE_TIE_TRAVEL_ERRORS_MM = {'slide': .5, 'lower': .15}
 KEY_RADIUS = {2: .8, 2.5: 1.05, 3: 1.3}
+B21_KEY_RADII = {2: .89, 2.5: 1.17, 3: 1.48}
 HEAD = {2: (1.93, 2.), 2.5: (2.25, 2.5), 3: (2.78, 3.)}
 NUT = {2: (4., 1.6), 2.5: (5., 2.), 3: (5.5, 2.4)}
 SPANNER_WIDTH = {2: 7., 2.5: 8., 3: 9.}
@@ -259,7 +261,116 @@ B20_CHANGES = {
     },
 }
 PLAN = [dict(row, **B20_CHANGES.get(row['id'], {})) for row in B19_PLAN]
-PLANS = {'b19': B19_PLAN, 'b20': PLAN}
+
+B21_CHANGES = {
+    'rear-guide-bolts': {
+        'text': '뒤에서 M3×16 두 개를 넣습니다. 받침 위로 5.5 mm 소켓을 내려 넣고 안쪽에서 뒤쪽 너트에 밀어 끼워 잡습니다.',
+        'socket_inset_mm': 8.,
+    },
+    'rotor-studs': {
+        'text': '아래에서 M3×16 네 개를 올립니다. 위 너트의 평평한 두 면을 앞뒤로 향하게 하고 스패너로 움직이지 않게 잡습니다. 아래에서 2.5 mm 육각렌치로 볼트를 조입니다.',
+        'set_nut_phases': dict.fromkeys(g('rotorNut', 4), -30),
+        'paired_drivers': list(zip(g('rotorNut', 4), g('mastStud', 4), strict=True)),
+    },
+    'c3-board': {'text': '선택 · 왼쪽 C3 캐리어 27을 작업대에 둡니다.'},
+    'c3-bolts': {'text': 'C3 클램프 두 개를 M3×8 나사와 일반 M3 너트로 고정합니다.'},
+    'id5-keeper': {'text': 'ID5 플러그를 꽂고 가드를 바깥에서 댑니다.'},
+    'id5-keeper-screws': {
+        'text': '가드를 새 M3 탭 두 곳에 M3×8로 고정하고, 본체에 물리는 두 곳은 모터 규격 M2.5×10으로 조입니다.',
+    },
+    'blink-horn': {
+        'text': '링크를 단 혼을 모터의 출력 플랜지에 댑니다. 모터 전원을 끈 상태에서 플랜지를 돌려 두 나사 구멍을 먼저 맞춥니다.',
+    },
+    'blink-horn-link': {
+        'text': '작업대에서 혼 19와 구동 링크 22의 핀 구멍을 맞춥니다.',
+    },
+    'blink-horn-link-nut': {
+        'text': '연마 핀을 넣고 링크가 돌아가는지 확인합니다. M3 무두나사는 핀이 옆으로 빠지지 않게 막는 깊이까지만 조입니다.',
+        'pins': (['BlinkPivotServo'], (10, 0, 0)),
+        'nuts': ([], (0, 0, 0)),
+        'bolts': ['BlinkPivotServoRetainer'],
+    },
+    'blink-center-crank': {
+        'text': '가운데 크랭크 21-2와 구동 링크의 핀 구멍을 맞춥니다.',
+    },
+    'blink-center-crank-nut': {
+        'text': '평행핀과 M3 무두나사를 끼워 링크를 연결합니다.',
+        'pins': (['BlinkPivotDrive'], (10, 0, 0)),
+        'nuts': ([], (0, 0, 0)),
+        'bolts': ['BlinkPivotDriveRetainer'],
+    },
+    'eye-cradle': {'text': '작업대에 눈 크래들 12를 둡니다.'},
+    'eye-tie-bolt': {
+        'text': '눈 좌우 혼의 아래쪽에서 평행핀을 넣고 M3 무두나사를 끼워 타이바를 연결합니다. 연결부가 손으로 움직이는지 확인합니다.',
+        'pins': (['EyeYawDrivePivot'], (0, 0, -10)),
+        'nuts': ([], (0, 0, 0)),
+        'bolts': ['EyeYawDrivePivotRetainer'],
+    },
+    'blink-lid-links': {
+        'text': '양쪽 짧은 링크 23을 크랭크에 대고 핀 구멍을 맞춥니다.',
+    },
+    'blink-lid-link-nuts': {
+        'text': '양쪽 크랭크 관절의 평행핀을 가운데 쪽에서 넣고 M3 무두나사로 빠짐을 막습니다.',
+        'pins': (['BlinkPivotUpperL'], (10, 0, 0)),
+        'pins2': (['BlinkPivotUpperR'], (-10, 0, 0)),
+        'nuts': ([], (0, 0, 0)),
+        'nuts2': ([], (0, 0, 0)),
+        'bolts': ['BlinkPivotUpperLRetainer', 'BlinkPivotUpperRRetainer'],
+    },
+    'blink-lower-joints': {
+        'text': '두 눈을 정면으로 둡니다. 전원을 끈 상태에서 링크와 양쪽 눈꺼풀을 완전히 닫아 핀 구멍을 맞춥니다. 가운데 쪽에서 평행핀과 M3 무두나사를 끼운 뒤 손으로 열고 닫아 걸림을 확인합니다.',
+        'blink_deg': 90.,
+        'blink_access_checks_deg': [85., 87.5],
+        'pins': (['BlinkPivotLowerL'], (10, 0, 0)),
+        'pins2': (['BlinkPivotLowerR'], (-10, 0, 0)),
+        'nuts': ([], (0, 0, 0)),
+        'nuts2': ([], (0, 0, 0)),
+        'bolts': ['BlinkPivotLowerLRetainer', 'BlinkPivotLowerRRetainer'],
+    },
+    'mast-nuts': {
+        'text': '기둥 옆 열린 통로로 5.5 mm 스패너 두 개를 넣습니다. 아래 너트를 한 스패너로 잡고, 위 너트를 다른 스패너로 조입니다. 네 곳을 같은 방법으로 조입니다.',
+        'paired_nuts': list(zip(g('rotorNut', 4), g('mastNut', 4), strict=True)),
+    },
+    'jaw-body': {
+        'text': '턱의 오른쪽 받침 37과 베어링을 뒤쪽 위에서 비스듬히 내려 맞춥니다.',
+        'place': (['Jaw_37_right_jaw_bearing_stay', 'Jaw_MR104ZZ_jaw_right'], (0, 12, 12)),
+    },
+}
+
+SPANNER_STAGES = {'rear-cover-bolts', 'hatch-bolts', 'rotor-studs', 'yoke-bolts', 'blink-clamps', 'mast-nuts'}
+SOCKET_STAGES = {'rear-guide-bolts', 'hub-bolts', 'c3-bolts', 'c3-carrier-bolts', 'openrb-bolts', 'openrb-carrier-bolts',
+                 'keeper-bolts', 'bearing-seat-bolts', 'base-deck-bolts', 'blink-rail-bolts'}
+
+
+def b21_plan():
+    revised = []
+    for original in PLAN:
+        sid = original['id']
+        if sid == 'id5-nuts':
+            continue
+        if sid == 'c3-bolts':
+            revised.append(step('c3-clamps', 'c3', 'C3 기판 양쪽에 클램프를 위에서 댑니다.',
+                                place=(g('C3Clamp', 2), (0, 0, 15))))
+        row = dict(original, **B21_CHANGES.get(sid, {}))
+        for role in ('nuts', 'nuts2'):
+            if role in row and not row[role][0]:
+                row.pop(role)
+        mode = ('spanner',) if sid in SPANNER_STAGES else ('socket',) if sid in SOCKET_STAGES else ('socket', 'spanner')
+        targets = [name for role in ('nuts', 'nuts2') for name in row.get(role, ([], None))[0]
+                   if 'washer' not in name.lower()]
+        if sid == 'mast-nuts':
+            targets += g('rotorNut', 4)
+        if targets:
+            row['hold_nuts'] = dict.fromkeys(targets, mode)
+        revised.append(row)
+    return revised
+
+
+PLANS = {'b19': B19_PLAN, 'b20': PLAN, 'b21': b21_plan()}
+
+
+def plan_hash(plan):
+    return sha256(json.dumps(plan, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
 
 def cylinder(radius, height, start, axis):
@@ -293,8 +404,22 @@ class World:
         self.world = cad/'world'
         self.rows = {row['id']: row for row in hardware if not row.get('tool')}
         self.screws = dict(CAD_SCREWS)
+        self.headless = {}
+        self.neutral_nuts = {}
+        self.layout = None
         for item in spec:
             shapes = item['shapes']
+            if item.get('kind') == 'set_screw':
+                ((section, radius, length, start, outward),) = shapes
+                if section != 'cyl' or item['key_af_mm'] <= 0:
+                    raise ValueError(f'Invalid headless fastener geometry: {item["name"]}')
+                axis = np.asarray(outward, float)
+                end = np.asarray(start) + axis*length
+                self.screws[item['name']] = (2*radius, length, tuple(end), tuple(-axis))
+                self.headless[item['name']] = item['key_af_mm']
+                continue
+            if item.get('kind') in ('pin', 'retainer', 'washer', 'nut'):
+                continue
             if shapes[0][0] != 'cyl' or len(shapes) < 2:
                 continue
             radius, height, start, axis = shapes[0][1:]
@@ -303,7 +428,15 @@ class World:
             self.screws[item['name']] = (size, round(shapes[1][2]+.1, 2), tuple(seat), tuple(axis))
         self.cache = {}
 
-    def screw(self, name):
+    def reference_nut(self, name):
+        return self.neutral_nuts[name] if name in self.neutral_nuts else self.mesh(name)
+
+    def accept_nut(self, name, mesh):
+        if name not in self.neutral_nuts:
+            self.neutral_nuts[name] = self.mesh(name)
+        self.cache[name] = mesh
+
+    def neutral_screw(self, name):
         if name in self.screws:
             return self.screws[name]
         row = self.rows[name]
@@ -314,10 +447,43 @@ class World:
             return row['size'], length, tuple(row['seat']), tuple(row['axis'])
         return row['size'], row['length'], tuple(row['seat']), tuple(row['axis'])
 
+    blink_pose = None
+
+    def blink_transform(self, name):
+        if self.blink_pose is None:
+            return None
+        kind = self.layout['world_motion'].get(name, '')
+        if name.startswith(('crankBolt', 'crankNut')):
+            kind = 'blink_shaft_crank'
+        if not kind.startswith(('blink_', 'lid')):
+            return None
+        from check_head import pose
+
+        return pose(kind, (0., 0., 0., self.blink_pose, 0.), self.layout)
+
+    def screw(self, name):
+        size, length, seat, axis = self.neutral_screw(name)
+        motion = self.blink_transform(name)
+        if motion is not None:
+            seat = tuple(motion[:3, :3] @ np.asarray(seat) + motion[:3, 3])
+            axis = tuple(motion[:3, :3] @ np.asarray(axis))
+        return size, length, seat, axis
+
     closed = False
     limit = OVERLAP_LIMIT
 
     def mesh(self, name):
+        motion = self.blink_transform(name)
+        if motion is not None:
+            key = ('blink', self.blink_pose, name)
+            if key not in self.cache:
+                saved = self.blink_pose
+                self.blink_pose = None
+                try:
+                    self.cache[key] = self.mesh(name).copy().apply_transform(motion)
+                finally:
+                    self.blink_pose = saved
+            return self.cache[key]
         if self.closed and name in ('Part078', 'Part079'):
             key = ('closed', name)
             if key not in self.cache:
@@ -329,7 +495,9 @@ class World:
             return self.cache[key]
         if name in self.cache:
             return self.cache[name]
-        if name in self.screws or (name in self.rows and self.rows[name]['type'] in ('bolt', 'head')):
+        if name in self.headless:
+            mesh = tr.load_mesh(self.world/f'{name}.stl')
+        elif name in self.screws or (name in self.rows and self.rows[name]['type'] in ('bolt', 'head')):
             mesh = screw_mesh(*self.screw(name))
         elif name in self.rows:
             row = self.rows[name]
@@ -450,11 +618,13 @@ def travel_clearance(world, moving, fixed, start, end, *, starts_outside):
     return nearest, lower_bound, nearest_pair, nearest_position.round(3).tolist()
 
 
-def key_access(world, name, installed):
+def key_access(world, name, installed, radii=KEY_RADIUS):
     size, _, seat, axis = world.screw(name)
     axis = np.asarray(axis, float)
-    top = np.asarray(seat) - axis*HEAD[size][1]
-    probe = cylinder(KEY_RADIUS[size], 2., top - axis*2.05, -axis)
+    headless = world.headless.get(name)
+    top = np.asarray(seat) - axis*(0 if headless else HEAD[size][1])
+    radius = headless/np.sqrt(3) + .02 if headless else radii[size]
+    probe = cylinder(radius, 2., top - axis*2.05, -axis)
     obj = fcl.CollisionObject(mesh_to_BVH(probe))
     request = fcl.CollisionRequest()
     others = []
@@ -556,22 +726,63 @@ def socket_open(world, name, rigid):
     return False
 
 
+def blink_access_cases(world, step, obstacles):
+    results = []
+    nominal = world.blink_pose
+    try:
+        for angle in step['blink_access_checks_deg']:
+            world.blink_pose = angle
+            seated = list(obstacles)
+            issues = []
+            for key in ('pins', 'pins2'):
+                pins, offset = step[key]
+                issues.extend(sweep(world, pins, seated, offset))
+                seated.extend(pins)
+            for screw in step['bolts']:
+                size, length, _, axis = world.screw(screw)
+                issues.extend(sweep(world, [screw], seated, -np.asarray(axis)*(length+3.)))
+                seated.append(screw)
+                reach, blocker = key_access(world, screw, seated)
+                if reach < KEY_WARN:
+                    issues.append((screw, blocker))
+            results.append({'blink_deg': angle, 'status': 'fail' if issues else 'pass', 'blocking_pairs': issues})
+    finally:
+        world.blink_pose = nominal
+    return results
+
+
 def run(cad, hardware, spec, revision='b19'):
     world = World(cad, hardware, spec)
     cad_sha256 = None
-    if revision == 'b20':
-        cad_sha256 = json.loads((cad/'cad_parts.json').read_text())['source_sha256']
+    if revision in ('b20', 'b21'):
+        world.layout = json.loads((cad/'cad_parts.json').read_text())
+        cad_sha256 = world.layout['source_sha256']
         if not re.fullmatch(r'[0-9a-f]{64}', cad_sha256):
             raise ValueError('Invalid exported CAD source hash')
+    plan = PLANS[revision]
+    if revision == 'b21':
+        from check_b21_tools import ToolCheck
+
+        tools = ToolCheck(world, hardware)
     installed = {}
+    nut_entries = {}
     report = []
-    for st in PLANS[revision]:
+    for st in plan:
+        world.blink_pose = st.get('blink_deg')
+        if revision == 'b21':
+            for nut, phase in st.get('set_nut_phases', {}).items():
+                tools.require_nut_phase(nut, phase)
         ctx = installed.setdefault(st['ctx'], [])
         world.limit = st.get('limit', OVERLAP_LIMIT)
         rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
+        fitted_before_step = tuple(rigid)
         issues = []
         notes = []
         clearance = None
+        tools_checked = {}
+        drivers_checked = {}
+        paired_checked = {}
+        driver_pairs = {}
         for key in ('merge', 'merge2'):
             if key in st:
                 other, offset = st[key]
@@ -589,7 +800,10 @@ def run(cad, hardware, spec, revision='b19'):
         for key in ('place', 'place2', 'pins', 'pins2'):
             if key in st:
                 parts, offset = st[key]
-                alternative, hits = find_clear(world, parts, rigid, offset)
+                if revision == 'b21' and key in ('pins', 'pins2'):
+                    alternative, hits = False, sweep(world, parts, rigid, offset)
+                else:
+                    alternative, hits = find_clear(world, parts, rigid, offset)
                 if alternative:
                     notes.append(f'{", ".join(parts)}: stated approach {tuple(offset)} is blocked; {alternative} is clear')
                 elif alternative is False:
@@ -604,7 +818,7 @@ def run(cad, hardware, spec, revision='b19'):
                 moving_end = np.asarray(end, float)
                 for (a, b), hit in sweep_shifted(world, parts, rigid, shift, moving_end).items():
                     issues.append(f'{a} ↔ {b} on the path segment ending at {tuple(end)} ({hit["overlap_mm3"]} mm³)')
-            if revision == 'b20' and st['id'] == 'eye-tie':
+            if revision in ('b20', 'b21') and st['id'] == 'eye-tie':
                 clearance = {}
                 legs = zip(EYE_TIE_TRAVEL_ERRORS_MM.items(), points[:-1], points[1:], strict=True)
                 for (leg, error), start, end in legs:
@@ -626,6 +840,9 @@ def run(cad, hardware, spec, revision='b19'):
             if key in st:
                 parts, offset = st[key]
                 alternative, hits = find_clear(world, parts, rigid, offset)
+                if revision == 'b21':
+                    for name in parts:
+                        nut_entries[name] = (alternative or offset, tuple(rigid))
                 if alternative:
                     notes.append(f'{", ".join(parts)}: stated approach {tuple(offset)} is blocked; {alternative} is clear')
                     hits = {}
@@ -640,22 +857,83 @@ def run(cad, hardware, spec, revision='b19'):
                 issues.append(f'{a} ↔ {b} while driving the screw ({hit["at_mm"]} mm from seated, {hit["overlap_mm3"]} mm³)')
             ctx.append(name)
             rigid.append(name)
-            reach, blocker = key_access(world, name, rigid)
+            radii = B21_KEY_RADII if revision == 'b21' else KEY_RADIUS
+            reach, blocker = key_access(world, name, rigid, radii)
             if reach < KEY_WARN:
                 notes.append(f'{name}: straight key reach {reach} mm (blocked by {blocker})')
-        for key in ('nuts', 'nuts2'):
-            if key in st:
-                for nut in st[key][0]:
-                    dirs = spanner_access(world, nut, rigid)
-                    if dirs == [] and not socket_open(world, nut, rigid):
-                        notes.append(f'{nut}: no open side for a spanner, fingers or a socket; needs a pocket that holds it')
+            if revision == 'b21':
+                status = 'pass' if reach >= KEY_WARN else 'unknown'
+                drivers_checked[name] = {'status': status, 'straight_key_reach_mm': reach, 'blocker': blocker}
+                if status != 'pass':
+                    issues.append(f'{name}: driver route unknown')
+        if revision == 'b21':
+            for nut, modes in st.get('hold_nuts', {}).items():
+                def rotated_entry(mesh):
+                    if nut not in nut_entries:
+                        return False
+                    offset, obstacles = nut_entries[nut]
+                    saved = world.mesh(nut)
+                    world.cache[nut] = mesh
+                    try:
+                        return not sweep(world, [nut], obstacles, offset)
+                    finally:
+                        world.cache[nut] = saved
+
+                tools_checked[nut] = tools.hold(nut, rigid, modes, rotated_entry, st.get('socket_inset_mm'))
+                status = tools_checked[nut]['status']
+                if status != 'pass':
+                    issues.append(f'{nut}: holding-tool route {status}')
+            for first, second in st.get('paired_nuts', ()):
+                pair = f'{first}/{second}'
+                paired_checked[pair] = tools.hold_together(first, second)
+                status = paired_checked[pair]['status']
+                if status != 'pass':
+                    issues.append(f'{pair}: paired-tool route {status}')
+            for nut, bolt in st.get('paired_drivers', ()):
+                pair = f'{nut}/{bolt}'
+                reach = drivers_checked[bolt]['straight_key_reach_mm']
+                if reach < KEY_WARN:
+                    driver_pairs[pair] = {'status': 'unknown', 'reason': 'no straight driver reach'}
+                else:
+                    size, _, seat, axis = world.screw(bolt)
+                    axis = np.asarray(axis)
+                    tip = np.asarray(seat)-axis*(HEAD[size][1]+.05)
+                    driver = cylinder(radii[size], reach, tip, -axis)
+                    driver_pairs[pair] = tools.hold_and_drive(nut, driver)
+                status = driver_pairs[pair]['status']
+                if status != 'pass':
+                    issues.append(f'{pair}: holding-tool and key route {status}')
+        else:
+            for key in ('nuts', 'nuts2'):
+                if key in st:
+                    for nut in st[key][0]:
+                        dirs = spanner_access(world, nut, rigid)
+                        if dirs == [] and not socket_open(world, nut, rigid):
+                            notes.append(f'{nut}: no open side for a spanner, fingers or a socket; needs a pocket that holds it')
         row = {'id': st['id'], 'context': st['ctx'], 'text': st['text'], 'issues': issues, 'notes': notes}
         if clearance is not None:
             row['insertion_clearance'] = clearance
+        if tools_checked:
+            row['tool_access'] = tools_checked
+        if drivers_checked:
+            row['driver_access'] = drivers_checked
+        if paired_checked:
+            row['paired_tool_access'] = paired_checked
+        if driver_pairs:
+            row['paired_driver_access'] = driver_pairs
+        if world.blink_pose is not None:
+            row['blink_deg'] = world.blink_pose
+        if st.get('blink_access_checks_deg'):
+            row['blink_access_cases'] = blink_access_cases(world, st, fitted_before_step)
+            for case in row['blink_access_cases']:
+                if case['status'] != 'pass':
+                    issues.append(f'pin or key interference at {case["blink_deg"]:g}° lid position')
         report.append(row)
         print(st['id'], 'CLEAR' if not issues else issues, notes if notes else '', flush=True)
     if cad_sha256 is not None:
         report[0]['cad_sha256'] = cad_sha256
+    if revision == 'b21':
+        report[0]['plan_sha256'] = plan_hash(plan)
     return report
 
 

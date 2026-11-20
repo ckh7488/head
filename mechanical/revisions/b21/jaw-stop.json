@@ -1,0 +1,740 @@
+{
+  "modified_part": "Jaw_37_right_jaw_bearing_stay",
+  "software_open_deg": 8.0,
+  "verified_clear_deg": 8.75,
+  "nominal_contact_deg": 9.404137747628349,
+  "compound_clear_travel_deg": 8.6,
+  "bench_approach_offset_mm": [
+    0.0,
+    12.0,
+    12.0
+  ],
+  "contact_trials": [
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.823071071079799,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.024754568899333154,
+      "continuous_lower_bound_through_verified_travel_mm": 0.010475503119582041,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        48.0,
+        -10.627000045776366,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 9.404137747628349,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.2217161195017743,
+      "continuous_lower_bound_through_verified_travel_mm": 0.2074370537220232,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 9.984537397112165,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4186776701042155,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4043986043244644,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.0
+      ]
+    }
+  ],
+  "compound_contact_trials": [
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        -0.2,
+        -0.2
+      ],
+      "first_contact_deg": 8.720859200613837,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.04138279354730221,
+      "continuous_lower_bound_through_verified_travel_mm": 0.027348511752346833,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.823071834019252,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.07559666651952293,
+      "continuous_lower_bound_through_verified_travel_mm": 0.061562384724567557,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        -0.2,
+        0.2
+      ],
+      "first_contact_deg": 8.927429308210098,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.10981053949174364,
+      "continuous_lower_bound_through_verified_travel_mm": 0.09577625769678827,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        -0.2,
+        0.0,
+        -0.2
+      ],
+      "first_contact_deg": 9.296007428850448,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.23843459104288367,
+      "continuous_lower_bound_through_verified_travel_mm": 0.22440030924792828,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 9.404137856619698,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.2726484640151044,
+      "continuous_lower_bound_through_verified_travel_mm": 0.25861418222014904,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        -0.2,
+        0.0,
+        0.2
+      ],
+      "first_contact_deg": 9.514537811279297,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.3068623369873251,
+      "continuous_lower_bound_through_verified_travel_mm": 0.29282805519236976,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.8,
+        -10.427000045776367,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        0.2,
+        -0.2
+      ],
+      "first_contact_deg": 9.870509447370257,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4354863885384675,
+      "continuous_lower_bound_through_verified_travel_mm": 0.42145210674351213,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 9.984537288120816,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4697002615106883,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4556659797157329,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        0.2,
+        0.2
+      ],
+      "first_contact_deg": 10.100958142961776,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.5039141344829107,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4898798526879553,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        -0.2
+      ],
+      "first_contact_deg": 8.720859200613837,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.04138279354730221,
+      "continuous_lower_bound_through_verified_travel_mm": 0.027348511752346833,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.823071834019252,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.07559666651952293,
+      "continuous_lower_bound_through_verified_travel_mm": 0.061562384724567557,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        0.2
+      ],
+      "first_contact_deg": 8.927429308210098,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.10981053949174364,
+      "continuous_lower_bound_through_verified_travel_mm": 0.09577625769678827,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "first_contact_deg": 9.296007428850448,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.23843459104288367,
+      "continuous_lower_bound_through_verified_travel_mm": 0.22440030924792828,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 9.404137856619698,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.2726484640151044,
+      "continuous_lower_bound_through_verified_travel_mm": 0.25861418222014904,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "first_contact_deg": 9.514537811279297,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.3068623369873251,
+      "continuous_lower_bound_through_verified_travel_mm": 0.29282805519236976,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        48.0,
+        -10.427000045776367,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        -0.2
+      ],
+      "first_contact_deg": 9.870509447370257,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4354863885384675,
+      "continuous_lower_bound_through_verified_travel_mm": 0.42145210674351213,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 9.984537288120816,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4697002615106883,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4556659797157329,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        0.2
+      ],
+      "first_contact_deg": 10.100958142961776,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.5039141344829107,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4898798526879553,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.2,
+        -0.2,
+        -0.2
+      ],
+      "first_contact_deg": 8.720859200613837,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.04138279354730221,
+      "continuous_lower_bound_through_verified_travel_mm": 0.027348511752346833,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.2,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.823071834019252,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.07559666651952293,
+      "continuous_lower_bound_through_verified_travel_mm": 0.061562384724567557,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.2,
+        -0.2,
+        0.2
+      ],
+      "first_contact_deg": 8.927429308210098,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.10981053949174364,
+      "continuous_lower_bound_through_verified_travel_mm": 0.09577625769678827,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.627000045776366,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.2,
+        0.0,
+        -0.2
+      ],
+      "first_contact_deg": 9.296007428850448,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.23843459104288367,
+      "continuous_lower_bound_through_verified_travel_mm": 0.22440030924792828,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.2,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 9.404137856619698,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.2726484640151044,
+      "continuous_lower_bound_through_verified_travel_mm": 0.25861418222014904,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.427000045776367,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.2,
+        0.0,
+        0.2
+      ],
+      "first_contact_deg": 9.514537811279297,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.2961470204213357,
+      "continuous_lower_bound_through_verified_travel_mm": 0.28211273862638037,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        48.2,
+        -10.427000045776367,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.2,
+        0.2,
+        -0.2
+      ],
+      "first_contact_deg": 9.870509447370257,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4354863885384675,
+      "continuous_lower_bound_through_verified_travel_mm": 0.42145210674351213,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.2,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 9.984537288120816,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4697002615106883,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4556659797157329,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "first_contact_deg": 10.100958142961776,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4182792417028126,
+      "continuous_lower_bound_through_verified_travel_mm": 0.40424495990785725,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.227000045776368,
+        72.2
+      ]
+    }
+  ],
+  "neighbor_pose_comparisons": 259,
+  "neck_pitch_gaps": {
+    "Part011": {
+      "sample_step_deg": 0.25,
+      "sampled_minimum_mm": 0.47394082162370504,
+      "continuous_lower_bound_mm": 0.3553408749921383
+    },
+    "Part018": {
+      "sample_step_deg": 0.25,
+      "sampled_minimum_mm": 4.400287628173828,
+      "continuous_lower_bound_mm": 4.318872619361871
+    }
+  },
+  "neck_pitch_gaps_by_stop_shift_mm": {
+    "(-0.2, -0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.6519395080438287,
+        "continuous_lower_bound_mm": 0.533339561412262
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.118872619361868
+      }
+    },
+    "(-0.2, -0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.6937508933508902,
+        "continuous_lower_bound_mm": 0.5751509467193235
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.118872619361868
+      }
+    },
+    "(-0.2, 0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.2541307498965184,
+        "continuous_lower_bound_mm": 0.13553080326495168
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.118872619361868
+      }
+    },
+    "(-0.2, 0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.29594213520358137,
+        "continuous_lower_bound_mm": 0.17734218857201464
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.118872619361868
+      }
+    },
+    "(0.2, -0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.6519395080438273,
+        "continuous_lower_bound_mm": 0.5333395614122606
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.518872619361874
+      }
+    },
+    "(0.2, -0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.6937508933508902,
+        "continuous_lower_bound_mm": 0.5751509467193235
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.518872619361874
+      }
+    },
+    "(0.2, 0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.2541307498965184,
+        "continuous_lower_bound_mm": 0.13553080326495168
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.518872619361874
+      }
+    },
+    "(0.2, 0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 0.29594213520358137,
+        "continuous_lower_bound_mm": 0.17734218857201464
+      },
+      "Part018": {
+        "sample_step_deg": 0.25,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.518872619361874
+      }
+    }
+  },
+  "print_sha256": "65af9f35726884e7550402e902fa099610d998c49dd99d79af25cbefa8929ce9",
+  "added_volume_mm3": 936.5574714903114,
+  "gravity_drop": {
+    "jaw_mass_kg": 0.047600094067609885,
+    "gravity_energy_from_closed_no_friction_J": 0.002569314509892836,
+    "minimum_contact_lever_mm": 19.339589863084296,
+    "gravity_tangential_force_N": 0.6514234150518327,
+    "latest_static_contact_deg": 10.100958142961776
+  },
+  "local_FE": {
+    "scope": "Homogeneous elastic stop with a fixed upper stem. Gravity drop from closed, no friction, no servo torque or hinge compliance.",
+    "meshes": [
+      {
+        "mesh_mm": 0.7,
+        "elements": 16406,
+        "contact_load_facets": 6,
+        "compliance_mm_per_N_at_1000_MPa": 0.01053431487399545,
+        "impact_cases": [
+          {
+            "modulus_MPa": 500.0,
+            "force_N": 16.282286745980866,
+            "deflection_mm": 0.3430454709016904,
+            "additional_opening_deg": 1.0163120212421166,
+            "opening_with_static_face_tolerance_and_impact_deg": 11.117270164203893
+          },
+          {
+            "modulus_MPa": 1000.0,
+            "force_N": 22.747201846116123,
+            "deflection_mm": 0.23962618674931782,
+            "additional_opening_deg": 0.7099203891472804,
+            "opening_with_static_face_tolerance_and_impact_deg": 10.810878532109056
+          },
+          {
+            "modulus_MPa": 1800.0,
+            "force_N": 30.290294548782487,
+            "deflection_mm": 0.1772708335571904,
+            "additional_opening_deg": 0.5251854183826662,
+            "opening_with_static_face_tolerance_and_impact_deg": 10.626143561344442
+          }
+        ]
+      },
+      {
+        "mesh_mm": 0.5,
+        "elements": 39817,
+        "contact_load_facets": 12,
+        "compliance_mm_per_N_at_1000_MPa": 0.010886153854978443,
+        "impact_cases": [
+          {
+            "modulus_MPa": 500.0,
+            "force_N": 16.028064444011246,
+            "deflection_mm": 0.3489679510700319,
+            "additional_opening_deg": 1.0338580561010888,
+            "opening_with_static_face_tolerance_and_impact_deg": 11.134816199062865
+          },
+          {
+            "modulus_MPa": 1000.0,
+            "force_N": 22.387518423154788,
+            "deflection_mm": 0.24371396998562744,
+            "additional_opening_deg": 0.7220309214110457,
+            "opening_with_static_face_tolerance_and_impact_deg": 10.822989064372821
+          },
+          {
+            "modulus_MPa": 1800.0,
+            "force_N": 29.807633820208373,
+            "deflection_mm": 0.18027249323313735,
+            "additional_opening_deg": 0.5340781835438679,
+            "opening_with_static_face_tolerance_and_impact_deg": 10.635036326505643
+          }
+        ]
+      },
+      {
+        "mesh_mm": 0.4,
+        "elements": 75766,
+        "contact_load_facets": 22,
+        "compliance_mm_per_N_at_1000_MPa": 0.011181469397352461,
+        "impact_cases": [
+          {
+            "modulus_MPa": 500.0,
+            "force_N": 15.824017598986094,
+            "deflection_mm": 0.3538715370524596,
+            "additional_opening_deg": 1.0483854986819112,
+            "opening_with_static_face_tolerance_and_impact_deg": 11.149343641643688
+          },
+          {
+            "modulus_MPa": 1000.0,
+            "force_N": 22.098821300926797,
+            "deflection_mm": 0.2470972940938737,
+            "additional_opening_deg": 0.7320544117487285,
+            "opening_with_static_face_tolerance_and_impact_deg": 10.833012554710505
+          },
+          {
+            "modulus_MPa": 1800.0,
+            "force_N": 29.420227612698262,
+            "deflection_mm": 0.1827563192858497,
+            "additional_opening_deg": 0.5414368064967107,
+            "opening_with_static_face_tolerance_and_impact_deg": 10.642394949458486
+          }
+        ]
+      }
+    ]
+  },
+  "source_sha256": "d947ca149ab712e598ddda04ced12b1814dd6b0170742076cd2197a12f958857",
+  "cad_sha256": "9ed25081889f5846ff2d7c70c99e39580195da25de1857a4c046a16143fdfe02"
+}

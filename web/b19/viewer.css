@@ -21,6 +21,7 @@ main { display: grid; grid-template-columns: 300px 1fr 340px; height: calc(100% 
 #legend i:first-child { margin-left: 0; }
 #legend .b19 { background: #e25c3c; }
 #legend .moving { background: #1e6bff; }
+#legend .tool { background: #10907d; }
 #card { padding: 16px; border-left: 1px solid #ddd8cf; overflow-y: auto; background: #fff; }
 #meta { font-size: 12px; color: #6b7377; }
 #meta b { color: #1f2427; }
@@ -34,6 +35,9 @@ main { display: grid; grid-template-columns: 300px 1fr 340px; height: calc(100% 
 #controls button { width: 36px; height: 32px; border: 1px solid #c9c3b8; border-radius: 4px; background: #fbfaf7; cursor: pointer; }
 #controls input { flex: 1; }
 #display { display: flex; align-items: center; gap: 5px; margin-top: 8px; }
+#tool-view { display: grid; gap: 3px; margin-top: 10px; }
+#tool-view[hidden] { display: none; }
+#tool-select { max-width: 100%; font: inherit; }
 .hint { color: #8a9296; font-size: 12px; }
 @media (max-width: 900px) {
   main { grid-template-columns: 1fr; grid-template-rows: 45vh auto auto; height: auto; }

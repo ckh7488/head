@@ -117,9 +117,25 @@ def test_jaw_clack_runs_through_the_compiled_sketch(firmware):
     with terminal(firmware) as port:
         result = pc('jaw_clack.py', port, '--drive')
     assert result.returncode == 0, result.stderr
-    commands = [e for e in firmware.trace() if e.direction == 'w' and e.register == 116]
-    assert {e.id for e in commands} == {6}
-    assert [e.value for e in commands[:5]] == [2000, 1886, 2000, 1852, 2000]
+    events = firmware.trace()
+    commands = [e for e in events if e.direction == 'w' and e.register == 116]
+    assert {(e.id, e.value) for e in commands if e.id in (4, 5)} == {(4, 2048), (5, 2048)}
+    assert [e.value for e in commands if e.id == 6][:5] == [2000, 1932, 2000, 1909, 2000]
+    assert [(e.id, e.value) for e in events if e.direction == 'w' and e.register == 64] == [
+        (4, 1), (5, 1), (6, 1),
+    ]
+
+
+def test_jaw_clack_stops_on_a_stalled_servo(firmware):
+    firmware.exchange('follow 6 0')
+    with terminal(firmware) as port:
+        result = pc('jaw_clack.py', port, '--drive')
+    assert result.returncode == 1
+    assert result.stderr.strip() == 'ERROR JAW_FOLLOW_TIMEOUT ID6'
+    events = firmware.trace()
+    assert [(e.id, e.value) for e in events if e.direction == 'w' and e.register == 64] == [
+        (4, 1), (5, 1), (6, 1), (6, 0),
+    ]
 
 
 @pytest.mark.parametrize(('failure', 'message'), [

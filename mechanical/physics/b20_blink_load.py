@@ -331,7 +331,10 @@ def check_drag(layout):
     cap, stroke, step = .085, .68, .000125
     nominal_xml = build(layout, cap, 1., step)
     result = []
-    for force_left, force_right in ((0., 0.), (0., .25), (0., .5), (0., 1.), (.25, .25)):
+    cases = [(0., 0.), (.25, .25)]
+    for force in (.25, .5, 1.):
+        cases.extend(((force, 0.), (0., force)))
+    for force_left, force_right in cases:
         forces = [force_left, force_right]
         torques = np.array(forces)*LID_TOUCH_LEVER_M
         for mode in ('closing_touch', 'speed_dependent_drag') if any(forces) else ('intrinsic_drag_only',):

@@ -4,11 +4,15 @@ from argparse import ArgumentParser
 from pathlib import Path
 import re
 
-from track import AXES, LIMITS
+from track import AXES, JAW_MAX_DEGREES, LIMITS
 
 HEADER = Path(__file__).resolve().parents[1] / 'openrb' / 'R5B1' / 'Calibration.h'
 NAMES = (*AXES, 'jaw')
 UNSET = (-1, -1, -1)
+JAW_MAX_TICKS = JAW_MAX_DEGREES * 4096 // 360
+NECK_PITCH_AXIS = AXES.index('neck-pitch')
+PITCH_MAX_DEGREES = LIMITS[NECK_PITCH_AXIS][1]
+PITCH_MAX_TICKS = int(PITCH_MAX_DEGREES * 4096 // 360)
 ROW = re.compile(r'\{\s*(-?[0-9]+)\s*,\s*(-?[0-9]+)\s*,\s*(-?[0-9]+)\s*\}')
 
 
@@ -30,8 +34,13 @@ def issues(rows, nominal_neck=False):
         elif i in (2, 5):
             if low != zero or abs(high-zero) < 4:
                 yield f'{prefix} needs low equal to zero and a high at least 4 ticks away.'
+            elif i == 5 and abs(high-zero) > JAW_MAX_TICKS:
+                yield f'{prefix} opening exceeds {JAW_MAX_DEGREES}° ({JAW_MAX_TICKS} ticks). Recalibrate the jaw.'
         elif not min(low, high) < zero < max(low, high):
             yield f'{prefix} needs zero between its two endpoints.'
+        elif i == NECK_PITCH_AXIS and abs(high-zero) > PITCH_MAX_TICKS:
+            yield (f'{prefix} positive travel exceeds {PITCH_MAX_DEGREES:g}° '
+                   f'({PITCH_MAX_TICKS} ticks). Recalibrate the positive endpoint.')
         elif nominal_neck and i in (3, 4):
             for end, span, expected in zip(('low', 'high'), (abs(low-zero), abs(high-zero)), LIMITS[i], strict=True):
                 measured = span * 360 / 4096

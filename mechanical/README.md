@@ -1,14 +1,16 @@
 # R5 기구 설계와 조립
 
-[B20 FreeCAD·P2S 출력판과 검사](revisions/b20/) · [이전 CAD 개정](revisions/)
+[B21 FreeCAD·P2S 출력판과 검사](revisions/b21/) · [이전 CAD 개정](revisions/)
 
 ## B15 조립
 
 FreeCAD에서 [B15 조립본](R5-B15-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P2S 전체판](R5-B15-P2S.3mf) · [P2S 시험판](R5-B15-Fit-P2S.3mf)
 
-최신 조립 순서와 공구 방향은 [B20 조립 절차서](ASSEMBLY.md)에 있습니다.
+최신 조립 순서와 공구 방향은 [B21 조립 절차서](ASSEMBLY.md)에 있습니다.
 
 ## P2S 출력 설정
+
+[B21 출력판과 변경 부품](revisions/b21/#출력과-조립)을 확인합니다. 이 절의 출력 시간과 사용량은 B15 프로젝트 기준입니다.
 
 3MF를 Bambu Studio에서 **프로젝트로 열고**, **P2S 0.4 mm · Textured PEI Plate · Bambu PETG HF**를 확인합니다. 모델 방향, 판 배치, 부품별 서포트가 저장돼 있습니다. 배치를 유지하고 한 장씩 슬라이스합니다. 같은 PETG HF를 서포트에도 사용하며 단일 스풀로 출력할 수 있습니다. [P2S 프린터 프리셋](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/machine/Bambu%20Lab%20P2S%200.4%20nozzle.json) · [PETG HF 프리셋](https://github.com/bambulab/BambuStudio/blob/master/resources/profiles/BBL/filament/Bambu%20PETG%20HF%20%40BBL%20P2S%200.4%20nozzle.json)
 

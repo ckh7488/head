@@ -4,15 +4,22 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { updateTube } from "../wiring.js";
 
 const el = id => document.getElementById(id);
-const response = await fetch("steps.json", { cache: "no-cache" });
-if (!response.ok) throw new Error(`steps.json: ${response.status}`);
-const data = await response.json();
+const embedded = el("embedded-data");
+let data;
+if (embedded) {
+  data = JSON.parse(embedded.textContent);
+} else {
+  const response = await fetch("steps.json", { cache: "no-cache" });
+  if (!response.ok) throw new Error(`steps.json: ${response.status}`);
+  data = await response.json();
+}
 const steps = data.steps;
 const revision = data.revision ?? "B19";
 const mainSteps = steps.filter(step => !step.continued).length;
+const blockedSteps = steps.filter(step => step.issues.length).length;
 document.title = `R5 ${revision} 조립 순서`;
 el("revision").textContent = revision;
-el("step-count").textContent = `CAD 조립 검사 ${steps.length}단계`;
+el("step-count").textContent = `CAD 조립 검사 ${steps.length}단계` + (blockedSteps ? ` · 확인 필요 ${blockedSteps}단계` : "");
 
 const renderer = new THREE.WebGLRenderer({ canvas: el("view"), antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -22,6 +29,8 @@ const camera = new THREE.PerspectiveCamera(32, 1, 1, 5000);
 camera.up.set(0, 0, 1);
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
+let repaint = true;
+controls.addEventListener("change", () => { repaint = true; });
 scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 2.2));
 const sun = new THREE.DirectionalLight(0xffffff, 1.6);
 sun.position.set(200, -300, 400);
@@ -29,7 +38,10 @@ scene.add(sun);
 const paths = new THREE.Group();
 scene.add(paths);
 
-const gltf = await new GLTFLoader().loadAsync(`model.glb?cad=${data.cadSha256 ?? revision}`);
+const loader = new GLTFLoader();
+const gltf = embedded
+  ? await loader.parseAsync(Uint8Array.from(atob(data.embeddedModel), char => char.charCodeAt(0)).buffer, "")
+  : await loader.loadAsync(`model.glb?rev=${data.modelSha256 ?? data.cadSha256 ?? revision}`);
 scene.add(gltf.scene);
 const wiring = new THREE.Group();
 for (const wire of data.wires ?? []) {
@@ -56,6 +68,16 @@ for (const name of Object.keys(data.parts)) {
     posedPosition: node.position.clone(),
   });
 }
+const toolNodes = new Map();
+for (const step of steps) {
+  for (const tool of (step.toolPaths ?? []).flat()) {
+    if (toolNodes.has(tool.id)) continue;
+    const node = gltf.scene.getObjectByName(tool.id);
+    if (!node) throw new Error(`Missing qualified tool model: ${tool.id}`);
+    node.visible = false;
+    toolNodes.set(tool.id, { node, position: node.position.clone(), bounds: new THREE.Box3().setFromObject(node) });
+  }
+}
 const hinge = new THREE.Vector3(0, -39, 119);
 const closed = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
 const state = { index: 0, t: 1, playing: true, last: 0 };
@@ -66,6 +88,23 @@ let cameraFrame;
 
 function showExterior(id) {
   return !exterior.has(id) || !el("hide-exterior").checked;
+}
+
+function selectedTools(step) {
+  const name = el("tool-select").value;
+  return name ? (step.toolPaths?.[Number(name)] ?? []) : [];
+}
+
+function partCenter(step, id) {
+  const point = new THREE.Vector3(...data.parts[id].center);
+  const matrix = step.actorPoses?.[id];
+  return matrix ? point.applyMatrix4(new THREE.Matrix4().set(...matrix.flat())) : point;
+}
+
+function toolLabel(tool) {
+  if (tool.kind === "driver-axis") return `육각렌치 접근 범위 · ${tool.nut}`;
+  const name = tool.kind === "socket" ? "소켓" : "스패너";
+  return `${name} ${tool.size === 3 ? "5.5" : "4"} mm · ${tool.nut}`;
 }
 
 function pathPoint(path, u) {
@@ -112,6 +151,15 @@ function tint(entry, color, amount) {
   }
 }
 
+function pathLine(origin, path, color) {
+  const points = path.map(point => origin.clone().add(new THREE.Vector3(...point)));
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),
+    new THREE.LineDashedMaterial({ color, dashSize: 2, gapSize: 1.4, depthTest: false, transparent: true, opacity: .8 }));
+  line.computeLineDistances();
+  line.renderOrder = 5;
+  paths.add(line);
+}
+
 function show(step) {
   wiring.visible = Boolean(step.showWires);
   for (const entry of nodes.values()) {
@@ -140,45 +188,68 @@ function show(step) {
     entry.node.position.copy(entry.posedPosition);
     entry.node.quaternion.premultiply(closed);
   }
+  for (const [id, pose] of Object.entries(step.actorPoses ?? {})) {
+    const entry = nodes.get(id);
+    const matrix = new THREE.Matrix4().set(...pose.flat());
+    entry.posedPosition.copy(entry.position).applyMatrix4(matrix);
+    entry.node.position.copy(entry.posedPosition);
+    entry.node.quaternion.copy(entry.quaternion).premultiply(new THREE.Quaternion().setFromRotationMatrix(matrix));
+  }
   for (const line of paths.children) {
     line.geometry.dispose();
     line.material.dispose();
   }
   paths.clear();
+  for (const entry of toolNodes.values()) entry.node.visible = false;
+  const tools = selectedTools(step);
+  el("tool-legend").hidden = !tools.length;
+  if (tools.length) {
+    for (const tool of tools) pathLine(new THREE.Vector3(...tool.seat), tool.path, 0x10907d);
+    return;
+  }
   for (const move of step.moves) {
     if (!move.ids.some(showExterior)) continue;
-    const center = new THREE.Vector3(...data.parts[move.ids[0]].center);
-    const points = move.path.map(p => center.clone().add(new THREE.Vector3(...p)));
-    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),
-      new THREE.LineDashedMaterial({ color: 0x1e6bff, dashSize: 2, gapSize: 1.4, depthTest: false, transparent: true, opacity: .8 }));
-    line.computeLineDistances();
-    line.renderOrder = 5;
-    paths.add(line);
+    const center = partCenter(step, move.ids[0]);
+    pathLine(center, move.path, 0x1e6bff);
   }
 }
 
 function place(step, t) {
+  const tools = selectedTools(step);
+  const stage = tools.length ? 1 : t;
   const count = step.moves.length;
   step.moves.forEach((move, k) => {
-    const u = Math.min(1, Math.max(0, t * count - k));
+    const u = Math.min(1, Math.max(0, stage * count - k));
     const offset = pathPoint(move.path, u);
     for (const id of move.ids) {
       const entry = nodes.get(id);
       if (!entry) continue;
-      entry.node.visible = t * count >= k && showExterior(id);
+      entry.node.visible = stage * count >= k && showExterior(id);
       entry.node.position.copy(entry.posedPosition).add(offset);
     }
   });
+  tools.forEach((tool, index) => {
+    const entry = toolNodes.get(tool.id);
+    const progress = t * tools.length - index;
+    entry.node.visible = progress >= 0;
+    entry.node.position.copy(entry.position).add(pathPoint(tool.path, Math.min(1, Math.max(0, progress))));
+  });
   el("scrub").value = Math.round(t * 1000);
+  repaint = true;
 }
 
 function frame(step) {
   const box = new THREE.Box3();
-  for (const move of step.moves) {
+  const tools = selectedTools(step);
+  for (const tool of tools) {
+    const { bounds } = toolNodes.get(tool.id);
+    for (const offset of tool.path) box.union(bounds.clone().translate(new THREE.Vector3(...offset)));
+  }
+  for (const move of (tools.length ? [] : step.moves)) {
     for (const id of move.ids) {
       const part = data.parts[id];
       if (!part) continue;
-      const c = new THREE.Vector3(...part.center);
+      const c = partCenter(step, id);
       const r = Math.max(part.size / 2, 4);
       for (const p of move.path) {
         const at = c.clone().add(new THREE.Vector3(...p));
@@ -197,7 +268,7 @@ function frame(step) {
     }
     const part = data.parts[id];
     if (!part || part.size > 160) continue;
-    const c = new THREE.Vector3(...part.center);
+    const c = partCenter(step, id);
     if (c.distanceTo(middle) < 70) {
       box.expandByPoint(c.clone().addScalar(part.size / 2));
       box.expandByPoint(c.clone().addScalar(-part.size / 2));
@@ -221,6 +292,7 @@ function frame(step) {
     const e = k * (2 - k);
     controls.target.lerpVectors(from.center, target.center, e);
     camera.position.lerpVectors(from.position, target.position, e);
+    repaint = true;
     if (k < 1) cameraFrame = requestAnimationFrame(tween);
   };
   cameraFrame = requestAnimationFrame(tween);
@@ -243,10 +315,15 @@ function go(index) {
     const { slide, lower } = step.insertionClearance;
     notes.push(`CAD 계산상 최소 여유 · 옆으로 밀 때 ${slide.continuous_lower_bound_mm} mm · 자리 맞출 때 ${lower.continuous_lower_bound_mm} mm`);
   }
+  if (step.blinkDegrees !== undefined) notes.push(`검사한 눈꺼풀 위치 · ${step.blinkDegrees}°`);
   el("notes").replaceChildren(...notes.map(note => Object.assign(document.createElement("li"), { textContent: note })));
   el("issues").hidden = !step.issues.length;
   el("issues").lastElementChild.replaceChildren(...step.issues.map(issue =>
     Object.assign(document.createElement("li"), { textContent: issue })));
+  const choices = step.toolPaths ?? [];
+  el("tool-view").hidden = !choices.length;
+  el("tool-select").replaceChildren(new Option("공구 경로 숨기기", ""), ...choices.map((tools, i) =>
+    new Option(tools.map(toolLabel).join(" → "), String(i))));
   show(step);
   state.t = state.playing ? 0 : 1;
   state.last = performance.now();
@@ -260,20 +337,27 @@ function resize() {
   renderer.setSize(w, h, false);
   camera.aspect = w / h;
   camera.updateProjectionMatrix();
+  repaint = true;
 }
 addEventListener("resize", resize);
 
 function tick(now) {
   const step = steps[state.index];
-  if (state.playing && step.moves.length) {
-    const duration = MOVE_SECONDS * step.moves.length;
+  const moveCount = selectedTools(step).length || step.moves.length;
+  if (state.playing && moveCount) {
+    const previous = Math.min(1, state.t);
+    const duration = MOVE_SECONDS * moveCount;
     state.t += (now - state.last) / 1000 / duration;
     if (state.t > 1 + HOLD_SECONDS / duration) state.t = 0;
-    place(step, Math.min(1, state.t));
+    const progress = Math.min(1, state.t);
+    if (progress !== previous) place(step, progress);
   }
   state.last = now;
   controls.update();
-  renderer.render(scene, camera);
+  if (repaint) {
+    renderer.render(scene, camera);
+    repaint = false;
+  }
   requestAnimationFrame(tick);
 }
 
@@ -294,8 +378,16 @@ el("hide-exterior").onchange = () => {
   show(step);
   place(step, Math.min(1, state.t));
 };
+el("tool-select").onchange = () => {
+  const step = steps[state.index];
+  show(step);
+  state.t = state.playing ? 0 : 1;
+  state.last = performance.now();
+  place(step, state.t);
+  frame(step);
+};
 addEventListener("keydown", event => {
-  if (event.target instanceof Element && event.target.closest("button, input")) return;
+  if (event.target instanceof Element && event.target.closest("button, input, select")) return;
   if (event.key === "ArrowRight") go(state.index + 1);
   if (event.key === "ArrowLeft") go(state.index - 1);
   if (event.key === " ") { event.preventDefault(); el("play").click(); }

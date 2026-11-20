@@ -11,6 +11,7 @@ from urllib.request import urlopen
 MODEL_URL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
 MODEL_HASH = '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
 AXES = ('eye-yaw', 'eye-pitch', 'blink', 'neck-yaw', 'neck-pitch')
+JAW_MAX_DEGREES = 8
 LIMITS = ((-20., 20.), (-8., 8.), (0., 90.), (-60., 60.), (-15., 6.))
 RATES = (160., 105., 950., 36., 22.)
 ZERO = (0.,) * 5
@@ -141,7 +142,7 @@ class UsbController:
         if len(self.buffer)>512:
             self.buffer.clear()
 
-    def start(self, before_arm=None):
+    def start(self, *, jaw_demo=False):
         deadline=time.monotonic()+6.
         next_ping=0.
         while time.monotonic()<deadline:
@@ -153,16 +154,15 @@ class UsbController:
                 break
         else:
             raise RuntimeError('OpenRB R5 B1 firmware did not respond to PING.')
-        if before_arm is not None:
-            before_arm(self)
-        self.send(f'ARM {self.mask}')
+        self.send('ARM_JAW_DEMO' if jaw_demo else f'ARM {self.mask}')
+        acknowledgement = f'{"ARMED_JAW_DEMO" if jaw_demo else "ARMED"} {self.mask}'
         deadline=time.monotonic()+3.
         acknowledged=False
         while time.monotonic()<deadline:
             for line in self.lines():
                 if line.startswith(('LOCKED','ERROR')):
                     raise RuntimeError(line)
-                if line==f'ARMED {self.mask}':
+                if line==acknowledgement:
                     acknowledged=True
                 self.handle_state(line)
                 if acknowledged and self.last_state is not None:

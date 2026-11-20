@@ -50,6 +50,14 @@ MEASURE_GAP = {
 }
 
 
+def sweep_angles(layout):
+    stop = layout['motion_geometry'].get('jaw_stop')
+    if stop is None:
+        return ANGLES
+    limit = float(stop['verified_clear_deg'])
+    return (*ANGLES[:-1], tuple(np.linspace(0., limit, len(ANGLES[-1]))))
+
+
 def translation(offset):
     matrix = np.eye(4)
     matrix[:3, 3] = offset
@@ -103,6 +111,7 @@ def pose(kind, angles, layout):
 
 def sweep(directory):
     layout = json.loads((directory/'cad_parts.json').read_text())
+    sampled_angles = sweep_angles(layout)
     kinds = layout['world_motion']
     pairs = dict(PAIRS_BY_INTERFACE)
     if 'BallastTray' in kinds:
@@ -129,7 +138,7 @@ def sweep(directory):
             x.setTransform(fcl.Transform())
             measure = pair in MEASURE_GAP
             best = float('inf')
-            for values in product(*(ANGLES[i] for i in axes)):
+            for values in product(*(sampled_angles[i] for i in axes)):
                 angles = np.zeros(len(ANGLES))
                 angles[axes] = values
                 tx = np.linalg.solve(pose(mode_a, angles, layout), pose(mode_b, angles, layout))

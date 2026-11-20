@@ -1,0 +1,201 @@
+{
+  "project_sha256": "ae256bf867473d91bd4afb9842ce0938f4fd10ceb8d535dd13c84598d6202592",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "plate_sha256": {
+    "1": "9b03cb2114788c60ce18661d0a8a36b278ba645ec63f1c9a01f718cbe3770eff",
+    "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
+    "3": "66bbcead5c1c9e380e0695fea8733503764e05fb0d9882b46ec64bf20c805e2d",
+    "4": "1c9a90c529c26a03fcc258a282b3b22a72a60f8464efcb65957c86f234743766",
+    "5": "beab2bb3cf151826a3645d6a7ebaaa57a12e35a984c517e986a01e2a49e14c41",
+    "6": "cf63c494b015e69e2bc9a46cea9b423ee90813edbaed732a6c6f3f7240a66c13",
+    "7": "e7dd2c741fb50f674c5355659d8b84693c844d8f3a17a29c95b3497a14ae78dd",
+    "8": "7e675553fa95a97afb21c4757783d63c66fbbc1fd45515dda7b8bbb5ccd0b102",
+    "9": "d61cbe153b73d2d177e97813c960d3e6fd53059e8d1258f9ada65cb099c193ae",
+    "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
+    "11": "88ab835c0ee5d0251804209e9e4f67abbc3a434df7c78a79c0e150189bd4b885",
+    "12": "188659ae982aeed759d2d54e886201dbe966119133c8729eb6d67c0d56ef6544",
+    "13": "a2b5fca331c7baf3d4cacab1df077f728c9cd079971b8191e1acbffd0cb7f4d1"
+  },
+  "changed_plates": {
+    "3": [
+      "27_c3_carrier-B21.stl",
+      "51_c3_clamp_left-B21.stl",
+      "51_c3_clamp_right-B21.stl"
+    ],
+    "6": [
+      "06_neck_mast-B21.stl"
+    ],
+    "7": [
+      "07_yoke-B21.stl"
+    ],
+    "8": [
+      "18_eye_pitch_link_58p5mm-B21.stl",
+      "ID5-keeper-B21.stl",
+      "23_left_short_lid_link-B21.stl",
+      "23_right_short_lid_link-B21.stl",
+      "15_eye_yaw_offset_tie_bar-B21.stl",
+      "16_eye_yaw_horn_13p5_mm-B21.stl",
+      "22_blink_drive_link-B21.stl",
+      "19_blink_servo_horn-B21.stl",
+      "21_blink_shaft_crank_1-B21.stl",
+      "21_blink_shaft_crank_3-B21.stl",
+      "21_blink_shaft_crank_2-B21.stl"
+    ],
+    "9": [
+      "32_left_eyelid-B21.stl",
+      "32_right_eyelid-B21.stl",
+      "37_right_cheek_bearing_stay-B21.stl"
+    ]
+  },
+  "identical_to_b20_plates": [
+    1,
+    2,
+    4,
+    5,
+    10,
+    11,
+    12,
+    13
+  ],
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "filament": "R5 B15 Bambu PETG HF 14 mm3/s @ P2S",
+  "layer_height_mm": 0.2,
+  "plate_surface": "Textured PEI Plate",
+  "slicer": "Bambu Studio 02.09.01.70",
+  "raster_step_mm": 0.2,
+  "checks_by_plate": {
+    "3": {
+      "objects": 6,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "layers": 113,
+      "filament_g": 21.392534255981445,
+      "estimated_seconds": 3988.839599609375,
+      "changed_parts": {
+        "27_c3_carrier-B21": {
+          "layers": 39,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "51_c3_clamp_right-B21": {
+          "layers": 17,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "51_c3_clamp_left-B21": {
+          "layers": 17,
+          "model_path_below_0p30_mm": 0.0
+        }
+      },
+      "specimen_match": "identical meshes, placements, object settings, and profile to the independently sliced plate"
+    },
+    "6": {
+      "objects": 7,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "layers": 500,
+      "filament_g": 169.53781127929688,
+      "estimated_seconds": 26188.240234375,
+      "changed_parts": {
+        "06_neck_mast-B21": {
+          "layers": 500,
+          "model_path_below_0p30_mm": 0.0
+        }
+      },
+      "specimen_match": "identical meshes, placements, object settings, and profile to the independently sliced plate"
+    },
+    "7": {
+      "objects": 9,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "layers": 271,
+      "filament_g": 121.77190399169922,
+      "estimated_seconds": 24475.32421875,
+      "changed_parts": {
+        "07_yoke-B21": {
+          "layers": 246,
+          "model_path_below_0p30_mm": 0.0
+        }
+      },
+      "specimen_match": "identical meshes, placements, object settings, and profile to the independently sliced plate"
+    },
+    "8": {
+      "objects": 15,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "layers": 175,
+      "filament_g": 45.930137634277344,
+      "estimated_seconds": 11318.8837890625,
+      "changed_parts": {
+        "21_blink_shaft_crank_2-B21": {
+          "layers": 39,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "19_blink_servo_horn-B21": {
+          "layers": 16,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "22_blink_drive_link-B21": {
+          "layers": 44,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "18_eye_pitch_link_58p5mm-B21": {
+          "layers": 13,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "23_right_short_lid_link-B21": {
+          "layers": 28,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "21_blink_shaft_crank_1-B21": {
+          "layers": 39,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "16_eye_yaw_horn_13p5_mm-B21": {
+          "layers": 27,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "21_blink_shaft_crank_3-B21": {
+          "layers": 39,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "15_eye_yaw_offset_tie_bar-B21": {
+          "layers": 14,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "23_left_short_lid_link-B21": {
+          "layers": 28,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "ID5-keeper-B21": {
+          "layers": 153,
+          "model_path_below_0p30_mm": 0.0
+        }
+      },
+      "specimen_match": "identical meshes, placements, object settings, and profile to the independently sliced plate"
+    },
+    "9": {
+      "objects": 7,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "layers": 153,
+      "filament_g": 28.403724670410156,
+      "estimated_seconds": 6926.34521484375,
+      "changed_parts": {
+        "32_right_eyelid-B21": {
+          "layers": 145,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "32_left_eyelid-B21": {
+          "layers": 145,
+          "model_path_below_0p30_mm": 0.0
+        },
+        "37_right_cheek_bearing_stay-B21": {
+          "layers": 153,
+          "model_path_below_0p30_mm": 0.0
+        }
+      },
+      "specimen_match": "exact release plate"
+    }
+  },
+  "total_changed_filament_g": 387.03611183166504,
+  "total_changed_print_seconds": 72897.63305664062
+}

@@ -56,6 +56,7 @@ def extract(path, output, include_world):
         ]
         world = output/'world'
         motion_by_part = {}
+        world_hashes = {}
         if include_world:
             world.mkdir(exist_ok=True)
         hub_parts = {part.Name for part in doc.HubInstalled.Group + doc.HubCableSpace.Group}
@@ -66,7 +67,9 @@ def extract(path, output, include_world):
             mesh = world_mesh(obj) if obj.TypeId == 'Mesh::Feature' else None
             if include_world and (shape is not None or mesh is not None):
                 motion_by_part[obj.Name] = group or ('hatch' if obj.Name in hub_parts else 'fixed')
-                (mesh if mesh is not None else tessellate(shape)).write(str(world/f'{obj.Name}.stl'))
+                part_file = world/f'{obj.Name}.stl'
+                (mesh if mesh is not None else tessellate(shape)).write(str(part_file))
+                world_hashes[obj.Name] = sha256(part_file.read_bytes()).hexdigest()
             if not group or group == 'fixed':
                 continue
             row = {'name': obj.Name, 'label': obj.Label, 'motion': group,
@@ -84,7 +87,7 @@ def extract(path, output, include_world):
         hinge = doc.JawMotion.Placement.Base
         masses = {'source_sha256': sha256(path.read_bytes()).hexdigest(),
                   'jaw_pivot_mm': list(hinge), 'motion_geometry': motion_geometry,
-                  'world_motion': motion_by_part, 'parts': records}
+                  'world_motion': motion_by_part, 'world_sha256': world_hashes, 'parts': records}
         (output/'cad_parts.json').write_text(json.dumps(masses, ensure_ascii=False, indent=2))
         doc.Part063.Shape.exportStep(str(output/'blink_rail.step'))
         doc.CableSaddle.Shape.exportStep(str(output/'cable_saddle.step'))

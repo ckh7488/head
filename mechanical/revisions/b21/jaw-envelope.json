@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "cad_sha256": "9ed25081889f5846ff2d7c70c99e39580195da25de1857a4c046a16143fdfe02",
+  "modeled_static_contact_deg": [
+    8.823071071079799,
+    9.984537397112165
+  ],
+  "modeled_compound_contact_deg": [
+    8.720859200613837,
+    10.100958142961776
+  ],
+  "modeled_gravity_drop_upper_deg": 11.149343641643688,
+  "tested_wire_angles_deg": [
+    10.25,
+    11.0,
+    11.175
+  ]
+}

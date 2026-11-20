@@ -29,7 +29,7 @@ COLORS = {
     'iris': (77, 123, 103), 'pupil': (12, 17, 17), 'glass': (29, 41, 50),
     'pcb': (48, 106, 76), 'connector': (194, 196, 180), 'power': (225, 171, 51),
     'terminal': (85, 145, 107), 'fuse': (181, 92, 67), 'capacitor': (112, 114, 117),
-    'b19': (226, 92, 60),
+    'b19': (226, 92, 60), 'tool': (16, 144, 125),
 }
 FACE_LIMIT = {'bone': 30000, 'jaw': 12000, 'eye': 8000}
 BLOCKED = re.compile(r'(.+): stated approach \((.+?)\) is blocked; \((.+?)\) is clear')
@@ -81,6 +81,62 @@ def load_wires(source, cad_hash):
         App.closeDocument(doc.Name)
 
 
+def checked_tools(row, world, hardware, tools, phases):
+    from shapely.geometry import Polygon
+
+    from check_b21_tools import SOCKET_DEPTH_MM, SOCKET_RADII, arm_frame
+
+    choices, by_nut = [], {}
+    for name, route in row.get('tool_access', {}).items():
+        if route['status'] != 'pass':
+            continue
+        stock = world.rows[name]
+        axis, outward, seat = [np.asarray(route[key], float) for key in ('axis', 'outward', 'seat_mm')]
+        phase = route.get('nut_rotation_deg')
+        if phase is not None and phases.setdefault(name, phase) != phase:
+            raise ValueError(f'Conflicting installed orientations for {name}')
+        if route['tool'] == 'spanner':
+            profile = next(value for value in hardware if value.get('tool') and value['type'] == 'spanner'
+                           and value['size'] == stock['size'])
+            mesh = trimesh.creation.extrude_polygon(Polygon(profile['profile']), profile['thickness'])
+            mesh.apply_transform(arm_frame(axis, outward, seat))
+        elif route['tool'] == 'socket':
+            outer, inner = SOCKET_RADII[stock['size']]
+            length = route['body_length_mm']
+            mesh = trimesh.creation.revolve([(inner, 0), (outer, 0), (outer, length), (0, length),
+                                               (0, SOCKET_DEPTH_MM), (inner, SOCKET_DEPTH_MM),
+                                               (inner, 0)], sections=48)
+            mesh.apply_transform(trimesh.geometry.align_vectors([0., 0., 1.], outward))
+            mesh.apply_translation(seat)
+        else:
+            raise ValueError(f'Unsupported qualified tool: {route["tool"]}')
+        native_path = route.get('waypoints_mm')
+        points = np.asarray(native_path if native_path else [seat + outward*route['travel_mm'], seat])
+        if not np.allclose(points[-1], seat, atol=.001):
+            raise ValueError(f'Tool path ends outside the reported seat for {name}')
+        mesh_id = f'tool-{row["id"]}-{name}'
+        tools[mesh_id] = mesh
+        by_nut[name] = {'id': mesh_id, 'nut': name, 'kind': route['tool'], 'size': stock['size'],
+                        'seat': seat.tolist(), 'path': (points-seat).round(3).tolist()}
+        choices.append([by_nut[name]])
+    for route in row.get('paired_tool_access', {}).values():
+        if route['status'] == 'pass':
+            choices.append([by_nut[name] for name in route['insertion_order']])
+    for pair, route in row.get('paired_driver_access', {}).items():
+        if route['status'] != 'pass':
+            continue
+        nut, bolt = pair.split('/')
+        reach = row['driver_access'][bolt]['straight_key_reach_mm']
+        size, _, seat, axis = world.screw(bolt)
+        axis = np.asarray(axis, float)
+        tip = np.asarray(seat)-axis*(C.HEAD[size][1]+.05)
+        mesh_id = f'tool-{row["id"]}-{bolt}-axis'
+        tools[mesh_id] = C.cylinder(C.B21_KEY_RADII[size], reach, tip, -axis)
+        choices.append([by_nut[nut], {'id': mesh_id, 'nut': bolt, 'kind': 'driver-axis', 'size': size,
+                                      'seat': tip.tolist(), 'path': [[0, 0, 0], [0, 0, 0]]}])
+    return choices
+
+
 def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None):
     data = json.loads(hardware.read_text())
     world = C.World(cad, data['hardware'], json.loads(spec.read_text()))
@@ -91,8 +147,11 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         raise ValueError('Assembly report does not match the current assembly plan')
     manifest = {p['cad_id']: p['finish'] for p in json.loads((ROOT/'web/assets/assembly.json').read_text())['parts']}
     layout = json.loads((cad/'cad_parts.json').read_text())
+    world.layout = layout
     if revision != 'B19' and checked[0].get('cad_sha256') != layout['source_sha256']:
         raise ValueError('Assembly report and CAD export use different revisions')
+    if revision == 'B21' and checked[0].get('plan_sha256') != C.plan_hash(plan):
+        raise ValueError('B21 assembly plan differs from the one checked')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
     b19_names = {item['name'] for item in json.loads(spec.read_text())} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
@@ -100,8 +159,15 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     wires = load_wires(assembly_cad, layout['source_sha256'])
 
     installed, used, steps = {}, set(), []
+    tools, phases = {}, {}
     number, last_text, sub = 0, '', 0
     for st, row in zip(plan, checked, strict=True):
+        if st.get('blink_deg') != row.get('blink_deg'):
+            raise ValueError(f'Assembly pose differs from the checked pose for {st["id"]}')
+        world.blink_pose = st.get('blink_deg')
+        for name, phase in st.get('set_nut_phases', {}).items():
+            if phases.setdefault(name, phase) != phase:
+                raise ValueError(f'Conflicting assembly orientation for {name}')
         ctx = installed.setdefault(st['ctx'], [])
         if st['id'] == 'rear-cover':
             ctx.extend(rear_wiring)
@@ -151,6 +217,8 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         if len(names) != len(set(names)):
             raise ValueError(f'Duplicate parts in {st["id"]}')
         used.update(names)
+        tool_paths = checked_tools(row, world, data['hardware'], tools, phases) if revision == 'B21' else []
+        poses = {name: matrix.tolist() for name in names if (matrix := world.blink_transform(name)) is not None}
         steps.append({
             'id': st['id'], 'label': label, 'section': SECTIONS[st['ctx']], 'bench': st['ctx'] in BENCH,
             'text': row['text'] or last_text, 'continued': not row['text'],
@@ -158,10 +226,13 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             'issues': row['issues'], 'fixed': fixed, 'moves': moves,
             'closedLids': bool(st.get('closed_lids')),
             'showWires': st['id'] == 'rear-skull',
+            **({'toolPaths': tool_paths} if tool_paths else {}),
+            **({'actorPoses': poses, 'blinkDegrees': st['blink_deg']} if poses else {}),
             **({'insertionClearance': row['insertion_clearance']} if 'insertion_clearance' in row else {}),
         })
 
     scene = trimesh.Scene()
+    world.blink_pose = None
     materials = {name: trimesh.visual.material.PBRMaterial(
         name=name, baseColorFactor=np.array((*rgb, 255), dtype=np.uint8), roughnessFactor=.6,
         metallicFactor=.45 if name == 'steel' else 0.) for name, rgb in COLORS.items()}
@@ -171,6 +242,10 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         if mesh is None:
             raise ValueError(f'Empty assembly mesh: {name}')
         mesh = mesh.copy()
+        if phases.get(name):
+            nut = world.rows[name]
+            mesh.apply_transform(trimesh.transformations.rotation_matrix(
+                np.radians(phases[name]), nut['axis'], nut['seat']))
         finish = ('b19' if name in b19_names else 'power' if name.startswith('RearLead')
                   else 'connector' if name in rear_wiring or name in hub_plugs else finish_of(name, manifest))
         limit = FACE_LIMIT.get(finish, 4000)
@@ -187,10 +262,15 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         parts[name] = {'label': labels.get(name, ''), 'b19': name in b19_names,
                        'center': mesh.bounds.mean(axis=0).round(2).tolist(),
                        'size': float(np.linalg.norm(mesh.extents).round(2))}
+    for name, mesh in tools.items():
+        mesh.visual = trimesh.visual.TextureVisuals(material=materials['tool'])
+        scene.add_geometry(mesh, node_name=name, geom_name=name)
     output.mkdir(parents=True, exist_ok=True)
-    (output/'model.glb').write_bytes(trimesh.exchange.gltf.export_glb(scene, include_normals=True))
+    model = trimesh.exchange.gltf.export_glb(scene, include_normals=True)
+    (output/'model.glb').write_bytes(model)
     (output/'steps.json').write_text(json.dumps({
         'source': report.name, 'revision': revision, 'cadSha256': layout['source_sha256'],
+        'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
     }, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(f'{len(steps)} steps, {len(parts)} parts, model {(output/"model.glb").stat().st_size/1e6:.1f} MB')

@@ -1,6 +1,6 @@
 # 웹 뷰어
 
-브라우저에서 B20의 조립 순서를 볼 수 있습니다. 아래의 B15 뷰어에서는 배선을 살펴보고 여섯 축을 움직일 수 있습니다.
+브라우저에서 B21의 조립 순서와 공구 경로를 볼 수 있습니다. 아래의 B15 뷰어에서는 배선을 살펴보고 여섯 축을 움직일 수 있습니다.
 
 최근 개정의 [B18 후면 연결부](../mechanical/revisions/b18/)와 [B18 개선 시안](../mechanical/revisions/b18/study/)은 HTML을 내려받아 브라우저에서 직접 엽니다.
 
@@ -24,11 +24,23 @@ Windows PowerShell에서는 JavaScript의 MIME 유형을 지정하고 서버를 
 py -3.12 -c "import mimetypes, runpy; mimetypes.init(); mimetypes.add_type('text/javascript', '.js'); runpy.run_module('http.server', run_name='__main__')" 8000 --bind 127.0.0.1 --directory web
 ```
 
+## B21 조립 순서
+
+위 서버를 띄우고 `http://127.0.0.1:8000/b19/`를 열면 B21 조립 122단계를 볼 수 있습니다. 파란색은 이번에 끼우는 부품이고 주황색은 체결품과 핀입니다. 공구 표시를 켜면 검사를 통과한 스패너·소켓 경로가 나타납니다. 마지막 단계에서 외장 숨기기를 누르면 내부 배선과 체결품이 보입니다. [B21 CAD와 검사](../mechanical/revisions/b21/)
+
+[B21 검사](../mechanical/revisions/b21/#다시-만들기)에서 나온 `assembly.json`을 지정합니다. 단일 HTML을 만들면 서버 없이 브라우저에서 열 수 있습니다.
+
+```sh
+out=build/b21
+assembly_report=build/b21/checks/검사실행폴더/assembly.json
+python web/b19/build_b19_viewer.py "$out/cad" "$out/hardware.json" "$out/hardware-spec.json" "$assembly_report" --revision B21 --assembly-cad "$out/R5-B21-Assembly.FCStd" --output "$out/viewer"
+npm ci --prefix web
+python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B21-assembly.html"
+```
+
 ## B20 조립 순서
 
-`/b19/`에서 B20 조립 경로 122단계를 3D로 봅니다. 파란색은 이번 단계에 넣는 부품, 주황색은 추가된 체결품과 핀입니다. 위 서버를 띄운 뒤 `http://127.0.0.1:8000/b19/`를 엽니다. 타이바는 `/b19/#eye-tie`에서 바로 확인할 수 있습니다. 마지막 단계에서 외장 숨기기를 누르면 CAD에 모델링된 내부 배선과 체결품을 볼 수 있습니다. [B20 CAD·검사](../mechanical/revisions/b20/)
-
-B20 CAD나 조립 검사가 바뀌면 [B20 재현](../mechanical/revisions/b20/README.md#재현)의 명령으로 새로 내보냅니다. 뷰어 생성기는 조립 검사와 배선에 쓴 CAD의 해시를 대조합니다.
+[B20 재현](../mechanical/revisions/b20/README.md#재현)의 명령으로 B20 모델을 내보낼 수 있습니다.
 
 아래 `/assembly/` 단계별 조립과 배선·구동 화면은 B15 조립본 기준입니다.
 
