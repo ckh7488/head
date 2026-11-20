@@ -1,44 +1,23 @@
-# R5 B15
+# R5 B15 로봇 헤드
 
-코 안의 USB 카메라로 얼굴을 보고 눈·목을 움직이는 해골 헤드입니다. OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 6축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
+R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
-구조물은 **M3×8·M3×16 육각렌치 원통머리 ISO 4762 (DIN 912)**와 일반 M3 육각너트를 씁니다. 작은 링크와 기판, 제조사 체결 구멍은 부품표에 적었습니다. [기구 부품표](mechanical/BOM.csv)
+## 디렉터리 구성
 
-P2S 출력판에는 앞 해골의 출력 경사, 눈꺼풀 축의 홈, 목 볼트와 JST 통로를 수정한 형상이 들어 있습니다. [구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사) · [출력 검사](mechanical/README.md#출력-경로-검사)
+- [mechanical/](mechanical/README.md) · FreeCAD 조립본, P1S·P2S 출력판, 부품표, 기구 검증과 조립 순서
+- [electronics/](electronics/README.md) · KiCad 회로와 PCB, 발주 파일, 전원과 배선
+- [control/](control/README.md) · PC 얼굴 추적, OpenRB 펌웨어, 카메라와 모터 보정
+- [web/](web/README.md) · 3D 조립·구동·배선 뷰어, CAD 내보내기
+- [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
 
-출력 기준은 P2S 기본 0.4 mm 노즐과 Bambu PETG HF입니다. 시험판 2번은 케이블, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어용입니다. [P2S 출력 설정](mechanical/README.md#p2s-출력-설정) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [조립절차서](mechanical/ASSEMBLY.md)
+## B15 제작과 조립
 
-| 작업 | 시작 파일 |
-|---|---|
-| 기구 확인 및 수정 | [B15 FreeCAD 조립본](mechanical/R5-B15-Assembly.FCStd) |
-| P2S 전체판 | [B15 출력판 12장과 선택 1장](mechanical/R5-B15-P2S.3mf) |
-| 부품·물리 검증 | [기구 BOM](mechanical/BOM.csv) · [검증 재현](mechanical/README.md) |
-| 두 PCB 발주·납땜 | [발주 파일·제작 옵션·배선](electronics/README.md) |
-| 카메라 추적·펌웨어·보정 | [제어 실행법](control/README.md) |
-| 브라우저에서 조립 순서와 6축 조작 | [조립 완료](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#complete) · [배선 포함 구동](https://r5-b1-review.ckh.chatgpt.site/b15/?view=wiring) |
+- [FreeCAD 조립본](mechanical/R5-B15-Assembly.FCStd) · [기구 부품표](mechanical/BOM.csv)
+- [P2S 전체판 12장과 선택 1장](mechanical/R5-B15-P2S.3mf) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [출력 설정](mechanical/README.md#p2s-출력-설정)
+- [조립 절차](mechanical/ASSEMBLY.md) · [체결품과 배선을 장착한 상태의 구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사)
 
-## 웹 뷰어
+P2S 출력판은 **0.4 mm 노즐과 Bambu PETG HF** 기준입니다. 앞 해골의 출력 경사, 눈꺼풀 축 홈, 목 볼트와 JST 통로를 수정한 형상이 들어 있습니다. 시험판 2번은 케이블, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어를 확인하는 데 씁니다. [출력 경로 검사](mechanical/README.md#출력-경로-검사)
 
-저장소 루트에서 실행하면 브라우저에서 조립 형상과 6축 움직임을 볼 수 있습니다. [구동 검토](http://localhost:8000) · [단계별 조립](http://localhost:8000/assembly/)
+## 3D 뷰어
 
-```sh
-npm ci --prefix web
-python -m http.server 8000 --directory web
-```
-
-CAD와 웹 모델을 갱신한 뒤 `node web/verify_assets.mjs`로 조립 형상, 간섭 검사, 배선과 커넥터가 같은 버전인지 검사합니다.
-
-```sh
-python web/export_cad.py build/physics/cad build/web
-npx --yes gltfpack@0.24.0 -i build/web/assembly.glb -o web/assets/assembly.glb -cc -kn -km -noq
-cp build/web/assembly.json web/assets/assembly.json
-QT_QPA_PLATFORM=offscreen PYTHONPATH=/usr/lib/freecad-python3/lib build/freecad-venv/bin/python web/assembly/export_review.py --cad build/mechanical/R5-B15-Assembly.FCStd
-```
-
-외장 메시를 BoneHub의 Visible Human Full-Skeleton 3D Bone Models에서 개작했습니다. [원본](https://doi.org/10.57967/hf/10464) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
-
-목의 XL430 두 개와 눈·눈꺼풀·턱의 XL330 네 개는 ROBOTIS STEP을 사용합니다. 웹 내보내기에서도 모터의 케이스 윤곽과 장착 구멍을 유지합니다. [XL330 원본 도면](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#drawings) · [XL430 원본 도면](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/#xl430-w250-new)
-
-구매품 형상은 `web/export_connectors.py`로 내보냅니다. 스크립트의 두 번째 인수는 아래 STEP 다섯 파일이 들어 있는 폴더입니다. `--review-cad`로 구매품을 교체한 FreeCAD 참고본도 만들 수 있습니다. [XT60U-F](https://modules.easyeda.com/qAxj6KHrDKw4blvCG8QJPs7Y/7e3f76bd9e1344f68e653ea7d528bc08) · [XT60U-M](https://modules.easyeda.com/qAxj6KHrDKw4blvCG8QJPs7Y/8e19b37684634468b185c41bc1fdfa75) · [KiCad JST 3종](https://github.com/KiCad/kicad-packages3D/tree/master/Connector_JST.3dshapes) · [KiCad 라이선스](https://www.kicad.org/libraries/license/)
-
-영상 예제는 scikit-image의 NASA 우주비행사 샘플이고, 한국어 서체는 Noto Sans CJK입니다. [샘플](https://scikit-image.org/docs/stable/api/skimage.data.html#skimage.data.astronaut) · [서체 라이선스](web/assets/noto-sans-cjk-license.txt)
+[단계별 조립](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/) · [조립 완료 모습](https://r5-b1-review.ckh.chatgpt.site/b15/assembly/#complete) · [배선 포함 구동](https://r5-b1-review.ckh.chatgpt.site/b15/?view=wiring)
