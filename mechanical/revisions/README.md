@@ -6,7 +6,7 @@
 | [B17](b17/) | ID5 플러그 가드와 300 mm 시선 정렬 |
 | [B18](b18/) | 받침 밖 USB와 전원 플러그, 분리형 후면 트레이 |
 | [B18 개선 시안](b18/study/) | 고정 허브, 30 mm 내려가는 바닥 덮개, 목 가림막과 12 V 배선 |
-| [B19](b19/) | 모든 체결품의 길이, 조립이 안 되던 지점 수정, 출력물 9개 교체, 단계별 조립 검사 |
+| [B19](b19/) | 모든 체결품의 길이, 조립이 안 되던 지점 수정, 출력물 10개 교체, 단계별 조립 검사 |
 
 ## 제작할 파일 (B19 기준)
 
@@ -15,12 +15,13 @@
 | 출력 | [B16 P2S 전체판 13장](b16/R5-B16-P2S.3mf) 또는 [P1S](b16/R5-B16-P1S.3mf)를 열고 아래 부품을 바꿔 다시 슬라이스 |
 | 6번 판 | 09 머리 프레임 → [B19 프레임](b19/print/09_head_frame-B19.stl) |
 | 7번 판 | 07 요크 → [B18 요크](b18/study/R5-B18-yoke-and-ID5-keeper.zip)의 `07-yoke-B18.stl`, 12 크래들 → [B19 크래들](b19/print/12_eye_tilt_cradle-B19.stl), 39 눈 좌우 모터판 → [B19 모터판](b19/print/xl330_eye_yaw_front_plate-B19.stl). [B19 ID5 가드](b19/print/ID5-keeper-B19.stl)를 빈 자리에 추가 |
-| 8번 판 | 19 눈꺼풀 혼 → [B19 혼](b19/print/19_blink_servo_horn-B19.stl), 21-2 가운데 크랭크 → [B19 크랭크](b19/print/21_blink_shaft_crank_2-B19.stl), 45 간격통 두 개 → [B19 왼쪽](b19/print/45_blink_shaft_spacer_left-B19.stl)·[오른쪽](b19/print/45_blink_shaft_spacer_right-B19.stl) |
+| 5번 판 | 30 턱 → [B19 턱 한 몸](b19/print/30_38_39_jaw_one_piece-B19.3mf) (38·39 팔 포함) |
+| 8번 판 | 38·39 팔 삭제(턱에 포함), 19 눈꺼풀 혼 → [B19 혼](b19/print/19_blink_servo_horn-B19.stl), 21-2 가운데 크랭크 → [B19 크랭크](b19/print/21_blink_shaft_crank_2-B19.stl), 45 간격통 두 개 → [B19 왼쪽](b19/print/45_blink_shaft_spacer_left-B19.stl)·[오른쪽](b19/print/45_blink_shaft_spacer_right-B19.stl) |
 | 12번 판 | 26 카메라 브래킷 → [B19 브래킷](b19/print/26_u20cam_slotted_bracket-B19.stl) |
 | 11번 판 | 40·42번 → [B18 40번](b18/40-rear-cable-guide-B18.stl)·[42번](b18/42-rear-cable-cover-B18.stl) |
 | 시험 출력 | [B16 P2S 시험판](b16/R5-B16-Fit-P2S.3mf) |
 | 구매품 | [부품표](../BOM.csv) (나사·핀·전선·단자 포함), [전선 재단표](../WIRING-CUT-LIST.csv) |
-| 조립 | [B19 조립 절차](../ASSEMBLY.md). 눈 타이바와 턱 팔 두 곳은 아직 조립할 수 없음 |
+| 조립 | [B19 조립 절차](../ASSEMBLY.md) |
 
 B18 개선 시안(고정 허브, 목 가림막)은 제작 전 검토 단계라 위 목록에 넣지 않았습니다.
 

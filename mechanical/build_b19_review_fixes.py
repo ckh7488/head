@@ -57,6 +57,9 @@ EYE_YAW_FEET = ((-8., -47.6), (8., -47.6))
 EYE_YAW_FOOT_Z = (108.85, 111.55)
 CRADLE_FOOT_TOP = 125.
 CRADLE_COUNTERBORE = (3.1, 121.5)
+TIE_PIN_X = (-34., 34.)
+TIE_PIN_Y = -25.5
+TIE_PIN_HOLE_RADIUS = 1.1
 KEEPER_MOTOR_HOLES = ((11., 84.), (11., 108.))
 STAY_FRAME_HOLES = ((53., 142.), (53., 151.))
 STAY_FRAME_SPAN_Y = (20.8, 31.)
@@ -216,6 +219,10 @@ def repair_printed_parts(doc):
         cradle = cradle.cut([cylinder(1.7, CRADLE_FOOT_TOP-EYE_YAW_FOOT_Z[1]+.4, (x, y, EYE_YAW_FOOT_Z[1]-.2)),
                              cylinder(CRADLE_COUNTERBORE[0], CRADLE_FOOT_TOP-CRADLE_COUNTERBORE[1]+.2,
                                       (x, y, CRADLE_COUNTERBORE[1]))])
+    # The 15 tie bar cannot reach its pins: they stand 3.25 mm proud of the bar and the cradle
+    # bridges leave 3.55 mm above it, but the bar can only come in sideways at seat height. Let it
+    # slide in without pins and push each Ø2×6 pin down afterwards through a hole in the bridge.
+    cradle = cradle.cut([cylinder(TIE_PIN_HOLE_RADIUS, 4., (x, TIE_PIN_Y, 120.)) for x in TIE_PIN_X])
     plate = world_shape(doc.Part039)
     feet = [cylinder(1.6, EYE_YAW_FOOT_Z[1]-EYE_YAW_FOOT_Z[0], (x, y, EYE_YAW_FOOT_Z[0])) for x, y in EYE_YAW_FEET]
     plate = plate.fuse([f.common(box(x-3., x+3., y-2.7, y+2.7, *EYE_YAW_FOOT_Z)) for f, (x, y) in zip(feet, EYE_YAW_FEET)])
@@ -373,6 +380,51 @@ def check(doc, hardware):
     return report
 
 
+def jaw_one_piece(doc, path):
+    """30 jaw, 38 drive arm and 39 pin arm fused into one print in the jaw's own frame.
+
+    The jaw's arm pockets are closed on every side, so separately printed arms cannot be fitted.
+    """
+    import numpy as np
+    import trimesh
+    jaw = doc.getObject('Jaw_30_moving_jaw')
+    meshes = []
+    for name in ('Jaw_30_moving_jaw', 'Jaw_38_left_jaw_drive_arm', 'Jaw_39_right_jaw_pivot_arm'):
+        mesh = doc.getObject(name).Mesh.copy()
+        mesh.Placement = doc.getObject(name).getGlobalPlacement()
+        points, facets = mesh.Topology
+        part = trimesh.Trimesh(np.array([tuple(p) for p in points]), np.array(facets))
+        meshes.append(part)
+    fused = trimesh.boolean.union(meshes, engine='manifold')
+    local = jaw.getGlobalPlacement().inverse().toMatrix()
+    fused.apply_transform(np.array(local.A).reshape(4, 4))
+    fused.apply_translation(-np.array([*fused.bounds.mean(axis=0)[:2], fused.bounds[0][2]]))
+    if not fused.is_volume or fused.body_count != 1:
+        raise ValueError('jaw one-piece print is not a single closed body')
+    write_3mf(fused.vertices, fused.faces, path)
+
+
+def write_3mf(vertices, faces, path):
+    """Minimal 3MF. Unlike STL it keeps vertex indices, so the seams where the arms only touch
+    their pockets stay closed instead of being welded into non-manifold edges on import."""
+    import zipfile
+    v = ''.join(f'<vertex x="{x:.5f}" y="{y:.5f}" z="{z:.5f}"/>' for x, y, z in vertices)
+    t = ''.join(f'<triangle v1="{a}" v2="{b}" v3="{c}"/>' for a, b, c in faces)
+    model = ('<?xml version="1.0" encoding="UTF-8"?>'
+             '<model unit="millimeter" xmlns="http://schemas.microsoft.com/3dmanufacturing/core/2015/02">'
+             f'<resources><object id="1" type="model"><mesh><vertices>{v}</vertices><triangles>{t}</triangles>'
+             '</mesh></object></resources><build><item objectid="1"/></build></model>')
+    types = ('<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+             '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+             '<Default Extension="model" ContentType="application/vnd.ms-package.3dmanufacturing-3dmodel+xml"/></Types>')
+    rels = ('<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
+            '<Relationship Target="/3D/3dmodel.model" Id="rel0" Type="http://schemas.microsoft.com/3dmanufacturing/2013/01/3dmodel"/></Relationships>')
+    with zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED) as archive:
+        archive.writestr('[Content_Types].xml', types)
+        archive.writestr('_rels/.rels', rels)
+        archive.writestr('3D/3dmodel.model', model)
+
+
 def make(source, output, report, stl=None):
     if source.resolve() == output.resolve():
         raise ValueError('Choose a separate CAD output')
@@ -391,10 +443,12 @@ def make(source, output, report, stl=None):
         result['head_only_screws'] = {k: f'{v[0]} × {v[1]}' for k, v in HEAD_ONLY.items()}
         result['empty_horn_holes'] = EMPTY_HORN_HOLES
         result['printed_parts_changed'] = {name: slug for name, (slug, _) in printed.items()}
+        result['printed_parts_changed']['Jaw_30_moving_jaw + Jaw_38 + Jaw_39'] = '30_38_39_jaw_one_piece-B19'
         if stl:
             stl.mkdir(parents=True, exist_ok=True)
             for name, (slug, direction) in printed.items():
                 print_mesh(world_shape(doc.getObject(name)), stl/f'{slug}.stl', direction)
+            jaw_one_piece(doc, stl/'30_38_39_jaw_one_piece-B19.3mf')
             (stl/'hardware-spec.json').write_text(json.dumps(hardware_spec(), indent=1) + '\n')
         output.parent.mkdir(parents=True, exist_ok=True)
         doc.saveAs(str(output.resolve()))
