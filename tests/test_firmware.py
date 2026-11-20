@@ -189,6 +189,28 @@ def test_release_retries_only_the_unconfirmed_axis(firmware):
     arm(firmware, 24)
 
 
+def test_reboot_recovers_an_axis_that_latched_a_hardware_alert(firmware):
+    arm(firmware, 24)
+    firmware.fail('r', 5, POSITION, 'alert', 100)
+    firmware.fail('r', 5, TORQUE, 'alert', 100)
+    assert firmware.tick(120)[0] == 'ERROR READ_STATUS ID5'
+    assert firmware.command('RELEASE') == ['ERROR RELEASE_UNCONFIRMED']
+    assert firmware.command('ARM 24') == ['LOCKED RELEASE_AFTER_FAULT']
+    firmware.trace()
+    assert firmware.command('REBOOT 5') == ['REBOOTED 5']
+    assert [(e.direction, e.id) for e in firmware.trace()] == [('b', 5)]
+    assert firmware.command('RELEASE') == ['RELEASED']
+    arm(firmware, 24)
+
+
+def test_reboot_is_refused_on_a_healthy_armed_axis(firmware):
+    arm(firmware, 24)
+    assert firmware.command('REBOOT 4') == ['ERROR REBOOT_WHILE_ARMED ID4']
+    assert firmware.command('REBOOT 7') == ['ERROR REBOOT_ID']
+    assert not any(e.direction == 'b' for e in firmware.trace())
+    assert firmware.command('REBOOT 6') == ['REBOOTED 6']
+
+
 def test_pacing_applies_latest_goal_as_reports_continue(firmware):
     _, period, report, _ = map(int, firmware.exchange('timing')[0].split())
     arm(firmware, 8)

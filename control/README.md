@@ -43,6 +43,14 @@ OpenRB는 최신 목표를 60 ms마다 보낼 수 있고 위치는 120 ms마다 
 
 CRC나 응답 지연은 한 번 재시도합니다. 문제가 계속되거나 실제 위치가 보정 범위를 8틱 넘게 벗어나면 새 움직임을 잠그고, 응답하는 축에는 현재 위치를 보정 범위 안에서 잡습니다. 통신이 끊긴 축에는 마지막 목표가 남을 수 있습니다. 추적이 얼굴을 놓치거나 유효한 명령이 400 ms 동안 없을 때도 현재 위치를 잡습니다. `--release` 전에는 목을 받칩니다. OpenRB가 제어 중이던 축의 Torque Enable이 0으로 읽히면 `RELEASED`가 표시됩니다.
 
+모터가 과부하·전압·과열 오류를 기록하면 상태 응답에 알림 비트가 남아 재부팅 전까지 그 축을 읽을 수 없습니다. 이때 `RELEASE`는 `ERROR RELEASE_UNCONFIRMED`로 끝납니다. 걸린 원인을 없애고 목을 받친 뒤 해당 ID만 재부팅하고, 다시 `--release`와 `--check`를 실행합니다. 재부팅은 정상 동작 중인 축에서는 거부되고, 오류로 멈춘 뒤에만 허용됩니다. 모터가 다시 켜질 때까지 잠깐 기다린 뒤 다음 명령을 보냅니다.
+
+```sh
+python control/pc/commission.py --serial /dev/ttyACM0 --reboot 6
+python control/pc/commission.py --serial /dev/ttyACM0 --release
+python control/pc/commission.py --serial /dev/ttyACM0 --check
+```
+
 Goal PWM은 XL330·XL430 위치 모드의 출력 PWM 상한입니다. 펌웨어는 설정값을 다시 읽은 뒤 토크를 켭니다. 실제 정지 토크와 하중은 조립 상태에서 측정하는 값입니다. [XL330 제어표](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#goal-pwm100) · [XL430 제어표](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/#goal-pwm100)
 
 ## 하드웨어 없이 실행

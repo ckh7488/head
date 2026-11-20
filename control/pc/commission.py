@@ -1,4 +1,4 @@
-"""Check or read servos without enabling torque, or explicitly release armed axes."""
+"""Check or read servos without enabling torque, release armed axes, or reboot one servo."""
 from argparse import ArgumentParser
 import time
 
@@ -42,6 +42,8 @@ def main():
     action.add_argument('--read',type=int,choices=range(1,7))
     action.add_argument('--check',action='store_true',help='Read readiness and torque status for all six servos')
     action.add_argument('--release',action='store_true')
+    action.add_argument('--reboot',type=int,choices=range(1,7),
+                        help='Clear a latched hardware error (overload, voltage, heat) on one servo')
     args=argument.parse_args()
     with serial.Serial(args.serial,115200,timeout=.2,write_timeout=.3) as port:
         until=time.monotonic()+4
@@ -56,6 +58,8 @@ def main():
                 check_axes(port)
             elif args.read:
                 print(request(port,f'READ {args.read}',lambda line: line.startswith(f'RAW {args.read} ')))
+            elif args.reboot:
+                print(request(port,f'REBOOT {args.reboot}',lambda line: line==f'REBOOTED {args.reboot}'))
             else:
                 print(request(port,'RELEASE',lambda line: line=='RELEASED'))
         except RuntimeError as error:

@@ -129,6 +129,21 @@ struct Dynamixel2Arduino {
         return libError == DXL_LIB_OK && (status == 0 || status == 0x80);
     }
 
+    bool reboot(uint8_t id, uint32_t timeout) {
+        exchange('b', id, 0, 0, timeout);
+        if (libError != DXL_LIB_OK) return false;
+        auto& registers = motors.at(id-1).registers;
+        registers.at(64) = 0;
+        registers.at(100) = 885;
+        registers.at(108) = 0;
+        registers.at(112) = 0;
+        registers.at(116) = registers.at(132);
+        for (auto& failure : failures) {
+            if (failure.id == id && failure.kind == "alert") failure.remaining = 0;
+        }
+        return status == 0 || status == 0x80;
+    }
+
     static uint16_t registerSize(uint16_t address) {
         switch (address) {
             case 0: case 100: return 2;

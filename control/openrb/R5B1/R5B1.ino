@@ -362,6 +362,24 @@ void arm(uint8_t mask) {
   report();
 }
 
+void rebootAxis(uint8_t i) {
+  const uint8_t id=i+1;
+  // A servo that latched a hardware error (overload, voltage, heat) keeps the alert
+  // bit until it reboots, so every later read on that axis fails. Allow the reboot
+  // on an idle axis, or on an armed axis once a fault has already stopped motion.
+  if (axisEnabled(armed,i) && !faulted) {
+    printAxisError("ERROR REBOOT_WHILE_ARMED",id);
+    return;
+  }
+  drainBusInput();
+  if (!dxl.reboot(id,busTimeoutMs)) {
+    printAxisError("ERROR REBOOT",id);
+    return;
+  }
+  Serial.print("REBOOTED ");
+  Serial.println(id);
+}
+
 bool getUnsigned(const char* text,long lo,long hi,long& value) {
   char* end=nullptr;
   value=strtol(text,&end,10);
@@ -386,6 +404,13 @@ void command(char* text) {
     if (moving) Serial.println("ERROR CHECK_DURING_MOVE");
     else if (getUnsigned(text+6,1,count,id)) checkAxis(id-1);
     else Serial.println("ERROR CHECK_ID");
+    return;
+  }
+  if (!strncmp(text,"REBOOT ",7)) {
+    long id=0;
+    if (moving) Serial.println("ERROR REBOOT_DURING_MOVE");
+    else if (getUnsigned(text+7,1,count,id)) rebootAxis(id-1);
+    else Serial.println("ERROR REBOOT_ID");
     return;
   }
   if (!strncmp(text,"READ ",5)) {
