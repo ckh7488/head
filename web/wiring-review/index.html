@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>R5 B16 배선 검사</title>
+  <link rel="stylesheet" href="./review.css">
+  <script type="importmap">{"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}</script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>R5 B16 배선 검사</h1>
+      <p id="status" role="status">CAD와 검사 자세 불러오는 중</p>
+    </header>
+    <section class="viewport" aria-label="배선 3D 모델">
+      <div id="scene"></div>
+      <div class="views">
+        <button id="base-view" type="button">받침 확대</button>
+        <button id="neck-view" type="button">목 확대</button>
+        <label><input id="shell" type="checkbox"> 외장</label>
+        <label><input id="wire-only" type="checkbox"> 배선만</label>
+      </div>
+    </section>
+    <aside aria-label="검사 자세">
+      <div id="comparison" hidden>
+        <div class="modes" aria-label="배선 수정 전후">
+          <button id="before" type="button" aria-pressed="false">수정 전</button>
+          <button id="after" type="button" aria-pressed="true">수정 후</button>
+        </div>
+        <label class="select-label">볼 배선
+          <select id="wire-focus">
+            <option value="all">전체 배선</option>
+            <option value="crossing">받침 배선 교차</option>
+            <option value="jaw">턱 DATA 굽힘</option>
+            <option value="moving">ID1 · 카메라선</option>
+            <option value="j1">J1 5 V 루프</option>
+            <option value="j6">J6 DATA 분기</option>
+          </select>
+        </label>
+        <p class="hint" id="comparison-note"></p>
+        <button id="worst-pose" type="button" hidden>이 모델의 최저 반경 자세</button>
+        <dl id="comparison-totals" hidden>
+          <dt>복합 끝자세 배선 교차</dt><dd id="crossing-total"></dd>
+          <dt>턱 DATA 최저 R <span title="목표 5.715 mm">(기준 5.715)</span></dt><dd id="jaw-total"></dd>
+          <dt>ID1·카메라 부품 접촉 자세</dt><dd id="moving-total"></dd>
+        </dl>
+      </div>
+      <div id="result" aria-live="polite"></div>
+      <div id="positions"></div>
+      <div class="modes">
+        <button id="neck-mode" type="button" aria-pressed="true">목 구동</button>
+        <button id="hatch-mode" type="button" aria-pressed="false">바닥 덮개</button>
+      </div>
+      <fieldset id="neck-controls">
+        <label>좌우 <output id="yaw-value"></output><input id="yaw" type="range" min="-60" max="60" step="5" value="0"></label>
+        <label>상하 <output id="pitch-value"></output><input id="pitch" type="range" min="-15" max="6" step="3" value="0"></label>
+        <div class="corners" id="corners">
+          <button type="button" data-yaw="-60" data-pitch="-15">−60° / −15°</button>
+          <button type="button" data-yaw="-60" data-pitch="6">−60° / +6°</button>
+          <button type="button" data-yaw="60" data-pitch="-15">+60° / −15°</button>
+          <button type="button" data-yaw="60" data-pitch="6">+60° / +6°</button>
+        </div>
+      </fieldset>
+      <fieldset id="hatch-controls" hidden>
+        <label>내린 거리 <output id="drop-value"></output><input id="drop" type="range" min="0" max="30" step="1" value="0"></label>
+        <button id="open-hatch" type="button">30 mm 열기</button>
+      </fieldset>
+      <button type="button" id="play" aria-pressed="false">왕복 재생</button>
+      <label id="combined-label" class="select-label" hidden>덮개 30 mm + 목 끝자세
+        <select id="combined">
+          <option value="">자세 선택</option>
+        </select>
+      </label>
+      <div class="layers">
+        <label class="usb"><input id="camera" type="checkbox" checked> 카메라선</label>
+        <label class="motors"><input id="motors" type="checkbox" checked> 모터선</label>
+        <label class="power"><input id="power" type="checkbox" checked> 5 V 입력선</label>
+        <label class="hits"><input id="contacts" type="checkbox" checked> 간섭 위치</label>
+        <label class="bends"><input id="bends" type="checkbox"> 굽힘 위치</label>
+        <label id="neighbors-label" hidden><input id="neighbors" type="checkbox"> 기존 배선 비교</label>
+      </div>
+      <label id="extra-label" hidden>추가 검사 자세 <select id="extra"></select></label>
+      <p class="hint">드래그로 회전하고 휠로 확대합니다. 각 프레임은 해당 자세의 정적 검사 결과입니다. 5 V 루프의 처짐은 조립 후 확인합니다.</p>
+    </aside>
+  </main>
+  <script type="module" src="./review.js"></script>
+</body>
+</html>

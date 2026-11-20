@@ -55,7 +55,7 @@ const circle = Array.from({ length: sides }, (_, i) => {
   return [Math.cos(angle), Math.sin(angle)];
 });
 
-function updateTube(node, samples, radius) {
+export function updateTube(node, samples, radius) {
   const points = samples.filter((point, i) => i === 0 || point.distanceToSquared(samples[i - 1]) > 1e-8);
   const count = points.length * sides;
   if (node.geometry.getAttribute("position")?.count !== count) {
