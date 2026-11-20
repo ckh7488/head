@@ -2,6 +2,10 @@
 
 R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
+![R5 B15의 조립 형상과 외장을 투명하게 표시한 내부 배선 및 체결품](mechanical/assembly/b15-readme.jpg)
+
+B15 CAD 기반 렌더링. [모델과 자료 출처](web/README.md#모델과-자료-출처)
+
 ## 디렉터리 구성
 
 - [mechanical/](mechanical/README.md) · FreeCAD 조립본, P1S·P2S 출력판, 부품표, 기구 검증과 조립 순서
