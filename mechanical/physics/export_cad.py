@@ -20,9 +20,11 @@ def world_shape(obj):
 
 
 def world_mesh(obj):
+    # Setting the copy's placement re-expresses its points in world coordinates. The earlier
+    # transform by parent × own⁻¹ left meshes that carry their own placement inside a moving
+    # group (the 30 jaw and 38 drive arm under JawMotion) about 2 mm off the motor axis.
     mesh = obj.Mesh.copy()
-    world_from_parent = obj.getGlobalPlacement().multiply(obj.Placement.inverse())
-    mesh.transform(world_from_parent.toMatrix())
+    mesh.Placement = obj.getGlobalPlacement()
     return mesh
 
 

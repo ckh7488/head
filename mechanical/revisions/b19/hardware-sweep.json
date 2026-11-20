@@ -8,27 +8,11 @@
       "collisions": [],
       "under_1mm": {}
     },
-    "XL430YawSideL2": {
-      "collisions": [],
-      "under_1mm": {}
-    },
-    "XL430YawSideL3": {
-      "collisions": [],
-      "under_1mm": {}
-    },
     "XL430YawSideR0": {
       "collisions": [],
       "under_1mm": {}
     },
     "XL430YawSideR1": {
-      "collisions": [],
-      "under_1mm": {}
-    },
-    "XL430YawSideR2": {
-      "collisions": [],
-      "under_1mm": {}
-    },
-    "XL430YawSideR3": {
       "collisions": [],
       "under_1mm": {}
     },
@@ -100,9 +84,47 @@
     "EyeYawTieHorn": {
       "collisions": [],
       "under_1mm": {
-        "Part024": 0.65,
-        "Part039": 0.476
+        "Part024": 0.75,
+        "Part039": 0.856
       }
+    },
+    "EyeYawHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew2": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkHornScrew0": {
+      "collisions": [],
+      "under_1mm": {
+        "Part056": 0.787
+      }
+    },
+    "BlinkHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "JawHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "JawHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
     },
     "EyeYawTiePinL": {
       "collisions": [],
@@ -130,17 +152,19 @@
     }
   },
   "yaw_gap_mm": {
-    "XL430YawSideL0": 22.251,
-    "XL430YawSideL1": 10.75,
-    "XL430YawSideL2": 14.736,
-    "XL430YawSideL3": 3.691,
-    "XL430YawSideR0": 22.251,
-    "XL430YawSideR1": 10.75,
-    "XL430YawSideR2": 14.736,
-    "XL430YawSideR3": 3.691,
+    "XL430YawSideL0": 10.75,
+    "XL430YawSideL1": 3.691,
+    "XL430YawSideR0": 10.75,
+    "XL430YawSideR1": 3.691,
     "YawBracketFoot0": 19.509,
     "YawBracketFoot1": 15.096,
     "YawBracketFoot2": 19.509,
     "YawBracketFoot3": 15.096
+  },
+  "joint_pairs": {
+    "Part047 / Part056": 0.0,
+    "Part054 / Part056": 0.0,
+    "Part053 / Part057": 0.0,
+    "Part055 / Part060": 0.0
   }
 }

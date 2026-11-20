@@ -9,7 +9,9 @@
     "EyeYawFoot1 / 31 right black orbit": 0.195,
     "CradleMountFrameL / 29 skull rear": 3.735,
     "CradleMountFrameR / 28 skull front": 3.873,
-    "CradleMountFrameR / 29 skull rear": 1.779
+    "CradleMountFrameR / 29 skull rear": 1.779,
+    "JawHornScrew0 / 36 left cheek servo stay": 1.719,
+    "JawHornScrew1 / 36 left cheek servo stay": 1.718
   },
   "sweep_overlap_mm3": {},
   "sweep_min_gap_mm": 4.097,
@@ -35,12 +37,8 @@
   "fasteners": {
     "XL430YawSideL0": "M2.5 × 8",
     "XL430YawSideL1": "M2.5 × 8",
-    "XL430YawSideL2": "M2.5 × 8",
-    "XL430YawSideL3": "M2.5 × 8",
     "XL430YawSideR0": "M2.5 × 8",
     "XL430YawSideR1": "M2.5 × 8",
-    "XL430YawSideR2": "M2.5 × 8",
-    "XL430YawSideR3": "M2.5 × 8",
     "YawBracketFoot0": "M3 × 8",
     "YawBracketFoot1": "M3 × 8",
     "YawBracketFoot2": "M3 × 8",
@@ -51,26 +49,45 @@
     "XL430PitchKeeper1": "M2.5 × 10",
     "EyeYawFoot0": "M3 × 16",
     "EyeYawFoot1": "M3 × 16",
-    "EyePitchStayFrame0": "M3 × 10",
-    "EyePitchStayFrame1": "M3 × 10",
+    "EyePitchStayFrame0": "M3 × 8",
+    "EyePitchStayFrame1": "M3 × 8",
     "CradleMountFrameL": "M3 × 16",
     "CradleMountFrameR": "M3 × 16",
-    "EyeYawTieHorn": "M2 × 8"
+    "EyeYawTieHorn": "M2 × 8",
+    "EyeYawHornScrew0": "M2 × 5",
+    "EyeYawHornScrew1": "M2 × 5",
+    "EyeYawHornScrew2": "M2 × 5",
+    "EyePitchHornScrew0": "M2 × 5",
+    "EyePitchHornScrew1": "M2 × 5",
+    "BlinkHornScrew0": "M2 × 6",
+    "BlinkHornScrew1": "M2 × 6",
+    "JawHornScrew0": "M2 × 6",
+    "JawHornScrew1": "M2 × 6"
   },
   "pins": {
-    "EyeYawTiePinL": "Ø2 × 8",
-    "EyeYawTiePinR": "Ø2 × 8",
+    "EyeYawTiePinL": "Ø2 × 6",
+    "EyeYawTiePinR": "Ø2 × 6",
     "EyePitchLinkHornPin": "Ø2 × 6",
     "EyePitchLinkCradlePin": "Ø2 × 6"
   },
   "head_only_screws": {
     "XL330 case, through 39·42·46 plates and the 36 jaw stay": "M2 × 6 × 16",
-    "XL330 horn under the 16 eye yaw and 17 eye pitch horns (horn hole 3.3 mm deep)": "M2 × 5 × 8",
-    "XL330 horn under the 19 blink horn and the 38 jaw drive arm (horn hole 3.3 mm deep)": "M2 × 6 × 8",
     "42 eye pitch plate into the 34 stay (Ø2.7 tap)": "M3 × 8 × 2"
+  },
+  "empty_horn_holes": {
+    "16 eye yaw horn (-11.8, -35.5)": "31 left orbit at eye pitch -8°",
+    "17 eye pitch horn (10, 145) and (16, 151)": "18 eye pitch link",
+    "19 blink horn (-19.0, 166.6) and (-10.6, 165.0)": "21 centre crank and 22 drive link",
+    "38 jaw drive arm (-9, 86)": "07 pitch yoke at neck +6° with the jaw open",
+    "38 jaw drive arm (-3, 92)": "07 pitch yoke while the jaw is lifted into the head"
   },
   "printed_parts_changed": {
     "Part024": "12_eye_tilt_cradle-B19",
+    "Part066": "26_u20cam_slotted_bracket-B19",
+    "BlinkCollarLeft": "45_blink_shaft_spacer_left-B19",
+    "BlinkCollarRight": "45_blink_shaft_spacer_right-B19",
+    "Part047": "19_blink_servo_horn-B19",
+    "Part054": "21_blink_shaft_crank_2-B19",
     "Part039": "xl330_eye_yaw_front_plate-B19",
     "ID5EHKeeper": "ID5-keeper-B19",
     "Part019": "09_head_frame-B19"

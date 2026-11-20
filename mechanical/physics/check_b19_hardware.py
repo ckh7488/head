@@ -106,7 +106,31 @@ def sweep(cad, spec):
                 near[name] = round(float(best), 3)
         report[item['name']] = {'collisions': hits, 'under_1mm': near}
     base = [item for item in spec if item['motion'] == 'fixed']
-    return {'fasteners': report, 'yaw_gap_mm': yaw_gaps(world, kinds, base)}
+    return {'fasteners': report, 'yaw_gap_mm': yaw_gaps(world, kinds, base),
+            'joint_pairs': joint_pairs(meshes, kinds, layout)}
+
+
+# Parts that meet at a joint and that check_head.py treats as mates. B19 trimmed the 19 horn
+# and 21-2 crank where they overlapped the 22 drive link; this sweeps those pairs through
+# the whole blink stroke.
+JOINT_PAIRS = (('Part047', 'Part056'), ('Part054', 'Part056'), ('Part053', 'Part057'), ('Part055', 'Part060'))
+
+
+def joint_pairs(meshes, kinds, layout):
+    result = {}
+    for a, b in JOINT_PAIRS:
+        mesh_a, obj_a = meshes[a]
+        mesh_b, obj_b = meshes[b]
+        worst = 0.
+        for blink in ANGLES[3]:
+            angles = np.zeros(len(ANGLES))
+            angles[3] = blink
+            tx = np.linalg.solve(pose(kinds[b], angles, layout), pose(kinds[a], angles, layout))
+            moved = mesh_a.copy().apply_transform(tx)
+            volume = tr.boolean.intersection([moved, mesh_b], engine='manifold', check_volume=False).volume
+            worst = max(worst, float(volume))
+        result[f'{a} / {b}'] = round(worst, 3)
+    return result
 
 
 if __name__ == '__main__':
@@ -120,5 +144,7 @@ if __name__ == '__main__':
     failed = [name for name, row in result['fasteners'].items() if row['collisions']]
     print(f"{len(result['fasteners'])} fasteners, {len(failed)} colliding", failed)
     print('yaw gaps', result['yaw_gap_mm'])
-    if failed or any(gap <= 0 for gap in result['yaw_gap_mm'].values()):
+    print('joint overlap mm³', result['joint_pairs'])
+    if failed or any(gap <= 0 for gap in result['yaw_gap_mm'].values()) or \
+            any(volume > .05 for volume in result['joint_pairs'].values()):
         raise SystemExit(1)

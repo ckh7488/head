@@ -15,10 +15,11 @@
   eye yaw motor fills the space under the feet. The cradle now takes a counterbored
   M3 × 16 from above into a Ø2.6 tap hole in each plate foot.
 * The B17 ID5 plug keeper covered two of the four pitch-motor mounting holes. The
-  keeper gets two through holes and an M2.5 × 10 passes through it into the motor.
+  keeper gets two through holes and an M2.5 × 10 passes through it into the motor; a
+  head-clearance hole instead would cut through the keeper rail.
 * The eye pitch stay was to be bolted to the frame with the nut on the motor side,
   where the motor case sits 0.8 mm from the frame. The frame hole becomes a Ø2.6 tap
-  hole for an M3 × 10.
+  hole for an M3 × 8.
 * Motor case, horn and bracket screws that the earlier revisions only showed as heads
   get lengths from the measured hole depths.
 """
@@ -64,9 +65,11 @@ NUT = {2: (4., 1.6), 2.5: (5., 2.), 3: (5.5, 2.4)}
 
 # (name, size, length, seat, axis from head into the stack, host parts, motion, note)
 SCREWS = [
-    *[(f'XL430YawSide{"LR"[s>0]}{i}', 2.5, 8., (s*18.55, y, z), (-s, 0, 0), ('Part008' if s < 0 else 'Part009', 'Part017'),
+    # Only the upper side holes: a screw head bound for a lower hole has to pass over the
+    # bracket's own foot pad and hits it 0.75 mm deep.
+    *[(f'XL430YawSide{"LR"[s>0]}{i}', 2.5, 8., (s*18.55, y, -50.9), (-s, 0, 0), ('Part008' if s < 0 else 'Part009', 'Part017'),
        'fixed', 'XL430 ID4 to 05 bracket; case hole Ø2.1 × 4.0 deep under a 4.25 mm wall')
-      for s in (-1, 1) for i, (y, z) in enumerate((y, z) for y in (4., 28.) for z in (-62.9, -50.9))],
+      for s in (-1, 1) for i, y in enumerate((4., 28.))],
     *[(f'YawBracketFoot{i}', 3, 8., (x, y, -64.4), (0, 0, -1), ('Part008' if x < 0 else 'Part009', 'Part000'),
        'fixed', '05 bracket foot into the Ø2.7 tap hole of the 01 base cup')
       for i, (x, y) in enumerate((x, y) for x in (-22.8, 22.8) for y in (5., 26.))],
@@ -78,27 +81,49 @@ SCREWS = [
     *[(f'EyeYawFoot{i}', 3, 16., (x, y, CRADLE_COUNTERBORE[1]), (0, 0, -1), ('Part024', 'Part039'), 'tilt',
        '12 cradle into the tapped foot of the eye yaw plate')
       for i, (x, y) in enumerate(EYE_YAW_FEET)],
-    *[(f'EyePitchStayFrame{i}', 3, 10., (x, 34.6, z), (0, -1, 0), ('Part064', 'Part019'), 'head',
+    *[(f'EyePitchStayFrame{i}', 3, 8., (x, 34.6, z), (0, -1, 0), ('Part064', 'Part019'), 'head',
        '34 stay into the tapped 09 frame')
       for i, (x, z) in enumerate(STAY_FRAME_HOLES)],
     *[(f'CradleMountFrame{"LR"[s>0]}', 3, 16., (s*69.2, 27., 146.), (-s, 0, 0), ('Part025' if s < 0 else 'Part027', 'Part019'),
        'head', '13 cradle mount into the 2.5 mm channel of the 09 frame')
       for s in (-1, 1)],
-    ('EyeYawTieHorn', 2, 8., (-5.8, -22., 117.8), (0, 0, -1), ('Part037', 'Part040'), 'look_link',
-     'tie bar to eye yaw horn joint, nut under the horn'),
+    # Head under the horn: from above the 12 cradle leaves 3 mm, too little to drive an 8 mm screw.
+    ('EyeYawTieHorn', 2, 8., (-5.8, -22., 111.8), (0, 0, 1), ('Part037', 'Part040'), 'look_link',
+     'tie bar to eye yaw horn joint, nut and washer on the tie bar'),
+    # Printed horns on XL330 horns. Holes whose screw head would hit a moving part are left empty.
+    *[(f'EyeYawHornScrew{i}', 2, 5., (x, y, 114.25), (0, 0, -1), ('Part040', 'Part038'), 'look_horn',
+       '16 eye yaw horn to the XL330 horn')
+      for i, (x, y) in enumerate(((-5.8, -41.5), (-5.8, -29.5), (.2, -35.5)))],
+    *[(f'EyePitchHornScrew{i}', 2, 5., (61.2, y, z), (-1, 0, 0), ('Part043', 'Part041'), 'tilt_horn',
+       '17 eye pitch horn to the XL330 horn')
+      for i, (y, z) in enumerate(((4., 151.), (10., 157.)))],
+    *[(f'BlinkHornScrew{i}', 2, 6., (4.3, y, z), (-1, 0, 0), ('Part047', 'Part045'), 'blink_motor_horn',
+       '19 blink horn to the XL330 horn')
+      for i, (y, z) in enumerate(((-17.4, 175.), (-9., 173.4)))],
+    *[(f'JawHornScrew{i}', 2, 6., (-46.9, y, z), (1, 0, 0),
+       ('Jaw_38_left_jaw_drive_arm', 'Jaw_XL330_M288_Jaw', 'Jaw_30_moving_jaw'), 'jaw',
+       '38 jaw drive arm to the XL330 horn')
+      for i, (y, z) in enumerate(((-15., 92.), (-9., 98.)))],
 ]
+# Horn holes left empty because an ISO 4762 head there would strike a moving part.
+EMPTY_HORN_HOLES = {
+    '16 eye yaw horn (-11.8, -35.5)': '31 left orbit at eye pitch -8°',
+    '17 eye pitch horn (10, 145) and (16, 151)': '18 eye pitch link',
+    '19 blink horn (-19.0, 166.6) and (-10.6, 165.0)': '21 centre crank and 22 drive link',
+    '38 jaw drive arm (-9, 86)': '07 pitch yoke at neck +6° with the jaw open',
+    '38 jaw drive arm (-3, 92)': '07 pitch yoke while the jaw is lifted into the head',
+}
 # (name, radius, length, start, axis, host parts, motion, note)
 PINS = [
-    ('EyeYawTiePinL', 1., 8., (-34., -25.5, 111.8), (0, 0, 1), ('Part029', 'Part037'), 'look_link', 'glued in the left eyeball crank'),
-    ('EyeYawTiePinR', 1., 8., (34., -25.5, 111.8), (0, 0, 1), ('Part033', 'Part037'), 'look_link', 'glued in the right eyeball crank'),
+    # 6 mm, not longer: the tie bar has to clear the pin tips under the cradle bridge to drop on.
+    ('EyeYawTiePinL', 1., 6., (-34., -25.5, 111.8), (0, 0, 1), ('Part029', 'Part037'), 'look_link', 'glued in the left eyeball crank'),
+    ('EyeYawTiePinR', 1., 6., (34., -25.5, 111.8), (0, 0, 1), ('Part033', 'Part037'), 'look_link', 'glued in the right eyeball crank'),
     ('EyePitchLinkHornPin', 1., 6., (58.65, 20., 151.), (1, 0, 0), ('Part043', 'Part044'), 'tilt_link', 'glued in the 17 horn'),
     ('EyePitchLinkCradlePin', 1., 6., (58., -29., 119.), (1, 0, 0), ('Part024', 'Part044'), 'tilt', 'glued in the 12 cradle lug'),
 ]
 # Screws that only need a length because the earlier revisions already model their heads.
 HEAD_ONLY = {
     'XL330 case, through 39·42·46 plates and the 36 jaw stay': ('M2 × 6', 16),
-    'XL330 horn under the 16 eye yaw and 17 eye pitch horns (horn hole 3.3 mm deep)': ('M2 × 5', 8),
-    'XL330 horn under the 19 blink horn and the 38 jaw drive arm (horn hole 3.3 mm deep)': ('M2 × 6', 8),
     '42 eye pitch plate into the 34 stay (Ø2.7 tap)': ('M3 × 8', 2),
 }
 
@@ -170,8 +195,8 @@ def apply(doc):
         if not shape.isValid() or len(shape.Solids) != 1:
             raise ValueError(f'{name} became invalid')
         replace(doc.getObject(name), shape)
-    doc.Part015.Label = 'Right pitch pin · Ø8 × 27.3, 1 mm D-flat, Ø3.2 cross hole'
-    doc.Part013.Label = 'Left pitch pin · Ø8 × 21.5, Ø3.2 cross hole'
+    doc.Part015.Label = 'Right pitch pin · Ø8 × 27.3, 1 mm D-flat, Ø3.0 cross hole'
+    doc.Part013.Label = 'Left pitch pin · Ø8 × 21.5, Ø3.0 cross hole'
     shaft = blink_shaft()
     replace(doc.Part048, shaft)
     doc.Part048.Label = f'4 mm blink shaft 112 mm with three {BLINK_FLAT_DEPTH:.2f} mm flats'
@@ -202,7 +227,32 @@ def repair_printed_parts(doc):
     span = box(-100, 100, lo, hi, -1000, 1000)
     frame = frame.fuse([cylinder(1.78, hi-lo, (x, lo, z), (0, 1, 0)).common(span) for x, z in STAY_FRAME_HOLES])
     frame = frame.cut([cylinder(M3_TAP_RADIUS, hi-lo+.4, (x, lo-.2, z), (0, 1, 0)) for x, z in STAY_FRAME_HOLES])
+    # The 19 horn's screw boss reaches 2 mm into the 22 drive link and the 21-2 crank's clamp
+    # pad 0.8 mm into the same link (44 and 2.2 mm³ of solid overlap in B15-B18; the pairs were
+    # listed as mates, so the motion sweeps skipped them). Trim both back to the link faces.
+    horn = world_shape(doc.Part047)
+    link = world_shape(doc.Part056)
+    face = link.BoundBox.XMin - .1
+    horn = horn.cut(box(face, horn.BoundBox.XMax+1, -40, 10, 140, 200))
+    crank = world_shape(doc.Part054)
+    crank = crank.cut(box(crank.BoundBox.XMin-1, 7.25, -21., -15.5, 150., 160.))
+    # The 21-2 crank's clamp boss overhangs its hub by 1.05 mm (left) and 0.8 mm (right) above the
+    # shaft, so both 45 spacers sat 0.6-0.8 mm³ inside it.
+    # Both spacers' bearing ends also sit 1 mm inside the rail's bearing shoulders, which leaves no
+    # way to drop them in once the crank and link are in place. Stop them 0.1 mm short of the boss
+    # and 1.2 mm short of the bearings; the M3 clamp on the shaft flat holds the crank axially.
+    left = world_shape(doc.BlinkCollarLeft).common(box(-28.8, 6.25, -40, -10, 140, 170))
+    right = world_shape(doc.BlinkCollarRight).common(box(14.15, 22.8, -40, -10, 140, 170))
+    # The U20CAM board's bottom edge sits 1.8 mm inside the bracket's front ledge (114 mm³; both
+    # parts move with the head, so the motion checks skipped the pair). Cut the slot the board
+    # stands in so it seats where the lens opening was aligned.
+    camera = world_shape(doc.Part066).cut(box(-16.2, 16.2, -53.5, -51.2, 72.9, 75.))
     changed = {'Part024': (cradle, '12_eye_tilt_cradle-B19', 'y+'),
+               'Part066': (camera, '26_u20cam_slotted_bracket-B19', None),
+               'BlinkCollarLeft': (left, '45_blink_shaft_spacer_left-B19', 'x+'),
+               'BlinkCollarRight': (right, '45_blink_shaft_spacer_right-B19', 'x+'),
+               'Part047': (horn, '19_blink_servo_horn-B19', 'x+'),
+               'Part054': (crank, '21_blink_shaft_crank_2-B19', 'x+'),
                'Part039': (plate, 'xl330_eye_yaw_front_plate-B19', None),
                'ID5EHKeeper': (keeper, 'ID5-keeper-B19', None),
                'Part019': (frame, '09_head_frame-B19', 'y+')}
@@ -226,10 +276,10 @@ def add_fasteners(doc, group):
         add_part(doc, group, name, f'M{size:g} × {length:g} · {note}', screw_shape(size, length, seat, axis), motion)
         if name == 'EyeYawTieHorn':
             width, height = NUT[size]
-            start = (seat[0], seat[1], 111.85-.05-height)
-            add_part(doc, group, 'EyeYawTieHornNut', 'M2 plain nut under the eye yaw horn',
+            start = (seat[0], seat[1], 117.45+.35)
+            add_part(doc, group, 'EyeYawTieHornNut', 'M2 plain nut on the tie bar',
                      hexagon(width, height, start, Z).cut(cylinder(1., height, start)), motion)
-            add_part(doc, group, 'EyeYawTieHornWasher', 'M2 washer on the tie bar',
+            add_part(doc, group, 'EyeYawTieHornWasher', 'M2 washer under the nut',
                      cylinder(2.5, .3, (seat[0], seat[1], 117.45+.02)).cut(cylinder(1.1, .3, (seat[0], seat[1], 117.47))), motion)
     for name, radius, length, start, axis, _, motion, note in PINS:
         add_part(doc, group, name, f'Ø{2*radius:g} × {length:g} pin · {note}', cylinder(radius, length, start, axis), motion)
@@ -244,7 +294,7 @@ def hardware_spec():
         shank_start = [s + a*.05 for s, a in zip(seat, axis)]
         shapes = [['cyl', radius, height, head_start, list(axis)], ['cyl', size/2.*.9, length-.1, shank_start, list(axis)]]
         if name == 'EyeYawTieHorn':
-            shapes.append(['hex', NUT[2][0], NUT[2][1], [seat[0], seat[1], 111.8-NUT[2][1]], [0, 0, 1]])
+            shapes.append(['hex', NUT[2][0], NUT[2][1], [seat[0], seat[1], 117.8], [0, 0, 1]])
         spec.append({'name': name, 'motion': motion, 'skip': list(hosts), 'shapes': shapes})
     for name, radius, length, start, axis, hosts, motion, _ in PINS:
         spec.append({'name': name, 'motion': motion, 'skip': list(hosts),
@@ -285,6 +335,8 @@ def check(doc, hardware):
         reach = shape.BoundBox
         reach.enlarge(3)
         for obj in meshes:
+            if obj.Name in skip:
+                continue
             mesh = obj.Mesh.copy()
             mesh.Placement = obj.getGlobalPlacement()
             if not mesh.BoundBox.intersect(reach):
@@ -337,6 +389,7 @@ def make(source, output, report, stl=None):
         result['fasteners'] = {name: f'M{size:g} × {length:g}' for name, size, length, *_ in SCREWS}
         result['pins'] = {name: f'Ø{2*r:g} × {length:g}' for name, r, length, *_ in PINS}
         result['head_only_screws'] = {k: f'{v[0]} × {v[1]}' for k, v in HEAD_ONLY.items()}
+        result['empty_horn_holes'] = EMPTY_HORN_HOLES
         result['printed_parts_changed'] = {name: slug for name, (slug, _) in printed.items()}
         if stl:
             stl.mkdir(parents=True, exist_ok=True)
