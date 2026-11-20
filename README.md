@@ -16,7 +16,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 
 ## 최근 CAD
 
-- **B19 목 상하축 고정** · 머리 프레임과 Ø8 축을 평행핀으로 잇고 눈꺼풀 축 평면을 0.30 mm로 바꿨습니다. [제작할 파일 목록](mechanical/revisions/#제작할-파일-b19-기준) · [B19 검사](mechanical/revisions/b19/)
+- **B19 체결품과 조립 불가 지점** · 모든 모터·링크 체결품의 길이를 정하고, 나사를 넣을 수 없던 자리와 머리가 끄덕이지 않던 목 상하축을 고쳤습니다. [제작할 파일 목록](mechanical/revisions/#제작할-파일-b19-기준) · [B19 검사](mechanical/revisions/b19/)
 - **B18 후면 연결부** · 외부에서 USB 두 개와 5 V·12 V 전원 플러그를 잡고 뺄 수 있는 배치입니다. [조립본과 뒤쪽 3D 보기](mechanical/revisions/b18/)
 - **B18 개선 시안** · 고정 허브, 30 mm 내려가는 덮개, 목 12 V 경로와 가림막을 비교합니다. 제작 전에 남은 확인 사항을 함께 기록했습니다. [FreeCAD와 전후 비교](mechanical/revisions/b18/study/)
 
