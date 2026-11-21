@@ -10,7 +10,7 @@ import trimesh
 
 from build_b21_print import build as pack_prints
 from build_b24 import digest
-from build_b25_blink_fit import SKULL_REPLACE, apply as fit_blink, print_replacements
+from build_b25_blink_fit import SKULL_REPLACE, apply as fit_blink, front_print_precision, print_replacements
 from build_b25_hatch_envelope import apply as fit_terminal
 from build_b25_rear_retention import FRAME_PRINT, REAR_PRINT, apply as retain_rear
 
@@ -47,7 +47,7 @@ def build(output):
     replacements[REAR_SOURCE] = Path(REAR_PRINT).with_suffix('.stl').name, rear
     replacements[FRAME_SOURCE] = FRAME_PRINT, trimesh.load_mesh(prints / FRAME_PRINT)
     pack_prints(project, replacements, output / 'print-build.json', source=PROJECT, revision='B25',
-                indexed_parts=(SKULL_REPLACE, REAR_SOURCE))
+                indexed_parts=(SKULL_REPLACE, REAR_SOURCE), placement_filters={SKULL_REPLACE: front_print_precision})
     report = {
         'source_cad_sha256': digest(ASSEMBLY),
         'cad_sha256': digest(assembly),

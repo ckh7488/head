@@ -2,6 +2,7 @@
 
 from contextlib import contextmanager
 from hashlib import file_digest
+from itertools import product
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -29,6 +30,7 @@ MAX_RADIAL_CENTER_DEVIATION_MM = .025
 LOCATING_BAND_WIDTH_MM = 1.20
 LOCATING_BAND_DIAMETRAL_CLEARANCE_MM = .030
 BEARING_END_FLOAT_MM = .10
+FRONT_PRECISION_LIMIT_MM = .00002
 
 
 @contextmanager
@@ -43,6 +45,70 @@ def source_document(path):
 def shape_to_mesh(solid_shape):
     native = solid_shape.to_mesh64()
     return trimesh.Trimesh(vertices=native.vert_properties[:, :3], faces=native.tri_verts, process=False)
+
+
+def triangle_normals(triangles):
+    return np.cross(triangles[..., 1, :] - triangles[..., 0, :],
+                    triangles[..., 2, :] - triangles[..., 0, :])
+
+
+def front_slicer_normals(triangles, center, height):
+    """Model Bambu's float32 import and the centered, unrotated plate-4 slice."""
+    single = triangles.astype(np.float32)
+    scale = np.array([1e5, 1e5, 1.], dtype=np.float32)
+    shift = np.array([0., 0., height], dtype=np.float32)
+    plane = (single - center) * scale + shift
+    normal_scale = np.array([1e5, 1e5, 1e10])
+    return np.stack((triangle_normals(single), triangle_normals(plane) / normal_scale))
+
+
+def front_print_precision(vertices, faces):
+    """Separate rounded seam vertices without removing faces or changing topology."""
+    points = vertices.copy()
+    single = vertices.astype(np.float32)
+    minimum, maximum = single.min(axis=0), single.max(axis=0)
+    center = ((minimum.astype(float) + maximum) / 2).astype(np.float32)
+    height = float(center[2] - minimum[2])
+    reference = triangle_normals(vertices[faces])
+    original = front_slicer_normals(vertices[faces], center, height)
+    originally_reversed = np.sum(original * reference, axis=-1) < 0.
+    distances = np.array((0., .25, -.25, .5, -.5, 1., -1., 2., -2., 4., -4., 8., -8.)) * 1e-6
+    offsets = np.array(list(product(distances, repeat=3)))
+    steps = np.linalg.norm(offsets, axis=1)
+    offsets = offsets[np.argsort(steps, kind='stable')]
+
+    while True:
+        bad = np.all(front_slicer_normals(points[faces], center, height) == 0., axis=-1)
+        if not bad.any():
+            break
+        best = None
+        for vertex in np.unique(faces[bad.any(axis=0)]):
+            indices = np.flatnonzero((faces == vertex).any(axis=1))
+            nearby_faces = faces[indices]
+            candidates = vertices[vertex] + offsets
+            triangles = np.broadcast_to(points[nearby_faces], (len(candidates), *nearby_faces.shape, 3)).copy()
+            triangles[:, nearby_faces == vertex] = candidates[:, None]
+            facing = np.sum(triangle_normals(triangles) * reference[indices], axis=-1)
+            rounded = front_slicer_normals(triangles, center, height)
+            flips = (np.sum(rounded * reference[indices], axis=-1) < 0.) & ~originally_reversed[:, None, indices]
+            benefit = bad[:, indices].sum() - np.all(rounded == 0., axis=-1).sum(axis=(0, 2))
+            benefit[(facing <= 0.).any(axis=1) | flips.any(axis=(0, 2))] = 0
+            choice = int(benefit.argmax())
+            if benefit[choice] > 0 and (best is None or benefit[choice] > best[0]):
+                best = benefit[choice], vertex, candidates[choice]
+        if best is None:
+            raise ValueError('The front print seam cannot be resolved within the precision limit')
+        _, vertex, point = best
+        points[vertex] = point
+
+    source = trimesh.Trimesh(vertices, faces, process=False)
+    repaired = trimesh.Trimesh(points, faces, process=False)
+    if (not repaired.is_volume or repaired.body_count != 1
+            or not np.array_equal(repaired.bounds, source.bounds)
+            or np.linalg.norm(points-vertices, axis=1).max() > FRONT_PRECISION_LIMIT_MM
+            or abs(repaired.volume-source.volume) > .001):
+        raise ValueError('The front print seam adjustment exceeded its geometry limits')
+    return points, faces
 
 
 def relieve_lid(stock):

@@ -1,0 +1,83 @@
+{
+  "baseline_project_sha256": "540c14f1d74139db92ae8929a89a7a8bba5447e08ed3d0d7c083002e44ff04b3",
+  "project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "plate4_mesh_sha256": "65231153e516e43b4c8e8c7e76fedd433a9cc25e9536092a003c367fcfad9574",
+  "unchanged_plates": [
+    1,
+    2,
+    3,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "front_shell": {
+    "vertices": 117187,
+    "faces": 234490,
+    "identical_face_indices": true,
+    "moved_vertices": 21,
+    "maximum_displacement_mm": 8.066132903227325e-06,
+    "absolute_volume_change_mm3": 3.789114998653531e-06,
+    "identical_bounds": true,
+    "euler_number": -58,
+    "new_double_normal_inversions": 0,
+    "new_float32_normal_inversions": 0,
+    "float32_zero_area_before": {
+      "import": 34,
+      "centered_slice": 41
+    },
+    "float32_zero_area_after": {
+      "import": 0,
+      "centered_slice": 0
+    }
+  },
+  "slicer": "Bambu Studio 02.09.01.70",
+  "raster_pitch_mm": 0.2,
+  "slice_checks": {
+    "4": {
+      "project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+      "plate_sha256": "c23f0ecd2153726141e815856e155ecccbfe85a83756091450cf97610a48adc3",
+      "gcode_sha256": "b51ae43e7c9a89435c519f79ee85a28d9c4a851ea3262756534015112db130eb",
+      "layers": 523,
+      "objects": 1,
+      "isolated_model_starts": 0,
+      "plate_warning_message": ""
+    },
+    "6": {
+      "project_sha256": "540c14f1d74139db92ae8929a89a7a8bba5447e08ed3d0d7c083002e44ff04b3",
+      "plate_sha256": "0536ba67bd6a18bf8be05b5113a4684393c04585a22ead4540ff0847aac60430",
+      "gcode_sha256": "620885b1f000fc37dbf7f843ed0ecf26fc7cb9f93fb81731568da7943cddcf66",
+      "layers": 500,
+      "objects": 9,
+      "isolated_model_starts": 0,
+      "plate_warning_message": ""
+    },
+    "9": {
+      "project_sha256": "540c14f1d74139db92ae8929a89a7a8bba5447e08ed3d0d7c083002e44ff04b3",
+      "plate_sha256": "543ea929e027f8fe70c79ae76e927a2c8e8c8e3a23f8d7c73afb5c16c9fc84b9",
+      "gcode_sha256": "f88e8023b7b31158289beec99f5be1861b5a9686e9ecb554486a499b709935a8",
+      "layers": 215,
+      "objects": 7,
+      "isolated_model_starts": 0,
+      "plate_warning_message": ""
+    }
+  },
+  "slicer_diagnostics": {
+    "4": [
+      "FillFloatingConcentric retry",
+      "Inherited AMS unload T65535"
+    ],
+    "6": [
+      "FillFloatingConcentric retry",
+      "Inherited AMS unload T65535"
+    ],
+    "9": [
+      "Inherited AMS unload T65535"
+    ]
+  }
+}
