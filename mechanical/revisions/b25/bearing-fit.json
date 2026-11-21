@@ -1,8 +1,8 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_sha256": "92638b0e64ef6576f2bd9da38ff7703be2ca18d8b5394f2a0d8014741bf8f2e9",
+  "source_sha256": "374035f76c859c284b307c380a9cf5d6d746bf7ad8fc0100fcf0f9636e3ebeca",
   "archive": "R5-B25-Bearing-Fit-STLs.zip",
-  "archive_sha256": "69249fbfbe63fd9fdb9d3f76a3bbacc189c69d906a9f15b88e050a3d6276e6d8",
+  "archive_sha256": "49071a2e2c97939ea87c1a02a0677b66d742727f5ea6ea04c986b2c5db1d3bb1",
   "parts": [
     {
       "source_file": "13_left_eye_cradle_mount-B24.stl",
@@ -321,7 +321,7 @@
       "plate": 9,
       "object_id": 96,
       "object_path": "3D/Objects/object_48.model",
-      "source_mesh_sha256": "a2b31cccd3c7548b0ac5f2de850d3d6feff789a9132176b7483342a8742d34c5",
+      "source_mesh_sha256": "91bb267903c2ac79573d0fe24ec0b798deabecda60996ceecbf941012958bf9a",
       "part": "37",
       "cad_id": "Jaw_37_right_jaw_bearing_stay",
       "print_axis": "Z",
@@ -333,15 +333,15 @@
       "variants": [
         {
           "file": "p9-37-bearing-pocket-D10.05.stl",
-          "sha256": "82056d714b8be3abf5d501b39a2484f91bbef331d1b458a37bdbfe432af209a8",
-          "facets": 13120,
+          "sha256": "b500ef2684658d366cd19ad5b12a28ae9d16ccfc3bd2676f1923f5e35e8bf07b",
+          "facets": 13116,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
           "min_triangle_area_mm2": 1.2774216884281486e-07,
-          "volume_delta_mm3": 3.179863,
+          "volume_delta_mm3": 3.179862,
           "sections": {
             "pocket": {
               "nominal_diameter_mm": 10.05,
@@ -368,15 +368,15 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.10.stl",
-          "sha256": "bfad4c4373ff2ded3f9ccd0c20fd655dff3304f079c71372ca4fff5e8315e276",
-          "facets": 13120,
+          "sha256": "602486415fc8997eaf035c591eedd4ee1dbe4543f36e5844222786204b04052a",
+          "facets": 13116,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
           "min_triangle_area_mm2": 1.2774216884281486e-07,
-          "volume_delta_mm3": -3e-06,
+          "volume_delta_mm3": -4e-06,
           "sections": {
             "pocket": {
               "nominal_diameter_mm": 10.1,
@@ -403,15 +403,15 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.15.stl",
-          "sha256": "3cdf04f8079f278ed6bd07df780916506f5ec4ac42bb7a205f2465c3910ec52f",
-          "facets": 14000,
+          "sha256": "11e5594edab4beafe9bc70e5407e4f32506f6ad67def23d499bb00aa94b031b7",
+          "facets": 13996,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
           "min_triangle_area_mm2": 1.2774216884281486e-07,
-          "volume_delta_mm3": -3.392776,
+          "volume_delta_mm3": -3.392777,
           "sections": {
             "pocket": {
               "nominal_diameter_mm": 10.15,
@@ -438,15 +438,15 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.20.stl",
-          "sha256": "e160178aa4dd6407178aeed1cffbef3dd7b6f434bd4450f50f2139cca5e4ca2f",
-          "facets": 14768,
+          "sha256": "d5f3f340d9238ac2799b5ab8a0cbe8c281313097cf28e0bb7b5f1547a0603d62",
+          "facets": 14764,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
           "min_triangle_area_mm2": 1.2774216884281486e-07,
-          "volume_delta_mm3": -6.74661,
+          "volume_delta_mm3": -6.746611,
           "sections": {
             "pocket": {
               "nominal_diameter_mm": 10.2,
@@ -473,15 +473,15 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.25.stl",
-          "sha256": "8ee31da49eb23fd02f9cb5a628f1df76838f50e2049138746088cd72f2fca080",
-          "facets": 13612,
+          "sha256": "8965430de3219bb9aaabaea3561617fe2e7b2891f0fed1061a02d4910d4d1c6a",
+          "facets": 13608,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
           "min_triangle_area_mm2": 1.2774216884281486e-07,
-          "volume_delta_mm3": -10.116932,
+          "volume_delta_mm3": -10.116934,
           "sections": {
             "pocket": {
               "nominal_diameter_mm": 10.25,

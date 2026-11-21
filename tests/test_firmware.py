@@ -77,7 +77,7 @@ def test_unconfirmed_enable_latches_without_switching_off(firmware):
 
 def test_goal_limits_cover_reversed_and_one_sided_axes(firmware):
     arm(firmware, 63)
-    firmware.command('GO -1e9 1e9 1e9 1e9 -1e9 2.0')
+    firmware.command('GO -1e9 1e9 1e9 1e9 -1e9 5.5')
     assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [
         (1, 1829), (2, 1965), (3, 3024), (4, 2707), (5, 2203), (6, 1978),
     ]
@@ -86,14 +86,14 @@ def test_goal_limits_cover_reversed_and_one_sided_axes(firmware):
     assert [e.value for e in writes(firmware.trace(), GOAL)] == [2048, 2048, 2000, 2048, 2048, 2000]
 
 
-@pytest.mark.parametrize('goal', ['2.0001', '5.5', '-1'])
+@pytest.mark.parametrize('goal', ['5.5001', '6', '-1'])
 def test_jaw_rejects_commands_outside_calibrated_demo_range(firmware, goal):
     arm(firmware, 32)
     assert firmware.command('GO 0 0 0 0 0 ' + goal) == ['ERROR JAW_GOAL_RANGE ID6']
     assert not writes(firmware.trace(), GOAL)
 
 
-@pytest.mark.parametrize('opening_tick', [1977, 1938, 2023])
+@pytest.mark.parametrize('opening_tick', [1937, 2063])
 def test_jaw_arming_rejects_overlong_calibration(firmware_build, opening_tick):
     rows = (*CALIBRATED[:-1], (2000, 2000, opening_tick))
     simulator = Firmware(firmware_build(rows))
@@ -101,6 +101,18 @@ def test_jaw_arming_rejects_overlong_calibration(firmware_build, opening_tick):
         for command in ('ARM 56', 'ARM_JAW_DEMO', 'ARM_EXHIBIT'):
             assert simulator.command(command) == ['LOCKED JAW_CALIBRATION_RANGE ID6']
         assert not writes(simulator.trace(), TORQUE)
+    finally:
+        simulator.close()
+
+
+@pytest.mark.parametrize('opening_tick', [1938, 2062])
+def test_jaw_commands_the_62_tick_endpoint(firmware_build, opening_tick):
+    rows = (*CALIBRATED[:-1], (2000, 2000, opening_tick))
+    simulator = Firmware(firmware_build(rows))
+    try:
+        arm(simulator, 32)
+        simulator.command('GO 0 0 0 0 0 5.5')
+        assert [(e.id, e.value) for e in writes(simulator.trace(), GOAL)] == [(6, opening_tick)]
     finally:
         simulator.close()
 
@@ -124,7 +136,7 @@ def test_arming_keeps_feedback_inside_cad_travel(firmware_build, axis, row, name
 def test_jaw_position_report_limits_overtravel_to_five_ticks(firmware):
     arm(firmware, 32)
     firmware.set(6, POSITION, 1978 - 5)
-    assert firmware.tick(120)[0].endswith(' 2.000')
+    assert firmware.tick(120)[0].endswith(' 5.500')
     firmware.set(6, POSITION, 1978 - 6)
     assert firmware.tick(120) == ['ERROR POSITION_LIMIT ID6']
     assert [(e.id, e.value) for e in writes(firmware.trace(), TORQUE)] == [(6, 0)]
@@ -526,7 +538,7 @@ def test_persistent_jaw_lag_releases_only_the_jaw(firmware, closing):
         firmware.set(6, POSITION, 1978)
     arm(firmware, 56)
     firmware.exchange('follow 6 0')
-    goal = 'GO 0 0 0 0 0 ' + ('0' if closing else '2.0')
+    goal = 'GO 0 0 0 0 0 ' + ('0' if closing else '5.5')
     for _ in range(5):
         firmware.command(goal)
         assert firmware.tick(120)[0].startswith('STATE 56 ')
@@ -544,7 +556,7 @@ def test_persistent_jaw_lag_releases_only_the_jaw(firmware, closing):
 def test_jaw_settling_and_a_single_late_lag_sample_do_not_trip(firmware):
     arm(firmware, 32)
     firmware.exchange('follow 6 0')
-    goal = 'GO 0 0 0 0 0 2.0'
+    goal = 'GO 0 0 0 0 0 5.5'
     for _ in range(5):
         firmware.command(goal)
         assert firmware.tick(120)[0].startswith('STATE 32 ')
@@ -561,7 +573,7 @@ def test_jaw_lag_monitor_restarts_after_a_new_goal(firmware):
     arm(firmware, 32)
     firmware.exchange('follow 6 0')
     for _ in range(5):
-        firmware.command('GO 0 0 0 0 0 2.0')
+        firmware.command('GO 0 0 0 0 0 5.5')
         assert firmware.tick(120)[0].startswith('STATE 32 ')
     firmware.command('GO 0 0 0 0 0 1.0')
     assert firmware.tick(120)[0].startswith('STATE 32 ')
@@ -622,7 +634,7 @@ def test_jaw_demo_stops_if_neck_is_no_longer_holding(firmware):
 def test_jaw_demo_waits_for_the_neck_centering_interval(firmware):
     arm_jaw_demo(firmware)
     firmware.trace()
-    firmware.command('GO 0 0 0 0 0 1.0')
+    firmware.command('GO 0 0 0 0 0 2.75')
     firmware.tick(120)
     assert not writes(firmware.trace(), GOAL)
     firmware.tick(120)

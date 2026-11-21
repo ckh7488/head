@@ -12,7 +12,7 @@ from urllib.request import urlopen
 MODEL_URL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task'
 MODEL_HASH = '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
 AXES = ('eye-yaw', 'eye-pitch', 'blink', 'neck-yaw', 'neck-pitch')
-JAW_MAX_DEGREES = 2.0
+JAW_MAX_DEGREES = 5.5
 LIMITS = ((-20., 20.), (-8., 8.), (0., 90.), (-60., 60.), (-15., 4.5))
 RATES = (160., 105., 950., 36., 22.)
 ZERO = (0.,) * 5

@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "976e79b393027eb28b50f369da07e5fd7dfebd30b6e642486f83cc7ab0529935",
-  "p2s_sha256": "92638b0e64ef6576f2bd9da38ff7703be2ca18d8b5394f2a0d8014741bf8f2e9",
+  "cad_sha256": "51ffd25b975ce01e541812e0fac97c98199579a22c98b474205d9e11fcf27246",
+  "p2s_sha256": "374035f76c859c284b307c380a9cf5d6d746bf7ad8fc0100fcf0f9636e3ebeca",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -132,6 +132,9 @@
     },
     "right_jaw_and_local_rotor_reliefs": {
       "report": "local-geometry-checks.json"
+    },
+    "jaw_stop_at_62_ticks": {
+      "report": "jaw-62-stop.json"
     }
   },
   "print_inputs_sha256": {

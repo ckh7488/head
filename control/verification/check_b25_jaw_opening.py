@@ -4,7 +4,7 @@ from argparse import ArgumentParser
 from hashlib import sha256
 from itertools import product
 import json
-from math import ceil, cos, floor, radians, sin
+from math import atan2, ceil, cos, floor, pi, radians, sin
 from pathlib import Path
 import re
 
@@ -21,8 +21,9 @@ CAD = CONTROL.parent / 'mechanical/revisions/b25/R5-B25-Assembly.FCStd'
 SKETCH = CONTROL / 'openrb/R5B1/R5B1.ino'
 STAY = 'Jaw_37_right_jaw_bearing_stay'
 ARM = 'Jaw_39_right_jaw_pivot_arm'
+JAW = 'Jaw_30_moving_jaw'
 TICK_DEGREES = 360 / 4096
-RESERVE = 2.
+RESERVE = 1.  # Section 6's Goal PWM-limited direct-drive jaw exception.
 
 
 def installed_mesh(doc, name):
@@ -33,7 +34,7 @@ def installed_mesh(doc, name):
     return trimesh.Trimesh([tuple(point) for point in points], faces, process=False)
 
 
-def relative_bounds(stay, arm, pivot, phase):
+def relative_bounds(stay, arm, pivot, phase, limit_deg=6.):
     # Print 37 is rotated about Y so its bed normal is world X. The one-piece jaw
     # is printed in part 30's frame, whose X axis stays the opening axis.
     fixed_warp = .002 * np.linalg.norm(stay.vertices[:, 1:] - pivot[1:], axis=1).max()
@@ -46,15 +47,21 @@ def relative_bounds(stay, arm, pivot, phase):
     bearing_pocket_offset = .05 / 2
     bearing_radial_play = .010  # Full standard miniature MC3 travel.
     radial_play = glued_pin_offset + bearing_pocket_offset + bearing_radial_play
-    # Cover the sweep through 6° by enclosing the rotating print axes in world axes.
-    # Both projected coordinate bounds increase over this angular interval.
-    upper_angle = phase + radians(6.)
+    upper_angle = phase + radians(limit_deg)
+    if not 0. <= phase <= upper_angle <= pi/2:
+        raise ValueError('The tolerance projection requires the opening arc in the first quadrant')
+
+    def projected(cosine, sine):
+        angle = max(phase, min(upper_angle, atan2(sine, cosine)))
+        return cosine*cos(angle) + sine*sin(angle)
+
     box = (.30 + fixed_warp,
-           .2 + .2*cos(upper_angle) + (.1+arm_warp)*sin(upper_angle) + radial_play,
-           .2 + .2*sin(upper_angle) + (.1+arm_warp)*cos(upper_angle) + radial_play)
+           .2 + projected(.2, .1+arm_warp) + radial_play,
+           .2 + projected(.1+arm_warp, .2) + radial_play)
     return np.asarray(box), {
         'fixed_warp_span_mm': fixed_warp / .002,
         'moving_warp_span_mm': arm_warp / .002,
+        'projected_through_jaw_deg': limit_deg,
         'radial_fit_terms_mm': {'glued_pin': glued_pin_offset, 'bearing_pocket': bearing_pocket_offset,
                                 'bearing_internal': bearing_radial_play},
         'relative_world_half_box_mm': list(box),
@@ -125,16 +132,18 @@ def check(cad=CAD, powered_minimum=None):
     span = floor(wire_limit / TICK_DEGREES)
     accepted = (span + tolerance) * TICK_DEGREES
     proof_angle = ceil((accepted + RESERVE) * 100) / 100
-    if proof_angle > 6.:
-        raise ValueError('Opening exceeds the rotation interval used for the offset envelope')
     doc = App.openDocument(str(cad.resolve()))
     try:
         pivot = np.array(tuple(doc.JawMotion.Placement.Base))
-        phase = doc.getObject('Jaw_30_moving_jaw').getGlobalPlacement().Rotation.Angle
+        phase = doc.getObject(JAW).getGlobalPlacement().Rotation.Angle
         stay, arm = (installed_mesh(doc, name) for name in (STAY, ARM))
+        jaw_vertices = installed_mesh(doc, JAW).vertices
     finally:
         App.closeDocument(doc.Name)
-    box, inputs = relative_bounds(stay, arm, pivot, phase)
+    box, inputs = relative_bounds(stay, arm, pivot, phase, proof_angle)
+    tip = jaw_vertices[jaw_vertices[:, 1].argmin()]
+    opening_transform = trimesh.transformations.rotation_matrix(radians(span*TICK_DEGREES), (1., 0., 0.), pivot)
+    jaw_tip_drop = tip[2] - trimesh.transform_points([tip], opening_transform)[0, 2]
     fixed, moving = (fcl.CollisionObject(mesh_to_BVH(mesh)) for mesh in (stay, arm))
     radius = np.linalg.norm(arm.vertices[:, 1:] - pivot[1:], axis=1).max()
     clearance, cells = verify_continuous_clearance(fixed, moving, pivot, radius, box, proof_angle)
@@ -143,7 +152,10 @@ def check(cad=CAD, powered_minimum=None):
         gap, count = verify_continuous_clearance(fixed, moving, pivot, radius, box, accepted, powered_minimum)
         powered = {'end_deg': accepted, 'minimum_mm': gap, 'required_mm': powered_minimum, 'verified_cells': count}
     witnesses = [(contact(fixed, moving, pivot, shift), shift) for shift in product(*[(-b, 0., b) for b in box])]
-    first, shift = min((angle, shift) for angle, shift in witnesses if angle is not None)
+    contacts = [(angle, shift) for angle, shift in witnesses if angle is not None]
+    if not contacts:
+        raise ValueError('The right jaw stop did not contact within the inspected range')
+    first, shift = min(contacts)
     return {
         'cad_sha256': sha256(cad.read_bytes()).hexdigest(),
         'firmware_sha256': sha256(SKETCH.read_bytes()).hexdigest(),
@@ -153,9 +165,12 @@ def check(cad=CAD, powered_minimum=None):
         'wire_goal_max_deg': wire_limit,
         'goal_span_max_ticks': span,
         'goal_span_max_encoder_deg': span * TICK_DEGREES,
+        'closed_front_tip_point_mm': tip.tolist(),
+        'jaw_tip_drop_at_goal_mm': float(jaw_tip_drop),
         'feedback_opening_allowance_ticks': tolerance,
         'accepted_feedback_max_encoder_deg': accepted,
         'contact_free_through_deg_in_relative_envelope': proof_angle,
+        'required_stop_reserve_deg': RESERVE,
         'continuous_lower_gap_mm': clearance,
         'verified_cells': cells,
         'reserve_from_goal_at_least_deg': proof_angle - span * TICK_DEGREES,
