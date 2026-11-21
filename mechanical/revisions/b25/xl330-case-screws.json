@@ -1,0 +1,578 @@
+{
+  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "seat_manifest_sha256": "214353659dc1f84592132e3378c4bb560028649475165eebbc9cdd82595c9fdd",
+  "geometry_passes": true,
+  "oem_phs_m2_tap_counts": {
+    "x6": 5,
+    "x8": 11
+  },
+  "bench_gauge_mm": {
+    "head_diameter": 4.0,
+    "head_height": 2.0,
+    "driver_shaft_diameter": 3.0,
+    "driver_axial_path": 30.0
+  },
+  "as_built_thread_form_and_clamp": "pending",
+  "seats": {
+    "eyeYawHead0": {
+      "motor": "Part038",
+      "plate": "Part039",
+      "seat_mm": [
+        -13.3,
+        -43.5,
+        111.55
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyeYawHead1": {
+      "motor": "Part038",
+      "plate": "Part039",
+      "seat_mm": [
+        -13.3,
+        -27.5,
+        109.7
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "oem_tapping_screw_length_mm": 6,
+      "printed_stack_mm": 0.85,
+      "measured_print_stack_mm": 0.85,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": 1.65,
+      "pilot_start_mm": 4.35,
+      "pilot_end_mm": 19.35,
+      "case_exit_mm": 23.85,
+      "nominal_tip_reach_into_pilot_mm": 1.65,
+      "tip_to_end_of_pilot_mm": 13.35,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 23,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyeYawHead2": {
+      "motor": "Part038",
+      "plate": "Part039",
+      "seat_mm": [
+        16.7,
+        -43.5,
+        111.55
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyeYawHead3": {
+      "motor": "Part038",
+      "plate": "Part039",
+      "seat_mm": [
+        16.7,
+        -27.5,
+        111.55
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 23,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyePitchHead0": {
+      "motor": "Part041",
+      "plate": "Part042",
+      "seat_mm": [
+        58.35,
+        2,
+        128.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyePitchHead1": {
+      "motor": "Part041",
+      "plate": "Part042",
+      "seat_mm": [
+        58.35,
+        2,
+        158.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyePitchHead2": {
+      "motor": "Part041",
+      "plate": "Part042",
+      "seat_mm": [
+        58.35,
+        18,
+        128.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "eyePitchHead3": {
+      "motor": "Part041",
+      "plate": "Part042",
+      "seat_mm": [
+        58.35,
+        18,
+        158.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "blinkMotorHead0": {
+      "motor": "Part045",
+      "plate": "Part046",
+      "seat_mm": [
+        -0.7999999999999999,
+        -22,
+        162.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 6,
+      "printed_stack_mm": 1.0,
+      "measured_print_stack_mm": 1.0,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": 1.5,
+      "pilot_start_mm": 4.5,
+      "pilot_end_mm": 19.5,
+      "case_exit_mm": 24.0,
+      "nominal_tip_reach_into_pilot_mm": 1.5,
+      "tip_to_end_of_pilot_mm": 13.5,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "blinkMotorHead1": {
+      "motor": "Part045",
+      "plate": "Part046",
+      "seat_mm": [
+        0.9,
+        -22,
+        192.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 17,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "blinkMotorHead2": {
+      "motor": "Part045",
+      "plate": "Part046",
+      "seat_mm": [
+        -0.9500000000000001,
+        -6,
+        162.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 6,
+      "printed_stack_mm": 0.85,
+      "measured_print_stack_mm": 0.85,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": 1.65,
+      "pilot_start_mm": 4.35,
+      "pilot_end_mm": 19.35,
+      "case_exit_mm": 23.85,
+      "nominal_tip_reach_into_pilot_mm": 1.65,
+      "tip_to_end_of_pilot_mm": 13.35,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "blinkMotorHead3": {
+      "motor": "Part045",
+      "plate": "Part046",
+      "seat_mm": [
+        0.9,
+        -6,
+        192.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "jawMotorHead0": {
+      "motor": "Jaw_XL330_M288_Jaw",
+      "plate": "Jaw_36_left_jaw_servo_stay",
+      "seat_mm": [
+        -41.65,
+        -17,
+        84.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 6,
+      "printed_stack_mm": 0.85,
+      "measured_print_stack_mm": 0.85,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": 1.65,
+      "pilot_start_mm": 4.35,
+      "pilot_end_mm": 19.35,
+      "case_exit_mm": 23.85,
+      "nominal_tip_reach_into_pilot_mm": 1.65,
+      "tip_to_end_of_pilot_mm": 13.35,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "jawMotorHead1": {
+      "motor": "Jaw_XL330_M288_Jaw",
+      "plate": "Jaw_36_left_jaw_servo_stay",
+      "seat_mm": [
+        -43.5,
+        -17,
+        114.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "jawMotorHead2": {
+      "motor": "Jaw_XL330_M288_Jaw",
+      "plate": "Jaw_36_left_jaw_servo_stay",
+      "seat_mm": [
+        -43.5,
+        -1,
+        84.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 8,
+      "printed_stack_mm": 2.7,
+      "measured_print_stack_mm": 2.7,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": -0.2,
+      "pilot_start_mm": 6.2,
+      "pilot_end_mm": 21.2,
+      "case_exit_mm": 25.7,
+      "nominal_tip_reach_into_pilot_mm": 1.8,
+      "tip_to_end_of_pilot_mm": 13.2,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    },
+    "jawMotorHead3": {
+      "motor": "Jaw_XL330_M288_Jaw",
+      "plate": "Jaw_36_left_jaw_servo_stay",
+      "seat_mm": [
+        -41.9,
+        -1,
+        114.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "oem_tapping_screw_length_mm": 6,
+      "printed_stack_mm": 1.1,
+      "measured_print_stack_mm": 1.1,
+      "case_entry_diameter_mm": 2.0,
+      "case_entry_length_mm": 3.5,
+      "pilot_diameter_mm": 1.6,
+      "pilot_length_mm": 15.0,
+      "original_m2x6_tip_reach_mm": 1.4,
+      "pilot_start_mm": 4.6,
+      "pilot_end_mm": 19.6,
+      "case_exit_mm": 24.1,
+      "nominal_tip_reach_into_pilot_mm": 1.4,
+      "tip_to_end_of_pilot_mm": 13.6,
+      "case_centerline_open": true,
+      "head_seat_support_samples_of_24": 24,
+      "bench_overlaps": {
+        "head_insertion_mm3": 0.0,
+        "driver_approach_mm3": 0.0,
+        "shank_before_pilot_mm3": 0.0
+      },
+      "geometry_passes": true
+    }
+  }
+}
