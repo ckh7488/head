@@ -47,7 +47,7 @@
     "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
     "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
   },
-  "checked_current_cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
+  "checked_current_cad_sha256": "e899cec93a8a29a8fd749a94075c120674eae6da7227939de88900c3eae3b794",
   "opening_stop_pair_in_current_cad": "Same installed vertex and triangle arrays, pivot and phase as the proof source.",
   "separate_axial_gap_check": {
     "closed_nominal_gap_mm": 0.399998,

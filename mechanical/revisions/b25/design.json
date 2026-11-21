@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
-  "p2s_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
+  "cad_sha256": "e899cec93a8a29a8fd749a94075c120674eae6da7227939de88900c3eae3b794",
+  "p2s_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -124,6 +124,11 @@
       "part": "HubBodyJ2",
       "installed_height_mm": 13.8,
       "datasheet": "https://www.phoenixcontact.com/en-pc/products/pcb-terminal-block-mkds-15-2-508-1715721"
+    },
+    "heat_set_inserts": {
+      "report": "heat-set-checks.json",
+      "socket_head": 18,
+      "pin_retainers": 9
     }
   },
   "print_inputs_sha256": {

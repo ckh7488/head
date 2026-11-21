@@ -1,40 +1,52 @@
 {
-  "project_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
+  "project_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
   "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
   "plate_sha256": {
-    "1": "9936a70947df764cfd242b03b7233d1201ffc1830909eff8db561b2ec5a327e8",
+    "1": "fdd1978177929cc198c8778b8bc68ecf1cfbd325b43b6e96a641404bf8b6a048",
     "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
     "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
-    "4": "c23f0ecd2153726141e815856e155ecccbfe85a83756091450cf97610a48adc3",
+    "4": "ba800a1f9fd975e8eb8e8475d99dc2e2135b79a5c0cf0956ebbcb1c311eaa195",
     "5": "e6bb6fe3a6ebc10245486be01512ed1bc78b78276a4292cfc7d36e6293b2f3a7",
-    "6": "521de65831f9113e93b3e5b8b63bcf08c7fea3b8e778bfb695a793f2cb712c58",
-    "7": "12808c8815aa78f96b1e14a2631771a8271b490224086f783760e00dafaa4fe4",
-    "8": "24077302c0150eb8ddf145fdbaf2b5788e481378a246c54160f9e3e8a4937185",
-    "9": "543ea929e027f8fe70c79ae76e927a2c8e8c8e3a23f8d7c73afb5c16c9fc84b9",
+    "6": "dab2fd69b7c6d6ccd1e7b299c0264a65753f2d934a1bc119434e132151781094",
+    "7": "cfb5fa71bc38daba82a25d971bec2c239ac01ed5381ff87a8a5f20a908d2b84e",
+    "8": "a5cd15dd0a59523d9bfcfad4369581bdb9921b8f97ae7dcdf8b23cb84aa0bf8d",
+    "9": "cec514d2a19cc12031a3e5b50d8b3310171d26fb298fa30211e5327c8836916c",
     "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
     "11": "8e5625005604535cd0ad25caae41485eee67fb7e4aa288b6269c4467e28e849c",
     "12": "f1f5d30ee257338730eaca087eb50774b5ad546e2c265c74a1cb8d63b244280f"
   },
   "changed_plates": {
+    "1": [
+      "01_base_cup-hatch-capture.stl"
+    ],
     "4": [
       "28_skull_front_with_camera_tray-B25.stl"
-    ],
-    "5": [
-      "29_skull_rear-B25.stl"
     ],
     "6": [
       "09_head_frame-B25.stl"
     ],
+    "7": [
+      "07_yoke-B22.stl",
+      "12_eye_tilt_cradle-B23.stl",
+      "34_eye_pitch_motor_stay.stl",
+      "xl330_eye_yaw_front_plate-B19.stl"
+    ],
+    "8": [
+      "23_left_short_lid_link-B24.stl",
+      "23_right_short_lid_link-B21.stl",
+      "16_eye_yaw_horn_13p5_mm-B21.stl",
+      "22_blink_drive_link-B21.stl",
+      "21_blink_shaft_crank_2-B21.stl"
+    ],
     "9": [
-      "32_left_eyelid-B25.stl"
+      "36_left_cheek_servo_stay.stl"
     ]
   },
-  "identical_to_b24_plates": [
-    1,
+  "source_project_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
+  "identical_to_pre_insert_b25_plates": [
     2,
     3,
-    7,
-    8,
+    5,
     10,
     11,
     12

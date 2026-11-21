@@ -1,6 +1,6 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_project_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
+  "source_project_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
   "units": "mm",
   "stl_origin": "Source orientation with lowest Z at the build plate",
   "parts": {
@@ -138,31 +138,31 @@
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.10mm.stl",
           "bore_diameter_mm": 8.1,
-          "sha256": "176a9fda85e195e531d015f155371881f8d0a4e9a07c7ee383e7802583e4c402",
+          "sha256": "aa1319820799bf6f55bb946c93b1572986b1534acaf1c1c2c4cb60bf8d34a639",
           "min_sampled_boss_wall_mm": 2.348
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.15mm.stl",
           "bore_diameter_mm": 8.15,
-          "sha256": "602312fd256ecec38dde559e70faf9a1d554efc87fdd4aef52d5945aa0d1dc32",
+          "sha256": "ca1e7bc0040e0e155540f0f794229682031ff07872848b48da141fe47388e19a",
           "min_sampled_boss_wall_mm": 2.323
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.20mm.stl",
           "bore_diameter_mm": 8.2,
-          "sha256": "a69aa3dbbabd22ec128a8a77bd605295a8f4ea63854e7a1b55a1fd08f2b1803f",
+          "sha256": "badd8dfbb59b1cf3753762eb0f0d4158f0372a458d7341032eae34c2d14128e5",
           "min_sampled_boss_wall_mm": 2.298
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.25mm.stl",
           "bore_diameter_mm": 8.25,
-          "sha256": "de535dc2c4c75661e07420a95c22ddd1210758c24eab21c28ce645bf91fcde76",
+          "sha256": "ca6b1fb47524d0309356f1e62fc983f74f18c4be76abca176dde03f66cf559ef",
           "min_sampled_boss_wall_mm": 2.273
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.30mm.stl",
           "bore_diameter_mm": 8.3,
-          "sha256": "6dba6e3faa73fb9987d9ec633ba6616720088145d73ed3cf10926a40faf259a9",
+          "sha256": "b43e2b5fff1763c31890f19acf844e2eeb9dce405566d6b4ca9cf81a58ac2502",
           "min_sampled_boss_wall_mm": 2.248
         }
       ]

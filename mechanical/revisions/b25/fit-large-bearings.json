@@ -1,6 +1,6 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "source_project_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
   "units": "mm",
   "stl_origin": "Source orientation with lowest Z at the build plate",
   "parts": {
@@ -159,7 +159,7 @@
           ],
           "file": "07_pitch-yoke_688_ID16.10mm.stl",
           "bytes": 553984,
-          "sha256": "2787da6d8bb58254d50759ee5579f292ede9deb73f80d405029d0cef1b4ca340"
+          "sha256": "23eba19663dd8398a3983aedbe3e84797288a348291a98de5abcb839d721e9a8"
         },
         {
           "nominal_bore_diameter_mm": 16.2,
@@ -175,7 +175,7 @@
           ],
           "file": "07_pitch-yoke_688_ID16.20mm.stl",
           "bytes": 553984,
-          "sha256": "ca385a6b7d966eb82a5e01c4daa68b0a8694d4d9d307c6c0c3fd69820c8d5e70"
+          "sha256": "0d01ef40ffe733286e27066c228ef2f01c44997b6a83ec57c5c688bdc320bdce"
         },
         {
           "nominal_bore_diameter_mm": 16.3,
@@ -191,7 +191,7 @@
           ],
           "file": "07_pitch-yoke_688_ID16.30mm.stl",
           "bytes": 553984,
-          "sha256": "13aa7f4119ab680c4e9baf7a250c7a40427367b8681e1b72c472016d56cca04a"
+          "sha256": "e053b07e367b6daa4977adcfd6a824d3537d95b0a2599475fb698f008a94ae4f"
         },
         {
           "nominal_bore_diameter_mm": 16.4,
@@ -207,7 +207,7 @@
           ],
           "file": "07_pitch-yoke_688_ID16.40mm.stl",
           "bytes": 553984,
-          "sha256": "d7eea489c1ac3921e17c432756091333cf53a732b458a3763cabe0ed5cb19156"
+          "sha256": "42172af5526dae045dc1096146c463195f4474fe3358677220af317c173ad4b2"
         },
         {
           "nominal_bore_diameter_mm": 16.5,
@@ -223,7 +223,7 @@
           ],
           "file": "07_pitch-yoke_688_ID16.50mm.stl",
           "bytes": 553984,
-          "sha256": "aac647d479138d26e3a491ce81027ddb96b2e7b2f9dadd80bb372f9a3c4f6a7e"
+          "sha256": "ded2057ea63f22c349c420b19123e417e10e1a01846877c2765a60dfeab0c1e3"
         }
       ]
     }
