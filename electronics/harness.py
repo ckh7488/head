@@ -55,7 +55,6 @@ def check_wire_sizes():
         ('XT30U supply pigtail', SUPPLY_TAIL, (1.0, 1.5), None),
         ('JST SPH-002T-P0.5S', MOTOR_WIRE, (.05, .22), (.8, 1.5)),
         ('JST SEH-001T-P0.6', MOTOR_WIRE, (.05, .33), (1., 1.9)),
-        ('Phoenix 1715721 stranded', POWER_WIRE, (.14, 1.5), None),
         ('WAGO 221 power and signal', POWER_WIRE, (.14, 4.), None),
         ('WAGO 221 XT60 tail', XT60_TAIL, (.14, 4.), None),
         ('WAGO 221 signals', MOTOR_WIRE, (.14, 4.), None),

@@ -121,9 +121,11 @@ def hub_5v_current(ph_fault=False, *, servo_a=XL330_STALL_A):
 
 
 def neck_paths(board, parts):
-    check_net(parts, 'J2', {1: '12V_IN', 2: 'GND'})
+    check_net(parts, 'J2', {1: 'GND', 2: '12V_IN'})
     check_net(parts, 'F2', {1: '12V_IN', 2: '12V_NECK'})
-    lead = copper_path(board, parts, '12V_IN', ('J2', 1), ('F2', 1))
+    if parts['F2'].GetValue() != '4A MINI':
+        raise ValueError('12 V hub fuse must match the 4 A MINI protection')
+    lead = copper_path(board, parts, '12V_IN', ('J2', 2), ('F2', 1))
     for output, wires in (('J7', ('W22', 'W23')), ('J8', ('W25', 'W26'))):
         check_net(parts, output, {1: 'GND', 2: '12V_NECK', 3: 'DXL_BUS'})
         branch = copper_path(board, parts, '12V_NECK', ('F2', 2), (output, 2))
@@ -133,7 +135,7 @@ def neck_paths(board, parts):
 def neck_voltages(board, parts, *, trunk_a=NECK_NORMAL_A):
     """Calculate each loaded motor at the source floor and stated trunk current."""
     trunk = (wire_resistance('W6', 'W7', wire=XT60_TAIL)
-             + wire_resistance('W8', 'W9', wire=POWER_WIRE) + .012)
+             + wire_resistance('W8', 'W9', wire=POWER_WIRE) + .012 + HUB_XT30_CONTACT_OHM)
     for output, wires, positive in neck_paths(board, parts):
         voltage = (NECK_SOURCE_MIN_V - trunk_a * (trunk + positive + .038 + .015)
                    - XL430_STALL_A * (wire_resistance(*wires, wire=MOTOR_WIRE) + .090))

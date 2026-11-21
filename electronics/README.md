@@ -1,14 +1,14 @@
-# B25 서보 허브 A3
+# B25 서보 허브 A4
 
-B25에는 서보 허브 A3를 사용합니다. 관통홀 동박 링과 KiCad 제작 파일 검사를 통과했습니다. 조립 뒤 실제 배선에서 구동 전압을 측정합니다. [검사 조건 14절](../spec/conditions.md#14-전원과-환경)
+B25 서보 허브 A4는 12 V 입력 J2에 AMASS XT30PW-M을 사용합니다. 기판 제작 파일 검사를 통과했습니다. 아래 덮개의 전체 배선 경로와 두 입력 플러그의 교차 결합 방지를 확인한 뒤 조립과 통전을 진행합니다. [검사 조건 14절](../spec/conditions.md#14-전원과-환경)
 
 | 보드 | 제작 파일 | JLCPCB 발주 옵션 |
 |---|---|---|
-| [서보 허브 A3](servo-hub/R5_Servo_Hub.kicad_pro) | [Gerber·드릴 ZIP](fabrication/R5_Servo_Hub_A3-Gerbers.zip) | 70 × 35 mm, **2층 FR-4 1.6 mm, 양면 완성 동박 2 oz**, ENIG, 녹색 솔더마스크 |
+| [서보 허브 A4](servo-hub/R5_Servo_Hub.kicad_pro) | [Gerber·드릴 ZIP](fabrication/R5_Servo_Hub_A4-Gerbers.zip) | 70 × 35 mm, **2층 FR-4 1.6 mm, 양면 완성 동박 2 oz**, ENIG, 녹색 솔더마스크 |
 
-A3의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**, XT30 J1의 도금 고정홀 2개는 **Ø1.60 / Ø1.00 mm**입니다. 양면 동박 Gerber와 PTH 드릴을 대조한 결과, 두 곳의 최소 설계 링은 각각 **0.300 mm**입니다. 전체 도금 부품홀 49개의 최소값도 0.300 mm로 JLCPCB의 2층 2 oz 기준 **0.254 mm**를 충족합니다. 비아 25개는 Ø0.70 또는 Ø0.90 mm 패드에 Ø0.35 mm 드릴을 사용해 별도로 게시된 비아 기준을 충족합니다. KiCad 9.0.2에서 ERC, DRC, 미연결과 회로도 대조 각 0건이며, 재생성한 Gerber·드릴·스텐실 내용은 생성 시각을 제외하고 저장본과 일치합니다. [JLCPCB 제작 한계](https://jlcpcb.com/capabilities/pcb-capabilities/)
+A4의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**입니다. J1과 J2의 XT30은 각각 **5.00 mm 피치, Ø1.90 mm 단자홀 2개, Ø1.00 mm 고정홀 2개**이며, 도금 고정홀의 동박 패드는 Ø1.60 mm입니다. 전체 도금 부품홀 51개의 최소 설계 링은 0.300 mm로 JLCPCB의 2층 2 oz 기준 **0.254 mm**를 충족합니다. 비아 25개는 Ø0.70 또는 Ø0.90 mm 패드에 Ø0.35 mm 드릴을 사용합니다. KiCad 9.0.2에서 ERC, DRC, 미연결과 회로도 대조 각 0건입니다. [AMASS XT30PW-M 제조사 도면](https://www.tme.eu/Document/6eb2005a51a52592b3f19e8a450c54c8/XT30PW-M.pdf) · [JLCPCB 제작 한계](https://jlcpcb.com/capabilities/pcb-capabilities/)
 
-허브 U1–U3, R4–R6, C3–C5를 밑면에 먼저 리플로우합니다. VSON 접지 패드의 접합을 검사한 뒤 윗면 관통홀 부품을 납땜합니다. [허브 BOM](servo-hub/BOM.csv) · [허브 밑면 스텐실](fabrication/R5_Servo_Hub_A3-Stencil.zip) · [허브 밑면 실장 좌표](fabrication/R5-hub-back-positions-mm.csv) · [KiCad 라이브러리 라이선스](https://www.kicad.org/libraries/license/)
+허브 U1–U3, R4–R6, C3–C5를 밑면에 먼저 리플로우합니다. VSON 접지 패드의 접합을 검사한 뒤 윗면 관통홀 부품을 납땜합니다. [허브 BOM](servo-hub/BOM.csv) · [허브 밑면 스텐실](fabrication/R5_Servo_Hub_A4-Stencil.zip) · [허브 밑면 실장 좌표](fabrication/R5-hub-back-positions-mm.csv) · [KiCad 라이브러리 라이선스](https://www.kicad.org/libraries/license/)
 
 ## 전원과 배선
 
@@ -19,20 +19,22 @@ A3의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**, XT30 J1�
 | 5 V | 2.30–2.35 mm, 4.42 A | 제한기 앞 최소 0.32 mm, 뒤 최소 0.38 mm, 1.47 A |
 | 12 V | 2.20–2.40 mm, 2.80 A | 1.25 mm, 1.40 A |
 
-동박 두께 60 µm를 적용한 IPC-2221 외층 단일 트랙의 온도 상승 추정은 공통부에서 5 V 약 4 °C, 12 V 약 2 °C, 가장 좁은 5 V 분기에서 약 9 °C입니다. 5 V 분기의 Ø0.35 mm 비아는 JLCPCB의 평균 도금 두께 18 µm에서 약 1.6 mΩ 및 3.4 mW입니다. 위 전류에서 PCB 양극 동박의 전압 강하 추정은 J4–J6 **32.3–45.3 mV**, J7–J8 **11.5–16.1 mV**입니다. GND는 양면 동박 면으로 연결됩니다. 정상 구동 중의 어댑터 출력과 모터 단자 최저 전압은 조립품에서 측정합니다. [동박 전압 강하 계산](power_check.py) · [KiCad 트랙 폭 계산 기준](https://docs.kicad.org/9.0/en/pcb_calculator/pcb_calculator.html#track-width) · [JLCPCB 비아 도금](https://jlcpcb.com/capabilities/pcb-capabilities/)
+동박 두께 60 µm를 적용한 IPC-2221 외층 단일 트랙의 온도 상승 추정은 공통부에서 5 V 약 4 °C, 12 V 약 2 °C, 가장 좁은 5 V 분기에서 약 9 °C입니다. 5 V 분기의 Ø0.35 mm 비아는 JLCPCB의 평균 도금 두께 18 µm에서 약 1.6 mΩ 및 3.4 mW입니다. 위 전류에서 PCB 양극 동박의 전압 강하 추정은 J4–J6 **32.3–45.3 mV**, J7 **18.2 mV**, J8 **12.4 mV**입니다. GND는 양면 동박 면으로 연결됩니다. 정상 구동 중의 어댑터 출력과 모터 단자 최저 전압은 조립품에서 측정합니다. [동박 전압 강하 계산](power_check.py) · [KiCad 트랙 폭 계산 기준](https://docs.kicad.org/9.0/en/pcb_calculator/pcb_calculator.html#track-width) · [JLCPCB 비아 도금](https://jlcpcb.com/capabilities/pcb-capabilities/)
 
 ### 허브 단자와 배선
 
 | 단자 | 연결 |
 |---|---|
 | J1 5 V 입력 | 패드 2는 +, 1은 GND. 기판 XT30PW-M에는 W3/W4의 XT30U-F가 연결 |
-| J2 목 전원 입력 | 패드 1은 +, 2는 GND. B5 외부 고정에는 XT60U를 사용 |
+| J2 12 V 목 전원 입력 | 패드 2는 +, 1은 GND. 기판 XT30PW-M에는 W8/W9의 12 V XT30U-F가 연결. 받침 밖 12 V 연결은 XT60U |
 | J3 OpenRB | OpenRB EH 1(GND) → PH 1, EH 3(DATA) → PH 2. EH 2는 비움 |
 | J4–J6 | ID 1–3. PH 1 GND / 2 **개별 전류 제한 5 V** / 3 DATA |
 | J7–J8 | ID 4·5. EH 1 GND / 2 **목 전원** / 3 DATA |
 | ID 6 턱 | 어댑터 5 V에서 **2 A 인라인 퓨즈**를 거쳐 EH 2. 입력 GND는 EH 1, J6 DATA는 EH 3에 분기 |
 
 5 V 배선에는 XT30U-F 두 개와 XT30U-M 한 개가 필요합니다. F 한 개는 5 V 전원 꼬리에, 다른 한 개는 허브 J1 쪽 W3/W4에 씁니다. OpenRB 점퍼는 USB/VIN에 두고 USB로 공급합니다. 5 V와 목 전원은 GND·DATA를 공유하고 양극은 별도입니다. [OpenRB 전원과 포트](https://emanual.robotis.com/docs/en/parts/controller/openrb-150/)
+
+J1과 J2의 XT30 키는 극성 방향을 정합니다. 12 V 플러그를 J1에 연결하면 5 V 회로에 12 V가 인가됩니다. F1 7.5 A와 F2 4 A는 과전류에 대응합니다. 두 전원선 양끝에 전압을 표시하고, 정비 중 내부 12 V 플러그가 J1에 도달할 수 없도록 배선을 물리적으로 고정합니다. 두 어댑터를 분리한 상태에서 교차 결합 방지와 각 전원 플러그의 극성을 확인한 뒤 통전합니다. [AMASS XT30U](https://www.china-amass.com/biao/268.html)
 
 ### 전원 실물 검수
 
@@ -49,6 +51,8 @@ A3의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**, XT30 J1�
 ```
 
 ## 이전 전장 검토 기록
+
+이전 서보 허브 A3의 제작 파일입니다. [Gerber·드릴](fabrication/R5_Servo_Hub_A3-Gerbers.zip) · [스텐실](fabrication/R5_Servo_Hub_A3-Stencil.zip)
 
 ESP32-C3 A1은 별도 RF 실험으로 보관합니다. B25의 부품·PCB 발주 범위에서 제외합니다. [C3 KiCad 원본](c3-rf/) · [이전 C3 제작·실장 기록](https://github.com/ckh7488/head/blob/9c024361d586ff5ea582cbac3e1328d40d5b0c65/electronics/README.md#c3-첫-동작)
 
