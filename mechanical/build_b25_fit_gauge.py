@@ -37,6 +37,8 @@ ROWS = (
 )
 YAW_Y = 220.
 YAW_DIAMETERS = (100.10, 100.20, 100.30, 100.40, 100.50)
+INSERT_PILOTS = (3.95, 4.05, 4.15, 4.25, 4.35)
+INSERT_PILOT_DEPTH = 4.5
 
 
 def round_row(y, sizes, width, depth, direction):
@@ -87,8 +89,26 @@ def yaw_row():
     return rail.fuse(tabs).removeSplitter()
 
 
+def insert_row(y, horizontal):
+    # Short M3 heat-set inserts go into blind pockets with the same access
+    # direction as the part, so horizontal bridging is represented as well.
+    parts = []
+    for index, diameter in enumerate(INSERT_PILOTS):
+        x = 66. + 11. * index
+        if horizontal:
+            block = box(x-4.5, x+4.5, y, y+7., 0., 9.)
+            bore = cylinder(diameter/2, INSERT_PILOT_DEPTH+.1, (x, y-.1, 4.5), (0, 1, 0))
+        else:
+            block = box(x-4.5, x+4.5, y, y+9., 0., 7.)
+            bore = cylinder(diameter/2, INSERT_PILOT_DEPTH+.1, (x, y+4.5, 7.1), (0, 0, -1))
+        parts.append(block.cut(bore))
+    bridge = box(48., 114.5, y-.9, y+.3, 0., 1.2)
+    return bridge.fuse(parts).removeSplitter()
+
+
 def gauge_shape():
     rows = [round_row(y, sizes, width, depth, direction) for _, y, sizes, width, depth, direction in ROWS]
+    rows.extend((insert_row(0., False), insert_row(13., True)))
     rows.append(yaw_row())
     edge = box(-1.4, .45, -1., YAW_Y+6.1, 0., 1.2)
     plate = edge.fuse(rows).removeSplitter()
