@@ -159,11 +159,15 @@ def physical_record(item, record):
         if record['status'] == 'PASS' and (cycles < 50 or binds):
             raise ValueError('P03 합격에는 50회 이상 구동과 걸림 0회가 필요합니다.')
     if record.get('revision') == 'B25' and item == 'P06':
-        opening, reserve = (record[key] for key in ('jaw_open_deg', 'jaw_stop_reserve_deg'))
-        if any(type(value) not in (int, float) or not math.isfinite(value) for value in (opening, reserve)):
-            raise ValueError('실제 턱 열림각과 스토퍼 여유를 도 단위로 기록해야 합니다.')
-        if record['status'] == 'PASS' and (opening < 8 or reserve < 2):
-            raise ValueError('P06 합격에는 실제 열림 8°와 스토퍼 여유 2° 이상이 필요합니다.')
+        drop, reserve = (record[key] for key in ('jaw_tip_drop_mm', 'jaw_stop_reserve_deg'))
+        visible, limited = (record[key] for key in ('jaw_visible_drop', 'jaw_goal_pwm_verified'))
+        if any(type(value) not in (int, float) or not math.isfinite(value) for value in (drop, reserve)):
+            raise ValueError('턱 끝의 하강량(mm)과 스토퍼 여유(°)를 기록해야 합니다.')
+        if type(visible) is not bool or type(limited) is not bool:
+            raise ValueError('턱 끝이 눈에 보이게 내려갔는지와 Goal PWM 제한 확인 여부를 기록해야 합니다.')
+        minimum_reserve = 1 if limited else 2
+        if record['status'] == 'PASS' and (not visible or drop <= 0 or reserve < minimum_reserve):
+            raise ValueError(f'P06 합격에는 눈에 보이는 턱 끝 하강과 스토퍼 여유 {minimum_reserve}° 이상이 필요합니다.')
     if record.get('revision') == 'B25' and item == 'P07':
         cycles, disconnects, reenumerations = (record[key] for key in (
             'camera_yaw_cycles', 'camera_usb_disconnects', 'camera_usb_reenumerations'))

@@ -28,6 +28,6 @@
 
 시험한 사람이 `tester`에 이름, `date`에 시험일(`YYYY-MM-DD`), `measurement`에 시험 방법과 조건, `result`에 직접 확인한 결과를 적습니다. P03은 구동·걸림 횟수를, P08은 전체 조립 완료 여부와 두 덮개의 너트 유지 결과를 함께 적습니다. [실물 시험과 필드](../bench.md)
 
-B25의 P06은 `jaw_open_deg`, `jaw_stop_reserve_deg`를 실측합니다. P07은 `camera_yaw_cycles`, `camera_usb_disconnects`, `camera_usb_reenumerations`, `camera_recognized_after`와 좌우 끝 실제 각도를 기록합니다. [B25 실물 시험](../bench.md#b25-실물-시험)
+B25의 P06은 62틱에서 실측한 `jaw_tip_drop_mm`, 눈에 보이는 움직임 `jaw_visible_drop`, 스토퍼 여유 `jaw_stop_reserve_deg`, Goal PWM 출력 제한 확인 `jaw_goal_pwm_verified`를 기록합니다. P07은 `camera_yaw_cycles`, `camera_usb_disconnects`, `camera_usb_reenumerations`, `camera_recognized_after`와 좌우 끝 실제 각도를 기록합니다. [B25 실물 시험](../bench.md#b25-실물-시험)
 
 두 기록은 저장소에서 `python spec/verify.py --b25-physical`로 검사합니다.
