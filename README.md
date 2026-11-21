@@ -11,7 +11,7 @@
 | 검토 대상 커밋, 다시 실행할 명령, 발견한 문제 | [B24·A1 검토 안내](REVIEW.md) |
 | FreeCAD 조립본, P2S 출력판, 조립 순서 | [B24 기구 파일](https://github.com/ckh7488/head/tree/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24) |
 | 대화 없이 3D 조립·구동 열기 | [브라우저용 모델 만들기](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/web/README.md#b24-조립-순서) |
-| 두 KiCad 프로젝트, PCB 출력 파일과 배선 | [A1 전자 설계](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/electronics/README.md) |
+| A1 회로도·PCB 원본 | [서보 허브](https://github.com/ckh7488/head/tree/2157cbfafac76ff17a58f86f65da18d7d153c68a/electronics/servo-hub) · [ESP32-C3](https://github.com/ckh7488/head/tree/2157cbfafac76ff17a58f86f65da18d7d153c68a/electronics/c3-rf) |
 | 펌웨어, 얼굴 추적, 실물 판정 | [제어](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/control/README.md) · [B24 실물 검수](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24/README.md#실물-검수) |
 
 기본 브랜치의 CAD와 조립 문서는 B18 이하 이력입니다. [이전 첫 화면](https://github.com/ckh7488/head/blob/aea5a97dc126997b99470e445302394d638795f6/README.md)

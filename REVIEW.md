@@ -1,6 +1,8 @@
 # B24·A1 설계 검토
 
-**상태는 검토 중이며 전체 출력과 부품·PCB 발주는 보류합니다.** B24는 기구와 펌웨어의 리비전입니다. A1은 서보 허브와 ESP32-C3 PCB의 리비전입니다. 카메라 USB와 OpenRB USB가 PC에 연결되고 OpenRB는 서보 허브의 DATA와 GND에 연결됩니다. ESP32-C3의 전원과 데이터는 별도입니다. [검토 대상 커밋][rev] · [전원과 배선][ee]
+**상태는 검토 중이며 전체 출력과 부품·PCB 발주는 보류합니다.** B24는 기구와 펌웨어의 리비전입니다. A1은 서보 허브와 ESP32-C3 PCB의 리비전입니다. 카메라 USB와 OpenRB USB가 PC에 연결되고 OpenRB는 서보 허브의 DATA와 GND에 연결됩니다. ESP32-C3의 전원과 데이터는 별도입니다. [검토 대상 커밋][rev] · [기존 전원·배선 참고][ee]
+
+고정 커밋의 기구·전자 문서에는 당시 조립·발주 안내가 들어 있습니다. 그 파일에서 형상과 회로를 확인하고, 발주 여부와 현행 검토 결과는 이 페이지에서 확인합니다.
 
 ## 깨끗한 체크아웃에서 실행
 
@@ -11,7 +13,7 @@ git fetch --depth 1 https://github.com/ckh7488/head.git 2157cbfafac76ff17a58f86f
 git switch --detach FETCH_HEAD
 ```
 
-Linux에서 Python 3.12와 C++ 컴파일러로 가상 제어 테스트를 실행합니다. PCB는 KiCad 9.0.2, KiCad 표준 라이브러리와 `pcbnew`가 설치된 시스템 Python이 필요합니다. [제어 실행법][control] · [KiCad 프로젝트와 발주 산출물][ee]
+Linux에서 Python 3.12와 C++ 컴파일러로 가상 제어 테스트를 실행합니다. PCB는 KiCad 9.0.2, KiCad 표준 라이브러리와 `pcbnew`가 설치된 시스템 Python이 필요합니다. [제어 실행법][control] · [기존 PCB 내보내기 안내][ee]
 
 ```sh
 python3.12 -m venv build/review-env
@@ -49,6 +51,7 @@ FreeCAD 1.0과 Python 3.12 환경에서 다시 만든 3MF는 저장본과 바이
 | --- | --- |
 | **5 V 전원 하한**. 공급품 예시의 허용 하한은 4.75 V입니다. 같은 배선 손실 모델로 계산하면 눈·눈꺼풀의 최저 전압은 4.27 V에서 약 4.07 V로 내려갑니다. 이는 눈꺼풀 검증에 사용한 4.27–5.25 V 범위 아래입니다. | [전원 모델][power] · [어댑터 사양][adapter] |
 | **정지와 전원 리셋**. 가상 테스트에서 목 상하축이 끝점보다 5틱 바깥에 있을 때 PC 명령을 끊으면 이전 목표가 남았습니다. 서보만 재부팅한 경우엔 토크가 꺼졌는데도 `STATE 31`이 나왔습니다. OpenRB 쪽만 재부팅한 가상 시험에서는 `RELEASED` 응답 뒤에도 모터 토크가 켜져 있었습니다. | [정지 처리][hold] · [상태 보고][report] · [가상 서보 인터페이스][harness] |
+| **추적 시작과 복귀**. 목이 정면에 있어도 눈 좌우 오차가 0.60° 남으면 PC 제어가 5초 뒤 `RETURN_FAILED`를 냈습니다. 판정은 다섯 축을 읽는데 복귀 보정은 목 두 축에만 적용합니다. | [복귀 제어][return] |
 | **허브 2 oz 제조 한계**. JST PH 패드 11개의 최소 동박 링은 0.225 mm이고 XT30 고정홀 두 개는 0.200 mm입니다. JLCPCB의 2 oz 도금홀 기준 0.254 mm보다 작습니다. KiCad 검사에는 해당 제조 한계가 반영되어 있지 않습니다. | [허브 PCB][hub-pcb] · [JLCPCB 2 oz 도금홀 기준][jlc] |
 | **허브 분기 보호**. 각 PH 출력 정격은 24 AWG에서 2 A입니다. 공용 5 A 퓨즈만으로는 한 분기가 2 A를 넘고 총전류가 5 A 미만인 경우의 차단을 보장하지 못합니다. | [허브 퓨즈와 단자][hub-bom] · [JST PH 정격][jst] |
 | **허브 전원 커넥터 수량**. 외부 5 V 입력과 내부 허브 J1에 XT30U-F가 각각 하나 필요합니다. 공통 BOM은 하나만 적고 있습니다. | [공통 BOM][bom] · [허브 J1][hub-bom] · [배선표][wiring] |
@@ -130,3 +133,4 @@ PYTHON
 [tracking]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/control/pc/track.py#L413-L453
 [neck-stop]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24/neck-stop.json#L239-L244
 [b24-bench]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24/README.md#실물-검수
+[return]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/control/pc/track.py#L79-L125
