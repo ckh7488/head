@@ -1,8 +1,6 @@
 """Check the stock fastener policy against the typed bill of materials."""
 
 import csv
-from hashlib import file_digest
-import json
 import re
 from pathlib import Path
 
@@ -73,27 +71,6 @@ def read_policy(criteria: dict) -> tuple[set[str], str, dict]:
     return set(standards), size.upper(), exceptions
 
 
-def check_guard(root, policy):
-    release = root / "mechanical/revisions/b22"
-    try:
-        layout = json.loads((release / "guard-layout.json").read_bytes())
-        verification = json.loads((release / "verification.json").read_bytes())
-        with (release / "R5-B22-Assembly.FCStd").open("rb") as file:
-            cad_hash = file_digest(file, "sha256").hexdigest()
-        rows = layout["fasteners"]
-        count = verification["guard"]["fastener_tool_pairs"]
-        expected = policy["guard"]
-        if (cad_hash != layout["source_sha256"] or cad_hash != verification["cad_sha256"]
-                or not count or len(rows) != count or len({row["id"] for row in rows}) != count):
-            return "UNVERIFIED", "보호 케이스 체결 자료와 CAD 또는 체결 위치 수가 다름"
-        wrong = [row["id"] for row in rows if any(row[key] != expected[key] for key in ("screw", "nut"))]
-    except (OSError, ValueError, TypeError, KeyError) as error:
-        return "UNVERIFIED", f"보호 케이스 체결 자료를 읽을 수 없음 ({error})"
-    if wrong:
-        return "FAIL", f"보호 케이스 체결 규격 불일치 ({', '.join(wrong)})"
-    return "PASS", f"케이스 체결 {count}쌍 확인"
-
-
 def check_fasteners(root: Path, criteria: dict) -> tuple[str, str]:
     """Return the outcome and detail for S06."""
     try:
@@ -157,5 +134,4 @@ def check_fasteners(root: Path, criteria: dict) -> tuple[str, str]:
         return "FAIL", " / ".join(violations)
     if not checked:
         return "UNVERIFIED", "BOM에서 확인할 체결품을 찾지 못함"
-    status, guard = check_guard(root, criteria["S06_fasteners"])
-    return status, f"본체 BOM 체결품 {len(checked)}개 품목 확인 · {guard}"
+    return "PASS", f"본체 BOM 체결품 {len(checked)}개 품목 확인"

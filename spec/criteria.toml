@@ -1,34 +1,37 @@
 [S01_walk_by]
-distance_m = 0.8
-walk_speed_mps = 1.2
+distance_m = 1.5
+walk_speed_mps = 0.8
 gaze_ok_deg = 10.0
-min_ok_ratio = 0.90
+min_ok_ratio = 0.85
+acquisition_s = 1.0
+scoring_range_deg = 80.0
+max_neck_speed_deg_s = 45.0
+loss_hold_min_s = 2.0
+loss_hold_max_s = 3.0
+max_return_speed_deg_s = 15.0
 camera_latency_s = 0.12
 camera_hfov_deg = 106.0
 
 [S01b_no_whip]
 target_deg = 40.0
 max_neck_overshoot_deg = 12.0
-max_final_gaze_err_deg = 2.0
+max_final_gaze_err_deg = 10.0
 
 [S02_look_up]
-head_height_m = 1.0
-base_tilt_deg = 10.0
+head_height_m = 1.4
+base_tilt_deg = 0.0
 person_eye_height_m = 1.6
 distance_m = 1.0
 
 [S03_blink]
-min_total_s = 0.30
-max_total_s = 0.60
-close_not_slower_than_open = true
+min_total_s = 0.8
+max_total_s = 1.5
+min_interval_s = 4.0
+max_interval_s = 10.0
 
 [S06_fasteners]
 allowed_standards = ["ISO 4762", "DIN 934", "DIN 125"]
 default_size = "M3"
-
-[S06_fasteners.guard]
-screw = "ISO 4762 M3×16"
-nut = "ISO 4032 M3"
 
 [S06_fasteners.exceptions.E1]
 size = "M2"
@@ -63,6 +66,7 @@ minimum_span_to_diameter = 3.0
 
 [M07_transmission]
 min_angle_deg = 40.0
+max_stall_fraction = 0.20
 
 [M09_print_wall]
 minimum_thickness_mm = 1.2

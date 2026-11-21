@@ -1,7 +1,7 @@
 {
   "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
   "sliced_grams_sha256": "b12723dcceb09029328068df052e02d11785a1f780f8ff2ae8574b59fd472d60",
-  "firmware_sha256": "cb1a4a35f0ead9b6da34e2d9900ba667ac6d97816246efa7833417efb24c29df",
+  "firmware_sha256": "0bf529078c9d6f4bd3b8328f281baaad3db11f66f524f8798ec3126d834cfa94",
   "status": "pass",
   "jaw_command_deg": 5.5,
   "jaw_feedback_limit_deg": 6.416015625,

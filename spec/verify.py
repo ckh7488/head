@@ -35,7 +35,7 @@ def checks(root=ROOT):
             status, _ = combined(results, scene, physical)
         results[scene] = status, f'{detail} · 실물 {physical} {details[physical][0]}'
     results['S04'] = combined(results, 'P06')
-    results['S05'] = combined(results, 'C01', 'C02', 'C03', 'C04', 'P01')
+    results['S05'] = combined(results, 'C01', 'C02', 'C03', 'C04', 'P01', 'P08')
     results['S06'] = check_fasteners(root, criteria)
     return dict(sorted(results.items(), key=lambda item: ('SCMP'.index(item[0][0]), item[0])))
 

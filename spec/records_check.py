@@ -9,8 +9,9 @@ import tomllib
 
 
 MECHANISMS = ('neck_yaw', 'neck_pitch', 'jaw', 'blink', 'eye_yaw', 'eye_pitch', 'cable_retention')
-RECORD_IDS = tuple(f'M{i:02d}' for i in range(1, 10)) + tuple(f'P{i:02d}' for i in range(1, 8))
+RECORD_IDS = tuple(f'P{i:02d}' for i in range(1, 9)) + tuple(f'M{i:02d}' for i in range(1, 10))
 VERDICTS = {'PASS', 'FAIL'}
+SERVICE_COVERS = {'rear-cable', 'bottom-board'}
 PLACEHOLDERS = {'-', 'n/a', 'todo', 'tbd', '미측정', '해당 없음', '해당없음'}
 REQUIRED_CASES = {
     'M02': {'neck_pitch', 'jaw', 'blink', 'eye_yaw', 'eye_pitch'},
@@ -58,13 +59,41 @@ def minimum_measurement_verdict(root, item, measurements, mechanism):
     return ('PASS' if measured >= minimum else 'FAIL'), measured, unit
 
 
-def mechanical_record(root, item, record):
+def check_source(root, value, label):
+    source = Path(required_text(value, label))
+    resolved = (root / source).resolve()
+    if source.is_absolute() or not resolved.is_relative_to(root) or not resolved.is_file():
+        raise ValueError(f'{label}을 찾을 수 없습니다. {source}')
+
+
+def transmission_exception(root, mechanism, case, physical):
+    evidence = case.get('exception')
+    if mechanism != 'blink':
+        return 'UNVERIFIED', f'{mechanism} 전달각 예외 근거 대기'
+    if evidence is None:
+        status = 'FAIL' if physical == 'FAIL' else 'UNVERIFIED'
+        return status, f'눈꺼풀 전달각 예외 토크 근거 대기 · P03 {physical}'
+    check_source(root, evidence['source'], '토크 근거 파일')
+    required, stall = (evidence[key] for key in ('required_torque_Nm', 'stall_torque_Nm'))
+    if (any(type(value) not in (float, int) or not math.isfinite(value) for value in (required, stall))
+            or required < 0 or stall <= 0):
+        raise ValueError('요구 토크와 정지 토크가 유효해야 합니다.')
+    with (root / 'spec/criteria.toml').open('rb') as file:
+        limit = tomllib.load(file)['M07_transmission']['max_stall_fraction']
+    if not 0 < limit < 1:
+        raise ValueError('정지 토크 대비 상한은 0과 1 사이여야 합니다.')
+    ratio = required / stall
+    status = 'FAIL' if ratio > limit else physical
+    return status, f'눈꺼풀 토크 {required:.4f} N·m / 정지 토크 {stall:g} N·m ({ratio:.1%}, 상한 {limit:.0%}) · P03 {physical}'
+
+
+def mechanical_record(root, item, record, physical):
     cases = record['cases']
     if not isinstance(cases, dict) or not cases or not set(cases).issubset(MECHANISMS):
         raise ValueError('지정된 7개 기구에서 판정할 항목을 기록해야 합니다.')
     if record['status'] == 'PASS' and set(cases) != set(MECHANISMS):
         raise ValueError('지정된 7개 기구 항목을 모두 기록해야 합니다.')
-    measured, minima = [], []
+    measured, minima, exceptions = [], [], []
     for name, case in cases.items():
         status = case['status']
         if status == 'N/A':
@@ -74,7 +103,7 @@ def mechanical_record(root, item, record):
             if 'measurements' in case:
                 raise ValueError(f'{name} 적용 제외와 측정 기록이 함께 있습니다.')
             continue
-        if status not in VERDICTS:
+        if status not in VERDICTS and (item != 'M07' or status != 'UNVERIFIED'):
             raise ValueError(f'{name} 판정은 PASS, FAIL, N/A 중 하나여야 합니다.')
         measurements = case['measurements']
         if not isinstance(measurements, list) or not measurements:
@@ -86,19 +115,23 @@ def mechanical_record(root, item, record):
             value = measurement['value']
             if type(value) not in (int, float) or (type(value) is float and not math.isfinite(value)):
                 raise ValueError(f'{name} 측정값은 유한한 수여야 합니다.')
-            source = Path(required_text(measurement['source'], f'{name} 근거 파일'))
-            resolved = (root / source).resolve()
-            if source.is_absolute() or not resolved.is_relative_to(root) or not resolved.is_file():
-                raise ValueError(f'{name} 근거 파일을 찾을 수 없습니다. {source}')
+            check_source(root, measurement['source'], f'{name} 근거 파일')
         if item in MEASUREMENT_LIMITS:
             verdict, value, unit = minimum_measurement_verdict(root, item, measurements, name)
-            if verdict != status:
+            if item == 'M07' and verdict == 'FAIL':
+                verdict, detail = transmission_exception(root, name, case, physical)
+                exceptions.append(detail)
+            if verdict != status and (item != 'M07' or status != 'UNVERIFIED'):
                 raise ValueError(f'{name} 최소 측정값과 판정이 일치하지 않습니다.')
             minima.append(value)
+            status = verdict
         measured.append(status)
     if not measured:
         raise ValueError('판정할 측정 항목이 없습니다.')
-    if record['status'] != ('FAIL' if 'FAIL' in measured else 'PASS'):
+    status = 'FAIL' if 'FAIL' in measured else 'PASS'
+    if item == 'M07' and status == 'PASS' and ('UNVERIFIED' in measured or set(cases) != set(MECHANISMS)):
+        status = 'UNVERIFIED'
+    if record['status'] != status and (item != 'M07' or record['status'] != 'UNVERIFIED'):
         raise ValueError('전체 판정과 기구별 판정이 일치하지 않습니다.')
     detail = f'기구 {len(measured)}개 측정, {len(cases) - len(measured)}개 적용 제외'
     if len(cases) < len(MECHANISMS):
@@ -106,10 +139,12 @@ def mechanical_record(root, item, record):
     if minima:
         suffix = '배' if unit == 'ratio' else f' {unit}'
         detail += f' · 최소 {min(minima):.3f}{suffix}'
-    return detail
+    if exceptions:
+        detail += ' · ' + ' · '.join(exceptions)
+    return status, detail
 
 
-def physical_record(record):
+def physical_record(item, record):
     tester = required_text(record['tester'], '시험자')
     when = required_text(record['date'], '시험 날짜')
     observed = date.fromisoformat(when)
@@ -117,6 +152,18 @@ def physical_record(record):
         raise ValueError('시험 날짜를 실제 시험한 날의 YYYY-MM-DD로 적어야 합니다.')
     required_text(record['measurement'], '시험 방법')
     required_text(record['result'], '시험 결과')
+    if item == 'P03':
+        cycles, binds = record['cycles'], record['binding_events']
+        if type(cycles) is not int or type(binds) is not int or not 0 <= binds <= cycles:
+            raise ValueError('실제 깜빡임 횟수와 걸린 횟수를 기록해야 합니다.')
+        if record['status'] == 'PASS' and (cycles < 50 or binds):
+            raise ValueError('P03 합격에는 50회 이상 구동과 걸림 0회가 필요합니다.')
+    if item == 'P08' and record['status'] == 'PASS':
+        rework = record['unplanned_rework_count']
+        covers = record['retained_nut_covers']
+        if record['full_assembly'] is not True or type(rework) is not int or rework != 0 or (
+                not isinstance(covers, list) or len(covers) != 2 or set(covers) != SERVICE_COVERS):
+            raise ValueError('P08 합격에는 완성품 한 번 조립과 두 덮개 너트 보존 확인이 필요합니다.')
     return f'{when} {tester} 실물 기록'
 
 
@@ -132,13 +179,17 @@ def check_records(root: Path, rev: str, cad_hash: str) -> dict[str, tuple[str, s
             record = json.loads(path.read_text(encoding='utf-8'), object_pairs_hook=unique_fields)
             if record['revision'] != rev or record['cad_sha256'] != cad_hash:
                 raise ValueError('리비전 또는 CAD SHA-256이 현재 조립본과 다릅니다.')
-            if record['status'] not in VERDICTS:
+            status = record['status']
+            if status not in VERDICTS and (item != 'M07' or status != 'UNVERIFIED'):
                 raise ValueError('판정은 PASS 또는 FAIL이어야 합니다.')
-            detail = mechanical_record(root, item, record) if item.startswith('M') else physical_record(record)
+            if item.startswith('M'):
+                status, detail = mechanical_record(root, item, record, results['P03'][0])
+            else:
+                detail = physical_record(item, record)
         except FileNotFoundError:
             results[item] = ('UNVERIFIED', f'spec/records/{item}.json 없음')
-        except (OSError, TypeError, ValueError, KeyError) as error:
+        except (OSError, TypeError, ValueError, KeyError, OverflowError) as error:
             results[item] = ('UNVERIFIED', f'{item} 기록 확인 필요 · {error}')
         else:
-            results[item] = (record['status'], detail)
+            results[item] = (status, detail)
     return results

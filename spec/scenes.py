@@ -1,10 +1,11 @@
 """Kinematic screening of the B22 scenes from the released control sources."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from hashlib import file_digest
 import json
 import math
 from pathlib import Path
+import random
 import re
 import runpy
 
@@ -13,6 +14,8 @@ STEP_S = .005
 CAMERA_FPS = 30
 BLINK_OPEN_DEG = 5.
 BLINK_SHUT_DEG = 85.
+POSITION_TICK_DEG = 360. / 4096
+VELOCITY_UNIT_DEG_S = .229 * 6
 
 
 @dataclass(frozen=True)
@@ -20,6 +23,8 @@ class RateModel:
     speed: tuple[float, ...]
     goal_period: float
     report_period: float
+    exhibit_neck_speed: tuple[float, float] | None = None
+    return_neck_speed: tuple[float, float] | None = None
 
     @classmethod
     def read(cls, root):
@@ -30,13 +35,45 @@ class RateModel:
         if speeds is None or goal is None or report is None:
             raise ValueError('Could not read the OpenRB drive profile and communication periods.')
         # Profile Velocity uses 0.229 rpm per register unit. The sixth axis is the jaw.
-        speed = tuple(float(value) * .229 * 6 for value in speeds[1].split(','))
+        speed = tuple(float(value) * VELOCITY_UNIT_DEG_S for value in speeds[1].split(','))
         if len(speed) != 6 or min(speed) <= 0 or int(goal[1]) <= 0 or int(report[1]) <= 0:
             raise ValueError('Invalid OpenRB profile velocities or communication period.')
-        return cls(speed[:5], int(goal[1]) / 1000, int(report[1]) / 1000)
+        profiles = []
+        for name in ('exhibitYawVelocity', 'exhibitPitchVelocity', 'returnNeckVelocity'):
+            match = re.search(rf'\b{name}\s*=\s*(\d+)\b', source)
+            profiles.append(int(match[1]) * VELOCITY_UNIT_DEG_S if match else 0.)
+        yaw, pitch, returning = profiles
+        return cls(speed[:5], int(goal[1]) / 1000, int(report[1]) / 1000,
+                   (yaw, pitch) if yaw and pitch else None, (returning, returning) if returning else None)
 
 
-def _simulate(model, planner, bearing, duration, latency, hfov, start, blink=False):
+@dataclass(frozen=True)
+class Frame:
+    captured_at: float
+    arrived_at: float
+    detected: bool
+    phase: str
+
+
+@dataclass
+class ExhibitTrace:
+    frames: list[Frame] = field(default_factory=list)
+    poses: list[tuple[float, tuple[float, ...]]] = field(default_factory=list)
+
+
+def _camera_error(yaw, pitch, camera_pitch, hfov):
+    yaw, pitch, tilt = map(math.radians, (yaw, pitch, camera_pitch))
+    x = math.sin(yaw) * math.cos(pitch)
+    y = math.sin(pitch) * math.cos(tilt) - math.cos(yaw) * math.cos(pitch) * math.sin(tilt)
+    z = math.sin(pitch) * math.sin(tilt) + math.cos(yaw) * math.cos(pitch) * math.cos(tilt)
+    edge = math.tan(math.radians(hfov / 2))
+    if z <= 0. or abs(x) > z * edge or abs(y) > z * edge * 720 / 1280:
+        return None
+    return math.degrees(math.atan2(x, z)), math.degrees(math.atan2(y, math.hypot(x, z)))
+
+
+def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
+              blink=False, target_pitch=0., hide_at=None):
     """Use ideal detections in the angular window and acceleration-free joints.
 
     A 30 Hz capture arrives after a fixed delay. Firmware goals are sampled every
@@ -44,17 +81,17 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, blink=Fal
     encoder calibration, bus errors, load and camera detection are outside this model.
     """
     position = list(start)
+    joint_speed = model.speed
     goal = feedback = tuple(start)
     pending = None
     frame_index = 0
     next_goal = next_report = 0.
     active = False
-    missed = losses = 0
-    first_seen = None
-    history, samples = [], []
+    history = []
+    trace = ExhibitTrace()
     for tick in range(math.ceil(duration / STEP_S) + 1):
         t = min(tick * STEP_S, duration)
-        history.append(position[3])
+        history.append(tuple(position[3:5]))
         if t + 1e-9 >= next_report:
             feedback = tuple(position)
             next_report += model.report_period
@@ -64,76 +101,142 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, blink=Fal
             sample = capture / STEP_S
             lower = min(int(sample), len(history) - 1)
             upper = min(lower + 1, len(history) - 1)
-            capture_neck = history[lower] + (sample - lower) * (history[upper] - history[lower])
-            relative = bearing(capture) - capture_neck
-            error = (relative, 0.) if abs(relative) <= hfov / 2 else None
-            if error is None:
-                missed += 1
-            elif first_seen is None:
-                first_seen = t
+            capture_yaw, capture_pitch = (a + (sample - lower) * (b - a)
+                                          for a, b in zip(history[lower], history[upper], strict=True))
+            error = _camera_error(bearing(capture) - capture_yaw, target_pitch, capture_pitch, hfov)
+            if hide_at is not None and capture >= hide_at:
+                error = None
             decision = planner.step(error, feedback, t, blink_enabled=blink)
+            trace.frames.append(Frame(capture, t, error is not None, decision.phase))
             if decision.active:
-                pending = decision.goals
+                pending = decision.goals, decision.phase
             elif active:
-                losses += 1
                 goal, pending = tuple(position), None
             active = decision.active
         if t + 1e-9 >= next_goal:
             if pending is not None:
-                goal, pending = pending, None
+                goal, phase = pending
+                pending = None
+                neck_speed = model.return_neck_speed if phase == 'RETURN' else model.exhibit_neck_speed
+                joint_speed = model.speed[:3] + neck_speed
             next_goal += model.goal_period
-        samples.append((t, bearing(t), position[3], position[0], position[2]))
+        trace.poses.append((t, tuple(position)))
         dt = min(STEP_S, duration - t)
-        for axis, limit in enumerate(model.speed):
+        for axis, limit in enumerate(joint_speed):
             change = goal[axis] - position[axis]
             position[axis] += min(limit*dt, max(-limit*dt, change))
-    return samples, missed, losses, first_seen
+    return trace
+
+
+def _neck_speed(poses, since=0.):
+    speeds = (math.hypot(b[3] - a[3], b[4] - a[4]) / (t1 - t0)
+              for (t0, a), (t1, b) in zip(poses, poses[1:]) if t0 >= since and t1 > t0)
+    return max(speeds, default=0.)
+
+
+def _walk_case(model, track, c, direction):
+    distance, speed, scoring_range = c['distance_m'], c['walk_speed_mps'], c['scoring_range_deg']
+    extent = distance * math.tan(math.radians((scoring_range + 90.) / 2))
+    duration = 2 * extent / speed
+    score_end = (extent + distance * math.tan(math.radians(scoring_range))) / speed
+
+    def bearing(t):
+        return direction * math.degrees(math.atan2(-extent + speed * t, distance))
+
+    run = _simulate(model, track['Planner'](exhibit=True), bearing, duration,
+                    c['camera_latency_s'], c['camera_hfov_deg'], track['ZERO'])
+    first = next((frame for frame in run.frames if frame.detected and
+                  abs(bearing(frame.captured_at)) <= scoring_range), None)
+    label = '왼→오' if direction > 0 else '오→왼'
+    if first is None:
+        return False, f'{label}: 평가 구간에서 얼굴 검출 없음'
+    peak = _neck_speed(run.poses)
+    tracking = next((frame.arrived_at for frame in run.frames if first.captured_at <= frame.captured_at
+                     and frame.detected and frame.phase == 'TRACK'), None)
+    if tracking is None:
+        return False, f'{label}: 추적에 들어가지 못함'
+    error = [(t, abs(bearing(t) - pose[3] - pose[0])) for t, pose in run.poses if tracking <= t <= score_end]
+    acquired = next((t for t, gap in error if gap <= c['gaze_ok_deg']), None)
+    if acquired is None or acquired >= score_end:
+        return False, f'{label}: 평가 구간에서 시선 {c["gaze_ok_deg"]:g}° 이내 포착 없음'
+
+    acquisition = acquired - first.captured_at
+    scored = [(t, gap) for t, gap in error if t >= acquired]
+    # The person's geometric exit is the deadline even when detections cease.
+    in_gaze = sum(min(STEP_S, score_end - t) for t, gap in scored if gap <= c['gaze_ok_deg'])
+    ratio = min(1., in_gaze / (score_end - acquired))
+    missing = sum(not frame.detected for frame in run.frames if acquired <= frame.captured_at <= score_end)
+    passed = (acquisition <= c['acquisition_s'] and ratio >= c['min_ok_ratio']
+              and peak <= c['max_neck_speed_deg_s'] + 1e-8)
+    return (passed, f'{label}: 포착 {acquisition:.2f}초, 수평 시선 {ratio:.1%}, '
+            f'평가 중 미검출 {missing}프레임, 목 최고 {peak:.2f}°/s')
+
+
+def _loss_case(model, track, c, yaw, pitch):
+    hide_at = 6.
+    duration = hide_at + c['loss_hold_max_s'] + abs(yaw) / min(model.return_neck_speed) + 2.
+    run = _simulate(model, track['Planner'](exhibit=True), lambda _: yaw, duration, c['camera_latency_s'],
+                    c['camera_hfov_deg'], track['ZERO'], target_pitch=pitch, hide_at=hide_at)
+    label = f'소실 {yaw:+g}°/{pitch:+g}°'
+    missed = next((frame for frame in run.frames if frame.captured_at >= hide_at and not frame.detected), None)
+    tracked = any(frame.phase == 'TRACK' and frame.detected for frame in run.frames if frame.captured_at < hide_at)
+    if not tracked or missed is None:
+        return False, f'{label}: 소실 전 추적 미성립'
+    still = [(t, pose) for t, pose in run.poses if missed.arrived_at - .25 <= t <= missed.arrived_at]
+    baseline = still[-1][1]
+    stationary = all(math.dist(pose[3:5], baseline[3:5]) <= POSITION_TICK_DEG for _, pose in still)
+    displaced = all(abs(angle) > POSITION_TICK_DEG for angle in baseline[3:5])
+    if not stationary or not displaced:
+        return False, f'{label}: 두 축이 돌아간 상태에서 정지한 뒤 소실시켜야 함'
+
+    returning = next((frame for frame in run.frames if frame.arrived_at >= missed.arrived_at
+                      and frame.phase == 'RETURN'), None)
+    starts = next((t for t, pose in run.poses if t > missed.arrived_at and
+                   math.dist(pose[3:5], baseline[3:5]) >= POSITION_TICK_DEG), None)
+    if returning is None or starts is None:
+        return False, f'{label}: 복귀 시작을 확인하지 못함'
+    delay = starts - missed.arrived_at
+    peak = _neck_speed(run.poses, missed.arrived_at)
+    home = all(abs(angle) <= POSITION_TICK_DEG for angle in run.poses[-1][1])
+    parked = run.frames[-1].phase == 'IDLE'
+    passed = (c['loss_hold_min_s'] <= delay <= c['loss_hold_max_s']
+              and peak <= c['max_return_speed_deg_s'] + 1e-8 and home and parked
+              and _neck_speed(run.poses) <= c['max_neck_speed_deg_s'] + 1e-8)
+    return passed, f'{label}: 유지 {delay:.2f}초, 복귀 최고 {peak:.2f}°/s, 중립 {"도달" if home and parked else "미도달"}'
 
 
 def _walk(model, track, c):
-    distance, speed = c['distance_m'], c['walk_speed_mps']
-
-    def bearing(t):
-        return math.degrees(math.atan2(-4. + speed*t, distance))
-
-    zero, limits = track['ZERO'], track['LIMITS']
-    start_neck = track['clamp'](bearing(0), *limits[3])
-    pre_acquired = (0., 0., 0., start_neck, 0.)
-    measured = []
-    passed = False
-    for primary, name, pose in ((True, '평가: 카메라를 시작 쪽에 미리 둠', pre_acquired),
-                                (False, '참고: 정면 시작', zero)):
-        trace, missed, losses, first = _simulate(model, track['Planner'](), bearing, 8/speed,
-                                                 c['camera_latency_s'], c['camera_hfov_deg'], pose)
-        inside = [item for item in trace if abs(item[1]) <= 80.]
-        ratio = sum(abs(target - neck - eye) <= c['gaze_ok_deg']
-                    for _, target, neck, eye, _ in inside) / len(inside)
-        if primary:
-            passed = ratio >= c['min_ok_ratio'] and not missed
-        acquired = f'첫 포착 {first:.2f}초' if first is not None else '포착 없음'
-        measured.append(f'{name} {ratio:.1%}, {acquired}, 화각 이탈 프레임 {missed}개, 재이탈 {losses}회')
-    start_bearing = abs(bearing(0.))
-    context = (f'{distance:g} m 앞을 {speed:g} m/s로 좌우 4 m씩 이동, ±80° 구간 기준. '
-               f'30 fps, 지연 {c["camera_latency_s"]:g}초, 수평 화각 {c["camera_hfov_deg"]:g}°를 '
-               f'가정한 속도 제한 모델. 목표 갱신 {model.goal_period*1000:g} ms, '
-               f'위치 보고 {model.report_period*1000:g} ms. 정면 시작에서는 대상의 첫 방향 {start_bearing:.1f}°가 '
-               f'카메라 반화각 {c["camera_hfov_deg"]/2:g}°보다 커 최초 검출까지 정지. '
-               '실제 영상 검출과 모터 하중은 실물에서 확인.')
-    return ('PASS' if passed else 'FAIL', ' / '.join(measured) + '. ' + context)
+    if model.exhibit_neck_speed is None or model.return_neck_speed is None:
+        return 'UNVERIFIED', '전시 추적과 복귀에 각각 적용되는 펌웨어 속도 설정이 필요합니다.'
+    walk = [_walk_case(model, track, c, direction) for direction in (1, -1)]
+    losses = [_loss_case(model, track, c, yaw, pitch) for yaw, pitch in ((-35., -10.), (35., 8.))]
+    measured = [case[1] for case in (*walk, *losses)]
+    context = (f'정면 대기, 거리 {c["distance_m"]:g} m, 보행 {c["walk_speed_mps"]:g} m/s, '
+               f'±{c["scoring_range_deg"]:g}°, 영상 {CAMERA_FPS} fps·지연 {c["camera_latency_s"]:g}초·'
+               f'수평 화각 {c["camera_hfov_deg"]:g}°를 가정한 속도 제한 모델. 포착은 첫 가시 프레임의 '
+               f'촬영 시각부터 시선 {c["gaze_ok_deg"]:g}° 이내까지 잽니다. 포착 후 반대쪽 '
+               f'{c["scoring_range_deg"]:g}°까지 미검출 중에도 시선 오차를 계산합니다. '
+               '소실 대기는 첫 미검출 도착부터 실제 목 이동까지 잽니다. '
+               '목 속도는 좌우·상하 각속도의 합성값이고, 중립 허용은 엔코더 한 틱입니다.')
+    return ('PASS' if all(case[0] for case in (*walk, *losses)) else 'FAIL', ' / '.join(measured) + '. ' + context)
 
 
 def _turn(model, track, c, camera):
+    if model.exhibit_neck_speed is None or model.return_neck_speed is None:
+        return 'UNVERIFIED', '전시 추적에 적용되는 펌웨어 속도 설정이 필요합니다.'
     distance = abs(c['target_deg'])
     measured = []
     passed = True
     for direction in (-1, 1):
         target = direction * distance
-        trace, missed, _, _ = _simulate(model, track['Planner'](), lambda _: target, 4.,
-                                         camera['camera_latency_s'], camera['camera_hfov_deg'], track['ZERO'])
-        over = max(0., max(direction*neck for _, _, neck, _, _ in trace) - distance)
-        _, _, neck, eye, _ = trace[-1]
-        error = abs(target - neck - eye)
-        passed &= over <= c['max_neck_overshoot_deg'] and error <= c['max_final_gaze_err_deg']
+        run = _simulate(model, track['Planner'](exhibit=True), lambda _: target, 4.,
+                        camera['camera_latency_s'], camera['camera_hfov_deg'], track['ZERO'])
+        over = max(0., max(direction * pose[3] for _, pose in run.poses) - distance)
+        final = run.poses[-1][1]
+        error = abs(target - final[3] - final[0])
+        missed = sum(not frame.detected for frame in run.frames)
+        tracked = any(frame.phase == 'TRACK' and frame.detected for frame in run.frames)
+        passed &= tracked and over <= c['max_neck_overshoot_deg'] and error <= c['max_final_gaze_err_deg']
         measured.append(f'{target:+g}° 목 넘침 {over:.2f}°, 4초 모형 수평 시선 오차 {error:.2f}°, 화각 이탈 {missed}프레임')
     return ('PASS' if passed else 'FAIL', ' / '.join(measured) + '. 속도 제한 모델에서의 결과.')
 
@@ -183,9 +286,11 @@ def _look_up(root, track, c):
             f'받침 {base:g}°의 실제 고정·안정성과 시선은 P05에서 확인.')
 
 
-def _first_blink(trace):
+def _blink_cycles(poses):
     started = shut = left_shut = None
-    for (t0, _, _, _, a0), (t1, _, _, _, a1) in zip(trace, trace[1:]):
+    cycles = []
+    for (t0, pose0), (t1, pose1) in zip(poses, poses[1:]):
+        a0, a1 = pose0[2], pose1[2]
         if a0 == a1:
             continue
         if started is None and a0 <= BLINK_OPEN_DEG < a1:
@@ -198,16 +303,15 @@ def _first_blink(trace):
             if shut is None or left_shut is None:
                 return None
             finished = t0 + (t1-t0) * (BLINK_OPEN_DEG-a0)/(a1-a0)
-            return finished-started, shut-started, finished-left_shut
-    return None
+            cycles.append((started, finished-started, shut-started, finished-left_shut))
+            started = shut = left_shut = None
+    return cycles
 
 
 def _blink(model, track, c):
-    planner = track['Planner']()
-    planner.step((0., 0.), track['ZERO'], -1.)
-    planner.next_blink = 0.
-    trace, _, _, _ = _simulate(model, planner, lambda _: 0., 3., 0., 106., track['ZERO'], blink=True)
-    cycle = _first_blink(trace)
+    if model.exhibit_neck_speed is None or model.return_neck_speed is None:
+        return 'UNVERIFIED', '전시 추적에 적용되는 펌웨어 속도 설정이 필요합니다.'
+    duration = 6 * c['max_interval_s'] + c['max_total_s']
     assumed_encoder_span_ticks = 1024
     shaft_span_deg = assumed_encoder_span_ticks * 360 / 4096
     shaft_travel_deg = (BLINK_SHUT_DEG - BLINK_OPEN_DEG) * shaft_span_deg / track['LIMITS'][2][1]
@@ -215,13 +319,27 @@ def _blink(model, track, c):
     context = (f'논리 90°에 엔코더 {assumed_encoder_span_ticks}틱(모터축 {shaft_span_deg:g}°)을 대응시킨 '
                f'명목 모델. 축 속도 상한 {model.speed[2]:.2f}°/s에서 5°↔85° 왕복 하한 {bound:.3f}초 '
                '(가속·정지 시간 제외). 실제 보정 폭, 눈꺼풀 닫힘과 링크 진동은 P03에서 확인.')
-    if cycle is None:
-        return 'FAIL', '모델의 첫 깜빡임이 5°에서 85°를 지나 다시 5°까지 돌아오지 않음. ' + context
-    total, close, reopen = cycle
-    passed = (c['min_total_s'] <= total <= c['max_total_s'] and bound <= c['max_total_s']
-              and (not c['close_not_slower_than_open'] or close <= reopen))
+    cycles, intervals = [], []
+    irregular = True
+    for seed in (0, 22, 42):
+        planner = track['Planner'](exhibit=True, rng=random.Random(seed))
+        run = _simulate(model, planner, lambda _: 0., duration, 0., 106., track['ZERO'], blink=True)
+        completed = _blink_cycles(run.poses)
+        if not completed or len(completed) < 4:
+            return 'FAIL', f'난수 시드 {seed}에서 완전한 깜빡임이 4회 미만입니다. ' + context
+        gaps = [b[0] - a[0] for a, b in zip(completed, completed[1:])]
+        irregular &= max(gaps) - min(gaps) > 2 * model.goal_period
+        cycles.extend(completed)
+        intervals.extend(gaps)
+    durations = [cycle[1] for cycle in cycles]
+    delta = max(close - reopen for _, _, close, reopen in cycles)
+    passed = (all(c['min_total_s'] <= total <= c['max_total_s'] for total in durations)
+              and bound <= c['max_total_s'] and irregular
+              and all(c['min_interval_s'] <= gap <= c['max_interval_s'] for gap in intervals))
     return ('PASS' if passed else 'FAIL',
-            f'첫 깜빡임 모델 전체 {total:.3f}초, 닫기 {close:.3f}초, 뜨기 {reopen:.3f}초. ' + context)
+            f'난수 시드 3개에서 깜빡임 {len(cycles)}회, 길이 {min(durations):.3f}~{max(durations):.3f}초, '
+            f'시작 간격 {min(intervals):.2f}~{max(intervals):.2f}초, 관측된 간격 {"변동" if irregular else "고정"}, '
+            f'닫기−열기 시간 차 최대 {delta:+.3f}초. ' + context)
 
 
 def check_scenes(root: Path, criteria: dict) -> dict[str, tuple[str, str]]:

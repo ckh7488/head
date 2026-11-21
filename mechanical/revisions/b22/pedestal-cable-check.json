@@ -1,0 +1,144 @@
+{
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "nominal_geometry_status": "PASS",
+  "scope": "Fixed neutral body geometry and a stationary equivalent for the exterior W31 fastening point. The existing internal wire analysis uses the fixed base-entry station. The strap is a deliberate contact with the jacket.",
+  "coordinates": "Released B22 CAD in millimetres. +Y points to the rear, +Z points up.",
+  "body_base_floor_z_mm": -83.0,
+  "matching_roots_sha256": {
+    "Part000": "c99ca70f0d7e94ef49ad213e3084c3b9dae329662a401c0f2906cd1d957455a8",
+    "RearLead3_1": "3eba7e7842e73e05c1eddca89651d5bdac47c3438f912e872e7f550d2ca2f706",
+    "CameraUSB": "a25f2ccceac430b2e9760e4aa0f50b1bdca8f7bd1681284d13eab57cd23c72fb"
+  },
+  "checked_body_meshes": 207,
+  "empty_export_actors": [
+    "HarnessWire",
+    "HarnessWire001",
+    "HarnessWire002",
+    "HarnessWire003",
+    "HarnessWire004",
+    "HarnessWire005",
+    "HarnessWire006",
+    "HarnessWire007",
+    "HarnessWire008",
+    "HarnessWire009",
+    "HarnessWire010",
+    "HarnessWire011",
+    "HarnessWire012",
+    "HarnessWire013",
+    "HarnessWire014",
+    "HarnessWire015",
+    "HarnessWire016",
+    "HarnessWire017",
+    "HarnessWire018",
+    "HarnessWire019"
+  ],
+  "fixture_aabb_mm": {
+    "stationary_angle_upright": [
+      [
+        46.5,
+        147.5,
+        -83.0
+      ],
+      [
+        66.5,
+        150.0,
+        -62.5
+      ]
+    ],
+    "stationary_angle_foot": [
+      [
+        46.5,
+        122.5,
+        -83.0
+      ],
+      [
+        66.5,
+        150.0,
+        -80.5
+      ]
+    ],
+    "J15_adhesive_tie_mount": [
+      [
+        49.5,
+        150.0,
+        -76.5
+      ],
+      [
+        63.5,
+        153.0,
+        -62.5
+      ]
+    ]
+  },
+  "fixture_clearance": {
+    "stationary_angle_upright": {
+      "nearest_actor": "RearLead3_1",
+      "clearances_mm": {
+        "CameraUSB": 8.045029,
+        "ControlUSB": 19.46651,
+        "RearLead3_1": 3.000225,
+        "RearLead4_1": 10.600122
+      },
+      "broad_phase_excluded_parts": 203,
+      "excluded_clearance_lower_bound_mm": 22.5
+    },
+    "stationary_angle_foot": {
+      "nearest_actor": "CableSaddle",
+      "clearances_mm": {
+        "CableSaddle": 10.89082,
+        "RearLead3_1": 16.125418
+      },
+      "broad_phase_excluded_parts": 205,
+      "excluded_clearance_lower_bound_mm": 20.477364148599975
+    },
+    "J15_adhesive_tie_mount": {
+      "nearest_actor": "RearLead3_1",
+      "clearances_mm": {
+        "CameraUSB": 5.071735,
+        "ControlUSB": 17.545513,
+        "RearLead3_1": 3.000225,
+        "RearLead4_1": 13.412094
+      },
+      "broad_phase_excluded_parts": 203,
+      "excluded_clearance_lower_bound_mm": 25.0
+    }
+  },
+  "wire_stations": {
+    "base_entry_mm": [
+      54.983866933158886,
+      75.12,
+      -66.9178877654729
+    ],
+    "installed_J15_pad_contact_face_center_mm": [
+      56.5,
+      150.0,
+      -69.5
+    ],
+    "measured_W31_center_at_y154_mm": [
+      56.50045,
+      154.0,
+      -57.5
+    ],
+    "J16_jacket_grip_Y_mm": [
+      152.5,
+      155.5
+    ],
+    "USB_A_overmold_start_Y_mm": 158.0,
+    "internal_run_mm": 337.29,
+    "external_arc_to_clip_center_mm": 81.653,
+    "external_arc_to_USB_A_overmold_mm": 85.653,
+    "nominal_external_bend_radius_mm": 14.0,
+    "internal_rotor_cable_slide_mm_approx": 51.0
+  },
+  "P02": {
+    "status": "UNVERIFIED",
+    "required_pull_force_N": 10.0,
+    "required_pull_duration_s": 30.0,
+    "pull_directions_deg": [
+      0.0,
+      45.0
+    ],
+    "max_jacket_slip_mm": 0.5,
+    "inspection": "Use the actual mounted angle, adhesive pad, reusable tie and supplied cable. Mark the jacket at the body-entry and grip stations, measure maximum slip and check the jacket for pressure marks or damage. Verify the required internal slip with the two end poses."
+  }
+}

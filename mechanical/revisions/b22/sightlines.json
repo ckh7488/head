@@ -69,20 +69,18 @@
   "coordinate_system": "Neutral native CAD, millimeters. Forward is -Y, up is +Z. Negative X rotations lift the neck and eyes.",
   "extraction": "Pupil centers come from the volume centroids of Part031 and Part035 in the FreeCAD physics export. Their neutral directions point from the globe pivots to those centers. The camera origin is the forward face of the concentric Part068 lens envelope.",
   "s02_ray_screen": {
-    "base_up_deg": 10.0,
+    "base_up_deg": 0.0,
+    "installed_neutral_eye_height_m": 1.4,
     "neck_up_deg": 15.0,
     "eye_up_deg": 8.0,
     "eye_datum_to_target_mm": [
       0.0,
       -1000.0,
-      600.0
+      200.0
     ],
-    "scene_camera_off_axis_deg": 7.086791492619245,
-    "light_ray_through_unbent_front_panel_mm": [
-      0.0,
-      -147.0,
-      138.15845293
-    ],
+    "scene_camera_off_axis_deg": 2.6567029325966227,
+    "max_pupil_elevation_deg": 17.667196325390147,
+    "required_pupil_elevation_deg": 10.631012103793669,
     "opaque_parts_tested": [
       "Part066",
       "Part073",

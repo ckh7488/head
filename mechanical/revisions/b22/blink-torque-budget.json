@@ -1,0 +1,368 @@
+{
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "sliced_grams_sha256": "b12723dcceb09029328068df052e02d11785a1f780f8ff2ae8574b59fd472d60",
+  "original_blink_measurements_sha256": "4a07bffa83d0b9f60a9b3c8055e5710dbfb47972fa4f73c06a171766ed95613a",
+  "firmware_specific_blink_register_values": {
+    "pwm": 200,
+    "profile_velocity": 160,
+    "profile_acceleration": 62,
+    "neck_velocity": [
+      29,
+      19
+    ],
+    "neck_acceleration": [
+      12,
+      10
+    ]
+  },
+  "published_motor": {
+    "model": "ROBOTIS XL330-M288-T, ID3",
+    "voltage_V": 5.0,
+    "stall_torque_Nm": 0.52,
+    "stall_current_A": 1.47,
+    "no_load_speed_rpm": 103.0,
+    "source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#specifications"
+  },
+  "geometry": {
+    "motion": "Rigid 1:1 paired parallelograms, opposing lid rods treated as translations, no binding or direct contact.",
+    "nominal_stroke_deg": [
+      0.0,
+      90.0
+    ],
+    "geometry_sampled_through_deg": 91.0,
+    "drive_effective_arm_mm": 3.222818288270707,
+    "lid_effective_arm_mm": 6.0602320827567855,
+    "bounds_independent_of_position_in_full_stroke": true
+  },
+  "mass": {
+    "assemblies": [
+      {
+        "id": "Part047",
+        "motion": "blink_motor_horn",
+        "original_mass_g": 0.8024100384130977,
+        "blink_radius_bound_mm": 11.948918916931527,
+        "head_radius_bound_mm": 92.49847493155995,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "2c4682ba1a72ce7e3ab5998885c3e57636cf3ffa4f07724680d8a6b6b01f4c75"
+      },
+      {
+        "id": "Part048",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 10.94191123329507,
+        "blink_radius_bound_mm": 2.20000684037799,
+        "head_radius_bound_mm": 79.72237605339465,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "94de0419b04ef71fec3a58408193cfbcae1e5e75882a1927cf4178d18770eb30"
+      },
+      {
+        "id": "Part053",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.8088437556455188,
+        "blink_radius_bound_mm": 14.548992276466175,
+        "head_radius_bound_mm": 111.35427772861836,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "7917c923de4332c563d7a763491cf60b8a68438fc7e2d333cf590e19905ddaca"
+      },
+      {
+        "id": "Part054",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.7560638819148543,
+        "blink_radius_bound_mm": 12.30477357661342,
+        "head_radius_bound_mm": 84.8460624273034,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "27aa87e3d65a8e59f4852292fe679fcecb764c9f5c329e564fc2fac494c5b91f"
+      },
+      {
+        "id": "Part055",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.800116885006031,
+        "blink_radius_bound_mm": 14.548992276466175,
+        "head_radius_bound_mm": 111.52998845314339,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "7fb27e134aa0d5ac5d68c30a90c856c432ccce59f46cc13c0f997aba63391ad8"
+      },
+      {
+        "id": "Part056",
+        "motion": "blink_drive_link",
+        "original_mass_g": 0.48518776419912285,
+        "blink_radius_bound_mm": 8.45,
+        "head_radius_bound_mm": 72.75198929431532,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "eaafbdff312a183717bdb8a3869f7eec8f581f825c8f2747fb40f1899058492e"
+      },
+      {
+        "id": "Part057",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.7698549754074833,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 87.71546913315328,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "5ce186c9f655cb5745e68f54a726d00005d3a3f74343f4cc0772d88fee4c1405"
+      },
+      {
+        "id": "Part060",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.7726750279379836,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 87.71546913315328,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "24f87077242c1c3b2799ae14cb88438c5950477ccad2b8f5b6fdb626f7b5ac89"
+      },
+      {
+        "id": "Part078",
+        "motion": "lid1",
+        "original_mass_g": 2.2143852823754746,
+        "blink_radius_bound_mm": 16.800007024139987,
+        "head_radius_bound_mm": 102.0749207824521,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "15e4a8daf9a3d4ac6e0256ba5fa69f5b62c5d07c8fafc362c448feb0f96d9715"
+      },
+      {
+        "id": "Part079",
+        "motion": "lid2",
+        "original_mass_g": 2.2143823575527146,
+        "blink_radius_bound_mm": 16.800007024139987,
+        "head_radius_bound_mm": 102.0749207824521,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "719a23c7c9e57934b1fdcb7a8d26043bd9bd2fd4343139d01d20dc5bd763b130"
+      },
+      {
+        "id": "BlinkCollarLeft",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.9953037927858618,
+        "blink_radius_bound_mm": 3.7500067143509628,
+        "head_radius_bound_mm": 66.87535028067455,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "eb8683ea2ce3e61458f3aa6d50b6eb18ba37dce3ac41184e76bf963242f77ddd"
+      },
+      {
+        "id": "BlinkCollarRight",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.21397424508729707,
+        "blink_radius_bound_mm": 3.7500067143509628,
+        "head_radius_bound_mm": 64.20870696450086,
+        "mass_source": "P2S extrusion",
+        "mesh_sha256": "e64bab09adbe3c6f347c9cee646a2ba5b8427536fa87628d2acef18c4c3e6fd5"
+      },
+      {
+        "id": "BlinkHornScrew0",
+        "motion": "blink_motor_horn",
+        "original_mass_g": 0.3295795844035659,
+        "blink_radius_bound_mm": 8.12954686805896,
+        "head_radius_bound_mm": 83.80546105194016,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "2afe9920173d0a62caa35487347c90064214d9a61b38cc3d1b1d9db3bea6509b"
+      },
+      {
+        "id": "BlinkHornScrew1",
+        "motion": "blink_motor_horn",
+        "original_mass_g": 0.3295795844035659,
+        "blink_radius_bound_mm": 8.129931551314042,
+        "head_radius_bound_mm": 80.51492074352366,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "4235de6315169d09f866eba75ab199c7932c00651049077acbd40e40880c573c"
+      },
+      {
+        "id": "BlinkPivotServo",
+        "motion": "blink_drive_link",
+        "original_mass_g": 0.14702653618800257,
+        "blink_radius_bound_mm": 8.45,
+        "head_radius_bound_mm": 70.68132090517398,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "34ce91ae0df6d979862db508141dc06b58af9197e4719aa0eb0c534e2e567d66"
+      },
+      {
+        "id": "BlinkPivotServoRetainer",
+        "motion": "blink_drive_link",
+        "original_mass_g": 0.16540485321150242,
+        "blink_radius_bound_mm": 8.45,
+        "head_radius_bound_mm": 71.77636789113646,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "47a83f670049d69ab77d94bda3f57057ddd1e0a04254719709db66c585ee3a71"
+      },
+      {
+        "id": "BlinkPivotDrive",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.14702653618800254,
+        "blink_radius_bound_mm": 9.449722893950925,
+        "head_radius_bound_mm": 61.28337637183871,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "6a818e12a916c35445f3ba39dde57a30675df1f21cf364ebe70650bfa167b4d5"
+      },
+      {
+        "id": "BlinkPivotDriveRetainer",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 0.16540485321150242,
+        "blink_radius_bound_mm": 9.949602704835094,
+        "head_radius_bound_mm": 63.60648631894615,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "bbcf517ae731de685797466669222d9287fc5be66213f7e32a6f44d4181e3304"
+      },
+      {
+        "id": "BlinkPivotUpperL",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.14702653618800254,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 89.42232013883924,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "a29863b222b5d0f61d8d076ff76091bc0fca4b4db7ebd404618c6e8fb7f3f337"
+      },
+      {
+        "id": "BlinkPivotUpperLRetainer",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.16540485321150242,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 84.84026382950336,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "350cd799917e790cad3f3b1a8bc63db7592c1cbca8f2d4a96718de548007759b"
+      },
+      {
+        "id": "BlinkPivotUpperR",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.14702653618800254,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 89.42236051567227,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "169c014d4c6de4e61240215676c6df030502055b593d1b12fd52e0ce74a8b8ee"
+      },
+      {
+        "id": "BlinkPivotUpperRRetainer",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.16540485321150242,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 84.8403334133116,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "b529d1550be4d23e29ee3aa18e304d40137009ecda8a4e8a624ea69df3b5dabb"
+      },
+      {
+        "id": "BlinkPivotLowerL",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.14702653618800246,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 87.07804064571278,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "00524be7369a1b63ba59851f8a15546f0bc1b22e9619fef24cff3d1bd1a505f0"
+      },
+      {
+        "id": "BlinkPivotLowerLRetainer",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.16540485321150258,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 82.27782928276065,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "3a69940cb717e2f7e03ee36a34ed33b99c0d2ebe48b66661bc1027628b5ad2b6"
+      },
+      {
+        "id": "BlinkPivotLowerR",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.14702653618800246,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 87.07822673022778,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "ee5a40d400d5ef39c6dd1c1d5b09bca5f821bd02d7aaa56b9274fe35a2c12fb2"
+      },
+      {
+        "id": "BlinkPivotLowerRRetainer",
+        "motion": "blink_lid_link",
+        "original_mass_g": 0.16540485321150258,
+        "blink_radius_bound_mm": 11.7,
+        "head_radius_bound_mm": 82.27812954766279,
+        "mass_source": "CAD volume × 7.8 g/cm³",
+        "mesh_sha256": "763c5411c1fe3654319f2bca35f391a3f34ab6d3391d646f31006d82dcda0a71"
+      },
+      {
+        "id": "Part045 XL330 vendor moving mass upper allowance",
+        "motion": "blink_motor_horn",
+        "original_mass_g": 18.0,
+        "blink_radius_bound_mm": 26.300766272276373,
+        "head_radius_bound_mm": 141.71051087316064,
+        "mass_source": "Entire ROBOTIS XL330 including stationary housing assumed moving",
+        "mesh_sha256": "ebd611c608d7cbbe911a7d59c8354535553a546564fab436c54d6b4eb89b0f81"
+      },
+      {
+        "id": "crankBolt0 plus crankNut0",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 1.5992443907509484,
+        "blink_radius_bound_mm": 14.350000000000012,
+        "head_radius_bound_mm": 111.84929801855282,
+        "mass_source": "Full solid screw and nut cylinder envelopes from hardware.json"
+      },
+      {
+        "id": "crankBolt1 plus crankNut1",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 1.5992443907509484,
+        "blink_radius_bound_mm": 14.350000000000012,
+        "head_radius_bound_mm": 91.2706023856425,
+        "mass_source": "Full solid screw and nut cylinder envelopes from hardware.json"
+      },
+      {
+        "id": "crankBolt2 plus crankNut2",
+        "motion": "blink_shaft_crank",
+        "original_mass_g": 1.5992443907509484,
+        "blink_radius_bound_mm": 14.350000000000012,
+        "head_radius_bound_mm": 112.02149387269708,
+        "mass_source": "Full solid screw and nut cylinder envelopes from hardware.json"
+      }
+    ],
+    "extra_mass_multiplier": 1.1,
+    "radial_padding_mm": 0.2,
+    "total_mass_with_conservative_supplier_and_fastener_allowances_g": 51.817248908785274,
+    "equivalent_inertia_upper_kg_m2": 1.7425004859219218e-05
+  },
+  "kinematic_envelope": {
+    "blink_speed_limit_deg_s": 219.84,
+    "blink_acceleration_limit_deg_s2": 1330.3774,
+    "absolute_head_omega_upper_rad_s": 1.1510795482753002,
+    "absolute_head_alpha_upper_rad_s2": 8.556034361628605,
+    "head_includes_simultaneous_maximum_normal_yaw_and_pitch_profiles": true
+  },
+  "budget_Nm": {
+    "gravity_upper": 0.00793542829761639,
+    "blink_inertia_upper": 0.00040459930655629414,
+    "base_rotation_and_coriolis_upper": 0.0011579368584639588,
+    "friction_assumed_by_drag_multiplier": {
+      "1.0": 0.014026380694135478,
+      "2.0": 0.028052761388270956,
+      "3.0": 0.042079142082406436,
+      "4.0": 0.05610552277654191
+    },
+    "normal_required_torque_conditional_upper": 0.0375507258509076,
+    "absolute_20_percent_stall_threshold": 0.10400000000000001,
+    "largest_total_friction_consistent_with_20_percent_stall": 0.09450203553736336
+  },
+  "uncertainty": {
+    "status": "UNVERIFIED",
+    "drag_multiplier_used": 2.0,
+    "friction_measured": false,
+    "torque_bound_requires": "Total assembled breakaway and running resistance no greater than the two-times model budget (0.028052761388270956 Nm), actual axis calibration within the reviewed geometry, and no direct contact or pinch. The conditional budget does not enclose uncontrolled external contact, roughness, skew, internal servo response, or arbitrary assembled joint clamping.",
+    "p03_physical_cycles_required": 50,
+    "p03_performed": false,
+    "additional_friction_must_be_checked_at_servo_output": true
+  },
+  "exposed_touch_sensitivity_Nm": {
+    "single_lid_1N_at_ideal_tangent_upper_radius": 0.05435073287504759,
+    "both_lids_1N_each_at_ideal_tangent_upper_radius": 0.07115073989918758,
+    "not_an_exposed_pinch_safety_claim": true,
+    "assumption": "Appended ideal static tangential torque on the lid CAD radius; assumes unchanged internal drag and 1:1 links; added joint friction, clamp slip and pinch are outside this sensitivity."
+  },
+  "pwm_speed_sensitivity": {
+    "configured_duty": 0.22598870056497175,
+    "estimated_zero_speed_torque_Nm": 0.11751412429378531,
+    "estimated_no_load_speed_deg_s": 139.66101694915253,
+    "estimated_available_torque_at_peak_host_command_Nm": 0.0,
+    "estimated_speed_at_conditional_torque_deg_s": 95.03342353403542,
+    "peak_host_command_deg_s_assuming_90deg_calibration": 198.52941176470586,
+    "linear_dc_duty_and_speed_model_is_not_a_guarantee": true
+  },
+  "calculation": "For every body point use its motion-radius upper bound r and maximum distance R to the head pivot. Sum m*r*g, m*r²*blink_acceleration and m*r*((head_alpha+head_speed²)*R+2*head_speed*blink_speed*r). The last summand encloses concurrent neck rotations. Add an explicit unmeasured breakaway and viscous resistance budget. All terms are positive so unrelated maxima need not coincide.",
+  "firmware_sha256_at_extraction": "0bf529078c9d6f4bd3b8328f281baaad3db11f66f524f8798ec3126d834cfa94",
+  "firmware_applicability": "Torque screen uses only the extracted ID3/neck velocity, acceleration and ID3 PWM registers. Position PID and actual response are not identified by this calculation.",
+  "references": [
+    "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+    "mechanical/revisions/b22/sliced-grams.json",
+    "mechanical/revisions/b22/blink-load.json",
+    "mechanical/revisions/b22/hardware.json",
+    "mechanical/physics/blink.py",
+    "control/openrb/R5B1/R5B1.ino"
+  ]
+}

@@ -18,6 +18,9 @@ constexpr float highDeg[count] = {20, 8, 90, 60, neckPitchMaxDegrees, jawMaxDegr
 constexpr uint16_t pwm[count] = {180, 180, 200, 270, 300, 160};
 constexpr uint16_t velocity[count] = {75, 60, 160, 29, 19, 35};
 constexpr uint16_t acceleration[count] = {20, 16, 62, 12, 10, 10};
+constexpr uint16_t exhibitYawVelocity = 29;
+constexpr uint16_t exhibitPitchVelocity = 15;
+constexpr uint16_t returnNeckVelocity = 7;
 static_assert(sizeof(calibration)/sizeof(calibration[0]) == count, "One calibration row per axis");
 constexpr uint32_t busBaud = 57600;
 constexpr uint32_t busTimeoutMs = 14;
@@ -32,6 +35,7 @@ constexpr uint8_t eyeCalibrationTicks[] = {4096u*20u/360u-positionTolerance,
 constexpr uint16_t neckYawCalibrationTicks = 4096u*60u/360u-positionTolerance;
 constexpr uint8_t hardwareAlert = 0x80;
 constexpr uint8_t neckYawAxis = 3, neckPitchAxis = 4;
+constexpr uint8_t trackerMask = (1u<<trackerCount)-1;
 constexpr uint8_t neckNeutralTolerance = 4096u*2u/360u;  // Direct drive, up to 2 degrees.
 constexpr uint8_t jawDemoMask = (1u<<neckYawAxis)|(1u<<neckPitchAxis)|(1u<<trackerCount);
 constexpr uint32_t jawDemoCenteringMs = 2*reportMs;
@@ -52,6 +56,7 @@ constexpr Register goalPwm{100, 2}, profileAcceleration{108, 4}, profileVelocity
 constexpr Register goalPosition{116, 4}, presentPosition{132, 4};
 
 enum class Transfer { ok, bus, servo };
+enum class NeckProfile { normal, exhibit, returning };
 
 struct AxisStatus {
   int32_t model = -1;
@@ -107,6 +112,8 @@ bool faulted = false;
 bool moving = false;
 bool pending = false;
 bool jawDemoActive = false;
+NeckProfile appliedProfile = NeckProfile::normal;
+NeckProfile queuedProfile = NeckProfile::normal;
 uint32_t lastCommand = 0;
 uint32_t lastGoal = 0;
 uint32_t lastReport = 0;
@@ -254,6 +261,7 @@ bool readyToArm(uint8_t i, const AxisStatus& status) {
 void cancelMotion() {
   pending=false;
   moving=false;
+  queuedProfile=appliedProfile;
 }
 
 bool releaseAxis(uint8_t i) {
@@ -395,9 +403,39 @@ bool verifyDemoNeckAxis(uint8_t i) {
   return true;
 }
 
+uint16_t neckVelocity(uint8_t axis, NeckProfile profile) {
+  if (profile==NeckProfile::returning) return returnNeckVelocity;
+  if (profile==NeckProfile::exhibit) return axis==neckYawAxis ? exhibitYawVelocity : exhibitPitchVelocity;
+  return velocity[axis];
+}
+
+bool applyNeckProfile() {
+  for (uint8_t i=neckYawAxis;i<=neckPitchAxis;i++) {
+    const uint8_t id=i+1;
+    const uint16_t wanted=neckVelocity(i,queuedProfile);
+    int32_t confirmed=-1;
+    if ((wanted!=neckVelocity(i,appliedProfile) && writeRegister(id,profileVelocity,wanted)!=Transfer::ok) ||
+        !readNeckRegister(id,profileVelocity,confirmed) || confirmed!=wanted) {
+      stopOnFault("NECK_PROFILE",id);
+      return false;
+    }
+  }
+  appliedProfile=queuedProfile;
+  return true;
+}
+
 void emitGoals() {
+  const bool profileChanged=queuedProfile!=appliedProfile;
+  if (profileChanged) {
+    if (!applyNeckProfile()) return;
+    if (moving && static_cast<uint32_t>(millis()-lastCommand)>=timeoutMs) {
+      freeze();
+      return;
+    }
+  }
   for (uint8_t i=0;i<count;i++) {
-    if (!axisEnabled(armed,i) || targets[i]==queued[i]) continue;
+    const bool refreshNeck=profileChanged && (i==neckYawAxis || i==neckPitchAxis);
+    if (!axisEnabled(armed,i) || (targets[i]==queued[i] && !refreshNeck)) continue;
     if (jawDemoActive && i==trackerCount) {
       if (static_cast<uint32_t>(millis()-jawDemoCenteringSince)<jawDemoCenteringMs) return;
       if (!verifyDemoNeckAxis(neckYawAxis) || !verifyDemoNeckAxis(neckPitchAxis)) return;
@@ -521,6 +559,7 @@ void arm(uint8_t mask, bool startJawDemo=false) {
       }
       targets[i]=raw[i];
     }
+    appliedProfile=NeckProfile::normal;
   }
   cancelMotion();
   jawDemoActive=startJawDemo;
@@ -589,6 +628,10 @@ void command(char* text) {
     Serial.println("R5B1 1");
     return;
   }
+  if (!strcmp(text,"EXHIBIT?")) {
+    Serial.println("R5B1_EXHIBIT 1");
+    return;
+  }
   if (!strcmp(text,"HOLD")) {
     if (armed!=0 && !faulted) freeze();
     return;
@@ -639,11 +682,25 @@ void command(char* text) {
     arm(jawDemoMask,true);
     return;
   }
-  if (armed==0 || faulted || strncmp(text,"GO ",3)) return;
+  if (armed==0 || faulted) return;
+
+  NeckProfile profile=NeckProfile::normal;
+  const char* next=nullptr;
+  if (!strncmp(text,"GO ",3)) next=text+3;
+  else if (!strncmp(text,"GO_EXHIBIT ",11)) {
+    profile=NeckProfile::exhibit;
+    next=text+11;
+  } else if (!strncmp(text,"GO_RETURN ",10)) {
+    profile=NeckProfile::returning;
+    next=text+10;
+  } else return;
+  if (profile!=NeckProfile::normal && (armed!=trackerMask || jawDemoActive)) {
+    Serial.println("ERROR EXHIBIT_MASK");
+    return;
+  }
 
   float goals[count];
   uint8_t active = commandAxisCount();
-  char* next=text+3;
   for (uint8_t i=0;i<active;i++) {
     char* end=nullptr;
     goals[i]=strtof(next,&end);
@@ -666,6 +723,7 @@ void command(char* text) {
     if (!axisEnabled(armed,i)) continue;
     queued[i]=toTicks(i,goals[i]);
   }
+  queuedProfile=profile;
   lastCommand=millis();
   moving=true;
   pending=true;

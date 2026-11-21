@@ -1,0 +1,838 @@
+{
+  "status": "pass",
+  "scope": "Two service-cover trial designs, nominal CAD paths and selected P2S extrusion witnesses. Full as-built assembly, tolerance and service operation recorded separately in P08.",
+  "manifest": {
+    "reference_cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+    "review_cad_sha256": "66965a255d97a0c02502937a1f906016a23a84e6eeaa446eadb0c096892cf6bb",
+    "rear_cable": {
+      "bolt_seats_mm": [
+        [
+          -47.0,
+          121.6,
+          -52.1
+        ],
+        [
+          -28.3,
+          121.6,
+          -52.1
+        ],
+        [
+          -3.0,
+          121.6,
+          -52.1
+        ],
+        [
+          22.0,
+          121.6,
+          -52.1
+        ],
+        [
+          47.0,
+          121.6,
+          -52.1
+        ]
+      ],
+      "bolt_length_mm": 16.0,
+      "parked_bottom_z_mm": -68.3,
+      "parking_rim_z_mm": -66.9,
+      "parking_pocket_across_flats_mm": 6.22,
+      "service_orientation": "upright"
+    },
+    "bottom_board": [
+      {
+        "keeper": "ServiceHatchNutKeeperLeft",
+        "screw": "ServiceHatchNutKeeperLeftScrew",
+        "seat_mm": [
+          -41.2,
+          61.0,
+          -69.98
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      },
+      {
+        "keeper": "ServiceHatchNutKeeperRight",
+        "screw": "ServiceHatchNutKeeperRightScrew",
+        "seat_mm": [
+          41.2,
+          61.0,
+          -69.98
+        ],
+        "axis": [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      }
+    ],
+    "print_meshes_sha256": {
+      "01_base_cup-hatch-capture.stl": "5bbc82685caba169498e9fd3ec017bdd8ed1e44f90e4c642802d7e78fbd105a2",
+      "35_hatch_two_nut_keeper.stl": "99a662a0e6f54b60559f0d94b775c3d193a63dc41c2b45aea5186b3bbeb94491",
+      "40-rear-cable-guide-service.stl": "ca321d1da6d4a8a35b995bfd70b01c5286a6056b9f12096c59fbe539ccb9dac2",
+      "42-rear-cable-cover-service.stl": "b17c0d07291a84f9b920fd2dc556f253ea01dd9f5a3a2be8202d1d67d0253879"
+    }
+  },
+  "combined_native": {
+    "rear_guide_added_to_bottom_clearance_mm": 22.095474649801037,
+    "hatch_added_to_rear_guide_clearance_mm": 6.937894873961325,
+    "hatch_added_to_rear_cover_clearance_mm": 27.21949899473965,
+    "hatch_keeper_to_rear_change_clearance_mm": 38.766038511130894,
+    "review_cad_sha256": "66965a255d97a0c02502937a1f906016a23a84e6eeaa446eadb0c096892cf6bb"
+  },
+  "rear_upright": {
+    "source_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+    "candidate_sha256": "224ac7836a2230cb97a032d10a6aff6b3c7e65bcc3868aeb20e92c89229dc2ba",
+    "printed_stl_sha256": {
+      "42-rear-cable-cover-service.stl": "b17c0d07291a84f9b920fd2dc556f253ea01dd9f5a3a2be8202d1d67d0253879",
+      "40-rear-cable-guide-service.stl": "ca321d1da6d4a8a35b995bfd70b01c5286a6056b9f12096c59fbe539ccb9dac2"
+    },
+    "hardware": "ordinary DIN 934 M3 nuts, ISO 4762 M3×16 bolts",
+    "scope": "Modelled upright service. The normal path withdraws each bolt and then the open-end spanner. A manually lifted or inverted nut may leave the pocket. Free-fall friction and manufactured thread engagement remain bench checks.",
+    "retaining_rim_lift_mm": 1.3999999999999915,
+    "wrench": {
+      "AF_mm": 5.5,
+      "head_width_mm": 13.0,
+      "head_thickness_mm": 4.2,
+      "nominal_reference_seat_yz_mm": [
+        121.6,
+        -66.55
+      ],
+      "approach_from_positive_y_mm": 24.0,
+      "section_profile_xy_mm": [
+        [
+          -6.5,
+          -4.0
+        ],
+        [
+          -6.5,
+          2.1
+        ],
+        [
+          -3.0,
+          7.7
+        ],
+        [
+          -3.0,
+          56.0
+        ],
+        [
+          3.0,
+          56.0
+        ],
+        [
+          3.0,
+          7.7
+        ],
+        [
+          6.5,
+          2.1
+        ],
+        [
+          6.5,
+          -4.0
+        ],
+        [
+          2.81,
+          -4.0
+        ],
+        [
+          2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          -4.0
+        ]
+      ],
+      "approach_unit_vector": [
+        0,
+        -1,
+        0
+      ],
+      "simultaneous_driver_axis": [
+        0,
+        0,
+        -1
+      ]
+    },
+    "nominal_spanner_under_floor_reserve_mm": 0.3500000000000085,
+    "added_guide_insertion_new_body_contacts": {},
+    "ports": [
+      {
+        "x_mm": -47.0,
+        "wrench_clearance_and_nearest_part": [
+          0.3499999999999517,
+          "guide"
+        ],
+        "open_end_wrench_overlap_mm3": {
+          "guide": 0.0,
+          "HarnessWire016": 0.0
+        },
+        "key_overlap_mm3": {
+          "cover": 0.0
+        },
+        "simultaneous_key_wrench_overlap_mm3": 0.0,
+        "parked_nut_first_rejected_horizontal_displacement_mm": {
+          "0": 0.5,
+          "45": 0.55,
+          "90": 0.6,
+          "135": 0.55,
+          "180": 0.5,
+          "225": 0.55,
+          "270": 0.6,
+          "315": 0.55
+        },
+        "floor_overlap_if_nut_forced_down_point_one_mm3": 1.31177243348949,
+        "low_nut_bolt_nominal_initial_engagement_mm": 1.9500000000000028
+      },
+      {
+        "x_mm": -28.3,
+        "wrench_clearance_and_nearest_part": [
+          0.3499999999999517,
+          "guide"
+        ],
+        "open_end_wrench_overlap_mm3": {
+          "guide": 0.0,
+          "HarnessWire016": 0.0
+        },
+        "key_overlap_mm3": {
+          "cover": 0.0
+        },
+        "simultaneous_key_wrench_overlap_mm3": 0.0,
+        "parked_nut_first_rejected_horizontal_displacement_mm": {
+          "0": 0.5,
+          "45": 0.55,
+          "90": 0.6,
+          "135": 0.55,
+          "180": 0.5,
+          "225": 0.55,
+          "270": 0.6,
+          "315": 0.55
+        },
+        "floor_overlap_if_nut_forced_down_point_one_mm3": 1.31177243348949,
+        "low_nut_bolt_nominal_initial_engagement_mm": 1.9500000000000028
+      },
+      {
+        "x_mm": -3.0,
+        "wrench_clearance_and_nearest_part": [
+          0.3499999999999517,
+          "guide"
+        ],
+        "open_end_wrench_overlap_mm3": {
+          "guide": 0.0
+        },
+        "key_overlap_mm3": {
+          "cover": 0.0
+        },
+        "simultaneous_key_wrench_overlap_mm3": 0.0,
+        "parked_nut_first_rejected_horizontal_displacement_mm": {
+          "0": 0.5,
+          "45": 0.55,
+          "90": 0.6,
+          "135": 0.55,
+          "180": 0.5,
+          "225": 0.55,
+          "270": 0.6,
+          "315": 0.55
+        },
+        "floor_overlap_if_nut_forced_down_point_one_mm3": 1.3117724334898129,
+        "low_nut_bolt_nominal_initial_engagement_mm": 1.9500000000000028
+      },
+      {
+        "x_mm": 22.0,
+        "wrench_clearance_and_nearest_part": [
+          0.3499999999999517,
+          "guide"
+        ],
+        "open_end_wrench_overlap_mm3": {
+          "guide": 0.0
+        },
+        "key_overlap_mm3": {
+          "cover": 0.0
+        },
+        "simultaneous_key_wrench_overlap_mm3": 0.0,
+        "parked_nut_first_rejected_horizontal_displacement_mm": {
+          "0": 0.5,
+          "45": 0.55,
+          "90": 0.6,
+          "135": 0.55,
+          "180": 0.5,
+          "225": 0.55,
+          "270": 0.6,
+          "315": 0.55
+        },
+        "floor_overlap_if_nut_forced_down_point_one_mm3": 1.3117724334894905,
+        "low_nut_bolt_nominal_initial_engagement_mm": 1.9500000000000028
+      },
+      {
+        "x_mm": 47.0,
+        "wrench_clearance_and_nearest_part": [
+          0.3499999999999517,
+          "guide"
+        ],
+        "open_end_wrench_overlap_mm3": {
+          "guide": 0.0,
+          "RearLead3_1": 0.0
+        },
+        "key_overlap_mm3": {
+          "cover": 0.0
+        },
+        "simultaneous_key_wrench_overlap_mm3": 0.0,
+        "parked_nut_first_rejected_horizontal_displacement_mm": {
+          "0": 0.5,
+          "45": 0.55,
+          "90": 0.6,
+          "135": 0.55,
+          "180": 0.5,
+          "225": 0.55,
+          "270": 0.6,
+          "315": 0.55
+        },
+        "floor_overlap_if_nut_forced_down_point_one_mm3": 1.3117724334894902,
+        "low_nut_bolt_nominal_initial_engagement_mm": 1.9500000000000028
+      }
+    ]
+  },
+  "rear_extrusion": {
+    "countersink_0": {
+      "model": 0,
+      "support": 1002,
+      "deepest_mm": 0.0
+    },
+    "countersink_1": {
+      "model": 0,
+      "support": 994,
+      "deepest_mm": 0.0
+    },
+    "countersink_2": {
+      "model": 0,
+      "support": 943,
+      "deepest_mm": 0.0
+    },
+    "countersink_3": {
+      "model": 0,
+      "support": 993,
+      "deepest_mm": 0.0
+    },
+    "countersink_4": {
+      "model": 0,
+      "support": 1011,
+      "deepest_mm": 0.0
+    },
+    "park_nut_0": {
+      "model": 0,
+      "support": 240,
+      "deepest_mm": 0.0
+    },
+    "park_nut_1": {
+      "model": 0,
+      "support": 232,
+      "deepest_mm": 0.0
+    },
+    "park_nut_2": {
+      "model": 0,
+      "support": 231,
+      "deepest_mm": 0.0
+    },
+    "park_nut_3": {
+      "model": 0,
+      "support": 226,
+      "deepest_mm": 0.0
+    },
+    "park_nut_4": {
+      "model": 0,
+      "support": 229,
+      "deepest_mm": 0.0
+    },
+    "underneath_access_0": {
+      "model": 0,
+      "support": 241,
+      "deepest_mm": 0.0
+    },
+    "underneath_access_1": {
+      "model": 0,
+      "support": 238,
+      "deepest_mm": 0.0
+    },
+    "underneath_access_2": {
+      "model": 0,
+      "support": 237,
+      "deepest_mm": 0.0
+    },
+    "underneath_access_3": {
+      "model": 0,
+      "support": 239,
+      "deepest_mm": 0.0
+    },
+    "underneath_access_4": {
+      "model": 0,
+      "support": 239,
+      "deepest_mm": 0.0
+    },
+    "wrench_0": {
+      "model": 0,
+      "support": 2872,
+      "deepest_mm": 0.0
+    },
+    "wrench_1": {
+      "model": 0,
+      "support": 3408,
+      "deepest_mm": 0.0
+    },
+    "wrench_2": {
+      "model": 0,
+      "support": 2941,
+      "deepest_mm": 0.0
+    },
+    "wrench_3": {
+      "model": 0,
+      "support": 2887,
+      "deepest_mm": 0.0
+    },
+    "wrench_4": {
+      "model": 0,
+      "support": 2431,
+      "deepest_mm": 0.0
+    }
+  },
+  "bottom_native": {
+    "reference_cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+    "candidate_cad_sha256": "16f116d7e2e4c100b041561a25050000d519f26f7f62c9fd151d61a7f6b517f7",
+    "nut_float_mm": 0.39999999999999725,
+    "minimum_nominal_cage_radial_wall_mm": 1.7013684387001704,
+    "caps": [
+      {
+        "id": "ServiceHatchNutKeeperLeft",
+        "top_keeper_insertion_overlap_mm3": 0.0,
+        "top_screw_insertion_overlap_mm3": 0.0,
+        "top_2p5_hex_driver_swept_overlap_mm3": 0.0
+      },
+      {
+        "id": "ServiceHatchNutKeeperRight",
+        "top_keeper_insertion_overlap_mm3": 0.0,
+        "top_screw_insertion_overlap_mm3": 0.0,
+        "top_2p5_hex_driver_swept_overlap_mm3": 0.0
+      }
+    ],
+    "cages": [
+      {
+        "nut": "hatchNut0",
+        "seat_mm": [
+          -41.2,
+          51.0,
+          -74.78
+        ],
+        "top_insertion_swept_overlaps_mm3": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_tolerance_swept_overlap_mm3": 0.0,
+        "external_hex_overlap_mm3": 0.0,
+        "external_bolt_overlap_mm3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cage_wall_missing_volume_mm3": 0.0,
+        "roof_annulus_missing_volume_mm3": 0.0,
+        "negative_Z_escape_shoulder_opening_mm": 3.7,
+        "positive_Z_escape_shoulder_opening_mm": 3.8
+      },
+      {
+        "nut": "hatchNut1",
+        "seat_mm": [
+          -41.2,
+          71.0,
+          -74.78
+        ],
+        "top_insertion_swept_overlaps_mm3": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_tolerance_swept_overlap_mm3": 0.0,
+        "external_hex_overlap_mm3": 0.0,
+        "external_bolt_overlap_mm3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cage_wall_missing_volume_mm3": 0.0,
+        "roof_annulus_missing_volume_mm3": 0.0,
+        "negative_Z_escape_shoulder_opening_mm": 3.7,
+        "positive_Z_escape_shoulder_opening_mm": 3.8
+      },
+      {
+        "nut": "hatchNut2",
+        "seat_mm": [
+          41.2,
+          51.0,
+          -74.78
+        ],
+        "top_insertion_swept_overlaps_mm3": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_tolerance_swept_overlap_mm3": 0.0,
+        "external_hex_overlap_mm3": 0.0,
+        "external_bolt_overlap_mm3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cage_wall_missing_volume_mm3": 0.0,
+        "roof_annulus_missing_volume_mm3": 0.0,
+        "negative_Z_escape_shoulder_opening_mm": 3.7,
+        "positive_Z_escape_shoulder_opening_mm": 3.8
+      },
+      {
+        "nut": "hatchNut3",
+        "seat_mm": [
+          41.2,
+          71.0,
+          -74.78
+        ],
+        "top_insertion_swept_overlaps_mm3": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "max_tolerance_swept_overlap_mm3": 0.0,
+        "external_hex_overlap_mm3": 0.0,
+        "external_bolt_overlap_mm3": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "cage_wall_missing_volume_mm3": 0.0,
+        "roof_annulus_missing_volume_mm3": 0.0,
+        "negative_Z_escape_shoulder_opening_mm": 3.7,
+        "positive_Z_escape_shoulder_opening_mm": 3.8
+      }
+    ]
+  },
+  "bottom_installation": {
+    "fixed": {
+      "minimum_separation_mm": 6.5581128753382885,
+      "minimum_pair": [
+        "CableSaddle",
+        "ServiceHatchNutKeeperLeft",
+        0.0
+      ]
+    },
+    "hatch": {
+      "minimum_separation_mm": 0.6313192645825845,
+      "minimum_pair": [
+        "HubHolder",
+        "DeltaBase",
+        0.0
+      ]
+    },
+    "collisions": [],
+    "wire_collisions": []
+  },
+  "bottom_pocket_extrusion": {
+    "world_to_gcode_shift_mm": [
+      104.99983215332031,
+      131.98165894160155,
+      83.0
+    ],
+    "nut_across_flats_mm": 5.5,
+    "checked_cavity_z_mm": [
+      -74.78,
+      -71.98
+    ],
+    "pockets": {
+      "hatchNut0": {
+        "model_min_mm": 0.1406097151285385,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -74.6,
+          -74.4,
+          -74.2,
+          -74.0,
+          -73.8,
+          -73.6,
+          -73.4,
+          -73.2,
+          -73.0,
+          -72.8,
+          -72.6,
+          -72.4,
+          -72.2,
+          -72.0
+        ],
+        "support_layers": []
+      },
+      "hatchNut1": {
+        "model_min_mm": 0.1406097151285385,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -74.6,
+          -74.4,
+          -74.2,
+          -74.0,
+          -73.8,
+          -73.6,
+          -73.4,
+          -73.2,
+          -73.0,
+          -72.8,
+          -72.6,
+          -72.4,
+          -72.2,
+          -72.0
+        ],
+        "support_layers": []
+      },
+      "hatchNut2": {
+        "model_min_mm": 0.14060971512853795,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -74.6,
+          -74.4,
+          -74.2,
+          -74.0,
+          -73.8,
+          -73.6,
+          -73.4,
+          -73.2,
+          -73.0,
+          -72.8,
+          -72.6,
+          -72.4,
+          -72.2,
+          -72.0
+        ],
+        "support_layers": []
+      },
+      "hatchNut3": {
+        "model_min_mm": 0.14060971512853795,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -74.6,
+          -74.4,
+          -74.2,
+          -74.0,
+          -73.8,
+          -73.6,
+          -73.4,
+          -73.2,
+          -73.0,
+          -72.8,
+          -72.6,
+          -72.4,
+          -72.2,
+          -72.0
+        ],
+        "support_layers": []
+      }
+    }
+  },
+  "bottom_keeper_extrusion": {
+    "world_to_gcode_shift_mm": [
+      34.79929542541504,
+      58.99999809265137,
+      71.9800033569336
+    ],
+    "screw_shank_diameter_mm": 3.0,
+    "checked_cavity_z_mm": [
+      -71.98,
+      -69.98
+    ],
+    "pockets": {
+      "clearance_0": {
+        "model_min_mm": 0.39029542541504103,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -71.78,
+          -71.58,
+          -71.38,
+          -71.18,
+          -70.98,
+          -70.78,
+          -70.58,
+          -70.38,
+          -70.18,
+          -69.98
+        ],
+        "support_layers": []
+      },
+      "clearance_1": {
+        "model_min_mm": 0.3902829006037146,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -71.78,
+          -71.58,
+          -71.38,
+          -71.18,
+          -70.98,
+          -70.78,
+          -70.58,
+          -70.38,
+          -70.18,
+          -69.98
+        ],
+        "support_layers": []
+      },
+      "clearance_2": {
+        "model_min_mm": 0.39026778625638714,
+        "support_min_mm": null,
+        "support_hits": 0,
+        "model_hits": 0,
+        "model_layers": [
+          -71.78,
+          -71.58,
+          -71.38,
+          -71.18,
+          -70.98,
+          -70.78,
+          -70.58,
+          -70.38,
+          -70.18,
+          -69.98
+        ],
+        "support_layers": []
+      }
+    }
+  },
+  "plate_paths": [
+    {
+      "1": {
+        "layers": 413,
+        "model_label_ids": [
+          1
+        ],
+        "path_arcs": 0,
+        "parts": {
+          "1": {
+            "first_z": 0.2,
+            "layers": 270,
+            "e_mm": 75597.66048004861,
+            "narrow_xy_mm": 0.0,
+            "xy_mm": 2371898.2369193323,
+            "bed_area_mm2": 21895.64
+          }
+        },
+        "islands": [],
+        "names": {
+          "1": "01_base_cup-hatch-capture"
+        },
+        "warning_message": ""
+      }
+    },
+    {
+      "12": {
+        "layers": 10,
+        "model_label_ids": [
+          1
+        ],
+        "path_arcs": 0,
+        "parts": {
+          "1": {
+            "first_z": 0.2,
+            "layers": 10,
+            "e_mm": 121.38731999999892,
+            "narrow_xy_mm": 0.0,
+            "xy_mm": 3897.1019413970757,
+            "bed_area_mm2": 146.32
+          }
+        },
+        "islands": [],
+        "names": {
+          "1": "35_hatch_two_nut_keeper"
+        },
+        "warning_message": ""
+      }
+    },
+    {
+      "11": {
+        "layers": 115,
+        "model_label_ids": [
+          1195,
+          1196,
+          1197
+        ],
+        "path_arcs": 0,
+        "parts": {
+          "1195": {
+            "first_z": 0.2,
+            "layers": 115,
+            "e_mm": 9779.399760000042,
+            "narrow_xy_mm": 0.0,
+            "xy_mm": 306490.15074631537,
+            "bed_area_mm2": 826.76
+          },
+          "1196": {
+            "first_z": 0.2,
+            "layers": 42,
+            "e_mm": 4363.609119999546,
+            "narrow_xy_mm": 0.0,
+            "xy_mm": 135550.61307173868,
+            "bed_area_mm2": 2426.88
+          },
+          "1197": {
+            "first_z": 0.2,
+            "layers": 44,
+            "e_mm": 5678.923689999043,
+            "narrow_xy_mm": 0.0,
+            "xy_mm": 177040.2188952045,
+            "bed_area_mm2": 3810.64
+          }
+        },
+        "islands": [],
+        "names": {
+          "1195": "40-rear-cable-guide-service",
+          "1196": "42-rear-cable-cover-service",
+          "1197": "35_hub_service_hatch_B8_1"
+        },
+        "warning_message": ""
+      }
+    }
+  ]
+}

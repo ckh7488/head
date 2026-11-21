@@ -5,6 +5,7 @@ from hashlib import sha256
 import json
 import math
 from pathlib import Path
+from random import Random
 import time
 from urllib.request import urlopen
 
@@ -15,6 +16,12 @@ JAW_MAX_DEGREES = 5.5
 LIMITS = ((-20., 20.), (-8., 8.), (0., 90.), (-60., 60.), (-15., 4.5))
 RATES = (160., 105., 950., 36., 22.)
 ZERO = (0.,) * 5
+LOSS_HOLD_S = 2.5
+RETURN_RATE = 10.
+EYE_LEAD_S = .12
+NEUTRAL_TOLERANCE = .5
+# Leave room for the camera and OpenRB goal-update cadence at each end.
+BLINK_INTERVAL_S = (4.15, 9.85)
 
 
 def clamp(value, low, high):
@@ -38,20 +45,58 @@ def parse_axes(text):
 class Tracking:
     active: bool
     goals: tuple[float, ...]
+    phase: str = 'IDLE'
 
 
 class Planner:
-    def __init__(self):
+    def __init__(self, exhibit=False, rng=None):
         self.command = ZERO
         self.last_time = None
         self.filtered = (0., 0.)
         self.active = False
         self.next_blink = None
+        self.exhibit = exhibit
+        self.rng = rng if rng is not None else Random()
+        self.lost_since = None
+        self.neck_after = 0.
+        self.centering = False
 
-    def step(self, error, feedback, seconds, blink_enabled=True, fixed_camera=False):
+    def start_centering(self, feedback):
+        self.command = bounded_goal(feedback)
+        self.centering = self.command != ZERO
+
+    def return_to_center(self, feedback, dt):
+        eyes = tuple(a - clamp(a, -rate*dt, rate*dt) for a, rate in zip(self.command[:3], RATES[:3], strict=True))
+        neck = self.command[3:]
+        remaining = math.hypot(*neck)
+        scale = 0. if remaining <= RETURN_RATE*dt else 1 - RETURN_RATE*dt/remaining
+        self.command = eyes + tuple(angle*scale for angle in neck)
+        if self.command == ZERO and all(abs(angle) <= NEUTRAL_TOLERANCE for angle in feedback):
+            self.lost_since = None
+            return Tracking(False, ZERO)
+        return Tracking(True, self.command, 'RETURN')
+
+    def step(self, error, feedback, seconds, blink_enabled=True, fixed_camera=False, target_changed=False):
         dt = 1/30 if self.last_time is None else clamp(seconds - self.last_time, 0., .1)
         self.last_time = seconds
+        if self.centering:
+            decision = self.return_to_center(feedback, dt)
+            self.centering = decision.active
+            return decision
         if error is None:
+            if self.exhibit:
+                if self.active:
+                    self.lost_since = seconds
+                    self.active = False
+                    self.filtered = (0., 0.)
+                    self.next_blink = None
+                if self.lost_since is None:
+                    return Tracking(False, self.command)
+                if seconds - self.lost_since < LOSS_HOLD_S - 1e-9:
+                    blink = max(0., self.command[2] - RATES[2]*dt)
+                    self.command = self.command[:2] + (blink,) + self.command[3:]
+                    return Tracking(True, self.command, 'HOLD')
+                return self.return_to_center(feedback, dt)
             if self.active:
                 self.command = bounded_goal(feedback)
             self.active = False
@@ -60,8 +105,13 @@ class Planner:
             return Tracking(False, self.command)
 
         if not self.active:
-            self.command = bounded_goal(feedback)
-            self.next_blink = seconds + 3.8
+            if self.lost_since is None:
+                self.command = bounded_goal(feedback)
+            self.next_blink = seconds + self.rng.uniform(*BLINK_INTERVAL_S)
+        if self.exhibit and (not self.active or target_changed):
+            self.filtered = (0., 0.)
+            self.neck_after = seconds + EYE_LEAD_S
+        self.lost_since = None
         self.active = True
 
         blend = 1 - math.exp(-dt / .08)
@@ -77,8 +127,10 @@ class Planner:
             head_yaw+.85*head_error[0],
             head_pitch+.78*head_error[1],
         ))
+        if self.exhibit and seconds < self.neck_after:
+            desired = desired[:3] + self.command[3:]
         self.command = tuple(a+clamp(b-a,-v*dt,v*dt) for a,b,v in zip(self.command,desired,RATES,strict=True))
-        return Tracking(True, self.command)
+        return Tracking(True, self.command, 'TRACK')
 
     def blink_goal(self, seconds):
         u = seconds-self.next_blink
@@ -91,7 +143,7 @@ class Planner:
         elif u < 1.48:
             v = 1-(u-.80)/.68
         else:
-            self.next_blink = seconds+4.15
+            self.next_blink += self.rng.uniform(*BLINK_INTERVAL_S)
             return 0.
         return 90*v*v*(3-2*v)
 
@@ -142,18 +194,19 @@ class UsbController:
         if len(self.buffer)>512:
             self.buffer.clear()
 
-    def start(self, *, jaw_demo=False):
+    def start(self, *, jaw_demo=False, exhibit=False):
+        probe, reply = ('EXHIBIT?', 'R5B1_EXHIBIT 1') if exhibit else ('PING', 'R5B1 1')
         deadline=time.monotonic()+6.
         next_ping=0.
         while time.monotonic()<deadline:
             now=time.monotonic()
             if now>=next_ping:
-                self.send('PING')
+                self.send(probe)
                 next_ping=now+.45
-            if 'R5B1 1' in list(self.lines()):
+            if reply in list(self.lines()):
                 break
         else:
-            raise RuntimeError('OpenRB R5 B1 firmware did not respond to PING.')
+            raise RuntimeError(f'OpenRB R5 B1 firmware did not respond to {probe}.')
         self.send('ARM_JAW_DEMO' if jaw_demo else f'ARM {self.mask}')
         acknowledgement = f'{"ARMED_JAW_DEMO" if jaw_demo else "ARMED"} {self.mask}'
         deadline=time.monotonic()+3.
@@ -211,10 +264,9 @@ def ensure_model(path):
     path.write_bytes(data)
 
 
-def eye_midpoint(result,width,height):
-    if not result.face_landmarks or len(result.face_landmarks[0]) <= 362:
+def _landmark_midpoint(face, width, height):
+    if len(face) <= 362:
         return None
-    face = result.face_landmarks[0]
     corners = [face[i] for i in (33,133,362,263)]
     pixels = [(p.x*(width-1),p.y*(height-1)) for p in corners]
     if not all(0<=x<width and 0<=y<height for x,y in pixels):
@@ -222,6 +274,25 @@ def eye_midpoint(result,width,height):
     if math.dist(pixels[0],pixels[1])<2.0 or math.dist(pixels[2],pixels[3])<2.0:
         return None
     return tuple(sum(p[i] for p in pixels)/4 for i in (0,1))
+
+
+def eye_midpoint(result,width,height):
+    if not result.face_landmarks:
+        return None
+    return _landmark_midpoint(result.face_landmarks[0], width, height)
+
+
+def select_face(result, width, height, previous):
+    points = [point for face in result.face_landmarks
+              if (point := _landmark_midpoint(face, width, height)) is not None]
+    if not points:
+        return None, False
+    if previous is not None:
+        closest = min(points, key=lambda point: math.dist(point, previous))
+        if math.dist(closest, previous) <= .16 * min(width, height):
+            return closest, False
+    center = (width / 2, height / 2)
+    return min(points, key=lambda point: math.dist(point, center)), previous is not None
 
 
 def annotate(cv2,frame,point,decision,drive):
@@ -233,8 +304,7 @@ def annotate(cv2,frame,point,decision,drive):
         cv2.line(frame,center,xy,(180,230,124),1,cv2.LINE_AA)
         cv2.circle(frame,xy,7,(170,240,116),-1,cv2.LINE_AA)
     cv2.rectangle(frame,(0,0),(w,51),(24,37,33),-1)
-    status='TRACK' if decision.active else 'HOLD'
-    title=f"{status}  /  {'OpenRB USB' if drive else 'camera preview'}"
+    title=f"{decision.phase}  /  {'OpenRB USB' if drive else 'camera preview'}"
     cv2.putText(frame,title,(14,22),cv2.FONT_HERSHEY_SIMPLEX,.57,(235,242,229),1,cv2.LINE_AA)
     q=decision.goals
     info=f'Eyes {q[0]:+.1f}, {q[1]:+.1f}    Neck {q[3]:+.1f}, {q[4]:+.1f} deg'
@@ -254,6 +324,7 @@ def run(args):
         raise ValueError('Use a live camera source for the USB drive mode.')
     camera=CameraAngles(args.hfov,args.calibration)
     mask=parse_axes(args.axes)
+    exhibit=mask == parse_axes('all') and not args.immediate_hold
     ensure_model(args.model)
     capture=cv2.VideoCapture(int(args.source) if is_live else args.source)
     if not capture.isOpened():
@@ -267,18 +338,20 @@ def run(args):
     options=mp.tasks.vision.FaceLandmarkerOptions(
         base_options=mp.tasks.BaseOptions(model_asset_path=str(args.model)),
         running_mode=mp.tasks.vision.RunningMode.VIDEO,
-        num_faces=1,
+        num_faces=2 if exhibit else 1,
         min_face_detection_confidence=.55,
         min_face_presence_confidence=.55,
         min_tracking_confidence=.55,
     )
-    planner=Planner()
+    planner=Planner(exhibit=exhibit)
     controller=None
     output_video=None
     stats={'frames':0,'tracking_frames':0,'hold_frames':0,'losses':0,'reacquired':0}
     previous_ms=-1
     last_sent_time=0.
     last_active=False
+    last_tracking=False
+    previous_point=None
     seen=False
     logical_pose=ZERO
     start=time.monotonic()
@@ -286,8 +359,10 @@ def run(args):
     try:
         if args.drive:
             controller=UsbController(args.serial,mask)
-            controller.start()
+            controller.start(exhibit=exhibit)
             controller.send('HOLD')
+            if exhibit:
+                planner.start_centering(controller.pose)
         with mp.tasks.vision.FaceLandmarker.create_from_options(options) as detector:
             while True:
                 ok,frame=capture.read()
@@ -301,35 +376,46 @@ def run(args):
                 previous_ms=timestamp
                 rgb=cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
                 result=detector.detect_for_video(mp.Image(image_format=mp.ImageFormat.SRGB,data=rgb),timestamp)
-                point=eye_midpoint(result,width,height)
+                if exhibit:
+                    point, changed=select_face(result,width,height,previous_point)
+                    previous_point=point
+                else:
+                    point=eye_midpoint(result,width,height)
+                    changed=False
                 if controller:
                     controller.read()
                     now=time.monotonic()
-                    if controller.last_state is None or now-controller.last_state>.42:
-                        point=None
+                    if controller.last_state is None or now-controller.last_state>.42 or now-start-elapsed>=.4:
+                        raise RuntimeError('OpenRB position or camera frame is stale.')
                     feedback=controller.pose
                 else:
                     feedback=logical_pose
                 err=None if point is None else camera.error(point,width,height)
-                decision=planner.step(err,feedback,elapsed,not args.no_blink,fixed_camera=not controller)
-                if decision.active:
-                    if seen and not last_active:
+                decision=planner.step(err,feedback,elapsed,not args.no_blink,
+                                      fixed_camera=not controller,target_changed=changed)
+                tracking=decision.phase == 'TRACK'
+                if tracking:
+                    if seen and not last_tracking:
                         stats['reacquired']+=1
                     seen=True
-                elif last_active:
+                elif last_tracking:
                     stats['losses']+=1
 
                 if controller:
                     if not decision.active and last_active:
                         controller.send('HOLD')
                     elif decision.active and now-last_sent_time>=.032:
-                        controller.send('GO '+' '.join(f'{x:.3f}' for x in decision.goals))
+                        command='GO'
+                        if exhibit:
+                            command='GO_RETURN' if decision.phase=='RETURN' else 'GO_EXHIBIT'
+                        controller.send(command+' '+' '.join(f'{x:.3f}' for x in decision.goals))
                         last_sent_time=now
                 else:
                     logical_pose=decision.goals
                 last_active=decision.active
+                last_tracking=tracking
                 stats['frames']+=1
-                stats['tracking_frames' if decision.active else 'hold_frames']+=1
+                stats['tracking_frames' if tracking else 'hold_frames']+=1
                 if args.output or not args.headless:
                     annotate(cv2,frame,point,decision,bool(controller))
                 if args.output:
@@ -371,6 +457,7 @@ def main():
     parser.add_argument('--serial')
     parser.add_argument('--drive',action='store_true')
     parser.add_argument('--axes',default='all',help=', '.join(AXES))
+    parser.add_argument('--immediate-hold',action='store_true',help='Hold immediately on face loss for commissioning')
     parser.add_argument('--headless',action='store_true')
     parser.add_argument('--no-blink',action='store_true')
     parser.add_argument('--rotate-180',action='store_true')

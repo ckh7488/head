@@ -136,15 +136,7 @@ def stages(release, evidence, verification, cad_hash):
     return list(zip(plan, rows, strict=True))
 
 
-def guard(release, evidence, cad_hash):
-    layout = reviewed(release, evidence, 'guard-layout.json')
-    report = reviewed(release, evidence, 'guard-check.json')
-    require(layout['source_sha256'] == report['head_cad_sha256'] == cad_hash
-            and layout['guard_cad_sha256'] == report['guard_cad_sha256'], '보호 케이스 CAD 불일치')
-    return layout, report
-
-
-def assembly(operations, guard_report, cad_hash):
+def assembly(operations, cad_hash):
     for step, row in operations:
         name = step['id']
         issues = row['issues']
@@ -185,11 +177,7 @@ def assembly(operations, guard_report, cad_hash):
         if name == 'camera-tray-bolts':
             for bolt in step['bolts']:
                 swept_solid(row['camera_tray_head_passage'][bolt], bolt)
-    roof = guard_report['assembly']
-    clear_list(roof['roof_slide_obstructions'], '케이스 상판 삽입 간섭')
-    clear_list(roof['rear_insertion_obstructions'], '케이스 뒷판 삽입 간섭')
-    require(roof['passed'] is True and roof['positive_retention'] is True, '케이스 조립 근거 불완전')
-    return 'PASS', 'B22 조립 136단계와 케이스 경로에서 막힘 0건 · 명목 CAD 표본과 별도 연속 삽입 증거'
+    return 'PASS', 'B22 본체 조립 136단계에서 막힘 0건 · 명목 CAD 표본과 별도 연속 삽입 증거'
 
 
 def fused_skull(release, evidence, verification, cad_hash):
@@ -202,7 +190,7 @@ def fused_skull(release, evidence, verification, cad_hash):
             '4번 판 앞 외장·코받침 일체 출력 증거 불일치')
 
 
-def tools(root, operations, hardware, spec, guard_layout, guard_report):
+def tools(root, operations, hardware, spec):
     # The final hardware overrides the two legacy C3 nut rows in the same order
     # as the CAD assembly generator.
     inventory = {row['id']: row['type'] for row in hardware['hardware'] if not row.get('tool')}
@@ -250,19 +238,7 @@ def tools(root, operations, hardware, spec, guard_layout, guard_report):
             '조립 체결품 공구 검사와 BOM 수량 불일치')
     require(all(name in modeled_screws or inventory.get(name) in ('bolt', 'head') for name in bolts),
             '나사 형상 항목 누락')
-    enclosure = guard_report['hardware']
-    expected_guard = {row['id'] for row in guard_layout['fasteners']}
-    guard_tools = enclosure['tools']
-    require(len(expected_guard) == len(guard_tools) == 35
-            and expected_guard == {row['id'] for row in guard_tools}, '케이스 체결 위치 확인 불완전')
-    for row in guard_tools:
-        clear_list(row['hex_blockers'], f'{row["id"]} 육각렌치 간섭')
-        clear_list(row['spanner_blockers'], f'{row["id"]} 스패너 간섭')
-        direction = row['spanner_direction']
-        require(len(direction) == 3 and all(valid_number(v) for v in direction)
-                and isclose(sum(v**2 for v in direction), 1., abs_tol=1e-6), f'{row["id"]} 스패너 방향 미기록')
-    require(enclosure['passed'] is True, '케이스 공구 경로 근거 불완전')
-    return ('PASS', f'본체 나사 {len(bolts)}곳, 너트 {len(nuts)}곳, 케이스 {len(guard_tools)}곳과 '
+    return ('PASS', f'본체 나사 {len(bolts)}곳, 너트 {len(nuts)}곳과 '
             '지정된 동시 공구 경로 확인')
 
 
@@ -290,12 +266,11 @@ def check_cad(root: Path) -> dict[str, tuple[str, str]]:
         require(digest(root / 'mechanical/BOM.csv') == evidence['reviewed_bom_sha256'],
                 '검증에 사용한 BOM과 현재 BOM의 해시 불일치')
         operations = stages(release, evidence, verification, cad_hash)
-        layout, report = guard(release, evidence, cad_hash)
         if check == 'C02':
             fused_skull(release, evidence, verification, cad_hash)
-            return assembly(operations, report, cad_hash)
+            return assembly(operations, cad_hash)
         return tools(root, operations, reviewed(release, evidence, 'hardware.json'),
-                     reviewed(release, evidence, 'hardware-spec.json'), layout, report)
+                     reviewed(release, evidence, 'hardware-spec.json'))
 
     return {
         'C01': checked(motion, evidence, verification, cad_hash),
