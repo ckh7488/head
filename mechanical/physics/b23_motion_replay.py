@@ -266,16 +266,16 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
                     fault = {'at_s': t, 'ids': [5], 'reason': 'neck moved during jaw recovery'}
                     active_mask[5] = False
                     hold(t, 'jaw-recovery-neck-position')
+                elif t >= fw.jaw_recovery_timeout:
+                    fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
+                    active_mask[5] = False
+                    hold(t, 'jaw-recovery-timeout')
                 elif abs(raw[5]) <= fw.jaw_ready_deg and not outside[5]:
                     recovering_jaw = False
                     goal[5] = 0.
                     recovered_at = t
                     if target is not None:
                         planner.start_centering(measured[:5])
-                elif t >= fw.jaw_recovery_timeout:
-                    fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
-                    active_mask[5] = False
-                    hold(t, 'jaw-recovery-timeout')
                 elif (fw.jaw_trim_deg > 0 and jaw_trimmed_at is None and t >= fw.jaw_trim_delay
                       and fw.jaw_ready_deg < raw[5] <= fw.jaw_trim_from_deg):
                     jaw_trimmed_at = t
@@ -419,7 +419,9 @@ def main(cad, grams, jaw_stop, output, root=ROOT, trace=False, jaw_minimum_volta
     scene=json.loads((cad/'cad_parts.json').read_bytes())
     bodies,_,_ = load_bodies(scene, cad,json.loads(grams.read_bytes()))
     output.mkdir(parents=True,exist_ok=True)
-    warm_jaw_case = f'warm_{jaw_minimum_voltage:g}V_jaw'.replace('.', 'p')
+    if not 3.7 <= jaw_minimum_voltage <= 6.0:
+        raise ValueError('The jaw supply must be in the XL330 operating range 3.7–6.0 V')
+    warm_jaw_case = 'warm_jaw_recovery'
     supply={'nominal':((12.,12.,5.),.85,NORMAL_FRICTION,.35),
             'warm_low':((11.1,11.1,5.),.55,UPPER_FRICTION,.75),
             'warm_minimum_rails':((10.62,10.62,jaw_minimum_voltage),.55,UPPER_FRICTION,.75),

@@ -180,3 +180,25 @@ def test_signed_closing_limit_rejects_overtravel_for_both_horn_directions(firmwa
         assert simulator.tick(120) == ['ERROR POSITION_LIMIT ID6']
     finally:
         simulator.close()
+
+
+def test_exhibit_jaw_rejects_other_servo_position_during_arming(firmware):
+    firmware.fail('r', 6, 132, 'wrong_id', 2)
+    assert firmware.command('ARM_EXHIBIT') == ['LOCKED SERVO_CHECK ID6']
+    assert not any(event.direction == 'w' for event in firmware.trace())
+
+
+def test_exhibit_jaw_rejects_other_servo_position_during_tracking(firmware):
+    assert firmware.command('ARM_EXHIBIT')[0] == 'ARMED_EXHIBIT 31'
+    firmware.fail('r', 6, 132, 'wrong_id', 2)
+    assert firmware.tick(120)[0] == 'ERROR READ_BUS ID6'
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_exhibit_jaw_cannot_finish_recovery_after_the_deadline(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, POSITION, 1955)
+    assert not any(line.startswith('ARMED_EXHIBIT') for line in firmware.command('ARM_EXHIBIT'))
+    firmware.set(6, POSITION, 2000)
+    assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(2520)
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'

@@ -252,13 +252,12 @@ bool retryable(Transfer result) {
 Transfer readRegister(uint8_t id, Register reg, int32_t& value) {
   Transfer result;
   for (uint8_t attempt=0;attempt<2;attempt++) {
-    uint8_t bytes[4] = {};
-    drainBusInput();
-    result=transferResult(dxl.read(id,reg.address,reg.size,bytes,sizeof(bytes),busTimeoutMs)==reg.size);
+    uint8_t status=0;
+    int32_t decoded=0;
+    const bool complete=dxl.readVerified(id,reg,decoded,status);
+    result=complete && status!=0 ? Transfer::servo : transferResult(complete);
     if (result==Transfer::ok) {
-      uint32_t decoded=0;
-      for (uint8_t n=0;n<reg.size;n++) decoded|=uint32_t(bytes[n])<<(8*n);
-      value=static_cast<int32_t>(decoded);
+      value=decoded;
       return result;
     }
     if (!retryable(result)) break;
@@ -588,6 +587,10 @@ void report(bool monitorTorque) {
         }
         const int32_t opening=jawOpening(raw[i]);
         const uint32_t elapsed=static_cast<uint32_t>(millis()-jawTargetSince);
+        if (elapsed>=exhibitJawRecoveryMs) {
+          stopOnFault("EXHIBIT_JAW_CLOSE_TIMEOUT",i+1);
+          return;
+        }
         if (opening<=exhibitJawReadyTicks) {
           if (!writeVerifiedRegister(i+1,goalPwm,exhibitJawPwm)) {
             stopOnFault("EXHIBIT_JAW_PWM",i+1);
@@ -596,9 +599,6 @@ void report(bool monitorTorque) {
           exhibitJawClosing=false;
           resetJawFollowing();
           Serial.println("ARMED_EXHIBIT 31");
-        } else if (elapsed>=exhibitJawRecoveryMs) {
-          stopOnFault("EXHIBIT_JAW_CLOSE_TIMEOUT",i+1);
-          return;
         }
       }
       if (closing || settling || abs(raw[i]-targets[i])<=tolerance) {
