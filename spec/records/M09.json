@@ -1,0 +1,19 @@
+{
+  "revision": "B22",
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "status": "FAIL",
+  "cases": {
+    "cable_retention": {
+      "status": "FAIL",
+      "measurements": [
+        {
+          "name": "minimum_wall_thickness",
+          "value": 1.0141386520300841,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/nose-wall.json",
+          "location": "Part066 코 카메라 케이블 타이 홈 천장과 케이블 안착면 사이, native_witness.wall_thickness_mm"
+        }
+      ]
+    }
+  }
+}

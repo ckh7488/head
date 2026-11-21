@@ -1,0 +1,93 @@
+{
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "base_pitch_pivot_mm": [
+    0.0,
+    0.0,
+    -99.0
+  ],
+  "neck_pitch_pivot_mm": [
+    0.0,
+    0.0,
+    112.0
+  ],
+  "eye_pitch_pivot_mm": [
+    0.0,
+    -39.0,
+    119.0
+  ],
+  "pupils": [
+    {
+      "part": "Part031",
+      "pivot_mm": [
+        -34.0,
+        -39.0,
+        119.0
+      ],
+      "center_mm": [
+        -32.56820473110216,
+        -52.7873462140917,
+        117.73665123020308
+      ],
+      "axis_unit": [
+        0.10286665884126855,
+        -0.99054541535339,
+        -0.09076469920191427
+      ]
+    },
+    {
+      "part": "Part035",
+      "pivot_mm": [
+        34.0,
+        -39.0,
+        119.0
+      ],
+      "center_mm": [
+        32.56820472961684,
+        -52.78734621393804,
+        117.73665123021004
+      ],
+      "axis_unit": [
+        -0.10286665894798146,
+        -0.990545415342354,
+        -0.09076469920141433
+      ]
+    }
+  ],
+  "camera": {
+    "part": "Part068",
+    "front_center_mm": [
+      0.0,
+      -66.55000305175781,
+      89.0
+    ],
+    "axis_unit": [
+      0.0,
+      -1.0,
+      0.0
+    ]
+  },
+  "coordinate_system": "Neutral native CAD, millimeters. Forward is -Y, up is +Z. Negative X rotations lift the neck and eyes.",
+  "extraction": "Pupil centers come from the volume centroids of Part031 and Part035 in the FreeCAD physics export. Their neutral directions point from the globe pivots to those centers. The camera origin is the forward face of the concentric Part068 lens envelope.",
+  "s02_ray_screen": {
+    "base_up_deg": 10.0,
+    "neck_up_deg": 15.0,
+    "eye_up_deg": 8.0,
+    "eye_datum_to_target_mm": [
+      0.0,
+      -1000.0,
+      600.0
+    ],
+    "scene_camera_off_axis_deg": 7.086791492619245,
+    "light_ray_through_unbent_front_panel_mm": [
+      0.0,
+      -147.0,
+      138.15845293
+    ],
+    "opaque_parts_tested": [
+      "Part066",
+      "Part073",
+      "Part080"
+    ],
+    "opaque_intersections": []
+  }
+}

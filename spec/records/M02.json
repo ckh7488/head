@@ -1,0 +1,250 @@
+{
+  "revision": "B22",
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "status": "PASS",
+  "cases": {
+    "neck_yaw": {
+      "status": "N/A",
+      "reason": "Part006 6816-2RS (80×100×10 mm)의 원주 베어링과 동축 혼 구조. 두 축 방향 지지점 간격 대신 구매 베어링의 모멘트 하중·기울기·수명으로 확인."
+    },
+    "neck_pitch": {
+      "status": "PASS",
+      "measurements": [
+        {
+          "name": "shaft_diameter",
+          "value": 8.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part012·Part014 688 내륜 중심, 축 좌표 -51.500 mm와 51.500 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 103.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part012·Part014 688 내륜 중심, 축 좌표 -51.500 mm와 51.500 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 12.875,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part012·Part014 688 내륜 중심, 축 좌표 -51.500 mm와 51.500 mm"
+        }
+      ]
+    },
+    "jaw": {
+      "status": "PASS",
+      "measurements": [
+        {
+          "name": "shaft_diameter",
+          "value": 4.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "왼쪽 XL330 출력 플랜지 외측 면과 오른쪽 MR104·핀 지지 중심. 구매품 내부 지지 구조 및 수명은 별도, 축 좌표 -43.600 mm와 42.000 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 85.6,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "왼쪽 XL330 출력 플랜지 외측 면과 오른쪽 MR104·핀 지지 중심. 구매품 내부 지지 구조 및 수명은 별도, 축 좌표 -43.600 mm와 42.000 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 21.4,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "왼쪽 XL330 출력 플랜지 외측 면과 오른쪽 MR104·핀 지지 중심. 구매품 내부 지지 구조 및 수명은 별도, 축 좌표 -43.600 mm와 42.000 mm"
+        }
+      ]
+    },
+    "blink": {
+      "status": "PASS",
+      "measurements": [
+        {
+          "name": "shaft_diameter",
+          "value": 4.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "공통 눈꺼풀 축, MR104 Part050·Part052 내륜 중심, 축 좌표 -32.000 mm와 26.000 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 58.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "공통 눈꺼풀 축, MR104 Part050·Part052 내륜 중심, 축 좌표 -32.000 mm와 26.000 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 14.5,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "공통 눈꺼풀 축, MR104 Part050·Part052 내륜 중심, 축 좌표 -32.000 mm와 26.000 mm"
+        },
+        {
+          "name": "shaft_diameter",
+          "value": 2.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part078 눈꺼풀 보어 테두리, 핀 Part058·Part061 범위 안, 축 좌표 -53.150 mm와 -14.850 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 38.3,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part078 눈꺼풀 보어 테두리, 핀 Part058·Part061 범위 안, 축 좌표 -53.150 mm와 -14.850 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 19.15,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part078 눈꺼풀 보어 테두리, 핀 Part058·Part061 범위 안, 축 좌표 -53.150 mm와 -14.850 mm"
+        },
+        {
+          "name": "shaft_diameter",
+          "value": 2.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part079 눈꺼풀 보어 테두리, 핀 Part059·Part062 범위 안, 축 좌표 14.850 mm와 53.150 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 38.3,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part079 눈꺼풀 보어 테두리, 핀 Part059·Part062 범위 안, 축 좌표 14.850 mm와 53.150 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 19.15,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part079 눈꺼풀 보어 테두리, 핀 Part059·Part062 범위 안, 축 좌표 14.850 mm와 53.150 mm"
+        }
+      ]
+    },
+    "eye_yaw": {
+      "status": "PASS",
+      "measurements": [
+        {
+          "name": "shaft_diameter",
+          "value": 2.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 Ø2.26 CAD 보어와 Part032 Ø2 핀의 지지 구간 중심, 축 좌표 109.350 mm와 127.875 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 18.525,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 Ø2.26 CAD 보어와 Part032 Ø2 핀의 지지 구간 중심, 축 좌표 109.350 mm와 127.875 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 9.2625,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 Ø2.26 CAD 보어와 Part032 Ø2 핀의 지지 구간 중심, 축 좌표 109.350 mm와 127.875 mm"
+        },
+        {
+          "name": "shaft_diameter",
+          "value": 2.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part029 Ø2.26 CAD 보어와 Part032 Ø2 핀의 지지 구간 중심, 축 좌표 113.000 mm와 124.900 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 11.9,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part029 Ø2.26 CAD 보어와 Part032 Ø2 핀의 지지 구간 중심, 축 좌표 113.000 mm와 124.900 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 5.95,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part029 Ø2.26 CAD 보어와 Part032 Ø2 핀의 지지 구간 중심, 축 좌표 113.000 mm와 124.900 mm"
+        },
+        {
+          "name": "shaft_diameter",
+          "value": 2.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 Ø2.26 CAD 보어와 Part036 Ø2 핀의 지지 구간 중심, 축 좌표 109.350 mm와 127.875 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 18.525,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 Ø2.26 CAD 보어와 Part036 Ø2 핀의 지지 구간 중심, 축 좌표 109.350 mm와 127.875 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 9.2625,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 Ø2.26 CAD 보어와 Part036 Ø2 핀의 지지 구간 중심, 축 좌표 109.350 mm와 127.875 mm"
+        },
+        {
+          "name": "shaft_diameter",
+          "value": 2.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part033 Ø2.26 CAD 보어와 Part036 Ø2 핀의 지지 구간 중심, 축 좌표 113.000 mm와 124.900 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 11.9,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part033 Ø2.26 CAD 보어와 Part036 Ø2 핀의 지지 구간 중심, 축 좌표 113.000 mm와 124.900 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 5.95,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part033 Ø2.26 CAD 보어와 Part036 Ø2 핀의 지지 구간 중심, 축 좌표 113.000 mm와 124.900 mm"
+        }
+      ]
+    },
+    "eye_pitch": {
+      "status": "PASS",
+      "measurements": [
+        {
+          "name": "shaft_diameter",
+          "value": 3.0,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 양쪽 보어와 Part026·Part028 Ø3 핀의 실제 겹침 중심, 축 좌표 -60.075 mm와 59.500 mm"
+        },
+        {
+          "name": "support_span",
+          "value": 119.575,
+          "unit": "mm",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 양쪽 보어와 Part026·Part028 Ø3 핀의 실제 겹침 중심, 축 좌표 -60.075 mm와 59.500 mm"
+        },
+        {
+          "name": "support_span_to_shaft_diameter",
+          "value": 39.85833,
+          "unit": "ratio",
+          "source": "mechanical/revisions/b22/R5-B22-Assembly.FCStd",
+          "location": "Part024 양쪽 보어와 Part026·Part028 Ø3 핀의 실제 겹침 중심, 축 좌표 -60.075 mm와 59.500 mm"
+        }
+      ]
+    },
+    "cable_retention": {
+      "status": "N/A",
+      "reason": "고정 타이 받침에는 회전축이 없습니다. 회전판 열린 가이드에서는 케이블 피복이 미끄러집니다."
+    }
+  }
+}

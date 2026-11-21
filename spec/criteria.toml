@@ -1,0 +1,68 @@
+[S01_walk_by]
+distance_m = 0.8
+walk_speed_mps = 1.2
+gaze_ok_deg = 10.0
+min_ok_ratio = 0.90
+camera_latency_s = 0.12
+camera_hfov_deg = 106.0
+
+[S01b_no_whip]
+target_deg = 40.0
+max_neck_overshoot_deg = 12.0
+max_final_gaze_err_deg = 2.0
+
+[S02_look_up]
+head_height_m = 1.0
+base_tilt_deg = 10.0
+person_eye_height_m = 1.6
+distance_m = 1.0
+
+[S03_blink]
+min_total_s = 0.30
+max_total_s = 0.60
+close_not_slower_than_open = true
+
+[S06_fasteners]
+allowed_standards = ["ISO 4762", "DIN 934", "DIN 125"]
+default_size = "M3"
+
+[S06_fasteners.guard]
+screw = "ISO 4762 M3×16"
+nut = "ISO 4032 M3"
+
+[S06_fasteners.exceptions.E1]
+size = "M2"
+interfaces = ["눈 좌우 혼 16에 3", "눈 상하 혼 17에 2"]
+
+[S06_fasteners.exceptions.E2]
+size = "M2"
+interfaces = ["XL330 케이스 16 (모터판 39·42·46, 턱 받침 36)", "깜빡임 혼 19에 2", "턱 구동팔 38에 2"]
+
+[S06_fasteners.exceptions.E3]
+size = "M2"
+interfaces = ["XL430 혼 8", "OpenRB 4", "카메라 PCB 2"]
+
+[S06_fasteners.exceptions.E4]
+size = "M2.5"
+interfaces = ["XL430 목 좌우 4 (브래킷 05 위 구멍)", "목 상하 2 (요크 07 바깥쪽)"]
+
+[S06_fasteners.exceptions.E5]
+size = "M2.5"
+interfaces = ["목 상하 XL430", "ID5 가드를 지나는 두 곳"]
+
+[S06_fasteners.exceptions.E8]
+standard = "ISO 4026"
+interfaces = ["눈꺼풀 링크 6", "눈 좌우 혼–타이바 1", "목 상하 제한판 핀 2"]
+
+[S06_fasteners.exceptions.F1]
+size = "M2"
+interfaces = ["OpenRB 기판 4", "카메라 기판 2"]
+
+[M02_support]
+minimum_span_to_diameter = 3.0
+
+[M07_transmission]
+min_angle_deg = 40.0
+
+[M09_print_wall]
+minimum_thickness_mm = 1.2

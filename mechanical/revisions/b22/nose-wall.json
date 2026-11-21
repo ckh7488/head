@@ -1,0 +1,26 @@
+{
+  "revision": "B22",
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "world_mesh_sha256": "6e3ebac9ca5d0d28c907d9ed8035e1239c0ff331a1d5873380741cb5e8ac7fa5",
+  "part": "Part066",
+  "p2s_plate": 12,
+  "build_axis": "+Z",
+  "wall": "코 카메라 케이블 타이 홈과 위쪽 케이블 안착 홈 사이의 바닥",
+  "load_path": "케이블을 잡은 타이 띠가 아래 홈의 천장에 닿습니다. 홈 천장과 위쪽 케이블 안착면 사이의 단면이 하중을 브래킷으로 전달합니다.",
+  "mesh_screen": {
+    "sample_x_count": 161,
+    "sample_y_count": 131,
+    "sample_x_range_mm": [3.940237626531255, 8.340237626531255],
+    "sample_y_range_mm": [-43.42860727328877, -40.450607273288774],
+    "valid_wall_rays": 20530,
+    "smallest_sample_mm": 1.014492103158858
+  },
+  "native_witness": {
+    "method": "FreeCAD world Part066.Shape와 지정 XY의 Z=76~80 mm 선분의 공통 부분을 계산했습니다.",
+    "xy_mm": [6.387737626531255, -40.450607273288774],
+    "lower_z_mm": 77.39126290180816,
+    "upper_z_mm": 78.40540155383825,
+    "wall_thickness_mm": 1.0141386520300841
+  },
+  "scope": "이 지점의 CAD 두께는 해당 단면 최소 두께의 상한입니다. 실제 출력물의 층간 강도와 케이블 인장 시험은 별도입니다."
+}

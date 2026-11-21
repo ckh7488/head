@@ -13,6 +13,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 - [control/](control/README.md) · PC 얼굴 추적, OpenRB 펌웨어, 카메라와 모터 보정
 - [web/](web/README.md) · 3D 조립·구동·배선 뷰어, CAD 내보내기
 - [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
+- [spec/](spec/requirements.md) · B22 동작 장면, 조립과 실물 인수 검사
 
 ## 최근 CAD
 

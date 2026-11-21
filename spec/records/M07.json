@@ -1,0 +1,26 @@
+{
+  "revision": "B22",
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "status": "FAIL",
+  "cases": {
+    "blink": {
+      "status": "FAIL",
+      "measurements": [
+        {
+          "name": "minimum_transmission_angle",
+          "value": 22.99461679191651,
+          "unit": "deg",
+          "source": "mechanical/revisions/b22/blink-load.json",
+          "location": "blink.drive_lid_minimum_lever_mm[0] = 3.222818288270707 mm. 8.25 mm 구동 혼 반경은 동일 CAD의 R5.MotionGeometry.blink.radius_mm. 힘 전달각 = degrees(asin(모멘트 암 / 혼 반경)). servo–shaft 입력 링크, 0~91°에서 0.5° 간격."
+        },
+        {
+          "name": "minimum_lid_transmission_angle",
+          "value": 31.801409486351808,
+          "unit": "deg",
+          "source": "mechanical/revisions/b22/blink-load.json",
+          "location": "blink.drive_lid_minimum_lever_mm[1] = 6.0602320827567855 mm. 11.5 mm 눈꺼풀 혼 반경은 동일 CAD의 R5.MotionGeometry.blink.lid_radius_mm. 힘 전달각 = degrees(asin(모멘트 암 / 혼 반경)). shaft–lid 좌우 링크, 0~91°에서 0.5° 간격."
+        }
+      ]
+    }
+  }
+}

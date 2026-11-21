@@ -1,0 +1,29 @@
+# 검수 기록
+
+`M01.json`부터 `M09.json`, `P01.json`부터 `P07.json`까지 항목별로 기록합니다. 모든 파일에 `revision`, `cad_sha256`, `status`를 적습니다. `status`는 `PASS` 또는 `FAIL`입니다. 판정에는 선택한 CAD 조립본과 리비전 및 SHA-256이 일치하는 기록을 사용합니다.
+
+## M01–M09 기구 검수
+
+`cases` 객체에는 아래 키로 기구를 기록합니다.
+
+| 키 | 기구 |
+| --- | --- |
+| `neck_yaw` | 목 좌우 |
+| `neck_pitch` | 목 상하 |
+| `jaw` | 턱 |
+| `blink` | 눈꺼풀 |
+| `eye_yaw` | 눈 좌우 |
+| `eye_pitch` | 눈 상하 |
+| `cable_retention` | 케이블 고정부 |
+
+- 적용하는 기구에는 `status`와 `measurements` 배열을 적습니다. 각 측정값은 `name`, 수치 `value`, `unit`, 근거 파일의 저장소 상대경로 `source`, 그 안의 부품 ID나 측정 위치 `location`을 담습니다.
+- 적용하지 않는 기구에는 `status`를 `N/A`로 적고 그 설계에서 규칙이 적용되지 않는 이유를 `reason`에 씁니다.
+- M02는 목 상하·턱·눈꺼풀·눈 좌우·눈 상하, M05는 눈꺼풀·턱·눈 좌우·눈 상하, M07은 눈꺼풀, M09는 출력 부품이 있는 일곱 기구 모두를 측정합니다.
+- M02의 지지점 간 거리 ÷ 축 지름은 `support_span_to_shaft_diameter`를 측정 이름으로 사용하고 단위는 `ratio`로 적습니다. [B22 측정 스크립트](../measure_m02.py)는 거리, 지름과 비율을 함께 기록합니다.
+- M07은 작동 범위에서 가장 작은 힘 전달각을 `minimum_transmission_angle`이라는 측정 이름으로 사용하고 단위는 `deg`로 적습니다. `criteria.toml`의 M07 기준과 수치가 일치하는 판정을 기록합니다.
+- M09의 가장 얇은 벽은 `minimum_wall_thickness`라는 측정 이름으로 사용하고 단위는 `mm`로 적습니다. 기준 두께는 `criteria.toml`을 따릅니다.
+- 측정한 기구 중 하나라도 `FAIL`이면 전체 판정은 `FAIL`입니다. 이때 아직 측정하지 않은 기구는 생략할 수 있습니다. 전체 `PASS`에는 일곱 기구의 판정과 최소 한 건의 실제 측정이 필요합니다.
+
+## P01–P07 실물 시험
+
+시험한 사람이 `tester`에 이름, `date`에 시험일(`YYYY-MM-DD`), `measurement`에 시험 방법과 조건, `result`에 직접 확인한 결과를 적습니다. 실물 시험 판정은 이 기록을 따릅니다.
