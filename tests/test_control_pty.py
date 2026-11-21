@@ -175,3 +175,23 @@ def test_tracking_usb_receives_feedback_and_propagates_bus_fault(firmware):
         finally:
             controller.close()
     assert not any(e.direction == 'w' and e.register == 64 and e.value == 0 for e in firmware.trace())
+
+
+def test_exhibit_host_keeps_five_feedback_fields_with_closed_jaw_torque(firmware):
+    with terminal(firmware) as port:
+        controller = UsbController(port, 31)
+        try:
+            controller.start(exhibit=True)
+            assert controller.jaw_hold is True
+            assert controller.pose == (0.,) * 5
+            controller.send('GO_EXHIBIT 0 0 0 5 0')
+            deadline = time.monotonic() + 2.
+            while controller.pose[3] == 0 and time.monotonic() < deadline:
+                controller.read()
+                time.sleep(.006)
+            assert controller.pose[3] > 0
+        finally:
+            controller.close()
+    jaw = [e for e in firmware.trace() if e.id == 6 and e.direction == 'w']
+    assert [e.value for e in jaw if e.register == 116] == [2000]
+    assert [e.value for e in jaw if e.register == 64] == [1]

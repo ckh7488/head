@@ -1,0 +1,204 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "point_load_N": 1.0,
+  "point_load_converted_to_input_torque_Nm": 0.0166,
+  "modeled_bilateral_drag_torque_Nm": [
+    0.009,
+    0.009
+  ],
+  "rail_mesh_mm": 1.1,
+  "modulus_MPa": 500.0,
+  "command_angle_samples_deg": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    21.0,
+    24.0,
+    27.0,
+    30.0,
+    33.0,
+    36.0,
+    39.0,
+    42.0,
+    45.0,
+    48.0,
+    51.0,
+    54.0,
+    57.0,
+    60.0,
+    63.0,
+    66.0,
+    69.0,
+    72.0,
+    75.0,
+    78.0,
+    81.0,
+    84.0,
+    87.0,
+    87.25,
+    87.5,
+    87.75,
+    88.0,
+    88.25,
+    88.5,
+    88.75,
+    89.0,
+    89.25,
+    89.5,
+    89.75,
+    90.0
+  ],
+  "actor_mesh_sha256": {
+    "Part057": "272c6c840a01de40f5e37f0ce005aa15040487236289d70493645c840621049d",
+    "Part060": "24f87077242c1c3b2799ae14cb88438c5950477ccad2b8f5b6fdb626f7b5ac89",
+    "Part078": "15e4a8daf9a3d4ac6e0256ba5fa69f5b62c5d07c8fafc362c448feb0f96d9715",
+    "Part079": "719a23c7c9e57934b1fdcb7a8d26043bd9bd2fd4343139d01d20dc5bd763b130",
+    "Part073": "d30af4b706212f4537e94c7bc74e7b1accdd49b4f5b92adb38504bea7b3e9af0"
+  },
+  "rail_step_sha256": "550604d07e448e51e31d243469f1fedb65eadc93d065d584607b219beb3143a2",
+  "baseline_left_link_sha256": "5ce186c9f655cb5745e68f54a726d00005d3a3f74343f4cc0772d88fee4c1405",
+  "mixed_E500_min_link_clearance_mm": 0.33480333596214007,
+  "mixed_E500_min_lid_clearance_mm": 0.2851130110035352,
+  "mixed_E500": {
+    "witnesses": {
+      "Part057": {
+        "gap_mm": 0.33480333596214007,
+        "command_deg": 89.25,
+        "lid_deg": [
+          98.14783212172735,
+          92.15403217103548
+        ],
+        "shaft_deg": 95.79768084498419,
+        "crank_torques_Nm": [
+          -0.0256,
+          -0.009
+        ]
+      },
+      "Part078": {
+        "gap_mm": 0.2851130110035352,
+        "command_deg": 89.75,
+        "lid_deg": [
+          99.17998409524539,
+          92.9048194886905
+        ],
+        "shaft_deg": 96.71234705093968,
+        "crank_torques_Nm": [
+          -0.0256,
+          -0.009
+        ]
+      },
+      "Part060": {
+        "gap_mm": 0.7811318507553777,
+        "command_deg": 90.0,
+        "lid_deg": [
+          94.16834562985757,
+          95.3011097305482
+        ],
+        "shaft_deg": 95.45952282246125,
+        "crank_torques_Nm": [
+          -0.009,
+          -0.0256
+        ]
+      },
+      "Part079": {
+        "gap_mm": 0.3665767242596243,
+        "command_deg": 90.0,
+        "lid_deg": [
+          94.16834562985757,
+          95.3011097305482
+        ],
+        "shaft_deg": 95.45952282246125,
+        "crank_torques_Nm": [
+          -0.009,
+          -0.0256
+        ]
+      }
+    },
+    "contacts": []
+  },
+  "full_unilateral_E500": {
+    "witnesses": {
+      "Part057": {
+        "gap_mm": 0.0,
+        "command_deg": 89.75,
+        "lid_deg": [
+          103.68090088778649,
+          92.13569235832381
+        ],
+        "shaft_deg": 98.19203089982568,
+        "crank_torques_Nm": [
+          -0.036,
+          -0.0
+        ]
+      },
+      "Part078": {
+        "gap_mm": 0.09885503656994288,
+        "command_deg": 90.0,
+        "lid_deg": [
+          104.45827532579598,
+          92.5519560309077
+        ],
+        "shaft_deg": 98.75413875634241,
+        "crank_torques_Nm": [
+          -0.036,
+          -0.0
+        ]
+      },
+      "Part060": {
+        "gap_mm": 0.6228695064772616,
+        "command_deg": 90.0,
+        "lid_deg": [
+          91.70115862734416,
+          96.86325038592082
+        ],
+        "shaft_deg": 94.83551269916512,
+        "crank_torques_Nm": [
+          -0.0,
+          -0.036
+        ]
+      },
+      "Part079": {
+        "gap_mm": 0.2397344110662623,
+        "command_deg": 90.0,
+        "lid_deg": [
+          91.70115862734416,
+          96.86325038592082
+        ],
+        "shaft_deg": 94.83551269916512,
+        "crank_torques_Nm": [
+          -0.0,
+          -0.036
+        ]
+      }
+    },
+    "contacts": [
+      {
+        "part": "Part057",
+        "command_deg": 89.75,
+        "crank_torques_Nm": [
+          -0.036,
+          -0.0
+        ],
+        "volume_mm3": 0.0025254932054413837
+      },
+      {
+        "part": "Part057",
+        "command_deg": 90.0,
+        "crank_torques_Nm": [
+          -0.036,
+          -0.0
+        ],
+        "volume_mm3": 0.024740172021023472
+      }
+    ]
+  },
+  "rim_removed_mm3": 10.850537485676227,
+  "min_net_web_mm2": 11.38763792192185,
+  "weakest_web_station_mm": 2.2,
+  "min_pinned_Euler_N": 21.832368216694036,
+  "removed_from_lower_pin_boss_mm3": 0.0
+}

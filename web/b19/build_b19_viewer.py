@@ -51,6 +51,10 @@ B23_PREPARATION = {
     'eye-cradle': '안구를 넣기 전에 서포트를 빼고 긴 Ø2.2 mm 드릴을 손으로 돌려 위·아래 홀 한 쌍씩을 같은 축으로 마감합니다.',
     'yaw-stop-pads': '회전판 돌기가 닿을 면을 손끝으로 밀어 왼쪽은 앞 왼쪽, 오른쪽은 앞 오른쪽 키 벽에 댄 채 공용 M3 너트를 조입니다.',
 }
+B24_ASSEMBLY_VIEWS = [
+    {'id': 'eye-pitch-bearings', 'label': '눈 상하 베어링 정렬', 'stage': 'eye-bearing-align'},
+    {'id': 'neck-pitch-coupling', 'label': '목 상하 축 체결', 'stage': 'pitch-drive-lock'},
+]
 
 
 def numbers(text):
@@ -134,7 +138,7 @@ def assembly_motion(layout, hardware, stock, steps, revision):
     motion = {row['id']: row['motion'] for row in hardware if 'motion' in row and not row.get('tool')}
     motion.update({row['name']: row['motion'] for row in stock})
     motion.update(layout['world_motion'])
-    if revision in ('B22', 'B23'):
+    if revision in ('B22', 'B23', 'B24'):
         for step in steps:
             owner = FASTENER_OWNERS.get(step['id'])
             if owner is None:
@@ -165,7 +169,9 @@ def load_wire_states(report, layout, actors, world_motion, wires):
     wire_names = {wire['label'].split('  ·  ', 1)[0]: wire for wire in wires}
     diameters = data.get('wireDiametersMm', {})
     states = []
-    yaw_limits = layout['motion_geometry'].get('yaw_limit', {}).get('nominal_stop_deg')
+    rig = layout['motion_geometry']
+    yaw_limits = rig.get('yaw_limit', {}).get('nominal_stop_deg')
+    pitch_stops = sorted(stop['nominal_deg'] for stop in rig['pitch_stop']['stops']) if 'pitch_coupler' in rig else None
     for row in data['states']:
         degrees, points = np.asarray(row['pose_deg'], float), np.asarray(row['points'], float)
         if (degrees.shape != (5,) or points.ndim != 2 or points.shape[1] != 3 or len(points) < 2
@@ -173,6 +179,8 @@ def load_wire_states(report, layout, actors, world_motion, wires):
             raise ValueError(f'Invalid camera geometry in {row["id"]}')
         if yaw_limits is not None and not yaw_limits[0] < degrees[0] < yaw_limits[1]:
             raise ValueError(f'Wire comparison is past a mechanical yaw stop: {row["id"]}')
+        if pitch_stops and not pitch_stops[0] < degrees[1] < pitch_stops[-1]:
+            raise ValueError(f'Wire comparison is past a mechanical pitch stop: {row["id"]}')
         recorded = row.get('wirePoints', {})
         show_all = (len(wire_names) == len(wires) and wire_names.keys() <= recorded.keys()
                     and all(np.isclose(diameters.get(name, 0), model['diameter'], atol=.001, rtol=0)
@@ -266,6 +274,19 @@ def checked_tools(row, world, hardware, tools, phases):
             choices.append([{'id': name, 'nut': f'{side} {station} · 2 mm 볼 육각렌치',
                              'kind': 'driver-axis', 'size': 2, 'seat': tip,
                              'path': [[0, 0, 0], [0, 0, 0]]}])
+    if (key := row.get('pitch_drive_key')) and key['status'] == 'pass':
+        elbow = np.asarray(key['elbow_mm'], float)
+        tip = elbow - [0., 0., key['short_leg_mm']]
+        radius = key['key_across_flats_mm'] / np.sqrt(3.)
+        angle = np.radians(key['handle_direction_deg'])
+        name = 'tool-neck-pitch-key'
+        tools[name] = trimesh.util.concatenate([
+            C.cylinder(radius, key['short_leg_mm'], tip, (0., 0., 1.)),
+            C.cylinder(radius, key['long_leg_mm'], elbow, (np.cos(angle), np.sin(angle), 0.)),
+        ])
+        choices.append([{'id': name, 'nut': '목 축 M3 · 2.5 mm 육각렌치',
+                         'kind': 'driver-axis', 'size': key['key_across_flats_mm'], 'seat': tip.tolist(),
+                         'path': [[0., 0., key['entry_from_above_mm']], [0., 0., 0.]]}])
     return choices
 
 
@@ -328,6 +349,10 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     world = C.World(cad, data['hardware'], stock)
     checked = json.loads(report.read_text())
     layout = json.loads((cad/'cad_parts.json').read_text())
+    service_covers = revision in ('B23', 'B24')
+    rig = layout['motion_geometry']
+    if revision == 'B24' and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
+        raise ValueError('B24 CAD must include both revised pitch axes')
     plan = C.assembly_plan(revision.lower(), layout)
     if [(row['id'], row['context'], row['text']) for row in checked] != [
             (step['id'], step['ctx'], step['text']) for step in plan]:
@@ -336,22 +361,24 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     world.layout = layout
     if revision != 'B19' and checked[0].get('cad_sha256') != layout['source_sha256']:
         raise ValueError('Assembly report and CAD export use different revisions')
-    if revision == 'B23':
+    if service_covers:
         if layout['world_sha256'].keys() != layout['world_motion'].keys():
             raise ValueError('CAD world export has incomplete mesh provenance')
         for name, digest in layout['world_sha256'].items():
             if sha256((cad/'world'/f'{name}.stl').read_bytes()).hexdigest() != digest:
                 raise ValueError(f'CAD world export mesh changed after validation: {name}')
-    has_qualified_tools = revision in ('B21', 'B22', 'B23')
+    has_qualified_tools = revision in ('B21', 'B22') or service_covers
     if has_qualified_tools and checked[0].get('plan_sha256') != C.plan_hash(plan):
         raise ValueError(f'{revision} assembly plan differs from the one checked')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
     keeper_names = set()
-    keeper_screws = set()
-    if revision == 'B23':
-        for cap in layout['motion_geometry']['bottom_board_service_nuts']:
+    native_screws = set()
+    if service_covers:
+        for cap in rig['bottom_board_service_nuts']:
             keeper_names.add(cap['keeper'])
-            keeper_screws.add(cap['screw'])
+            native_screws.add(cap['screw'])
+    if revision == 'B24':
+        native_screws.add(rig['pitch_coupler']['actor'])
     b19_names = {item['name'] for item in stock} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
     hub_plugs = [name for name in layout['world_motion'] if name.startswith('HubPlug')]
@@ -411,8 +438,10 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             moves.append({'ids': [name], 'path': [(-np.asarray(axis, float)*(length+3.)).round(2).tolist(), [0, 0, 0]]})
             ctx.append(name)
         notes = list(dict.fromkeys(note_text(n) for n in row['notes']))
-        if revision == 'B23' and st['id'] in B23_PREPARATION:
+        if service_covers and st['id'] in B23_PREPARATION:
             notes.insert(0, B23_PREPARATION[st['id']])
+        if (key := row.get('pitch_drive_key')) and key['status'] == 'pass':
+            notes.append(f'착좌한 2.5 mm 육각렌치의 회전 {key["swept_turn_deg"]:g}° 범위를 CAD에서 확인했습니다.')
         if (yaw := row.get('yaw_driver_adjustment')) and yaw['status'] == 'pass':
             closest = min(record['minimum_driver_gap_mm'] for record in yaw['tool_rows'])
             notes.append(f'네 공구 자리와 모터 높이 세 위치의 CAD 최소 여유 · {closest:.3f} mm')
@@ -449,6 +478,19 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             notes.append('작은 플러그의 검사 외곽을 표시합니다.')
             if route['status'] == 'pass':
                 notes.append(f'공차 포함 CAD 최소 여유 · {route["minimum_clearance_mm"]:.3f} mm')
+        if jig := st.get('eye_bearing_alignment'):
+            alignment = row['eye_bearing_alignment']
+            diameter, length = jig['diameter_mm'], jig['length_mm']
+            if ((alignment['tool_diameter_mm'], alignment['tool_length_mm']) != (diameter, length)
+                    or not np.allclose(alignment['route_offset_mm'], jig['feed_offset_mm'])):
+                raise ValueError('Eye-bearing alignment gauge does not match the checked route')
+            if alignment['status'] == 'pass':
+                actor = 'checked-eye-bearing-alignment-gauge'
+                y, z = jig['axis_yz_mm']
+                feed_models[actor] = C.cylinder(diameter/2, length, (-length/2, y, z), (1., 0., 0.))
+                offset = alignment['route_offset_mm']
+                moves.append({'ids': [actor], 'path': [offset, [0., 0., 0.], offset], 'temporary': True})
+                notes.append(f'검사한 정렬봉 · 지름 {diameter:g} mm · 길이 {length:g} mm')
         if row['text']:
             number += 1
             label, last_text, sub = str(number), row['text'], 0
@@ -489,7 +531,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     guard, guard_hash = load_guard(guard_cad, guard_report, layout['source_sha256'])
     review = None
     states = []
-    if guard or wire_states or revision == 'B23':
+    if guard or wire_states or service_covers:
         complete = next(step for step in steps if step['id'] == 'rear-skull')
         fixed = complete['fixed'] + [name for move in complete['moves'] for name in move['ids']] + sorted(guard)
         if len(fixed) != len(set(fixed)):
@@ -504,7 +546,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         metallicFactor=.45 if name == 'steel' else 0.) for name, rgb in COLORS.items()}
     parts = {}
     for name in sorted(used):
-        if name in keeper_screws:
+        if name in native_screws:
             mesh = trimesh.load_mesh(world.world/f'{name}.stl')
         else:
             mesh = feed_models[name] if name in feed_models else world.mesh(name)
@@ -553,6 +595,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
         **({'stops': stop_locations} if stop_locations else {}),
+        **({'assemblyViews': B24_ASSEMBLY_VIEWS} if revision == 'B24' else {}),
         **({'finalView': review} if review else {}),
         **({'guardSha256': guard_hash} if guard_hash else {}),
         **({'wireStates': states, 'wireStatesSha256': sha256(wire_states.read_bytes()).hexdigest()} if states else {}),

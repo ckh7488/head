@@ -21,30 +21,36 @@ def build(assets, output, revision, preview=False):
         raise ValueError('GLB and step metadata do not match')
     if not re.fullmatch(r'[0-9a-f]{64}', data.get('cadSha256', '')):
         raise ValueError('Viewer has no exact CAD digest')
-    has_qualified_tools = revision in ('B21', 'B22', 'B23')
+    has_qualified_tools = revision in ('B21', 'B22', 'B23', 'B24')
     if has_qualified_tools and not re.fullmatch(r'[0-9a-f]{64}', data.get('planSha256') or ''):
         raise ValueError(f'{revision} viewer has no checked assembly-plan digest')
     if not preview and any(step['issues'] for step in data['steps']):
         raise ValueError('Resolve assembly issues before packaging production review')
     if has_qualified_tools and not data.get('wires'):
         raise ValueError(f'{revision} viewer has no CAD cable paths')
-    if revision in ('B22', 'B23') and not preview:
+    if revision in ('B22', 'B23', 'B24') and not preview:
         stops = data.get('stops', [])
         angles = sorted(stop['firstContactDegrees'] for stop in stops)
         if len(angles) != 2 or not angles[0] < 0 < angles[-1]:
             raise ValueError(f'{revision} viewer needs checked stops in both pitch directions')
         if any({'head', 'anchor'} - stop.get('contactPose', {}).keys() for stop in stops):
             raise ValueError(f'{revision} viewer has no checked pitch pose for a stop')
-    if revision == 'B23' and not preview:
+    if revision in ('B23', 'B24') and not preview:
         states = data.get('wireStates', [])
         if not data.get('finalView') or len(states) < 3 or not all(state['fullHarness'] for state in states):
-            raise ValueError('B23 production viewer needs assembled wiring and all checked comparison paths')
+            raise ValueError(f'{revision} production viewer needs assembled wiring and all checked comparison paths')
         service_checked = {step['id'] for step in data['steps'] if step.get('serviceChecked')}
         if not {'rear-cover-bolts', 'hatch-bolts'} <= service_checked:
-            raise ValueError('B23 production viewer needs both checked cover service paths')
+            raise ValueError(f'{revision} production viewer needs both checked cover service paths')
         yaw = next((step for step in data['steps'] if step['id'] == 'yaw-side-tighten'), None)
         if yaw and len(yaw.get('toolPaths', [])) != 4:
-            raise ValueError('B23 production viewer needs the four checked yaw driver positions')
+            raise ValueError(f'{revision} production viewer needs the four checked yaw driver positions')
+    if revision == 'B24' and not preview:
+        by_stage = {step['id']: step for step in data['steps']}
+        eye = by_stage.get('eye-bearing-align', {})
+        neck = by_stage.get('pitch-drive-lock', {})
+        if not any(move.get('temporary') for move in eye.get('moves', [])) or not neck.get('toolPaths'):
+            raise ValueError('B24 production viewer needs both checked pitch-axis tool paths')
 
     data['embeddedModel'] = base64.b64encode(model).decode('ascii')
     text = (VIEWER / 'viewer.js').read_text(encoding='utf-8')

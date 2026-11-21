@@ -1,0 +1,2613 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "modulus_MPa": 700.0,
+  "print_layer_normal_cad": [
+    0.0,
+    1.0,
+    0.0
+  ],
+  "trials": [
+    {
+      "torque_Nm": 0.0244,
+      "mesh_mm": 1.45,
+      "left_bearing_mm": 0.12112513379254561,
+      "right_bearing_mm": 0.18938686501850155,
+      "motor_mount_mm": 0.14519727780364375,
+      "bearing_center_differential_mm": 0.2656868289874364,
+      "vm_p99_MPa": 0.9081294198507013,
+      "vm_max_MPa": 4.481681284187803,
+      "layer_y_tension_max_MPa": 4.462876561280794,
+      "layer_y_compression_max_MPa": 6.872963727956942,
+      "layer_y_shear_max_MPa": 2.2640880051182695
+    },
+    {
+      "torque_Nm": 0.06,
+      "mesh_mm": 1.45,
+      "left_bearing_mm": 0.2978486896538006,
+      "right_bearing_mm": 0.46570540578320047,
+      "motor_mount_mm": 0.3570424864024026,
+      "bearing_center_differential_mm": 0.6533282680018927,
+      "vm_p99_MPa": 2.233105130780413,
+      "vm_max_MPa": 11.020527748002793,
+      "layer_y_tension_max_MPa": 10.974286626100312,
+      "layer_y_compression_max_MPa": 16.90073047858264,
+      "layer_y_shear_max_MPa": 5.567429520782629
+    },
+    {
+      "torque_Nm": 0.0244,
+      "mesh_mm": 1.1,
+      "left_bearing_mm": 0.12453008739982983,
+      "right_bearing_mm": 0.19975646702524547,
+      "motor_mount_mm": 0.1472639166398223,
+      "bearing_center_differential_mm": 0.27486587662537676,
+      "vm_p99_MPa": 0.8810849848100818,
+      "vm_max_MPa": 4.360074035124659,
+      "layer_y_tension_max_MPa": 3.316259576140508,
+      "layer_y_compression_max_MPa": 5.988906096747148,
+      "layer_y_shear_max_MPa": 2.1980852624305753
+    },
+    {
+      "torque_Nm": 0.06,
+      "mesh_mm": 1.1,
+      "left_bearing_mm": 0.30622152639302413,
+      "right_bearing_mm": 0.4912044271112593,
+      "motor_mount_mm": 0.3621243851798909,
+      "bearing_center_differential_mm": 0.6758996966197789,
+      "vm_p99_MPa": 2.1666024216641353,
+      "vm_max_MPa": 10.72149352899506,
+      "layer_y_tension_max_MPa": 8.154736662640591,
+      "layer_y_compression_max_MPa": 14.726818270689707,
+      "layer_y_shear_max_MPa": 5.405127694501414
+    },
+    {
+      "torque_Nm": 0.0244,
+      "mesh_mm": 0.8,
+      "left_bearing_mm": 0.12947822668368308,
+      "right_bearing_mm": 0.20281097258986358,
+      "motor_mount_mm": 0.15451556148707052,
+      "bearing_center_differential_mm": 0.27966423655035677,
+      "vm_p99_MPa": 0.8316563135811719,
+      "vm_max_MPa": 4.482764801143663,
+      "layer_y_tension_max_MPa": 3.7351898391064244,
+      "layer_y_compression_max_MPa": 4.992185741726243,
+      "layer_y_shear_max_MPa": 2.382457772051085
+    },
+    {
+      "torque_Nm": 0.06,
+      "mesh_mm": 0.8,
+      "left_bearing_mm": 0.3183890820090567,
+      "right_bearing_mm": 0.4987155063685169,
+      "motor_mount_mm": 0.379956298738698,
+      "bearing_center_differential_mm": 0.6876989423369427,
+      "vm_p99_MPa": 2.04505650880616,
+      "vm_max_MPa": 11.023192133959826,
+      "layer_y_tension_max_MPa": 9.18489304698301,
+      "layer_y_compression_max_MPa": 12.275866578015352,
+      "layer_y_shear_max_MPa": 5.858502718158405
+    }
+  ],
+  "deflected_lid_replay": {
+    "1.45": [
+      {
+        "command_deg": 0,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          1.6070856999242644,
+          -0.4292572428059995
+        ],
+        "shaft_deg": 0.6543728513049967,
+        "bearing_center_slope_deg": 0.1953712842500682
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          -1.630126611930619,
+          0.43455677517486146
+        ],
+        "shaft_deg": -0.6561419937110731,
+        "bearing_center_slope_deg": 0.1953712842500682
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          6.469063390523307,
+          4.62122998721463
+        ],
+        "shaft_deg": 5.608112035557205,
+        "bearing_center_slope_deg": 0.1862664399537699
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          3.5152470696979634,
+          5.382506355886169
+        ],
+        "shaft_deg": 4.390678381188966,
+        "bearing_center_slope_deg": 0.1862664399537699
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          11.368716529837284,
+          9.659873135291537
+        ],
+        "shaft_deg": 10.57572628287259,
+        "bearing_center_slope_deg": 0.1792911199813979
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          8.620523310849645,
+          10.342853065169605
+        ],
+        "shaft_deg": 9.423494494177904,
+        "bearing_center_slope_deg": 0.1792911199813979
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          16.29824666700573,
+          14.689911079114362
+        ],
+        "shaft_deg": 15.554828542951826,
+        "bearing_center_slope_deg": 0.17410989399065396
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          13.694517237636342,
+          15.312155136606481
+        ],
+        "shaft_deg": 14.44475721766181,
+        "bearing_center_slope_deg": 0.17410989399065396
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          21.25262711608992,
+          19.713561696832993
+        ],
+        "shaft_deg": 20.543969175533782,
+        "bearing_center_slope_deg": 0.17049309053080236
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          18.742853258067115,
+          20.288078751302066
+        ],
+        "shaft_deg": 19.45596176874497,
+        "bearing_center_slope_deg": 0.17049309053080236
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          26.228818806931105,
+          24.73241077172595
+        ],
+        "shaft_deg": 25.54242488443255,
+        "bearing_center_slope_deg": 0.16828993814891996
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          23.7689560349521,
+          25.26897289184213
+        ],
+        "shaft_deg": 24.457871070784833,
+        "bearing_center_slope_deg": 0.16828993814891996
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          31.225333942436485,
+          29.747655991638865
+        ],
+        "shaft_deg": 30.55009932953328,
+        "bearing_center_slope_deg": 0.16741240998335843
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          28.774598366113,
+          30.25360727897309
+        ],
+        "shaft_deg": 29.450624447571734,
+        "bearing_center_slope_deg": 0.16741240998335843
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          36.242038012391916,
+          34.760275023822416
+        ],
+        "shaft_deg": 35.56751195633419,
+        "bearing_center_slope_deg": 0.16782635649503733
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          33.760169891886264,
+          35.240996617877556
+        ],
+        "shaft_deg": 34.43375875040288,
+        "bearing_center_slope_deg": 0.16782635649503733
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          41.280144814841066,
+          39.77115992532721
+        ],
+        "shaft_deg": 40.59587314870424,
+        "bearing_center_slope_deg": 0.1695481964070912
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          38.724741195481165,
+          40.23026604598191
+        ],
+        "shaft_deg": 39.406147533495016,
+        "bearing_center_slope_deg": 0.1695481964070912
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          46.3424074264207,
+          44.781250524653224
+        ],
+        "shaft_deg": 45.63726506590762,
+        "bearing_center_slope_deg": 0.17264655264165701
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          43.66594275290578,
+          45.22052572937903
+        ],
+        "shaft_deg": 44.365844768888834,
+        "bearing_center_slope_deg": 0.17264655264165701
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          51.43355953674101,
+          49.791702438624014
+        ],
+        "shaft_deg": 50.69497683347444,
+        "bearing_center_slope_deg": 0.17724914774344938
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          48.579632626041665,
+          50.210723660162614
+        ],
+        "shaft_deg": 49.30979594312512,
+        "bearing_center_slope_deg": 0.17724914774344938
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          56.56113854004508,
+          54.80414401614545
+        ],
+        "shaft_deg": 55.77409358533201,
+        "bearing_center_slope_deg": 0.18355630244069687
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          53.459273092808225,
+          55.199435014009296
+        ],
+        "shaft_deg": 54.233342219253146,
+        "bearing_center_slope_deg": 0.18355630244069687
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          61.736965176601906,
+          59.82112429592527
+        ],
+        "shaft_deg": 60.8825395117407,
+        "bearing_center_slope_deg": 0.19186385266893755
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          58.29485373716228,
+          60.18451765034151
+        ],
+        "shaft_deg": 59.12937678356647,
+        "bearing_center_slope_deg": 0.19186385266893755
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          66.9798595854614,
+          64.84696943338444
+        ],
+        "shaft_deg": 66.03299399906392,
+        "bearing_center_slope_deg": 0.2026007829680945
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          63.07105171637501,
+          65.16249910472548
+        ],
+        "shaft_deg": 63.98688431001351,
+        "bearing_center_slope_deg": 0.2026007829680945
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          72.32089599445305,
+          69.88955825551758
+        ],
+        "shaft_deg": 71.24662188321525,
+        "bearing_center_slope_deg": 0.21639151367482598
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          67.76403987694664,
+          70.12741878636315
+        ],
+        "shaft_deg": 68.78833518144803,
+        "bearing_center_slope_deg": 0.21639151367482598
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          77.81442375807558,
+          74.96434969455241
+        ],
+        "shaft_deg": 76.56094839351265,
+        "bearing_center_slope_deg": 0.23416215081619354
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          72.33579750813466,
+          75.06852890733391
+        ],
+        "shaft_deg": 73.50486076312797,
+        "bearing_center_slope_deg": 0.23416215081619354
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          83.56408141656996,
+          80.1046549948958
+        ],
+        "shaft_deg": 82.04850102393578,
+        "bearing_center_slope_deg": 0.2573304383101708
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          76.72365487491001,
+          79.96551235499582
+        ],
+        "shaft_deg": 78.08695611691167,
+        "bearing_center_slope_deg": 0.2573304383101708
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          89.7965816601554,
+          85.39283723892166
+        ],
+        "shaft_deg": 87.86936709597565,
+        "bearing_center_slope_deg": 0.28816778966855466
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          80.82056521011737,
+          84.77811536964067
+        ],
+        "shaft_deg": 82.44588890367521,
+        "bearing_center_slope_deg": 0.28816778966855466
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          97.15454363471594,
+          91.08998408361158
+        ],
+        "shaft_deg": 94.47432153043265,
+        "bearing_center_slope_deg": 0.3305510918418446
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          84.43751787794677,
+          89.4230531665701
+        ],
+        "shaft_deg": 86.41565961421799,
+        "bearing_center_slope_deg": 0.3305510918418446
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          -0.43345901550478344,
+          0.8850700004443798
+        ],
+        "shaft_deg": 0.24631665223947577,
+        "bearing_center_slope_deg": 0.12584492186669222
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          0.43350089825084964,
+          -0.8919050519782494
+        ],
+        "shaft_deg": -0.24648141597404855,
+        "bearing_center_slope_deg": 0.12584492186669222
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          4.61798148240715,
+          5.803174794220871
+        ],
+        "shaft_deg": 5.233358634617634,
+        "bearing_center_slope_deg": 0.11896618119627113
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          5.3821541644338575,
+          4.1922372241285135
+        ],
+        "shaft_deg": 4.766553375975148,
+        "bearing_center_slope_deg": 0.11896618119627113
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          9.657249878765843,
+          10.743729501658958
+        ],
+        "shaft_deg": 10.225211349453833,
+        "bearing_center_slope_deg": 0.11359657454548197
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          10.342943403065219,
+          9.253173302630895
+        ],
+        "shaft_deg": 9.774768781074346,
+        "bearing_center_slope_deg": 0.11359657454548197
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          14.687705346087785,
+          15.701831262000681
+        ],
+        "shaft_deg": 15.22133050057155,
+        "bearing_center_slope_deg": 0.10946691279925388
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          15.312534316849046,
+          14.29612812182387
+        ],
+        "shaft_deg": 14.778716628913086,
+        "bearing_center_slope_deg": 0.10946691279925388
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          19.711634262220336,
+          20.67433088492225
+        ],
+        "shaft_deg": 20.221453738164332,
+        "bearing_center_slope_deg": 0.10638888369575608
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          20.28865323943422,
+          19.32443800019756
+        ],
+        "shaft_deg": 19.778666248042075,
+        "bearing_center_slope_deg": 0.10638888369575608
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          24.730661727605835,
+          25.659309798126177
+        ],
+        "shaft_deg": 25.22557581342126,
+        "bearing_center_slope_deg": 0.10423224148208386
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          25.269683445269845,
+          24.340140939078243
+        ],
+        "shaft_deg": 24.77463084612261,
+        "bearing_center_slope_deg": 0.10423224148208386
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          29.746006812797006,
+          30.655788879201616
+        ],
+        "shaft_deg": 30.233952578870863,
+        "bearing_center_slope_deg": 0.10291057123254857
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          30.25441371307207,
+          29.34430363249417
+        ],
+        "shaft_deg": 29.766365272387098,
+        "bearing_center_slope_deg": 0.10291057123254857
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          34.758655888242785,
+          35.66359045137527
+        ],
+        "shaft_deg": 35.24713706994372,
+        "bearing_center_slope_deg": 0.10237254897294215
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          35.241867604085535,
+          34.33718195985656
+        ],
+        "shaft_deg": 34.75333255262462,
+        "bearing_center_slope_deg": 0.10237254897294215
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          39.76949847401787,
+          40.68331919125159
+        ],
+        "shaft_deg": 40.266056910514116,
+        "bearing_center_slope_deg": 0.1025969840196595
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          40.23117050884265,
+          39.318258796383766
+        ],
+        "shaft_deg": 39.73463097584273,
+        "bearing_center_slope_deg": 0.1025969840196595
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          44.77945860966939,
+          45.71645878165719
+        ],
+        "shaft_deg": 45.292152119837645,
+        "bearing_center_slope_deg": 0.10359072863312849
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          45.22142289068097,
+          44.28616962539044
+        ],
+        "shaft_deg": 44.708864652242994,
+        "bearing_center_slope_deg": 0.10359072863312849
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          49.78965607432013,
+          50.7656117196867
+        ],
+        "shaft_deg": 50.327609730168405,
+        "bearing_center_slope_deg": 0.1053890582344617
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          50.21154780367752,
+          49.238497874666486
+        ],
+        "shaft_deg": 49.67392540154291,
+        "bearing_center_slope_deg": 0.1053890582344617
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          54.80164758376609,
+          55.83495287318377
+        ],
+        "shaft_deg": 55.375764551940094,
+        "bearing_center_slope_deg": 0.10805851751182795
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          55.200067829756385,
+          54.171386655905444
+        ],
+        "shaft_deg": 54.62662636319496,
+        "bearing_center_slope_deg": 0.10805851751182795
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          59.81783937228921,
+          60.93104517962995
+        ],
+        "shaft_deg": 60.44180231234958,
+        "bearing_center_slope_deg": 0.11170258644668785
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          60.18473297666704,
+          59.07885673309252
+        ],
+        "shaft_deg": 59.56207472430223,
+        "bearing_center_slope_deg": 0.11170258644668785
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          64.8422604988763,
+          66.06432720142445
+        ],
+        "shaft_deg": 65.53404680702917,
+        "bearing_center_slope_deg": 0.11647090201772253
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          65.16184486889907,
+          63.95161460826023
+        ],
+        "shaft_deg": 64.47256349253908,
+        "bearing_center_slope_deg": 0.11647090201772253
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          69.88212713645225,
+          71.25195313615839
+        ],
+        "shaft_deg": 70.6664543735117,
+        "bearing_center_slope_deg": 0.12257317748410021
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          70.12494866547063,
+          68.77492084480612
+        ],
+        "shaft_deg": 69.34553338948045,
+        "bearing_center_slope_deg": 0.12257317748410021
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          74.9512720227421,
+          76.52361442086733
+        ],
+        "shaft_deg": 75.86382300966133,
+        "bearing_center_slope_deg": 0.1302992069780683
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          75.06215055801262,
+          73.52463273782271
+        ],
+        "shaft_deg": 74.15964373979153,
+        "bearing_center_slope_deg": 0.1302992069780683
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          80.07845467699828,
+          81.93474595121879
+        ],
+        "shaft_deg": 81.17382128339477,
+        "bearing_center_slope_deg": 0.14004551485791567
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          79.95028283890395,
+          78.15951908492332
+        ],
+        "shaft_deg": 78.87678789185269,
+        "bearing_center_slope_deg": 0.14004551485791567
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          85.33054472416677,
+          87.60132104685081
+        ],
+        "shaft_deg": 86.69909604624998,
+        "bearing_center_slope_deg": 0.15234341800580858
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          84.74141179248323,
+          82.60562132213308
+        ],
+        "shaft_deg": 83.42494973485097,
+        "bearing_center_slope_deg": 0.15234341800580858
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          90.89395159481519,
+          93.81735389990085
+        ],
+        "shaft_deg": 92.70594660293087,
+        "bearing_center_slope_deg": 0.16785551656118514
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          89.32979449601815,
+          86.72326097895827
+        ],
+        "shaft_deg": 87.65957534529828,
+        "bearing_center_slope_deg": 0.16785551656118514
+      }
+    ],
+    "1.1": [
+      {
+        "command_deg": 0,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          1.6548710184875188,
+          -0.4430494078873531
+        ],
+        "shaft_deg": 0.681399510289306,
+        "bearing_center_slope_deg": 0.20141362519698808
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          -1.6792691744265371,
+          0.4488557385329385
+        ],
+        "shaft_deg": -0.6832958895720709,
+        "bearing_center_slope_deg": 0.20141362519698808
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          6.513099658366267,
+          4.60910040674048
+        ],
+        "shaft_deg": 5.633266452100657,
+        "bearing_center_slope_deg": 0.19204715153508928
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          3.4702845468502943,
+          5.394994809790216
+        ],
+        "shaft_deg": 4.365437201897323,
+        "bearing_center_slope_deg": 0.19204715153508928
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          11.410036697161306,
+          9.649018148409116
+        ],
+        "shaft_deg": 10.59956165325645,
+        "bearing_center_slope_deg": 0.1848731653584323
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          8.578567731574287,
+          10.353969891790102
+        ],
+        "shaft_deg": 9.399603653315644,
+        "bearing_center_slope_deg": 0.1848731653584323
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          16.337687155460507,
+          14.680047042707804
+        ],
+        "shaft_deg": 15.577802692033867,
+        "bearing_center_slope_deg": 0.17954687775278502
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          13.654650876089306,
+          15.322216123524615
+        ],
+        "shaft_deg": 14.421754365077653,
+        "bearing_center_slope_deg": 0.17954687775278502
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          21.29089818644163,
+          19.704476873745044
+        ],
+        "shaft_deg": 20.566481583678165,
+        "bearing_center_slope_deg": 0.17583228036733414
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          18.70431938720725,
+          20.297316946139198
+        ],
+        "shaft_deg": 19.433446238383333,
+        "bearing_center_slope_deg": 0.17583228036733414
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          26.266557191955226,
+          24.723945018517107
+        ],
+        "shaft_deg": 25.5648452943847,
+        "bearing_center_slope_deg": 0.17357455945266023
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          23.731094184539856,
+          25.2775634869222
+        ],
+        "shaft_deg": 24.435474866991473,
+        "bearing_center_slope_deg": 0.17357455945266023
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          31.263145886940613,
+          29.739688155096573
+        ],
+        "shaft_deg": 30.572792340984225,
+        "bearing_center_slope_deg": 0.17268351228315745
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          28.736795654683775,
+          30.261683095217027
+        ],
+        "shaft_deg": 29.427987935840342,
+        "bearing_center_slope_deg": 0.17268351228315745
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          36.28053882815938,
+          34.752715716209124
+        ],
+        "shaft_deg": 35.59086108416095,
+        "bearing_center_slope_deg": 0.1731244613288618
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          33.72182004351075,
+          35.24865743673272
+        ],
+        "shaft_deg": 34.41050763129289,
+        "bearing_center_slope_deg": 0.1731244613288618
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          41.320000462344886,
+          39.76394866974854
+        ],
+        "shaft_deg": 40.62030774899239,
+        "bearing_center_slope_deg": 0.1749148937598067
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          38.68520516672656,
+          40.237583430925184
+        ],
+        "shaft_deg": 39.381868030080106,
+        "bearing_center_slope_deg": 0.1749148937598067
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          46.384384380717606,
+          44.77435733395599
+        ],
+        "shaft_deg": 45.663294323119125,
+        "bearing_center_slope_deg": 0.17812620347297858
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          43.624505531681734,
+          45.227543908771025
+        ],
+        "shaft_deg": 44.340053610166436,
+        "bearing_center_slope_deg": 0.17812620347297858
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          51.478591699065625,
+          49.78513514038394
+        ],
+        "shaft_deg": 50.72323700929875,
+        "bearing_center_slope_deg": 0.18289087043693647
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          48.53545009421621,
+          50.21745611650334
+        ],
+        "shaft_deg": 49.28190058771857,
+        "bearing_center_slope_deg": 0.18289087043693647
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          56.61042548768806,
+          54.797964656805206
+        ],
+        "shaft_deg": 55.80541891631704,
+        "bearing_center_slope_deg": 0.18941647773136447
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          53.41130074919703,
+          55.205855316967195
+        ],
+        "shaft_deg": 54.202584478760336,
+        "bearing_center_slope_deg": 0.18941647773136447
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          61.792127739775395,
+          59.81548196613011
+        ],
+        "shaft_deg": 60.91807581213911,
+        "bearing_center_slope_deg": 0.19800949400381546
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          58.24174497807777,
+          60.1905413783833
+        ],
+        "shaft_deg": 59.09474881501917,
+        "bearing_center_slope_deg": 0.19800949400381546
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          67.04320456474379,
+          64.84216588827722
+        ],
+        "shaft_deg": 66.07439292596888,
+        "bearing_center_slope_deg": 0.20911432953138548
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          63.01100610667204,
+          65.16795076972657
+        ],
+        "shaft_deg": 63.946998408842724,
+        "bearing_center_slope_deg": 0.20911432953138548
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          72.39590396273236,
+          69.88618540321598
+        ],
+        "shaft_deg": 71.29639871922242,
+        "bearing_center_slope_deg": 0.2233780019708167
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          67.69456952702656,
+          70.13197239076447
+        ],
+        "shaft_deg": 68.74121533507227,
+        "bearing_center_slope_deg": 0.2233780019708167
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          77.90674321910632,
+          74.96360280557269
+        ],
+        "shaft_deg": 76.62320660106258,
+        "bearing_center_slope_deg": 0.2417605101069095
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          72.2533600942496,
+          75.0716014874219
+        ],
+        "shaft_deg": 73.44760044707782,
+        "bearing_center_slope_deg": 0.2417605101069095
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          83.68386455624064,
+          80.10914525148887
+        ],
+        "shaft_deg": 82.13061071525695,
+        "bearing_center_slope_deg": 0.26573232073643493
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          76.62307598516844,
+          79.96607598611526
+        ],
+        "shaft_deg": 78.01514955226088,
+        "bearing_center_slope_deg": 0.26573232073643493
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          89.96536899474361,
+          85.40919882174944
+        ],
+        "shaft_deg": 87.98678336597645,
+        "bearing_center_slope_deg": 0.29765116511938783
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          80.69416077030127,
+          84.774385493623
+        ],
+        "shaft_deg": 82.35270198493346,
+        "bearing_center_slope_deg": 0.29765116511938783
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          97.43685657164696,
+          91.14156535962385
+        ],
+        "shaft_deg": 94.67159342694474,
+        "bearing_center_slope_deg": 0.34154560305162446
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          84.27392048006682,
+          89.41208029826225
+        ],
+        "shaft_deg": 86.2904436691298,
+        "bearing_center_slope_deg": 0.34154560305162446
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          -0.4469734111971599,
+          0.9113940263844924
+        ],
+        "shaft_deg": 0.25004856668738784,
+        "bearing_center_slope_deg": 0.1296789481205714
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          0.44698316558682827,
+          -0.918627175568206
+        ],
+        "shaft_deg": -0.2502131950324906,
+        "bearing_center_slope_deg": 0.1296789481205714
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          4.606167482845001,
+          5.826997966149444
+        ],
+        "shaft_deg": 5.237101194568522,
+        "bearing_center_slope_deg": 0.12257043814380111
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          5.393954057957937,
+          4.168147932121066
+        ],
+        "shaft_deg": 4.762812970349005,
+        "bearing_center_slope_deg": 0.12257043814380111
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          9.646731720179686,
+          10.765729504546641
+        ],
+        "shaft_deg": 10.229006001895076,
+        "bearing_center_slope_deg": 0.11701997144620244
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          10.353458644037707,
+          9.230994579393437
+        ],
+        "shaft_deg": 9.770978517232733,
+        "bearing_center_slope_deg": 0.11701997144620244
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          14.678191323438002,
+          15.72253458653563
+        ],
+        "shaft_deg": 15.225226754507736,
+        "bearing_center_slope_deg": 0.11274912968326432
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          15.322053198285225,
+          14.275307933510927
+        ],
+        "shaft_deg": 14.774827343500178,
+        "bearing_center_slope_deg": 0.11274912968326432
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          19.702909240369728,
+          20.694166308428635
+        ],
+        "shaft_deg": 20.225509392693077,
+        "bearing_center_slope_deg": 0.10956308770648382
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          20.297389305069682,
+          19.304533044445456
+        ],
+        "shaft_deg": 19.77462069528092,
+        "bearing_center_slope_deg": 0.10956308770648382
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          24.722564826948062,
+          25.67864568415616
+        ],
+        "shaft_deg": 25.22985913357916,
+        "bearing_center_slope_deg": 0.10732700335292786
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          25.277797083061,
+          24.320775326939447
+        ],
+        "shaft_deg": 24.770361629123375,
+        "bearing_center_slope_deg": 0.10732700335292786
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          29.73841770840804,
+          30.67496136305096
+        ],
+        "shaft_deg": 30.238546191376148,
+        "bearing_center_slope_deg": 0.10595127568763232
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          30.262025563752452,
+          29.325138801779264
+        ],
+        "shaft_deg": 29.761791119039483,
+        "bearing_center_slope_deg": 0.10595127568763232
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          34.75148692192137,
+          35.68292715636518
+        ],
+        "shaft_deg": 35.25214388219265,
+        "bearing_center_slope_deg": 0.10538248249140833
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          35.24906641034881,
+          34.31789237204643
+        ],
+        "shaft_deg": 34.74835268801531,
+        "bearing_center_slope_deg": 0.10538248249140833
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          39.762691288694924,
+          40.70316204188413
+        ],
+        "shaft_deg": 40.27160886983665,
+        "bearing_center_slope_deg": 0.10559822004585906
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          40.23801665576483,
+          39.2985096125229
+        ],
+        "shaft_deg": 39.72911687697112,
+        "bearing_center_slope_deg": 0.10559822004585906
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          44.77298512651418,
+          45.7371893425031
+        ],
+        "shaft_deg": 45.29842333608606,
+        "bearing_center_slope_deg": 0.1066048929660705
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          45.22794787847275,
+          44.26559311436987
+        ],
+        "shaft_deg": 44.702647866372814,
+        "bearing_center_slope_deg": 0.1066048929660705
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          49.78352478286104,
+          50.78768328208823
+        ],
+        "shaft_deg": 50.33483666565319,
+        "bearing_center_slope_deg": 0.10843803454839678
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          50.21774888341691,
+          49.216665038129854
+        ],
+        "shaft_deg": 49.66677915207457,
+        "bearing_center_slope_deg": 0.10843803454839678
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          54.795917801752516,
+          55.858935641302175
+        ],
+        "shaft_deg": 55.384278165151876,
+        "bearing_center_slope_deg": 0.11116513749187515
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          55.20589563256016,
+          54.14776938406275
+        ],
+        "shaft_deg": 54.61823700099032,
+        "bearing_center_slope_deg": 0.11116513749187515
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          59.812649245545515,
+          60.957695515678076
+        ],
+        "shaft_deg": 60.452081364900515,
+        "bearing_center_slope_deg": 0.11489133423909428
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          60.190067551463855,
+          59.052773315382055
+        ],
+        "shaft_deg": 59.55199602734947,
+        "bearing_center_slope_deg": 0.11489133423909428
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          64.83788108467934,
+          66.09470184857058
+        ],
+        "shaft_deg": 65.54681071661793,
+        "bearing_center_slope_deg": 0.11976863825862825
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          65.1664508586089,
+          63.92214665882959
+        ],
+        "shaft_deg": 64.46014098676406,
+        "bearing_center_slope_deg": 0.11976863825862825
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          69.8790702677092,
+          71.28761226770204
+        ],
+        "shaft_deg": 70.682835118047,
+        "bearing_center_slope_deg": 0.12600983085009348
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          70.12839062235602,
+          68.74078075311843
+        ],
+        "shaft_deg": 69.32977433920327,
+        "bearing_center_slope_deg": 0.12600983085009348
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          74.95051958316711,
+          76.56701592691138
+        ],
+        "shaft_deg": 75.88570960823465,
+        "bearing_center_slope_deg": 0.133908229715548
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          75.06362820286765,
+          73.48394404175286
+        ],
+        "shaft_deg": 74.13898501250496,
+        "bearing_center_slope_deg": 0.133908229715548
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          80.08199641953318,
+          81.99010697787631
+        ],
+        "shaft_deg": 81.20462988965319,
+        "bearing_center_slope_deg": 0.14386347616653788
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          79.94829830709328,
+          78.10944212880727
+        ],
+        "shaft_deg": 78.84866568155006,
+        "bearing_center_slope_deg": 0.14386347616653788
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          85.3428519592955,
+          87.67686519166128
+        ],
+        "shaft_deg": 86.74580146080235,
+        "bearing_center_slope_deg": 0.1564068571578509
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          84.73307272241402,
+          82.54171133273836
+        ],
+        "shaft_deg": 83.38497986317701,
+        "bearing_center_slope_deg": 0.1564068571578509
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          90.92732934245441,
+          93.93330798628787
+        ],
+        "shaft_deg": 92.78626391279798,
+        "bearing_center_slope_deg": 0.17218912606544692
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          89.30932939648353,
+          86.6384304690322
+        ],
+        "shaft_deg": 87.60000103291492,
+        "bearing_center_slope_deg": 0.17218912606544692
+      }
+    ],
+    "0.8": [
+      {
+        "command_deg": 0,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          1.6933751717168835,
+          -0.4490408457560968
+        ],
+        "shaft_deg": 0.6907474571574188,
+        "bearing_center_slope_deg": 0.20557436934665077
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          -1.7188649026194667,
+          0.45512775649530307
+        ],
+        "shaft_deg": -0.6925690794939829,
+        "bearing_center_slope_deg": 0.20557436934665077
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          6.547987207513723,
+          4.603765563196518
+        ],
+        "shaft_deg": 5.641823702056983,
+        "bearing_center_slope_deg": 0.19599221549539408
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          3.434665331191713,
+          5.400531462763239
+        ],
+        "shaft_deg": 4.356940018249795,
+        "bearing_center_slope_deg": 0.19599221549539408
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          11.442288808727476,
+          9.644218636518412
+        ],
+        "shaft_deg": 10.607585291276349,
+        "bearing_center_slope_deg": 0.18865096558666716
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          8.54582127660315,
+          10.358919760943335
+        ],
+        "shaft_deg": 9.391630920159475,
+        "bearing_center_slope_deg": 0.18865096558666716
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          16.368075761480856,
+          14.675700439107903
+        ],
+        "shaft_deg": 15.585503130956253,
+        "bearing_center_slope_deg": 0.18319756375876106
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          13.62393505461297,
+          15.326678807010738
+        ],
+        "shaft_deg": 14.414099946066154,
+        "bearing_center_slope_deg": 0.18319756375876106
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          21.320059469229726,
+          19.700529658051547
+        ],
+        "shaft_deg": 20.574041929065608,
+        "bearing_center_slope_deg": 0.1793902599382267
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          18.67495805625729,
+          20.301357257707245
+        ],
+        "shaft_deg": 19.425930687075557,
+        "bearing_center_slope_deg": 0.1793902599382267
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          26.295044485465738,
+          24.720367647424265
+        ],
+        "shaft_deg": 25.572436542701993,
+        "bearing_center_slope_deg": 0.17707033635519295
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          23.70251317530283,
+          25.28121882234235
+        ],
+        "shaft_deg": 24.427930780855554,
+        "bearing_center_slope_deg": 0.17707033635519295
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          31.2914710078298,
+          29.736473692369287
+        ],
+        "shaft_deg": 30.580586805957637,
+        "bearing_center_slope_deg": 0.1761450999432914
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          28.708476171130616,
+          30.264966310527758
+        ],
+        "shaft_deg": 29.420247118520795,
+        "bearing_center_slope_deg": 0.1761450999432914
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          36.30920816053895,
+          34.74988156293948
+        ],
+        "shaft_deg": 35.59904603340359,
+        "bearing_center_slope_deg": 0.17657854493512215
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          33.69326091770307,
+          35.25155618310998
+        ],
+        "shaft_deg": 34.402388234836266,
+        "bearing_center_slope_deg": 0.17657854493512215
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          41.349551041869326,
+          39.76154170658631
+        ],
+        "shaft_deg": 40.62910131027249,
+        "bearing_center_slope_deg": 0.17838786398204312
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          38.655888053604365,
+          40.24005596350098
+        ],
+        "shaft_deg": 39.37315986435078,
+        "bearing_center_slope_deg": 0.17838786398204312
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          46.41542545581172,
+          44.772463629845404
+        ],
+        "shaft_deg": 45.67296633320777,
+        "bearing_center_slope_deg": 0.18164516127554953
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          43.59385804631256,
+          45.229510539418776
+        ],
+        "shaft_deg": 44.33049940498095,
+        "bearing_center_slope_deg": 0.18164516127554953
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          51.51185899624433,
+          49.783896636006844
+        ],
+        "shaft_deg": 50.73413889886511,
+        "bearing_center_slope_deg": 0.186484697014948
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          48.50280156883824,
+          50.21878439892808
+        ],
+        "shaft_deg": 49.27117004672231,
+        "bearing_center_slope_deg": 0.186484697014948
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          56.646859593489644,
+          54.797607463836385
+        ],
+        "shaft_deg": 55.81802963182441,
+        "bearing_center_slope_deg": 0.19311707469261846
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          53.37582369296859,
+          55.20633533092066
+        ],
+        "shaft_deg": 54.19023615100421,
+        "bearing_center_slope_deg": 0.19311707469261846
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          61.832997022206946,
+          59.816365346812354
+        ],
+        "shaft_deg": 60.93307677776721,
+        "bearing_center_slope_deg": 0.2018533295663899
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          58.20237200927699,
+          60.18984441113705
+        ],
+        "shaft_deg": 59.08017147413159,
+        "bearing_center_slope_deg": 0.2018533295663899
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          67.0903130030682,
+          64.84487052504849
+        ],
+        "shaft_deg": 66.09279814706142,
+        "bearing_center_slope_deg": 0.2131444856012669
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          62.966306116923064,
+          65.16555887452667
+        ],
+        "shaft_deg": 63.92931748854662,
+        "bearing_center_slope_deg": 0.2131444856012669
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          72.45197214744508,
+          69.89168218037616
+        ],
+        "shaft_deg": 71.31979729358846,
+        "bearing_center_slope_deg": 0.22764702298555733
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          67.64255645293804,
+          70.12705480099768
+        ],
+        "shaft_deg": 68.71913857657063,
+        "bearing_center_slope_deg": 0.22764702298555733
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          77.97618091665863,
+          74.97360371911336
+        ],
+        "shaft_deg": 76.65425857502468,
+        "bearing_center_slope_deg": 0.24633454369023747
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          72.19119069944855,
+          75.0627904216116
+        ],
+        "shaft_deg": 73.41915586782548,
+        "bearing_center_slope_deg": 0.24633454369023747
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          83.77457643486203,
+          80.12692925697954
+        ],
+        "shaft_deg": 82.17420428027714,
+        "bearing_center_slope_deg": 0.27069738296710705
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          76.5465691180255,
+          79.95104580877799
+        ],
+        "shaft_deg": 77.97723171082676,
+        "bearing_center_slope_deg": 0.27069738296710705
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          90.09405479334129,
+          85.44199590795034
+        ],
+        "shaft_deg": 88.05337691786455,
+        "bearing_center_slope_deg": 0.3031229942796956
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          80.59705306484479,
+          84.7490399249251
+        ],
+        "shaft_deg": 82.30028744233557,
+        "bearing_center_slope_deg": 0.3031229942796956
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          97.65341364854118,
+          91.21098232954515
+        ],
+        "shaft_deg": 94.79195007358275,
+        "bearing_center_slope_deg": 0.3476857132719914
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": -52.45,
+        "lid_deg": [
+          84.14683133241954,
+          89.36896337523625
+        ],
+        "shaft_deg": 86.2153034504718,
+        "bearing_center_slope_deg": 0.3476857132719914
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          -0.4528200503089738,
+          0.9379977238951472
+        ],
+        "shaft_deg": 0.26572975841653657,
+        "bearing_center_slope_deg": 0.13268101845733668
+      },
+      {
+        "command_deg": 0,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          0.4529571047205112,
+          -0.9456373723384955
+        ],
+        "shaft_deg": -0.2658834101436344,
+        "bearing_center_slope_deg": 0.13268101845733668
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          4.600982814764208,
+          5.851275324379328
+        ],
+        "shaft_deg": 5.251488557968439,
+        "bearing_center_slope_deg": 0.1254318322411475
+      },
+      {
+        "command_deg": 5,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          5.399230432513412,
+          4.14360152721927
+        ],
+        "shaft_deg": 4.748437482504082,
+        "bearing_center_slope_deg": 0.1254318322411475
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          9.642084990775345,
+          10.788338369472362
+        ],
+        "shaft_deg": 10.242492537033494,
+        "bearing_center_slope_deg": 0.11977340661061192
+      },
+      {
+        "command_deg": 10,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          10.358174738819121,
+          9.208207555251066
+        ],
+        "shaft_deg": 9.757505697863998,
+        "bearing_center_slope_deg": 0.11977340661061192
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          14.673999144464286,
+          15.74400042977588
+        ],
+        "shaft_deg": 15.23813131181522,
+        "bearing_center_slope_deg": 0.11542211022184841
+      },
+      {
+        "command_deg": 15,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          15.326300840614323,
+          14.25372846699329
+        ],
+        "shaft_deg": 14.761939467606826,
+        "bearing_center_slope_deg": 0.11542211022184841
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          19.699118144256822,
+          20.71493061123257
+        ],
+        "shaft_deg": 20.238105751442834,
+        "bearing_center_slope_deg": 0.11217954118814757
+      },
+      {
+        "command_deg": 20,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          20.301227677054698,
+          19.283705018903145
+        ],
+        "shaft_deg": 19.762045394340063,
+        "bearing_center_slope_deg": 0.11217954118814757
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          24.719145950175236,
+          25.699101671636246
+        ],
+        "shaft_deg": 25.24239812625077,
+        "bearing_center_slope_deg": 0.10990849702817385
+      },
+      {
+        "command_deg": 25,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          25.28125927345521,
+          24.300298405172896
+        ],
+        "shaft_deg": 24.757849963937993,
+        "bearing_center_slope_deg": 0.10990849702817385
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          29.735365236085332,
+          30.695482980132383
+        ],
+        "shaft_deg": 30.251274488886047,
+        "bearing_center_slope_deg": 0.10851797942946907
+      },
+      {
+        "command_deg": 30,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          30.265120937230154,
+          29.30463756398146
+        ],
+        "shaft_deg": 29.74909911979085,
+        "bearing_center_slope_deg": 0.10851797942946907
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          34.74881974634535,
+          35.70389560568556
+        ],
+        "shaft_deg": 35.265322229148545,
+        "bearing_center_slope_deg": 0.10795399089241207
+      },
+      {
+        "command_deg": 35,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          35.25177959887633,
+          34.296989375980466
+        ],
+        "shaft_deg": 34.735223660265504,
+        "bearing_center_slope_deg": 0.10795399089241207
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          39.76045814744926,
+          40.72499370922115
+        ],
+        "shaft_deg": 40.28553244503542,
+        "bearing_center_slope_deg": 0.10819431880936992
+      },
+      {
+        "command_deg": 40,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          40.24030310835347,
+          39.276798369489875
+        ],
+        "shaft_deg": 39.715261977175714,
+        "bearing_center_slope_deg": 0.10819431880936992
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          44.77127434720623,
+          45.76036938633433
+        ],
+        "shaft_deg": 45.31344747934358,
+        "bearing_center_slope_deg": 0.10924634441586949
+      },
+      {
+        "command_deg": 45,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          45.22972508371965,
+          44.242607048706176
+        ],
+        "shaft_deg": 44.687722064851734,
+        "bearing_center_slope_deg": 0.10924634441586949
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          49.78248101392773,
+          50.81281079152764
+        ],
+        "shaft_deg": 50.351412701481856,
+        "bearing_center_slope_deg": 0.11114746077554946
+      },
+      {
+        "command_deg": 50,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          50.218881301329,
+          49.19183759304321
+        ],
+        "shaft_deg": 49.65034859997747,
+        "bearing_center_slope_deg": 0.11114746077554946
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          54.795770308620824,
+          55.88678983925892
+        ],
+        "shaft_deg": 55.40300714715816,
+        "bearing_center_slope_deg": 0.1139680985590793
+      },
+      {
+        "command_deg": 55,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          55.20616963198642,
+          54.12037826037389
+        ],
+        "shaft_deg": 54.599731610203314,
+        "bearing_center_slope_deg": 0.1139680985590793
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          59.81376065807312,
+          60.98933987397431
+        ],
+        "shaft_deg": 60.47379986753301,
+        "bearing_center_slope_deg": 0.11781773914827
+      },
+      {
+        "command_deg": 60,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          60.18914952496949,
+          59.02185759926546
+        ],
+        "shaft_deg": 59.53063691857938,
+        "bearing_center_slope_deg": 0.11781773914827
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          64.8408346420425,
+          66.13165875703112
+        ],
+        "shaft_deg": 65.57273619644276,
+        "bearing_center_slope_deg": 0.12285470235532628
+      },
+      {
+        "command_deg": 65,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          65.16381573566157,
+          63.88637768126308
+        ],
+        "shaft_deg": 64.43482465706879,
+        "bearing_center_slope_deg": 0.12285470235532628
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          69.88483486128592,
+          71.33217708519017
+        ],
+        "shaft_deg": 70.71482904429556,
+        "bearing_center_slope_deg": 0.12930093547563365
+      },
+      {
+        "command_deg": 70,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          70.12319620825139,
+          68.6982527222217
+        ],
+        "shaft_deg": 69.29888053335779,
+        "bearing_center_slope_deg": 0.12930093547563365
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          74.96078685487674,
+          76.62287145514453
+        ],
+        "shaft_deg": 75.92679462815974,
+        "bearing_center_slope_deg": 0.13746331479323623
+      },
+      {
+        "command_deg": 75,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          75.05448678012591,
+          73.43182280725763
+        ],
+        "shaft_deg": 74.10004672886878,
+        "bearing_center_slope_deg": 0.13746331479323623
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          80.09994894785476,
+          82.06367208139328
+        ],
+        "shaft_deg": 81.26012766888611,
+        "bearing_center_slope_deg": 0.1477621585792704
+      },
+      {
+        "command_deg": 80,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          79.93284809880795,
+          78.04336035518666
+        ],
+        "shaft_deg": 78.7977862251205,
+        "bearing_center_slope_deg": 0.1477621585792704
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          85.37523763053252,
+          87.7808182637201
+        ],
+        "shaft_deg": 86.82630604095034,
+        "bearing_center_slope_deg": 0.16076170836129205
+      },
+      {
+        "command_deg": 85,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          84.70715927375116,
+          82.45472047067318
+        ],
+        "shaft_deg": 83.31579419387144,
+        "bearing_center_slope_deg": 0.16076170836129205
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": -0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          90.9920717240204,
+          94.09914498581873
+        ],
+        "shaft_deg": 92.91821011866357,
+        "bearing_center_slope_deg": 0.17716857030210278
+      },
+      {
+        "command_deg": 90,
+        "torque_Nm": 0.031,
+        "resisting_crank_x_mm": 52.45,
+        "lid_deg": [
+          89.26548558640582,
+          86.51927057701488
+        ],
+        "shaft_deg": 87.50191307194456,
+        "bearing_center_slope_deg": 0.17716857030210278
+      }
+    ]
+  },
+  "replayed_unchanged_inputs": {
+    "source_report_sha256": "96f311d9da59efe4c7183f8b1f5ed09f144ff128a87432833709c85797428650",
+    "source_cad_sha256": "c30c199d787d6f1d538977a9743e732a71c433befcd37dd34cd51fa8f86d06d1",
+    "identical_mesh_sha256": {
+      "Part063": "d44660332152ffb8bd8721f8ce0bf375ca8f333d1fbebd4bdb1fda8981f17c85"
+    },
+    "placement_and_kinematic_metadata_unchanged": true
+  }
+}

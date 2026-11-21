@@ -1,0 +1,399 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "sliced_grams_sha256": "27fb7007c2f3f809c9cf45d4c0b2d220a2eea1325f70ebc80ebe37201cf0a608",
+  "firmware_sha256": "95dd62c6522740ee7c62d8b1811913c9f13fac8498bb60662b2aa976df3d1170",
+  "jaw_mass_g": 47.60009406760989,
+  "jaw_COM_relative_to_hinge_mm": [
+    0.357387581498407,
+    -22.635633257993796,
+    -51.83304183925154
+  ],
+  "centered_closed_static_opening_torque_Nm": 0.010569865651855755,
+  "worst_released_pose_static_opening_torque_Nm": 0.017257911431641248,
+  "tracking_closed_wrench": {
+    "opening_torque_Nm": [
+      0.007992740675991893,
+      0.01718753180606869
+    ],
+    "maximum_axial_load_N": 0.011838645428049438
+  },
+  "worst_closed_opening_budget_Nm": 0.017257911431641248,
+  "incidental_force_N": 0.25,
+  "outer_jaw_lever_m": 0.1044228158618575,
+  "incidental_torque_Nm": 0.026105703965464376,
+  "assumed_min_voltage_V_at_actuator": 4.5,
+  "warm_derating": 0.55,
+  "nominal_PWM_cap_fraction": 0.1807909604519774,
+  "static_PWM_model_cap_Nm": 0.04788179052585832,
+  "low_hold_PWM_example": 100.0,
+  "low_hold_voltage_sweep": {
+    "3.7": {
+      "cap_Nm": 0.02610169491525424,
+      "nominal_gravity_margin_Nm": 0.00884378348361299,
+      "with_0p25N_margin_Nm": -0.017261920481851385
+    },
+    "4.0": {
+      "cap_Nm": 0.02753585397653194,
+      "nominal_gravity_margin_Nm": 0.010277942544890693,
+      "with_0p25N_margin_Nm": -0.015827761420573683
+    },
+    "4.5": {
+      "cap_Nm": 0.02992611907866145,
+      "nominal_gravity_margin_Nm": 0.012668207647020202,
+      "with_0p25N_margin_Nm": -0.013437496318444174
+    },
+    "5.0": {
+      "cap_Nm": 0.03231638418079096,
+      "nominal_gravity_margin_Nm": 0.015058472749149714,
+      "with_0p25N_margin_Nm": -0.011047231216314662
+    }
+  },
+  "slow_recovery_from_released_jaw": {
+    "centered_neck": {
+      "PWM100_velocity7": {
+        "minimum_margin_Nm": 0.001842717949339566,
+        "demand_signed_Nm": -0.023499406943275375,
+        "at_jaw_deg": 0.22438351049739585,
+        "at_speed_deg_s": -9.618,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0,
+        "profile": {
+          "duration_s_one_way": 1.063745923490147,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 9.618,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM120_velocity7": {
+        "minimum_margin_Nm": 0.007827941765071858,
+        "demand_signed_Nm": -0.023499406943275375,
+        "at_jaw_deg": 0.22438351049739585,
+        "at_speed_deg_s": -9.618,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0,
+        "profile": {
+          "duration_s_one_way": 1.063745923490147,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 9.618,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM160_velocity7": {
+        "minimum_margin_Nm": 0.019798389396536435,
+        "demand_signed_Nm": -0.023499406943275375,
+        "at_jaw_deg": 0.22438351049739585,
+        "at_speed_deg_s": -9.618,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0,
+        "profile": {
+          "duration_s_one_way": 1.063745923490147,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 9.618,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM100_velocity35": {
+        "minimum_margin_Nm": -0.014815870363949891,
+        "demand_signed_Nm": -0.02293004167135968,
+        "at_jaw_deg": 4.919580400000001,
+        "at_speed_deg_s": -45.76517882646588,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0,
+        "profile": {
+          "duration_s_one_way": 0.4274166626589919,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 45.856892611689254,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM120_velocity35": {
+        "minimum_margin_Nm": -0.0088306465482176,
+        "demand_signed_Nm": -0.02293004167135968,
+        "at_jaw_deg": 4.919580400000001,
+        "at_speed_deg_s": -45.76517882646588,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0,
+        "profile": {
+          "duration_s_one_way": 0.4274166626589919,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 45.856892611689254,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM160_velocity35": {
+        "minimum_margin_Nm": 0.00313980108324698,
+        "demand_signed_Nm": -0.02293004167135968,
+        "at_jaw_deg": 4.919580400000001,
+        "at_speed_deg_s": -45.76517882646588,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0,
+        "profile": {
+          "duration_s_one_way": 0.4274166626589919,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 45.856892611689254,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      }
+    },
+    "neck_at_feedback_limits": {
+      "PWM100_velocity7": {
+        "minimum_margin_Nm": -0.0029910051471262328,
+        "demand_signed_Nm": -0.028333130039741174,
+        "at_jaw_deg": 0.22438351049739585,
+        "at_speed_deg_s": -9.618,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -14.326171875,
+        "profile": {
+          "duration_s_one_way": 1.063745923490147,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 9.618,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM120_velocity7": {
+        "minimum_margin_Nm": 0.0029942186686060593,
+        "demand_signed_Nm": -0.028333130039741174,
+        "at_jaw_deg": 0.22438351049739585,
+        "at_speed_deg_s": -9.618,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -14.326171875,
+        "profile": {
+          "duration_s_one_way": 1.063745923490147,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 9.618,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM160_velocity7": {
+        "minimum_margin_Nm": 0.014964666300070636,
+        "demand_signed_Nm": -0.028333130039741174,
+        "at_jaw_deg": 0.22438351049739585,
+        "at_speed_deg_s": -9.618,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -14.326171875,
+        "profile": {
+          "duration_s_one_way": 1.063745923490147,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 9.618,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM100_velocity35": {
+        "minimum_margin_Nm": -0.019876118534552248,
+        "demand_signed_Nm": -0.027990289841962036,
+        "at_jaw_deg": 4.919580400000001,
+        "at_speed_deg_s": -45.76517882646588,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -14.326171875,
+        "profile": {
+          "duration_s_one_way": 0.4274166626589919,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 45.856892611689254,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM120_velocity35": {
+        "minimum_margin_Nm": -0.013890894718819956,
+        "demand_signed_Nm": -0.027990289841962036,
+        "at_jaw_deg": 4.919580400000001,
+        "at_speed_deg_s": -45.76517882646588,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -14.326171875,
+        "profile": {
+          "duration_s_one_way": 0.4274166626589919,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 45.856892611689254,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      },
+      "PWM160_velocity35": {
+        "minimum_margin_Nm": -0.0019204470873553751,
+        "demand_signed_Nm": -0.027990289841962036,
+        "at_jaw_deg": 4.919580400000001,
+        "at_speed_deg_s": -45.76517882646588,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -14.326171875,
+        "profile": {
+          "duration_s_one_way": 0.4274166626589919,
+          "travel_deg": 9.8,
+          "max_profile_speed_deg_s": 45.856892611689254,
+          "pivot_inertia_kg_m2": 0.00019440713721220366
+        }
+      }
+    }
+  },
+  "configured_exhibit_closure": {
+    "exhibitJawPwm": 100,
+    "exhibitJawRecoveryPwm": 120,
+    "exhibitJawVelocity": 6,
+    "exhibitJawRecoveryTicks": 110,
+    "exhibitJawEntryNeckTicks": 11,
+    "recovery": {
+      "minimum_margin_Nm": 0.008482843606892464,
+      "demand_signed_Nm": -0.023499361413747123,
+      "at_jaw_deg": 0.16114413253517526,
+      "at_speed_deg_s": -8.244,
+      "at_friction_Nm": 0.012,
+      "at_neck_pitch_deg": -2.0,
+      "profile": {
+        "duration_s_one_way": 1.2111476677326651,
+        "travel_deg": 9.66796875,
+        "max_profile_speed_deg_s": 8.244,
+        "pivot_inertia_kg_m2": 0.00019440713721220366
+      }
+    },
+    "stationary_hold_cap_Nm": 0.02992611907866145,
+    "stationary_nominal_hold_margin_Nm": 0.012668207647020202
+  },
+  "electrical_hold": {
+    "nominal": {
+      "torque_Nm": 0.017257911431641248,
+      "modeled_static_margin_Nm": 0.030623879094217075,
+      "required_goal_pwm_equivalent_units": 57.668391234688514,
+      "current_illustrative_equivalent_mA": [
+        64.72115764883546,
+        103.76574117970084
+      ],
+      "voltage_times_current_W": [
+        0.29124520941975957,
+        0.4669458353086538
+      ],
+      "horn_pair_equal_shear_force_N_per_screw": 2.0338643670717276
+    },
+    "incidental_0p25N": {
+      "torque_Nm": 0.04336361539710562,
+      "modeled_static_margin_Nm": 0.004518175128752702,
+      "required_goal_pwm_equivalent_units": 144.90223501124024,
+      "current_illustrative_equivalent_mA": [
+        136.90801637761953,
+        235.0145752320355
+      ],
+      "voltage_times_current_W": [
+        0.6160860736992879,
+        1.0575655885441597
+      ],
+      "horn_pair_equal_shear_force_N_per_screw": 5.110451084009795
+    },
+    "PWM_limited_jam": {
+      "torque_Nm": 0.04788179052585832,
+      "modeled_static_margin_Nm": 0.0,
+      "required_goal_pwm_equivalent_units": 160.0,
+      "current_illustrative_equivalent_mA": [
+        149.40156453715775,
+        257.7301173402868
+      ],
+      "voltage_times_current_W": [
+        0.6723070404172099,
+        1.1597855280312908
+      ],
+      "horn_pair_equal_shear_force_N_per_screw": 5.642923129364701
+    }
+  },
+  "required_demo_reserve_Nm": 0.007,
+  "firmware_full_jaw_profile": {
+    "duration_s_one_way": 0.3201988411800768,
+    "travel_deg": 5.5,
+    "max_profile_speed_deg_s": 34.35365337194867,
+    "pivot_inertia_kg_m2": 0.00019440713721220366
+  },
+  "signed_neutral_jaw_demo": {
+    "free_jaw": {
+      "opening": {
+        "minimum_margin_Nm": 0.026689179039381408,
+        "demand_signed_Nm": 0.004852208759109792,
+        "at_jaw_deg": 2.7390110000000005,
+        "at_speed_deg_s": 34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": 2.0
+      },
+      "closing": {
+        "minimum_margin_Nm": 0.007907621041077215,
+        "demand_signed_Nm": -0.023633766757413986,
+        "at_jaw_deg": 2.7609889999999995,
+        "at_speed_deg_s": -34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0
+      }
+    },
+    "bias_over_gravity_no_breakaway": {
+      "opening": {
+        "minimum_margin_Nm": 0.008475172403773313,
+        "demand_signed_Nm": 0.023066215394717888,
+        "at_jaw_deg": 2.7390110000000005,
+        "at_speed_deg_s": 34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": 2.0
+      },
+      "closing": {
+        "minimum_margin_Nm": 0.026129299445945376,
+        "demand_signed_Nm": -0.005412088352545824,
+        "at_jaw_deg": 2.7609889999999995,
+        "at_speed_deg_s": -34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0
+      }
+    },
+    "bias_with_0p005_return_loss": {
+      "opening": {
+        "minimum_margin_Nm": 0.003475172403773312,
+        "demand_signed_Nm": 0.02806621539471789,
+        "at_jaw_deg": 2.7390110000000005,
+        "at_speed_deg_s": 34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": 2.0
+      },
+      "closing": {
+        "minimum_margin_Nm": 0.031129299445945377,
+        "demand_signed_Nm": -0.0004120883525458238,
+        "at_jaw_deg": 2.7609889999999995,
+        "at_speed_deg_s": -34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": -2.0
+      }
+    },
+    "bias_with_0p012_return_loss": {
+      "opening": {
+        "minimum_margin_Nm": -0.0035248275962266873,
+        "demand_signed_Nm": 0.03506621539471789,
+        "at_jaw_deg": 2.7390110000000005,
+        "at_speed_deg_s": 34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": 2.0
+      },
+      "closing": {
+        "minimum_margin_Nm": 0.024752295688102117,
+        "demand_signed_Nm": 0.023129494837756205,
+        "at_jaw_deg": 5.5,
+        "at_speed_deg_s": -0.0,
+        "at_friction_Nm": 0.0,
+        "at_neck_pitch_deg": 2.0
+      }
+    },
+    "bias_against_standalone_0p25N": {
+      "opening": {
+        "minimum_margin_Nm": -0.017630531561691053,
+        "demand_signed_Nm": 0.049171919360182254,
+        "at_jaw_deg": 2.7390110000000005,
+        "at_speed_deg_s": 34.28494606520478,
+        "at_friction_Nm": 0.012,
+        "at_neck_pitch_deg": 2.0
+      },
+      "closing": {
+        "minimum_margin_Nm": 0.010646591722637745,
+        "demand_signed_Nm": 0.03723519880322058,
+        "at_jaw_deg": 5.5,
+        "at_speed_deg_s": -0.0,
+        "at_friction_Nm": 0.0,
+        "at_neck_pitch_deg": 2.0
+      }
+    }
+  },
+  "maximum_bias_preload_Nm_by_torsional_rate": {
+    "0.0": 0.01968917903938141,
+    "0.01": 0.019211131437397985,
+    "0.02": 0.01873308383541456,
+    "0.03": 0.018255036233431138
+  },
+  "motor_source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+  "scope": "Sliced masses and nominal pivot, level base, warm DC torque/speed model. The commanded jaw demo includes \u00b12 degrees of centered-neck tolerance and the full existing trajectory. External contact is a separate static disturbance. Current values are torque-equivalent estimates from manufacturer stall ratios and standby consumption, with uncertain gear losses and PWM current ripple. No continuous thermal rating inferred."
+}

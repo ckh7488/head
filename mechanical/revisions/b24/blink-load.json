@@ -1,0 +1,1303 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "PETG_model_MPa": 1450.0,
+  "steel_model_E_G_MPa": [
+    195000.0,
+    77000.0
+  ],
+  "scope": "Quasi-static longitudinal link and shaft elasticity with fixed shaft bearings. Pin clearance is screened separately.",
+  "shaft": {
+    "diameter_mm": 3.999553680419922,
+    "flat_depth_mm": 0.29977989196777344
+  },
+  "blink": {
+    "drive_lid_minimum_lever_mm": [
+      3.222818288270707,
+      6.0602320827567855
+    ],
+    "links": [
+      {
+        "length_mm": 18.867962264113206,
+        "sampled_web_area_mm2": 14.820000871150203,
+        "sampled_minor_inertia_mm4": 8.348599878298277,
+        "sampled_centroid_offset_mm": 3.3247675269109306e-06,
+        "sampled_bore_min_diameters_mm": [
+          2.089058770631921,
+          2.0890581854697774
+        ],
+        "one_sided_clearance_on_2mm_pin_mm": 0.08905847805084921,
+        "compliance_mm_per_N": 0.0008780288126662816,
+        "pinned_Euler_load_N": 335.60729844828876
+      },
+      {
+        "length_mm": 38.07886552931955,
+        "sampled_web_area_mm2": 14.819992089651471,
+        "sampled_minor_inertia_mm4": 8.348585744650785,
+        "sampled_centroid_offset_mm": 1.4298697017522954e-06,
+        "sampled_bore_min_diameters_mm": [
+          2.089057217952785,
+          2.0890522284658064
+        ],
+        "one_sided_clearance_on_2mm_pin_mm": 0.08905472320929575,
+        "compliance_mm_per_N": 0.0017720175836245962,
+        "pinned_Euler_load_N": 82.39723860827723
+      },
+      {
+        "length_mm": 38.07886552931955,
+        "sampled_web_area_mm2": 14.819993734109016,
+        "sampled_minor_inertia_mm4": 8.348586671027462,
+        "sampled_centroid_offset_mm": 1.499288734052584e-06,
+        "sampled_bore_min_diameters_mm": [
+          2.089058626773778,
+          2.08905391564372
+        ],
+        "one_sided_clearance_on_2mm_pin_mm": 0.08905627120874882,
+        "compliance_mm_per_N": 0.0017720173869984535,
+        "pinned_Euler_load_N": 82.39724775124856
+      }
+    ],
+    "link_only_one_sided_lash_linearized_deg": [
+      1.583295881354242,
+      0.8419578187634833,
+      0.841972454149412
+    ],
+    "pin_fit_alternative": [
+      {
+        "modeled_link_only_one_sided_angle_deg": 1.6154184890992886,
+        "finished_2p08_to_2p10_mm_bores_angular_range_deg": [
+          1.4480594584259496,
+          1.8185336363046958
+        ]
+      },
+      {
+        "modeled_link_only_one_sided_angle_deg": 0.8549473419841016,
+        "finished_2p08_to_2p10_mm_bores_angular_range_deg": [
+          0.7667947913741046,
+          0.9618909031559403
+        ]
+      },
+      {
+        "modeled_link_only_one_sided_angle_deg": 0.8549624371569362,
+        "finished_2p08_to_2p10_mm_bores_angular_range_deg": [
+          0.7667947913741046,
+          0.9618909031559403
+        ]
+      }
+    ],
+    "one_sided_lash_deg_by_total_link_slack_mm": {
+      "0.2": [
+        3.5556320206824923,
+        1.8908774030653497
+      ],
+      "0.4": [
+        7.111264041364985,
+        3.7817548061306994
+      ],
+      "0.8": [
+        14.22252808272997,
+        7.563509612261399
+      ]
+    },
+    "load_cases": {
+      "nominal_intrinsic_drag": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.003,
+          0.003
+        ],
+        "drive_left_right_force_N": [
+          1.8617245725074583,
+          0.495030546525754,
+          0.495030546525754
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.004130566829681531,
+          0.004531866857947661,
+          0.0074597493572197155
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.005812913255003453,
+          0.00402238079877341
+        ],
+        "maximum_lid_difference_deg": 0.025786771708319,
+        "maximum_lid_lag_deg": 0.18499820320530158,
+        "maximum_nominal_shaft_bending_MPa": 5.732464332766767,
+        "maximum_bearing_reaction_N": 0.6802953204096553
+      },
+      "left_touch_0.25_N": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.006500000000000001,
+          0.003
+        ],
+        "drive_left_right_force_N": [
+          2.947730573136809,
+          1.0725661841391338,
+          0.495030546525754
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.006312045768884447,
+          0.007596332459037064,
+          0.010544313260965341
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.012594645385840817,
+          0.00402238079877341
+        ],
+        "maximum_lid_difference_deg": 0.009404694490286756,
+        "maximum_lid_lag_deg": 0.26968049963619173,
+        "maximum_nominal_shaft_bending_MPa": 8.505286483772856,
+        "maximum_bearing_reaction_N": 1.554647266270342
+      },
+      "right_touch_0.25_N": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.003,
+          0.006500000000000001
+        ],
+        "drive_left_right_force_N": [
+          2.947730573136809,
+          0.495030546525754,
+          1.0725661841391338
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.006768147306684665,
+          0.006754742931075291,
+          0.013079082426197243
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.005812913255003453,
+          0.00871515839734239
+        ],
+        "maximum_lid_difference_deg": 0.07225341591939027,
+        "maximum_lid_lag_deg": 0.3161471438472633,
+        "maximum_nominal_shaft_bending_MPa": 9.647899778832182,
+        "maximum_bearing_reaction_N": 0.8149254899190737
+      },
+      "left_touch_0.5_N": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.01,
+          0.003
+        ],
+        "drive_left_right_force_N": [
+          4.03373657376616,
+          1.6501018217525134,
+          0.495030546525754
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.008493557311127711,
+          0.010660863556603216,
+          0.013629395994046445
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.019376377516678176,
+          0.00402238079877341
+        ],
+        "maximum_lid_difference_deg": 0.015586821171638362,
+        "maximum_lid_lag_deg": 0.36134017879482805,
+        "maximum_nominal_shaft_bending_MPa": 11.278315311180105,
+        "maximum_bearing_reaction_N": 2.4322422460590443
+      },
+      "right_touch_0.5_N": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.003,
+          0.01
+        ],
+        "drive_left_right_force_N": [
+          4.03373657376616,
+          0.495030546525754,
+          1.6501018217525134
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.009405755240748027,
+          0.008977706470637658,
+          0.018698720370395244
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.005812913255003453,
+          0.013407935995911368
+        ],
+        "maximum_lid_difference_deg": 0.11872006013046153,
+        "maximum_lid_lag_deg": 0.4472960844892249,
+        "maximum_nominal_shaft_bending_MPa": 13.563486726500818,
+        "maximum_bearing_reaction_N": 1.4203561298497824
+      },
+      "left_touch_1_N": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.017,
+          0.003
+        ],
+        "drive_left_right_force_N": [
+          6.205748575024861,
+          2.8051730969792725,
+          0.495030546525754
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.01285661181960176,
+          0.016789978786877456,
+          0.019800147858787375
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.0329398417783529,
+          0.00402238079877341
+        ],
+        "maximum_lid_difference_deg": 0.03974153716380973,
+        "maximum_lid_lag_deg": 0.5634689260926731,
+        "maximum_nominal_shaft_bending_MPa": 16.824584219567896,
+        "maximum_bearing_reaction_N": 4.189008743106784
+      },
+      "right_touch_1_N": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.003,
+          0.017
+        ],
+        "drive_left_right_force_N": [
+          6.205748575024861,
+          0.495030546525754,
+          2.8051730969792725
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.014680994284335327,
+          0.013423722135561946,
+          0.02993822415356214
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.005812913255003453,
+          0.022793491193049326
+        ],
+        "maximum_lid_difference_deg": 0.21165334855260404,
+        "maximum_lid_lag_deg": 0.7095939657731477,
+        "maximum_nominal_shaft_bending_MPa": 21.394782399454126,
+        "maximum_bearing_reaction_N": 2.6335404425312996
+      },
+      "bilateral_touch_0.25_N_each": {
+        "scenario": "normal_or_gentle_touch",
+        "load_per_lid_Nm": [
+          0.006500000000000001,
+          0.006500000000000001
+        ],
+        "drive_left_right_force_N": [
+          4.03373657376616,
+          1.0725661841391338,
+          1.0725661841391338
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.008949561464309988,
+          0.009819044858886605,
+          0.016162790273976053
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.012594645385840817,
+          0.00871515839734239
+        ],
+        "maximum_lid_difference_deg": 0.05587133870135778,
+        "maximum_lid_lag_deg": 0.4008294402781535,
+        "maximum_nominal_shaft_bending_MPa": 12.42033938766133,
+        "maximum_bearing_reaction_N": 1.4739731942209207
+      },
+      "left_resistance": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.04,
+          0.0
+        ],
+        "drive_left_right_force_N": [
+          12.411497150049723,
+          6.600407287010054,
+          0.0
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.02493191323308987,
+          0.03502376600385621,
+          0.03526525615779048
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.0775055100667127,
+          0.0
+        ],
+        "maximum_lid_difference_deg": 0.18722373963466363,
+        "maximum_lid_lag_deg": 1.1550214131305436,
+        "maximum_nominal_shaft_bending_MPa": 32.18393746228018,
+        "maximum_bearing_reaction_N": 10.043977816576485
+      },
+      "right_resistance": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.0,
+          0.04
+        ],
+        "drive_left_right_force_N": [
+          12.411497150049723,
+          0.0,
+          6.600407287010054
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.030144336378987387,
+          0.025406316503717167,
+          0.06422674615619497
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.0,
+          0.05363174398364547
+        ],
+        "maximum_lid_difference_deg": 0.5310473624122425,
+        "maximum_lid_lag_deg": 1.4988450359081322,
+        "maximum_nominal_shaft_bending_MPa": 44.75083251060211,
+        "maximum_bearing_reaction_N": 6.938419532452437
+      },
+      "both_resist": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.04,
+          0.04
+        ],
+        "drive_left_right_force_N": [
+          24.822994300099445,
+          6.600407287010054,
+          6.600407287010054
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.05507422439575375,
+          0.06042489143930216,
+          0.09946332476292984
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.0775055100667127,
+          0.05363174398364547
+        ],
+        "maximum_lid_difference_deg": 0.3438236227775896,
+        "maximum_lid_lag_deg": 2.4666427094040233,
+        "maximum_nominal_shaft_bending_MPa": 76.43285777022358,
+        "maximum_bearing_reaction_N": 9.070604272128739
+      },
+      "left_jam_0p12": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.12,
+          0.0
+        ],
+        "drive_left_right_force_N": [
+          37.234491450149164,
+          19.80122186103016,
+          0.0
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.07479573969926982,
+          0.1050712980115687,
+          0.10579576847337409
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.23251653020013813,
+          0.0
+        ],
+        "maximum_lid_difference_deg": 0.5616712189039652,
+        "maximum_lid_lag_deg": 3.4650642393916353,
+        "maximum_nominal_shaft_bending_MPa": 96.55181238684052,
+        "maximum_bearing_reaction_N": 30.131933449729456
+      },
+      "right_jam_0p12": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.0,
+          0.12
+        ],
+        "drive_left_right_force_N": [
+          37.234491450149164,
+          0.0,
+          19.80122186103016
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.09043300913696219,
+          0.07621894951115152,
+          0.1926802384685848
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.0,
+          0.1608952319509364
+        ],
+        "maximum_lid_difference_deg": 1.5931420872367257,
+        "maximum_lid_lag_deg": 4.496535107724396,
+        "maximum_nominal_shaft_bending_MPa": 134.2524975318063,
+        "maximum_bearing_reaction_N": 20.815258597357314
+      },
+      "rated_stall_5V_left_jam": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.52,
+          0.0
+        ],
+        "drive_left_right_force_N": [
+          161.3494629506464,
+          85.80529473113069,
+          0.0
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.3241148720301686,
+          0.45530895805013083,
+          0.45844833005129226
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          1.007571630867265,
+          0.0
+        ],
+        "maximum_lid_difference_deg": 2.433908615250465,
+        "maximum_lid_lag_deg": 15.01527837069707,
+        "maximum_nominal_shaft_bending_MPa": 418.3911870096422,
+        "maximum_bearing_reaction_N": 130.5717116154943
+      },
+      "rated_stall_5V_right_jam": {
+        "scenario": "overload_sensitivity",
+        "load_per_lid_Nm": [
+          0.0,
+          0.52
+        ],
+        "drive_left_right_force_N": [
+          161.3494629506464,
+          0.0,
+          85.80529473113069
+        ],
+        "drive_left_right_shaft_bend_mm": [
+          0.39187637292683586,
+          0.33028211454832307,
+          0.8349477000305343
+        ],
+        "left_right_shaft_twist_upper_deg": [
+          0.0,
+          0.6972126717873911
+        ],
+        "maximum_lid_difference_deg": 6.903615711359147,
+        "maximum_lid_lag_deg": 19.48498546680571,
+        "maximum_nominal_shaft_bending_MPa": 581.7608226378275,
+        "maximum_bearing_reaction_N": 90.19945392188168
+      }
+    },
+    "max_drive_compression_before_Euler_Nm": 1.0816013391162702,
+    "max_lid_compression_before_Euler_Nm": 0.49934638894444777
+  },
+  "blink_flat_clamp": {
+    "roof_areas_mm2": [
+      16.249385584066182,
+      16.24938584721938,
+      16.249386666233896
+    ],
+    "flat_half_width_mm": 1.0531466121140898,
+    "flat_top_mm": 155.6999969482422,
+    "screw_gap_to_flat_contact_deg": {
+      "0.02": 1.1053670003720506,
+      "0.05": 2.834531473546907,
+      "0.1": 5.949249535397833,
+      "0.2": 13.602488401787724
+    },
+    "optimistic_edge_normal_at_0p12_N": 113.9442491858865,
+    "sensitivity_cases": [
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.16,
+        "retention_fraction": 0.3,
+        "friction": 0.1,
+        "retained_preload_N": 62.5,
+        "tip_only_first_slip_Nm": 0.010624980926513672,
+        "tip_and_bore_first_slip_Nm": 0.02312358617782593,
+        "initial_roof_pressure_MPa": 12.820997585140745
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.16,
+        "retention_fraction": 0.3,
+        "friction": 0.25,
+        "retained_preload_N": 62.5,
+        "tip_only_first_slip_Nm": 0.02656245231628418,
+        "tip_and_bore_first_slip_Nm": 0.05780896544456482,
+        "initial_roof_pressure_MPa": 12.820997585140745
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.16,
+        "retention_fraction": 1.0,
+        "friction": 0.1,
+        "retained_preload_N": 208.33333333333334,
+        "tip_only_first_slip_Nm": 0.03541660308837891,
+        "tip_and_bore_first_slip_Nm": 0.0770786205927531,
+        "initial_roof_pressure_MPa": 12.820997585140745
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.16,
+        "retention_fraction": 1.0,
+        "friction": 0.25,
+        "retained_preload_N": 208.33333333333334,
+        "tip_only_first_slip_Nm": 0.08854150772094727,
+        "tip_and_bore_first_slip_Nm": 0.19269655148188275,
+        "initial_roof_pressure_MPa": 12.820997585140745
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.25,
+        "retention_fraction": 0.3,
+        "friction": 0.1,
+        "retained_preload_N": 40.0,
+        "tip_only_first_slip_Nm": 0.00679998779296875,
+        "tip_and_bore_first_slip_Nm": 0.014799095153808594,
+        "initial_roof_pressure_MPa": 8.205438454490077
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.25,
+        "retention_fraction": 0.3,
+        "friction": 0.25,
+        "retained_preload_N": 40.0,
+        "tip_only_first_slip_Nm": 0.016999969482421873,
+        "tip_and_bore_first_slip_Nm": 0.03699773788452149,
+        "initial_roof_pressure_MPa": 8.205438454490077
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.25,
+        "retention_fraction": 1.0,
+        "friction": 0.1,
+        "retained_preload_N": 133.33333333333334,
+        "tip_only_first_slip_Nm": 0.022666625976562504,
+        "tip_and_bore_first_slip_Nm": 0.04933031717936199,
+        "initial_roof_pressure_MPa": 8.205438454490077
+      },
+      {
+        "installation_Nm": 0.1,
+        "nut_factor": 0.25,
+        "retention_fraction": 1.0,
+        "friction": 0.25,
+        "retained_preload_N": 133.33333333333334,
+        "tip_only_first_slip_Nm": 0.056666564941406254,
+        "tip_and_bore_first_slip_Nm": 0.12332579294840496,
+        "initial_roof_pressure_MPa": 8.205438454490077
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.16,
+        "retention_fraction": 0.3,
+        "friction": 0.1,
+        "retained_preload_N": 125.0,
+        "tip_only_first_slip_Nm": 0.021249961853027344,
+        "tip_and_bore_first_slip_Nm": 0.04624717235565186,
+        "initial_roof_pressure_MPa": 25.64199517028149
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.16,
+        "retention_fraction": 0.3,
+        "friction": 0.25,
+        "retained_preload_N": 125.0,
+        "tip_only_first_slip_Nm": 0.05312490463256836,
+        "tip_and_bore_first_slip_Nm": 0.11561793088912964,
+        "initial_roof_pressure_MPa": 25.64199517028149
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.16,
+        "retention_fraction": 1.0,
+        "friction": 0.1,
+        "retained_preload_N": 416.6666666666667,
+        "tip_only_first_slip_Nm": 0.07083320617675783,
+        "tip_and_bore_first_slip_Nm": 0.1541572411855062,
+        "initial_roof_pressure_MPa": 25.64199517028149
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.16,
+        "retention_fraction": 1.0,
+        "friction": 0.25,
+        "retained_preload_N": 416.6666666666667,
+        "tip_only_first_slip_Nm": 0.17708301544189453,
+        "tip_and_bore_first_slip_Nm": 0.3853931029637655,
+        "initial_roof_pressure_MPa": 25.64199517028149
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.25,
+        "retention_fraction": 0.3,
+        "friction": 0.1,
+        "retained_preload_N": 80.0,
+        "tip_only_first_slip_Nm": 0.0135999755859375,
+        "tip_and_bore_first_slip_Nm": 0.02959819030761719,
+        "initial_roof_pressure_MPa": 16.410876908980153
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.25,
+        "retention_fraction": 0.3,
+        "friction": 0.25,
+        "retained_preload_N": 80.0,
+        "tip_only_first_slip_Nm": 0.03399993896484375,
+        "tip_and_bore_first_slip_Nm": 0.07399547576904297,
+        "initial_roof_pressure_MPa": 16.410876908980153
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.25,
+        "retention_fraction": 1.0,
+        "friction": 0.1,
+        "retained_preload_N": 266.6666666666667,
+        "tip_only_first_slip_Nm": 0.04533325195312501,
+        "tip_and_bore_first_slip_Nm": 0.09866063435872398,
+        "initial_roof_pressure_MPa": 16.410876908980153
+      },
+      {
+        "installation_Nm": 0.2,
+        "nut_factor": 0.25,
+        "retention_fraction": 1.0,
+        "friction": 0.25,
+        "retained_preload_N": 266.6666666666667,
+        "tip_only_first_slip_Nm": 0.11333312988281251,
+        "tip_and_bore_first_slip_Nm": 0.2466515858968099,
+        "initial_roof_pressure_MPa": 16.410876908980153
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.16,
+        "retention_fraction": 0.3,
+        "friction": 0.1,
+        "retained_preload_N": 187.5,
+        "tip_only_first_slip_Nm": 0.03187494277954102,
+        "tip_and_bore_first_slip_Nm": 0.06937075853347778,
+        "initial_roof_pressure_MPa": 38.46299275542223
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.16,
+        "retention_fraction": 0.3,
+        "friction": 0.25,
+        "retained_preload_N": 187.5,
+        "tip_only_first_slip_Nm": 0.07968735694885254,
+        "tip_and_bore_first_slip_Nm": 0.17342689633369446,
+        "initial_roof_pressure_MPa": 38.46299275542223
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.16,
+        "retention_fraction": 1.0,
+        "friction": 0.1,
+        "retained_preload_N": 625.0,
+        "tip_only_first_slip_Nm": 0.10624980926513672,
+        "tip_and_bore_first_slip_Nm": 0.23123586177825928,
+        "initial_roof_pressure_MPa": 38.46299275542223
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.16,
+        "retention_fraction": 1.0,
+        "friction": 0.25,
+        "retained_preload_N": 625.0,
+        "tip_only_first_slip_Nm": 0.2656245231628418,
+        "tip_and_bore_first_slip_Nm": 0.5780896544456482,
+        "initial_roof_pressure_MPa": 38.46299275542223
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.25,
+        "retention_fraction": 0.3,
+        "friction": 0.1,
+        "retained_preload_N": 120.0,
+        "tip_only_first_slip_Nm": 0.02039996337890625,
+        "tip_and_bore_first_slip_Nm": 0.04439728546142578,
+        "initial_roof_pressure_MPa": 24.61631536347023
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.25,
+        "retention_fraction": 0.3,
+        "friction": 0.25,
+        "retained_preload_N": 120.0,
+        "tip_only_first_slip_Nm": 0.050999908447265624,
+        "tip_and_bore_first_slip_Nm": 0.11099321365356446,
+        "initial_roof_pressure_MPa": 24.61631536347023
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.25,
+        "retention_fraction": 1.0,
+        "friction": 0.1,
+        "retained_preload_N": 400.0,
+        "tip_only_first_slip_Nm": 0.0679998779296875,
+        "tip_and_bore_first_slip_Nm": 0.14799095153808595,
+        "initial_roof_pressure_MPa": 24.61631536347023
+      },
+      {
+        "installation_Nm": 0.3,
+        "nut_factor": 0.25,
+        "retention_fraction": 1.0,
+        "friction": 0.25,
+        "retained_preload_N": 400.0,
+        "tip_only_first_slip_Nm": 0.16999969482421876,
+        "tip_and_bore_first_slip_Nm": 0.36997737884521487,
+        "initial_roof_pressure_MPa": 24.61631536347023
+      }
+    ]
+  },
+  "eye_links": {
+    "pitch": {
+      "length_mm": 58.52349955359813,
+      "sampled_web_area_mm2": 16.380011299590453,
+      "sampled_minor_inertia_mm4": 9.22742261148705,
+      "sampled_centroid_offset_mm": 4.3703845323462956e-07,
+      "sampled_bore_min_diameters_mm": [
+        2.0890544310995685,
+        2.089058500117262
+      ],
+      "one_sided_clearance_on_2mm_pin_mm": 0.08905646560841518,
+      "compliance_mm_per_N": 0.0024640419006254338,
+      "pinned_Euler_load_N": 38.55561041889456,
+      "minimum_lever_mm": 6.710349856991977,
+      "force_at_0p04_Nm_N": 5.960941061563465,
+      "compression_Euler_torque_Nm": 0.2587216348606675,
+      "elastic_error_deg_at_0p04_Nm": 0.12541237296004495,
+      "link_only_one_sided_lash_linearized_deg": 0.7604014286076971,
+      "pin_fit_alternative": {
+        "modeled_link_only_one_sided_angle_deg": 0.7668219976037224,
+        "finished_2p08_to_2p10_mm_bores_angular_range_deg": [
+          0.6882429579032125,
+          0.861959570143517
+        ]
+      }
+    },
+    "yaw_left": {
+      "length_mm": 28.416368522385124,
+      "sampled_web_area_mm2": 13.442320302206278,
+      "sampled_minor_inertia_mm4": 9.42078648988883,
+      "sampled_centroid_offset_mm": 1.7634271246160942,
+      "sampled_bore_min_diameters_mm": [
+        2.08906293077573,
+        2.089061592939511
+      ],
+      "one_sided_clearance_on_2mm_pin_mm": 0.08906226185762045,
+      "compliance_mm_per_N": 0.007926765636100553,
+      "pinned_Euler_load_N": 166.96204524313418,
+      "minimum_lever_mm": 12.020555289884273,
+      "force_at_0p04_Nm_N": 3.3276332944170584,
+      "compression_Euler_torque_Nm": 2.006976496157254,
+      "elastic_error_deg_at_0p04_Nm": 0.12572729762533302,
+      "link_only_one_sided_lash_linearized_deg": 0.42451380949305134,
+      "pin_fit_alternative": {
+        "modeled_link_only_one_sided_angle_deg": 0.4255031084937933,
+        "finished_2p08_to_2p10_mm_bores_angular_range_deg": [
+          0.38211594377183733,
+          0.4778973826064467
+        ]
+      }
+    },
+    "yaw_right": {
+      "length_mm": 39.953598085779454,
+      "sampled_web_area_mm2": 13.391449746833182,
+      "sampled_minor_inertia_mm4": 9.385134859067824,
+      "sampled_centroid_offset_mm": 1.4756730951280321,
+      "sampled_bore_min_diameters_mm": [
+        2.08906293077573,
+        2.089061592939511
+      ],
+      "one_sided_clearance_on_2mm_pin_mm": 0.08906226185762045,
+      "compliance_mm_per_N": 0.00845093534744538,
+      "pinned_Euler_load_N": 84.13883069449524,
+      "minimum_lever_mm": 12.232600236074482,
+      "force_at_0p04_Nm_N": 3.269950724134532,
+      "compression_Euler_torque_Nm": 1.0292366802165134,
+      "elastic_error_deg_at_0p04_Nm": 0.12943443631106027,
+      "link_only_one_sided_lash_linearized_deg": 0.41715511173838316,
+      "pin_fit_alternative": {
+        "modeled_link_only_one_sided_angle_deg": 0.4179741230319748,
+        "finished_2p08_to_2p10_mm_bores_angular_range_deg": [
+          0.37536884933994147,
+          0.4694198309383134
+        ]
+      }
+    }
+  },
+  "rigid_pin_drag_cases": [
+    {
+      "mode": "intrinsic_drag_only",
+      "contact_force_per_lid_N": [
+        0.0,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.0
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 90.02815390568142,
+      "max_return_error_deg": 0.014290923067578008,
+      "max_tracking_error_deg": 0.9332776550292118,
+      "min_closed_end_deg": 90.02815390568142,
+      "max_return_end_error_deg": 0.014290923067578008,
+      "max_loop_gap_mm": 0.01589096340615142,
+      "max_drive_torque_Nm": 0.012241810144914302,
+      "max_lid_difference_deg": 3.81666561775622e-14,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        0.25,
+        0.25
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0035,
+        0.0035
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.20174389390239,
+      "max_return_error_deg": 0.014290923067577125,
+      "max_tracking_error_deg": 1.2523784309236843,
+      "min_closed_end_deg": 89.20174389390239,
+      "max_return_end_error_deg": 0.014290923067577125,
+      "max_loop_gap_mm": 0.02696912547728212,
+      "max_drive_torque_Nm": 0.014329994578803112,
+      "max_lid_difference_deg": 2.5444437451708134e-14,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        0.25,
+        0.25
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0035,
+        0.0035
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.93749405254921,
+      "max_return_error_deg": 0.05607275055239046,
+      "max_tracking_error_deg": 1.502449511229393,
+      "min_closed_end_deg": 89.93749405254921,
+      "max_return_end_error_deg": 0.05607275055239046,
+      "max_loop_gap_mm": 0.030854950722514107,
+      "max_drive_torque_Nm": 0.019267467559353612,
+      "max_lid_difference_deg": 5.088887490341627e-14,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        0.25,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0035,
+        0.0
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.58477269619033,
+      "max_return_error_deg": 0.014290923067579038,
+      "max_tracking_error_deg": 0.9684765017951656,
+      "min_closed_end_deg": 89.58477269619033,
+      "max_return_end_error_deg": 0.014290923067579038,
+      "max_loop_gap_mm": 0.019980158569252435,
+      "max_drive_torque_Nm": 0.012241809796427847,
+      "max_lid_difference_deg": 0.045401332912722095,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        0.25,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0035,
+        0.0
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 90.00693828358571,
+      "max_return_error_deg": 0.02455380488870673,
+      "max_tracking_error_deg": 1.2213964336504242,
+      "min_closed_end_deg": 90.00693828358571,
+      "max_return_end_error_deg": 0.02455380488870673,
+      "max_loop_gap_mm": 0.022960717054280065,
+      "max_drive_torque_Nm": 0.015753507756966063,
+      "max_lid_difference_deg": 0.042690676362024234,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        0.0,
+        0.25
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.0035
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.5847726961903,
+      "max_return_error_deg": 0.01429092306757648,
+      "max_tracking_error_deg": 0.9684765017951656,
+      "min_closed_end_deg": 89.5847726961903,
+      "max_return_end_error_deg": 0.01429092306757648,
+      "max_loop_gap_mm": 0.019980158569252435,
+      "max_drive_torque_Nm": 0.012241809796423761,
+      "max_lid_difference_deg": 0.04540133291264577,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        0.0,
+        0.25
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.0035
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 90.00693828358571,
+      "max_return_error_deg": 0.024553804888706707,
+      "max_tracking_error_deg": 1.2213964336503795,
+      "min_closed_end_deg": 90.00693828358571,
+      "max_return_end_error_deg": 0.024553804888706707,
+      "max_loop_gap_mm": 0.022960717054280065,
+      "max_drive_torque_Nm": 0.015753507756965362,
+      "max_lid_difference_deg": 0.042690676361960625,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        0.5,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.007,
+        0.0
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.15845342983559,
+      "max_return_error_deg": 0.01429092306758024,
+      "max_tracking_error_deg": 1.287087436991984,
+      "min_closed_end_deg": 89.15845342983559,
+      "max_return_end_error_deg": 0.01429092306758024,
+      "max_loop_gap_mm": 0.026961244860525063,
+      "max_drive_torque_Nm": 0.014326141302096916,
+      "max_lid_difference_deg": 0.08865296244509067,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        0.5,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.007,
+        0.0
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.92942860071476,
+      "max_return_error_deg": 0.05799236591656986,
+      "max_tracking_error_deg": 1.5229194912414385,
+      "min_closed_end_deg": 89.92942860071476,
+      "max_return_end_error_deg": 0.05799236591656986,
+      "max_loop_gap_mm": 0.030864448454412,
+      "max_drive_torque_Nm": 0.019267977290973154,
+      "max_lid_difference_deg": 0.08523726003637797,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        0.0,
+        0.5
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.007
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.1584534298357,
+      "max_return_error_deg": 0.01429092306757642,
+      "max_tracking_error_deg": 1.2870874369919714,
+      "min_closed_end_deg": 89.1584534298357,
+      "max_return_end_error_deg": 0.01429092306757642,
+      "max_loop_gap_mm": 0.026961244860525063,
+      "max_drive_torque_Nm": 0.014326141302099967,
+      "max_lid_difference_deg": 0.08865296244511613,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        0.0,
+        0.5
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.007
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.92942860071477,
+      "max_return_error_deg": 0.05799236591657034,
+      "max_tracking_error_deg": 1.522919491241426,
+      "min_closed_end_deg": 89.92942860071477,
+      "max_return_end_error_deg": 0.05799236591657034,
+      "max_loop_gap_mm": 0.03086444845441015,
+      "max_drive_torque_Nm": 0.019267977290982542,
+      "max_lid_difference_deg": 0.08523726003630162,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        1.0,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.014,
+        0.0
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 88.3546350517479,
+      "max_return_error_deg": 0.014290923067576688,
+      "max_tracking_error_deg": 1.970553488996011,
+      "min_closed_end_deg": 88.3546350517479,
+      "max_return_end_error_deg": 0.014290923067576688,
+      "max_loop_gap_mm": 0.040323897607815566,
+      "max_drive_torque_Nm": 0.02129858625315508,
+      "max_lid_difference_deg": 0.16911453701402265,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        1.0,
+        0.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.014,
+        0.0
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.62491439399017,
+      "max_return_error_deg": 0.20668661403487734,
+      "max_tracking_error_deg": 2.220754977314615,
+      "min_closed_end_deg": 89.62491439399017,
+      "max_return_end_error_deg": 0.20668661403487734,
+      "max_loop_gap_mm": 0.04724359025938102,
+      "max_drive_torque_Nm": 0.0263059948607263,
+      "max_lid_difference_deg": 0.1676084907502842,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "closing_touch",
+      "contact_force_per_lid_N": [
+        0.0,
+        1.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.014
+      ],
+      "constant_torque_window_s": [
+        0.54,
+        0.8
+      ],
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 88.3546350517479,
+      "max_return_error_deg": 0.01429092306757774,
+      "max_tracking_error_deg": 1.9705534889960363,
+      "min_closed_end_deg": 88.3546350517479,
+      "max_return_end_error_deg": 0.01429092306757774,
+      "max_loop_gap_mm": 0.04032389760781739,
+      "max_drive_torque_Nm": 0.02129858625315601,
+      "max_lid_difference_deg": 0.1691145370139972,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "speed_dependent_drag",
+      "contact_force_per_lid_N": [
+        0.0,
+        1.0
+      ],
+      "equivalent_torque_per_lid_Nm": [
+        0.0,
+        0.014
+      ],
+      "constant_torque_window_s": null,
+      "nominal_contact_lever_mm": 14.0,
+      "solver_step_s": 0.000125,
+      "torque_saturated": false,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 89.62491439399008,
+      "max_return_error_deg": 0.20668661403487676,
+      "max_tracking_error_deg": 2.22075497731464,
+      "min_closed_end_deg": 89.62491439399008,
+      "max_return_end_error_deg": 0.20668661403487676,
+      "max_loop_gap_mm": 0.047243590259379166,
+      "max_drive_torque_Nm": 0.026305994860727017,
+      "max_lid_difference_deg": 0.16760849075030962,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "bilateral_overload_sensitivity",
+      "extra_drag_per_lid_Nm": [
+        0.04,
+        0.04
+      ],
+      "solver_step_s": 0.000125,
+      "torque_saturated": true,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 59.249649671111186,
+      "max_return_error_deg": 41.64975380533281,
+      "max_tracking_error_deg": 52.44715833159908,
+      "min_closed_end_deg": 59.249649671111186,
+      "max_return_end_error_deg": 41.64975380533281,
+      "max_loop_gap_mm": 0.11893678105092419,
+      "max_drive_torque_Nm": 0.085,
+      "max_lid_difference_deg": 3.81666561775622e-14,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    },
+    {
+      "mode": "bilateral_overload_sensitivity",
+      "extra_drag_per_lid_Nm": [
+        0.04,
+        0.04
+      ],
+      "solver_step_s": 6.25e-05,
+      "torque_saturated": true,
+      "cycles": 4,
+      "stroke_seconds": 0.68,
+      "torque_cap_Nm": 0.085,
+      "min_closed_deg": 59.26094856424816,
+      "max_return_error_deg": 41.6508445116201,
+      "max_tracking_error_deg": 52.45300033827759,
+      "min_closed_end_deg": 59.26094856424816,
+      "max_return_end_error_deg": 41.6508445116201,
+      "max_loop_gap_mm": 0.11894558985803919,
+      "max_drive_torque_Nm": 0.085,
+      "max_lid_difference_deg": 3.81666561775622e-14,
+      "contact_count": 0,
+      "max_contact_force_N": 0.0
+    }
+  ]
+}

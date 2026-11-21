@@ -32,9 +32,22 @@ class Firmware:
     feedback_limits: np.ndarray
     speeds: dict
     accel: np.ndarray
+    pwm: np.ndarray
     goal: float
     report: float
     watchdog: float
+    jaw_hold_pwm: float
+    jaw_recovery_pwm: float
+    jaw_recovery_rate: float
+    jaw_recovery_end_deg: float
+    jaw_ready_deg: float
+    jaw_recovery_limit_deg: float
+    jaw_entry_neck_deg: float
+    jaw_trim_deg: float
+    jaw_trim_from_deg: float
+    jaw_trim_delay: float
+    jaw_recovery_timeout: float
+    jaw_lag_deg: float
     sha: str
 
     @classmethod
@@ -57,7 +70,8 @@ class Firmware:
         neg[independent] -= tolerance
         # ID3 has a separate real mechanism calibration; this model uses nominal 90°.
         ticks[2] = 1024
-        neg[4] = round(-logical[4, 0]/ENCODER_DEG)
+        neg[4] = int(val('neckPitchMaxNegativeTicks'))
+        ticks[4] = int(val('neckPitchMaxPositiveTicks'))
         neg[3] = ticks[3] = int(val('neckYawCalibrationTicks'))
         commanded = np.column_stack((-neg, ticks))*ENCODER_DEG
         drift = np.array([tolerance]*5 + [val('jawPositionTolerance')])*ENCODER_DEG
@@ -67,8 +81,15 @@ class Firmware:
         exhibit[3:5] = [val('exhibitYawVelocity')*VEL_UNIT, val('exhibitPitchVelocity')*VEL_UNIT]
         returning[3:5] = val('returnNeckVelocity')*VEL_UNIT
         speeds = {'normal': normal, 'TRACK': exhibit, 'HOLD': exhibit, 'RETURN': returning}
-        return cls(logical, commanded, feedback_bounds, speeds, ar('acceleration')*ACC_UNIT,
-                   val('goalPeriodMs')/1000, val('reportMs')/1000, val('timeoutMs')/1000, sha256(content).hexdigest())
+        return cls(logical, commanded, feedback_bounds, speeds, ar('acceleration')*ACC_UNIT, ar('pwm')[-3:],
+                   val('goalPeriodMs')/1000, val('reportMs')/1000, val('timeoutMs')/1000,
+                   val('exhibitJawPwm'), val('exhibitJawRecoveryPwm'), val('exhibitJawVelocity') * VEL_UNIT,
+                   val('exhibitJawStartTicks') * ENCODER_DEG, val('exhibitJawReadyTicks') * ENCODER_DEG,
+                   val('exhibitJawRecoveryTicks') * ENCODER_DEG, val('exhibitJawEntryNeckTicks') * ENCODER_DEG,
+                   val('exhibitJawTrimTicks') * ENCODER_DEG, val('exhibitJawTrimOpenTicks') * ENCODER_DEG,
+                   val('exhibitJawTrimAfterMs') / 1000,
+                   val('exhibitJawRecoveryMs') / 1000, val('exhibitJawLagTicks') * ENCODER_DEG,
+                   sha256(content).hexdigest())
 
     def motor_target(self, command):
         cols = (command >= 0).astype(int)
@@ -122,6 +143,13 @@ def direct_input(label, t):
 
 
 def motion(name, d, angle_sign=1):
+    if name.startswith('cold-close-exhibit'):
+        def target(t):
+            side = angle_sign * np.sign(np.cos(t * 1.3))
+            return np.array((side * d * tan(radians(43.)), -d - .039, .285))
+        return 10., target, None
+    if name.startswith('cold-close'):
+        return 3.2, None, None
     if name == 'walk':
         extent = d*tan(radians(85.))
         xt = lambda t: angle_sign*(-extent+.8*t)
@@ -172,6 +200,21 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
     max_tau = np.zeros(3)
     old_friction = model.dof_frictionloss.copy()
     active_mask = np.array([1,1,1,1,1,0], dtype=bool) if target else np.array([0,0,0,1,1,1],dtype=bool)
+    cold_close = scenario.startswith('cold-close')
+    holding_jaw = target is not None or cold_close
+    active_mask[5] = True
+    recovering_jaw = cold_close
+    recovered_at = None
+    jaw_trimmed_at = None
+    jaw_follow_reports = 0
+    feedback_at = 0.
+    pwm_duty = fw.pwm / 885.
+    if cold_close:
+        initial = fw.jaw_recovery_limit_deg if scenario.endswith('limit') else 8.5
+        state.qpos[1] = radians(direction * fw.jaw_entry_neck_deg)
+        state.qpos[2] = radians(initial)
+        goal[4] = ref_p[4] = degrees(state.qpos[1])
+        ref_p[5] = initial
 
     def hold(t, why):
         nonlocal pending, last_command
@@ -180,6 +223,8 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         tolerance = 3 * ENCODER_DEG + 1e-9
         legal = (active_mask & (raw >= fw.commanded[:, 0] - tolerance)
                  & (raw <= fw.commanded[:, 1] + tolerance))
+        if holding_jaw:
+            legal[5] = False
         old = goal.copy()
         goal[legal] = np.clip(raw[legal], fw.commanded[legal,0], fw.commanded[legal,1])
         pending = None
@@ -197,35 +242,63 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
             hold(t,'watchdog')
         if i>=next_report:
             raw, measured = fw.reports(physical)
+            feedback_at = t
             next_report+=report_ticks
             outside = active_mask & ((raw<fw.feedback_limits[:,0]-1e-9) | (raw>fw.feedback_limits[:,1]+1e-9))
+            if recovering_jaw and fault is None:
+                close_limit = fw.jaw_trim_deg if jaw_trimmed_at is not None else fw.jaw_recovery_end_deg
+                outside[5] = not -close_limit <= raw[5] <= fw.jaw_recovery_limit_deg
+                if max(abs(raw[3:5])) > 22 * ENCODER_DEG:
+                    fault = {'at_s': t, 'ids': [5], 'reason': 'neck moved during jaw recovery'}
+                    active_mask[5] = False
+                    hold(t, 'jaw-recovery-neck-position')
+                elif abs(raw[5]) <= fw.jaw_ready_deg and not outside[5]:
+                    recovering_jaw = False
+                    goal[5] = 0.
+                    recovered_at = t
+                    if target is not None:
+                        planner.start_centering(measured[:5])
+                elif t >= fw.jaw_recovery_timeout:
+                    fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
+                    active_mask[5] = False
+                    hold(t, 'jaw-recovery-timeout')
+                elif jaw_trimmed_at is None and t >= fw.jaw_trim_delay and fw.jaw_ready_deg < raw[5] <= fw.jaw_trim_from_deg:
+                    jaw_trimmed_at = t
+                    goal[5] = -fw.jaw_trim_deg
+            elif holding_jaw and t >= (recovered_at or 0.) + .6:
+                jaw_follow_reports = jaw_follow_reports + 1 if abs(raw[5]) > fw.jaw_lag_deg else 0
+                if jaw_follow_reports >= 2:
+                    outside[5] = True
             if fault is None and np.any(outside):
                 ids = (np.flatnonzero(outside)+1).tolist()
                 fault={'at_s':t, 'ids':ids,'raw_relative_deg':raw.tolist()}
-                if 6 in ids:
+                if 6 in ids or holding_jaw:
                     active_mask[5]=False
                 hold(t,'feedback-position-limit')
         cap_tick=round(frame_index*dt**-1/30)
         if i>=cap_tick + (latency_ticks if target else 0) and fault is None:
             frame_index += 1
-            if target:
+            if target and not recovering_jaw:
                 picture_time=cap_tick*dt
                 picture_target=target(picture_time)
                 error=None if hidden and hidden(picture_time) else camera(states[min(cap_tick,i)], center, picture_target, 106.)
-                decision=planner.step(error, measured[:5], t, blink_enabled=False)
+                decision=planner.step(error, measured[:5], t, blink_enabled=False, feedback_at=feedback_at)
                 frames.append((t,picture_time,error is not None,decision.phase))
-                if decision.active:
+                if decision.active or decision.keep_neutral:
                     command = np.r_[decision.goals, 0.]
-                    desired_phase = decision.phase
+                    desired_phase = 'RETURN' if decision.keep_neutral else decision.phase
                 else:
                     if previous_active:
                         hold(t,'planner-idle')
                     command = desired_phase = None
-                previous_active = decision.active
-            else:
+                previous_active = decision.active or decision.keep_neutral
+            elif not cold_close:
                 incoming = direct_input(scenario,t)
                 command, desired_phase = incoming if incoming is not None else (None,None)
-            if command is not None and (last_transmitted is None or t-last_transmitted>=.032-1e-9):
+            else:
+                command = desired_phase = None
+            send_period = .12 if target and not recovering_jaw and decision.keep_neutral else .032
+            if command is not None and (last_transmitted is None or t-last_transmitted>=send_period-1e-9):
                 pending = fw.motor_target(command), desired_phase
                 last_command=last_transmitted=t
         if i>=next_goal:
@@ -235,6 +308,9 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
                 goal[:] = g
                 pending=None
         maxspeed = fw.speeds[phase]
+        if holding_jaw:
+            maxspeed = maxspeed.copy()
+            maxspeed[5] = fw.jaw_recovery_rate
         stamp = float(np.hypot(*np.degrees(state.qvel[:2])))
         next_ref, next_v = profile_step(ref_p, ref_v, goal, maxspeed, fw.accel, dt)
         reference_acceleration = (next_v-ref_v)/dt
@@ -244,10 +320,12 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         request = (PROPORTIONAL_GAIN*np.sign(ref_p[NECK_JAW]*converter-state.qpos)*
                    np.maximum(abs(ref_p[NECK_JAW]*converter-state.qpos)-radians(dead)/2,0.)
                    +DERIVATIVE_GAIN*(ref_v[NECK_JAW]*converter-state.qvel))
-        avail = capacity(motor, state.qvel, request)
+        if holding_jaw:
+            pwm_duty[2] = (fw.jaw_recovery_pwm if recovering_jaw else fw.jaw_hold_pwm) / 885.
+        avail = capacity(motor, state.qvel, request, pwm=pwm_duty)
         state.ctrl[:] = np.where(active_mask[3:], np.clip(request, -avail, avail), 0.)
         jaw_limit, jaw_stiffness = jaw_mech
-        jaw_contact = min(0., state.qpos[2]) + max(0., state.qpos[2]-jaw_limit)
+        jaw_contact = min(0., state.qpos[2] - radians(-1.5)) + max(0., state.qpos[2]-jaw_limit)
         touch = force*.058*np.sin(np.pi*(t-.88)/.15)**2 if .88<t<1.03 else 0.
         state.qfrc_applied[2]=touch-jaw_contact*jaw_stiffness
         max_tau=np.maximum(abs(state.ctrl),max_tau)
@@ -257,7 +335,7 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
             mj.mj_inverse(model,ideal)
             model.dof_frictionloss[:]=old_friction
             demand=np.abs(ideal.qfrc_inverse)+old_friction
-            min_margin=np.minimum(min_margin,capacity(motor,ideal.qvel,ideal.qfrc_inverse)-demand)
+            min_margin=np.minimum(min_margin,capacity(motor,ideal.qvel,ideal.qfrc_inverse,pwm=pwm_duty)-demand)
         samples.append((t, *physical, *np.degrees(state.qvel), stamp, *state.ctrl, *goal[3:], *ref_p[3:], *ref_v[3:]))
         mj.mj_step(model,state)
     matrix = np.asarray(samples)
@@ -303,11 +381,19 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
             resume=next((f[0] for f in frames if f[0]>move and f[3]=='TRACK'),duration)
             result.update(hold_command_s=float(move-first),
                       maximum_hold_drift_deg=float(np.max(np.linalg.norm(matrix[first_i:at,4:6]-matrix[first_i,4:6],axis=1))),
-                      return_peak_speed_deg_s=float(matrix[at:round(resume/dt)+1,10].max()), parked=frames[-1][3]=='IDLE')
+                      return_peak_speed_deg_s=float(matrix[at:round(resume/dt)+1,10].max()),
+                      parked=frames[-1][3]=='IDLE', return_failed=any(f[3]=='RETURN_FAILED' for f in frames))
     if force:
         selecting=(matrix[:,0]>=.88)&(matrix[:,0]<=1.03)
         result.update(jaw_pause_s=float(dt*np.sum(matrix[selecting,9]>=-1.)),
                       jaw_angle_at_touch_release_deg=float(matrix[round(1.03/dt),6]))
+    if cold_close:
+        result['jaw_recovered_at_s'] = recovered_at
+        result['jaw_trimmed_at_s'] = jaw_trimmed_at
+        if recovered_at is not None and target is not None:
+            post_recovery = matrix[round(recovered_at / dt):, 6]
+            result.update(jaw_after_recovery_range_deg=[float(post_recovery.min()), float(post_recovery.max())],
+                          exhibit_tracking_frames=sum(frame[3] == 'TRACK' for frame in frames))
     return result
 
 
@@ -319,23 +405,32 @@ def main(cad, grams, jaw_stop, output, root=ROOT, trace=False):
     output.mkdir(parents=True,exist_ok=True)
     supply={'nominal':((12.,12.,5.),.85,NORMAL_FRICTION,.35),
             'warm_low':((11.1,11.1,5.),.55,UPPER_FRICTION,.75),
-            'warm_4p5V_jaw':((11.1,11.1,4.5),.55,UPPER_FRICTION,.75)}
+            'warm_minimum_rails':((10.62,10.62,4.27),.55,UPPER_FRICTION,.75),
+            'warm_4p5V_jaw':((11.1,11.1,4.5),.55,UPPER_FRICTION,.75),
+            'warm_4p27V_jaw':((11.1,11.1,4.27),.55,UPPER_FRICTION,.75)}
     jaw_stop_bytes = jaw_stop.read_bytes()
     stop, stiffness = jaw_parameters(json.loads(jaw_stop_bytes))
     jaw_mech=(radians(stop),stiffness)
     cases={}
+    cold = [(scenario, sign, .12, 0.) for scenario in ('cold-close', 'cold-close-limit') for sign in (-1, 1)]
     for case, (volts,derating,friction,dead) in supply.items():
         motor=motor_parameters(volts,derating)
-        xml=model_xml(bodies,pos(scene['jaw_pivot_mm']),motor,friction)
+        xml=model_xml(bodies,pos(scene['jaw_pivot_mm']),motor,friction,firmware.pwm/885.)
         if trace:
             (output/f'{case}.xml').write_text(xml)
         model=mj.MjModel.from_xml_string(xml)
         if case=='warm_4p5V_jaw':
             scenarios=[('jaw-demo',1,.12,force) for force in (0.,.25,.5,1.)]
+        elif case=='warm_4p27V_jaw':
+            cold_exhibit = [(scenario, sign, .12, 0.) for scenario in
+                            ('cold-close-exhibit', 'cold-close-exhibit-limit') for sign in (-1, 1)]
+            scenarios = cold + cold_exhibit + [('loss', 1, .12, 0.), ('loss', -1, .12, 0.)]
         else:
             scenarios=[(name,1,.12,0.) for name in ('walk','turn','loss','reacquire','reversal','watchdog','jaw-demo')]
             scenarios += [(n,-1,.12,0.) for n in ('walk','turn','loss')] \
                 + [('walk',1,.20,0.)] + [(f'watchdog-{delay}',1,.12,0.) for delay in (1.12,1.2,1.28)]
+            if case == 'nominal':
+                scenarios += cold
         for scenario,direction,latency,force in scenarios:
             result=replay(scene, firmware, track, model, motor, dead, case, scenario, direction,
                             output if trace else None, jaw_mech, latency, force)
@@ -350,10 +445,14 @@ def main(cad, grams, jaw_stop, output, root=ROOT, trace=False):
             'firmware_sha256':firmware.sha,'tracker_sha256':sha256((root/'control/pc/track.py').read_bytes()).hexdigest(),
             'mujoco_version':mj.__version__,'commanded_shaft_range_deg':firmware.commanded.tolist(),
             'feedback_guard_deg':firmware.feedback_limits.tolist(),
+            'neck_yaw_pitch_jaw_pwm_registers':firmware.pwm.tolist(),
             'axis_speed_caps_deg_s':{k:v.tolist() for k,v in firmware.speeds.items()},'axis_profile_accel_deg_s2':firmware.accel.tolist(),
             'installed_masses_g':[b.mass*1000 for b in bodies],
+            'exhibit_jaw_hold': {'pwm_limit': firmware.jaw_hold_pwm, 'recovery_pwm_limit': firmware.jaw_recovery_pwm,
+                                 'recovery_velocity_deg_s': firmware.jaw_recovery_rate,
+                                 'recovery_limit_deg': firmware.jaw_recovery_limit_deg},
             'passive_jaw_model':{'positive_pitch_stop_deg':stop,'stop_stiffness_Nm_rad':stiffness,
-                                    'negative_pitch_stop_deg':0.,'assumption':'B22 stop assembly geometry unchanged; gravity torque, elastic end stops and assumed joint loss; exhibit jaw has no power'},
+                                    'negative_pitch_stop_deg':-1.5,'assumption':'Elastic opening stop and conservative lower tooth contact angle. Powered exhibit commands calibrated closed zero.'},
             'scope':('Rigid coupled neck and jaw, fitted approximate torque-limited position dynamics. Live Planner with sampled camera geometry, '
                      'encoder and bus model. No actual MediaPipe video, wiring loads, current/temperature measurement, gear flex, no physical cycles. '
                      'Eye trajectory uses the position profile and encoder model. Direct reversal is a separate engineering stress case. '

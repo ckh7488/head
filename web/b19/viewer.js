@@ -15,6 +15,7 @@ if (embedded) {
 }
 const steps = data.finalView ? [...data.steps, data.finalView] : data.steps;
 const stops = data.stops ?? [];
+const assemblyViews = data.assemblyViews ?? [];
 const wireStates = data.wireStates ?? [];
 const revision = data.revision ?? "B19";
 const mainSteps = data.steps.filter(step => !step.continued).length;
@@ -94,10 +95,12 @@ const state = { index: 0, t: 1, playing: true, last: 0, stop: null, wirePose: nu
 const MOVE_SECONDS = 1.3;
 const HOLD_SECONDS = .9;
 const exterior = new Set(["Part073", "Part074", ...Object.keys(data.parts).filter(name => data.parts[name].guardPanel)]);
+const baseCovers = new Set(["Part000", "Part002", "CableGate", "HubHolder"]);
 let cameraFrame;
 
 function showExterior(id) {
-  return !exterior.has(id) || !el("hide-exterior").checked;
+  if (!el("hide-exterior").checked) return true;
+  return !exterior.has(id) && !(steps[state.index].id === "final-view" && baseCovers.has(id));
 }
 
 function selectedTools(step) {
@@ -267,7 +270,7 @@ function place(step, t) {
     for (const id of move.ids) {
       const entry = nodes.get(id);
       if (!entry) continue;
-      entry.node.visible = (move.mounted || stage * count >= k) && showExterior(id);
+      entry.node.visible = (move.mounted || stage * count >= k) && (!move.temporary || u < 1) && showExterior(id);
       entry.node.position.copy(entry.posedPosition).add(offset);
     }
   });
@@ -391,11 +394,19 @@ function go(index, stop = null) {
   el("wire-view").hidden = !complete || !wireStates.length;
   el("play").hidden = complete;
   el("scrub").hidden = complete;
+  el("prev").disabled = state.index === 0;
+  el("next").disabled = state.index === steps.length - 1;
   history.replaceState(null, "", "#" + step.id);
   for (const button of document.querySelectorAll("#list button")) {
     button.classList.toggle("active", Number(button.dataset.index) === state.index);
   }
-  document.querySelector("#list button.active")?.scrollIntoView({ block: "nearest" });
+  const list = el("list");
+  const active = list.querySelector("button.active");
+  if (active) {
+    const listBox = list.getBoundingClientRect();
+    const rowBox = active.getBoundingClientRect();
+    list.scrollTop += rowBox.top < listBox.top ? rowBox.top - listBox.top : Math.max(0, rowBox.bottom - listBox.bottom);
+  }
   el("meta").innerHTML = (complete ? `CAD 조립 검사 ${data.steps.length}단계` : `<b>${step.label}</b> / ${mainSteps} · ${step.section}`) +
     (step.bench ? '<span class="bench">작업대</span>' : "");
   el("title").textContent = complete ? step.section : step.continued ? `${step.label} 이어서` : `${step.label}단계`;
@@ -482,20 +493,27 @@ el("tool-select").onchange = () => {
   place(step, state.t);
   frame(step);
 };
-el("stop-view").hidden = !stops.length;
-el("stop-select").append(...stops.map(stop => new Option(stop.label, stop.id)));
+const inspectionViews = [...assemblyViews, ...stops];
+el("stop-view").hidden = !inspectionViews.length;
+if (assemblyViews.length) el("inspection-label").textContent = "검사 위치";
+el("stop-select").append(...inspectionViews.map(view => new Option(view.label, view.id)));
 el("stop-select").onchange = event => {
-  const stop = stops.find(location => location.id === event.target.value);
-  if (!stop) {
+  const view = inspectionViews.find(location => location.id === event.target.value);
+  if (!view) {
     go(state.index);
     return;
   }
-  const step = steps.findIndex(row => row.id === stop.stage);
-  if (step < 0) throw new Error(`Missing stop inspection stage: ${stop.stage}`);
+  const step = steps.findIndex(row => row.id === view.stage);
+  if (step < 0) throw new Error(`Missing inspection stage: ${view.stage}`);
+  if (assemblyViews.includes(view)) {
+    go(step);
+    el("stop-select").value = view.id;
+    return;
+  }
   state.playing = false;
   el("play").textContent = "▶︎";
   el("hide-exterior").checked = true;
-  go(step, stop);
+  go(step, view);
 };
 el("wire-select").append(...wireStates.map(pose => new Option(pose.label, pose.id)));
 el("wire-select").onchange = event => {
@@ -507,8 +525,8 @@ el("wire-select").onchange = event => {
 };
 addEventListener("keydown", event => {
   if (event.target instanceof Element && event.target.closest("button, input, select")) return;
-  if (event.key === "ArrowRight") go(state.index + 1);
-  if (event.key === "ArrowLeft") go(state.index - 1);
+  if (event.key === "ArrowRight") el("next").click();
+  if (event.key === "ArrowLeft") el("prev").click();
   if (event.key === " ") { event.preventDefault(); el("play").click(); }
 });
 

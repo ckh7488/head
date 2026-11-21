@@ -1,0 +1,1390 @@
+{
+  "status": "pass",
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "reference_cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "added_part_keys": [
+    "Part015",
+    "Part016",
+    "Part025",
+    "Part027",
+    "EyePitchBearingL",
+    "EyePitchBearingR",
+    "PitchDriveScrew",
+    "Part073"
+  ],
+  "coupled_cutoff_jaw_profile": [
+    [
+      6.5,
+      9.79
+    ],
+    [
+      6.9,
+      9.61
+    ],
+    [
+      7.0,
+      9.11
+    ],
+    [
+      7.15,
+      8.87
+    ]
+  ],
+  "camera_internal_run_mm": null,
+  "camera_bend": {
+    "required_for_pass": false,
+    "checked_poses": 0,
+    "below_target": 0,
+    "smallest_radius_mm": null
+  },
+  "camera_cable_allocation": null,
+  "scope": "Sampled pose-fitted cable polylines with fixed cut-length inputs. Includes simultaneous axis motion and geometric reserves. Excludes elastic and friction forces.",
+  "trajectories": {
+    "tracking_-1": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "tracking_+1": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      6,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24
+    ],
+    "power_loss_-60_-1": [
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31
+    ],
+    "power_loss_-60_+1": [
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38
+    ],
+    "power_loss_+0_-1": [
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "power_loss_+0_+1": [
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52
+    ],
+    "power_loss_+60_-1": [
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59
+    ],
+    "power_loss_+60_+1": [
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66
+    ],
+    "cutoff_wire_clearance_+6.50": [
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75
+    ],
+    "cutoff_wire_clearance_+6.90": [
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84
+    ],
+    "cutoff_wire_clearance_+7.00": [
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93
+    ],
+    "cutoff_wire_clearance_+7.12": [
+      94,
+      95,
+      38,
+      96,
+      97,
+      52,
+      98,
+      99,
+      66
+    ]
+  },
+  "samples": [
+    {
+      "pose_deg": [
+        60.0,
+        -15.0,
+        -8.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        50.0,
+        -13.375,
+        -6.666666666666667,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        40.0,
+        -11.75,
+        -5.333333333333334,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        30.0,
+        -10.125,
+        -4.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        20.0,
+        -8.5,
+        -2.666666666666667,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        10.0,
+        -6.875,
+        -1.333333333333333,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -5.25,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -10.0,
+        -3.625,
+        1.333333333333334,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -20.0,
+        -2.0,
+        2.666666666666666,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -30.0,
+        -0.375,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -40.0,
+        1.25,
+        5.333333333333334,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -50.0,
+        2.875,
+        6.666666666666666,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        4.5,
+        8.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -15.0,
+        8.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -50.0,
+        -13.375,
+        6.666666666666667,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -40.0,
+        -11.75,
+        5.333333333333334,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -30.0,
+        -10.125,
+        4.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -20.0,
+        -8.5,
+        2.666666666666667,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -10.0,
+        -6.875,
+        1.333333333333333,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        10.0,
+        -3.625,
+        -1.333333333333334,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        20.0,
+        -2.0,
+        -2.666666666666666,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        30.0,
+        -0.375,
+        -4.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        40.0,
+        1.25,
+        -5.333333333333334,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        50.0,
+        2.875,
+        -6.666666666666666,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        4.5,
+        -8.0,
+        0.0,
+        0.0
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -12.0,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -12.867356770833334,
+        5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -13.734713541666666,
+        2.666666666666667,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -14.6020703125,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -15.469427083333333,
+        -2.666666666666666,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -16.33678385416667,
+        -5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -17.204140625,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        1.5,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        2.436953125,
+        -5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        3.37390625,
+        -2.666666666666667,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        4.310859375,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        5.2478125,
+        2.666666666666666,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.184765625000001,
+        5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.12171875,
+        8.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -12.0,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -12.867356770833334,
+        5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -13.734713541666666,
+        2.666666666666667,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -14.6020703125,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -15.469427083333333,
+        -2.666666666666666,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -16.33678385416667,
+        -5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -17.204140625,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        1.5,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        2.436953125,
+        -5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        3.37390625,
+        -2.666666666666667,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        4.310859375,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        5.2478125,
+        2.666666666666666,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.184765625000001,
+        5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.12171875,
+        8.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -12.0,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -12.867356770833334,
+        5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -13.734713541666666,
+        2.666666666666667,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -14.6020703125,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -15.469427083333333,
+        -2.666666666666666,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -16.33678385416667,
+        -5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -17.204140625,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        1.5,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        2.436953125,
+        -5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        3.37390625,
+        -2.666666666666667,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        4.310859375,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        5.2478125,
+        2.666666666666666,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.184765625000001,
+        5.333333333333334,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.12171875,
+        8.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.5,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.5,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.5,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.5,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.5,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.5,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.5,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.5,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.5,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.9,
+        -8.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.9,
+        0.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        6.9,
+        8.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.9,
+        -8.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.9,
+        0.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        0.0,
+        6.9,
+        8.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.9,
+        -8.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.9,
+        0.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        60.0,
+        6.9,
+        8.0,
+        0.0,
+        9.61
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 0.75
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.0,
+        -8.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.0,
+        0.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.0,
+        8.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.0,
+        -8.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.0,
+        0.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.0,
+        8.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.0,
+        -8.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.0,
+        0.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.0,
+        8.0,
+        0.0,
+        9.11
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.12171875,
+        -8.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.12171875,
+        0.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.12171875,
+        -8.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.12171875,
+        0.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.12171875,
+        -8.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.12171875,
+        0.0,
+        0.0,
+        8.87
+      ],
+      "checked_cables": 15,
+      "contacts": [],
+      "chin_reserve_mm": 1.0
+    }
+  ],
+  "replayed_unchanged_inputs": {
+    "source_report_sha256": "ba685e440ba05743d8b23a74c0f698f3137e0549bf2f42c36c5a1f4e80afc69a",
+    "source_cad_sha256": "c30c199d787d6f1d538977a9743e732a71c433befcd37dd34cd51fa8f86d06d1",
+    "identical_mesh_sha256": {
+      "Part015": "5e2cf381cf6480d98d4ea60d33e04ee03db27e3d9ac1dbb8415b3b83f3b3f4df",
+      "Part016": "dab6f6e4b77142ac6afcec933211719a141912908c3d68bda0cd0bc0878e594b",
+      "Part025": "fe740780abb4eff2ec169f6fcff9af514e29bd6afb23b9f091b54014c6424402",
+      "Part027": "42732519f83b23c2388b69598b4954b8469a65d3c38a2d3bbdefecc11cde8749",
+      "EyePitchBearingL": "12c11f11bf6c8474130e1646a39b1f279989e13941e4e562efb167d053f54e2a",
+      "EyePitchBearingR": "db254e01ff52672f9beb95ddd76c248a416a3211284b22b74c69522c2be30814",
+      "PitchDriveScrew": "614ace27da6e7134767088e1d75b85733b83b6694117a9dd2e849d3e78d7d9c7",
+      "Part073": "d30af4b706212f4537e94c7bc74e7b1accdd49b4f5b92adb38504bea7b3e9af0",
+      "Jaw_30_moving_jaw": "2c9de9a6e0793a897e7fbdc251675a62b65690c38f9001fd019291e26f24e64b"
+    },
+    "placement_and_kinematic_metadata_unchanged": true
+  }
+}

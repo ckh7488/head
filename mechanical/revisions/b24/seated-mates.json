@@ -1,0 +1,259 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "baseline_cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "contact_report_sha256": "d74d28a08c9c14162c538d652b5e705cf6acb8ba5b269945d77c47093d41189b",
+  "pairs": [
+    {
+      "pair": [
+        "BlinkHornScrew0",
+        "Part045"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 3.2798227303474525,
+      "b23_overlap_mm3": 3.2798227303474525
+    },
+    {
+      "pair": [
+        "BlinkHornScrew1",
+        "Part045"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 3.279822730347584,
+      "b23_overlap_mm3": 3.279822730347584
+    },
+    {
+      "pair": [
+        "EyePitchHornScrew0",
+        "Part041"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.770884720465928,
+      "b23_overlap_mm3": 2.770884720465928
+    },
+    {
+      "pair": [
+        "EyePitchHornScrew1",
+        "Part041"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.7708847204659683,
+      "b23_overlap_mm3": 2.7708847204659683
+    },
+    {
+      "pair": [
+        "EyeYawHornScrew0",
+        "Part038"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.9405307237596547,
+      "b23_overlap_mm3": 2.9405307237596547
+    },
+    {
+      "pair": [
+        "EyeYawHornScrew1",
+        "Part038"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.9405307237597573,
+      "b23_overlap_mm3": 2.9405307237597573
+    },
+    {
+      "pair": [
+        "EyeYawHornScrew2",
+        "Part038"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.9405307237598217,
+      "b23_overlap_mm3": 2.9405307237598217
+    },
+    {
+      "pair": [
+        "HarnessID1EH",
+        "Part038"
+      ],
+      "status": "stock_connector_envelope",
+      "overlap_mm3": 42.65009340054967,
+      "b23_overlap_mm3": 42.65009340054967
+    },
+    {
+      "pair": [
+        "HarnessID6EH",
+        "Jaw_XL330_M288_Jaw"
+      ],
+      "status": "stock_connector_envelope",
+      "overlap_mm3": 42.65009340632009,
+      "b23_overlap_mm3": 42.65009340632009
+    },
+    {
+      "pair": [
+        "JawHornScrew0",
+        "Jaw_XL330_M288_Jaw"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 3.2798227303473944,
+      "b23_overlap_mm3": 3.2798227303473944
+    },
+    {
+      "pair": [
+        "JawHornScrew1",
+        "Jaw_XL330_M288_Jaw"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 3.2798227303474974,
+      "b23_overlap_mm3": 3.2798227303474974
+    },
+    {
+      "pair": [
+        "Jaw_36_left_jaw_servo_stay",
+        "Jaw_XL330_M288_Jaw"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Jaw_38_left_jaw_drive_arm",
+        "Jaw_XL330_M288_Jaw"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part007",
+        "Part017"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part016",
+        "Part018"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part017",
+        "XL430YawSideL0"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 5.20666621261758,
+      "b23_overlap_mm3": 5.20666621261758
+    },
+    {
+      "pair": [
+        "Part017",
+        "XL430YawSideL1"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 5.206666212617578,
+      "b23_overlap_mm3": 5.206666212617578
+    },
+    {
+      "pair": [
+        "Part017",
+        "XL430YawSideR0"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 5.206666212617769,
+      "b23_overlap_mm3": 5.206666212617769
+    },
+    {
+      "pair": [
+        "Part017",
+        "XL430YawSideR1"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 5.206666212617772,
+      "b23_overlap_mm3": 5.206666212617772
+    },
+    {
+      "pair": [
+        "Part018",
+        "XL430PitchKeeper0"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.7499407694435125,
+      "b23_overlap_mm3": 2.7499407694435125
+    },
+    {
+      "pair": [
+        "Part018",
+        "XL430PitchKeeper1"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 2.749940769443532,
+      "b23_overlap_mm3": 2.749940769443532
+    },
+    {
+      "pair": [
+        "Part018",
+        "XL430PitchSide0"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 5.062152962485497,
+      "b23_overlap_mm3": 5.062152962485497
+    },
+    {
+      "pair": [
+        "Part018",
+        "XL430PitchSide1"
+      ],
+      "status": "stock_thread",
+      "overlap_mm3": 5.062152962485496,
+      "b23_overlap_mm3": 5.062152962485496
+    },
+    {
+      "pair": [
+        "Part038",
+        "Part039"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part038",
+        "Part040"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part041",
+        "Part042"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part041",
+        "Part043"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part045",
+        "Part046"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    },
+    {
+      "pair": [
+        "Part045",
+        "Part047"
+      ],
+      "status": "clear",
+      "overlap_mm3": 0.0
+    }
+  ],
+  "scope": "Printed parts and stock motor solids are checked separately. Threads and JST plug boxes model their occupied envelopes at the catalog mating interface."
+}

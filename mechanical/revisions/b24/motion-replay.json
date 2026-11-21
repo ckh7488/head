@@ -1,0 +1,3128 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "sliced_grams_sha256": "27fb7007c2f3f809c9cf45d4c0b2d220a2eea1325f70ebc80ebe37201cf0a608",
+  "solver_sha256": "8b12946c5fb8bb82176d6be7a694fe4baf4a470229ddc95a1b97799d1a6df44d",
+  "jaw_stop_sha256": "2eb7f6a5c6885f088550a3c6a56bee357867902590b2e548bc51509873c01920",
+  "firmware_sha256": "95dd62c6522740ee7c62d8b1811913c9f13fac8498bb60662b2aa976df3d1170",
+  "tracker_sha256": "d23e6413308fcca33a02adbfff04dcce4f0e0f46a232cbeab0acf88533583b3b",
+  "mujoco_version": "3.3.7",
+  "commanded_shaft_range_deg": [
+    [
+      -19.248046875,
+      19.248046875
+    ],
+    [
+      -7.294921875,
+      7.294921875
+    ],
+    [
+      0.0,
+      90.0
+    ],
+    [
+      -57.919921875,
+      57.919921875
+    ],
+    [
+      -13.623046875,
+      2.98828125
+    ],
+    [
+      0.0,
+      5.44921875
+    ]
+  ],
+  "feedback_guard_deg": [
+    [
+      -19.951171875,
+      19.951171875
+    ],
+    [
+      -7.998046875,
+      7.998046875
+    ],
+    [
+      -0.703125,
+      90.703125
+    ],
+    [
+      -58.623046875,
+      58.623046875
+    ],
+    [
+      -14.326171875,
+      3.69140625
+    ],
+    [
+      -0.966796875,
+      6.416015625
+    ]
+  ],
+  "neck_yaw_pitch_jaw_pwm_registers": [
+    270,
+    185,
+    160
+  ],
+  "axis_speed_caps_deg_s": {
+    "normal": [
+      103.05000000000001,
+      82.44000000000001,
+      219.84000000000003,
+      39.846000000000004,
+      26.106,
+      48.09
+    ],
+    "TRACK": [
+      103.05000000000001,
+      82.44000000000001,
+      219.84000000000003,
+      39.846000000000004,
+      20.610000000000003,
+      48.09
+    ],
+    "HOLD": [
+      103.05000000000001,
+      82.44000000000001,
+      219.84000000000003,
+      39.846000000000004,
+      20.610000000000003,
+      48.09
+    ],
+    "RETURN": [
+      103.05000000000001,
+      82.44000000000001,
+      219.84000000000003,
+      9.618,
+      9.618,
+      48.09
+    ]
+  },
+  "axis_profile_accel_deg_s2": [
+    429.15400000000005,
+    343.32320000000004,
+    1330.3774,
+    257.49240000000003,
+    214.57700000000003,
+    214.57700000000003
+  ],
+  "installed_masses_g": [
+    237.46600382143262,
+    597.1465697722412,
+    47.60009406760989
+  ],
+  "exhibit_jaw_hold": {
+    "pwm_limit": 100.0,
+    "recovery_pwm_limit": 120.0,
+    "recovery_velocity_deg_s": 8.244,
+    "recovery_limit_deg": 9.66796875
+  },
+  "passive_jaw_model": {
+    "positive_pitch_stop_deg": 8.13984375,
+    "stop_stiffness_Nm_rad": 19.18320669710246,
+    "negative_pitch_stop_deg": -1.5,
+    "assumption": "Elastic opening stop and conservative lower tooth contact angle. Powered exhibit commands calibrated closed zero."
+  },
+  "scope": "Rigid coupled neck and jaw, fitted approximate torque-limited position dynamics. Live Planner with sampled camera geometry, encoder and bus model. No actual MediaPipe video, wiring loads, current/temperature measurement, gear flex, no physical cycles. Eye trajectory uses the position profile and encoder model. Direct reversal is a separate engineering stress case. Actual servo tuning, calibrated spans and thermal limits need bench measurements.",
+  "cases": {
+    "nominal-walk-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.32909163091921,
+      "shaft_max_abs_speed_deg_s": [
+        39.641405344838745,
+        17.14981696278602,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -35.62072571830441,
+          57.51729468851156
+        ],
+        [
+          -5.575264284991687,
+          0.39579895891596745
+        ],
+        [
+          0.0,
+          0.7358623616250901
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21007205265856493,
+        0.14815762814344668,
+        0.03091406843126236
+      ],
+      "max_applied_torque_Nm": [
+        0.04099898156227243,
+        0.053353354966527516,
+        0.008336013541944033
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        57.5172436986727,
+        -4.087224302654816,
+        0.7355916228378843
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.732,
+      "acquisition_s": 0.7319999999999993,
+      "horizontal_tracking_10deg_ratio": 0.9623804118696286,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.234704560106948,
+      "final_80deg_head_yaw": 57.51724720167502,
+      "final_80deg_eye_yaw": 19.248046875
+    },
+    "nominal-turn-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.5343203711677,
+      "shaft_max_abs_speed_deg_s": [
+        39.74537341806657,
+        16.286775104072117,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -1.6512851162553592e-07,
+          40.70859677584644
+        ],
+        [
+          -2.9451292521205796,
+          0.10150467139806857
+        ],
+        [
+          0.0,
+          0.6752633345552856
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21182878199940922,
+        0.14652894768138497,
+        0.032072354250732
+      ],
+      "max_applied_torque_Nm": [
+        0.04123280033105684,
+        0.054197760936806845,
+        0.007507527911731911
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        40.347789571141355,
+        -2.4256440341723877,
+        0.6749150709977375
+      ],
+      "overshoot_deg": 0.7085967758464378,
+      "horizontal_error_at_4s_deg": 0.7068925162047748
+    },
+    "nominal-loss-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 44.08039613847293,
+      "shaft_max_abs_speed_deg_s": [
+        39.76875775774808,
+        19.903632501683077,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -1.6512851162553592e-07,
+          36.053001044697396
+        ],
+        [
+          -5.500126726908957,
+          0.22365743271503716
+        ],
+        [
+          0.0,
+          0.7255776610868632
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21187278718920696,
+        0.14652894768138497,
+        0.030911270731206635
+      ],
+      "max_applied_torque_Nm": [
+        0.041368471695266876,
+        0.054197760936806845,
+        0.008204150528246667
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        0.46265933639421536,
+        0.22365743271503716,
+        0.7252896405813968
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.0003118504200865001,
+      "return_peak_speed_deg_s": 10.276568398594684,
+      "parked": true,
+      "return_failed": false
+    },
+    "nominal-reacquire-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 44.08039613847293,
+      "shaft_max_abs_speed_deg_s": [
+        39.76875775774808,
+        19.903632501683077,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -35.004476905509435,
+          36.053001044697396
+        ],
+        [
+          -5.6973108189087736,
+          0.10150467139806857
+        ],
+        [
+          0.0,
+          0.7472289451066044
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.20920079443725684,
+        0.14652894768138497,
+        0.030911270731206635
+      ],
+      "max_applied_torque_Nm": [
+        0.041368471695266876,
+        0.054197760936806845,
+        0.008628757133337852
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -34.526038766612125,
+        -4.881366466233492,
+        0.7470422190344661
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.0003118504200865001,
+      "return_peak_speed_deg_s": 10.164791706112057,
+      "parked": false,
+      "return_failed": false
+    },
+    "nominal-reversal-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 47.8049067103876,
+      "shaft_max_abs_speed_deg_s": [
+        39.859164304830344,
+        26.482188738741282,
+        34.194228858947085
+      ],
+      "range_deg": [
+        [
+          -35.43377299670083,
+          24.478661837819345
+        ],
+        [
+          -13.121540006441288,
+          3.192351576879591
+        ],
+        [
+          0.0,
+          6.127417921090068
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.2125261510872655,
+        0.1217901163315559,
+        0.041345069886660625
+      ],
+      "max_applied_torque_Nm": [
+        0.04203937596346009,
+        0.05672899904450146,
+        0.015520201034565615
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -9.074960674622233,
+        -13.121505410540792,
+        1.1742368701163446
+      ]
+    },
+    "nominal-watchdog-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 42.7203065765423,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599993172666,
+        24.274108596959827,
+        12.381942074965911
+      ],
+      "range_deg": [
+        [
+          0.0,
+          56.66558773833358
+        ],
+        [
+          0.0,
+          3.233876430364132
+        ],
+        [
+          0.0,
+          1.0163091511241669
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21281634425138984,
+        0.2109743176453286,
+        0.06409193942218547
+      ],
+      "max_applied_torque_Nm": [
+        0.04113037865993618,
+        0.015464151735769842,
+        0.005471038896347105
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.433,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            53.423586928403935,
+            3.2283196472628672,
+            0.5293256732077171
+          ],
+          "pre_freeze_speed_deg_s": [
+            39.84599993172666,
+            0.0001372760356112066,
+            -3.6451531350339655e-13
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            53.4375,
+            2.98828125,
+            0.52734375
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        53.765693664942404,
+        3.233876430364132,
+        1.0163091511227929
+      ]
+    },
+    "nominal-jaw-demo-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 0.6287182400075493,
+      "shaft_max_abs_speed_deg_s": [
+        8.165320077815278e-05,
+        0.6287182382453614,
+        33.83024132359647
+      ],
+      "range_deg": [
+        [
+          -7.397038578828453e-06,
+          4.109198719303993e-06
+        ],
+        [
+          0.0,
+          0.198354904309407
+        ],
+        [
+          0.0,
+          5.909602870183431
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.3669757944967317,
+        0.22376386323361613,
+        0.0410984714235777
+      ],
+      "max_applied_torque_Nm": [
+        4.702886754623515e-07,
+        0.0031822289641687106,
+        0.015134820892219852
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -2.1045236618999963e-06,
+        0.19833647303937965,
+        1.1018127389531613
+      ]
+    },
+    "nominal-walk--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.34396941162478,
+      "shaft_max_abs_speed_deg_s": [
+        39.61141523561771,
+        17.13279519632398,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -57.52008030760886,
+          35.62075568435971
+        ],
+        [
+          -5.577181885916681,
+          0.3957976041941201
+        ],
+        [
+          0.0,
+          0.7372993968171949
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21024655766136793,
+        0.1479515402860655,
+        0.03091665088591853
+      ],
+      "max_applied_torque_Nm": [
+        0.04100300231058101,
+        0.053592580831217054,
+        0.008356511386318594
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -57.52008030760886,
+        -4.097384003608112,
+        0.7370979211569435
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.732,
+      "acquisition_s": 0.7319999999999993,
+      "horizontal_tracking_10deg_ratio": 0.9623804118696286,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.231874931213106,
+      "final_80deg_head_yaw": -57.52007683056886,
+      "final_80deg_eye_yaw": -19.248046875
+    },
+    "nominal-turn--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.50424203301932,
+      "shaft_max_abs_speed_deg_s": [
+        39.7756757189326,
+        16.308492960474787,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -40.7086030739963,
+          1.491041076389206e-06
+        ],
+        [
+          -2.9454412739902063,
+          0.1015071534495932
+        ],
+        [
+          0.0,
+          0.6741947600718536
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.2120060467047758,
+        0.14673526756285402,
+        0.03206085168773986
+      ],
+      "max_applied_torque_Nm": [
+        0.04138636172592976,
+        0.05395277809782311,
+        0.007486115556162687
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -40.34782513820249,
+        -2.426170194717026,
+        0.6739540969638329
+      ],
+      "overshoot_deg": 0.7086030739963007,
+      "horizontal_error_at_4s_deg": 0.7068677978426905
+    },
+    "nominal-loss--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.6784851891169,
+      "shaft_max_abs_speed_deg_s": [
+        39.76345198596523,
+        16.937316274873876,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -36.050432794715434,
+          1.491041076389206e-06
+        ],
+        [
+          0.0,
+          3.2398358236106484
+        ],
+        [
+          0.0,
+          0.5816672479639005
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21214486472195676,
+        0.19811369556217961,
+        0.03319462636439609
+      ],
+      "max_applied_torque_Nm": [
+        0.04106624062234186,
+        0.05271579503421813,
+        0.0065821213050693515
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -0.20678756817832736,
+        0.22103716080138422,
+        0.5816672479630365
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.00031597282142624975,
+      "return_peak_speed_deg_s": 10.183256309329328,
+      "parked": true,
+      "return_failed": false
+    },
+    "nominal-walk-+1-0.20-0.00": {
+      "latency_s": 0.2,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 43.61604593817184,
+      "shaft_max_abs_speed_deg_s": [
+        39.77065429351214,
+        18.998677455838244,
+        14.40422031760601
+      ],
+      "range_deg": [
+        [
+          -37.567553361062714,
+          57.463562961516885
+        ],
+        [
+          -6.021232333312789,
+          0.395813303504617
+        ],
+        [
+          0.0,
+          0.7552633699805268
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.20968282603583271,
+        0.1465659122037057,
+        0.030787172738392012
+      ],
+      "max_applied_torque_Nm": [
+        0.04137337726251938,
+        0.05374590670028662,
+        0.00866684078764754
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        57.46351457185287,
+        -4.232956646403673,
+        0.7549855584286127
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.791,
+      "acquisition_s": 0.7910000000000004,
+      "horizontal_tracking_10deg_ratio": 0.9476171079429735,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.288434542330471,
+      "final_80deg_head_yaw": 57.4635172194515,
+      "final_80deg_eye_yaw": 19.248046875
+    },
+    "nominal-watchdog-1.12-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 42.7203065765423,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599994436026,
+        24.274108596959827,
+        12.381942074965911
+      ],
+      "range_deg": [
+        [
+          0.0,
+          57.35020249256631
+        ],
+        [
+          0.0,
+          3.2340159467889182
+        ],
+        [
+          0.0,
+          1.0169160806236022
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21281634425138984,
+        0.2109743176453286,
+        0.06409193942218547
+      ],
+      "max_applied_torque_Nm": [
+        0.04113037865993618,
+        0.015464151735769842,
+        0.005471038896347105
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.5,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            55.82942018907095,
+            3.228335018104801,
+            0.5293131468641691
+          ],
+          "pre_freeze_speed_deg_s": [
+            28.278576593521052,
+            0.0003105236867379604,
+            -0.0003513558410514231
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            55.810546875,
+            2.98828125,
+            0.52734375
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        56.03859104686872,
+        3.2340159467889182,
+        1.0169160806221338
+      ]
+    },
+    "nominal-watchdog-1.2-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 42.7203065765423,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599994436026,
+        24.274108596959827,
+        12.381942074965911
+      ],
+      "range_deg": [
+        [
+          0.0,
+          57.35016474881367
+        ],
+        [
+          0.0,
+          3.234273118568006
+        ],
+        [
+          0.0,
+          1.0168960217011809
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21281634425138984,
+        0.2109743176453286,
+        0.06409193942218547
+      ],
+      "max_applied_torque_Nm": [
+        0.04113037865993618,
+        0.015464151735769842,
+        0.005471038896347105
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.567,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            57.1253035798819,
+            3.2283558821578167,
+            0.5292895277318101
+          ],
+          "pre_freeze_speed_deg_s": [
+            10.708228685790303,
+            0.0003107655687871751,
+            -0.00035073823560803136
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            57.12890625,
+            2.98828125,
+            0.52734375
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        57.06014424444443,
+        3.234273118568006,
+        1.0168960216996175
+      ]
+    },
+    "nominal-watchdog-1.28-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 42.7203065765423,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599994436026,
+        24.274108596959827,
+        12.381942074965911
+      ],
+      "range_deg": [
+        [
+          0.0,
+          57.35096338961059
+        ],
+        [
+          0.0,
+          3.2352156862977353
+        ],
+        [
+          0.0,
+          1.0163354418480484
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.21281634425138984,
+        0.2109743176453286,
+        0.06409193942218547
+      ],
+      "max_applied_torque_Nm": [
+        0.04113037865993618,
+        0.015464151735769842,
+        0.005471038896347105
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.667,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            57.35095341453175,
+            3.2290545184319734,
+            0.5292727782887114
+          ],
+          "pre_freeze_speed_deg_s": [
+            0.0012902081066772366,
+            0.009251484223998555,
+            -9.559137909452282e-06
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            57.392578125,
+            2.98828125,
+            0.52734375
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        57.247679598483174,
+        3.2352156862977353,
+        1.0163354418466626
+      ]
+    },
+    "nominal-cold-close--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 7.942022846872921,
+      "shaft_max_abs_speed_deg_s": [
+        0.0013212442907942826,
+        7.94202273697104,
+        86.64337929404107
+      ],
+      "range_deg": [
+        [
+          -7.6099380834529805e-06,
+          1.0991119354040442e-06
+        ],
+        [
+          -0.9667968750000001,
+          -0.7800988811565699
+        ],
+        [
+          0.21937382000945974,
+          8.5
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.3669758231715047,
+        0.22464493831401217,
+        0.028720438165270985
+      ],
+      "max_applied_torque_Nm": [
+        7.609820822187421e-06,
+        0.0401981893482349,
+        0.028269391527015734
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -7.6099380834529805e-06,
+        -0.7800988811565699,
+        0.6085207138071895
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "nominal-cold-close-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 8.147057763912972,
+      "shaft_max_abs_speed_deg_s": [
+        0.0013224093147336967,
+        8.147057656587943,
+        87.44923467744377
+      ],
+      "range_deg": [
+        [
+          -1.045971569841476e-05,
+          8.847040738007041e-07
+        ],
+        [
+          0.9667968750000001,
+          1.1876889805092146
+        ],
+        [
+          0.16288894022003803,
+          8.5
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.3669758332924108,
+        0.22279496830476606,
+        0.029531912866008304
+      ],
+      "max_applied_torque_Nm": [
+        7.61653087837784e-06,
+        0.0412359643326092,
+        0.028561206749681697
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -1.045971569841476e-05,
+        1.1876889805092146,
+        0.5544325616718642
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "nominal-cold-close-limit--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 38.78054967718368,
+      "shaft_max_abs_speed_deg_s": [
+        0.0063759715124704274,
+        38.780549153041896,
+        430.713711456527
+      ],
+      "range_deg": [
+        [
+          -3.5736383758982496e-05,
+          1.0448590564439232e-05
+        ],
+        [
+          -0.9667968750000001,
+          -0.7288717859923957
+        ],
+        [
+          0.2164284201663705,
+          9.66796875
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.3669758283011642,
+        0.22464493831401217,
+        0.028720438165270985
+      ],
+      "max_applied_torque_Nm": [
+        3.6722959648970645e-05,
+        0.19628599785110304,
+        0.05993220338983051
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -8.994738731573774e-06,
+        -0.7425814588699646,
+        0.6092183843221395
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "nominal-cold-close-limit-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 38.99390951102288,
+      "shaft_max_abs_speed_deg_s": [
+        0.0063097372900686784,
+        38.993909000522834,
+        431.6764958646217
+      ],
+      "range_deg": [
+        [
+          -3.5505435495183995e-05,
+          1.0048788011136235e-05
+        ],
+        [
+          0.9667968750000001,
+          1.2082728925511432
+        ],
+        [
+          0.16234552570443023,
+          9.66796875
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.3669758433888283,
+        0.22279496830476606,
+        0.029531912866008304
+      ],
+      "max_applied_torque_Nm": [
+        3.6341477913695776e-05,
+        0.19736590908183066,
+        0.05993220338983051
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -8.979074656267057e-06,
+        1.2038417653281588,
+        0.5550449608479818
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "warm_low-walk-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.160574850649446,
+      "shaft_max_abs_speed_deg_s": [
+        39.6370371827202,
+        13.099896445900407,
+        2.3062734119730375
+      ],
+      "range_deg": [
+        [
+          -35.0737974535934,
+          56.970516190153006
+        ],
+        [
+          -4.782429646447988,
+          0.0009259322384538286
+        ],
+        [
+          -8.075515205440732e-05,
+          0.45155317066472633
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08173843341453275,
+        0.04475729638183654,
+        0.006391868530772039
+      ],
+      "max_applied_torque_Nm": [
+        0.06410516656330977,
+        0.07773527467689237,
+        0.0011531706478553917
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        56.97049686063793,
+        -4.7818602429925585,
+        0.45150375801488324
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.744,
+      "acquisition_s": 0.7439999999999998,
+      "horizontal_tracking_10deg_ratio": 0.962749553643889,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.781453588826956,
+      "final_80deg_head_yaw": 56.97049817295501,
+      "final_80deg_eye_yaw": 19.248046875
+    },
+    "warm_low-turn-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.20958157726679,
+      "shaft_max_abs_speed_deg_s": [
+        39.703907671953225,
+        12.341018934941339,
+        0.6813907129535204
+      ],
+      "range_deg": [
+        [
+          -7.827362841070156e-07,
+          40.0740343579108
+        ],
+        [
+          -1.8826031009190767,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.03155742571717751
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08291116226548365,
+        0.043023455482987624,
+        0.007560320090470845
+      ],
+      "max_applied_torque_Nm": [
+        0.06470933951580347,
+        0.07819194516366101,
+        0.0002140652058039091
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        39.47600214755135,
+        -1.8824102981692556,
+        0.031503848101847046
+      ],
+      "overshoot_deg": 0.07403435791079716,
+      "horizontal_error_at_4s_deg": 0.5239956639216956
+    },
+    "warm_low-loss-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.89632055177939,
+      "shaft_max_abs_speed_deg_s": [
+        39.72666067634115,
+        17.961605857595593,
+        2.6601009051440228
+      ],
+      "range_deg": [
+        [
+          -7.827362841070156e-07,
+          35.33013052395158
+        ],
+        [
+          -4.537537855179532,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.4321714906951662
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08277840620914799,
+        0.043023455482987624,
+        0.006469770253608009
+      ],
+      "max_applied_torque_Nm": [
+        0.06484904968633695,
+        0.07819194516366101,
+        0.000854635658350444
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        0.40364277704864626,
+        -0.3826602541136374,
+        0.43200624098426643
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.00012805049731082405,
+      "return_peak_speed_deg_s": 10.190983865730574,
+      "parked": true,
+      "return_failed": false
+    },
+    "warm_low-reacquire-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.89632055177939,
+      "shaft_max_abs_speed_deg_s": [
+        39.853960868427585,
+        17.961605857595593,
+        2.6601009051440228
+      ],
+      "range_deg": [
+        [
+          -34.630575305519294,
+          35.33013052395158
+        ],
+        [
+          -4.669625675147252,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.4510297528601628
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08129692641661672,
+        0.043023455482987624,
+        0.006455911395713353
+      ],
+      "max_applied_torque_Nm": [
+        0.06484904968633695,
+        0.07819194516366101,
+        0.001148449967961341
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -34.56636830978595,
+        -4.66948431559882,
+        0.4510268171651563
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.00012805049731082405,
+      "return_peak_speed_deg_s": 10.190983865730574,
+      "parked": false,
+      "return_failed": false
+    },
+    "warm_low-reversal-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 47.70150391099889,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599942320329,
+        26.475694451046646,
+        35.0222284876502
+      ],
+      "range_deg": [
+        [
+          -34.887508427079425,
+          23.932884305000776
+        ],
+        [
+          -12.602428977142889,
+          2.4070504250694023
+        ],
+        [
+          -7.341704558953266e-05,
+          5.871816872300452
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0833658016749677,
+        0.026216320689097516,
+        0.014338019924457532
+      ],
+      "max_applied_torque_Nm": [
+        0.0648404541820094,
+        0.08193265601665417,
+        0.02382818027615211
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -8.528207224718084,
+        -12.602421115663635,
+        1.8181239448685254
+      ]
+    },
+    "warm_low-watchdog-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599959579756,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.11991460545488
+        ],
+        [
+          0.0,
+          2.4630039349180417
+        ],
+        [
+          -2.952434261657523e-05,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08365599483909204,
+        0.062010859003791274,
+        0.028888549591677
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.05430511400411434,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.433,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            52.87679670524519,
+            2.4629135184589384,
+            5.420208515049559e-05
+          ],
+          "pre_freeze_speed_deg_s": [
+            39.84599959579756,
+            4.8901811116589786e-05,
+            7.281602505369133e-12
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            52.91015625,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        53.63810204201745,
+        2.4630039349180417,
+        4.6250501321674794e-07
+      ]
+    },
+    "warm_low-jaw-demo-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 0.0066896610244142184,
+      "shaft_max_abs_speed_deg_s": [
+        0.00010952223241072168,
+        0.00668876442268484,
+        33.86764565710056
+      ],
+      "range_deg": [
+        [
+          -5.618637589844475e-06,
+          3.357246650009918e-06
+        ],
+        [
+          -0.00020123517495021913,
+          0.0002698458363860271
+        ],
+        [
+          0.0,
+          4.920976374774518
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990799788656224,
+        0.09619889148220372,
+        0.014074006855205129
+      ],
+      "max_applied_torque_Nm": [
+        6.308027747015081e-07,
+        3.385487899917136e-05,
+        0.024179551968347424
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -1.377380316076296e-06,
+        2.6202949951165887e-05,
+        1.760428040802384
+      ]
+    },
+    "warm_low-walk--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.136967512249164,
+      "shaft_max_abs_speed_deg_s": [
+        39.61386810730989,
+        13.072401919409657,
+        2.365082347304923
+      ],
+      "range_deg": [
+        [
+          -56.970536308306954,
+          35.07383811811464
+        ],
+        [
+          -4.7841706918382405,
+          0.0009208634326884512
+        ],
+        [
+          -6.80709956470217e-05,
+          0.452996642109883
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08191446227980716,
+        0.04455051179217648,
+        0.006388098783962442
+      ],
+      "max_applied_torque_Nm": [
+        0.06396474918347879,
+        0.07802061566914265,
+        0.001173181878698788
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -56.970536308306954,
+        -4.783641235195186,
+        0.4529966417970972
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.744,
+      "acquisition_s": 0.7439999999999998,
+      "horizontal_tracking_10deg_ratio": 0.962749553643889,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.7814167594107957,
+      "final_80deg_head_yaw": -56.97053500237117,
+      "final_80deg_eye_yaw": -19.248046875
+    },
+    "warm_low-turn--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.23800547749231,
+      "shaft_max_abs_speed_deg_s": [
+        39.73403682265807,
+        12.370230945790691,
+        0.6747944026513867
+      ],
+      "range_deg": [
+        [
+          -40.07403460917405,
+          0.0
+        ],
+        [
+          -1.8831343451181963,
+          1.9563027747029825e-05
+        ],
+        [
+          -7.341872030095841e-05,
+          0.03216563685851339
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0830876410102591,
+        0.0432297753644567,
+        0.007577466516044844
+      ],
+      "max_applied_torque_Nm": [
+        0.06484367398588904,
+        0.07790564891100887,
+        0.00021199291380531092
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -39.47601617842543,
+        -1.8829900185593773,
+        0.032149819069811854
+      ],
+      "overshoot_deg": 0.07403460917404914,
+      "horizontal_error_at_4s_deg": 0.5239860109416625
+    },
+    "warm_low-loss--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.41758320242825,
+      "shaft_max_abs_speed_deg_s": [
+        39.71441677518018,
+        12.297674666532428,
+        0.01513595172650331
+      ],
+      "range_deg": [
+        [
+          -35.32870184238352,
+          0.0
+        ],
+        [
+          0.0,
+          2.4298432280845503
+        ],
+        [
+          -0.00028082312866747276,
+          0.0007101028214354511
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08314415696484925,
+        0.07386151552165814,
+        0.0083829458329816
+      ],
+      "max_applied_torque_Nm": [
+        0.06458534571352856,
+        0.07416312282210633,
+        4.7550994749072545e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -0.31606694477714486,
+        0.30084317125627896,
+        -5.492267661845309e-07
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.0001122352681653052,
+      "return_peak_speed_deg_s": 10.183310133737397,
+      "parked": true,
+      "return_failed": false
+    },
+    "warm_low-walk-+1-0.20-0.00": {
+      "latency_s": 0.2,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.790945081819395,
+      "shaft_max_abs_speed_deg_s": [
+        39.73768371174263,
+        15.89981415821666,
+        3.0248505433521844
+      ],
+      "range_deg": [
+        [
+          -37.02120192929767,
+          56.91594306539191
+        ],
+        [
+          -5.106417755499087,
+          0.0009307961834847039
+        ],
+        [
+          -7.352602685731454e-05,
+          0.4620164716672122
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08235663379860843,
+        0.0432297753644567,
+        0.00626165440358635
+      ],
+      "max_applied_torque_Nm": [
+        0.06485703375551452,
+        0.07790400051298463,
+        0.0013365408286384402
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        56.915923289907674,
+        -5.0758279490916784,
+        0.4619615080306485
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.801000000000002,
+      "acquisition_s": 0.8010000000000019,
+      "horizontal_tracking_10deg_ratio": 0.9467590705258867,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.8360270981251716,
+      "final_80deg_head_yaw": 56.915924663656796,
+      "final_80deg_eye_yaw": 19.248046875
+    },
+    "warm_low-watchdog-1.12-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.845999670616834,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.80449800154717
+        ],
+        [
+          0.0,
+          2.4630041189303062
+        ],
+        [
+          -1.9747946237473676e-05,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08365599483909204,
+        0.06553552398015888,
+        0.028888549591677
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.05430511785074135,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.5,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            55.28280384723592,
+            2.4629230064532517,
+            4.16372083052321e-05
+          ],
+          "pre_freeze_speed_deg_s": [
+            28.28233581959194,
+            0.00022314076676359672,
+            -0.000352624838816007
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            55.283203125,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        55.70754679655942,
+        2.4630041189303062,
+        4.625091081304138e-07
+      ]
+    },
+    "warm_low-watchdog-1.2-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.845999670616834,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.80449787101266
+        ],
+        [
+          0.0,
+          2.4630044178688393
+        ],
+        [
+          -8.373560243274565e-06,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08365599483909204,
+        0.06399395696974527,
+        0.028888549591677
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.05430462717355501,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.567,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            56.578857805664555,
+            2.462937997891152,
+            1.7932284311928615e-05
+          ],
+          "pre_freeze_speed_deg_s": [
+            10.709863137455377,
+            0.00022289660408047587,
+            -0.0003520002288480189
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            56.6015625,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        56.523341648741926,
+        2.4630044178688393,
+        4.625100539783989e-07
+      ]
+    },
+    "warm_low-watchdog-1.28-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.845999670616834,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.80457011295425
+        ],
+        [
+          0.0,
+          2.4630048315700988
+        ],
+        [
+          -5.909321662993703e-06,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08365599483909204,
+        0.06400183073838953,
+        0.028888549591677
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.054304424255379985,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.667,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            56.80455927293838,
+            2.4629515215885065,
+            4.788524956731164e-07
+          ],
+          "pre_freeze_speed_deg_s": [
+            0.0012881438610820315,
+            4.99305727052335e-05,
+            -1.6675278273258148e-06
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            56.77734375,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        56.624732566221645,
+        2.4630048315700988,
+        4.6251010631429993e-07
+      ]
+    },
+    "warm_minimum_rails-walk-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.160574850649446,
+      "shaft_max_abs_speed_deg_s": [
+        39.6370371827202,
+        13.099896445900407,
+        2.3062734119730375
+      ],
+      "range_deg": [
+        [
+          -35.0737974535934,
+          56.970516190153006
+        ],
+        [
+          -4.782429646447988,
+          0.0009259322384538286
+        ],
+        [
+          -8.075515205440732e-05,
+          0.45155317066472633
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.06873423581974615,
+        0.03546326807648234,
+        0.002902081481662957
+      ],
+      "max_applied_torque_Nm": [
+        0.06410516656330977,
+        0.07773527467689237,
+        0.0011531706478553917
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        56.97049686063793,
+        -4.7818602429925585,
+        0.45150375801488324
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.744,
+      "acquisition_s": 0.7439999999999998,
+      "horizontal_tracking_10deg_ratio": 0.962749553643889,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.781453588826956,
+      "final_80deg_head_yaw": 56.97049817295501,
+      "final_80deg_eye_yaw": 19.248046875
+    },
+    "warm_minimum_rails-turn-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.20958157726679,
+      "shaft_max_abs_speed_deg_s": [
+        39.703907671953225,
+        12.341018934941339,
+        0.6813907129535204
+      ],
+      "range_deg": [
+        [
+          -7.827362841070156e-07,
+          40.0740343579108
+        ],
+        [
+          -1.8826031009190767,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.03155742571717751
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.06987950103323595,
+        0.03366617564275448,
+        0.004070533041361762
+      ],
+      "max_applied_torque_Nm": [
+        0.06470933951580347,
+        0.07819194516366101,
+        0.0002140652058039091
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        39.47600214755135,
+        -1.8824102981692556,
+        0.031503848101847046
+      ],
+      "overshoot_deg": 0.07403435791079716,
+      "horizontal_error_at_4s_deg": 0.5239956639216956
+    },
+    "warm_minimum_rails-loss-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.89632055177939,
+      "shaft_max_abs_speed_deg_s": [
+        39.72666067634115,
+        17.961605857595593,
+        2.6601009051440228
+      ],
+      "range_deg": [
+        [
+          -7.827362841070156e-07,
+          35.33013052395158
+        ],
+        [
+          -4.537537855179532,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.4321714906951662
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0697467449769003,
+        0.03366617564275448,
+        0.0029799832044989268
+      ],
+      "max_applied_torque_Nm": [
+        0.06484904968633695,
+        0.07819194516366101,
+        0.000854635658350444
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        0.40364277704864626,
+        -0.3826602541136374,
+        0.43200624098426643
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.00012805049731082405,
+      "return_peak_speed_deg_s": 10.190983865730574,
+      "parked": true,
+      "return_failed": false
+    },
+    "warm_minimum_rails-reacquire-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.89632055177939,
+      "shaft_max_abs_speed_deg_s": [
+        39.853960868427585,
+        17.961605857595593,
+        2.6601009051440228
+      ],
+      "range_deg": [
+        [
+          -34.630575305519294,
+          35.33013052395158
+        ],
+        [
+          -4.669625675147252,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.4510297528601628
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.06830161696704183,
+        0.03366617564275448,
+        0.00296612434660427
+      ],
+      "max_applied_torque_Nm": [
+        0.06484904968633695,
+        0.07819194516366101,
+        0.001148449967961341
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -34.56636830978595,
+        -4.66948431559882,
+        0.4510268171651563
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.00012805049731082405,
+      "return_peak_speed_deg_s": 10.190983865730574,
+      "parked": false,
+      "return_failed": false
+    },
+    "warm_minimum_rails-reversal-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 47.70150391099889,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599942320329,
+        26.475694451046646,
+        35.0222284876502
+      ],
+      "range_deg": [
+        [
+          -34.887508427079425,
+          23.932884305000776
+        ],
+        [
+          -12.602428977142889,
+          2.4070504250694023
+        ],
+        [
+          -7.341704558953266e-05,
+          5.871816872300452
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.07032309483379616,
+        0.01723961990800045,
+        0.008064913909400395
+      ],
+      "max_applied_torque_Nm": [
+        0.0648404541820094,
+        0.08193265601665417,
+        0.02382818027615211
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -8.528207224718084,
+        -12.602421115663635,
+        1.8181239448685254
+      ]
+    },
+    "warm_minimum_rails-watchdog-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.84599959579756,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.11991460545488
+        ],
+        [
+          0.0,
+          2.4630039349180417
+        ],
+        [
+          -2.952434261657523e-05,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0706132879979205,
+        0.052108082512129755,
+        0.023304890313102462
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.05430511400411434,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.433,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            52.87679670524519,
+            2.4629135184589384,
+            5.420208515049559e-05
+          ],
+          "pre_freeze_speed_deg_s": [
+            39.84599959579756,
+            4.8901811116589786e-05,
+            7.281602505369133e-12
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            52.91015625,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        53.63810204201745,
+        2.4630039349180417,
+        4.6250501321674794e-07
+      ]
+    },
+    "warm_minimum_rails-jaw-demo-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 0.0066896610244142184,
+      "shaft_max_abs_speed_deg_s": [
+        0.00010952223241072168,
+        0.00668876442268484,
+        33.86764565710056
+      ],
+      "range_deg": [
+        [
+          -5.618637589844475e-06,
+          3.357246650009918e-06
+        ],
+        [
+          -0.00020123517495021913,
+          0.0002698458363860271
+        ],
+        [
+          0.0,
+          4.920976374774518
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.1745665935282087,
+        0.08568718849592442,
+        0.007800900840147992
+      ],
+      "max_applied_torque_Nm": [
+        6.308027747015081e-07,
+        3.385487899917136e-05,
+        0.024179551968347424
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -1.377380316076296e-06,
+        2.6202949951165887e-05,
+        1.760428040802384
+      ]
+    },
+    "warm_minimum_rails-walk--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.136967512249164,
+      "shaft_max_abs_speed_deg_s": [
+        39.61386810730989,
+        13.072401919409657,
+        2.365082347304923
+      ],
+      "range_deg": [
+        [
+          -56.970536308306954,
+          35.07383811811464
+        ],
+        [
+          -4.7841706918382405,
+          0.0009208634326884512
+        ],
+        [
+          -6.80709956470217e-05,
+          0.452996642109883
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.06891026468502055,
+        0.03525648348682228,
+        0.0028983117348533594
+      ],
+      "max_applied_torque_Nm": [
+        0.06396474918347879,
+        0.07802061566914265,
+        0.001173181878698788
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -56.970536308306954,
+        -4.783641235195186,
+        0.4529966417970972
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.744,
+      "acquisition_s": 0.7439999999999998,
+      "horizontal_tracking_10deg_ratio": 0.962749553643889,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.7814167594107957,
+      "final_80deg_head_yaw": -56.97053500237117,
+      "final_80deg_eye_yaw": -19.248046875
+    },
+    "warm_minimum_rails-turn--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.23800547749231,
+      "shaft_max_abs_speed_deg_s": [
+        39.73403682265807,
+        12.370230945790691,
+        0.6747944026513867
+      ],
+      "range_deg": [
+        [
+          -40.07403460917405,
+          0.0
+        ],
+        [
+          -1.8831343451181963,
+          1.9563027747029825e-05
+        ],
+        [
+          -7.341872030095841e-05,
+          0.03216563685851339
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.07005597977801141,
+        0.033872495524223556,
+        0.004087679466935761
+      ],
+      "max_applied_torque_Nm": [
+        0.06484367398588904,
+        0.07790564891100887,
+        0.00021199291380531092
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -39.47601617842543,
+        -1.8829900185593773,
+        0.032149819069811854
+      ],
+      "overshoot_deg": 0.07403460917404914,
+      "horizontal_error_at_4s_deg": 0.5239860109416625
+    },
+    "warm_minimum_rails-loss--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.41758320242825,
+      "shaft_max_abs_speed_deg_s": [
+        39.71441677518018,
+        12.297674666532428,
+        0.01513595172650331
+      ],
+      "range_deg": [
+        [
+          -35.32870184238352,
+          0.0
+        ],
+        [
+          0.0,
+          2.4298432280845503
+        ],
+        [
+          -0.00028082312866747276,
+          0.0007101028214354511
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.07011249573260156,
+        0.06366440114652012,
+        0.004893158783872517
+      ],
+      "max_applied_torque_Nm": [
+        0.06458534571352856,
+        0.07416312282210633,
+        4.7550994749072545e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -0.31606694477714486,
+        0.30084317125627896,
+        -5.492267661845309e-07
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.0001122352681653052,
+      "return_peak_speed_deg_s": 10.183310133737397,
+      "parked": true,
+      "return_failed": false
+    },
+    "warm_minimum_rails-walk-+1-0.20-0.00": {
+      "latency_s": 0.2,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.790945081819395,
+      "shaft_max_abs_speed_deg_s": [
+        39.73768371174263,
+        15.89981415821666,
+        3.0248505433521844
+      ],
+      "range_deg": [
+        [
+          -37.02120192929767,
+          56.91594306539191
+        ],
+        [
+          -5.106417755499087,
+          0.0009307961834847039
+        ],
+        [
+          -7.352602685731454e-05,
+          0.4620164716672122
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0693709577165592,
+        0.033872495524223556,
+        0.0027718673544772678
+      ],
+      "max_applied_torque_Nm": [
+        0.06485703375551452,
+        0.07790400051298463,
+        0.0013365408286384402
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        56.915923289907674,
+        -5.0758279490916784,
+        0.4619615080306485
+      ],
+      "first_visible_capture_s": 19.0,
+      "first_inside_10deg_s": 19.801000000000002,
+      "acquisition_s": 0.8010000000000019,
+      "horizontal_tracking_10deg_ratio": 0.9467590705258867,
+      "missed_after_acquiring": 0,
+      "final_80deg_error": 3.8360270981251716,
+      "final_80deg_head_yaw": 56.915924663656796,
+      "final_80deg_eye_yaw": 19.248046875
+    },
+    "warm_minimum_rails-watchdog-1.12-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.845999670616834,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.80449800154717
+        ],
+        [
+          0.0,
+          2.4630041189303062
+        ],
+        [
+          -1.9747946237473676e-05,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0706132879979205,
+        0.055543945708032255,
+        0.023304890313102462
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.05430511785074135,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.5,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            55.28280384723592,
+            2.4629230064532517,
+            4.16372083052321e-05
+          ],
+          "pre_freeze_speed_deg_s": [
+            28.28233581959194,
+            0.00022314076676359672,
+            -0.000352624838816007
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            55.283203125,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        55.70754679655942,
+        2.4630041189303062,
+        4.625091081304138e-07
+      ]
+    },
+    "warm_minimum_rails-watchdog-1.2-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.845999670616834,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.80449787101266
+        ],
+        [
+          0.0,
+          2.4630044178688393
+        ],
+        [
+          -8.373560243274565e-06,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0706132879979205,
+        0.05404043660353225,
+        0.023304890313102462
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.05430462717355501,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.567,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            56.578857805664555,
+            2.462937997891152,
+            1.7932284311928615e-05
+          ],
+          "pre_freeze_speed_deg_s": [
+            10.709863137455377,
+            0.00022289660408047587,
+            -0.0003520002288480189
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            56.6015625,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        56.523341648741926,
+        2.4630044178688393,
+        4.625100539783989e-07
+      ]
+    },
+    "warm_minimum_rails-watchdog-1.28-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.7655846674616,
+      "shaft_max_abs_speed_deg_s": [
+        39.845999670616834,
+        22.351634417924853,
+        0.017411780208893213
+      ],
+      "range_deg": [
+        [
+          -3.122807482803191e-07,
+          56.80457011295425
+        ],
+        [
+          0.0,
+          2.4630048315700988
+        ],
+        [
+          -5.909321662993703e-06,
+          0.001389231207066638
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0706132879979205,
+        0.0540483103721765,
+        0.023304890313102462
+      ],
+      "max_applied_torque_Nm": [
+        0.0646439179367086,
+        0.054304424255379985,
+        5.470072079017907e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [
+        {
+          "at_s": 1.667,
+          "cause": "watchdog",
+          "pre_freeze_angle_deg": [
+            56.80455927293838,
+            2.4629515215885065,
+            4.788524956731164e-07
+          ],
+          "pre_freeze_speed_deg_s": [
+            0.0012881438610820315,
+            4.99305727052335e-05,
+            -1.6675278273258148e-06
+          ],
+          "goal_before_deg": [
+            57.744140625,
+            2.98828125,
+            0.0
+          ],
+          "hold_goal_deg": [
+            56.77734375,
+            2.4609375,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        56.624732566221645,
+        2.4630048315700988,
+        4.6251010631429993e-07
+      ]
+    },
+    "warm_4p5V_jaw-jaw-demo-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 0.0066896610244142184,
+      "shaft_max_abs_speed_deg_s": [
+        0.00010952223241072168,
+        0.00668876442268484,
+        33.86764565710056
+      ],
+      "range_deg": [
+        [
+          -5.618637589844475e-06,
+          3.357246650009918e-06
+        ],
+        [
+          -0.00020123517495021913,
+          0.0002698458363860271
+        ],
+        [
+          0.0,
+          4.920976374774518
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990799788656224,
+        0.09619889148220372,
+        0.009801715292950763
+      ],
+      "max_applied_torque_Nm": [
+        6.308027747015081e-07,
+        3.385487899917136e-05,
+        0.024179551968347424
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -1.377380316076296e-06,
+        2.6202949951165887e-05,
+        1.760428040802384
+      ]
+    },
+    "warm_4p5V_jaw-jaw-demo-+1-0.12-0.25": {
+      "latency_s": 0.12,
+      "force_N": 0.25,
+      "max_neck_combined_speed_deg_s": 0.010218065367503039,
+      "shaft_max_abs_speed_deg_s": [
+        0.00016732342576513624,
+        0.010216695293770645,
+        41.03217353667591
+      ],
+      "range_deg": [
+        [
+          -6.524187399559118e-06,
+          3.357246650009918e-06
+        ],
+        [
+          -0.0002638500784339305,
+          0.0002698458363860271
+        ],
+        [
+          0.0,
+          4.9495196975124145
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990799788656224,
+        0.09619889148220372,
+        0.009801715292950763
+      ],
+      "max_applied_torque_Nm": [
+        9.637137494549202e-07,
+        5.171134174929904e-05,
+        0.03260581630298022
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -1.2750988561136877e-06,
+        2.4225697183979672e-05,
+        1.7604280962516408
+      ],
+      "jaw_pause_s": 0.108,
+      "jaw_angle_at_touch_release_deg": 3.7876654793571616
+    },
+    "warm_4p5V_jaw-jaw-demo-+1-0.12-0.50": {
+      "latency_s": 0.12,
+      "force_N": 0.5,
+      "max_neck_combined_speed_deg_s": 0.011217021949016468,
+      "shaft_max_abs_speed_deg_s": [
+        0.00018389323979759318,
+        0.011215514463504292,
+        53.56436143606291
+      ],
+      "range_deg": [
+        [
+          -7.964199582406164e-06,
+          3.357246650009918e-06
+        ],
+        [
+          -0.00035973815914198205,
+          0.0002698458363860271
+        ],
+        [
+          0.0,
+          5.696122504009139
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990799788656224,
+        0.09619889148220372,
+        0.009801715292950763
+      ],
+      "max_applied_torque_Nm": [
+        1.0591490271870658e-06,
+        5.6766819861026635e-05,
+        0.042356370986192535
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -1.1731026766227147e-06,
+        2.2297770143926964e-05,
+        1.760428150314624
+      ],
+      "jaw_pause_s": 0.106,
+      "jaw_angle_at_touch_release_deg": 4.235453885782439
+    },
+    "warm_4p5V_jaw-jaw-demo-+1-0.12-1.00": {
+      "latency_s": 0.12,
+      "force_N": 1.0,
+      "max_neck_combined_speed_deg_s": 18.402023435326534,
+      "shaft_max_abs_speed_deg_s": [
+        0.0030189225736290772,
+        18.402023187693615,
+        154.9975158444141
+      ],
+      "range_deg": [
+        [
+          -1.1189225514347162e-05,
+          1.1706316349168903e-05
+        ],
+        [
+          -0.0015514465213237747,
+          0.3343437585055797
+        ],
+        [
+          0.0,
+          8.791572379564629
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990799788656224,
+        0.09619889148220372,
+        0.009801715292950763
+      ],
+      "max_applied_torque_Nm": [
+        1.7387745794960752e-05,
+        0.09314100915954285,
+        0.04788179052585832
+      ],
+      "firmware_feedback_fault": {
+        "at_s": 0.96,
+        "ids": [
+          6
+        ],
+        "raw_relative_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          7.646484375
+        ]
+      },
+      "freeze_events": [
+        {
+          "at_s": 0.96,
+          "cause": "feedback-position-limit",
+          "pre_freeze_angle_deg": [
+            6.904538245344103e-06,
+            0.0005399262244594292,
+            7.618935308122724
+          ],
+          "pre_freeze_speed_deg_s": [
+            0.00012590561790806263,
+            0.007648812418116594,
+            75.15492525620023
+          ],
+          "goal_before_deg": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "hold_goal_deg": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "unconfirmed_ids": []
+        }
+      ],
+      "final_neck_jaw_deg": [
+        -4.42188529686535e-06,
+        0.3343437585055797,
+        7.497137045237828
+      ],
+      "jaw_pause_s": 0.11,
+      "jaw_angle_at_touch_release_deg": 7.5746498652613505
+    },
+    "warm_4p27V_jaw-cold-close--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 5.705878324294577,
+      "shaft_max_abs_speed_deg_s": [
+        0.0011337450639373986,
+        5.705878211658291,
+        79.94219490345823
+      ],
+      "range_deg": [
+        [
+          -8.860789994476496e-06,
+          3.055208561198642e-07
+        ],
+        [
+          -0.9667968750000001,
+          -0.902857636330268
+        ],
+        [
+          0.8741303971766956,
+          8.5
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990802656133524,
+        0.09707996656259976,
+        0.0023736672319771973
+      ],
+      "max_applied_torque_Nm": [
+        6.529902800500607e-06,
+        0.02888004483826049,
+        0.024777524458640107
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -8.860789994476496e-06,
+        -0.902857636330268,
+        0.8741303971766956
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "warm_4p27V_jaw-cold-close-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 5.91091343981472,
+      "shaft_max_abs_speed_deg_s": [
+        0.0011378154986474358,
+        5.910913330303378,
+        80.69927029248593
+      ],
+      "range_deg": [
+        [
+          -8.996906587003865e-06,
+          3.1888874874810165e-07
+        ],
+        [
+          0.9667968750000001,
+          1.032961256187831
+        ],
+        [
+          0.8201526035962022,
+          8.5
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990803668224135,
+        0.09522999655335364,
+        0.0031851419327145122
+      ],
+      "max_applied_torque_Nm": [
+        6.553346821434218e-06,
+        0.029917820830006946,
+        0.025015366706678414
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -8.996906587003865e-06,
+        1.032961256187831,
+        0.8201526035962022
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "warm_4p27V_jaw-cold-close-limit--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 38.57584023000609,
+      "shaft_max_abs_speed_deg_s": [
+        0.006442795022826742,
+        38.57583969530389,
+        443.8581083228533
+      ],
+      "range_deg": [
+        [
+          -3.965663294747885e-05,
+          7.4094868764073434e-06
+        ],
+        [
+          -0.9667968750000001,
+          -0.6757361877265142
+        ],
+        [
+          0.8678894855416139,
+          9.66796875
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990803169099474,
+        0.09707996656259976,
+        0.0023736672319771973
+      ],
+      "max_applied_torque_Nm": [
+        3.710783543921186e-05,
+        0.16096045197740114,
+        0.03459191655801826
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -9.380317775371114e-06,
+        -0.6777035311563883,
+        0.8678894855416139
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "warm_4p27V_jaw-cold-close-limit-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 38.88384387784082,
+      "shaft_max_abs_speed_deg_s": [
+        0.00637847717810512,
+        38.88384335721697,
+        444.9218196256489
+      ],
+      "range_deg": [
+        [
+          -3.943187489307453e-05,
+          7.186915718259284e-06
+        ],
+        [
+          0.9667968750000001,
+          1.2675717213376445
+        ],
+        [
+          0.8135706395663124,
+          9.66796875
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.18990804677865886,
+        0.09522999655335364,
+        0.0031851419327145122
+      ],
+      "max_applied_torque_Nm": [
+        3.6737391247012867e-05,
+        0.16096045197740114,
+        0.03459191655801826
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -9.403815980640635e-06,
+        1.2672932780707111,
+        0.8135706395663124
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56
+    },
+    "warm_4p27V_jaw-cold-close-exhibit--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.38779478480662,
+      "shaft_max_abs_speed_deg_s": [
+        39.638186597636675,
+        11.213533206262893,
+        79.94219490345823
+      ],
+      "range_deg": [
+        [
+          -6.374207627659875e-06,
+          43.247530216255186
+        ],
+        [
+          -2.3222157705621225,
+          -0.4543679577795604
+        ],
+        [
+          0.8735169986968676,
+          8.5
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08421615556908506,
+        0.05031943313149202,
+        0.0023736672319771973
+      ],
+      "max_applied_torque_Nm": [
+        0.06398225800544259,
+        0.07572507169680942,
+        0.024777524458640107
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        43.06907050089221,
+        -2.310591439724161,
+        0.8741300778568327
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56,
+      "jaw_after_recovery_range_deg": [
+        0.8735169986968676,
+        1.057585835737316
+      ],
+      "exhibit_tracking_frames": 122
+    },
+    "warm_4p27V_jaw-cold-close-exhibit-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.710763238913664,
+      "shaft_max_abs_speed_deg_s": [
+        40.07417621478551,
+        13.107204655045784,
+        80.69927029248593
+      ],
+      "range_deg": [
+        [
+          -11.80293570300642,
+          42.97414218080907
+        ],
+        [
+          -2.4630451714112898,
+          1.0328070971708305
+        ],
+        [
+          0.8193231960336639,
+          8.5
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08269848861744186,
+        0.06321788505249856,
+        0.0031851419327145122
+      ],
+      "max_applied_torque_Nm": [
+        0.06408808489259424,
+        0.07351618869228403,
+        0.025015366706678414
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        42.70708466981712,
+        -2.447303827166225,
+        0.8201529380730429
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56,
+      "jaw_after_recovery_range_deg": [
+        0.8193231960336639,
+        1.0034992488970478
+      ],
+      "exhibit_tracking_frames": 121
+    },
+    "warm_4p27V_jaw-cold-close-exhibit-limit--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.73538126658238,
+      "shaft_max_abs_speed_deg_s": [
+        39.63818338695361,
+        38.57583969530389,
+        443.8581083228533
+      ],
+      "range_deg": [
+        [
+          -3.965663294747885e-05,
+          43.24753076236584
+        ],
+        [
+          -2.3209527137977424,
+          -0.23839708855141084
+        ],
+        [
+          0.867151147858618,
+          9.66796875
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.0842257579569698,
+        0.05031943313149202,
+        0.0023736672319771973
+      ],
+      "max_applied_torque_Nm": [
+        0.06395702992257701,
+        0.16096045197740114,
+        0.03459191655801826
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        43.0690702490736,
+        -2.30949413543624,
+        0.8678891353547699
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56,
+      "jaw_after_recovery_range_deg": [
+        0.867151147858618,
+        1.0513319872552414
+      ],
+      "exhibit_tracking_frames": 122
+    },
+    "warm_4p27V_jaw-cold-close-exhibit-limit-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.71078963231044,
+      "shaft_max_abs_speed_deg_s": [
+        40.07418575660243,
+        38.88384335721697,
+        444.9218196256489
+      ],
+      "range_deg": [
+        [
+          -11.802936838049668,
+          42.974143141296636
+        ],
+        [
+          -2.463003526329575,
+          1.2675717213376445
+        ],
+        [
+          0.8127412231861457,
+          9.66796875
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08269848861744186,
+        0.06321788505249856,
+        0.0031851419327145122
+      ],
+      "max_applied_torque_Nm": [
+        0.06408818809613503,
+        0.16096045197740114,
+        0.03459191655801826
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        42.70708492345099,
+        -2.4472429092788373,
+        0.8135709743462931
+      ],
+      "jaw_recovered_at_s": 1.68,
+      "jaw_trimmed_at_s": 1.56,
+      "jaw_after_recovery_range_deg": [
+        0.8127412231861457,
+        0.9969048774826206
+      ],
+      "exhibit_tracking_frames": 121
+    },
+    "warm_4p27V_jaw-loss-+1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 41.89632055177939,
+      "shaft_max_abs_speed_deg_s": [
+        39.72666067634115,
+        17.961605857595593,
+        2.6601009051440228
+      ],
+      "range_deg": [
+        [
+          -7.827362841070156e-07,
+          35.33013052395158
+        ],
+        [
+          -4.537537855179532,
+          1.5361170367886825e-05
+        ],
+        [
+          -6.21126358077344e-05,
+          0.4321714906951662
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08277840620914799,
+        0.043023455482987624,
+        0.0029799832044989268
+      ],
+      "max_applied_torque_Nm": [
+        0.06484904968633695,
+        0.07819194516366101,
+        0.000854635658350444
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        0.40364277704864626,
+        -0.3826602541136374,
+        0.43200624098426643
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.00012805049731082405,
+      "return_peak_speed_deg_s": 10.190983865730574,
+      "parked": true,
+      "return_failed": false
+    },
+    "warm_4p27V_jaw-loss--1-0.12-0.00": {
+      "latency_s": 0.12,
+      "force_N": 0.0,
+      "max_neck_combined_speed_deg_s": 40.41758320242825,
+      "shaft_max_abs_speed_deg_s": [
+        39.71441677518018,
+        12.297674666532428,
+        0.01513595172650331
+      ],
+      "range_deg": [
+        [
+          -35.32870184238352,
+          0.0
+        ],
+        [
+          0.0,
+          2.4298432280845503
+        ],
+        [
+          -0.00028082312866747276,
+          0.0007101028214354511
+        ]
+      ],
+      "min_profile_reference_torque_margin_Nm": [
+        0.08314415696484925,
+        0.07386151552165814,
+        0.004893158783872517
+      ],
+      "max_applied_torque_Nm": [
+        0.06458534571352856,
+        0.07416312282210633,
+        4.7550994749072545e-06
+      ],
+      "firmware_feedback_fault": null,
+      "freeze_events": [],
+      "final_neck_jaw_deg": [
+        -0.31606694477714486,
+        0.30084317125627896,
+        -5.492267661845309e-07
+      ],
+      "hold_command_s": 2.500000000000001,
+      "maximum_hold_drift_deg": 0.0001122352681653052,
+      "return_peak_speed_deg_s": 10.183310133737397,
+      "parked": true,
+      "return_failed": false
+    }
+  }
+}

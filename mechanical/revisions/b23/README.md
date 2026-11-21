@@ -29,7 +29,10 @@ assembly="$rev/R5-B23-Assembly.FCStd"
 python mechanical/build_b23.py "$out"
 python mechanical/physics/export_cad.py --world --cad "$out/R5-B23-Assembly.FCStd" "$out/cad"
 python mechanical/build_b23_print.py "$out/R5-B23-P2S.3mf" --service-prints "$out/print" --nose "$out/print/26_u20cam_slotted_bracket-B23.stl" --front-shell "$out/cad/world/Part073.stl" "$out/cad/world/Part065.stl" "$rev/printing/nasal-tray-with-pilots.stl"
-python mechanical/physics/verify_b23_release.py "$rev"
+historical="$out/b23-source"
+mkdir -p "$historical"
+git archive 0e94ed2 control/openrb/R5B1/R5B1.ino control/pc/track.py mechanical/physics/b23_motion_replay.py | tar -x -C "$historical"
+python mechanical/physics/verify_b23_release.py "$rev" --source "$historical"
 ```
 
 조립 HTML을 만들거나 기존 리비전의 조립 경로를 다시 검사할 때는, 위 명령의 `--cad`에 `"$assembly"`를 넣어 검사 데이터와 동일한 배포본을 내보냅니다. [3D 뷰어 생성법](../../../web/README.md#b23-조립-순서)

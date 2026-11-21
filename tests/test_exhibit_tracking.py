@@ -70,9 +70,53 @@ def test_neutral_return_does_not_restart_on_repeated_missing_frames():
     else:
         pytest.fail('Repeated missing frames prevented the return to neutral.')
 
-    at_home = frame(planner, index + 1)
+    assert frame(planner, index + 1).active
+    at_home = frame(planner, index + 2)
     assert not at_home.active
+    assert at_home.keep_neutral
     assert at_home.goals == ZERO
+
+
+def test_park_confirms_fresh_feedback_and_keeps_the_load_offset():
+    planner = Planner(exhibit=True)
+    planner.start_centering(ZERO)
+    powered_offset = (1.05, -1.27)
+    now = .0
+    goal = ZERO
+    for index in range(51):
+        now = index * .12
+        measured = ZERO[:3] + tuple(e + g for e, g in zip(powered_offset, goal[3:], strict=True))
+        decision = planner.step(None, measured, now, feedback_at=now)
+        assert dist(decision.goals[3:], goal[3:]) <= 1.75 * .12 + 1e-9
+        goal = decision.goals
+        if decision.keep_neutral:
+            assert max(abs(x) for x in measured[3:]) <= .5
+            break
+    else:
+        pytest.fail('A small loaded error prevented parking.')
+
+    assert goal != ZERO
+    repeated = planner.step(None, measured, now + .033, feedback_at=now)
+    assert repeated.keep_neutral and repeated.goals == goal
+    feedback = ZERO[:3] + (1.1, 0.)
+    drift = planner.step(None, feedback, now + .12, feedback_at=now + .12)
+    assert drift.active and not drift.keep_neutral
+    reused = planner.step(None, feedback, now + .153, feedback_at=now + .12)
+    assert reused.goals == drift.goals
+
+
+def test_blocked_return_does_not_claim_park_or_keep_applying_trim():
+    planner = Planner(exhibit=True)
+    planner.start_centering(ZERO)
+    for index in range(61):
+        now = .1 * index
+        result = planner.step(None, ZERO[:3] + (4., 0.), now, feedback_at=now)
+        if result.phase == 'RETURN_FAILED':
+            assert not result.active and not result.keep_neutral
+            assert result.goals == ZERO
+            break
+    else:
+        pytest.fail('A blocked return continued past the timeout.')
 
 
 def test_visible_new_face_ends_hold_and_the_eyes_lead():

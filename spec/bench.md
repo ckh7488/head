@@ -1,6 +1,6 @@
 # R5 실물 시험
 
-시험한 리비전과 CAD SHA-256, 날짜, 사용한 부품과 실측값을 해당 시험의 `records/P0x.json`에 기록합니다. B23의 판 배치, 홀 마감과 공구는 B23 조립 자료를 따릅니다. P03에서는 눈꺼풀 ID3 단자의 구동 중 전압도 함께 기록합니다. [합격 기준](requirements.md) · [기록 형식](records/README.md) · [B23 조립 자료](../mechanical/revisions/b23/assembly.md)
+시험한 리비전과 CAD SHA-256, 날짜, 사용한 부품과 실측값을 해당 시험의 `records/P0x.json`에 기록합니다. 리비전별 판 배치, 홀 마감과 공구는 해당 조립 자료를 따릅니다. P03에서는 눈꺼풀 ID3 단자의 구동 중 전압도 함께 기록합니다. [합격 기준](requirements.md) · [기록 형식](records/README.md) · [B24 조립 자료](../mechanical/revisions/b24/assembly.md)
 
 B22 보호 케이스는 별도 선택품입니다. 접촉 검수는 보호 케이스를 실제로 설치한 상태에서 시행합니다.
 
@@ -55,4 +55,4 @@ python control/pc/jaw_clack.py --serial /dev/ttyACM0 --drive
 
 실제 출력물과 구매품으로 배선과 모든 체결을 끝까지 조립합니다. 전원을 끄고 뒤쪽 케이블 덮개와 하부 보드 덮개의 나사를 각각 전부 뺍니다. 두 덮개를 다시 닫을 때까지 너트가 제자리에 남는지 확인합니다. 일반 육각렌치와 스패너·소켓으로 체결부에 닿는지, 케이블이 눌리지 않고 커넥터가 끝까지 들어가는지도 봅니다.
 
-`P08.json`에 사용한 공구와 걸림이 있었던 단계를 기록합니다. 합격 기록에는 전체 조립 완료 `full_assembly: true`, 절차서에 없던 추가 가공 횟수 `unplanned_rework_count: 0`, 너트가 남은 덮개 목록 `retained_nut_covers: ["rear-cable", "bottom-board"]`를 적습니다. [B22 조립 순서](../mechanical/revisions/b22/assembly.md) · [덮개 정비 시안](../mechanical/revisions/b22/service-covers.md)
+`P08.json`에 사용한 공구와 걸림이 있었던 단계를 기록합니다. 합격 기록에는 전체 조립 완료 `full_assembly: true`, 절차서에 없던 추가 가공 횟수 `unplanned_rework_count: 0`, 너트가 남은 덮개 목록 `retained_nut_covers: ["rear-cable", "bottom-board"]`를 적습니다. B24의 목 체결부는 조립에 앞서 양방향 하중 및 유격 시험도 수행합니다. [B24 조립 순서](../mechanical/revisions/b24/assembly.md) · [목 체결부 시험](../mechanical/revisions/b24/pitch-coupler.md)

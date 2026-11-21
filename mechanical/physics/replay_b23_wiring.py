@@ -1,4 +1,4 @@
-"""Verify the released B22 cable centerlines against the changed B23 geometry."""
+"""Replay released cable centerlines against a newer native CAD."""
 
 from argparse import ArgumentParser
 from hashlib import file_digest
@@ -13,6 +13,7 @@ from wiring_motion import matrices
 
 ROOT = Path(__file__).resolve().parents[2]
 B22 = ROOT / 'mechanical/revisions/b22'
+B23 = ROOT / 'mechanical/revisions/b23'
 
 
 def digest(path):
@@ -23,7 +24,8 @@ def digest(path):
 def motion_contract(path):
     layout = json.loads((path / 'cad_parts.json').read_text())
     geometry = layout['motion_geometry'].copy()
-    for key in ('bottom_board_service_nuts', 'rear_cable_service_nuts', 'yaw_inner_race_shim', 'yaw_limit', 'eye_pitch'):
+    for key in ('bottom_board_service_nuts', 'rear_cable_service_nuts', 'yaw_inner_race_shim', 'yaw_limit', 'eye_pitch',
+                'eye_pitch_bearings', 'pitch_coupler', 'blink_shell_relief', 'blink_link_relief'):
         geometry.pop(key, None)
     nose = geometry['camera_cable_nose'].copy()
     nose.pop('tie_notch_roof_center_mm')
@@ -34,19 +36,21 @@ def motion_contract(path):
     return layout, (layout['jaw_pivot_mm'], geometry)
 
 
-def replay(reference, cad, output):
+def replay(reference, cad, output, release=B22, at_yaw_limits=False):
     original, original_motion = motion_contract(reference)
     revised, revised_motion = motion_contract(cad)
-    record = json.loads((B22 / 'camera-check.json').read_text())
-    routes = B22 / 'camera-paths.npz'
-    if (original['source_sha256'] != digest(B22 / 'R5-B22-Assembly.FCStd')
+    paths_name, report_name = ('yaw-camera-paths.npz', 'yaw-camera-continuation.json') if at_yaw_limits else (
+        'camera-paths.npz', 'camera-check.json')
+    record = json.loads((release / report_name).read_text())
+    routes = release / paths_name
+    if (original['source_sha256'] != digest(release / f'R5-{release.name.upper()}-Assembly.FCStd')
             or original['source_sha256'] != record['cad_sha256']
             or record['status'] != 'pass'
             or digest(routes) != record['routes_sha256']
             or original_motion != revised_motion):
-        raise ValueError('The verified B22 centerlines require unchanged attachment points and motion')
+        raise ValueError('The verified centerlines require unchanged attachment points and motion')
     output.mkdir(parents=True, exist_ok=True)
-    variant = output / 'camera-paths.npz'
+    variant = output / paths_name
     with np.load(routes) as source:
         if source['cad_sha256'].item() != original['source_sha256']:
             raise ValueError('Centerlines do not match the reference CAD')
@@ -59,8 +63,8 @@ def replay(reference, cad, output):
                 raise ValueError(f'{role} attachment moved; solve the cable route again')
     points['cad_sha256'] = np.asarray(revised['source_sha256'])
     np.savez_compressed(variant, **points)
-    report_path = output / 'camera-check.json'
-    passed = check(cad, variant, report_path)
+    report_path = output / report_name
+    passed = check(cad, variant, report_path, record.get('minimum_wire_gap_mm'))
     report = json.loads(report_path.read_text())
     report['reference_routes_sha256'] = record['routes_sha256']
     report['reference_cad_sha256'] = original['source_sha256']
@@ -73,5 +77,10 @@ if __name__ == '__main__':
     parser.add_argument('reference', type=Path)
     parser.add_argument('cad', type=Path)
     parser.add_argument('output', type=Path)
+    parser.add_argument('--reference-revision', choices=('b22','b23'), default='b22')
+    parser.add_argument('--yaw-limits', action='store_true')
     args = parser.parse_args()
-    raise SystemExit(0 if replay(args.reference, args.cad, args.output) else 1)
+    if args.yaw_limits and args.reference_revision != 'b23':
+        parser.error('the yaw-limit archive was added in B23')
+    release = B23 if args.reference_revision == 'b23' else B22
+    raise SystemExit(0 if replay(args.reference, args.cad, args.output, release, args.yaw_limits) else 1)

@@ -1,6 +1,6 @@
 # R5 기구 설계와 조립
 
-[B22 FreeCAD·P2S 출력판과 검사](revisions/b22/) · [B21 FreeCAD·P2S 출력판과 검사](revisions/b21/) · [이전 CAD 개정](revisions/)
+[B24 FreeCAD·P2S 출력판과 검사](revisions/b24/) · [이전 CAD 개정](revisions/)
 
 ## B15 조립
 

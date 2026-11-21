@@ -1,0 +1,161 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "project_sha256": "0655c3ca68780d6e96523da4a428cfe019e494136b1e4a8b7b8511afe54d6b71",
+  "plate7_sha256": "12808c8815aa78f96b1e14a2631771a8271b490224086f783760e00dafaa4fe4",
+  "gcode_sha256": "0a521bbaa356787c1f7d43224fad49d6fc74ee8a1e305277e6e83600d4ff1189",
+  "bearing_model": "MR104ZZ",
+  "nominal_bearing_OD_mm": 10.0,
+  "retained_step_throat_OD_mm": 9.36,
+  "raw_model_probe_distinct_from_real_print": true,
+  "stationary_axis_YZ_mm": [
+    -24.0,
+    154.0
+  ],
+  "nominal_counterbore_depth_mm": 5.0,
+  "seats": {
+    "left": {
+      "mouth_world_X_mm": -29.0,
+      "axial_shoulder_world_X_mm": -34.0,
+      "stationary_axis_conservative_raw_fit_OD_mm_range": [
+        10.03,
+        10.04
+      ],
+      "stationary_axis_conservative_raw_fit_radial_play_mm_range": [
+        0.015,
+        0.02
+      ],
+      "slip_model_required_finished_OD_mm": 10.24,
+      "D10_physical_width_path": {
+        "diameter_mm": 10.0,
+        "model_hits": 9,
+        "support_hits": 2298,
+        "minimum_model_bead_margin_mm": -0.005000000000001115,
+        "maximum_model_overlap_mm": 0.005000000000001115,
+        "worst_layer_z_in_print_mm": 11.8,
+        "worst_feature": "Overhang wall"
+      },
+      "D10_open_mouth_before_shoulder": {
+        "diameter_mm": 10.0,
+        "model_hits": 0,
+        "support_hits": 1678,
+        "minimum_model_bead_margin_mm": 0.05728337705368028,
+        "maximum_model_overlap_mm": 0.0,
+        "worst_layer_z_in_print_mm": 12.2,
+        "worst_feature": "Overhang wall"
+      },
+      "D10_24_full_path": {
+        "diameter_mm": 10.24,
+        "model_hits": 276,
+        "support_hits": 3170,
+        "minimum_model_bead_margin_mm": -0.22704,
+        "maximum_model_overlap_mm": 0.22704,
+        "worst_layer_z_in_print_mm": 12.6,
+        "worst_feature": "Bridge"
+      },
+      "D10_03_passing_path": {
+        "diameter_mm": 10.03,
+        "model_hits": 0,
+        "support_hits": 3116,
+        "minimum_model_bead_margin_mm": 0.01377689350243258,
+        "maximum_model_overlap_mm": 0.0,
+        "worst_layer_z_in_print_mm": 12.2,
+        "worst_feature": "Overhang wall"
+      },
+      "D10_04_roof_intrusion": {
+        "diameter_mm": 10.04,
+        "model_hits": 4,
+        "support_hits": 3116,
+        "minimum_model_bead_margin_mm": -0.006167966915951673,
+        "maximum_model_overlap_mm": 0.006167966915951673,
+        "worst_layer_z_in_print_mm": 12.4,
+        "worst_feature": "Overhang wall"
+      }
+    },
+    "right": {
+      "mouth_world_X_mm": 23.0,
+      "axial_shoulder_world_X_mm": 28.0,
+      "stationary_axis_conservative_raw_fit_OD_mm_range": [
+        10.03,
+        10.04
+      ],
+      "stationary_axis_conservative_raw_fit_radial_play_mm_range": [
+        0.015,
+        0.02
+      ],
+      "slip_model_required_finished_OD_mm": 10.24,
+      "D10_physical_width_path": {
+        "diameter_mm": 10.0,
+        "model_hits": 9,
+        "support_hits": 1439,
+        "minimum_model_bead_margin_mm": -0.005000000000001115,
+        "maximum_model_overlap_mm": 0.005000000000001115,
+        "worst_layer_z_in_print_mm": 11.8,
+        "worst_feature": "Overhang wall"
+      },
+      "D10_open_mouth_before_shoulder": {
+        "diameter_mm": 10.0,
+        "model_hits": 0,
+        "support_hits": 1453,
+        "minimum_model_bead_margin_mm": 0.059729459597541806,
+        "maximum_model_overlap_mm": 0.0,
+        "worst_layer_z_in_print_mm": 12.2,
+        "worst_feature": "Overhang wall"
+      },
+      "D10_24_full_path": {
+        "diameter_mm": 10.24,
+        "model_hits": 280,
+        "support_hits": 2243,
+        "minimum_model_bead_margin_mm": -0.233745,
+        "maximum_model_overlap_mm": 0.233745,
+        "worst_layer_z_in_print_mm": 12.6,
+        "worst_feature": "Bridge"
+      },
+      "D10_03_passing_path": {
+        "diameter_mm": 10.03,
+        "model_hits": 0,
+        "support_hits": 2209,
+        "minimum_model_bead_margin_mm": 0.013782997018056187,
+        "maximum_model_overlap_mm": 0.0,
+        "worst_layer_z_in_print_mm": 12.2,
+        "worst_feature": "Overhang wall"
+      },
+      "D10_04_roof_intrusion": {
+        "diameter_mm": 10.04,
+        "model_hits": 2,
+        "support_hits": 2209,
+        "minimum_model_bead_margin_mm": -0.006167966915951673,
+        "maximum_model_overlap_mm": 0.006167966915951673,
+        "worst_layer_z_in_print_mm": 12.4,
+        "worst_feature": "Overhang wall"
+      }
+    }
+  },
+  "nominal_CAD_bench_cleanup_and_tool_routes": {
+    "left": {
+      "nominal_finish_proof_MM": 10.23,
+      "retained_D9p36_steel_outer_shoulder_plane_X_mm": -34.0,
+      "inside_face_tool_X_interval_mm": [
+        -33.96,
+        -23.0
+      ],
+      "nominal_finish_probe_overlap_mm3": 0.0,
+      "D4_support_punch_from_outside_overlap_mm3": 0.0
+    },
+    "right": {
+      "nominal_finish_proof_MM": 10.23,
+      "retained_D9p36_steel_outer_shoulder_plane_X_mm": 28.0,
+      "inside_face_tool_X_interval_mm": [
+        17.0,
+        27.96
+      ],
+      "nominal_finish_probe_overlap_mm3": 0.0,
+      "D4_support_punch_from_outside_overlap_mm3": 0.0
+    }
+  },
+  "manufacturing_result": "A concentric \u00d810.24 finish is needed to use the stated bearing slip in the loaded calculation. First remove support from both seats and retain the reduced shoulders. Actual printed fit is untested.",
+  "raw_Gcode_provenance": "Digest captured by direct B24 V3 analysis before transient G-code cleanup. Exact plate and profile signatures unchanged.",
+  "unchanged_geometry_source_cad_sha256": "701185079a1f9703a8c549837edf838cfad04b3b3c841838fc58a8bae52a590a",
+  "unchanged_B24_v3_print_project_sha256": "d3b0230f4d679688fa77f11a2e443a1d0a9b422c17c07f60ef302e1bfebaf009",
+  "rail_world_sha256": "d44660332152ffb8bd8721f8ce0bf375ca8f333d1fbebd4bdb1fda8981f17c85",
+  "raw_fit_range_axial_scope": "Projected roof and entry omit the final 0.11 mm at the stepped shoulder; separate full bearing-width sweep reports the shoulder transition. Remove all support before checking fit."
+}

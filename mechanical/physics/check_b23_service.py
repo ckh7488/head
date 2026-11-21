@@ -54,6 +54,14 @@ def prepare_hardware(layout, data, spec):
         spec.append({'name': name, 'motion': 'fixed', 'skip': ['Part000', cap['keeper']],
                      'shapes': [['cyl', 2.78, 3., (seat-3.05*axis).tolist(), axis.tolist()],
                                 ['cyl', 1.35, 7.9, (seat+.05*axis).tolist(), axis.tolist()]]})
+    if coupler := layout['motion_geometry'].get('pitch_coupler'):
+        if layout['world_motion'].get(coupler['actor']) != 'head' or coupler['m3_size_mm'] != 3.:
+            raise ValueError('Missing removable stock M3 drive screw in the head CAD')
+        rows[coupler['upper_horn_bolt']]['seat'] = coupler['upper_horn_seat_mm']
+        data['hardware'].append({'id': coupler['actor'], 'type': 'bolt', 'size': 3,
+                                 'length': coupler['m3_length_mm'], 'axis': coupler['m3_axis'],
+                                 'seat': coupler['m3_seat_mm'], 'phase': 0})
+        spec.append(coupler['hardware_spec'])
     return data, spec
 
 

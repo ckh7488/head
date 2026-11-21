@@ -151,14 +151,14 @@ def motor_parameters(volts, derating):
     return stall, free_rpm * np.pi / 30., derating
 
 
-def capacity(parameters, speed, direction=1.):
+def capacity(parameters, speed, direction=1., pwm=PWM):
     stall, free_speed, derating = parameters
     # Back EMF reduces drive in the direction of travel. Cap braking at the zero-speed estimate.
-    return stall * derating * np.clip(PWM - np.sign(direction) * speed / free_speed, 0., PWM)
+    return stall * derating * np.clip(pwm - np.sign(direction) * speed / free_speed, 0., pwm)
 
 
-def model_xml(bodies, jaw_pivot, motor, friction):
-    xml = ET.fromstring(gimbal_model(bodies, jaw_pivot, capacity(motor, 0), friction, .001))
+def model_xml(bodies, jaw_pivot, motor, friction, pwm=PWM):
+    xml = ET.fromstring(gimbal_model(bodies, jaw_pivot, capacity(motor, 0, pwm=pwm), friction, .001))
     for joint in xml.findall('.//joint'):
         # Let loss of control show up as overtravel instead of adding a fictitious brake.
         joint.set('limited', 'false')
@@ -216,9 +216,9 @@ def trace_fields():
 
 def run_trial(bodies, jaw_pivot, output, *, volts, derating, friction, backlash_deg,
               rate=1., pitch_cut=False, firmware_profile=False, amplitude=(1., 1., 1.),
-              trajectory=request):
+              trajectory=request, pwm=PWM):
     motor = motor_parameters(volts, derating)
-    xml = model_xml(bodies, jaw_pivot, motor, friction)
+    xml = model_xml(bodies, jaw_pivot, motor, friction, pwm)
     output.with_suffix('.xml').write_text(xml)
     model = mj.MjModel.from_xml_string(xml)
     actual, ideal = mj.MjData(model), mj.MjData(model)
@@ -239,7 +239,7 @@ def run_trial(bodies, jaw_pivot, output, *, volts, derating, friction, backlash_
         delta = goal - actual.qpos
         effective = np.sign(delta) * np.maximum(np.abs(delta) - np.deg2rad(backlash_deg) / 2, 0.)
         requested = PROPORTIONAL_GAIN * effective + DERIVATIVE_GAIN * (speed - actual.qvel)
-        available = capacity(motor, actual.qvel, requested)
+        available = capacity(motor, actual.qvel, requested, pwm=pwm)
         actual.ctrl[:] = np.clip(requested, -available, available)
         if t >= cutoff:
             actual.ctrl[1] = 0.
@@ -253,7 +253,7 @@ def run_trial(bodies, jaw_pivot, output, *, volts, derating, friction, backlash_
         max_velocity = np.maximum(max_velocity, np.abs(actual.qvel))
         min_angle = np.minimum(min_angle, actual.qpos)
         max_angle = np.maximum(max_angle, actual.qpos)
-        min_demand_margin = np.minimum(min_demand_margin, capacity(motor, speed, ideal.qfrc_inverse) - inverse)
+        min_demand_margin = np.minimum(min_demand_margin, capacity(motor, speed, ideal.qfrc_inverse, pwm=pwm) - inverse)
         deviations.append(np.degrees(np.abs(delta)))
         saturated.append(np.abs(requested) > available + 1e-10)
         pitch_deg = np.degrees(actual.qpos[1])
@@ -285,7 +285,7 @@ def run_trial(bodies, jaw_pivot, output, *, volts, derating, friction, backlash_
         'torque_demand_bound_Nm': max_inverse.tolist(), 'applied_torque_peak_Nm': max_actual.tolist(),
         'shaft_speed_peak_deg_s': np.degrees(max_velocity).tolist(),
         'simulated_travel_deg': np.degrees(np.column_stack((min_angle, max_angle))).tolist(),
-        'zero_speed_model_cap_Nm': capacity(motor, 0).tolist(),
+        'zero_speed_model_cap_Nm': capacity(motor, 0, pwm=pwm).tolist(),
         'minimum_planned_speed_margin_Nm': min_demand_margin.tolist(),
         'error_peak_deg': np.max(deviations, axis=0).tolist(),
         'error_p95_deg': np.percentile(deviations, 95, axis=0).tolist(),

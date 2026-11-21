@@ -1,0 +1,8 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "contact_report_sha256": "d74d28a08c9c14162c538d652b5e705cf6acb8ba5b269945d77c47093d41189b",
+  "baseline_sha256": "dad44504312297cfe00bfa6fd679293912b2e854b02555f50f56352f2cd1087a",
+  "seated_pairs": 43,
+  "unmeasurable_pairs": 29,
+  "regressions": []
+}

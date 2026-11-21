@@ -3,7 +3,7 @@
 from argparse import ArgumentParser
 from itertools import product
 import json
-from math import cos, radians, sin
+from math import acos, atan2, cos, degrees, pi, radians, sin
 from pathlib import Path
 
 import numpy as np
@@ -15,7 +15,71 @@ from blink import linkage_forces
 from cable_fea import mesh_step, traction
 
 
-def measure(directory, layout, size_mm):
+def stress_bounds(basis, field, lame, shear):
+    gradient = basis.interpolate(field).grad
+    strain = (gradient + gradient.swapaxes(0, 1))/2
+    trace = np.einsum('iijk->jk', strain)
+    identity = np.eye(3)[:, :, None, None]
+    stress = 2*shear*strain + lame*identity*trace
+    deviator = 2*shear*(strain-identity*trace/3)
+    von_mises = np.sqrt(1.5*(deviator**2).sum(axis=(0, 1))).mean(axis=1)
+    # The production plate rotates the rail +90° about CAD X. Build Z is CAD Y.
+    layer_normal = stress[1, 1]
+    layer_shear = np.linalg.norm(stress[1, [0, 2]], axis=0)
+    return np.array([np.percentile(von_mises, 99), von_mises.max(),
+                     max(0., layer_normal.max()), max(0., -layer_normal.min()), layer_shear.max()])
+
+
+def link_angle(pivot, from_pin, arm, length, reference):
+    delta = from_pin-pivot
+    distance = np.linalg.norm(delta)
+    cosine = (distance**2+arm**2-length**2)/(2*distance*arm)
+    if abs(cosine) > 1.:
+        raise ValueError('An elastically displaced blink link cannot reach its other pin')
+    line = atan2(delta[1], delta[0])
+    options = ((angle-reference+pi) % (2*pi)-pi for angle in (line-acos(cosine), line+acos(cosine)))
+    return reference+min(options, key=abs)
+
+
+def elastic_lid_angles(layout, angle, end, torque, centers, include_link_pins=False):
+    left, right, motor_low, motor_high = centers
+    span = np.diff(layout['bearing_x_mm'])[0]
+    pivot = np.array(layout['shaft_yz_mm'])
+    motor = np.array(layout['servo_yz_mm'])
+    lid = np.array([-39., 119.])
+    motor_z = layout['motor_mount_z_mm']
+    mount = np.array([layout['motor_mount_y_mm'], np.mean(motor_z)])
+    motor_tilt = atan2(-(motor_high[0]-motor_low[0]), motor_z[1]-motor_z[0])
+    rotate = np.array([[cos(motor_tilt), -sin(motor_tilt)], [sin(motor_tilt), cos(motor_tilt)]])
+    moved_motor = mount+(motor_low+motor_high)/2+rotate@(motor-mount)
+    _, drive, _ = layout['crank_x_mm']
+    drive_side = (drive-layout['bearing_x_mm'][0])/span
+    drive_pivot = pivot+left+drive_side*(right-left)
+    phase = radians(layout['phase_deg']+angle)
+    horn_phase = phase+motor_tilt
+    r = layout['radius_mm']
+    horn_pin = moved_motor+r*np.array([cos(horn_phase), sin(horn_phase)])
+    shaft_phase = link_angle(drive_pivot, horn_pin, r, np.linalg.norm(motor-pivot), phase)
+    r = layout['lid_radius_mm']
+    output, link_pins = [], []
+    for lid_x in layout['crank_x_mm'][::2]:
+        at = (lid_x-layout['bearing_x_mm'][0])/span
+        pin = pivot+left+at*(right-left)+r*np.array([cos(shaft_phase), sin(shaft_phase)])
+        lid_phase = link_angle(lid, pin, r, np.linalg.norm(lid-pivot), phase)
+        output.append(angle+degrees(lid_phase-phase))
+        if include_link_pins:
+            lid_pin = lid+r*np.array([cos(lid_phase), sin(lid_phase)])
+            link_pins.append([lid_pin.tolist(), pin.tolist()])
+    result = {'command_deg': angle, 'torque_Nm': torque, 'resisting_crank_x_mm': end,
+              'lid_deg': output, 'shaft_deg': angle+degrees(shaft_phase-phase),
+              'bearing_center_slope_deg': degrees(atan2(np.linalg.norm(right-left), span))}
+    if include_link_pins:
+        result['link_pins_yz_mm'] = link_pins
+    return result
+
+
+def measure(directory, layout, size_mm, torques=(.04,.12), modulus=1000., stress=False,
+            replay_torque=None, *, link_load_cases=(), link_angles=()):
     mesh=mesh_step(directory/'blink_rail.step',size_mm)
     boundary=mesh.boundary_facets()
     vertices=mesh.p[:,mesh.facets[:,boundary]]
@@ -38,7 +102,8 @@ def measure(directory, layout, size_mm):
 
     element=ElementVector(ElementTetP1())
     basis=Basis(mesh,element)
-    stiffness=asm(linear_elasticity(*lame_parameters(1000.,.37)),basis)
+    lame, shear = lame_parameters(modulus,.37)
+    stiffness=asm(linear_elasticity(lame,shear),basis)
     reduced,_,free=condense(stiffness,D=basis.get_dofs(facets=fixed).all())
     solve=splu(reduced.tocsc()).solve
     nodes=[np.unique(mesh.facets[:,p]) for p in patches]
@@ -48,33 +113,84 @@ def measure(directory, layout, size_mm):
         for direction in ((0.,1.,0.),(0.,0.,1.)):
             unit=np.zeros(basis.N)
             unit[free]=solve(traction(mesh,element,patch,direction)[free])
-            responses.append(unit[indices])
+            responses.append(unit)
     responses=np.array(responses)
-    rows=[]
-    for torque in (.04,.12):
-        maximum=np.zeros(len(nodes))
-        for end,angle in product(layout['crank_x_mm'][::2],range(0,91,5)):
-            input_force,_,left,right=-linkage_forces(layout,torque,angle,end)
-            phase=radians(angle+layout['phase_deg'])
-            crank=layout['radius_mm']*np.array([cos(phase),sin(phase)])
-            y,z=np.array(layout['servo_yz_mm'])+crank-[mount_y,np.mean(pads)]
-            couple=(y*input_force[1]-z*input_force[0])/(pads[1]-pads[0])
-            offset=np.array([couple,0.])
-            loads=np.r_[left,right,input_force/2+offset,input_force/2-offset]
-            displacement=np.einsum('i,ijk->jk',loads,responses)
-            maximum=np.maximum(maximum,[np.linalg.norm(displacement[:,n],axis=0).max() for n in nodes])
-        rows.append({'torque_Nm':torque,'mesh_mm':size_mm,'left_bearing_mm':float(maximum[0]),
-                     'right_bearing_mm':float(maximum[1]),'motor_mount_mm':float(maximum[2:].max())})
-    return rows
+    maximum = np.zeros(len(nodes))
+    stresses = np.zeros(5)
+    differential = 0.
+    deflected = []
+
+    def unit_loads(end, angle):
+        input_force, _, left, right = -linkage_forces(layout, 1., angle, end)
+        phase = radians(angle+layout['phase_deg'])
+        crank = layout['radius_mm']*np.array([cos(phase), sin(phase)])
+        y, z = np.array(layout['servo_yz_mm'])+crank-[mount_y, np.mean(pads)]
+        couple = (y*input_force[1]-z*input_force[0])/(pads[1]-pads[0])
+        offset = np.array([couple, 0.])
+        return np.r_[left, right, input_force/2+offset, input_force/2-offset]
+
+    ends = layout['crank_x_mm'][::2]
+    for end, angle in product(ends, range(0, 91, 5)):
+        field = unit_loads(end, angle) @ responses
+        displacement = field[indices]
+        maximum = np.maximum(maximum, [np.linalg.norm(displacement[:, n], axis=0).max() for n in nodes])
+        centers = [displacement[:, n].mean(axis=1) for n in nodes[:2]]
+        differential = max(differential, np.linalg.norm(centers[1]-centers[0]))
+        if replay_torque is not None:
+            centers_yz = np.asarray([displacement[1:, n].mean(axis=1) for n in nodes])
+            for torque in (-replay_torque, replay_torque):
+                deflected.append(elastic_lid_angles(layout, angle, end, torque, torque*centers_yz))
+        if stress:
+            stresses = np.maximum(stresses, stress_bounds(basis, field, lame, shear))
+    for angle in link_angles:
+        left_load, right_load = (unit_loads(end, angle) for end in ends)
+        for left_torque, right_torque in link_load_cases:
+            displacement = ((left_torque*left_load + right_torque*right_load) @ responses)[indices]
+            centers_yz = np.asarray([displacement[1:, n].mean(axis=1) for n in nodes])
+            row = elastic_lid_angles(layout, angle, None, left_torque+right_torque, centers_yz,
+                                     include_link_pins=True)
+            row['crank_torques_Nm'] = [left_torque, right_torque]
+            deflected.append(row)
+    rows = []
+    for torque in torques:
+        row = {'torque_Nm': torque, 'mesh_mm': size_mm,
+               'left_bearing_mm': float(torque*maximum[0]),
+               'right_bearing_mm': float(torque*maximum[1]),
+               'motor_mount_mm': float(torque*maximum[2:].max()),
+               'bearing_center_differential_mm': float(torque*differential)}
+        if stress:
+            labels = ('vm_p99_MPa', 'vm_max_MPa', 'layer_y_tension_max_MPa',
+                      'layer_y_compression_max_MPa', 'layer_y_shear_max_MPa')
+            row.update(zip(labels, map(float, torque*stresses), strict=True))
+        rows.append(row)
+    return rows, deflected
 
 
 if __name__ == '__main__':
     parser=ArgumentParser(description=__doc__)
     parser.add_argument('cad',type=Path)
     parser.add_argument('report',type=Path)
+    parser.add_argument('--torques', type=float, nargs='+', default=(.04,.12))
+    parser.add_argument('--modulus', type=float, default=1000.)
+    parser.add_argument('--mesh-mm', type=float, nargs='+', default=(1.45, 1.10))
+    parser.add_argument('--replay-torque', type=float)
+    parser.add_argument('--stress', action='store_true')
     args=parser.parse_args()
+    if not all(np.isfinite(x) and x>0 for x in (args.modulus,*args.torques,*args.mesh_mm)):
+        parser.error('Torque, modulus and mesh size must be positive and finite')
+    if args.replay_torque is not None and not (np.isfinite(args.replay_torque) and args.replay_torque > 0):
+        parser.error('Replay torque must be positive and finite')
     cad=json.loads((args.cad/'cad_parts.json').read_text())
-    results=[row for h in (1.45,1.10) for row in measure(args.cad,cad['motion_geometry']['blink'],h)]
-    report={'cad_sha256':cad['source_sha256'],'modulus_MPa':1000,'trials':results}
+    results, replay = [], {}
+    for h in args.mesh_mm:
+        rows, deflected = measure(args.cad,cad['motion_geometry']['blink'],h,args.torques,
+                                  args.modulus,args.stress,args.replay_torque)
+        results.extend(rows)
+        if deflected:
+            replay[str(h)] = deflected
+    report = {'cad_sha256': cad['source_sha256'], 'modulus_MPa': args.modulus,
+              'print_layer_normal_cad': [0., 1., 0.], 'trials': results}
+    if replay:
+        report['deflected_lid_replay'] = replay
     args.report.write_text(json.dumps(report,indent=2))
     print(json.dumps(report,indent=2))

@@ -42,6 +42,7 @@ QUALIFIED_MATE_MESHES = {
     'Part016': '116eb5cad785925567fc8f341b5228be4e6069f73b50f4cad8bf77b646650848',
     'Part018': '25c67c5fc6d252638ca5efa21ce89432e506879d8855a6549cff300003dcd27f',
 }
+B23 = Path(__file__).resolve().parents[1] / 'revisions/b23'
 
 
 def rigid_group(kind):
@@ -73,8 +74,13 @@ def encoder_feedback_limits():
         return float(match[1])
 
     scale = 4096 / 360.
-    negative = int(number('neckPitchMaxNegativeDegrees') * scale + .5)
-    positive = int(number('neckPitchMaxDegrees') * scale)
+
+    def ticks(name, degrees, rounding):
+        direct = re.search(rf'\b{name}\s*=\s*(\d+)u?\s*;', source)
+        return int(direct[1]) if direct else int(number(degrees) * scale + rounding)
+
+    negative = ticks('neckPitchMaxNegativeTicks', 'neckPitchMaxNegativeDegrees', .5)
+    positive = ticks('neckPitchMaxPositiveTicks', 'neckPitchMaxDegrees', 0.)
     drift = int(number('positionTolerance'))
     guard = np.array([-negative - drift, positive + drift]) / scale
     return guard, [-negative, positive], drift, sha256(firmware).hexdigest()
@@ -92,8 +98,36 @@ def released_overshoot_by_sign(value):
     return result
 
 
+def qualify_coupler(native, cad_hash):
+    """Prove changed metal removed no bearing clearance and added plastic outside the motor's axial span."""
+    from export_cad import App, world_shape
+
+    reference = B23/'R5-B23-Assembly.FCStd'
+    reference_hash = sha256(reference.read_bytes()).hexdigest()
+    if (native is None or sha256(native.read_bytes()).hexdigest() != cad_hash
+            or reference_hash != json.loads((B23/'verification.json').read_text())['cad_sha256']):
+        raise ValueError('The changed neck mates require matching native B23 and B24 files')
+    old = App.openDocument(str(reference.resolve()))
+    current = App.openDocument(str(native.resolve()))
+    try:
+        shaft_added = world_shape(current.Part015).cut(world_shape(old.Part015))
+        horn_added = world_shape(current.Part016).cut(world_shape(old.Part016))
+        if shaft_added.Volume > 1e-6 or horn_added.isNull() or not horn_added.isValid():
+            raise ValueError('Could not extend the original bearing and servo interface qualifications')
+        motor = world_shape(current.Part018).BoundBox
+        minimum = horn_added.BoundBox.XMin - motor.XMax
+        if minimum < .20:
+            raise ValueError('New neck holder material enters the pitch motor axial envelope')
+        return {'reference_cad_sha256': reference_hash,
+                'shaft_added_mm3': shaft_added.Volume, 'holder_added_mm3': horn_added.Volume,
+                'holder_addition_to_motor_axial_gap_mm': minimum}
+    finally:
+        App.closeDocument(current.Name)
+        App.closeDocument(old.Name)
+
+
 class Neck:
-    def __init__(self, cad):
+    def __init__(self, cad, native=None):
         self.layout = json.loads((cad / 'cad_parts.json').read_text())
         self.cad_hash = self.layout['source_sha256']
         if not re.fullmatch('[0-9a-f]{64}', self.cad_hash):
@@ -110,9 +144,13 @@ class Neck:
         names = set(self.layout['world_motion'])
         if names != set(self.layout['world_sha256']) or not {row['name'] for row in self.layout['parts']} <= names:
             raise ValueError('incomplete CAD export: missing moving part or matching mesh hash')
+        self.coupler = (qualify_coupler(native, self.cad_hash)
+                        if self.layout['motion_geometry'].get('pitch_coupler') else None)
         for name, digest in QUALIFIED_MATE_MESHES.items():
             role = 'pan' if name in ('Part012', 'Part014', 'Part018') else 'head'
-            if self.layout['world_sha256'][name] != digest or self.layout['world_motion'][name] != role:
+            qualified = self.layout['world_sha256'][name] == digest or (
+                self.coupler is not None and name in ('Part015', 'Part016'))
+            if not qualified or self.layout['world_motion'][name] != role:
                 raise ValueError(f'{name}: neck bearing/drive mate exemption must be requalified')
         self.names = []
         self.meshes = []
@@ -386,13 +424,18 @@ def calibrated_link_stop_interval(rig, nominal, span_tolerance):
     return interval
 
 
-def check(cad, jaw_released_deg=None):
-    rig = Neck(cad)
+def check(cad, jaw_released_deg=None, native=None):
+    rig = Neck(cad, native)
     motion = rig.layout['motion_geometry']
     spec = rig.spec
     powered, overtravel, gap = validate_spec(rig, spec)
     guard, ticks, drift, firmware_sha = encoder_feedback_limits()
-    if np.any(np.abs(powered - np.array(ticks) * 360 / 4096) > 360 / 4096):
+    commanded = np.array(ticks) * 360 / 4096
+    if rig.coupler is not None:
+        if commanded[0] < powered[0] - 360/4096 or commanded[1] > powered[1] + 360/4096:
+            raise ValueError('Firmware exceeds the screened CAD pitch command envelope')
+        powered = commanded
+    elif np.any(np.abs(powered - commanded) > 360 / 4096):
         raise ValueError('CAD command pitch limits differ from the firmware encoder travel')
     span_tolerance = 0.
     if rig.link is not None:
@@ -429,6 +472,8 @@ def check(cad, jaw_released_deg=None):
               'pitch_drive_mate': list(DRIVE_MATE), 'coverage': 'rigid pitch with sampled yaw, gaze, blink and jaw',
               'local_pose_order': ['eye_pitch', 'eye_yaw', 'blink', 'jaw'],
               'issues': [row for row in locations if row['status'] != 'pass']}
+    if rig.coupler is not None:
+        report['requalified_pitch_coupler'] = rig.coupler
     if rig.link is not None:
         report['lower_link_pivot'] = {'actors': list(LINK_LOWER_MATE), 'required_gap_mm': LOWER_PIVOT_GAP_MM,
                                       'nominal_radial_clearance_mm': lower_play}
@@ -492,11 +537,12 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('cad', type=Path)
     parser.add_argument('report', type=Path)
+    parser.add_argument('--native', type=Path, help='Native CAD for any revised bearing or drive mate')
     parser.add_argument('--jaw-released-deg', type=float,
                         help='check an extended released jaw bound from the coupled load analysis')
     args = parser.parse_args()
     try:
-        report = check(args.cad, args.jaw_released_deg)
+        report = check(args.cad, args.jaw_released_deg, args.native)
     except (ValueError, KeyError, FileNotFoundError, TypeError, IndexError) as error:
         report = {'status': 'unknown', 'issues': [{'reason': str(error)}]}
     args.report.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,2870 @@
+{
+  "project_sha256": "0655c3ca68780d6e96523da4a428cfe019e494136b1e4a8b7b8511afe54d6b71",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "plate_sha256": {
+    "1": "9936a70947df764cfd242b03b7233d1201ffc1830909eff8db561b2ec5a327e8",
+    "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
+    "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
+    "4": "b5d41bbd0ed83ff854cdf576060e3da9027c230c49713a245a3e4c584f420b8c",
+    "5": "beab2bb3cf151826a3645d6a7ebaaa57a12e35a984c517e986a01e2a49e14c41",
+    "6": "038b9e9498e4ee9db71bce5cdffb64d430f51d29d4e3ec0b8576a31db785540f",
+    "7": "12808c8815aa78f96b1e14a2631771a8271b490224086f783760e00dafaa4fe4",
+    "8": "24077302c0150eb8ddf145fdbaf2b5788e481378a246c54160f9e3e8a4937185",
+    "9": "6de323f72171d3f098430fe25ecddb09377238e792c593529d941041bf0a0226",
+    "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
+    "11": "8e5625005604535cd0ad25caae41485eee67fb7e4aa288b6269c4467e28e849c",
+    "12": "f1f5d30ee257338730eaca087eb50774b5ad546e2c265c74a1cb8d63b244280f"
+  },
+  "changed_plates": {
+    "4": [
+      "28_skull_front_with_camera_tray-B24.stl"
+    ],
+    "6": [
+      "08_pitch_horn_to_8mm_clamp-B24.stl"
+    ],
+    "7": [
+      "13_left_eye_cradle_mount-B24.stl",
+      "13_right_eye_cradle_mount-B24.stl"
+    ],
+    "8": [
+      "23_left_short_lid_link-B24.stl"
+    ]
+  },
+  "identical_to_b23_plates": [
+    1,
+    2,
+    3,
+    5,
+    9,
+    10,
+    11,
+    12
+  ],
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "canonical_mesh_sha256": {
+    "08_pitch_horn_to_8mm_clamp-B24.stl": "6002dd2c5789b9050dbd06618220bca36d4f207727e01cf1762d909c68c6af3b",
+    "13_left_eye_cradle_mount-B24.stl": "1c6f62bc9d7b4314c48cbe426776302bc2013d08db7155ee9c53419bc2ed1510",
+    "13_right_eye_cradle_mount-B24.stl": "4051d4d6d39a768419af88655893947e2702abf2869df3a46152c8a441fc97f1",
+    "23_left_short_lid_link-B24.stl": "5f2de08e19170f1f38df94b3626ae46aed60a06ffa57a759f36d139b0f772815",
+    "28_skull_front_with_camera_tray-B24.npz": "9efe5c3187c522e839a03acd4f569170d8e9ef8b8f1e05975d861bf8804b30d3"
+  },
+  "sliced_grams_sha256": "27fb7007c2f3f809c9cf45d4c0b2d220a2eea1325f70ebc80ebe37201cf0a608",
+  "baseline_project_sha256": "16d5ff8fde519a4dc24741ee736c0e95650e75b96bf124e8499c2724603d1902",
+  "profile_settings": {
+    "printer_model": "Bambu Lab P2S",
+    "printer_variant": "0.4",
+    "printer_settings_id": "Bambu Lab P2S 0.4 nozzle",
+    "filament_settings_id": [
+      "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+    ],
+    "filament_type": [
+      "PETG"
+    ],
+    "filament_density": [
+      "1.28"
+    ],
+    "nozzle_diameter": [
+      "0.4"
+    ],
+    "wall_loops": "4",
+    "bottom_shell_layers": "3",
+    "top_shell_layers": "5",
+    "sparse_infill_density": "20%",
+    "enable_support": "1",
+    "support_type": "tree(auto)",
+    "layer_height": "0.2",
+    "curr_bed_type": "Textured PEI Plate",
+    "printable_area": [
+      "0x0",
+      "256x0",
+      "256x256",
+      "0x256"
+    ],
+    "elefant_foot_compensation": "0.15"
+  },
+  "slicer": "Bambu Studio 02.09.01.70",
+  "checks_by_plate": {
+    "6": {
+      "objects": 9,
+      "layers": 500,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "slicer_return_code": 0,
+      "model_or_support_raster_pitch_mm": 0.2,
+      "gcode_sha256": "289c7217ec4844c4fe639acd51331f0cc568a0aa668b1d0c0069b448249d48d7",
+      "slicer_stderr": {
+        "[FillFloatingConcentric.cpp:487 detect_floating_line] ZFiller: encounter idx from clip: 39": 1,
+        "[GCodeProcessor.cpp:5973 process_T] Invalid T command (T65535).": 1
+      },
+      "filament_g": 185.25721740722656,
+      "estimated_seconds": 29145.888671875
+    },
+    "7": {
+      "objects": 9,
+      "layers": 271,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "slicer_return_code": 0,
+      "model_or_support_raster_pitch_mm": 0.2,
+      "gcode_sha256": "0a521bbaa356787c1f7d43224fad49d6fc74ee8a1e305277e6e83600d4ff1189",
+      "slicer_stderr": {
+        "[GCodeProcessor.cpp:5973 process_T] Invalid T command (T65535).": 1
+      },
+      "filament_g": 130.88385009765625,
+      "estimated_seconds": 26021.220703125
+    },
+    "4": {
+      "objects": 1,
+      "layers": 523,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "slicer_return_code": 0,
+      "model_or_support_raster_pitch_mm": 0.2,
+      "gcode_sha256": "2899b7d8022090e6618a8b0a27defbad473051f63d5f8c5d03fb6149d5854209",
+      "slicer_stderr": {
+        "[FillFloatingConcentric.cpp:487 detect_floating_line] ZFiller: encounter idx from clip: 281": 2,
+        "[FillFloatingConcentric.cpp:487 detect_floating_line] ZFiller: encounter idx from clip: 277": 1,
+        "[GCodeProcessor.cpp:5973 process_T] Invalid T command (T65535).": 1
+      },
+      "slicer_stderr_new_recognized_messages_from_v3": {},
+      "estimated_seconds": 51980.43359375,
+      "filament_g": 221.02552795410156
+    },
+    "8": {
+      "objects": 15,
+      "layers": 175,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "slicer_return_code": 0,
+      "model_or_support_raster_pitch_mm": 0.2,
+      "gcode_sha256": "5036b46e68df9c445c26aa331a8392cd27ef6e0ea9634f575494b49554ac04b3",
+      "slicer_stderr": {
+        "[GCodeProcessor.cpp:5973 process_T] Invalid T command (T65535).": 1
+      },
+      "slicer_stderr_new_messages_from_b23": {},
+      "estimated_seconds": 11305.7734375,
+      "filament_g": 45.814823150634766
+    }
+  },
+  "all_12_plates": {
+    "plates": {
+      "1": {
+        "objects": 1,
+        "layers": 413,
+        "filament_g": 240.71441650390625,
+        "estimated_seconds": 31777.125,
+        "exact_direct_print_revision": "b23"
+      },
+      "2": {
+        "objects": 1,
+        "layers": 33,
+        "filament_g": 56.155242919921875,
+        "estimated_seconds": 6031.34765625,
+        "exact_direct_print_revision": "b23"
+      },
+      "3": {
+        "objects": 6,
+        "layers": 113,
+        "filament_g": 21.35329246520996,
+        "estimated_seconds": 3992.930419921875,
+        "exact_direct_print_revision": "b23"
+      },
+      "4": {
+        "objects": 1,
+        "layers": 523,
+        "filament_g": 221.02552795410156,
+        "estimated_seconds": 51980.43359375,
+        "exact_direct_print_revision": "b24"
+      },
+      "5": {
+        "objects": 2,
+        "layers": 518,
+        "filament_g": 184.007080078125,
+        "estimated_seconds": 40555.49609375,
+        "exact_direct_print_revision": "b23"
+      },
+      "6": {
+        "objects": 9,
+        "layers": 500,
+        "filament_g": 185.25721740722656,
+        "estimated_seconds": 29145.888671875,
+        "exact_direct_print_revision": "b24"
+      },
+      "7": {
+        "objects": 9,
+        "layers": 271,
+        "filament_g": 130.88385009765625,
+        "estimated_seconds": 26021.220703125,
+        "exact_direct_print_revision": "b24"
+      },
+      "8": {
+        "objects": 15,
+        "layers": 175,
+        "filament_g": 45.814823150634766,
+        "estimated_seconds": 11305.7734375,
+        "exact_direct_print_revision": "b24"
+      },
+      "9": {
+        "objects": 7,
+        "layers": 215,
+        "filament_g": 28.73064422607422,
+        "estimated_seconds": 6829.533203125,
+        "exact_direct_print_revision": "b23"
+      },
+      "10": {
+        "objects": 2,
+        "layers": 151,
+        "filament_g": 7.465671062469482,
+        "estimated_seconds": 2140.10498046875,
+        "exact_direct_print_revision": "b23"
+      },
+      "11": {
+        "objects": 3,
+        "layers": 115,
+        "filament_g": 68.24071502685547,
+        "estimated_seconds": 12528.2724609375,
+        "exact_direct_print_revision": "b23"
+      },
+      "12": {
+        "objects": 3,
+        "layers": 183,
+        "filament_g": 6.531819820404053,
+        "estimated_seconds": 2796.795166015625,
+        "exact_direct_print_revision": "b23"
+      }
+    },
+    "totals": {
+      "filament_g": 1196.1803007125854,
+      "estimated_seconds": 225104.92138671875
+    },
+    "B23_exact_comparable_totals": {
+      "filament_g": 1196.0361967086792,
+      "estimated_seconds": 225031.67724609375
+    },
+    "delta_filament_g": 0.14410400390625,
+    "delta_estimated_seconds": 73.244140625
+  },
+  "local_gcode_checks": {
+    "P6": {
+      "finished_CAD_tools": {
+        "OEM_M2_at_actual_layer_seats": {
+          "upper": {
+            "as_sliced_head_start_mm": 41.0,
+            "head_approach_diameter_mm": 3.86,
+            "head_intersection_with_finished_coupler_mm3": 0.0,
+            "two_mm_driver_bare_coupler_overlap_mm3": 0.0
+          },
+          "right": {
+            "as_sliced_head_start_mm": 41.2,
+            "head_approach_diameter_mm": 3.86,
+            "head_intersection_with_finished_coupler_mm3": 0.0,
+            "two_mm_driver_bare_coupler_overlap_mm3": 0.0
+          },
+          "left": {
+            "as_sliced_head_start_mm": 41.2,
+            "head_approach_diameter_mm": 3.86,
+            "head_intersection_with_finished_coupler_mm3": 0.0,
+            "two_mm_driver_bare_coupler_overlap_mm3": 0.0
+          },
+          "lower": {
+            "as_sliced_head_start_mm": 41.2,
+            "head_approach_diameter_mm": 3.86,
+            "head_intersection_with_finished_coupler_mm3": 0.0,
+            "two_mm_driver_bare_coupler_overlap_mm3": 0.0
+          }
+        },
+        "M3_finish_from_above_diameter_mm": 3.08,
+        "M3_finish_bare_coupler_overlap_mm3": 0.0,
+        "shaft_M3_tap_drill_overlap_already_finished_mm3": 0.0
+      },
+      "printed_socket": {
+        "drive_print_pilot_D2p70": {
+          "diameter_mm": 2.7,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.10917389010556364,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 9.0,
+          "worst_feature": "Outer wall"
+        },
+        "drive_nominal_D3_before_ream": {
+          "diameter_mm": 3.0,
+          "model_hits": 100,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": -0.225,
+          "maximum_model_overlap_mm": 0.225,
+          "worst_layer_z_in_print_mm": 8.4,
+          "worst_feature": "Overhang wall"
+        },
+        "M3_socket_head_D5p56": {
+          "diameter_mm": 5.56,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.044607177734371756,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 11.6,
+          "worst_feature": "Overhang wall"
+        },
+        "upper_OEM_M2_head_D4p00": {
+          "diameter_mm": 4.0,
+          "model_hits": 54,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": -0.21,
+          "maximum_model_overlap_mm": 0.21,
+          "worst_layer_z_in_print_mm": 5.0,
+          "worst_feature": "Outer wall"
+        },
+        "upper_OEM_M2_spanner_axis_D2": {
+          "diameter_mm": 2.0,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.16897682092064817,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 2.4,
+          "worst_feature": "Outer wall"
+        }
+      },
+      "D8_shaft_socket_section": {
+        "target_D_shaft_diameter_mm": 8.0,
+        "target_D_plane_from_axis_mm": 3.0,
+        "world_axis_x_mm": [
+          44.25,
+          48.4
+        ],
+        "model_min_gap_mm": 0.06539282226563045,
+        "model_crossings": 0,
+        "sacrificial_support_crossings": 0,
+        "max_perm_intrusion_mm": 0.0,
+        "layer_min_mm": {
+          "8.4": 0.06539282226563045,
+          "8.6": 0.08039282226563041,
+          "8.8": 0.08039282226563046,
+          "9.0": 0.08039282226563041,
+          "9.2": 0.08039282226563046,
+          "9.4": 0.08039282226563046,
+          "9.6": 0.08039282226563046,
+          "9.8": 0.08039282226563046,
+          "10.0": 0.08039282226563046,
+          "10.2": 0.08039282226563046,
+          "10.4": 0.08039282226563046,
+          "10.6": 0.08039282226563046,
+          "10.8": 0.08039282226563046,
+          "11.0": 0.08039282226563046,
+          "11.2": 0.08039282226563041,
+          "11.4": 0.08039282226563046,
+          "11.6": 0.06539282226563045,
+          "11.8": 0.08039282226563046,
+          "12.0": 0.08039282226563046,
+          "12.2": 0.08039282226563046,
+          "12.4": 0.08039282226563046
+        }
+      },
+      "four_printed_OEM_M2_seats": {
+        "top": {
+          "CAD_seat_world_x_mm": 40.9,
+          "estimated_as_sliced_seat_world_x_mm": 41.0,
+          "axial_quantization_mm": 0.10000000000000142,
+          "smallest_useful_M2_head_radial_margin_mm": 0.21610108137231232,
+          "support_crossings_above_seat": 0,
+          "axial_radius_layers_mm": {
+            "40.2": 1.1713731045708633,
+            "40.4": 1.1713304698846267,
+            "40.6": 1.1712212976140692,
+            "40.8": 1.1714044799804677,
+            "41.0": 1.171440101418651,
+            "41.2": 2.1465924310679014,
+            "41.4": 2.1461010813723123,
+            "41.6": 2.1465295754607103,
+            "41.8": 2.1466639847513793,
+            "42.0": 2.1467976316882975,
+            "42.2": 2.152361333261777,
+            "42.4": 2.1470314124184,
+            "42.6": 2.151817289685398,
+            "42.8": 2.1505537929696414,
+            "43.0": 2.149665135353094,
+            "43.2": 2.31302616868987,
+            "43.4": 2.606446490228006,
+            "43.6": 2.8543660976597858,
+            "43.8": 2.880528973450277,
+            "44.0": 2.8423978787141735,
+            "44.2": 2.7877545443053853,
+            "44.4": 2.4846071777343695,
+            "44.6": 2.6000016169825604,
+            "44.8": 2.717168553382335,
+            "45.0": 2.8063998563157897,
+            "45.2": 2.8752535450390546,
+            "45.4": 2.9273254831037088,
+            "45.6": 2.964227060569093,
+            "45.8": 2.985244871750448,
+            "46.0": 2.9926865466178527,
+            "46.2": 2.985244871750448,
+            "46.4": 2.964227060569093,
+            "46.6": 2.9273254831037088,
+            "46.8": 2.8752535450390546,
+            "47.0": 2.8063998563157897,
+            "47.2": 2.717168553382335,
+            "47.4": 2.6000016169825604,
+            "47.6": 2.4846071777343695,
+            "47.8": 2.4996071777343696,
+            "48.0": 2.49960717773437,
+            "48.2": 2.4996071777343696,
+            "48.4": 2.4996071777343696
+          }
+        },
+        "right": {
+          "CAD_seat_world_x_mm": 41.2,
+          "estimated_as_sliced_seat_world_x_mm": 41.2,
+          "axial_quantization_mm": 0.0,
+          "smallest_useful_M2_head_radial_margin_mm": 0.21949108764508218,
+          "support_crossings_above_seat": 0,
+          "axial_radius_layers_mm": {
+            "40.2": 1.1713731045708633,
+            "40.4": 1.1713731045708633,
+            "40.6": 1.1713304698846267,
+            "40.8": 1.1713731045708633,
+            "41.0": 1.1713731045708633,
+            "41.2": 1.1712174616946984,
+            "41.4": 2.151592998636896,
+            "41.6": 2.151390444135309,
+            "41.8": 2.1512229444586874,
+            "42.0": 2.150529521381888,
+            "42.2": 2.150560759529471,
+            "42.4": 2.1506218196499876,
+            "42.6": 2.1506516584884663,
+            "42.8": 2.150486063083329,
+            "43.0": 2.1502408120774144,
+            "43.2": 2.150675732917108,
+            "43.4": 2.150323008565302,
+            "43.6": 2.1503349444914717,
+            "43.8": 2.1520121523521,
+            "44.0": 2.1511198362444808,
+            "44.2": 2.1522822897142366,
+            "44.4": 2.15211646227625,
+            "44.6": 2.1516160048058843,
+            "44.8": 2.1512509723068556,
+            "45.0": 2.149491087645082,
+            "45.2": 2.151069641722313,
+            "45.4": 2.1508002859215978,
+            "45.6": 2.150997294324098,
+            "45.8": 2.1509234706799325,
+            "46.0": 2.1511179725775174,
+            "46.2": 2.1514349715118346,
+            "46.4": 2.151633859935208,
+            "46.6": 2.1515595736355695,
+            "46.8": 2.151483758803072,
+            "47.0": 2.151582989273741,
+            "47.2": 2.151511117393487,
+            "47.4": 2.1518057136799307,
+            "47.6": 2.1516319260523513,
+            "47.8": 2.1518200826283636,
+            "48.0": 2.151751523545344,
+            "48.2": 2.1519087192869892,
+            "48.4": 2.1518698311670357
+          }
+        },
+        "left": {
+          "CAD_seat_world_x_mm": 41.2,
+          "estimated_as_sliced_seat_world_x_mm": 41.2,
+          "axial_quantization_mm": 0.0,
+          "smallest_useful_M2_head_radial_margin_mm": 0.21558947229869596,
+          "support_crossings_above_seat": 0,
+          "axial_radius_layers_mm": {
+            "40.2": 1.1713731045708644,
+            "40.4": 1.1713731045708644,
+            "40.6": 1.171330469884628,
+            "40.8": 1.1713731045708644,
+            "41.0": 1.1713731045708644,
+            "41.2": 1.1712174616946964,
+            "41.4": 2.1467338254151502,
+            "41.6": 2.146630621197846,
+            "41.8": 2.1462434189132185,
+            "42.0": 2.14618123321088,
+            "42.2": 2.146179840803137,
+            "42.4": 2.145685797508806,
+            "42.6": 2.1456850342612337,
+            "42.8": 2.145648230506342,
+            "43.0": 2.1456482080452157,
+            "43.2": 2.145649720791292,
+            "43.4": 2.145589472298696,
+            "43.6": 2.1468890800416607,
+            "43.8": 2.1469972094422642,
+            "44.0": 2.14664259448533,
+            "44.2": 2.146851117268839,
+            "44.4": 2.1462676099683065,
+            "44.6": 2.1461923238185574,
+            "44.8": 2.1466540177949187,
+            "45.0": 2.1463096711703358,
+            "45.2": 2.1465807511173622,
+            "45.4": 2.1469656999623865,
+            "45.6": 2.147073750455762,
+            "45.8": 2.1469228355358183,
+            "46.0": 2.1469981778286495,
+            "46.2": 2.1467930398576622,
+            "46.4": 2.1472596208377177,
+            "46.6": 2.147105961824857,
+            "46.8": 2.146994817013171,
+            "47.0": 2.1468729161420343,
+            "47.2": 2.1469851278371506,
+            "47.4": 2.1468635539742325,
+            "47.6": 2.1470454712646303,
+            "47.8": 2.1462316787954467,
+            "48.0": 2.1467226638136214,
+            "48.2": 2.146713388022799,
+            "48.4": 2.147288793339978
+          }
+        },
+        "lower": {
+          "CAD_seat_world_x_mm": 41.2,
+          "estimated_as_sliced_seat_world_x_mm": 41.2,
+          "axial_quantization_mm": 0.0,
+          "smallest_useful_M2_head_radial_margin_mm": 0.21664483579165883,
+          "support_crossings_above_seat": 0,
+          "axial_radius_layers_mm": {
+            "40.2": 1.1713731045708633,
+            "40.4": 1.1713731045708633,
+            "40.6": 1.1713304698846267,
+            "40.8": 1.1713731045708633,
+            "41.0": 1.1713731045708633,
+            "41.2": 1.1712174616946984,
+            "41.4": 2.1480122661259555,
+            "41.6": 2.147848754788336,
+            "41.8": 2.148093882617652,
+            "42.0": 2.1479356173390918,
+            "42.2": 2.147772575003519,
+            "42.4": 2.147831592377813,
+            "42.6": 2.1476674361133843,
+            "42.8": 2.1476435589898744,
+            "43.0": 2.147707688412947,
+            "43.2": 2.1467722413806065,
+            "43.4": 2.1469565621521696,
+            "43.6": 2.146893181080148,
+            "43.8": 2.1466448357916588,
+            "44.0": 2.1484201020059235,
+            "44.2": 2.1488679800222292,
+            "44.4": 2.1466766709138874,
+            "44.6": 2.1489878738597166,
+            "44.8": 2.148962261754638,
+            "45.0": 2.1491635171380263,
+            "45.2": 2.14740753907733,
+            "45.4": 2.147597228775139,
+            "45.6": 2.147597228775139,
+            "45.8": 2.147781094339324,
+            "46.0": 2.1475279194915307,
+            "46.2": 2.147714832773899,
+            "46.4": 2.147714832773899,
+            "46.6": 2.1476471338869696,
+            "46.8": 2.1476471338869696,
+            "47.0": 2.1486659670166395,
+            "47.2": 2.1485511510120343,
+            "47.4": 2.147765107443824,
+            "47.6": 2.148243795202944,
+            "47.8": 2.1479925648098663,
+            "48.0": 2.14814442764276,
+            "48.2": 2.148279184391063,
+            "48.4": 2.1481782356756303
+          }
+        }
+      },
+      "head_clearance_at_axial_seat_and_radial_wall": {
+        "D5.56_floor_117.56": {
+          "diameter_mm": 5.56,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.044607177734371756,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 11.6,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              21.063
+            ],
+            [
+              206.606,
+              21.737
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              21.063
+            ],
+            [
+              206.33639282226562,
+              21.063
+            ]
+          ],
+          "height_mm": 0.200001,
+          "closest_world_geometric_points_mm": [
+            [
+              47.4999995,
+              -0.3395955200195324,
+              117.29039282226563
+            ],
+            [
+              47.4999995,
+              -0.3395955200195324,
+              117.56
+            ]
+          ]
+        },
+        "D5.76_floor_117.56": {
+          "diameter_mm": 5.76,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.04460717773437181,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 8.4,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.606,
+              22.275
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.33639282226562,
+              20.525
+            ]
+          ],
+          "height_mm": 0.2,
+          "closest_world_geometric_points_mm": [
+            [
+              44.3,
+              -0.8775955200195327,
+              117.29039282226563
+            ],
+            [
+              44.3,
+              -0.8775955200195327,
+              117.56
+            ]
+          ]
+        },
+        "D5.56_floor_117.65": {
+          "diameter_mm": 5.56,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.13460717773437522,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 8.4,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.606,
+              22.275
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.24639282226562,
+              20.525
+            ]
+          ],
+          "height_mm": 0.2,
+          "closest_world_geometric_points_mm": [
+            [
+              44.3,
+              -0.8775955200195327,
+              117.29039282226563
+            ],
+            [
+              44.3,
+              -0.8775955200195327,
+              117.65
+            ]
+          ]
+        },
+        "D5.76_floor_117.65": {
+          "diameter_mm": 5.76,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.13460717773437522,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 8.4,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.606,
+              22.275
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.24639282226562,
+              20.525
+            ]
+          ],
+          "height_mm": 0.2,
+          "closest_world_geometric_points_mm": [
+            [
+              44.3,
+              -0.8775955200195327,
+              117.29039282226563
+            ],
+            [
+              44.3,
+              -0.8775955200195327,
+              117.65
+            ]
+          ]
+        },
+        "D5.56_floor_117.75": {
+          "diameter_mm": 5.56,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.23460717773436954,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 11.6,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              21.063
+            ],
+            [
+              206.606,
+              21.737
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              21.063
+            ],
+            [
+              206.14639282226562,
+              21.063
+            ]
+          ],
+          "height_mm": 0.200001,
+          "closest_world_geometric_points_mm": [
+            [
+              47.4999995,
+              -0.3395955200195324,
+              117.29039282226563
+            ],
+            [
+              47.4999995,
+              -0.3395955200195324,
+              117.75
+            ]
+          ]
+        },
+        "D5.76_floor_117.75": {
+          "diameter_mm": 5.76,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.23460717773436948,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 8.4,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.606,
+              22.275
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              20.525
+            ],
+            [
+              206.14639282226562,
+              20.525
+            ]
+          ],
+          "height_mm": 0.2,
+          "closest_world_geometric_points_mm": [
+            [
+              44.3,
+              -0.8775955200195327,
+              117.29039282226563
+            ],
+            [
+              44.3,
+              -0.8775955200195327,
+              117.75
+            ]
+          ]
+        },
+        "D5.56_floor_118.00": {
+          "diameter_mm": 5.56,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.48460717773436945,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 11.6,
+          "worst_feature": "Overhang wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              21.063
+            ],
+            [
+              206.606,
+              21.737
+            ]
+          ],
+          "bead_half_width_mm": 0.225,
+          "closest_bed_xy": [
+            [
+              206.606,
+              21.063
+            ],
+            [
+              205.89639282226562,
+              21.063
+            ]
+          ],
+          "height_mm": 0.200001,
+          "closest_world_geometric_points_mm": [
+            [
+              47.4999995,
+              -0.3395955200195324,
+              117.29039282226563
+            ],
+            [
+              47.4999995,
+              -0.3395955200195324,
+              118.0
+            ]
+          ]
+        },
+        "D5.76_floor_118.00": {
+          "diameter_mm": 5.76,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.36876301044308735,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 8.0,
+          "worst_feature": "Outer wall",
+          "extrusion_bed_xy": [
+            [
+              206.606,
+              24.133
+            ],
+            [
+              206.017,
+              24.133
+            ]
+          ],
+          "bead_half_width_mm": 0.21,
+          "closest_bed_xy": [
+            [
+              206.017,
+              24.133
+            ],
+            [
+              205.89639282226562,
+              23.566942996743176
+            ]
+          ],
+          "height_mm": 0.2,
+          "closest_world_geometric_points_mm": [
+            [
+              43.9,
+              2.730404479980468,
+              117.87939282226563
+            ],
+            [
+              43.9,
+              2.164347476723645,
+              118.0
+            ]
+          ]
+        }
+      },
+      "continuity_between_printed_layers": {
+        "raster_mm": 0.1,
+        "CAD_joint_bed_Z_mm": 8.200000000000003,
+        "minimum_between_adjacent_layers_mm2": 55.13000000000001,
+        "collar_common_footprint_mm2_by_layer_pair": {
+          "8.00\u20138.20": 55.65000000000001,
+          "8.20\u20138.40": 56.110000000000014,
+          "8.40\u20138.60": 57.820000000000014,
+          "8.60\u20138.80": 56.73000000000001,
+          "8.80\u20139.00": 56.04000000000001,
+          "9.00\u20139.20": 55.21000000000001,
+          "9.20\u20139.40": 55.13000000000001
+        },
+        "scope": "Co-located modeled extrusion footprint in local annulus r4.22\u20136.15 only. It is a manufacturing continuity check, not a bond-strength result."
+      },
+      "carried_forward_keyed_yaw_pad_pockets": {
+        "scope": "G-code analytic bead-width geometry at the M3 through holes and around both nominal tapered keys.",
+        "M3_gauge_diameter_mm": 3.0,
+        "nominal_key_to_socket_clearance_mm": 0.14,
+        "results": {
+          "seat_cavity_Left": {
+            "permanent_hits": 0,
+            "support_hits": 0,
+            "min_permanent_gap_mm": 0.128147974250819,
+            "max_permanent_overlap_mm": 0.0,
+            "worst_layer_bed_Z_mm": 9.4
+          },
+          "M3_bolt_passage_Left": {
+            "permanent_hits": 0,
+            "support_hits": 0,
+            "min_permanent_gap_mm": 0.2406938657310225,
+            "max_permanent_overlap_mm": 0.0,
+            "worst_layer_bed_Z_mm": 2.6
+          },
+          "key_shape_against_nominal_pocket_Left": {
+            "permanent_hits": 0,
+            "support_hits": 1117,
+            "min_permanent_gap_mm": 0.1386088679673028,
+            "max_permanent_overlap_mm": 0.0,
+            "worst_layer_bed_Z_mm": 0.4
+          },
+          "seat_cavity_Right": {
+            "permanent_hits": 0,
+            "support_hits": 0,
+            "min_permanent_gap_mm": 0.1284620416177448,
+            "max_permanent_overlap_mm": 0.0,
+            "worst_layer_bed_Z_mm": 11.8
+          },
+          "M3_bolt_passage_Right": {
+            "permanent_hits": 0,
+            "support_hits": 0,
+            "min_permanent_gap_mm": 0.24049837068367771,
+            "max_permanent_overlap_mm": 0.0,
+            "worst_layer_bed_Z_mm": 0.8
+          },
+          "key_shape_against_nominal_pocket_Right": {
+            "permanent_hits": 0,
+            "support_hits": 1002,
+            "min_permanent_gap_mm": 0.13840358888704143,
+            "max_permanent_overlap_mm": 0.0,
+            "worst_layer_bed_Z_mm": 3.2
+          }
+        }
+      },
+      "print_finish": "Hand-finish the horizontal M3 pass-through to 3.10 mm prior to fitting the steel shaft. 3.00 mm is the printed pilot."
+    },
+    "P7": {
+      "profile_binding": {
+        "p7_plate_sha256": "12808c8815aa78f96b1e14a2631771a8271b490224086f783760e00dafaa4fe4",
+        "proof_project_sha256": "c3f2b810899647140ff8b8758b2710210f43cb5ad2ebf0ed6b67c2525cc265da"
+      },
+      "bearing_wells": {
+        "left": {
+          "plate_xy_bearing_axis_mm": [
+            16.299699783325195,
+            83.29940032958984
+          ],
+          "minimum_pocket_diameter_mm": 6.216470605398746,
+          "minimum_bearing_OD6_radial_margin_mm": 0.1082353026993732,
+          "minimum_throat_diameter_mm": 5.176940785714218,
+          "planned_clear_counterbore_depth_mm": 2.6000000000000005,
+          "geometric_shoulder_floor_from_bed_mm": 1.8,
+          "bearing_radial_stock_gauge_mm": 3.0,
+          "support_crossings_through_OD6p1": 0,
+          "bead_clearance_each_layer": [
+            {
+              "upper_z_mm": 0.2,
+              "lower_z_mm": 0.0,
+              "model_min_radial_clear_mm": 2.7419905067861037
+            },
+            {
+              "upper_z_mm": 0.4,
+              "lower_z_mm": 0.2,
+              "model_min_radial_clear_mm": 2.591669262297198
+            },
+            {
+              "upper_z_mm": 0.6,
+              "lower_z_mm": 0.39999999999999997,
+              "model_min_radial_clear_mm": 2.5885069204752926
+            },
+            {
+              "upper_z_mm": 0.8,
+              "lower_z_mm": 0.6000000000000001,
+              "model_min_radial_clear_mm": 2.588774752401655
+            },
+            {
+              "upper_z_mm": 1.0,
+              "lower_z_mm": 0.8,
+              "model_min_radial_clear_mm": 2.58913719271911
+            },
+            {
+              "upper_z_mm": 1.2,
+              "lower_z_mm": 1.0,
+              "model_min_radial_clear_mm": 2.589223738356275
+            },
+            {
+              "upper_z_mm": 1.4,
+              "lower_z_mm": 1.2,
+              "model_min_radial_clear_mm": 2.588470392857109
+            },
+            {
+              "upper_z_mm": 1.6,
+              "lower_z_mm": 1.4000000000000001,
+              "model_min_radial_clear_mm": 2.5926333339027816
+            },
+            {
+              "upper_z_mm": 1.8,
+              "lower_z_mm": 1.6,
+              "model_min_radial_clear_mm": 2.592084108808416
+            },
+            {
+              "upper_z_mm": 2.0,
+              "lower_z_mm": 1.8,
+              "model_min_radial_clear_mm": 3.111077899324063
+            },
+            {
+              "upper_z_mm": 2.2,
+              "lower_z_mm": 2.0,
+              "model_min_radial_clear_mm": 3.1109759415166907
+            },
+            {
+              "upper_z_mm": 2.4,
+              "lower_z_mm": 2.1999999999999997,
+              "model_min_radial_clear_mm": 3.1094958311908534
+            },
+            {
+              "upper_z_mm": 2.6,
+              "lower_z_mm": 2.4,
+              "model_min_radial_clear_mm": 3.109562286279084
+            },
+            {
+              "upper_z_mm": 2.8,
+              "lower_z_mm": 2.5999999999999996,
+              "model_min_radial_clear_mm": 3.1088036873923923
+            },
+            {
+              "upper_z_mm": 3.0,
+              "lower_z_mm": 2.8,
+              "model_min_radial_clear_mm": 3.108235302699373
+            },
+            {
+              "upper_z_mm": 3.2,
+              "lower_z_mm": 3.0,
+              "model_min_radial_clear_mm": 3.111079942641031
+            },
+            {
+              "upper_z_mm": 3.4,
+              "lower_z_mm": 3.1999999999999997,
+              "model_min_radial_clear_mm": 3.1110899156856346
+            },
+            {
+              "upper_z_mm": 3.6,
+              "lower_z_mm": 3.4,
+              "model_min_radial_clear_mm": 3.1087141416335946
+            },
+            {
+              "upper_z_mm": 3.8,
+              "lower_z_mm": 3.5999999999999996,
+              "model_min_radial_clear_mm": 3.1093548398864197
+            },
+            {
+              "upper_z_mm": 4.0,
+              "lower_z_mm": 3.8,
+              "model_min_radial_clear_mm": 3.109793495680475
+            },
+            {
+              "upper_z_mm": 4.2,
+              "lower_z_mm": 4.0,
+              "model_min_radial_clear_mm": 3.110331150504783
+            },
+            {
+              "upper_z_mm": 4.4,
+              "lower_z_mm": 4.2,
+              "model_min_radial_clear_mm": 3.1106648220488085
+            }
+          ]
+        },
+        "right": {
+          "plate_xy_bearing_axis_mm": [
+            43.299692153930664,
+            169.89830017089844
+          ],
+          "minimum_pocket_diameter_mm": 6.216142542999168,
+          "minimum_bearing_OD6_radial_margin_mm": 0.10807127149958395,
+          "minimum_throat_diameter_mm": 5.17585743488395,
+          "planned_clear_counterbore_depth_mm": 2.6000000000000005,
+          "geometric_shoulder_floor_from_bed_mm": 1.8,
+          "bearing_radial_stock_gauge_mm": 3.0,
+          "support_crossings_through_OD6p1": 0,
+          "bead_clearance_each_layer": [
+            {
+              "upper_z_mm": 0.2,
+              "lower_z_mm": 0.0,
+              "model_min_radial_clear_mm": 2.741959340564667
+            },
+            {
+              "upper_z_mm": 0.4,
+              "lower_z_mm": 0.2,
+              "model_min_radial_clear_mm": 2.5917260392827934
+            },
+            {
+              "upper_z_mm": 0.6,
+              "lower_z_mm": 0.39999999999999997,
+              "model_min_radial_clear_mm": 2.5884436450199666
+            },
+            {
+              "upper_z_mm": 0.8,
+              "lower_z_mm": 0.6000000000000001,
+              "model_min_radial_clear_mm": 2.588988398970232
+            },
+            {
+              "upper_z_mm": 1.0,
+              "lower_z_mm": 0.8,
+              "model_min_radial_clear_mm": 2.5895833776670614
+            },
+            {
+              "upper_z_mm": 1.2,
+              "lower_z_mm": 1.0,
+              "model_min_radial_clear_mm": 2.5891114087190235
+            },
+            {
+              "upper_z_mm": 1.4,
+              "lower_z_mm": 1.2,
+              "model_min_radial_clear_mm": 2.5928336170816433
+            },
+            {
+              "upper_z_mm": 1.6,
+              "lower_z_mm": 1.4000000000000001,
+              "model_min_radial_clear_mm": 2.587928717441975
+            },
+            {
+              "upper_z_mm": 1.8,
+              "lower_z_mm": 1.6,
+              "model_min_radial_clear_mm": 2.5928846927559146
+            },
+            {
+              "upper_z_mm": 2.0,
+              "lower_z_mm": 1.8,
+              "model_min_radial_clear_mm": 3.11125513321371
+            },
+            {
+              "upper_z_mm": 2.2,
+              "lower_z_mm": 2.0,
+              "model_min_radial_clear_mm": 3.1101226995565487
+            },
+            {
+              "upper_z_mm": 2.4,
+              "lower_z_mm": 2.1999999999999997,
+              "model_min_radial_clear_mm": 3.1097446560384108
+            },
+            {
+              "upper_z_mm": 2.6,
+              "lower_z_mm": 2.4,
+              "model_min_radial_clear_mm": 3.1110373633286654
+            },
+            {
+              "upper_z_mm": 2.8,
+              "lower_z_mm": 2.5999999999999996,
+              "model_min_radial_clear_mm": 3.108630986816883
+            },
+            {
+              "upper_z_mm": 3.0,
+              "lower_z_mm": 2.8,
+              "model_min_radial_clear_mm": 3.108071271499584
+            },
+            {
+              "upper_z_mm": 3.2,
+              "lower_z_mm": 3.0,
+              "model_min_radial_clear_mm": 3.110683742276796
+            },
+            {
+              "upper_z_mm": 3.4,
+              "lower_z_mm": 3.1999999999999997,
+              "model_min_radial_clear_mm": 3.108622166414732
+            },
+            {
+              "upper_z_mm": 3.6,
+              "lower_z_mm": 3.4,
+              "model_min_radial_clear_mm": 3.1084079472853343
+            },
+            {
+              "upper_z_mm": 3.8,
+              "lower_z_mm": 3.5999999999999996,
+              "model_min_radial_clear_mm": 3.110907531876046
+            },
+            {
+              "upper_z_mm": 4.0,
+              "lower_z_mm": 3.8,
+              "model_min_radial_clear_mm": 3.1094969015855183
+            },
+            {
+              "upper_z_mm": 4.2,
+              "lower_z_mm": 4.0,
+              "model_min_radial_clear_mm": 3.1102611781898277
+            },
+            {
+              "upper_z_mm": 4.4,
+              "lower_z_mm": 4.2,
+              "model_min_radial_clear_mm": 3.1108925718868417
+            }
+          ]
+        }
+      },
+      "axial_contact_shoulders": {
+        "left": {
+          "axial_shoulder_top_bed_Z_mm": 1.8,
+          "annular_ring_coverage": {
+            "2.75": {
+              "points": 720,
+              "material_fraction": 1.0
+            },
+            "2.82": {
+              "points": 720,
+              "material_fraction": 1.0
+            },
+            "2.9": {
+              "points": 720,
+              "material_fraction": 1.0
+            },
+            "2.96": {
+              "points": 720,
+              "material_fraction": 1.0
+            }
+          }
+        },
+        "right": {
+          "axial_shoulder_top_bed_Z_mm": 1.8,
+          "annular_ring_coverage": {
+            "2.75": {
+              "points": 720,
+              "material_fraction": 1.0
+            },
+            "2.82": {
+              "points": 720,
+              "material_fraction": 1.0
+            },
+            "2.9": {
+              "points": 720,
+              "material_fraction": 1.0
+            },
+            "2.96": {
+              "points": 720,
+              "material_fraction": 1.0
+            }
+          }
+        }
+      },
+      "assembly_scope": "Align fixed bearings on the bare frame before mounting the cradle. The cradle cross-ribs obstruct a long common pin.",
+      "blink_rail_seat_finish": {
+        "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+        "project_sha256": "0655c3ca68780d6e96523da4a428cfe019e494136b1e4a8b7b8511afe54d6b71",
+        "plate7_sha256": "12808c8815aa78f96b1e14a2631771a8271b490224086f783760e00dafaa4fe4",
+        "gcode_sha256": "0a521bbaa356787c1f7d43224fad49d6fc74ee8a1e305277e6e83600d4ff1189",
+        "bearing_model": "MR104ZZ",
+        "nominal_bearing_OD_mm": 10.0,
+        "retained_step_throat_OD_mm": 9.36,
+        "raw_model_probe_distinct_from_real_print": true,
+        "stationary_axis_YZ_mm": [
+          -24.0,
+          154.0
+        ],
+        "nominal_counterbore_depth_mm": 5.0,
+        "seats": {
+          "left": {
+            "mouth_world_X_mm": -29.0,
+            "axial_shoulder_world_X_mm": -34.0,
+            "stationary_axis_conservative_raw_fit_OD_mm_range": [
+              10.03,
+              10.04
+            ],
+            "stationary_axis_conservative_raw_fit_radial_play_mm_range": [
+              0.015,
+              0.02
+            ],
+            "slip_model_required_finished_OD_mm": 10.24,
+            "D10_physical_width_path": {
+              "diameter_mm": 10.0,
+              "model_hits": 9,
+              "support_hits": 2298,
+              "minimum_model_bead_margin_mm": -0.005000000000001115,
+              "maximum_model_overlap_mm": 0.005000000000001115,
+              "worst_layer_z_in_print_mm": 11.8,
+              "worst_feature": "Overhang wall"
+            },
+            "D10_open_mouth_before_shoulder": {
+              "diameter_mm": 10.0,
+              "model_hits": 0,
+              "support_hits": 1678,
+              "minimum_model_bead_margin_mm": 0.05728337705368028,
+              "maximum_model_overlap_mm": 0.0,
+              "worst_layer_z_in_print_mm": 12.2,
+              "worst_feature": "Overhang wall"
+            },
+            "D10_24_full_path": {
+              "diameter_mm": 10.24,
+              "model_hits": 276,
+              "support_hits": 3170,
+              "minimum_model_bead_margin_mm": -0.22704,
+              "maximum_model_overlap_mm": 0.22704,
+              "worst_layer_z_in_print_mm": 12.6,
+              "worst_feature": "Bridge"
+            },
+            "D10_03_passing_path": {
+              "diameter_mm": 10.03,
+              "model_hits": 0,
+              "support_hits": 3116,
+              "minimum_model_bead_margin_mm": 0.01377689350243258,
+              "maximum_model_overlap_mm": 0.0,
+              "worst_layer_z_in_print_mm": 12.2,
+              "worst_feature": "Overhang wall"
+            },
+            "D10_04_roof_intrusion": {
+              "diameter_mm": 10.04,
+              "model_hits": 4,
+              "support_hits": 3116,
+              "minimum_model_bead_margin_mm": -0.006167966915951673,
+              "maximum_model_overlap_mm": 0.006167966915951673,
+              "worst_layer_z_in_print_mm": 12.4,
+              "worst_feature": "Overhang wall"
+            }
+          },
+          "right": {
+            "mouth_world_X_mm": 23.0,
+            "axial_shoulder_world_X_mm": 28.0,
+            "stationary_axis_conservative_raw_fit_OD_mm_range": [
+              10.03,
+              10.04
+            ],
+            "stationary_axis_conservative_raw_fit_radial_play_mm_range": [
+              0.015,
+              0.02
+            ],
+            "slip_model_required_finished_OD_mm": 10.24,
+            "D10_physical_width_path": {
+              "diameter_mm": 10.0,
+              "model_hits": 9,
+              "support_hits": 1439,
+              "minimum_model_bead_margin_mm": -0.005000000000001115,
+              "maximum_model_overlap_mm": 0.005000000000001115,
+              "worst_layer_z_in_print_mm": 11.8,
+              "worst_feature": "Overhang wall"
+            },
+            "D10_open_mouth_before_shoulder": {
+              "diameter_mm": 10.0,
+              "model_hits": 0,
+              "support_hits": 1453,
+              "minimum_model_bead_margin_mm": 0.059729459597541806,
+              "maximum_model_overlap_mm": 0.0,
+              "worst_layer_z_in_print_mm": 12.2,
+              "worst_feature": "Overhang wall"
+            },
+            "D10_24_full_path": {
+              "diameter_mm": 10.24,
+              "model_hits": 280,
+              "support_hits": 2243,
+              "minimum_model_bead_margin_mm": -0.233745,
+              "maximum_model_overlap_mm": 0.233745,
+              "worst_layer_z_in_print_mm": 12.6,
+              "worst_feature": "Bridge"
+            },
+            "D10_03_passing_path": {
+              "diameter_mm": 10.03,
+              "model_hits": 0,
+              "support_hits": 2209,
+              "minimum_model_bead_margin_mm": 0.013782997018056187,
+              "maximum_model_overlap_mm": 0.0,
+              "worst_layer_z_in_print_mm": 12.2,
+              "worst_feature": "Overhang wall"
+            },
+            "D10_04_roof_intrusion": {
+              "diameter_mm": 10.04,
+              "model_hits": 2,
+              "support_hits": 2209,
+              "minimum_model_bead_margin_mm": -0.006167966915951673,
+              "maximum_model_overlap_mm": 0.006167966915951673,
+              "worst_layer_z_in_print_mm": 12.4,
+              "worst_feature": "Overhang wall"
+            }
+          }
+        },
+        "nominal_CAD_bench_cleanup_and_tool_routes": {
+          "left": {
+            "nominal_finish_proof_MM": 10.23,
+            "retained_D9p36_steel_outer_shoulder_plane_X_mm": -34.0,
+            "inside_face_tool_X_interval_mm": [
+              -33.96,
+              -23.0
+            ],
+            "nominal_finish_probe_overlap_mm3": 0.0,
+            "D4_support_punch_from_outside_overlap_mm3": 0.0
+          },
+          "right": {
+            "nominal_finish_proof_MM": 10.23,
+            "retained_D9p36_steel_outer_shoulder_plane_X_mm": 28.0,
+            "inside_face_tool_X_interval_mm": [
+              17.0,
+              27.96
+            ],
+            "nominal_finish_probe_overlap_mm3": 0.0,
+            "D4_support_punch_from_outside_overlap_mm3": 0.0
+          }
+        },
+        "manufacturing_result": "A concentric \u00d810.24 finish is needed to use the stated bearing slip in the loaded calculation. First remove support from both seats and retain the reduced shoulders. Actual printed fit is untested.",
+        "raw_Gcode_provenance": "Digest captured by direct B24 V3 analysis before transient G-code cleanup. Exact plate and profile signatures unchanged.",
+        "unchanged_geometry_source_cad_sha256": "701185079a1f9703a8c549837edf838cfad04b3b3c841838fc58a8bae52a590a",
+        "unchanged_B24_v3_print_project_sha256": "d3b0230f4d679688fa77f11a2e443a1d0a9b422c17c07f60ef302e1bfebaf009",
+        "rail_world_sha256": "d44660332152ffb8bd8721f8ce0bf375ca8f333d1fbebd4bdb1fda8981f17c85",
+        "raw_fit_range_axial_scope": "Projected roof and entry omit the final 0.11 mm at the stepped shoulder; separate full bearing-width sweep reports the shoulder transition. Remove all support before checking fit."
+      }
+    },
+    "P4": {
+      "indexed_front_with_camera_tray": {
+        "mode": "fixed_precision_indexed_mesh_from_npz",
+        "mesh_sha256": "95e714ffc00643c581557396d5a327f293bf1d4c0221b698ab7eed56b546dbc2",
+        "physical_bodies": 1,
+        "triangles": 234502,
+        "volume_mm3": 143951.72576338472,
+        "source_shell_world_sha256": "d30af4b706212f4537e94c7bc74e7b1accdd49b4f5b92adb38504bea7b3e9af0",
+        "source_tray_world_sha256": "1178ffcd0ca00f9b21e165fff4536372beae410e9b7a4a429a970e43c1d59f1d",
+        "source_tray_print_pilots_sha256": "138ce2a2cfd7456027b46074b42efc77eb9e586924a2c1ef275bdd95ec875d20"
+      },
+      "left_blink_relief_and_carried_eye_link_relief": {
+        "world_relief_bounds_mm": {
+          "blink_left": [
+            [
+              -55.2,
+              -30.96,
+              127.95
+            ],
+            [
+              -54.14,
+              -28.97,
+              129.58
+            ]
+          ],
+          "prior_eye_link": [
+            [
+              60.85,
+              -13.1,
+              112.4
+            ],
+            [
+              64.65,
+              -5.05,
+              117.35
+            ]
+          ]
+        },
+        "test_inset_mm": {
+          "blink_left": {
+            "0.06": {
+              "min_model_bead_gap_mm": 0.060083312988283816,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 0,
+              "support_z_levels": []
+            },
+            "0.1": {
+              "min_model_bead_gap_mm": 0.10008331298828291,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 0,
+              "support_z_levels": []
+            },
+            "0.15": {
+              "min_model_bead_gap_mm": 0.15008331298828007,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 0,
+              "support_z_levels": []
+            },
+            "0.2": {
+              "min_model_bead_gap_mm": 0.20008331298828433,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 0,
+              "support_z_levels": []
+            },
+            "0.3": {
+              "min_model_bead_gap_mm": 0.3000833129882787,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 0,
+              "support_z_levels": []
+            }
+          },
+          "prior_eye_link": {
+            "0.06": {
+              "min_model_bead_gap_mm": 0.044916687011715334,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 127,
+              "support_z_levels": [
+                26.8,
+                27.0,
+                27.2,
+                27.4,
+                27.6,
+                27.8,
+                28.0,
+                33.2,
+                33.4,
+                33.6,
+                33.8,
+                34.0,
+                34.2,
+                34.4,
+                34.6
+              ]
+            },
+            "0.1": {
+              "min_model_bead_gap_mm": 0.08491668701170743,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 118,
+              "support_z_levels": [
+                26.8,
+                27.0,
+                27.2,
+                27.4,
+                27.6,
+                27.8,
+                28.0,
+                33.2,
+                33.4,
+                33.6,
+                33.8,
+                34.0,
+                34.2,
+                34.4,
+                34.6
+              ]
+            },
+            "0.15": {
+              "min_model_bead_gap_mm": 0.13491668701171874,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 95,
+              "support_z_levels": [
+                26.8,
+                27.0,
+                27.2,
+                27.4,
+                27.6,
+                27.8,
+                28.0,
+                33.4,
+                33.6,
+                33.8,
+                34.0,
+                34.2,
+                34.4,
+                34.6
+              ]
+            },
+            "0.2": {
+              "min_model_bead_gap_mm": 0.1849166870117301,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 84,
+              "support_z_levels": [
+                26.8,
+                27.0,
+                27.2,
+                27.4,
+                27.6,
+                27.8,
+                28.0,
+                33.6,
+                33.8,
+                34.0,
+                34.2,
+                34.4,
+                34.6
+              ]
+            },
+            "0.3": {
+              "min_model_bead_gap_mm": 0.28491668701169603,
+              "permanent_intrusions": 0,
+              "max_permanent_intrusion_mm": 0.0,
+              "support_intrusions": 51,
+              "support_z_levels": [
+                27.0,
+                27.2,
+                27.4,
+                27.6,
+                27.8,
+                33.8,
+                34.0,
+                34.2,
+                34.4
+              ]
+            }
+          }
+        },
+        "world_to_plate_offset_mm": [
+          93.51508331298828,
+          -4.072179794311523,
+          21.52918241933593
+        ]
+      },
+      "thin_left_outer_skin_bead_continuity": {
+        "thin_CAD_witness_world_mm": [
+          -55.2,
+          -29.916,
+          129.198
+        ],
+        "measure_direction": [
+          -1,
+          0,
+          0
+        ],
+        "Gcode_nearby_layer_and_radial_samples": [
+          {
+            "layer_bed_top_mm": 51.2,
+            "world_y_layer_center_mm": -29.570817080664074,
+            "world_z_profile_mm": 128.898,
+            "nominal_cad_wall_width_mm": 0.8631980302275011,
+            "nominal_cad_contiguous_x_mm": [
+              -56.063198793166954,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06156567970554,
+                -55.641564797887064
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.42000088181847417,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.2,
+            "world_y_layer_center_mm": -29.570817080664074,
+            "world_z_profile_mm": 129.048,
+            "nominal_cad_wall_width_mm": 0.8628707714095611,
+            "nominal_cad_contiguous_x_mm": [
+              -56.062871534349014,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.061258302656356,
+                -55.64125742083788
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.42000088181847417,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.2,
+            "world_y_layer_center_mm": -29.570817080664074,
+            "world_z_profile_mm": 129.198,
+            "nominal_cad_wall_width_mm": 0.8618624185973118,
+            "nominal_cad_contiguous_x_mm": [
+              -56.061863181536765,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06095092560717,
+                -55.6409500437887
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.42000088181847417,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.2,
+            "world_y_layer_center_mm": -29.570817080664074,
+            "world_z_profile_mm": 129.348,
+            "nominal_cad_wall_width_mm": 0.8608541376360037,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06085490057546,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06064354855799,
+                -55.640642666739524
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.42000088181846706,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.2,
+            "world_y_layer_center_mm": -29.570817080664074,
+            "world_z_profile_mm": 129.49800000000002,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.07486375286141,
+                -55.64033528969034
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.43452846317106975,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.4,
+            "world_y_layer_center_mm": -29.77081708066407,
+            "world_z_profile_mm": 128.898,
+            "nominal_cad_wall_width_mm": 0.8632810085363118,
+            "nominal_cad_contiguous_x_mm": [
+              -56.063281771475765,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06155225596342,
+                -55.64155130530809
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200009506553286,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.4,
+            "world_y_layer_center_mm": -29.77081708066407,
+            "world_z_profile_mm": 129.048,
+            "nominal_cad_wall_width_mm": 0.8626826420241471,
+            "nominal_cad_contiguous_x_mm": [
+              -56.0626834049636,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06123310702725,
+                -55.64123215637192
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200009506553286,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.4,
+            "world_y_layer_center_mm": -29.77081708066407,
+            "world_z_profile_mm": 129.198,
+            "nominal_cad_wall_width_mm": 0.861674361062839,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06167512400229,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06091395809108,
+                -55.64091300743575
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200009506553286,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.4,
+            "world_y_layer_center_mm": -29.77081708066407,
+            "world_z_profile_mm": 129.348,
+            "nominal_cad_wall_width_mm": 0.860666080101538,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06066684304099,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06059480915491,
+                -55.64059385849958
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200009506553286,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.4,
+            "world_y_layer_center_mm": -29.77081708066407,
+            "world_z_profile_mm": 129.49800000000002,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.094455263212616,
+                -55.64027470956341
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4541805536492092,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.6,
+            "world_y_layer_center_mm": -29.970819080664075,
+            "world_z_profile_mm": 128.898,
+            "nominal_cad_wall_width_mm": 0.8633639876749015,
+            "nominal_cad_contiguous_x_mm": [
+              -56.063364750614355,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06185337226749,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.861770059279209,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.6,
+            "world_y_layer_center_mm": -29.970819080664075,
+            "world_z_profile_mm": 129.048,
+            "nominal_cad_wall_width_mm": 0.8624945826091022,
+            "nominal_cad_contiguous_x_mm": [
+              -56.062495345548555,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06145014646104,
+                -55.64144862894731
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200015175137324,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.6,
+            "world_y_layer_center_mm": -29.970819080664075,
+            "world_z_profile_mm": 129.198,
+            "nominal_cad_wall_width_mm": 0.861486301647794,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06148706458725,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06104692065459,
+                -55.64104540314086
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200015175137324,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.6,
+            "world_y_layer_center_mm": -29.970819080664075,
+            "world_z_profile_mm": 129.348,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06064369484814,
+                -55.640642177334406
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4200015175137324,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.6,
+            "world_y_layer_center_mm": -29.970819080664075,
+            "world_z_profile_mm": 129.49800000000002,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.106737134213475,
+                -55.64023895152795
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4664981826855268,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.8,
+            "world_y_layer_center_mm": -30.17081708066407,
+            "world_z_profile_mm": 128.898,
+            "nominal_cad_wall_width_mm": 0.8633148079165167,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06331557085597,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.03119597398134,
+                -55.225590995966506
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.8056049780148342,
+            "layer_centerline_x_mm": []
+          },
+          {
+            "layer_bed_top_mm": 51.8,
+            "world_y_layer_center_mm": -30.17081708066407,
+            "world_z_profile_mm": 129.048,
+            "nominal_cad_wall_width_mm": 0.8623065269552086,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06230728989466,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06184953539683,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.8617662224085478,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.8,
+            "world_y_layer_center_mm": -30.17081708066407,
+            "world_z_profile_mm": 129.198,
+            "nominal_cad_wall_width_mm": 0.8612982459939076,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06129900893336,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06097744237357,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.8608941293852865,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.8,
+            "world_y_layer_center_mm": -30.17081708066407,
+            "world_z_profile_mm": 129.348,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.060105349350316,
+                -55.64009825097871
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.420007098371606,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 51.8,
+            "world_y_layer_center_mm": -30.17081708066407,
+            "world_z_profile_mm": 129.49800000000002,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.11339032448859,
+                -55.639226157955456
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.47416416653313576,
+            "layer_centerline_x_mm": [
+              -55.84,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 52.0,
+            "world_y_layer_center_mm": -30.37081708066407,
+            "world_z_profile_mm": 128.898,
+            "nominal_cad_wall_width_mm": null,
+            "nominal_cad_contiguous_x_mm": null,
+            "polymer_bead_intervals_world_x_mm": [],
+            "largest_contiguous_extrusion_width_mm": 0.0,
+            "layer_centerline_x_mm": []
+          },
+          {
+            "layer_bed_top_mm": 52.0,
+            "world_y_layer_center_mm": -30.37081708066407,
+            "world_z_profile_mm": 129.048,
+            "nominal_cad_wall_width_mm": 0.8621184694207429,
+            "nominal_cad_contiguous_x_mm": [
+              -56.062119232360196,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -55.98785036072307,
+                -55.26345261512972
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.7243977455933504,
+            "layer_centerline_x_mm": []
+          },
+          {
+            "layer_bed_top_mm": 52.0,
+            "world_y_layer_center_mm": -30.37081708066407,
+            "world_z_profile_mm": 129.198,
+            "nominal_cad_wall_width_mm": 0.8611101884594348,
+            "nominal_cad_contiguous_x_mm": [
+              -56.06111095139889,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06062970596451,
+                -55.20009214571642
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.8605375602480905,
+            "layer_centerline_x_mm": [
+              -55.6,
+              -55.44
+            ]
+          },
+          {
+            "layer_bed_top_mm": 52.0,
+            "world_y_layer_center_mm": -30.37081708066407,
+            "world_z_profile_mm": 129.348,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.06009336128875,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.8600100483004667,
+            "layer_centerline_x_mm": [
+              -55.86,
+              -55.42
+            ]
+          },
+          {
+            "layer_bed_top_mm": 52.0,
+            "world_y_layer_center_mm": -30.37081708066407,
+            "world_z_profile_mm": 129.49800000000002,
+            "nominal_cad_wall_width_mm": 0.9150810241699219,
+            "nominal_cad_contiguous_x_mm": [
+              -56.115081787109375,
+              -55.20000076293945
+            ],
+            "polymer_bead_intervals_world_x_mm": [
+              [
+                -56.11508331298828,
+                -55.639467495058305
+              ],
+              [
+                -55.620083312988285,
+                -55.20008331298828
+              ]
+            ],
+            "largest_contiguous_extrusion_width_mm": 0.4756158179299774,
+            "layer_centerline_x_mm": [
+              -55.9,
+              -55.42
+            ]
+          }
+        ],
+        "checked_width_samples": 24,
+        "minimum_contiguous_projected_polymer_mm": 0.42000088181846706,
+        "scope": "Model path width envelope in P4 layer slices; not a physical coupon or mechanical strength test."
+      },
+      "exact_outer_paths_localization_vs_v3": {
+        "plate_layers_compared": 523,
+        "raster_mm": 0.25,
+        "matching_within_mm": 0.5,
+        "B24_v3_outer_wall_painted_area_over_layers_mm2": 272439.0,
+        "B24_v5_outer_wall_painted_area_over_layers_mm2": 272331.5625,
+        "baseline_outer_wall_unmatched_percent": 0.03737075088368405,
+        "new_outer_wall_unmatched_percent": 0.001124548315988897,
+        "baseline_outer_wall_unmatched_by_any_v5_polymer_percent": 0.03737075088368405,
+        "worst_old_outer_wall_differences": [
+          {
+            "bed_z_mm": 28.2,
+            "baseline_px": 7488,
+            "missing_px": 81,
+            "missing_from_general_polymer_px": 81,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.235,
+                -6.671,
+                112.322
+              ],
+              [
+                64.485,
+                -6.671,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 31.6,
+            "baseline_px": 7112,
+            "missing_px": 78,
+            "missing_from_general_polymer_px": 78,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -10.071,
+                112.072
+              ],
+              [
+                64.485,
+                -10.071,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 30.2,
+            "baseline_px": 7135,
+            "missing_px": 74,
+            "missing_from_general_polymer_px": 74,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -8.671,
+                112.822
+              ],
+              [
+                64.985,
+                -8.671,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 29.2,
+            "baseline_px": 7101,
+            "missing_px": 73,
+            "missing_from_general_polymer_px": 73,
+            "new_px": 12,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                61.735,
+                -7.671,
+                113.072
+              ],
+              [
+                64.485,
+                -7.671,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 30.8,
+            "baseline_px": 7189,
+            "missing_px": 72,
+            "missing_from_general_polymer_px": 72,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -9.271,
+                112.822
+              ],
+              [
+                64.485,
+                -9.271,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 30.4,
+            "baseline_px": 7118,
+            "missing_px": 71,
+            "missing_from_general_polymer_px": 71,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -8.871,
+                112.822
+              ],
+              [
+                64.735,
+                -8.871,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 30.6,
+            "baseline_px": 7184,
+            "missing_px": 71,
+            "missing_from_general_polymer_px": 71,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -9.071,
+                112.822
+              ],
+              [
+                64.735,
+                -9.071,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 31.8,
+            "baseline_px": 7151,
+            "missing_px": 70,
+            "missing_from_general_polymer_px": 70,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -10.271,
+                112.572
+              ],
+              [
+                64.485,
+                -10.271,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 28.8,
+            "baseline_px": 7336,
+            "missing_px": 68,
+            "missing_from_general_polymer_px": 68,
+            "new_px": 14,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                61.985,
+                -7.271,
+                113.072
+              ],
+              [
+                64.485,
+                -7.271,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 29.0,
+            "baseline_px": 7232,
+            "missing_px": 68,
+            "missing_from_general_polymer_px": 68,
+            "new_px": 11,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                61.985,
+                -7.471,
+                113.072
+              ],
+              [
+                64.485,
+                -7.471,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 31.2,
+            "baseline_px": 7067,
+            "missing_px": 68,
+            "missing_from_general_polymer_px": 68,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -9.671,
+                112.822
+              ],
+              [
+                64.485,
+                -9.671,
+                115.572
+              ]
+            ]
+          },
+          {
+            "bed_z_mm": 31.4,
+            "baseline_px": 7213,
+            "missing_px": 67,
+            "missing_from_general_polymer_px": 67,
+            "new_px": 0,
+            "missing_from_general_polymer_bounds_world_mm": [
+              [
+                62.985,
+                -9.871,
+                113.072
+              ],
+              [
+                64.485,
+                -9.871,
+                115.572
+              ]
+            ]
+          }
+        ]
+      },
+      "fused_seam": {
+        "sampled_seam_layers_with_continuous_model_extrusion": 27,
+        "bridging_extrusion_segments_sampled": 409,
+        "raw_2p5mm_horizontal_pilot_gauge": {
+          "left": {
+            "made_part": {
+              "segments": 12,
+              "layer_count": 3,
+              "deepest_ideal_gauge_cross_mm": 0.04222421225141473
+            },
+            "support": {
+              "segments": 214,
+              "layer_count": 10,
+              "deepest_ideal_gauge_cross_mm": 0.21
+            }
+          },
+          "right": {
+            "made_part": {
+              "segments": 11,
+              "layer_count": 3,
+              "deepest_ideal_gauge_cross_mm": 0.04222421225141473
+            },
+            "support": {
+              "segments": 214,
+              "layer_count": 10,
+              "deepest_ideal_gauge_cross_mm": 0.21
+            }
+          }
+        }
+      },
+      "model_only_fused_mass": {
+        "fused_installed_g": 152.54589939066145,
+        "old_separate_skull_g": 149.66594498147444,
+        "logical_tray_g": 3.12331161782707,
+        "logical_skull_g": 149.4225877728344,
+        "bracket_g": 4.538895006125692,
+        "allocation": "Actual model extrusion divided by fraction of deposited centerline inside the former tray CAD cross-section of each layer. Split is an approximation; combined model extrusion excludes support."
+      },
+      "physical_print_finish": "Retain the stock reduced wall and blind camera-tray tap-pilot stops. Local left blink relief contains no slicing support."
+    },
+    "P8": {
+      "left_blink_link_reworked_web_and_stock_pilots": {
+        "name": "23_left_short_lid_link-B24",
+        "mesh_components": 1,
+        "printed_dims_mm": [
+          40.699493408203125,
+          20.699813842773438,
+          5.599998474121094
+        ],
+        "gcode_sha256": "5036b46e68df9c445c26aa331a8392cd27ef6e0ea9634f575494b49554ac04b3",
+        "stock_pin_pilots_mm": {
+          "pin": 1.92,
+          "M3_tap": 2.5
+        },
+        "radial_pilot_and_tap_path": {
+          "lower_pivot_1.72": {
+            "diameter_mm": 1.72,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.08523244456538018,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 0.6,
+            "worst_feature": "Outer wall"
+          },
+          "lower_pivot_1.8": {
+            "diameter_mm": 1.8,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.04523817472875494,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 0.6,
+            "worst_feature": "Outer wall"
+          },
+          "lower_pivot_1.92": {
+            "diameter_mm": 1.92,
+            "model_hits": 10,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": -0.014753230026201741,
+            "maximum_model_overlap_mm": 0.014753230026201741,
+            "worst_layer_z_in_print_mm": 0.6,
+            "worst_feature": "Outer wall"
+          },
+          "lower_M3_tap_2.24": {
+            "diameter_mm": 2.24,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.12342384213068494,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 5.6,
+            "worst_feature": "Outer wall"
+          },
+          "lower_M3_tap_2.38": {
+            "diameter_mm": 2.38,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.05342384213069176,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 5.0,
+            "worst_feature": "Outer wall"
+          },
+          "lower_M3_tap_2.5": {
+            "diameter_mm": 2.5,
+            "model_hits": 449,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": -0.006576157869310484,
+            "maximum_model_overlap_mm": 0.006576157869310484,
+            "worst_layer_z_in_print_mm": 3.0,
+            "worst_feature": "Outer wall"
+          },
+          "upper_pivot_1.72": {
+            "diameter_mm": 1.72,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.08516676732832615,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 1.4,
+            "worst_feature": "Outer wall"
+          },
+          "upper_pivot_1.8": {
+            "diameter_mm": 1.8,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.045167076754370344,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 1.4,
+            "worst_feature": "Outer wall"
+          },
+          "upper_pivot_1.92": {
+            "diameter_mm": 1.92,
+            "model_hits": 6,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": -0.014832459106544599,
+            "maximum_model_overlap_mm": 0.014832459106544599,
+            "worst_layer_z_in_print_mm": 1.4,
+            "worst_feature": "Outer wall"
+          },
+          "upper_M3_tap_2.24": {
+            "diameter_mm": 2.24,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.12342384213070631,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 2.8,
+            "worst_feature": "Outer wall"
+          },
+          "upper_M3_tap_2.38": {
+            "diameter_mm": 2.38,
+            "model_hits": 0,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": 0.05342384213070603,
+            "maximum_model_overlap_mm": 0.0,
+            "worst_layer_z_in_print_mm": 2.8,
+            "worst_feature": "Outer wall"
+          },
+          "upper_M3_tap_2.5": {
+            "diameter_mm": 2.5,
+            "model_hits": 448,
+            "support_hits": 0,
+            "minimum_model_bead_margin_mm": -0.006576157869296273,
+            "maximum_model_overlap_mm": 0.006576157869296273,
+            "worst_layer_z_in_print_mm": 2.8,
+            "worst_feature": "Outer wall"
+          }
+        },
+        "cut_0p06mm_inset_extrusion_hits": {
+          "model": 0,
+          "support": 0
+        },
+        "stations_along_rod_from_lower_pivot_mm": [
+          2.0,
+          2.2,
+          2.4
+        ],
+        "ligament_per_layer": [
+          {
+            "layer_bed_top_mm": 0.2,
+            "projected_strip_width_mm": [
+              4.162516819427798,
+              4.0350040676667485,
+              4.102988540826732
+            ],
+            "largest_contiguous_strip_mm": [
+              4.162516819427798,
+              2.621217294453684,
+              4.102988540826732
+            ]
+          },
+          {
+            "layer_bed_top_mm": 0.4,
+            "projected_strip_width_mm": [
+              4.517504490243365,
+              4.362720845048903,
+              4.3715646480001755
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517504490243365,
+              3.11731252245416,
+              2.7292434224805486
+            ]
+          },
+          {
+            "layer_bed_top_mm": 0.6,
+            "projected_strip_width_mm": [
+              4.516092120713085,
+              4.361750226743606,
+              4.369695245032513
+            ],
+            "largest_contiguous_strip_mm": [
+              4.516092120713085,
+              3.1163419041488627,
+              2.7292434224805224
+            ]
+          },
+          {
+            "layer_bed_top_mm": 0.8,
+            "projected_strip_width_mm": [
+              4.5171912548378765,
+              4.362736798259871,
+              4.404284343744691
+            ],
+            "largest_contiguous_strip_mm": [
+              4.5171912548378765,
+              3.1173284756651274,
+              4.404284343744691
+            ]
+          },
+          {
+            "layer_bed_top_mm": 1.0,
+            "projected_strip_width_mm": [
+              4.517731200256162,
+              4.362736798259903,
+              4.404284343744691
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517731200256162,
+              3.1173284756651274,
+              4.404284343744691
+            ]
+          },
+          {
+            "layer_bed_top_mm": 1.2,
+            "projected_strip_width_mm": [
+              4.517731200256162,
+              4.362736798259903,
+              4.404284343744691
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517731200256162,
+              3.1173284756651274,
+              4.404284343744691
+            ]
+          },
+          {
+            "layer_bed_top_mm": 1.4,
+            "projected_strip_width_mm": [
+              4.517716616950427,
+              4.362719776971398,
+              4.404267020628467
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517716616950427,
+              3.1173114543766225,
+              4.404267020628467
+            ]
+          },
+          {
+            "layer_bed_top_mm": 1.6,
+            "projected_strip_width_mm": [
+              4.517607186379024,
+              4.362613469419829,
+              4.190291003424238
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517607186379024,
+              3.1172051468250537,
+              2.5480731726239694
+            ]
+          },
+          {
+            "layer_bed_top_mm": 1.8,
+            "projected_strip_width_mm": [
+              4.516724543638219,
+              4.3617342513482775,
+              4.370583533911081
+            ],
+            "largest_contiguous_strip_mm": [
+              4.516724543638219,
+              3.1163259287535023,
+              2.729243422480528
+            ]
+          },
+          {
+            "layer_bed_top_mm": 2.0,
+            "projected_strip_width_mm": [
+              4.517716616950427,
+              4.362720845048935,
+              4.371564648000156
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517716616950427,
+              3.11731252245416,
+              2.729243422480528
+            ]
+          },
+          {
+            "layer_bed_top_mm": 2.2,
+            "projected_strip_width_mm": [
+              4.517716616950427,
+              4.362720845048935,
+              4.371564648000156
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517716616950427,
+              3.11731252245416,
+              2.729243422480528
+            ]
+          },
+          {
+            "layer_bed_top_mm": 2.4,
+            "projected_strip_width_mm": [
+              4.517716616950427,
+              4.362720845048935,
+              4.371564648000156
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517716616950427,
+              3.11731252245416,
+              2.729243422480528
+            ]
+          },
+          {
+            "layer_bed_top_mm": 2.6,
+            "projected_strip_width_mm": [
+              4.517716616950427,
+              4.3765167819928275,
+              4.404267020628467
+            ],
+            "largest_contiguous_strip_mm": [
+              4.517716616950427,
+              4.3765167819928275,
+              4.404267020628467
+            ]
+          }
+        ],
+        "minimum_total_polymer_span_at_2p20_mm_station_mm": 4.0350040676667485,
+        "minimum_contiguous_polymer_span_at_2p20_mm_station_mm": 2.621217294453684,
+        "native_minimum_transverse_cad_area_mm2": 11.38764,
+        "native_witness_station_mm": 2.2,
+        "previous_transverse_cad_area_same_station_mm2": 14.82,
+        "scope": "Analytic bead-width projections and indexed dry geometry; not a physical fit or strength measurement."
+      },
+      "model_only_per_part_masses_g": {
+        "04_yaw_rotor-b23": 22.530160088902985,
+        "18_eye_pitch_link_58p5mm-b23": 1.1098464406349546,
+        "id5-keeper-b21": 0.5387299698916245,
+        "23_left_short_lid_link-b24": 0.76115224225266,
+        "23_right_short_lid_link-b21": 0.7726750279379836,
+        "15_eye_yaw_offset_tie_bar-b21": 1.0108713004729162,
+        "16_eye_yaw_horn_13p5_mm-b21": 0.7345963293926202,
+        "17_eye_pitch_horn_10mm-b23": 0.687788420349592,
+        "22_blink_drive_link-b21": 0.48518776419912296,
+        "19_blink_servo_horn-b21": 0.8024100384130977,
+        "21_blink_shaft_crank_1-b21": 0.8088437556455188,
+        "21_blink_shaft_crank_3-b21": 0.800116885006031,
+        "21_blink_shaft_crank_2-b21": 0.7560638819148543,
+        "45_blink_shaft_spacer_left-b19": 0.9953037927858618,
+        "45_blink_shaft_spacer_right-b19": 0.21397424508729707
+      },
+      "bench_finish": "Ream the two \u00d81.92 print pilots to the specified finished \u00d82.08\u20132.10 mm slip. Tap the two existing \u00d82.50 M3 pilots. Keep both axes and inspect the lower bevel."
+    }
+  },
+  "changed_installed_printed_part_grams": {
+    "28_skull_front": {
+      "new_grams": 149.4225877728344,
+      "delta_grams": -2.9589210811309385e-05
+    },
+    "08_pitch_horn_to_8mm_clamp": {
+      "new_grams": 2.8317420926084544,
+      "delta_grams": 0.28739874936582366
+    },
+    "13_left_eye_cradle_mount": {
+      "new_grams": 3.240031740655876,
+      "delta_grams": -0.06938012094049295
+    },
+    "13_right_eye_cradle_mount": {
+      "new_grams": 3.245266465282174,
+      "delta_grams": -0.06414539631419469
+    },
+    "04_yaw_rotor": {
+      "new_grams": 22.530160088902985,
+      "delta_grams": 2.6569705696033452e-05
+    },
+    "23_left_short_lid_link": {
+      "new_grams": 0.76115224225266,
+      "delta_grams": -0.008702733154823283
+    },
+    "25_nasal_tray": {
+      "new_grams": 3.12331161782707,
+      "delta_grams": -0.0012875354465253785
+    }
+  },
+  "scope": "Exact native B24 V6 package. P8 newly sliced; P4, P6 and P7 signatures of geometry, placement and profile exactly match previous direct B24 runs. Eight B23 plate signatures verified unchanged."
+}

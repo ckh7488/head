@@ -83,6 +83,7 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
     position = list(start)
     joint_speed = model.speed
     goal = feedback = tuple(start)
+    feedback_at = 0.
     pending = None
     frame_index = 0
     next_goal = next_report = 0.
@@ -94,6 +95,7 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
         history.append(tuple(position[3:5]))
         if t + 1e-9 >= next_report:
             feedback = tuple(position)
+            feedback_at = t
             next_report += model.report_period
         capture = frame_index / CAMERA_FPS
         if t + 1e-9 >= capture + latency:
@@ -106,13 +108,13 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
             error = _camera_error(bearing(capture) - capture_yaw, target_pitch, capture_pitch, hfov)
             if hide_at is not None and capture >= hide_at:
                 error = None
-            decision = planner.step(error, feedback, t, blink_enabled=blink)
+            decision = planner.step(error, feedback, t, blink_enabled=blink, feedback_at=feedback_at)
             trace.frames.append(Frame(capture, t, error is not None, decision.phase))
-            if decision.active:
-                pending = decision.goals, decision.phase
+            if decision.active or decision.keep_neutral:
+                pending = decision.goals, 'RETURN' if decision.keep_neutral else decision.phase
             elif active:
                 goal, pending = tuple(position), None
-            active = decision.active
+            active = decision.active or decision.keep_neutral
         if t + 1e-9 >= next_goal:
             if pending is not None:
                 goal, phase = pending

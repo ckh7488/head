@@ -41,6 +41,24 @@ def test_arm_reads_pwm_back_before_enabling_any_axis(firmware):
     assert not writes(firmware.trace(), TORQUE)
 
 
+@pytest.mark.parametrize(('blink_model', 'pwm'), [(1200, 200), (1190, 230)])
+def test_blink_limits_pwm_to_the_verified_motor(firmware, blink_model, pwm):
+    firmware.set(3, 0, blink_model)
+    assert firmware.command('CHECK 3')[0].endswith(' 1 1')
+    assert firmware.command('ARM 4')[0] == 'ARMED 4'
+    trace = firmware.trace()
+    programmed, = writes(trace, 100)
+    assert (programmed.id, programmed.value) == (3, pwm)
+    assert next(event for event in trace if event.direction == 'r' and event.register == 100).value == pwm
+    assert trace.index(programmed) < trace.index(writes(trace, TORQUE)[0])
+
+
+def test_blink_refuses_any_other_motor_model(firmware):
+    firmware.set(3, 0, 1060)
+    assert firmware.command('ARM 4') == ['LOCKED SERVO_CHECK ID3']
+    assert not writes(firmware.trace(), TORQUE)
+
+
 def test_arm_accepts_reverse_direction(firmware):
     firmware.set(4, 10, 1)
     arm(firmware, 8)
@@ -61,7 +79,7 @@ def test_goal_limits_cover_reversed_and_one_sided_axes(firmware):
     arm(firmware, 63)
     firmware.command('GO -1e9 1e9 1e9 1e9 -1e9 5.5')
     assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [
-        (1, 1829), (2, 1965), (3, 3024), (4, 2707), (5, 2219), (6, 1938),
+        (1, 1829), (2, 1965), (3, 3024), (4, 2707), (5, 2203), (6, 1938),
     ]
     firmware.command('GO 0 0 0 0 0 0')
     firmware.tick(60)
@@ -88,6 +106,7 @@ def test_jaw_arming_rejects_overlong_calibration(firmware_build, opening_tick):
 
 @pytest.mark.parametrize(('axis', 'row', 'name'), [
     (0, (1828, 2048, 2267), 'EYE'), (1, (2131, 2048, 1964), 'EYE'),
+    (2, (2000, 2000, 3025), 'BLINK'), (2, (2000, 2000, 975), 'BLINK'),
     (3, (1389, 2048, 2708), 'YAW'), (3, (2707, 2048, 1388), 'YAW'),
     (3, (1374, 2048, 2722), 'YAW'),
 ])
@@ -111,9 +130,9 @@ def test_jaw_position_report_limits_overtravel_to_eleven_ticks(firmware):
     assert [(e.id, e.value) for e in writes(firmware.trace(), TORQUE)] == [(6, 0)]
 
 
-@pytest.mark.parametrize('row', [(2219, 2048, 1996), (1877, 2048, 2100),
-                                 (2219, 2048, 1980), (1877, 2048, 2116)])
-def test_pitch_arming_rejects_more_than_51_ticks_of_positive_travel(firmware_build, row):
+@pytest.mark.parametrize('row', [(2203, 2048, 2013), (1893, 2048, 2083),
+                                 (2203, 2048, 1997), (1893, 2048, 2099)])
+def test_pitch_arming_rejects_more_than_34_ticks_of_positive_travel(firmware_build, row):
     rows = (*CALIBRATED[:4], row, CALIBRATED[5])
     simulator = Firmware(firmware_build(rows))
     try:
@@ -127,16 +146,17 @@ def test_pitch_arming_rejects_more_than_51_ticks_of_positive_travel(firmware_bui
 def test_positive_pitch_limits_the_goal_to_4_5_degrees_and_keeps_eight_tick_allowance(firmware):
     arm(firmware, 16)
     assert not firmware.command('GO 0 0 0 0 12')
-    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(5, 1997)]
-    firmware.set(5, POSITION, 1997 - 8)
+    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(5, 2014)]
+    firmware.set(5, POSITION, 2014 - 8)
     assert firmware.tick(120)[0].endswith(' 4.500')
-    firmware.set(5, POSITION, 1997 - 9)
+    firmware.set(5, POSITION, 2014 - 9)
     assert firmware.tick(120) == ['ERROR POSITION_LIMIT ID5', 'ERROR HOLD_UNCONFIRMED']
     assert not writes(firmware.trace(), TORQUE)
 
 
-@pytest.mark.parametrize('row', [(2248, 2048, 1997), (1848, 2048, 2099)])
-def test_pitch_arming_rejects_200_ticks_of_negative_travel(firmware_build, row):
+@pytest.mark.parametrize('row', [(2204, 2048, 2014), (1892, 2048, 2082),
+                                 (2219, 2048, 2014), (1877, 2048, 2082)])
+def test_pitch_arming_rejects_more_than_155_ticks_of_negative_travel(firmware_build, row):
     rows = (*CALIBRATED[:4], row, CALIBRATED[5])
     simulator = Firmware(firmware_build(rows))
     try:
@@ -149,8 +169,8 @@ def test_pitch_arming_rejects_200_ticks_of_negative_travel(firmware_build, row):
 @pytest.mark.parametrize('direction', [-1, 1])
 def test_pitch_recovers_after_supported_return_from_a_negative_stop(firmware_build, direction):
     zero = 2048
-    lower = zero + direction * 171
-    row = (lower, zero, zero - direction * 51)
+    lower = zero + direction * 155
+    row = (lower, zero, zero - direction * 34)
     rows = (*CALIBRATED[:4], row, CALIBRATED[5])
     simulator = Firmware(firmware_build(rows))
     try:
@@ -208,7 +228,7 @@ def test_hold_discards_queued_setpoint(firmware):
 
 
 @pytest.mark.parametrize(('mask', 'servo', 'measured', 'goal'), [
-    (8, 4, 2710, 2707), (8, 4, 1386, 1389), (16, 5, 1994, 1997),
+    (8, 4, 2710, 2707), (8, 4, 1386, 1389), (16, 5, 2011, 2014),
 ])
 def test_hold_is_clamped_even_when_measured_tick_is_just_outside(firmware, mask, servo, measured, goal):
     arm(firmware, mask)

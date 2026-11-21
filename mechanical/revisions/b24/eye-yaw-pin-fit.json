@@ -1,0 +1,383 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "eye_hole_diameter_mm": 2.26,
+  "steel_pin_diameter_mm": 2.0,
+  "minimum_input_lever_mm": 12.0,
+  "regular_yaw_torque_bound_Nm": 0.003024,
+  "method": "Linear elastic fitted shaft with free center and tilt; direct-force box encloses all unit directions.",
+  "limits": "Nominal machined diameters; static three-angle load cases. Fit excludes friction, printed dimensional drift and loaded link constraints.",
+  "trials": [
+    {
+      "mesh_mm": 1.25,
+      "elements": 31650,
+      "support": "compliant",
+      "modulus_MPa": 700.0,
+      "support_N_per_mm": 100.0,
+      "trials": {
+        "0": {
+          "cases": 30,
+          "direct_load_bound_N": 0.0,
+          "rod_force_bound_N": 0.252,
+          "worst": {
+            "horn_deg": 0.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12992353228723283,
+              0.11414765834934036
+            ],
+            "minimum_radial_margin_mm": 0.11414765834934036
+          }
+        },
+        "0.1": {
+          "cases": 192,
+          "direct_load_bound_N": 0.1,
+          "rod_force_bound_N": 0.3686666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              -1.0,
+              1.0,
+              -1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.1298220716327796,
+              0.10294534694613741
+            ],
+            "minimum_radial_margin_mm": 0.10294534694613741
+          }
+        },
+        "0.25": {
+          "cases": 192,
+          "direct_load_bound_N": 0.25,
+          "rod_force_bound_N": 0.5436666666666666,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": 1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              1.0,
+              -1.0,
+              1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.1296505023171272,
+              0.08450137069351545
+            ],
+            "minimum_radial_margin_mm": 0.08450137069351545
+          }
+        },
+        "1": {
+          "cases": 192,
+          "direct_load_bound_N": 1.0,
+          "rod_force_bound_N": 1.4186666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": 1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              1.0,
+              -1.0,
+              1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12879265587451103,
+              -0.010452333370031975
+            ],
+            "minimum_radial_margin_mm": -0.010452333370031975
+          }
+        }
+      }
+    },
+    {
+      "mesh_mm": 1.25,
+      "elements": 31650,
+      "support": "stiff",
+      "modulus_MPa": 1800.0,
+      "support_N_per_mm": 2000.0,
+      "trials": {
+        "0": {
+          "cases": 30,
+          "direct_load_bound_N": 0.0,
+          "rod_force_bound_N": 0.252,
+          "worst": {
+            "horn_deg": 0.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12997026255614344,
+              0.12383520046929113
+            ],
+            "minimum_radial_margin_mm": 0.12383520046929113
+          }
+        },
+        "0.1": {
+          "cases": 192,
+          "direct_load_bound_N": 0.1,
+          "rod_force_bound_N": 0.3686666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              -1.0,
+              1.0,
+              -1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12993080563474924,
+              0.1194787460348641
+            ],
+            "minimum_radial_margin_mm": 0.1194787460348641
+          }
+        },
+        "0.25": {
+          "cases": 192,
+          "direct_load_bound_N": 0.25,
+          "rod_force_bound_N": 0.5436666666666666,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": 1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              1.0,
+              -1.0,
+              1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12986408423397025,
+              0.11230608860383572
+            ],
+            "minimum_radial_margin_mm": 0.11230608860383572
+          }
+        },
+        "1": {
+          "cases": 192,
+          "direct_load_bound_N": 1.0,
+          "rod_force_bound_N": 1.4186666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": 1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              1.0,
+              -1.0,
+              1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.1295304772828278,
+              0.07537964812529466
+            ],
+            "minimum_radial_margin_mm": 0.07537964812529466
+          }
+        }
+      }
+    },
+    {
+      "mesh_mm": 1.05,
+      "elements": 44634,
+      "support": "compliant",
+      "modulus_MPa": 700.0,
+      "support_N_per_mm": 100.0,
+      "trials": {
+        "0": {
+          "cases": 30,
+          "direct_load_bound_N": 0.0,
+          "rod_force_bound_N": 0.252,
+          "worst": {
+            "horn_deg": 0.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12991563771633652,
+              0.11127493252444677
+            ],
+            "minimum_radial_margin_mm": 0.11127493252444677
+          }
+        },
+        "0.1": {
+          "cases": 192,
+          "direct_load_bound_N": 0.1,
+          "rod_force_bound_N": 0.3686666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              -1.0,
+              1.0,
+              -1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12982576055996206,
+              0.09809411387802189
+            ],
+            "minimum_radial_margin_mm": 0.09809411387802189
+          }
+        },
+        "0.25": {
+          "cases": 192,
+          "direct_load_bound_N": 0.25,
+          "rod_force_bound_N": 0.5436666666666666,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              -1.0,
+              1.0,
+              -1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12965936389041402,
+              0.07659023421743065
+            ],
+            "minimum_radial_margin_mm": 0.07659023421743065
+          }
+        },
+        "1": {
+          "cases": 192,
+          "direct_load_bound_N": 1.0,
+          "rod_force_bound_N": 1.4186666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": 1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              1.0,
+              -1.0,
+              1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12882738017891884,
+              -0.03300217871304102
+            ],
+            "minimum_radial_margin_mm": -0.03300217871304102
+          }
+        }
+      }
+    },
+    {
+      "mesh_mm": 1.05,
+      "elements": 44634,
+      "support": "stiff",
+      "modulus_MPa": 1800.0,
+      "support_N_per_mm": 2000.0,
+      "trials": {
+        "0": {
+          "cases": 30,
+          "direct_load_bound_N": 0.0,
+          "rod_force_bound_N": 0.252,
+          "worst": {
+            "horn_deg": 0.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12996719244521926,
+              0.12271802931522043
+            ],
+            "minimum_radial_margin_mm": 0.12271802931522043
+          }
+        },
+        "0.1": {
+          "cases": 192,
+          "direct_load_bound_N": 0.1,
+          "rod_force_bound_N": 0.3686666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              -1.0,
+              1.0,
+              -1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12993224021765892,
+              0.11759215539738124
+            ],
+            "minimum_radial_margin_mm": 0.11759215539738124
+          }
+        },
+        "0.25": {
+          "cases": 192,
+          "direct_load_bound_N": 0.25,
+          "rod_force_bound_N": 0.5436666666666666,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": -1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              -1.0,
+              1.0,
+              -1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.1298675304016329,
+              0.10922953552968218
+            ],
+            "minimum_radial_margin_mm": 0.10922953552968218
+          }
+        },
+        "1": {
+          "cases": 192,
+          "direct_load_bound_N": 1.0,
+          "rod_force_bound_N": 1.4186666666666667,
+          "worst": {
+            "horn_deg": 20.0,
+            "direction": 1,
+            "load_split": "right",
+            "eccentric": true,
+            "force_components_per_N": [
+              1.0,
+              -1.0,
+              1.0
+            ],
+            "two_pin_radial_margins_mm": [
+              0.12954398118002242,
+              0.06661026383638169
+            ],
+            "minimum_radial_margin_mm": 0.06661026383638169
+          }
+        }
+      }
+    }
+  ]
+}

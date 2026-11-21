@@ -33,6 +33,41 @@ def flat_height(shape, axis_z, x):
                and face.BoundBox.XMax > x and 2.5 < face.BoundBox.Center.z - axis_z < 3.5)
 
 
+def bond_interface(horn, shaft_radius, bore_radius, axis_z, shaft_flat, horn_flat, left, length):
+    """Measure bearing surfaces that still face the shaft after the real relief cuts."""
+    flat_width = sqrt(shaft_radius**2-shaft_flat**2)
+    shift = App.Vector(left, -flat_width, axis_z+horn_flat-.01)
+    flat_clip = Part.makeBox(length, 2*flat_width, .02, shift)
+    radial_top = bore_radius * shaft_flat / shaft_radius
+    radial_clip = Part.makeBox(length, 2*bore_radius+.2, bore_radius+radial_top+.1,
+                                App.Vector(left, -bore_radius-.1, axis_z-bore_radius-.1))
+    flat_patches, radial_area = [], 0.
+    for face in horn.Faces:
+        surface = face.Surface
+        bb = face.BoundBox
+        if (type(surface).__name__ == 'Plane' and bb.ZLength < 1e-6
+                and abs(bb.ZMin-axis_z-horn_flat) < 1e-6):
+            flat_patches.extend(face.common(flat_clip).Faces)
+        if (type(surface).__name__ == 'Cylinder' and abs(surface.Axis.x) > .999
+                and abs(surface.Radius-bore_radius) < 1e-6):
+            radial_area += face.common(radial_clip).Area * shaft_radius/bore_radius
+    flat_area = sum(patch.Area for patch in flat_patches)
+    if min(flat_area, radial_area) <= 0:
+        raise ValueError('The D-flat joint has no verified bonding surfaces')
+    # For a flat patch, integrate y² over each surface triangle and add its constant z².
+    flat_moment = 0.
+    for patch in flat_patches:
+        vertices, faces = patch.tessellate(.01)
+        points = np.array([list(vertex) for vertex in vertices])[faces]
+        p, q, r = points.transpose(1, 0, 2)
+        areas = .5*np.linalg.norm(np.cross(q-p, r-p), axis=1)
+        a, b, c = points[:, :, 1].T
+        flat_moment += float(np.sum(areas*(a*a+b*b+c*c+a*b+b*c+c*a)/6.))
+    flat_moment += flat_area*shaft_flat**2
+    return {'flat_area_mm2': flat_area, 'round_area_mm2': radial_area,
+            'flat_polar_mm4': flat_moment, 'round_polar_mm4': radial_area*shaft_radius**2}
+
+
 def dimensions(assembly, step_path=None):
     doc = App.openDocument(str(assembly.resolve()))
     try:
@@ -51,6 +86,10 @@ def dimensions(assembly, step_path=None):
         screws = cylinders(horn, 'x', lambda c: abs(c.Radius-1.18) < 1e-6)
         screw_arm = min(hypot(c.Center.y, c.Center.z-axis_z) for c in screws)
         insertion = min(horn.BoundBox.XMax, shaft.BoundBox.XMax) - shaft.BoundBox.XMin
+        shaft_flat = flat_height(shaft, axis_z, shaft.BoundBox.XMin+1.)
+        horn_flat = flat_height(horn, axis_z, shaft.BoundBox.XMin+1.)
+        bond = bond_interface(horn, shaft_cylinder.Radius, bore, axis_z, shaft_flat, horn_flat,
+                              shaft.BoundBox.XMin, insertion)
         if step_path:
             bounds = hub_face.BoundBox
             local = frame.common(Part.makeBox(bounds.XLength+.4, 19., 14.,
@@ -66,18 +105,19 @@ def dimensions(assembly, step_path=None):
                 'hub_outer_radius_mm': outer, 'hub_inner_radius_mm': inner,
                 'hub_dowel_hole_radius_mm': frame_hole, 'horn_axis_x_mm': shaft.BoundBox.XMin+insertion/2,
                 'd_flat_axial_bond_length_mm': insertion, 'horn_bore_radius_mm': bore,
-                'shaft_flat_z_mm': flat_height(shaft, axis_z, shaft.BoundBox.XMin+1.),
-                'horn_flat_z_mm': flat_height(horn, axis_z, shaft.BoundBox.XMin+1.),
+                'shaft_flat_z_mm': shaft_flat, 'horn_flat_z_mm': horn_flat, 'd_flat_interface': bond,
                 'horn_mounting_screw_count': len(screws), 'horn_mounting_screw_radius_mm': screw_arm}
     finally:
         App.closeDocument(doc.Name)
 
 
-def torsion_section(radius, slot, step):
+def torsion_section(radius, slot, step, flat_z=None):
     """Solve the Prandtl stress function on the split section at the hole center."""
     samples = np.arange(-radius-step, radius+1.5*step, step)
     y, z = np.meshgrid(samples, samples, indexing='ij')
     solid = (y*y + z*z < radius*radius) & (np.abs(y) > slot)
+    if flat_z is not None:
+        solid &= z < flat_z
     ids = np.full(solid.shape, -1)
     count = int(solid.sum())
     ids[solid] = np.arange(count)
@@ -157,12 +197,11 @@ def evaluate(g, section, loads):
 
     flat = g['shaft_flat_z_mm']
     length = g['d_flat_axial_bond_length_mm']
-    half_chord = sqrt(r*r-flat*flat)
-    round_length = 2.*r*(pi-acos(flat/r))
-    full_area = (round_length+2.*half_chord)*length
-    flat_area = 2.*half_chord*length
-    flat_moment = length*(2.*half_chord*flat*flat+2.*half_chord**3/3.)
-    full_moment = round_length*length*r*r+flat_moment
+    interface = g['d_flat_interface']
+    flat_area = interface['flat_area_mm2']
+    full_area = flat_area + interface['round_area_mm2']
+    flat_moment = interface['flat_polar_mm4']
+    full_moment = flat_moment + interface['round_polar_mm4']
     bond = []
     for fraction in (.1, .25, .5, 1.):
         area = full_area*fraction

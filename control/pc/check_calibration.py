@@ -9,15 +9,17 @@ from track import AXES, JAW_MAX_DEGREES, LIMITS
 HEADER = Path(__file__).resolve().parents[1] / 'openrb' / 'R5B1' / 'Calibration.h'
 NAMES = (*AXES, 'jaw')
 UNSET = (-1, -1, -1)
+BLINK_AXIS = AXES.index('blink')
+BLINK_MAX_TICKS = 1024
 JAW_MAX_TICKS = int(JAW_MAX_DEGREES * 4096 / 360)
 NECK_YAW_AXIS = AXES.index('neck-yaw')
 NECK_YAW_LIMIT_TICKS = 659
 NECK_YAW_LIMIT_DEGREES = NECK_YAW_LIMIT_TICKS * 360 / 4096
 NECK_PITCH_AXIS = AXES.index('neck-pitch')
-PITCH_MAX_DEGREES = LIMITS[NECK_PITCH_AXIS][1]
-PITCH_MAX_TICKS = int(PITCH_MAX_DEGREES * 4096 // 360)
-PITCH_NEGATIVE_DEGREES = abs(LIMITS[NECK_PITCH_AXIS][0])
-PITCH_NEGATIVE_TICKS = int((PITCH_NEGATIVE_DEGREES * 4096 + 180) // 360)
+PITCH_MAX_TICKS = 34
+PITCH_NEGATIVE_TICKS = 155
+PITCH_MAX_DEGREES = PITCH_MAX_TICKS * 360 / 4096
+PITCH_NEGATIVE_DEGREES = PITCH_NEGATIVE_TICKS * 360 / 4096
 EYE_LIMITS_TICKS = tuple(int(top * 4096 // 360) - 8 for _, top in LIMITS[:2])
 ROW = re.compile(r'\{\s*(-?[0-9]+)\s*,\s*(-?[0-9]+)\s*,\s*(-?[0-9]+)\s*\}')
 
@@ -37,9 +39,11 @@ def issues(rows, nominal_neck=False):
         prefix = f'ID {i+1} {name}'
         if not all(0 <= tick <= 4095 for tick in (low, zero, high)):
             yield f'{prefix} needs three ticks in 0–4095.'
-        elif i in (2, 5):
+        elif i in (BLINK_AXIS, 5):
             if low != zero or abs(high-zero) < 4:
                 yield f'{prefix} needs low equal to zero and a high at least 4 ticks away.'
+            elif i == BLINK_AXIS and abs(high-zero) > BLINK_MAX_TICKS:
+                yield f'{prefix} closing exceeds 90° ({BLINK_MAX_TICKS} ticks). Recalibrate the eyelids.'
             elif i == 5 and abs(high-zero) > JAW_MAX_TICKS:
                 yield f'{prefix} opening exceeds {JAW_MAX_DEGREES}° ({JAW_MAX_TICKS} ticks). Recalibrate the jaw.'
         elif not min(low, high) < zero < max(low, high):
@@ -49,13 +53,14 @@ def issues(rows, nominal_neck=False):
         elif i == NECK_YAW_AXIS and max(abs(low-zero), abs(high-zero)) > NECK_YAW_LIMIT_TICKS:
             yield f'{prefix} needs both endpoints within {NECK_YAW_LIMIT_TICKS} ticks of zero.'
         elif i == NECK_PITCH_AXIS and abs(high-zero) > PITCH_MAX_TICKS:
-            yield (f'{prefix} positive travel exceeds {PITCH_MAX_DEGREES:g}° '
+            yield (f'{prefix} positive travel exceeds {PITCH_MAX_DEGREES:.2f}° '
                    f'({PITCH_MAX_TICKS} ticks). Recalibrate the positive endpoint.')
         elif i == NECK_PITCH_AXIS and abs(low-zero) > PITCH_NEGATIVE_TICKS:
-            yield (f'{prefix} negative travel exceeds the {PITCH_NEGATIVE_DEGREES:g}° endpoint '
+            yield (f'{prefix} negative travel exceeds the {PITCH_NEGATIVE_DEGREES:.2f}° endpoint '
                    f'({PITCH_NEGATIVE_TICKS} ticks). Recalibrate the negative endpoint.')
         elif nominal_neck and i in (NECK_YAW_AXIS, NECK_PITCH_AXIS):
-            limits = (NECK_YAW_LIMIT_DEGREES,)*2 if i == NECK_YAW_AXIS else LIMITS[i]
+            limits = ((NECK_YAW_LIMIT_DEGREES,)*2 if i == NECK_YAW_AXIS
+                      else (PITCH_NEGATIVE_DEGREES, PITCH_MAX_DEGREES))
             for end, span, expected in zip(('low', 'high'), (abs(low-zero), abs(high-zero)), limits, strict=True):
                 measured = span * 360 / 4096
                 if abs(measured-abs(expected)) > max(2., abs(expected)*.1):

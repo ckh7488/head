@@ -120,7 +120,8 @@ def force_path(horn_center, cradle_center, horn_pin, cradle_pin, cradle_play):
 def verify(cad):
     doc = App.openDocument(str(cad))
     try:
-        motion = json.loads(doc.R5.MotionGeometry)['eye_pitch']
+        geometry = json.loads(doc.R5.MotionGeometry)
+        motion = geometry['eye_pitch']
         phase, radius = motion['phase_deg'], motion['crank_radius_mm']
         motor = App.Vector(*motion['servo_axis_mm'])
         cradle = App.Vector(*motion['cradle_axis_mm'])
@@ -137,9 +138,24 @@ def verify(cad):
                           'toleranced_min_bound_mm': gap-TRANSLATION_TOLERANCE_MM}
         cradle_bore = bore_at(carrier, cradle)
         cradle_pin = world_shape(doc.Part028).BoundBox.YLength
+        fitted_bearings = geometry.get('eye_pitch_bearings')
+        support_play = cradle_bore-cradle_pin
+        if fitted_bearings:
+            # MC3 internal travel plus the upper limit required of the measured shaft fit.
+            support_play = .010 + .010
         linkage = force_path(motor, cradle, world_shape(doc.EyePitchLinkHornPin).CenterOfMass,
-                             world_shape(doc.EyePitchLinkCradlePin).CenterOfMass, cradle_bore-cradle_pin)
-        linkage['cradle_support_bore_and_pin_mm'] = [cradle_bore, cradle_pin]
+                             world_shape(doc.EyePitchLinkCradlePin).CenterOfMass, support_play)
+        if fitted_bearings:
+            linkage['with_bearing_support_max_reversal_deg'] = linkage.pop(
+                'with_unseated_cradle_support_max_reversal_deg')
+            linkage['bearing_support_play_mm'] = {
+                'vendor_mc3_internal_radial_travel_max_mm': .010,
+                'conditional_measured_shaft_fit_travel_max_mm': .010,
+                'total_assumed_travel_mm': support_play,
+            }
+            linkage['bonded_cradle_bore_and_pin_mm'] = [cradle_bore, cradle_pin]
+        else:
+            linkage['cradle_support_bore_and_pin_mm'] = [cradle_bore, cradle_pin]
     finally:
         App.closeDocument(doc.Name)
     with cad.open('rb') as stream:

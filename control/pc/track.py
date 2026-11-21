@@ -20,6 +20,11 @@ LOSS_HOLD_S = 2.5
 RETURN_RATE = 10.
 EYE_LEAD_S = .12
 NEUTRAL_TOLERANCE = .5
+NEUTRAL_SETTLE_S = .24
+NEUTRAL_TRIM_LIMIT = 2.
+NEUTRAL_TRIM_RATE = 1.75
+NEUTRAL_TRIM_GAIN = 1.05
+NEUTRAL_RETURN_LIMIT_S = 5.
 # Leave room for the camera and OpenRB goal-update cadence at each end.
 BLINK_INTERVAL_S = (4.15, 9.85)
 
@@ -46,6 +51,7 @@ class Tracking:
     active: bool
     goals: tuple[float, ...]
     phase: str = 'IDLE'
+    keep_neutral: bool = False
 
 
 class Planner:
@@ -60,27 +66,61 @@ class Planner:
         self.lost_since = None
         self.neck_after = 0.
         self.centering = False
+        self.parked = False
+        self.neutral_since = None
+        self.neutral_feedback_at = None
+        self.neutral_reports = 0
+        self.neutral_trim = (0., 0.)
 
     def start_centering(self, feedback):
         self.command = bounded_goal(feedback)
-        self.centering = self.command != ZERO
+        self.centering = True
 
-    def return_to_center(self, feedback, dt):
+    def return_to_center(self, feedback, dt, seconds, feedback_at):
         eyes = tuple(a - clamp(a, -rate*dt, rate*dt) for a, rate in zip(self.command[:3], RATES[:3], strict=True))
         neck = self.command[3:]
         remaining = math.hypot(*neck)
         scale = 0. if remaining <= RETURN_RATE*dt else 1 - RETURN_RATE*dt/remaining
         self.command = eyes + tuple(angle*scale for angle in neck)
-        if self.command == ZERO and all(abs(angle) <= NEUTRAL_TOLERANCE for angle in feedback):
-            self.lost_since = None
-            return Tracking(False, ZERO)
-        return Tracking(True, self.command, 'RETURN')
+        if self.command != ZERO:
+            return Tracking(True, self.command, 'RETURN')
 
-    def step(self, error, feedback, seconds, blink_enabled=True, fixed_camera=False, target_changed=False):
+        if self.neutral_since is None:
+            self.neutral_since = seconds
+        if self.neutral_feedback_at != feedback_at:
+            sample_dt = clamp(feedback_at - self.neutral_feedback_at, 0., .15) if self.neutral_feedback_at is not None else 0.
+            self.neutral_feedback_at = feedback_at
+            inside = all(abs(angle) <= NEUTRAL_TOLERANCE for angle in feedback)
+            if self.parked and not inside:
+                self.neutral_since = seconds - NEUTRAL_SETTLE_S
+            self.neutral_reports = self.neutral_reports + 1 if inside else 0
+            self.parked = self.neutral_reports >= 2
+            if not inside and seconds - self.neutral_since >= NEUTRAL_SETTLE_S:
+                # Estimate the small steady load offset from new position reports only.
+                measured = feedback[3:]
+                correction = tuple(-NEUTRAL_TRIM_GAIN * angle if .25 < abs(angle) < 3. else 0.
+                                   for angle in measured)
+                speed = math.hypot(*correction)
+                if speed > NEUTRAL_TRIM_RATE:
+                    correction = tuple(angle * NEUTRAL_TRIM_RATE / speed for angle in correction)
+                self.neutral_trim = tuple(clamp(offset + rate*sample_dt, -NEUTRAL_TRIM_LIMIT, NEUTRAL_TRIM_LIMIT)
+                                          for offset, rate in zip(self.neutral_trim, correction, strict=True))
+        goal = ZERO[:3] + self.neutral_trim
+        if self.parked:
+            self.lost_since = None
+            return Tracking(False, goal, keep_neutral=True)
+        if seconds - self.neutral_since >= NEUTRAL_RETURN_LIMIT_S:
+            return Tracking(False, goal, 'RETURN_FAILED')
+        return Tracking(True, goal, 'RETURN')
+
+    def step(self, error, feedback, seconds, blink_enabled=True, fixed_camera=False, target_changed=False,
+             feedback_at=None):
         dt = 1/30 if self.last_time is None else clamp(seconds - self.last_time, 0., .1)
         self.last_time = seconds
+        if feedback_at is None:
+            feedback_at = seconds
         if self.centering:
-            decision = self.return_to_center(feedback, dt)
+            decision = self.return_to_center(feedback, dt, seconds, feedback_at)
             self.centering = decision.active
             return decision
         if error is None:
@@ -90,13 +130,15 @@ class Planner:
                     self.active = False
                     self.filtered = (0., 0.)
                     self.next_blink = None
+                if self.neutral_since is not None:
+                    return self.return_to_center(feedback, dt, seconds, feedback_at)
                 if self.lost_since is None:
                     return Tracking(False, self.command)
                 if seconds - self.lost_since < LOSS_HOLD_S - 1e-9:
                     blink = max(0., self.command[2] - RATES[2]*dt)
                     self.command = self.command[:2] + (blink,) + self.command[3:]
                     return Tracking(True, self.command, 'HOLD')
-                return self.return_to_center(feedback, dt)
+                return self.return_to_center(feedback, dt, seconds, feedback_at)
             if self.active:
                 self.command = bounded_goal(feedback)
             self.active = False
@@ -105,7 +147,13 @@ class Planner:
             return Tracking(False, self.command)
 
         if not self.active:
-            if self.lost_since is None:
+            if self.neutral_since is not None:
+                self.command = ZERO[:3] + self.neutral_trim
+                self.neutral_since = self.neutral_feedback_at = None
+                self.neutral_reports = 0
+                self.neutral_trim = (0., 0.)
+                self.parked = False
+            elif self.lost_since is None:
                 self.command = bounded_goal(feedback)
             self.next_blink = seconds + self.rng.uniform(*BLINK_INTERVAL_S)
         if self.exhibit and (not self.active or target_changed):
@@ -178,6 +226,7 @@ class UsbController:
         self.mask=mask
         self.pose=ZERO
         self.last_state=None
+        self.jaw_hold=None
         self.buffer=bytearray()
 
     def send(self,command):
@@ -195,7 +244,7 @@ class UsbController:
             self.buffer.clear()
 
     def start(self, *, jaw_demo=False, exhibit=False):
-        probe, reply = ('EXHIBIT?', 'R5B1_EXHIBIT 1') if exhibit else ('PING', 'R5B1 1')
+        probe, reply = ('EXHIBIT_HOLD?', 'R5B1_EXHIBIT_HOLD 1') if exhibit else ('PING', 'R5B1 1')
         deadline=time.monotonic()+6.
         next_ping=0.
         while time.monotonic()<deadline:
@@ -207,9 +256,12 @@ class UsbController:
                 break
         else:
             raise RuntimeError(f'OpenRB R5 B1 firmware did not respond to {probe}.')
-        self.send('ARM_JAW_DEMO' if jaw_demo else f'ARM {self.mask}')
-        acknowledgement = f'{"ARMED_JAW_DEMO" if jaw_demo else "ARMED"} {self.mask}'
-        deadline=time.monotonic()+3.
+        self.send('ARM_EXHIBIT' if exhibit else 'ARM_JAW_DEMO' if jaw_demo else f'ARM {self.mask}')
+        armed = 'ARMED_EXHIBIT' if exhibit else 'ARMED_JAW_DEMO' if jaw_demo else 'ARMED'
+        acknowledgement = f'{armed} {self.mask}'
+        self.last_state = None
+        self.jaw_hold = True if exhibit else None
+        deadline=time.monotonic()+(4. if exhibit else 3.)
         acknowledged=False
         while time.monotonic()<deadline:
             for line in self.lines():
@@ -217,6 +269,9 @@ class UsbController:
                     raise RuntimeError(line)
                 if line==acknowledgement:
                     acknowledged=True
+                    self.last_state=None
+                if line=='EXHIBIT_JAW_UNCALIBRATED':
+                    self.jaw_hold=False
                 self.handle_state(line)
                 if acknowledged and self.last_state is not None:
                     return
@@ -360,6 +415,8 @@ def run(args):
         if args.drive:
             controller=UsbController(args.serial,mask)
             controller.start(exhibit=exhibit)
+            if controller.jaw_hold is False:
+                print('Jaw calibration is unset. Tracking with the five calibrated axes.')
             controller.send('HOLD')
             if exhibit:
                 planner.start_centering(controller.pose)
@@ -392,7 +449,10 @@ def run(args):
                     feedback=logical_pose
                 err=None if point is None else camera.error(point,width,height)
                 decision=planner.step(err,feedback,elapsed,not args.no_blink,
-                                      fixed_camera=not controller,target_changed=changed)
+                                      fixed_camera=not controller,target_changed=changed,
+                                      feedback_at=controller.last_state if controller else None)
+                if controller and decision.phase == 'RETURN_FAILED':
+                    raise RuntimeError('The head could not reach neutral within 0.5 degrees.')
                 tracking=decision.phase == 'TRACK'
                 if tracking:
                     if seen and not last_tracking:
@@ -402,14 +462,17 @@ def run(args):
                     stats['losses']+=1
 
                 if controller:
-                    if not decision.active and last_active:
-                        controller.send('HOLD')
+                    if decision.keep_neutral and now-last_sent_time>=.120:
+                        controller.send('GO_RETURN '+' '.join(f'{x:.3f}' for x in decision.goals))
+                        last_sent_time=now
                     elif decision.active and now-last_sent_time>=.032:
                         command='GO'
                         if exhibit:
                             command='GO_RETURN' if decision.phase=='RETURN' else 'GO_EXHIBIT'
                         controller.send(command+' '+' '.join(f'{x:.3f}' for x in decision.goals))
                         last_sent_time=now
+                    elif not decision.keep_neutral and not decision.active and last_active:
+                        controller.send('HOLD')
                 else:
                     logical_pose=decision.goals
                 last_active=decision.active

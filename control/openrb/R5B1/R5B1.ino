@@ -6,21 +6,37 @@
 
 constexpr uint8_t trackerCount = 5;
 constexpr uint8_t count = trackerCount + 1;
+constexpr uint8_t blinkAxis = 2;
+constexpr uint16_t blinkTravelTicks = 1024;
+constexpr uint16_t blinkFastModel = 1190;
+constexpr uint16_t blinkFastPwm = 230;
 constexpr float jawMaxDegrees = 5.5f;
 constexpr uint8_t jawMaxTravelTicks = static_cast<uint8_t>(4096u*jawMaxDegrees/360u);
 constexpr float neckPitchMaxDegrees = 4.5f;
 constexpr uint8_t neckPitchMaxNegativeDegrees = 15;
-constexpr uint8_t neckPitchMaxPositiveTicks = static_cast<uint8_t>(4096u*neckPitchMaxDegrees/360u);
-constexpr uint8_t neckPitchMaxNegativeTicks = (4096u*neckPitchMaxNegativeDegrees+180u)/360u;
+constexpr uint8_t neckPitchMaxPositiveTicks = 34;
+constexpr uint8_t neckPitchMaxNegativeTicks = 155;
 constexpr uint16_t model[count] = {1190, 1190, 1200, 1060, 1060, 1200};
 constexpr float lowDeg[count]  = {-20, -8, 0, -60, -neckPitchMaxNegativeDegrees, 0};
 constexpr float highDeg[count] = {20, 8, 90, 60, neckPitchMaxDegrees, jawMaxDegrees};
-constexpr uint16_t pwm[count] = {180, 180, 200, 270, 300, 160};
+constexpr uint16_t pwm[count] = {180, 180, 200, 270, 185, 160};
 constexpr uint16_t velocity[count] = {75, 60, 160, 29, 19, 35};
 constexpr uint16_t acceleration[count] = {20, 16, 62, 12, 10, 10};
 constexpr uint16_t exhibitYawVelocity = 29;
 constexpr uint16_t exhibitPitchVelocity = 15;
 constexpr uint16_t returnNeckVelocity = 7;
+constexpr uint16_t exhibitJawPwm = 100;
+constexpr uint16_t exhibitJawRecoveryPwm = 120;
+constexpr uint16_t exhibitJawVelocity = 6;
+constexpr uint8_t exhibitJawStartTicks = 8;
+constexpr uint8_t exhibitJawReadyTicks = 12;
+constexpr uint8_t exhibitJawRecoveryTicks = 110;
+constexpr uint8_t exhibitJawEntryNeckTicks = 11;
+constexpr uint8_t exhibitJawTrimTicks = 11;
+constexpr uint8_t exhibitJawTrimOpenTicks = 34;
+constexpr uint8_t exhibitJawLagTicks = 18;
+constexpr uint32_t exhibitJawTrimAfterMs = 1550;
+constexpr uint32_t exhibitJawRecoveryMs = 2400;
 static_assert(sizeof(calibration)/sizeof(calibration[0]) == count, "One calibration row per axis");
 constexpr uint32_t busBaud = 57600;
 constexpr uint32_t busTimeoutMs = 14;
@@ -57,6 +73,7 @@ constexpr Register goalPosition{116, 4}, presentPosition{132, 4};
 
 enum class Transfer { ok, bus, servo };
 enum class NeckProfile { normal, exhibit, returning };
+enum class ArmMode { normal, jawDemo, exhibit };
 
 struct AxisStatus {
   int32_t model = -1;
@@ -112,6 +129,9 @@ bool faulted = false;
 bool moving = false;
 bool pending = false;
 bool jawDemoActive = false;
+bool exhibitJawHold = false;
+bool exhibitJawClosing = false;
+bool exhibitJawTrimApplied = false;
 NeckProfile appliedProfile = NeckProfile::normal;
 NeckProfile queuedProfile = NeckProfile::normal;
 uint32_t lastCommand = 0;
@@ -132,7 +152,7 @@ bool axisEnabled(uint8_t mask, uint8_t i) {
 }
 
 uint8_t commandAxisCount() {
-  return axisEnabled(armed, trackerCount) ? count : trackerCount;
+  return !exhibitJawHold && axisEnabled(armed, trackerCount) ? count : trackerCount;
 }
 
 float limited(float value, float lo, float hi) {
@@ -159,6 +179,7 @@ bool validCalibration(uint8_t i) {
   if (c.low<0 || c.low>4095 || c.zero<0 || c.zero>4095 || c.high<0 || c.high>4095) {
     return false;
   }
+  if (i==blinkAxis && abs(c.high-c.zero)>blinkTravelTicks) return false;
   if (i==trackerCount && abs(c.high-c.zero)>jawMaxTravelTicks) return false;
   if (i==neckPitchAxis && !pitchEndpointsInRange(c)) return false;
   if (i==neckYawAxis && !yawEndpointsInRange(c)) return false;
@@ -242,10 +263,14 @@ Transfer writeRegister(uint8_t id, Register reg, int32_t value, bool retry=true)
   return result;
 }
 
+bool modelMatches(uint8_t i, int32_t found) {
+  return found==model[i] || (i==blinkAxis && found==blinkFastModel);
+}
+
 bool readAxis(uint8_t i, AxisStatus& status) {
   const uint8_t id=i+1;
   if (readRegister(id,modelNumber,status.model)!=Transfer::ok) return false;
-  if (status.model!=model[i]) return true;
+  if (!modelMatches(i,status.model)) return true;
   return readRegister(id,operatingMode,status.mode)==Transfer::ok &&
          readRegister(id,driveMode,status.drive)==Transfer::ok &&
          readRegister(id,statusReturnLevel,status.returnLevel)==Transfer::ok &&
@@ -253,9 +278,25 @@ bool readAxis(uint8_t i, AxisStatus& status) {
          readRegister(id,presentPosition,status.position)==Transfer::ok;
 }
 
-bool readyToArm(uint8_t i, const AxisStatus& status) {
-  return status.model==model[i] && status.mode==3 && (status.drive&12)==0 &&
-         status.returnLevel==2 && status.torque==0 && inside(i,status.position,0);
+bool jawNearClosed(int32_t position) {
+  return position>=0 && position<=4095 &&
+         abs(position-calibration[trackerCount].zero)<=exhibitJawStartTicks;
+}
+
+int32_t jawOpening(int32_t position) {
+  const auto& c=calibration[trackerCount];
+  return (position-c.zero)*(c.high>c.zero ? 1 : -1);
+}
+
+bool jawCanClose(int32_t position, uint8_t closedTolerance=exhibitJawStartTicks) {
+  const int32_t opening=jawOpening(position);
+  return position>=0 && position<=4095 && opening>=-closedTolerance && opening<=exhibitJawRecoveryTicks;
+}
+
+bool readyToArm(uint8_t i, const AxisStatus& status, bool checkJawClosed=false) {
+  return modelMatches(i,status.model) && status.mode==3 && (status.drive&12)==0 &&
+         status.returnLevel==2 && status.torque==0 &&
+         (checkJawClosed ? jawCanClose(status.position) : inside(i,status.position,0));
 }
 
 void cancelMotion() {
@@ -275,6 +316,8 @@ bool releaseAxis(uint8_t i) {
 void release() {
   cancelMotion();
   jawDemoActive=false;
+  exhibitJawHold=false;
+  exhibitJawClosing=false;
   for (uint8_t i=0;i<count;i++) {
     if (!axisEnabled(armed,i)) continue;
     releaseAxis(i);
@@ -326,7 +369,8 @@ bool holdAxes(bool includeJaw=true) {
 
 void stopOnFault(const char* reason, uint8_t id=0) {
   latchFault(reason,id);
-  const bool releaseJaw=id==count || jawDemoActive;
+  exhibitJawClosing=false;
+  const bool releaseJaw=id==count || jawDemoActive || exhibitJawHold;
   if (releaseJaw && axisEnabled(armed,trackerCount) && !releaseAxis(trackerCount)) {
     printAxisError("ERROR JAW_RELEASE_UNCONFIRMED",count);
   }
@@ -334,9 +378,13 @@ void stopOnFault(const char* reason, uint8_t id=0) {
 }
 
 bool freeze() {
+  if (exhibitJawClosing) {
+    stopOnFault("EXHIBIT_JAW_CLOSE_CANCELLED",count);
+    return false;
+  }
   cancelMotion();
-  if (holdAxes()) return true;
-  if (jawDemoActive) stopOnFault("HOLD_UNCONFIRMED");
+  if (holdAxes(!exhibitJawHold)) return true;
+  if (jawDemoActive || exhibitJawHold) stopOnFault("HOLD_UNCONFIRMED");
   else latchFault("HOLD_UNCONFIRMED");
   return false;
 }
@@ -368,11 +416,17 @@ bool readNeckRegister(uint8_t id, Register reg, int32_t& value) {
   return false;
 }
 
-bool neckNeutral(uint8_t i, int32_t ticks) {
-  return ticks>=0 && ticks<=4095 && abs(ticks-calibration[i].zero)<=neckNeutralTolerance;
+bool writeVerifiedRegister(uint8_t id, Register reg, int32_t value) {
+  int32_t confirmed=-1;
+  return writeRegister(id,reg,value)==Transfer::ok &&
+         readNeckRegister(id,reg,confirmed) && confirmed==value;
 }
 
-bool checkNeckNeutral() {
+bool neckNeutral(uint8_t i, int32_t ticks, uint8_t tolerance=neckNeutralTolerance) {
+  return ticks>=0 && ticks<=4095 && abs(ticks-calibration[i].zero)<=tolerance;
+}
+
+bool checkNeckNeutral(uint8_t tolerance=neckNeutralTolerance) {
   for (uint8_t i=neckYawAxis;i<=neckPitchAxis;i++) {
     const uint8_t id=i+1;
     int32_t measuredModel=-1, position=-1;
@@ -381,7 +435,7 @@ bool checkNeckNeutral() {
       printAxisError("ERROR NECK_CHECK",id);
       return false;
     }
-    if (!neckNeutral(i,position)) {
+    if (!neckNeutral(i,position,tolerance)) {
       printAxisError("ERROR NECK_NOT_NEUTRAL",id);
       return false;
     }
@@ -389,15 +443,16 @@ bool checkNeckNeutral() {
   return true;
 }
 
-bool verifyDemoNeckAxis(uint8_t i) {
+bool verifyNeutralNeckAxis(uint8_t i) {
   const uint8_t id=i+1;
   int32_t torque=-1;
   if (!readNeckRegister(id,presentPosition,raw[i]) || !readNeckRegister(id,torqueEnable,torque)) {
-    stopOnFault("JAW_DEMO_NECK_READ",id);
+    stopOnFault(exhibitJawClosing ? "EXHIBIT_JAW_NECK_READ" : "JAW_DEMO_NECK_READ",id);
     return false;
   }
   if (torque!=1 || !neckNeutral(i,raw[i])) {
-    stopOnFault(torque!=1 ? "JAW_DEMO_NECK_TORQUE" : "NECK_NOT_NEUTRAL",id);
+    const char* reason=exhibitJawClosing ? "EXHIBIT_JAW_NECK_TORQUE" : "JAW_DEMO_NECK_TORQUE";
+    stopOnFault(torque!=1 ? reason : "NECK_NOT_NEUTRAL",id);
     return false;
   }
   return true;
@@ -438,7 +493,7 @@ void emitGoals() {
     if (!axisEnabled(armed,i) || (targets[i]==queued[i] && !refreshNeck)) continue;
     if (jawDemoActive && i==trackerCount) {
       if (static_cast<uint32_t>(millis()-jawDemoCenteringSince)<jawDemoCenteringMs) return;
-      if (!verifyDemoNeckAxis(neckYawAxis) || !verifyDemoNeckAxis(neckPitchAxis)) return;
+      if (!verifyNeutralNeckAxis(neckYawAxis) || !verifyNeutralNeckAxis(neckPitchAxis)) return;
     }
     Transfer result=writeRegister(i+1,goalPosition,queued[i]);
     if (result!=Transfer::ok) {
@@ -454,8 +509,8 @@ void emitGoals() {
 void report() {
   for (uint8_t i=0;i<count;i++) {
     if (!axisEnabled(armed,i)) continue;
-    if (jawDemoActive && (i==neckYawAxis || i==neckPitchAxis)) {
-      if (!verifyDemoNeckAxis(i)) return;
+    if ((jawDemoActive || exhibitJawClosing) && (i==neckYawAxis || i==neckPitchAxis)) {
+      if (!verifyNeutralNeckAxis(i)) return;
     } else {
       Transfer result=readRegister(i+1,presentPosition,raw[i]);
       if (result!=Transfer::ok) {
@@ -463,13 +518,56 @@ void report() {
         return;
       }
     }
-    if (!inside(i,raw[i],i==trackerCount ? jawPositionTolerance : positionTolerance)) {
+    const bool closing=i==trackerCount && exhibitJawClosing;
+    const uint8_t closedTolerance=exhibitJawTrimApplied ? exhibitJawTrimTicks : exhibitJawStartTicks;
+    if (!(closing ? jawCanClose(raw[i],closedTolerance) :
+          inside(i,raw[i],i==trackerCount ? jawPositionTolerance : positionTolerance))) {
       stopOnFault("POSITION_LIMIT",i+1);
       return;
     }
     if (i==trackerCount) {
       const bool settling=static_cast<uint32_t>(millis()-jawTargetSince)<jawSettlingMs;
-      if (settling || abs(raw[i]-targets[i])<=jawFollowTolerance) {
+      const uint8_t tolerance=exhibitJawHold ? exhibitJawLagTicks : jawFollowTolerance;
+      if (closing) {
+        int32_t torque=-1;
+        if (!readNeckRegister(i+1,torqueEnable,torque) || torque!=1) {
+          stopOnFault("EXHIBIT_JAW_TORQUE",i+1);
+          return;
+        }
+        const int32_t opening=jawOpening(raw[i]);
+        const uint32_t elapsed=static_cast<uint32_t>(millis()-jawTargetSince);
+        if (abs(opening)<=exhibitJawReadyTicks) {
+          const int32_t zero=calibration[i].zero;
+          if (targets[i]!=zero && !writeVerifiedRegister(i+1,goalPosition,zero)) {
+            stopOnFault("EXHIBIT_JAW_TARGET",i+1);
+            return;
+          }
+          targets[i]=queued[i]=zero;
+          if (!writeVerifiedRegister(i+1,goalPwm,exhibitJawPwm)) {
+            stopOnFault("EXHIBIT_JAW_PWM",i+1);
+            return;
+          }
+          exhibitJawClosing=false;
+          resetJawFollowing();
+          Serial.println("ARMED_EXHIBIT 31");
+        } else if (elapsed>=exhibitJawRecoveryMs) {
+          stopOnFault("EXHIBIT_JAW_CLOSE_TIMEOUT",i+1);
+          return;
+        } else if (!exhibitJawTrimApplied && elapsed>=exhibitJawTrimAfterMs && opening<=exhibitJawTrimOpenTicks) {
+          // Closing startup only. The signed trim stays inside the measured tooth clearance.
+          exhibitJawTrimApplied=true;
+          const auto& c=calibration[i];
+          const int32_t aim=c.zero+(c.high>c.zero ? -exhibitJawTrimTicks : exhibitJawTrimTicks);
+          if (aim>=0 && aim<=4095) {
+            if (!writeVerifiedRegister(i+1,goalPosition,aim)) {
+              stopOnFault("EXHIBIT_JAW_TARGET",i+1);
+              return;
+            }
+            targets[i]=aim;
+          }
+        }
+      }
+      if (closing || settling || abs(raw[i]-targets[i])<=tolerance) {
         jawLagReports=0;
       } else if (++jawLagReports>=jawLagReportsRequired) {
         stopOnFault("JAW_FOLLOW_TIMEOUT",i+1);
@@ -478,7 +576,7 @@ void report() {
     }
   }
   Serial.print("STATE ");
-  Serial.print(armed);
+  Serial.print(exhibitJawHold ? trackerMask : armed);
   for (uint8_t i=0;i<commandAxisCount();i++) {
     Serial.print(' ');
     Serial.print(axisEnabled(armed,i)?toDegrees(i,raw[i]):0.0f,3);
@@ -486,13 +584,22 @@ void report() {
   Serial.println();
 }
 
-void arm(uint8_t mask, bool startJawDemo=false) {
+void arm(uint8_t mask, ArmMode mode=ArmMode::normal) {
+  const bool startJawDemo=mode==ArmMode::jawDemo;
+  const bool startExhibit=mode==ArmMode::exhibit;
+  const auto& jaw=calibration[trackerCount];
+  if (startExhibit && jaw.low==-1 && jaw.zero==-1 && jaw.high==-1) mask=trackerMask;
+  const bool armExhibitJaw=startExhibit && axisEnabled(mask,trackerCount);
   if (faulted) {
     Serial.println("LOCKED RELEASE_AFTER_FAULT");
     return;
   }
   if (jawDemoActive || (startJawDemo && armed!=0)) {
     Serial.println("ERROR RELEASE_BEFORE_JAW_DEMO_CHANGE");
+    return;
+  }
+  if (exhibitJawHold || (startExhibit && armed!=0)) {
+    Serial.println("ERROR RELEASE_BEFORE_EXHIBIT_CHANGE");
     return;
   }
   if (armed!=0 && armed!=mask) {
@@ -507,6 +614,8 @@ void arm(uint8_t mask, bool startJawDemo=false) {
       if (!validCalibration(i)) {
         const auto& c=calibration[i];
         const char* error="LOCKED CALIBRATE";
+        if (i==blinkAxis && c.low>=0 && c.zero>=0 && c.high>=0 && abs(c.high-c.zero)>blinkTravelTicks)
+          error="LOCKED BLINK_CALIBRATION_RANGE";
         if (i==trackerCount && abs(c.high-c.zero)>jawMaxTravelTicks) error="LOCKED JAW_CALIBRATION_RANGE";
         if (i==neckPitchAxis && !pitchEndpointsInRange(c)) error="LOCKED PITCH_CALIBRATION_RANGE";
         if (i==neckYawAxis && c.low>=0 && c.zero>=0 && c.high>=0 && !yawEndpointsInRange(c))
@@ -518,34 +627,59 @@ void arm(uint8_t mask, bool startJawDemo=false) {
       }
     }
     if (startJawDemo && !checkNeckNeutral()) return;
+    bool fastBlink=false;
     for (uint8_t i=0;i<count;i++) {
       if (!axisEnabled(mask,i)) continue;
       AxisStatus status;
-      if (!readAxis(i,status) || !readyToArm(i,status)) {
-        printAxisError("LOCKED SERVO_CHECK",i+1);
+      const bool closedJaw=armExhibitJaw && i==trackerCount;
+      const bool read=readAxis(i,status);
+      if (!read || !readyToArm(i,status,closedJaw)) {
+        const bool jawOpen=closedJaw && read && status.position>=0 && !jawCanClose(status.position);
+        printAxisError(jawOpen ? "LOCKED EXHIBIT_JAW_RANGE" : "LOCKED SERVO_CHECK",i+1);
         return;
       }
+      if (closedJaw && !jawNearClosed(status.position) && !checkNeckNeutral(exhibitJawEntryNeckTicks)) return;
+      if (i==blinkAxis) fastBlink=status.model==blinkFastModel;
     }
     for (uint8_t i=0;i<count;i++) {
       if (!axisEnabled(mask,i)) continue;
       const uint8_t id=i+1;
-      int32_t confirmedPwm=-1;
-      if (writeRegister(id,goalPwm,pwm[i])!=Transfer::ok ||
-          readRegister(id,goalPwm,confirmedPwm)!=Transfer::ok || confirmedPwm!=pwm[i] ||
-          writeRegister(id,profileVelocity,velocity[i])!=Transfer::ok ||
+      const bool closedJaw=armExhibitJaw && i==trackerCount;
+      const uint16_t wantedPwm=closedJaw ? exhibitJawPwm : i==blinkAxis && fastBlink ? blinkFastPwm : pwm[i];
+      const uint16_t wantedVelocity=closedJaw ? exhibitJawVelocity : velocity[i];
+      if (!writeVerifiedRegister(id,goalPwm,wantedPwm) || writeRegister(id,profileVelocity,wantedVelocity)!=Transfer::ok ||
           writeRegister(id,profileAcceleration,acceleration[i])!=Transfer::ok) {
         printAxisError("LOCKED ARM_CONFIG",id);
         return;
       }
+      if (closedJaw) {
+        int32_t confirmed=-1;
+        if (!readNeckRegister(id,profileVelocity,confirmed) || confirmed!=wantedVelocity ||
+            !readNeckRegister(id,profileAcceleration,confirmed) || confirmed!=acceleration[i]) {
+          printAxisError("LOCKED ARM_CONFIG",id);
+          return;
+        }
+      }
     }
+    exhibitJawHold=armExhibitJaw;
     for (uint8_t i=0;i<count;i++) {
       if (!axisEnabled(mask,i)) continue;
       const uint8_t id=i+1;
       const bool demoNeck=startJawDemo && (i==neckYawAxis || i==neckPitchAxis);
+      const bool closedJaw=armExhibitJaw && i==trackerCount;
       const bool positionRead=demoNeck ? readNeckRegister(id,presentPosition,raw[i])
                                       : readRegister(id,presentPosition,raw[i])==Transfer::ok;
-      if (!positionRead || (demoNeck && !neckNeutral(i,raw[i])) ||
-          !inside(i,raw[i],0) || writeRegister(id,goalPosition,raw[i])!=Transfer::ok) {
+      const int32_t goal=closedJaw ? calibration[i].zero : raw[i];
+      const bool recoverJaw=closedJaw && positionRead && !jawNearClosed(raw[i]);
+      if (recoverJaw && !checkNeckNeutral(exhibitJawEntryNeckTicks)) {
+        stopOnFault("EXHIBIT_JAW_CLOSE_CANCELLED",i+1);
+        return;
+      }
+      const bool positionAllowed=closedJaw ? jawCanClose(raw[i]) : inside(i,raw[i],0);
+      if (!positionRead || (demoNeck && !neckNeutral(i,raw[i])) || !positionAllowed ||
+          (recoverJaw && !writeVerifiedRegister(id,goalPwm,exhibitJawRecoveryPwm)) ||
+          (closedJaw ? !writeVerifiedRegister(id,goalPosition,goal)
+                     : writeRegister(id,goalPosition,goal)!=Transfer::ok)) {
         stopOnFault("ARM_POSITION_OR_BUS",id);
         return;
       }
@@ -557,7 +691,11 @@ void arm(uint8_t mask, bool startJawDemo=false) {
         stopOnFault("ARM_ENABLE_UNCONFIRMED",id);
         return;
       }
-      targets[i]=raw[i];
+      targets[i]=queued[i]=goal;
+      if (recoverJaw) {
+        exhibitJawClosing=true;
+        exhibitJawTrimApplied=false;
+      }
     }
     appliedProfile=NeckProfile::normal;
   }
@@ -574,8 +712,11 @@ void arm(uint8_t mask, bool startJawDemo=false) {
   lastGoal=static_cast<uint32_t>(millis())-goalPeriodMs;
   lastReport=millis();
   resetJawFollowing();
-  Serial.print(startJawDemo ? "ARMED_JAW_DEMO " : "ARMED ");
-  Serial.println(mask);
+  if (!exhibitJawClosing) {
+    Serial.print(startJawDemo ? "ARMED_JAW_DEMO " : startExhibit ? "ARMED_EXHIBIT " : "ARMED ");
+    Serial.println(startExhibit ? trackerMask : mask);
+  }
+  if (startExhibit && !armExhibitJaw) Serial.println("EXHIBIT_JAW_UNCALIBRATED");
   report();
 }
 
@@ -588,7 +729,7 @@ void rebootAxis(uint8_t i) {
   }
   int32_t value=0;
   uint8_t status=0;
-  if (!dxl.readVerified(id,modelNumber,value,status) || value!=model[i] ||
+  if (!dxl.readVerified(id,modelNumber,value,status) || !modelMatches(i,value) ||
       !dxl.readVerified(id,startupConfiguration,value,status)) {
     printAxisError("ERROR REBOOT_CHECK",id);
     return;
@@ -630,6 +771,10 @@ void command(char* text) {
   }
   if (!strcmp(text,"EXHIBIT?")) {
     Serial.println("R5B1_EXHIBIT 1");
+    return;
+  }
+  if (!strcmp(text,"EXHIBIT_HOLD?")) {
+    Serial.println("R5B1_EXHIBIT_HOLD 1");
     return;
   }
   if (!strcmp(text,"HOLD")) {
@@ -679,10 +824,18 @@ void command(char* text) {
     return;
   }
   if (!strcmp(text,"ARM_JAW_DEMO")) {
-    arm(jawDemoMask,true);
+    arm(jawDemoMask,ArmMode::jawDemo);
+    return;
+  }
+  if (!strcmp(text,"ARM_EXHIBIT")) {
+    arm((1u<<count)-1,ArmMode::exhibit);
     return;
   }
   if (armed==0 || faulted) return;
+  if (exhibitJawClosing) {
+    Serial.println("ERROR EXHIBIT_JAW_CLOSING");
+    return;
+  }
 
   NeckProfile profile=NeckProfile::normal;
   const char* next=nullptr;
@@ -694,8 +847,12 @@ void command(char* text) {
     profile=NeckProfile::returning;
     next=text+10;
   } else return;
-  if (profile!=NeckProfile::normal && (armed!=trackerMask || jawDemoActive)) {
+  if (profile!=NeckProfile::normal && armed!=trackerMask && !exhibitJawHold) {
     Serial.println("ERROR EXHIBIT_MASK");
+    return;
+  }
+  if (profile==NeckProfile::normal && exhibitJawHold) {
+    Serial.println("ERROR EXHIBIT_PROFILE");
     return;
   }
 
@@ -710,7 +867,7 @@ void command(char* text) {
   }
   while (*next==' ') next++;
   if (*next!='\0') return;
-  if (axisEnabled(armed,trackerCount) && (goals[trackerCount]<0 || goals[trackerCount]>jawMaxDegrees)) {
+  if (active==count && (goals[trackerCount]<0 || goals[trackerCount]>jawMaxDegrees)) {
     printAxisError("ERROR JAW_GOAL_RANGE",count);
     return;
   }

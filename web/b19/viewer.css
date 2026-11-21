@@ -34,6 +34,7 @@ main { display: grid; grid-template-columns: 300px 1fr 340px; height: calc(100% 
 #issues ul { margin: 2px 0 0; padding-left: 18px; }
 #controls { display: flex; gap: 6px; align-items: center; }
 #controls button { width: 36px; height: 32px; border: 1px solid #c9c3b8; border-radius: 4px; background: #fbfaf7; cursor: pointer; }
+#controls button:disabled { opacity: .45; cursor: default; }
 #controls input { flex: 1; }
 #display { display: flex; align-items: center; gap: 5px; margin-top: 8px; }
 #tool-view, #stop-view, #wire-view { display: grid; gap: 3px; margin-top: 10px; }

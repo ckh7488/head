@@ -1,0 +1,6833 @@
+{
+  "steps": [
+    {
+      "id": "xt60-mate",
+      "group": "받침",
+      "title": "작업대에서 전원 암수 연결",
+      "base": "InputXT30 InputXT60",
+      "moves": [
+        {
+          "ids": [
+            "InputXT60Mate"
+          ],
+          "offset": [
+            0,
+            -16,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        -24,
+        104,
+        -57
+      ],
+      "view": [
+        1.05,
+        -0.8,
+        1.5
+      ],
+      "span": 94,
+      "task": "작업대에서 XT30U와 XT60U 암수를 끝까지 꽂습니다.",
+      "check": "XT30U 열수축부는 한 가닥당 Ø4.0 mm, XT60U는 Ø5.6 mm까지입니다.",
+      "ports": [
+        "InputXT30",
+        "InputXT60",
+        "InputXT60Mate"
+      ],
+      "checked": true
+    },
+    {
+      "id": "cable-plugs",
+      "group": "받침",
+      "title": "트레이 위에 커넥터 얹기",
+      "base": "CableSaddle",
+      "moves": [
+        {
+          "ids": [
+            "InputXT30",
+            "InputXT60",
+            "InputXT60Mate",
+            "CameraUSB",
+            "ControlUSB"
+          ],
+          "offset": [
+            0,
+            0,
+            25
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        106,
+        -53
+      ],
+      "view": [
+        0.95,
+        -0.9,
+        1.5
+      ],
+      "span": 132,
+      "task": "연결한 전원 두 쌍과 USB 연장선 두 개를 열린 트레이 위에서 내려놓습니다.",
+      "check": "커넥터 뒤턱을 받침 턱에 붙이고, 받침으로 들어갈 선 끝을 같은 방향으로 펴 둡니다.",
+      "stock": "Alpha Wire 3055 · 18 AWG, 6718 · XT60U용 12 AWG",
+      "ports": [
+        "InputXT30",
+        "InputXT60",
+        "CameraUSB",
+        "ControlUSB",
+        "InputXT60Mate"
+      ],
+      "checked": true
+    },
+    {
+      "id": "cable-cover",
+      "group": "받침",
+      "title": "작업대에서 덮개 닫기",
+      "base": "CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB",
+      "moves": [
+        {
+          "ids": [
+            "CableGate"
+          ],
+          "offset": [
+            0,
+            0,
+            25
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        113,
+        -53
+      ],
+      "view": [
+        0.7,
+        1.6,
+        0.95
+      ],
+      "span": 115,
+      "task": "트레이를 작업대에 둔 채 42번 덮개를 위에서 내립니다.",
+      "check": "전선 피복이 덮개 사이에 끼지 않고 각 커넥터 뒤턱이 홈에 걸립니다.",
+      "ports": [
+        "InputXT30",
+        "InputXT60",
+        "CameraUSB",
+        "ControlUSB"
+      ],
+      "checked": true
+    },
+    {
+      "id": "cable-nuts",
+      "group": "받침",
+      "title": "트레이 밖에서 덮개 너트 걸기",
+      "base": "CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate",
+      "moves": [
+        {
+          "ids": [
+            "cableBolt0",
+            "cableBolt1",
+            "cableBolt2",
+            "cableBolt3",
+            "cableBolt4"
+          ],
+          "offset": [
+            0,
+            0,
+            18
+          ]
+        },
+        {
+          "ids": [
+            "cableNut0",
+            "cableNut1",
+            "cableNut2",
+            "cableNut3",
+            "cableNut4"
+          ],
+          "offset": [
+            0,
+            0,
+            -11
+          ]
+        }
+      ],
+      "seatOffsets": {
+        "cableNut0": [
+          0,
+          0,
+          -0.85
+        ],
+        "cableNut1": [
+          0,
+          0,
+          -0.85
+        ],
+        "cableNut2": [
+          0,
+          0,
+          -0.85
+        ],
+        "cableNut3": [
+          0,
+          0,
+          -0.85
+        ],
+        "cableNut4": [
+          0,
+          0,
+          -0.85
+        ]
+      },
+      "focus": [
+        0,
+        122,
+        -61
+      ],
+      "view": [
+        0.4,
+        2,
+        -0.38
+      ],
+      "span": 116,
+      "task": "덮개 위에서 M3×16을 한 개씩 꽂고, 뒤쪽 열린 턱에서 너트를 손으로 두 바퀴 걸어 둡니다.",
+      "check": "너트 밑이 열려 있어 손으로 받칠 수 있습니다.",
+      "stock": "M3×16 원통머리 · 일반 M3 육각너트 각 5개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "cable-cover-bolts",
+      "group": "받침",
+      "title": "작업대에서 덮개 조이기",
+      "base": "CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4",
+      "moves": [
+        {
+          "ids": [
+            "cableSpanner"
+          ],
+          "offset": [
+            0,
+            23,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "cableNut0",
+            "cableNut1",
+            "cableNut2",
+            "cableNut3",
+            "cableNut4"
+          ],
+          "offset": [
+            0,
+            0,
+            -0.85
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        123,
+        -61
+      ],
+      "view": [
+        0.9,
+        1.8,
+        -0.52
+      ],
+      "span": 136,
+      "task": "뒤에서 5.5 mm 오픈 스패너로 너트를 잡고, 위에서 2.5 mm 육각렌치로 조입니다.",
+      "check": "트레이를 작업대 끝에 두고 아래가 보이는 상태에서 다섯 곳을 조입니다.",
+      "note": "뒤쪽 공구 통로 폭 18 mm · P2S 시험판 2번",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "cable-tray",
+      "group": "받침",
+      "title": "연결한 트레이를 통째로 넣기",
+      "base": "Part000",
+      "moves": [
+        {
+          "ids": [
+            "CableSaddle",
+            "InputXT30",
+            "InputXT60",
+            "InputXT60Mate",
+            "CameraUSB",
+            "ControlUSB",
+            "CableGate",
+            "cableNut0",
+            "cableNut1",
+            "cableNut2",
+            "cableNut3",
+            "cableNut4",
+            "cableBolt0",
+            "cableBolt1",
+            "cableBolt2",
+            "cableBolt3",
+            "cableBolt4"
+          ],
+          "offset": [
+            0,
+            26,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        98,
+        -58
+      ],
+      "view": [
+        1,
+        1.4,
+        1.03
+      ],
+      "span": 142,
+      "task": "선 끝을 받침 뒤쪽 창에 맞추고, 덮개까지 조립한 트레이를 수평으로 밀어 붙입니다.",
+      "check": "전원 암수는 이미 연결돼 있습니다. 받침 안쪽에서 네 선이 각 창을 지나 꺾이지 않는지 봅니다.",
+      "ports": [
+        "InputXT30",
+        "InputXT60",
+        "CameraUSB",
+        "ControlUSB",
+        "InputXT60Mate"
+      ],
+      "checked": true
+    },
+    {
+      "id": "cable-tray-fasteners",
+      "group": "받침",
+      "title": "완성 트레이를 M3 두 개로 고정",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4",
+      "moves": [
+        {
+          "ids": [
+            "clipBolt0",
+            "clipBolt1"
+          ],
+          "offset": [
+            0,
+            51,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "clipWasher0",
+            "clipWasher1",
+            "clipNut0",
+            "clipNut1"
+          ],
+          "offset": [
+            0,
+            -14,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        105,
+        -69
+      ],
+      "view": [
+        1.1,
+        1.6,
+        0.9
+      ],
+      "span": 132,
+      "cut": [
+        "x",
+        -28.5
+      ],
+      "task": "뒤에서 M3×16 두 개를 넣고, 덮개가 열린 받침 안쪽에서 평와셔와 너트를 끼웁니다.",
+      "check": "2.5 mm 긴 육각렌치와 5.5 mm 공구로 조입니다. 허브를 장착하기 전에 작업합니다.",
+      "stock": "M3×16 원통머리 · 일반 너트 · 평와셔 각 2개",
+      "checked": true
+    },
+    {
+      "id": "hub-board",
+      "group": "받침",
+      "title": "작업대에서 허브 PCB 얹기",
+      "base": "HubHolder",
+      "moves": [
+        {
+          "ids": [
+            "HubPCB",
+            "HubBodyJ1",
+            "HubBodyJ2",
+            "HubBodyJ3",
+            "HubBodyJ4",
+            "HubBodyJ5",
+            "HubBodyJ6",
+            "HubBodyJ7",
+            "HubBodyJ8",
+            "HubBodyF1",
+            "HubBodyF2",
+            "HubBodyC1",
+            "HubBodyC2",
+            "HubBodyR1",
+            "HubBodyR2",
+            "HubBodyR3",
+            "HubBodyD1",
+            "HubBodyD2"
+          ],
+          "offset": [
+            0,
+            0,
+            26
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        59,
+        -69
+      ],
+      "view": [
+        1,
+        -1.15,
+        1
+      ],
+      "span": 93,
+      "task": "분리한 바닥 덮개를 작업대에 두고 허브를 네 기둥에 얹습니다.",
+      "check": "보드 아래 납땜부가 기둥에 닿는지와 네 구멍을 확인합니다."
+    },
+    {
+      "id": "hub-nuts",
+      "group": "받침",
+      "title": "소켓에 너트를 담아 허브에 걸기",
+      "base": "HubHolder HubPCB HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2",
+      "moves": [
+        {
+          "ids": [
+            "hubBolt0",
+            "hubBolt1",
+            "hubBolt2",
+            "hubBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        },
+        {
+          "ids": [
+            "hubSocket",
+            "hubNut0"
+          ],
+          "offset": [
+            0,
+            0,
+            -17
+          ]
+        },
+        {
+          "ids": [
+            "hubNut1",
+            "hubNut2",
+            "hubNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            -17
+          ]
+        }
+      ],
+      "seatOffsets": {
+        "hubNut0": [
+          0,
+          0,
+          -0.8
+        ],
+        "hubNut1": [
+          0,
+          0,
+          -0.8
+        ],
+        "hubNut2": [
+          0,
+          0,
+          -0.8
+        ],
+        "hubNut3": [
+          0,
+          0,
+          -0.8
+        ],
+        "hubSocket": [
+          0,
+          0,
+          -0.8
+        ]
+      },
+      "focus": [
+        -15,
+        53,
+        -78
+      ],
+      "view": [
+        -1,
+        -1.15,
+        -0.78
+      ],
+      "span": 107,
+      "task": "5.5 mm 소켓에 일반 M3 너트를 담아 덮개 아래에서 넣습니다. 기판 쪽에서 M3×8을 두 바퀴 걸어 둡니다.",
+      "check": "덮개 양끝만 받쳐 밑을 비웁니다. 그림은 네 곳 중 왼쪽 한 곳의 소켓을 보여 줍니다.",
+      "note": "덮개 구멍 Ø10.6 mm · 확인한 소켓 앞쪽 외경 Ø9.3 mm",
+      "stock": "M3×8 원통머리 · 일반 M3 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "hub-bolts",
+      "group": "받침",
+      "title": "허브를 양쪽에서 조이기",
+      "base": "HubHolder HubPCB HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubBolt0 hubBolt1 hubBolt2 hubBolt3",
+      "moves": [
+        {
+          "ids": [
+            "hubSocket"
+          ],
+          "offset": [
+            0,
+            0,
+            -15
+          ]
+        },
+        {
+          "ids": [
+            "hubKey"
+          ],
+          "offset": [
+            0,
+            0,
+            13
+          ]
+        },
+        {
+          "ids": [
+            "hubNut0",
+            "hubNut1",
+            "hubNut2",
+            "hubNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            -0.8
+          ]
+        }
+      ],
+      "focus": [
+        -15,
+        53,
+        -73
+      ],
+      "view": [
+        -1,
+        -1.35,
+        -0.48
+      ],
+      "span": 111,
+      "task": "아래에서 5.5 mm 소켓으로 너트를 잡고 위에서 2.5 mm 육각렌치로 조입니다.",
+      "check": "초록색 소켓을 그대로 잡고 위쪽 육각렌치를 돌립니다. 기판이 휘지 않게 네 곳을 조금씩 조입니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "hub-wiring",
+      "group": "받침",
+      "title": "작업대에서 JST 하네스 꽂기",
+      "base": "HubHolder HubPCB HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3",
+      "moves": [
+        {
+          "ids": [
+            "HubPlugJ3",
+            "HubPlugJ4",
+            "HubPlugJ5",
+            "HubPlugJ6",
+            "HubPlugJ7",
+            "HubPlugJ8"
+          ],
+          "offset": [
+            0,
+            0,
+            16
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        61,
+        -66
+      ],
+      "view": [
+        1,
+        -1.15,
+        1.15
+      ],
+      "span": 103,
+      "task": "J4–J6은 PH 3핀, J7–J8은 EH 3핀을 꽂습니다. J3 PH 2핀에는 OpenRB의 GND와 DATA를 연결합니다.",
+      "check": "빨강은 2번 전원, 검정은 1번 GND, 흰색은 3번 DATA입니다. J3은 1번 GND·2번 DATA입니다. 모터별 전압과 ID를 대조합니다.",
+      "stock": "Alpha Wire 6712 · 24 AWG · 피복 Ø1.04–1.14 mm · JST PHR-2/3, EHR-3",
+      "ports": [
+        "HubPlugJ3",
+        "HubPlugJ4",
+        "HubPlugJ5",
+        "HubPlugJ6",
+        "HubPlugJ7",
+        "HubPlugJ8"
+      ],
+      "note": "전원 J1은 XT30U-F를 꽂습니다. J2는 18 AWG 연선을 7 mm 벗겨 연결합니다. 허브를 30 mm 내려도 선이 당겨지지 않게 둡니다.",
+      "checked": true
+    },
+    {
+      "id": "hatch-fit",
+      "group": "받침",
+      "title": "아래에서 허브와 덮개 올리기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1",
+      "moves": [
+        {
+          "ids": [
+            "HubHolder",
+            "HubPCB",
+            "HubPlugJ3",
+            "HubPlugJ4",
+            "HubPlugJ5",
+            "HubPlugJ6",
+            "HubPlugJ7",
+            "HubPlugJ8",
+            "HubBodyJ1",
+            "HubBodyJ2",
+            "HubBodyJ3",
+            "HubBodyJ4",
+            "HubBodyJ5",
+            "HubBodyJ6",
+            "HubBodyJ7",
+            "HubBodyJ8",
+            "HubBodyF1",
+            "HubBodyF2",
+            "HubBodyC1",
+            "HubBodyC2",
+            "HubBodyR1",
+            "HubBodyR2",
+            "HubBodyR3",
+            "HubBodyD1",
+            "HubBodyD2",
+            "hubNut0",
+            "hubNut1",
+            "hubNut2",
+            "hubNut3",
+            "hubBolt0",
+            "hubBolt1",
+            "hubBolt2",
+            "hubBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            -30
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        63,
+        -90
+      ],
+      "view": [
+        1.25,
+        0.98,
+        -0.6
+      ],
+      "span": 133,
+      "task": "허브를 체결한 덮개를 받침 아래에서 함께 들어 올립니다.",
+      "check": "덮개가 힘 없이 들어가는지 확인합니다. 배선에는 덮개를 30 mm 내릴 여유를 둡니다.",
+      "note": "덮개 둘레 편측 0.55 mm 여유",
+      "cut": [
+        "y",
+        51
+      ],
+      "checked": true
+    },
+    {
+      "id": "hatch-nuts",
+      "group": "받침",
+      "title": "바닥 덮개에 일반 너트 걸기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3",
+      "moves": [
+        {
+          "ids": [
+            "hatchBolt0",
+            "hatchBolt1",
+            "hatchBolt2",
+            "hatchBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            -18
+          ]
+        },
+        {
+          "ids": [
+            "hatchNut0",
+            "hatchNut1",
+            "hatchNut2",
+            "hatchNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        }
+      ],
+      "seatOffsets": {
+        "hatchNut0": [
+          0,
+          0,
+          0.8
+        ],
+        "hatchNut1": [
+          0,
+          0,
+          0.8
+        ],
+        "hatchNut2": [
+          0,
+          0,
+          0.8
+        ],
+        "hatchNut3": [
+          0,
+          0,
+          0.8
+        ]
+      },
+      "focus": [
+        25,
+        61,
+        -73
+      ],
+      "view": [
+        1.5,
+        0.95,
+        0.34
+      ],
+      "span": 133,
+      "task": "받침을 받쳐 둔 채 아래에서 M3×8을 넣고 위에서 보이는 자리에 너트를 손으로 겁니다.",
+      "check": "옆 창에서 너트와 볼트 끝을 볼 수 있습니다.",
+      "stock": "M3×8 원통머리 · 일반 M3 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "hatch-bolts",
+      "group": "받침",
+      "title": "측면 스패너로 바닥 덮개 조이기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3",
+      "moves": [
+        {
+          "ids": [
+            "hatchSpanner"
+          ],
+          "offset": [
+            48,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "hatchNut0",
+            "hatchNut1",
+            "hatchNut2",
+            "hatchNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            0.8
+          ]
+        }
+      ],
+      "focus": [
+        42,
+        66,
+        -74
+      ],
+      "view": [
+        1.7,
+        0.94,
+        0.3
+      ],
+      "span": 145,
+      "task": "바깥쪽 창으로 5.5 mm 스패너를 넣고 밑에서 2.5 mm 육각렌치로 조입니다.",
+      "check": "허브를 다시 내릴 때도 같은 창으로 너트를 잡습니다. 받침을 받쳐 바닥과 측면을 모두 엽니다.",
+      "note": "측면 공구 통로 폭 18 mm · P2S 시험판 3번",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "boards-fit",
+      "group": "받침",
+      "title": "작업대에서 C3를 지지점에",
+      "base": "Part071",
+      "moves": [
+        {
+          "ids": [
+            "Part070"
+          ],
+          "offset": [
+            0,
+            0,
+            26
+          ]
+        }
+      ],
+      "focus": [
+        -52,
+        -7,
+        -65
+      ],
+      "view": [
+        1,
+        -1.1,
+        1.5
+      ],
+      "span": 106,
+      "task": "받침 밖에서 USB-C가 정면을 향하도록 보드를 두 기둥에 올립니다.",
+      "check": "보드가 기둥에 바로 앉는지 봅니다.",
+      "checked": true
+    },
+    {
+      "id": "c3-bolts",
+      "group": "받침",
+      "title": "C3 캐리어를 작업대에서 체결",
+      "base": "Part071 Part070",
+      "moves": [
+        {
+          "ids": [
+            "c3Bolt0",
+            "c3Bolt1"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        },
+        {
+          "ids": [
+            "c3Nut0",
+            "c3Nut1"
+          ],
+          "offset": [
+            0,
+            0,
+            -13
+          ]
+        }
+      ],
+      "focus": [
+        -52,
+        -7,
+        -70
+      ],
+      "view": [
+        1,
+        -1.15,
+        0.65
+      ],
+      "span": 100,
+      "task": "위에서 M2×8을 넣고 넓은 원형 구멍 아래에서 4 mm 소켓으로 일반 M2 너트를 잡습니다.",
+      "check": "1.5 mm 육각렌치로 보드가 휘지 않을 만큼 조입니다.",
+      "stock": "M2×8 원통머리 · 일반 M2 육각너트 각 2개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "base-boards",
+      "group": "받침",
+      "title": "C3를 고정한 캐리어 넣기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3",
+      "moves": [
+        {
+          "ids": [
+            "Part071",
+            "Part070",
+            "c3Bolt0",
+            "c3Bolt1",
+            "c3Nut0",
+            "c3Nut1"
+          ],
+          "offset": [
+            0,
+            0,
+            36
+          ]
+        }
+      ],
+      "focus": [
+        -44,
+        -8,
+        -68
+      ],
+      "view": [
+        1,
+        -1.1,
+        1.5
+      ],
+      "span": 120,
+      "task": "C3를 조립한 왼쪽 캐리어를 받침에 놓습니다.",
+      "check": "기판 양옆의 바깥 네 구멍에 위쪽 공구가 들어갈 공간이 보입니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "carrier-bolts",
+      "group": "받침",
+      "title": "왼쪽 캐리어 M3 체결",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1",
+      "moves": [
+        {
+          "ids": [
+            "carrierBolt0",
+            "carrierBolt1",
+            "carrierBolt2",
+            "carrierBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            -18
+          ]
+        },
+        {
+          "ids": [
+            "carrierNut0",
+            "carrierNut1",
+            "carrierNut2",
+            "carrierNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            18
+          ]
+        }
+      ],
+      "focus": [
+        -47,
+        -8,
+        -69
+      ],
+      "view": [
+        1,
+        -1.15,
+        1
+      ],
+      "span": 118,
+      "task": "받침 아래에서 M3×8을 넣고 위에서 5.5 mm 소켓으로 너트를 잡아 조입니다.",
+      "check": "보드 바깥에 체결 위치가 있어 보드를 조립한 채 공구가 들어갑니다.",
+      "stock": "M3×8 원통머리 · 일반 M3 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "openrb-usb",
+      "group": "받침",
+      "title": "USB-C를 보드에 먼저 꽂기",
+      "base": "Part069",
+      "moves": [
+        {
+          "ids": [
+            "OpenRBUSB"
+          ],
+          "offset": [
+            0,
+            -16,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        54,
+        -42,
+        -62
+      ],
+      "view": [
+        -0.8,
+        -1.3,
+        1.5
+      ],
+      "span": 92,
+      "task": "작업대에서 OpenRB에 USB-C 데이터 케이블을 먼저 꽂습니다.",
+      "check": "플러그와 보드가 같이 들어갈 방향을 확인합니다.",
+      "note": "플러그 몸체 12.4 × 18 × 6.2 mm 이내",
+      "checked": true
+    },
+    {
+      "id": "openrb-board",
+      "group": "받침",
+      "title": "작업대에서 OpenRB를 지지점에",
+      "base": "Part072",
+      "moves": [
+        {
+          "ids": [
+            "Part069",
+            "OpenRBUSB"
+          ],
+          "offset": [
+            0,
+            0,
+            26
+          ]
+        }
+      ],
+      "focus": [
+        53,
+        -9,
+        -64
+      ],
+      "view": [
+        -1,
+        -1.1,
+        1.5
+      ],
+      "span": 110,
+      "task": "USB-C를 꽂은 OpenRB를 받침 밖에서 네 기둥에 올립니다.",
+      "check": "시험판 4번에서 실물 보드의 구멍 네 곳을 먼저 맞춰 봅니다.",
+      "note": "OpenRB 홀 간격은 제조사 정면 그림에서 환산했습니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "openrb-bolts",
+      "group": "받침",
+      "title": "OpenRB 캐리어를 작업대에서 체결",
+      "base": "Part072 Part069 OpenRBUSB",
+      "moves": [
+        {
+          "ids": [
+            "openrbBolt0",
+            "openrbBolt1",
+            "openrbBolt2",
+            "openrbBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        },
+        {
+          "ids": [
+            "openrbNut0",
+            "openrbNut1",
+            "openrbNut2",
+            "openrbNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            -13
+          ]
+        }
+      ],
+      "focus": [
+        53,
+        -9,
+        -68
+      ],
+      "view": [
+        -1,
+        -1.1,
+        0.65
+      ],
+      "span": 111,
+      "task": "위에서 M2×8을 넣고 아래에서 4 mm 소켓으로 일반 M2 너트를 잡습니다.",
+      "check": "1.5 mm 육각렌치로 보드를 당겨 휘게 하기 전에 멈춥니다.",
+      "stock": "M2×8 원통머리 · 일반 M2 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "openrb-carrier",
+      "group": "받침",
+      "title": "OpenRB를 고정한 캐리어 넣기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3",
+      "moves": [
+        {
+          "ids": [
+            "Part072",
+            "Part069",
+            "OpenRBUSB",
+            "openrbBolt0",
+            "openrbBolt1",
+            "openrbBolt2",
+            "openrbBolt3",
+            "openrbNut0",
+            "openrbNut1",
+            "openrbNut2",
+            "openrbNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            36
+          ]
+        }
+      ],
+      "focus": [
+        43,
+        -8,
+        -68
+      ],
+      "view": [
+        -1,
+        -1.1,
+        1.5
+      ],
+      "span": 120,
+      "task": "OpenRB와 USB-C가 달린 오른쪽 캐리어를 받침에 내립니다.",
+      "check": "케이블은 받침 가운데 쪽으로 보냅니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "openrb-carrier-bolts",
+      "group": "받침",
+      "title": "오른쪽 캐리어 M3 체결",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3",
+      "moves": [
+        {
+          "ids": [
+            "carrierBolt4",
+            "carrierBolt5",
+            "carrierBolt6",
+            "carrierBolt7"
+          ],
+          "offset": [
+            0,
+            0,
+            -18
+          ]
+        },
+        {
+          "ids": [
+            "carrierNut4",
+            "carrierNut5",
+            "carrierNut6",
+            "carrierNut7"
+          ],
+          "offset": [
+            0,
+            0,
+            18
+          ]
+        }
+      ],
+      "focus": [
+        48,
+        -8,
+        -68
+      ],
+      "view": [
+        -1,
+        -1.15,
+        1
+      ],
+      "span": 112,
+      "task": "받침 아래에서 M3×8을 넣고 위에서 5.5 mm 소켓으로 잡아 조입니다.",
+      "check": "작업대에서 받침을 옆으로 지지하면 위아래 공구를 동시에 댈 수 있습니다.",
+      "stock": "M3×8 원통머리 · 일반 M3 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "yaw-motor",
+      "group": "목",
+      "title": "받침 안 목 모터",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009",
+      "moves": [
+        {
+          "ids": [
+            "Part017"
+          ],
+          "offset": [
+            0,
+            0,
+            34
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        12,
+        -57
+      ],
+      "view": [
+        1.15,
+        -1.55,
+        1.5
+      ],
+      "span": 108,
+      "task": "ID 4 XL430을 05번 좌우 브래킷 사이에 놓고 왼쪽 창에서 JST를 꽂습니다.",
+      "check": "왼쪽 창에서 플러그가 12 mm 드나듭니다. 본체에는 M2.6 탭핑 나사 자리가 있습니다.",
+      "stock": "JST EHR-3 · 본체용 육각 나사의 나사산 호환은 실물 검증 범위",
+      "hold": true
+    },
+    {
+      "id": "yaw-bearing",
+      "group": "목",
+      "title": "작업대에서 6816 베어링부터",
+      "base": "Part001",
+      "moves": [
+        {
+          "ids": [
+            "Part006"
+          ],
+          "offset": [
+            0,
+            0,
+            28
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        2,
+        -37
+      ],
+      "view": [
+        1,
+        -1.3,
+        1.4
+      ],
+      "span": 121,
+      "task": "분리된 베어링 받침 02에 6816을 위에서 올려 외륜을 앉힙니다.",
+      "check": "이 상태에서 받침 위와 밑에 공구가 들어갑니다.",
+      "stock": "6816 ×1",
+      "checked": true
+    },
+    {
+      "id": "yaw-keepers",
+      "group": "목",
+      "title": "외륜 눌림판 세 개",
+      "base": "Part001 Part006",
+      "moves": [
+        {
+          "ids": [
+            "YawBearingRetainer1",
+            "YawBearingRetainer2",
+            "YawBearingRetainer3"
+          ],
+          "offset": [
+            0,
+            0,
+            12
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        0,
+        -34
+      ],
+      "view": [
+        1.15,
+        -1.4,
+        1.2
+      ],
+      "span": 145,
+      "task": "외륜 위에 눌림판 세 개를 올립니다.",
+      "check": "세 눌림판 모두 바깥 링에 닿습니다.",
+      "checked": true
+    },
+    {
+      "id": "keeper-nuts",
+      "group": "목",
+      "title": "작업대에서 눌림판 체결",
+      "base": "Part001 Part006 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3",
+      "moves": [
+        {
+          "ids": [
+            "keeperBolt0",
+            "keeperBolt1",
+            "keeperBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            -17
+          ]
+        },
+        {
+          "ids": [
+            "keeperNut0",
+            "keeperNut1",
+            "keeperNut2"
+          ],
+          "offset": [
+            0,
+            0,
+            14
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        0,
+        -34
+      ],
+      "view": [
+        1.15,
+        -1.4,
+        0.72
+      ],
+      "span": 145,
+      "task": "아래에서 M3×8을 넣고 위의 일반 너트를 5.5 mm 소켓으로 잡아 조입니다.",
+      "check": "조인 뒤에도 베어링 내륜이 돌아갑니다.",
+      "stock": "M3×8 원통머리 · 일반 M3 육각너트 각 3개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "bearing-seat",
+      "group": "목",
+      "title": "조립한 베어링 받침 올리기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017",
+      "moves": [
+        {
+          "ids": [
+            "Part001",
+            "Part006",
+            "YawBearingRetainer1",
+            "YawBearingRetainer2",
+            "YawBearingRetainer3",
+            "keeperNut0",
+            "keeperNut1",
+            "keeperNut2",
+            "keeperBolt0",
+            "keeperBolt1",
+            "keeperBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            33
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        0,
+        -47
+      ],
+      "view": [
+        1.15,
+        -1.4,
+        1.15
+      ],
+      "span": 180,
+      "task": "베어링과 눌림판을 조인 02번 받침을 세 안쪽 기둥에 내려놓습니다.",
+      "check": "베어링 받침을 올릴 때 눌림판 볼트와 너트도 함께 움직입니다.",
+      "checked": true
+    },
+    {
+      "id": "bearing-seat-bolts",
+      "group": "목",
+      "title": "베어링 받침을 아래에서 체결",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2",
+      "moves": [
+        {
+          "ids": [
+            "seatBolt0",
+            "seatBolt1",
+            "seatBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            -45
+          ]
+        },
+        {
+          "ids": [
+            "seatNut0",
+            "seatNut1",
+            "seatNut2"
+          ],
+          "offset": [
+            0,
+            0,
+            19
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        0,
+        -45
+      ],
+      "view": [
+        1.1,
+        -1.3,
+        0.76
+      ],
+      "span": 185,
+      "task": "바닥의 원형 통로로 M3×16을 넣고 위에서 너트를 소켓으로 잡습니다.",
+      "check": "긴 2.5 mm 육각렌치로 아래쪽에서 조입니다.",
+      "stock": "M3×16 원통머리 · 일반 M3 육각너트 각 3개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "rotor-nuts",
+      "group": "목",
+      "title": "회전판에 M3 볼트 네 개 세우기",
+      "base": "Part007",
+      "moves": [
+        {
+          "ids": [
+            "mastStud0",
+            "mastStud1",
+            "mastStud2",
+            "mastStud3"
+          ],
+          "offset": [
+            0,
+            0,
+            -18
+          ]
+        },
+        {
+          "ids": [
+            "rotorNut0",
+            "rotorNut1",
+            "rotorNut2",
+            "rotorNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        15,
+        -35
+      ],
+      "view": [
+        1,
+        0.85,
+        0.53
+      ],
+      "span": 99,
+      "task": "회전판 밑 볼트 자리 네 곳에서 서포트를 빼고 M3×16을 넣습니다. 육각렌치로 잡고 위쪽 너트를 조입니다.",
+      "check": "머리는 아래, 나사산은 위로 나옵니다. 이 볼트에 나중에 목 기둥을 얹습니다.",
+      "stock": "M3×16 원통머리 · 일반 M3 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "rotor",
+      "group": "목",
+      "title": "회전판을 위에서 안착",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2",
+      "moves": [
+        {
+          "ids": [
+            "Part007",
+            "rotorNut0",
+            "rotorNut1",
+            "rotorNut2",
+            "rotorNut3",
+            "mastStud0",
+            "mastStud1",
+            "mastStud2",
+            "mastStud3"
+          ],
+          "offset": [
+            0,
+            0,
+            26
+          ]
+        }
+      ],
+      "focus": [
+        -4,
+        13,
+        -37
+      ],
+      "view": [
+        1,
+        -1.35,
+        0.6
+      ],
+      "span": 94,
+      "task": "볼트 네 개를 세운 회전판을 베어링 내륜에 내려 놓습니다.",
+      "check": "밑면 나사 머리가 모터와 베어링에 닿지 않고 돌아갑니다.",
+      "checked": true
+    },
+    {
+      "id": "rotor-horn",
+      "group": "목",
+      "title": "혼에 회전판부터 체결",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2",
+      "moves": [
+        {
+          "ids": [
+            "hornBolt0",
+            "hornBolt1",
+            "hornBolt2",
+            "hornBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            21
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        3,
+        -33
+      ],
+      "view": [
+        1,
+        -1.2,
+        1.35
+      ],
+      "span": 78,
+      "task": "기둥을 올리기 전에 모터 혼의 네 구멍을 맞추고 위에서 체결합니다.",
+      "check": "혼에 들어가는 나사 길이는 3 mm입니다.",
+      "stock": "XL430 혼 · M2×8 원통머리 ×4",
+      "checked": true
+    },
+    {
+      "id": "base-deck",
+      "group": "목",
+      "title": "상판 03 닫기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2",
+      "moves": [
+        {
+          "ids": [
+            "Part002"
+          ],
+          "offset": [
+            0,
+            0,
+            29
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        0,
+        -27
+      ],
+      "view": [
+        1,
+        -1.4,
+        1.1
+      ],
+      "span": 191,
+      "task": "기둥을 얹기 전에 상판 03을 위에서 내립니다.",
+      "check": "상판 바깥쪽 세 구멍을 받침 벽의 너트와 맞춥니다.",
+      "checked": true
+    },
+    {
+      "id": "base-deck-bolts",
+      "group": "목",
+      "title": "상판을 아래에서 M3×8로",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2 Part002",
+      "moves": [
+        {
+          "ids": [
+            "lidBolt0",
+            "lidBolt1",
+            "lidBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            -65
+          ]
+        },
+        {
+          "ids": [
+            "lidNut0",
+            "lidNut1",
+            "lidNut2"
+          ],
+          "offset": [
+            0,
+            0,
+            19
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        0,
+        -24
+      ],
+      "view": [
+        1,
+        -1.4,
+        1.06
+      ],
+      "span": 191,
+      "task": "바닥의 바깥 세 통로로 M3×8을 넣고 위에서 5.5 mm 소켓으로 너트를 잡습니다.",
+      "check": "긴 2.5 mm 육각렌치로 조인 뒤 회전판을 손으로 돌려 봅니다.",
+      "stock": "M3×8 원통머리 ×3",
+      "checked": true
+    },
+    {
+      "id": "yoke-fit",
+      "group": "목",
+      "title": "상하 요크 얹기",
+      "base": "Part010",
+      "moves": [
+        {
+          "ids": [
+            "Part011"
+          ],
+          "offset": [
+            0,
+            0,
+            28
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        16,
+        76
+      ],
+      "view": [
+        1,
+        -1.25,
+        0.87
+      ],
+      "span": 118,
+      "task": "작업대에 놓은 목 기둥 위에 07번 요크를 얹습니다.",
+      "check": "목 기둥 아래 쪽으로 두 손과 공구를 댈 수 있는 공간을 비웁니다.",
+      "checked": true
+    },
+    {
+      "id": "yoke-nuts",
+      "group": "목",
+      "title": "기둥 옆에서 스패너로 요크 체결",
+      "base": "Part010 Part011",
+      "moves": [
+        {
+          "ids": [
+            "yokeNut0",
+            "yokeNut1"
+          ],
+          "offset": [
+            -18,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "yokeNut2"
+          ],
+          "offset": [
+            18,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "yokeBolt0",
+            "yokeBolt1",
+            "yokeBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            25
+          ]
+        }
+      ],
+      "seatOffsets": {
+        "yokeBolt0": [
+          0,
+          0,
+          6
+        ],
+        "yokeBolt1": [
+          0,
+          0,
+          6
+        ],
+        "yokeBolt2": [
+          0,
+          0,
+          6
+        ]
+      },
+      "focus": [
+        0,
+        23,
+        67
+      ],
+      "view": [
+        1.3,
+        -1.35,
+        0.53
+      ],
+      "span": 100,
+      "task": "요크 위에서 볼트를 들고 있는 동안 옆 통로에 스패너로 너트를 댑니다.",
+      "check": "왼쪽 두 개는 한 개씩 맞춥니다.",
+      "stock": "M3×16 원통머리 · 일반 M3 육각너트 각 3개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "yoke-bolts",
+      "group": "목",
+      "title": "너트를 잡고 요크 조이기",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2",
+      "moves": [
+        {
+          "ids": [
+            "yokeBolt0",
+            "yokeBolt1",
+            "yokeBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            6
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        23,
+        68
+      ],
+      "view": [
+        1.3,
+        -1.35,
+        0.68
+      ],
+      "span": 99,
+      "task": "스패너로 너트를 잡은 상태에서 볼트를 내려 2.5 mm 육각렌치로 조입니다.",
+      "check": "기둥 옆이 열린 상태에서 세 곳에 차례로 공구를 댑니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "pitch-horn",
+      "group": "목",
+      "title": "끄덕임 모터의 혼을 먼저",
+      "base": "Part016 Part018",
+      "moves": [
+        {
+          "ids": [
+            "pitchHornBolt0",
+            "pitchHornBolt1",
+            "pitchHornBolt2",
+            "pitchHornBolt3"
+          ],
+          "offset": [
+            21,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        30,
+        0,
+        112
+      ],
+      "view": [
+        1.7,
+        -1,
+        0.65
+      ],
+      "span": 86,
+      "task": "모터가 요크 밖에 있을 때 08번 혼을 모터에 M2×8로 먼저 조입니다.",
+      "check": "네 자리에 평평한 원통머리 받침이 있습니다.",
+      "stock": "XL430 혼 · M2×8 원통머리 ×4",
+      "checked": true
+    },
+    {
+      "id": "pitch-drive",
+      "group": "목",
+      "title": "끄덕임 모터를 요크 위에서",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2",
+      "moves": [
+        {
+          "ids": [
+            "Part018",
+            "Part016",
+            "pitchHornBolt0",
+            "pitchHornBolt1",
+            "pitchHornBolt2",
+            "pitchHornBolt3"
+          ],
+          "offset": [
+            0,
+            0,
+            52
+          ]
+        }
+      ],
+      "focus": [
+        20,
+        0,
+        108
+      ],
+      "view": [
+        1.2,
+        -1.5,
+        0.88
+      ],
+      "span": 131,
+      "task": "혼을 조인 모터를 요크 위에서 내려 넣습니다.",
+      "check": "JST를 요크의 뒤쪽 창에서 꽂습니다. 플러그 삽입 경로는 12 mm입니다.",
+      "hold": true
+    },
+    {
+      "id": "pitch-bearing",
+      "group": "목",
+      "title": "688을 바깥쪽에서",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3",
+      "moves": [
+        {
+          "ids": [
+            "Part012"
+          ],
+          "offset": [
+            -19,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part014"
+          ],
+          "offset": [
+            19,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        2,
+        112
+      ],
+      "view": [
+        1.05,
+        -1.5,
+        0.75
+      ],
+      "span": 129,
+      "task": "688 베어링을 요크 양끝의 바깥쪽에서 안으로 넣습니다.",
+      "check": "좌우 베어링이 같은 높이에서 수평으로 앉는지 확인합니다.",
+      "stock": "688 ×2",
+      "checked": true
+    },
+    {
+      "id": "head-frame",
+      "group": "목",
+      "title": "머리 프레임을 위에서",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014",
+      "moves": [
+        {
+          "ids": [
+            "Part019"
+          ],
+          "offset": [
+            0,
+            0,
+            31
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        11,
+        132
+      ],
+      "view": [
+        1.15,
+        -1.4,
+        0.8
+      ],
+      "span": 140,
+      "task": "두 688 베어링 사이에 09번 머리 프레임을 위에서 내립니다.",
+      "check": "외장을 붙이기 전에 이 상태에서 좌우 축 구멍을 맞춥니다.",
+      "checked": true
+    },
+    {
+      "id": "neck-pins",
+      "group": "목",
+      "title": "목 축을 양쪽에서",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019",
+      "moves": [
+        {
+          "ids": [
+            "Part013"
+          ],
+          "offset": [
+            -24,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part015"
+          ],
+          "offset": [
+            24,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        2,
+        2,
+        111
+      ],
+      "view": [
+        1.05,
+        -1.5,
+        0.75
+      ],
+      "span": 132,
+      "task": "머리 프레임을 받친 채 Ø8 축을 양쪽에서 끼웁니다.",
+      "check": "오른쪽 긴 축의 평평한 끝이 08번 구동 혼을 향합니다. 모터 혼을 풀고 핀이 들어가는지 확인합니다.",
+      "stock": "Ø8 강철축 ×2",
+      "checked": true
+    },
+    {
+      "id": "eye-pitch-stay",
+      "group": "눈·눈꺼풀",
+      "title": "눈 상하 모터 지지대",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015",
+      "moves": [
+        {
+          "ids": [
+            "Part064"
+          ],
+          "offset": [
+            0,
+            35,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        50,
+        21,
+        150
+      ],
+      "view": [
+        1.3,
+        0.7,
+        1
+      ],
+      "span": 86,
+      "task": "머리 뒤가 열린 상태에서 34번 지지대를 대고 프레임 쪽 체결 자리 두 곳을 맞춥니다.",
+      "check": "프레임 쪽 체결 방식과 나사 길이는 가조립에서 대조합니다.",
+      "hold": true
+    },
+    {
+      "id": "blink-motor-heads",
+      "group": "눈·눈꺼풀",
+      "title": "눈꺼풀 모터 원통머리 자리",
+      "base": "Part045 Part046",
+      "moves": [
+        {
+          "ids": [
+            "blinkMotorHead0",
+            "blinkMotorHead1",
+            "blinkMotorHead2",
+            "blinkMotorHead3"
+          ],
+          "offset": [
+            14,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        1,
+        -14,
+        177
+      ],
+      "view": [
+        1.45,
+        -0.8,
+        0.53
+      ],
+      "span": 53,
+      "task": "모터 브래킷 앞면에 일반 M2 원통머리 외형을 대 봅니다.",
+      "check": "혼과 가까운 한 곳은 1.85 mm 깊이의 평평한 홈으로 머리를 내립니다. 혼을 끼우기 전에 조이는 자리입니다.",
+      "stock": "1.5 mm 육각렌치 · XL330 나사산 실물 대조 대기",
+      "cut": [
+        "y",
+        -6
+      ],
+      "hold": true
+    },
+    {
+      "id": "blink-rail",
+      "group": "눈·눈꺼풀",
+      "title": "레일을 프레임에",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064",
+      "moves": [
+        {
+          "ids": [
+            "Part063"
+          ],
+          "offset": [
+            0,
+            -27,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        8,
+        157
+      ],
+      "view": [
+        1,
+        1.6,
+        1.1
+      ],
+      "span": 136,
+      "task": "빈 레일을 앞쪽에서 밀어 프레임에 댑니다. 먼저 레일을 체결한 다음 작은 베어링을 넣습니다.",
+      "check": "레일과 프레임 구멍을 맞춥니다. 레일 앞쪽에는 소켓이 들어가는 원형 통로가 보입니다.",
+      "checked": true
+    },
+    {
+      "id": "blink-rail-bolts",
+      "group": "눈·눈꺼풀",
+      "title": "앞뒤에서 레일 나사 네 개",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part063",
+      "moves": [
+        {
+          "ids": [
+            "railBolt0",
+            "railBolt1",
+            "railBolt2",
+            "railBolt3"
+          ],
+          "offset": [
+            0,
+            21,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "railNut0",
+            "railNut1",
+            "railNut2",
+            "railNut3"
+          ],
+          "offset": [
+            0,
+            -24,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        25,
+        147
+      ],
+      "view": [
+        1,
+        1.6,
+        1.1
+      ],
+      "span": 106,
+      "task": "뒤에서 M3×16을 넣고 앞쪽 원형 통로에서 5.5 mm 소켓으로 일반 너트를 잡습니다.",
+      "check": "공용축과 모터를 놓기 전에 앞뒤에서 네 개를 조입니다.",
+      "stock": "M3×16 원통머리 · 일반 M3 육각너트 각 4개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "blink-bearings",
+      "group": "눈·눈꺼풀",
+      "title": "레일의 작은 베어링",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3",
+      "moves": [
+        {
+          "ids": [
+            "Part050"
+          ],
+          "offset": [
+            18,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part052"
+          ],
+          "offset": [
+            -18,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -22,
+        156
+      ],
+      "view": [
+        1.25,
+        -1.65,
+        0.75
+      ],
+      "span": 82,
+      "task": "MR104ZZ 두 개를 레일 중앙에서 양 바깥쪽으로 눌러 넣습니다.",
+      "check": "간격통의 얇은 턱은 베어링 안쪽 링에 닿습니다.",
+      "stock": "MR104ZZ ×2",
+      "checked": true
+    },
+    {
+      "id": "eye-pitch-motor-heads",
+      "group": "눈·눈꺼풀",
+      "title": "눈 상하 모터와 모터판",
+      "base": "Part041 Part042",
+      "moves": [
+        {
+          "ids": [
+            "eyePitchHead0",
+            "eyePitchHead1",
+            "eyePitchHead2",
+            "eyePitchHead3"
+          ],
+          "offset": [
+            18,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        56,
+        10,
+        148
+      ],
+      "view": [
+        1.6,
+        -1,
+        0.6
+      ],
+      "span": 74,
+      "task": "작업대에서 상하 모터를 모터판에 맞추고 옆에서 체결합니다.",
+      "check": "모터 케이스에 맞는 나사산과 나사 길이를 실물에서 대조합니다.",
+      "hold": true
+    },
+    {
+      "id": "eye-pitch-horn",
+      "group": "눈·눈꺼풀",
+      "title": "작업대에서 눈 상하 혼 끼우기",
+      "base": "Part042 Part041 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3",
+      "moves": [
+        {
+          "ids": [
+            "Part043"
+          ],
+          "offset": [
+            18,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        57,
+        10,
+        150
+      ],
+      "view": [
+        1.55,
+        -1,
+        0.64
+      ],
+      "span": 78,
+      "task": "모터와 모터판을 프레임에 넣기 전에 작업대에서 혼을 오른쪽에서 끼웁니다.",
+      "check": "혼을 넣을 때 이미 붙인 모터 나사 머리를 확인합니다.",
+      "checked": true
+    },
+    {
+      "id": "eye-pitch-motor-fit",
+      "group": "눈·눈꺼풀",
+      "title": "눈 상하 모터를 지지대에",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052",
+      "moves": [
+        {
+          "ids": [
+            "Part042",
+            "Part041",
+            "Part043",
+            "eyePitchHead0",
+            "eyePitchHead1",
+            "eyePitchHead2",
+            "eyePitchHead3"
+          ],
+          "offset": [
+            8,
+            -32,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        56,
+        10,
+        148
+      ],
+      "view": [
+        1.65,
+        -1.2,
+        0.67
+      ],
+      "span": 107,
+      "task": "모터·혼·나사를 붙인 모터판을 비어 있는 머리 정면에서 약간 비스듬히 밀어 넣습니다.",
+      "check": "안구 모듈을 넣기 전에 모터판 위 두 자리를 조일 수 있게 둡니다.",
+      "checked": true
+    },
+    {
+      "id": "eye-pitch-plate-heads",
+      "group": "눈·눈꺼풀",
+      "title": "눈 상하 모터판 두 자리",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052",
+      "moves": [
+        {
+          "ids": [
+            "eyePitchHead4",
+            "eyePitchHead5"
+          ],
+          "offset": [
+            18,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        56,
+        10,
+        160
+      ],
+      "view": [
+        1.65,
+        -1.2,
+        0.67
+      ],
+      "span": 100,
+      "task": "모터판 위 두 곳에 M3 머리와 2.5 mm 육각렌치 공간을 확인합니다.",
+      "check": "지지대 쪽 파일럿 구멍은 체결 방식을 실물에서 대조합니다.",
+      "hold": true
+    },
+    {
+      "id": "blink-horn-nut",
+      "group": "눈·눈꺼풀",
+      "title": "작업대에서 혼과 가운데 링크 체결",
+      "base": "Part047 Part056",
+      "moves": [
+        {
+          "ids": [
+            "middleServo0"
+          ],
+          "offset": [
+            -11,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "middleNut0",
+            "middleWasher0"
+          ],
+          "offset": [
+            13,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        3,
+        -12,
+        167
+      ],
+      "view": [
+        1.2,
+        -1.4,
+        0.75
+      ],
+      "span": 56,
+      "task": "모터에 혼을 붙이기 전에 가운데 링크를 M2×8로 연결합니다. 바깥에서 4 mm 소켓으로 너트를 잡습니다.",
+      "check": "안쪽에서 1.5 mm 육각렌치로 조이고 링크 유격을 확인합니다.",
+      "stock": "M2×8 원통머리 · 일반 M2 육각너트 · 평와셔 각 1개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "blink-center-link",
+      "group": "눈·눈꺼풀",
+      "title": "작업대에서 가운데 크랭크까지 체결",
+      "base": "Part047 Part056 middleNut0 middleServo0 middleWasher0 Part054",
+      "moves": [
+        {
+          "ids": [
+            "centerLink0"
+          ],
+          "offset": [
+            -12,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "linkNutPos0",
+            "linkWasherPos0"
+          ],
+          "offset": [
+            12,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        6,
+        -18,
+        155
+      ],
+      "view": [
+        1.2,
+        -1.4,
+        0.75
+      ],
+      "span": 68,
+      "task": "베어링 사이에 들어가기 전에 가운데 크랭크와 링크를 작업대에서 조입니다.",
+      "check": "1.5 mm 육각렌치와 4 mm 소켓이 양옆에서 닿습니다.",
+      "stock": "M2×8 원통머리 · 일반 M2 육각너트 · 평와셔 각 1개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "blink-motor-fit",
+      "group": "눈·눈꺼풀",
+      "title": "눈꺼풀 모터판을 레일에",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052",
+      "moves": [
+        {
+          "ids": [
+            "Part045",
+            "Part046",
+            "blinkMotorHead0",
+            "blinkMotorHead1",
+            "blinkMotorHead2",
+            "blinkMotorHead3",
+            "Part047",
+            "Part056",
+            "Part054",
+            "centerLink0",
+            "linkNutPos0",
+            "linkWasherPos0",
+            "middleNut0",
+            "middleServo0",
+            "middleWasher0"
+          ],
+          "offset": [
+            0,
+            -31,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -6,
+        177
+      ],
+      "view": [
+        1.25,
+        -1.5,
+        0.48
+      ],
+      "span": 103,
+      "task": "혼과 가운데 링크, 크랭크를 단 모터판을 앞쪽에서 레일에 댑니다.",
+      "check": "모터판이 붙으면 다음 단계에서 두 곳을 체결합니다.",
+      "checked": true
+    },
+    {
+      "id": "blink-motor-fasteners",
+      "group": "눈·눈꺼풀",
+      "title": "모터판 체결",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3",
+      "moves": [
+        {
+          "ids": [
+            "blinkPlateBolt0",
+            "blinkPlateBolt1"
+          ],
+          "offset": [
+            24,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "blinkPlateNut0",
+            "blinkPlateNut1"
+          ],
+          "offset": [
+            -12,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        -3,
+        -2,
+        182
+      ],
+      "view": [
+        1.2,
+        -0.9,
+        0.72
+      ],
+      "span": 91,
+      "task": "몸체 양옆에서 M3×16과 일반 육각너트를 넣어 모터판을 고정합니다.",
+      "check": "레일을 붙인 볼트와 같은 규격입니다.",
+      "stock": "M3×16 원통머리 · M3 일반 너트 각 2개",
+      "checked": true
+    },
+    {
+      "id": "blink-shaft",
+      "group": "눈·눈꺼풀",
+      "title": "공용축을 옆에서 통과",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 BlinkCollarLeft BlinkCollarRight",
+      "moves": [
+        {
+          "ids": [
+            "Part048"
+          ],
+          "offset": [
+            -87,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        -28,
+        -21,
+        154
+      ],
+      "view": [
+        1.05,
+        -1.55,
+        0.42
+      ],
+      "span": 168,
+      "task": "눈 상하 모터가 자리 잡은 뒤 간격통과 이미 연결한 가운데 크랭크를 통과하도록 Ø4 축을 왼쪽에서 넣습니다.",
+      "check": "37.4 mm 간격통은 왼쪽, 짧은 간격통은 오른쪽입니다. 끼울 때 축이 휘도록 누르지 않습니다.",
+      "stock": "Ø4 × 112 mm 연마축",
+      "checked": true
+    },
+    {
+      "id": "blink-outer-cranks",
+      "group": "눈·눈꺼풀",
+      "title": "양끝 크랭크를 축에",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight",
+      "moves": [
+        {
+          "ids": [
+            "Part053"
+          ],
+          "offset": [
+            -16,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part055"
+          ],
+          "offset": [
+            16,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -23,
+        158
+      ],
+      "view": [
+        1.2,
+        -1.35,
+        0.72
+      ],
+      "span": 134,
+      "task": "양끝 크랭크를 열린 면이 정면을 향하게 끼웁니다.",
+      "check": "볼트는 다음 단계에 넣어 축의 세 평면과 방향을 맞춥니다.",
+      "checked": true
+    },
+    {
+      "id": "blink-clamps",
+      "group": "눈·눈꺼풀",
+      "title": "크랭크 너트를 정면에서 대기",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 Part055",
+      "moves": [
+        {
+          "ids": [
+            "crankNut0",
+            "crankNut1",
+            "crankNut2"
+          ],
+          "offset": [
+            0,
+            -15,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "crankBolt0",
+            "crankBolt1",
+            "crankBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            13
+          ]
+        }
+      ],
+      "seatOffsets": {
+        "crankNut0": [
+          0,
+          0,
+          -0.55
+        ],
+        "crankNut1": [
+          0,
+          0,
+          -0.55
+        ],
+        "crankNut2": [
+          0,
+          0,
+          -0.55
+        ],
+        "crankBolt0": [
+          0,
+          0,
+          5
+        ],
+        "crankBolt1": [
+          0,
+          0,
+          5
+        ],
+        "crankBolt2": [
+          0,
+          0,
+          5
+        ]
+      },
+      "focus": [
+        3,
+        -24,
+        159
+      ],
+      "view": [
+        1,
+        -1.35,
+        0.7
+      ],
+      "span": 132,
+      "task": "볼트를 조금 들어 두고 앞에서 5.5 mm 스패너로 너트를 댑니다.",
+      "check": "나사 끝을 Ø4 축의 평평한 부분에 맞춥니다. 한 곳씩 작업합니다.",
+      "stock": "M3×8 원통머리 · 일반 M3 육각너트 각 3개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "blink-clamp-bolts",
+      "group": "눈·눈꺼풀",
+      "title": "크랭크 축을 공구로 조이기",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 Part055",
+      "moves": [
+        {
+          "ids": [
+            "crankSpanner"
+          ],
+          "offset": [
+            0,
+            -17,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "crankNut0",
+            "crankNut1",
+            "crankNut2"
+          ],
+          "offset": [
+            0,
+            0,
+            -0.55
+          ]
+        },
+        {
+          "ids": [
+            "crankBolt0",
+            "crankBolt1",
+            "crankBolt2"
+          ],
+          "offset": [
+            0,
+            0,
+            5
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -25,
+        159
+      ],
+      "view": [
+        1,
+        -1.3,
+        0.68
+      ],
+      "span": 129,
+      "task": "앞에서 너트를 스패너로 잡고 위에서 육각렌치로 나사를 조입니다.",
+      "check": "머리 바깥 폭 16 mm·두께 4.2 mm의 스패너로 정면과 좌우 15° 경로를 확인했습니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "eye-pins",
+      "group": "눈·눈꺼풀",
+      "title": "안구의 위아래 핀",
+      "base": "Part024 Part029 Part030 Part031 Part033 Part034 Part035",
+      "moves": [
+        {
+          "ids": [
+            "Part032",
+            "Part036"
+          ],
+          "offset": [
+            0,
+            0,
+            23
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -38,
+        123
+      ],
+      "view": [
+        1,
+        -1.35,
+        1.15
+      ],
+      "span": 91,
+      "task": "안구 두 개를 12번 크래들에 놓고 Ø2 핀을 위에서 넣습니다.",
+      "check": "핀을 끼운 뒤 안구를 각각 손으로 돌려 봅니다.",
+      "stock": "Ø2 × 24 mm 핀 ×2",
+      "checked": true
+    },
+    {
+      "id": "eye-pin",
+      "group": "눈·눈꺼풀",
+      "title": "눈 상하축 핀을 양옆에서",
+      "base": "Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part027",
+      "moves": [
+        {
+          "ids": [
+            "Part026"
+          ],
+          "offset": [
+            -18,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part028"
+          ],
+          "offset": [
+            18,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -38,
+        120
+      ],
+      "view": [
+        1.2,
+        -1.8,
+        0.66
+      ],
+      "span": 135,
+      "task": "외장을 씌우기 전에 양쪽 지지대와 크래들의 구멍을 맞춰 Ø3 핀을 넣습니다.",
+      "check": "핀 끝과 나중에 들어오는 눈꺼풀 핀 사이에는 0.75 mm 틈이 있습니다.",
+      "stock": "Ø3 × 13 mm 핀 ×2",
+      "cut": [
+        "y",
+        -39.02
+      ],
+      "checked": true
+    },
+    {
+      "id": "eye-yaw-motor-heads",
+      "group": "눈·눈꺼풀",
+      "title": "눈 좌우 모터와 모터판",
+      "base": "Part038 Part039",
+      "moves": [
+        {
+          "ids": [
+            "eyeYawHead0",
+            "eyeYawHead1",
+            "eyeYawHead2",
+            "eyeYawHead3"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -36,
+        111
+      ],
+      "view": [
+        1,
+        -1,
+        1.2
+      ],
+      "span": 74,
+      "task": "작업대에서 좌우 모터와 모터판을 맞추고 1.5 mm 육각렌치가 들어가는 네 자리를 확인합니다.",
+      "check": "나사 머리는 아래 단계에서도 같이 움직입니다. 모터 케이스 나사산과 깊이는 실물에서 대조합니다.",
+      "hold": true
+    },
+    {
+      "id": "eye-module",
+      "group": "눈·눈꺼풀",
+      "title": "눈 모듈을 프레임에",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2",
+      "moves": [
+        {
+          "ids": [
+            "Part024",
+            "Part029",
+            "Part030",
+            "Part031",
+            "Part032",
+            "Part033",
+            "Part034",
+            "Part035",
+            "Part036",
+            "Part025",
+            "Part026",
+            "Part027",
+            "Part028",
+            "Part037",
+            "Part038",
+            "Part039",
+            "eyeYawHead0",
+            "eyeYawHead1",
+            "eyeYawHead2",
+            "eyeYawHead3",
+            "Part040"
+          ],
+          "offset": [
+            0,
+            -64,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -13,
+        130
+      ],
+      "view": [
+        1.3,
+        -1.45,
+        0.77
+      ],
+      "span": 158,
+      "task": "축을 맞춘 눈 모듈을 머리 프레임 앞쪽에서 뒤로 밀어 넣습니다.",
+      "check": "해골을 씌우기 전에 좌우 지지대의 체결과 안구 움직임을 확인합니다.",
+      "checked": true
+    },
+    {
+      "id": "eye-pitch-link",
+      "group": "눈·눈꺼풀",
+      "title": "눈 상하 링크 연결",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040",
+      "moves": [
+        {
+          "ids": [
+            "Part044"
+          ],
+          "offset": [
+            0,
+            -26,
+            26
+          ]
+        }
+      ],
+      "focus": [
+        58,
+        -5,
+        139
+      ],
+      "view": [
+        1.65,
+        -1.2,
+        0.67
+      ],
+      "span": 116,
+      "task": "안구 모듈을 넣은 뒤 상하 링크를 정면 위에서 비스듬히 내려 혼과 안구에 연결합니다.",
+      "check": "앞 외장을 끼우기 전에 손으로 안구 상하축을 움직여 봅니다.",
+      "checked": true
+    },
+    {
+      "id": "lids",
+      "group": "눈·눈꺼풀",
+      "title": "왼쪽 눈꺼풀 핀",
+      "base": "Part076 Part078",
+      "moves": [
+        {
+          "ids": [
+            "Part058"
+          ],
+          "offset": [
+            -13,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part061"
+          ],
+          "offset": [
+            13,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        -34,
+        -42,
+        123
+      ],
+      "view": [
+        1,
+        -1.9,
+        0.9
+      ],
+      "span": 71,
+      "task": "작업대에서 왼쪽 눈틀과 눈꺼풀을 맞추고 양쪽 핀을 넣습니다.",
+      "check": "핀은 눈틀에 잡히고 눈꺼풀만 가볍게 돕니다.",
+      "stock": "Ø2 × 8 mm 핀 ×2",
+      "checked": true
+    },
+    {
+      "id": "right-lid",
+      "group": "눈·눈꺼풀",
+      "title": "오른쪽 눈꺼풀 핀",
+      "base": "Part077 Part079",
+      "moves": [
+        {
+          "ids": [
+            "Part059"
+          ],
+          "offset": [
+            -13,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "Part062"
+          ],
+          "offset": [
+            13,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        34,
+        -42,
+        123
+      ],
+      "view": [
+        1,
+        -1.9,
+        0.9
+      ],
+      "span": 71,
+      "task": "오른쪽도 작업대에서 따로 조립합니다.",
+      "check": "양쪽 모두 막대 링크 없이 눈꺼풀이 손으로 가볍게 돌아가야 합니다.",
+      "stock": "Ø2 × 8 mm 핀 ×2",
+      "checked": true
+    },
+    {
+      "id": "blink-upper-links",
+      "group": "눈·눈꺼풀",
+      "title": "외장 전 링크 윗부분 체결",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part057 Part060 linkNutPos1 linkNutNeg0 linkWasherPos1 linkWasherNeg0",
+      "moves": [
+        {
+          "ids": [
+            "centerLink1"
+          ],
+          "offset": [
+            -12,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "rightLink0"
+          ],
+          "offset": [
+            12,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -20,
+        151
+      ],
+      "view": [
+        1.3,
+        -1.7,
+        0.85
+      ],
+      "span": 128,
+      "task": "양옆 링크의 위쪽 끝을 외장을 씌우기 전에 체결합니다.",
+      "check": "앞 외장을 넣는 동안 양쪽 링크를 그림의 위치에 가볍게 잡아 둡니다.",
+      "stock": "M2×8 원통머리 · M2 평와셔 각 2개",
+      "checked": true
+    },
+    {
+      "id": "jaw-motor-heads",
+      "group": "턱·외장",
+      "title": "턱 모터와 왼쪽 지지대",
+      "base": "Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw",
+      "moves": [
+        {
+          "ids": [
+            "jawMotorHead0",
+            "jawMotorHead1",
+            "jawMotorHead2",
+            "jawMotorHead3"
+          ],
+          "offset": [
+            -16,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        -42,
+        -8,
+        99
+      ],
+      "view": [
+        -1.6,
+        -1,
+        0.57
+      ],
+      "span": 81,
+      "task": "작업대에서 턱 모터를 왼쪽 지지대에 맞추고 바깥에서 체결합니다.",
+      "check": "원통머리가 들어가는 네 자리와 모터 케이스에 맞는 나사산을 대조합니다.",
+      "hold": true
+    },
+    {
+      "id": "jaw-fit",
+      "group": "턱·외장",
+      "title": "턱 오른쪽 축 맞추기",
+      "base": "Jaw_30_moving_jaw Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw jawMotorHead0 jawMotorHead1 jawMotorHead2 jawMotorHead3 Jaw_37_right_jaw_bearing_stay Jaw_38_left_jaw_drive_arm Jaw_39_right_jaw_pivot_arm Jaw_MR104ZZ_jaw_right",
+      "moves": [
+        {
+          "ids": [
+            "Jaw_Pin_jaw_4x10"
+          ],
+          "offset": [
+            -15,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        26,
+        -20,
+        88
+      ],
+      "view": [
+        1.6,
+        -1.1,
+        0.5
+      ],
+      "span": 100,
+      "task": "작업대에서 오른쪽 Ø4 핀을 턱 안쪽에서 베어링과 힌지팔로 밀어 넣습니다.",
+      "check": "턱을 손으로 열고 닫아 한쪽만 들리는지 확인합니다. 접착 위치는 가조립이 끝난 뒤 잡습니다.",
+      "stock": "MR104ZZ ×1 · Ø4 × 10 mm 핀 ×1",
+      "checked": true
+    },
+    {
+      "id": "camera-fit",
+      "group": "턱·외장",
+      "title": "코 카메라 놓기",
+      "base": "Part073 Part065 Part080",
+      "moves": [
+        {
+          "ids": [
+            "Part066",
+            "Part067",
+            "Part068"
+          ],
+          "offset": [
+            0,
+            66,
+            45
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -34,
+        97
+      ],
+      "view": [
+        1.1,
+        1.45,
+        0.55
+      ],
+      "span": 98,
+      "task": "열린 뒤쪽 위에서 카메라와 브래킷을 함께 코 쪽으로 비스듬히 내립니다.",
+      "check": "영상 가장자리와 실물 카메라의 고정 홀을 브래킷에 대조합니다.",
+      "stock": "카메라 고정 방식 실물 대조",
+      "hold": true
+    },
+    {
+      "id": "front-orbit",
+      "group": "턱·외장",
+      "title": "눈틀을 열린 뒤쪽에서",
+      "base": "Part073 Part065 Part066 Part067 Part068 Part080",
+      "moves": [
+        {
+          "ids": [
+            "Part076",
+            "Part078",
+            "Part058",
+            "Part061",
+            "Part077",
+            "Part079",
+            "Part059",
+            "Part062"
+          ],
+          "offset": [
+            0,
+            84,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -32,
+        123
+      ],
+      "view": [
+        1.1,
+        1.5,
+        0.63
+      ],
+      "span": 136,
+      "task": "핀을 끼운 두 눈틀을 해골 뒤쪽에서 눈구멍으로 밀어 넣습니다.",
+      "check": "눈꺼풀은 닫아 두고 링크는 나중에 연결합니다.",
+      "closedLids": true,
+      "checked": true
+    },
+    {
+      "id": "front-shell",
+      "group": "턱·외장",
+      "title": "앞 해골을 정면에서",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040",
+      "moves": [
+        {
+          "ids": [
+            "Part073",
+            "Part065",
+            "Part066",
+            "Part067",
+            "Part068",
+            "Part080",
+            "Part076",
+            "Part078",
+            "Part058",
+            "Part061",
+            "Part077",
+            "Part079",
+            "Part059",
+            "Part062"
+          ],
+          "offset": [
+            0,
+            -84,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -24,
+        123
+      ],
+      "view": [
+        1.25,
+        1.75,
+        0.37
+      ],
+      "span": 178,
+      "task": "목 핀을 먼저 끼웁니다. 눈꺼풀을 닫아 둔 앞 외장을 정면에서 뒤로 밀어 맞춥니다.",
+      "check": "안쪽에 만든 통로로 눈 지지대와 목 축이 지나갑니다.",
+      "cut": [
+        "x",
+        66.9
+      ],
+      "closedLids": true,
+      "checked": true
+    },
+    {
+      "id": "blink-lower-nuts",
+      "group": "턱·외장",
+      "title": "눈꺼풀 아래에서 작은 너트 잡기",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062",
+      "moves": [
+        {
+          "ids": [
+            "linkLeftLowerNut0",
+            "linkRightLowerNut0",
+            "linkWasherPos2",
+            "linkWasherNeg1"
+          ],
+          "offset": [
+            0,
+            0,
+            -13
+          ]
+        },
+        {
+          "ids": [
+            "lowerSpanner"
+          ],
+          "offset": [
+            0,
+            0,
+            -13
+          ]
+        }
+      ],
+      "focus": [
+        -29,
+        -31,
+        112
+      ],
+      "view": [
+        0.7,
+        -1.6,
+        -0.5
+      ],
+      "span": 113,
+      "task": "앞 외장을 끼운 뒤 턱이 비어 있을 때 아래에서 4 mm 스패너를 올려 너트를 댑니다.",
+      "check": "그림은 왼쪽 예입니다. 한쪽씩 와셔와 너트를 대고 바로 볼트를 겁니다.",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "blink-links",
+      "group": "턱·외장",
+      "title": "양옆에서 눈꺼풀 링크 조이기",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062 linkWasherPos2 linkWasherNeg1 linkLeftLowerNut0 linkRightLowerNut0",
+      "moves": [
+        {
+          "ids": [
+            "centerLower0"
+          ],
+          "offset": [
+            -12,
+            0,
+            0
+          ]
+        },
+        {
+          "ids": [
+            "rightLower0"
+          ],
+          "offset": [
+            12,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -29,
+        115
+      ],
+      "view": [
+        1.4,
+        -1.75,
+        0.63
+      ],
+      "span": 129,
+      "task": "아래의 스패너로 너트를 잡은 채 옆에서 1.5 mm 육각렌치로 조입니다.",
+      "check": "각 관절에 축방향 유격 0.10~0.20 mm를 둡니다.",
+      "stock": "M2×8 원통머리 · M2 평와셔 각 2개",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "jaw-to-shell",
+      "group": "턱·외장",
+      "title": "턱 조립체를 아래에서",
+      "base": "Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062 linkWasherPos2 linkWasherNeg1 linkLeftLowerNut0 linkRightLowerNut0 centerLower0 rightLower0",
+      "moves": [
+        {
+          "ids": [
+            "Jaw_30_moving_jaw",
+            "Jaw_36_left_jaw_servo_stay",
+            "Jaw_XL330_M288_Jaw",
+            "jawMotorHead0",
+            "jawMotorHead1",
+            "jawMotorHead2",
+            "jawMotorHead3",
+            "Jaw_37_right_jaw_bearing_stay",
+            "Jaw_38_left_jaw_drive_arm",
+            "Jaw_39_right_jaw_pivot_arm",
+            "Jaw_MR104ZZ_jaw_right",
+            "Jaw_Pin_jaw_4x10"
+          ],
+          "offset": [
+            0,
+            0,
+            -76
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        -25,
+        77
+      ],
+      "view": [
+        1.3,
+        -1.45,
+        0.65
+      ],
+      "span": 175,
+      "task": "받침에 붙이기 전에 작업대에서 머리를 높게 받치고 턱을 아래에서 올립니다.",
+      "check": "왼쪽 턱 지지대의 작은 홈이 앞에서 조인 눈꺼풀 링크 나사를 지나갑니다. 양쪽 지지대가 앉는지 봅니다.",
+      "checked": true
+    },
+    {
+      "id": "mast",
+      "group": "턱·외장",
+      "title": "기둥과 머리를 받침 위로",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2 Part002 lidBolt0 lidBolt1 lidBolt2 lidNut0 lidNut1 lidNut2",
+      "moves": [
+        {
+          "ids": [
+            "Part010",
+            "Part011",
+            "yokeNut0",
+            "yokeNut1",
+            "yokeNut2",
+            "yokeBolt0",
+            "yokeBolt1",
+            "yokeBolt2",
+            "Part018",
+            "Part016",
+            "pitchHornBolt0",
+            "pitchHornBolt1",
+            "pitchHornBolt2",
+            "pitchHornBolt3",
+            "Part012",
+            "Part014",
+            "Part019",
+            "Part013",
+            "Part015",
+            "Part064",
+            "Part042",
+            "Part041",
+            "Part043",
+            "Part044",
+            "eyePitchHead0",
+            "eyePitchHead1",
+            "eyePitchHead2",
+            "eyePitchHead3",
+            "eyePitchHead4",
+            "eyePitchHead5",
+            "Part063",
+            "railBolt0",
+            "railBolt1",
+            "railBolt2",
+            "railBolt3",
+            "railNut0",
+            "railNut1",
+            "railNut2",
+            "railNut3",
+            "Part050",
+            "Part052",
+            "Part046",
+            "Part045",
+            "Part047",
+            "Part056",
+            "Part054",
+            "crankNut1",
+            "crankBolt1",
+            "centerLink0",
+            "linkNutPos0",
+            "linkWasherPos0",
+            "middleNut0",
+            "middleServo0",
+            "middleWasher0",
+            "blinkMotorHead0",
+            "blinkMotorHead1",
+            "blinkMotorHead2",
+            "blinkMotorHead3",
+            "blinkPlateBolt0",
+            "blinkPlateBolt1",
+            "blinkPlateNut0",
+            "blinkPlateNut1",
+            "Part048",
+            "BlinkCollarLeft",
+            "BlinkCollarRight",
+            "Part053",
+            "crankNut0",
+            "crankBolt0",
+            "Part055",
+            "crankNut2",
+            "crankBolt2",
+            "Part057",
+            "Part060",
+            "centerLink1",
+            "rightLink0",
+            "linkWasherPos1",
+            "linkWasherNeg0",
+            "linkNutPos1",
+            "linkNutNeg0",
+            "Part024",
+            "Part029",
+            "Part030",
+            "Part031",
+            "Part032",
+            "Part033",
+            "Part034",
+            "Part035",
+            "Part036",
+            "Part025",
+            "Part026",
+            "Part027",
+            "Part028",
+            "Part037",
+            "Part039",
+            "Part038",
+            "eyeYawHead0",
+            "eyeYawHead1",
+            "eyeYawHead2",
+            "eyeYawHead3",
+            "Part040",
+            "Part073",
+            "Part065",
+            "Part066",
+            "Part067",
+            "Part068",
+            "Part080",
+            "Part076",
+            "Part078",
+            "Part058",
+            "Part061",
+            "Part077",
+            "Part079",
+            "Part059",
+            "Part062",
+            "linkWasherPos2",
+            "linkWasherNeg1",
+            "linkLeftLowerNut0",
+            "linkRightLowerNut0",
+            "centerLower0",
+            "rightLower0",
+            "Jaw_36_left_jaw_servo_stay",
+            "Jaw_XL330_M288_Jaw",
+            "jawMotorHead0",
+            "jawMotorHead1",
+            "jawMotorHead2",
+            "jawMotorHead3",
+            "Jaw_30_moving_jaw",
+            "Jaw_37_right_jaw_bearing_stay",
+            "Jaw_38_left_jaw_drive_arm",
+            "Jaw_39_right_jaw_pivot_arm",
+            "Jaw_MR104ZZ_jaw_right",
+            "Jaw_Pin_jaw_4x10"
+          ],
+          "offset": [
+            0,
+            0,
+            36
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        4,
+        65
+      ],
+      "view": [
+        1.1,
+        -1.15,
+        0.52
+      ],
+      "span": 288,
+      "task": "작업대에서 조립한 머리를 06번 기둥과 함께 들어 회전판 위에 낮춥니다.",
+      "check": "회전판에 세운 볼트 네 개에 기둥 발을 맞춥니다. 머리를 받친 채 너트를 손으로 겁니다.",
+      "cut": [
+        "x",
+        0
+      ],
+      "checked": true
+    },
+    {
+      "id": "mast-bolts",
+      "group": "턱·외장",
+      "title": "기둥 바깥 위아래 너트로 고정",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062 linkWasherPos2 linkWasherNeg1 linkLeftLowerNut0 linkRightLowerNut0 centerLower0 rightLower0 Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw jawMotorHead0 jawMotorHead1 jawMotorHead2 jawMotorHead3 Jaw_30_moving_jaw Jaw_37_right_jaw_bearing_stay Jaw_38_left_jaw_drive_arm Jaw_39_right_jaw_pivot_arm Jaw_MR104ZZ_jaw_right Jaw_Pin_jaw_4x10 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2 Part002 lidBolt0 lidBolt1 lidBolt2 lidNut0 lidNut1 lidNut2",
+      "moves": [
+        {
+          "ids": [
+            "mastNut0",
+            "mastNut1",
+            "mastNut2",
+            "mastNut3"
+          ],
+          "offset": [
+            0,
+            0,
+            17
+          ]
+        },
+        {
+          "ids": [
+            "mastSpanner"
+          ],
+          "offset": [
+            21,
+            0,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        17,
+        19,
+        -26
+      ],
+      "view": [
+        1.3,
+        -1.05,
+        0.68
+      ],
+      "span": 108,
+      "task": "이미 세워 둔 M3 볼트에 기둥을 얹은 뒤 위쪽 일반 너트 네 개를 조입니다.",
+      "check": "아래쪽 너트는 열린 홈에서 5.5 mm 스패너로 잡고 위쪽 너트는 소켓으로 조입니다.",
+      "stock": "일반 M3 육각너트 ×4",
+      "checked": true,
+      "inspectFasteners": true
+    },
+    {
+      "id": "neck-wiring",
+      "group": "턱·외장",
+      "title": "목과 머리 배선 연결",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062 linkWasherPos2 linkWasherNeg1 linkLeftLowerNut0 linkRightLowerNut0 centerLower0 rightLower0 Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw jawMotorHead0 jawMotorHead1 jawMotorHead2 jawMotorHead3 Jaw_30_moving_jaw Jaw_37_right_jaw_bearing_stay Jaw_38_left_jaw_drive_arm Jaw_39_right_jaw_pivot_arm Jaw_MR104ZZ_jaw_right Jaw_Pin_jaw_4x10 mastNut0 mastNut1 mastNut2 mastNut3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2 Part002 lidBolt0 lidBolt1 lidBolt2 lidNut0 lidNut1 lidNut2",
+      "moves": [],
+      "focus": [
+        0,
+        0,
+        55
+      ],
+      "view": [
+        1.6,
+        -1,
+        0.8
+      ],
+      "span": 310,
+      "task": "뒤 해골을 닫기 전에 받침에서 올라오는 선을 회전판 앞 통로로 보내고 모터 네 개와 카메라를 연결합니다.",
+      "check": "ID 4는 왼쪽 창, ID 5는 뒤쪽 창에 꽂습니다. ID 1의 뒤쪽 플러그는 눈 모듈을 만들 때 미리 꽂습니다.",
+      "inspectFasteners": true,
+      "wiring": true,
+      "checked": true,
+      "status": "CAD 삽입 경로 확인"
+    },
+    {
+      "id": "rear-shell",
+      "group": "턱·외장",
+      "title": "뒤 해골을 씌우기",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062 linkWasherPos2 linkWasherNeg1 linkLeftLowerNut0 linkRightLowerNut0 centerLower0 rightLower0 Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw jawMotorHead0 jawMotorHead1 jawMotorHead2 jawMotorHead3 Jaw_30_moving_jaw Jaw_37_right_jaw_bearing_stay Jaw_38_left_jaw_drive_arm Jaw_39_right_jaw_pivot_arm Jaw_MR104ZZ_jaw_right Jaw_Pin_jaw_4x10 mastNut0 mastNut1 mastNut2 mastNut3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2 Part002 lidBolt0 lidBolt1 lidBolt2 lidNut0 lidNut1 lidNut2",
+      "moves": [
+        {
+          "ids": [
+            "Part074"
+          ],
+          "offset": [
+            0,
+            68,
+            0
+          ]
+        }
+      ],
+      "focus": [
+        0,
+        43,
+        151
+      ],
+      "view": [
+        1.1,
+        1.4,
+        0.59
+      ],
+      "span": 172,
+      "task": "뒤 해골을 이음면에 수직으로 밀어 넣습니다.",
+      "check": "앞뒤 이음면이 힘 없이 닫히는지 봅니다. 눈 지지대와 링크의 옆 나사를 먼저 확인합니다.",
+      "cut": [
+        "y",
+        22.98
+      ],
+      "checked": true,
+      "wiring": true
+    },
+    {
+      "id": "complete",
+      "group": "턱·외장",
+      "title": "조립 완료 · 체결과 배선",
+      "base": "Part000 CableSaddle InputXT30 InputXT60 InputXT60Mate CameraUSB ControlUSB CableGate cableNut0 cableNut1 cableNut2 cableNut3 cableNut4 cableBolt0 cableBolt1 cableBolt2 cableBolt3 cableBolt4 clipBolt0 clipBolt1 clipNut0 clipNut1 clipWasher0 clipWasher1 HubHolder HubPCB HubPlugJ3 HubPlugJ4 HubPlugJ5 HubPlugJ6 HubPlugJ7 HubPlugJ8 HubBodyJ1 HubBodyJ2 HubBodyJ3 HubBodyJ4 HubBodyJ5 HubBodyJ6 HubBodyJ7 HubBodyJ8 HubBodyF1 HubBodyF2 HubBodyC1 HubBodyC2 HubBodyR1 HubBodyR2 HubBodyR3 HubBodyD1 HubBodyD2 hubNut0 hubNut1 hubNut2 hubNut3 hubBolt0 hubBolt1 hubBolt2 hubBolt3 hatchNut0 hatchNut1 hatchNut2 hatchNut3 hatchBolt0 hatchBolt1 hatchBolt2 hatchBolt3 Part071 Part070 c3Bolt0 c3Bolt1 c3Nut0 c3Nut1 carrierBolt0 carrierBolt1 carrierBolt2 carrierBolt3 carrierNut0 carrierNut1 carrierNut2 carrierNut3 Part072 Part069 OpenRBUSB openrbBolt0 openrbBolt1 openrbBolt2 openrbBolt3 openrbNut0 openrbNut1 openrbNut2 openrbNut3 carrierBolt4 carrierBolt5 carrierBolt6 carrierBolt7 carrierNut4 carrierNut5 carrierNut6 carrierNut7 Part008 Part009 Part017 Part001 Part006 Part007 rotorNut0 rotorNut1 rotorNut2 rotorNut3 mastStud0 mastStud1 mastStud2 mastStud3 hornBolt0 hornBolt1 hornBolt2 hornBolt3 Part010 Part011 yokeNut0 yokeNut1 yokeNut2 yokeBolt0 yokeBolt1 yokeBolt2 Part018 Part016 pitchHornBolt0 pitchHornBolt1 pitchHornBolt2 pitchHornBolt3 Part012 Part014 Part019 Part013 Part015 Part064 Part042 Part041 Part043 Part044 eyePitchHead0 eyePitchHead1 eyePitchHead2 eyePitchHead3 eyePitchHead4 eyePitchHead5 Part063 railBolt0 railBolt1 railBolt2 railBolt3 railNut0 railNut1 railNut2 railNut3 Part050 Part052 Part046 Part045 Part047 Part056 Part054 crankNut1 crankBolt1 centerLink0 linkNutPos0 linkWasherPos0 middleNut0 middleServo0 middleWasher0 blinkMotorHead0 blinkMotorHead1 blinkMotorHead2 blinkMotorHead3 blinkPlateBolt0 blinkPlateBolt1 blinkPlateNut0 blinkPlateNut1 Part048 BlinkCollarLeft BlinkCollarRight Part053 crankNut0 crankBolt0 Part055 crankNut2 crankBolt2 Part057 Part060 centerLink1 rightLink0 linkWasherPos1 linkWasherNeg0 linkNutPos1 linkNutNeg0 Part024 Part029 Part030 Part031 Part032 Part033 Part034 Part035 Part036 Part025 Part026 Part027 Part028 Part037 Part039 Part038 eyeYawHead0 eyeYawHead1 eyeYawHead2 eyeYawHead3 Part040 Part073 Part065 Part066 Part067 Part068 Part080 Part076 Part078 Part058 Part061 Part077 Part079 Part059 Part062 linkWasherPos2 linkWasherNeg1 linkLeftLowerNut0 linkRightLowerNut0 centerLower0 rightLower0 Jaw_36_left_jaw_servo_stay Jaw_XL330_M288_Jaw jawMotorHead0 jawMotorHead1 jawMotorHead2 jawMotorHead3 Jaw_30_moving_jaw Jaw_37_right_jaw_bearing_stay Jaw_38_left_jaw_drive_arm Jaw_39_right_jaw_pivot_arm Jaw_MR104ZZ_jaw_right Jaw_Pin_jaw_4x10 Part074 mastNut0 mastNut1 mastNut2 mastNut3 YawBearingRetainer1 YawBearingRetainer2 YawBearingRetainer3 keeperNut0 keeperNut1 keeperNut2 keeperBolt0 keeperBolt1 keeperBolt2 seatBolt0 seatBolt1 seatBolt2 seatNut0 seatNut1 seatNut2 Part002 lidBolt0 lidBolt1 lidBolt2 lidNut0 lidNut1 lidNut2",
+      "moves": [],
+      "focus": [
+        0,
+        1,
+        58
+      ],
+      "view": [
+        1.15,
+        -1.45,
+        0.8
+      ],
+      "span": 325,
+      "task": "기본 체결품 140개와 체결 길이를 확인 중인 원통머리 18곳, 내부 전선 32가닥을 표시합니다.",
+      "check": "목 좌우 ±60°에서 회전판 아래 볼트와 모터 사이 최소 간격은 0.70 mm입니다.",
+      "note": "구동 검토에서 배선과 체결품을 표시한 채 눈·목·턱을 움직일 수 있습니다.",
+      "inspectFasteners": true,
+      "wiring": true,
+      "checked": true,
+      "status": "CAD 조립 상태"
+    }
+  ],
+  "hardware": [
+    {
+      "id": "hatchNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -41.2,
+        51,
+        -74.78
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -41.2,
+        71,
+        -74.78
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        41.2,
+        51,
+        -74.78
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        41.2,
+        71,
+        -74.78
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -41.2,
+        51,
+        -79.65
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -41.2,
+        71,
+        -79.65
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        41.2,
+        51,
+        -79.65
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hatchBolt3",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        41.2,
+        71,
+        -79.65
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hubBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -30.8,
+        46.2,
+        -72.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hubBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -30.8,
+        72.8,
+        -72.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hubBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        30.8,
+        46.2,
+        -72.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hubBolt3",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        30.8,
+        72.8,
+        -72.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hubNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -30.8,
+        46.2,
+        -80.05
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "hubNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -30.8,
+        72.8,
+        -80.05
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "hubNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        30.8,
+        46.2,
+        -80.05
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "hubNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        30.8,
+        72.8,
+        -80.05
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "cableNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -47,
+        121.6,
+        -64.4
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "cableNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -28.3,
+        121.6,
+        -64.4
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "cableNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -3,
+        121.6,
+        -64.4
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "cableNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        22,
+        121.6,
+        -64.4
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "cableNut4",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        47,
+        121.6,
+        -64.4
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "cableBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -47.0,
+        121.6,
+        -52.1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "cableBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -28.3,
+        121.6,
+        -52.1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "cableBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -3.0,
+        121.6,
+        -52.1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "cableBolt3",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        22.0,
+        121.6,
+        -52.1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "cableBolt4",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        47.0,
+        121.6,
+        -52.1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "clipBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        -28.5,
+        93.6,
+        -71
+      ],
+      "phase": 0
+    },
+    {
+      "id": "clipBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        28.5,
+        93.6,
+        -71
+      ],
+      "phase": 0
+    },
+    {
+      "id": "clipWasher0",
+      "type": "washer",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        -28.5,
+        83.75,
+        -71
+      ],
+      "phase": 0
+    },
+    {
+      "id": "clipWasher1",
+      "type": "washer",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        28.5,
+        83.75,
+        -71
+      ],
+      "phase": 0
+    },
+    {
+      "id": "clipNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        -28.5,
+        82.95,
+        -71
+      ],
+      "phase": 0
+    },
+    {
+      "id": "clipNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        28.5,
+        82.95,
+        -71
+      ],
+      "phase": 0
+    },
+    {
+      "id": "seatNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        3.857637417314163e-15,
+        -63,
+        -37
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "seatNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        54.559600438419636,
+        31.499999999999996,
+        -37
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "seatNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -54.559600438419636,
+        31.499999999999996,
+        -37
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "seatBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        3.857637417314163e-15,
+        -63,
+        -50.15
+      ],
+      "phase": 0
+    },
+    {
+      "id": "seatBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        54.559600438419636,
+        31.499999999999996,
+        -50.15
+      ],
+      "phase": 0
+    },
+    {
+      "id": "seatBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -54.559600438419636,
+        31.499999999999996,
+        -50.15
+      ],
+      "phase": 0
+    },
+    {
+      "id": "lidNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        5.204748896376251e-15,
+        -85,
+        -25.8
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "lidNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        73.6121593216773,
+        42.49999999999999,
+        -25.8
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "lidNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -73.6121593216773,
+        42.49999999999999,
+        -25.8
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "lidBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        5.204748896376251e-15,
+        -85,
+        -31.05
+      ],
+      "phase": 0
+    },
+    {
+      "id": "lidBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        73.6121593216773,
+        42.49999999999999,
+        -31.05
+      ],
+      "phase": 0
+    },
+    {
+      "id": "lidBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -73.6121593216773,
+        42.49999999999999,
+        -31.05
+      ],
+      "phase": 0
+    },
+    {
+      "id": "keeperNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        56.4,
+        0,
+        -33.55
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "keeperNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -28.199999999999985,
+        48.843832773442344,
+        -33.55
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "keeperNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -28.200000000000024,
+        -48.84383277344232,
+        -33.55
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "keeperBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        56.4,
+        0,
+        -38.75
+      ],
+      "phase": 0
+    },
+    {
+      "id": "keeperBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -28.199999999999985,
+        48.843832773442344,
+        -38.75
+      ],
+      "phase": 0
+    },
+    {
+      "id": "keeperBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -28.200000000000024,
+        -48.84383277344232,
+        -38.75
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -76,
+        -28,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -76,
+        7,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -32,
+        -28,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -32,
+        7,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut4",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        35,
+        -28,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut5",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        35,
+        7,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut6",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        70,
+        -28,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierNut7",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        70,
+        7,
+        -74.3
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "carrierBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -76,
+        -28,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -76,
+        7,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -32,
+        -28,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt3",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -32,
+        7,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt4",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        35,
+        -28,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt5",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        35,
+        7,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt6",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        70,
+        -28,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "carrierBolt7",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        70,
+        7,
+        -79.45
+      ],
+      "phase": 0
+    },
+    {
+      "id": "c3Nut0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -68,
+        -28.799999999999997,
+        -76.86
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "c3Nut1",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -40,
+        -15.899999999999999,
+        -76.86
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "c3Bolt0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -68,
+        -28.799999999999997,
+        -69.4
+      ],
+      "phase": 0
+    },
+    {
+      "id": "c3Bolt1",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -40,
+        -15.899999999999999,
+        -69.4
+      ],
+      "phase": 0
+    },
+    {
+      "id": "openrbNut0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        42.25,
+        -42,
+        -76.51
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "openrbNut1",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        42.25,
+        19.5,
+        -76.51
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "openrbNut2",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        62.75,
+        -42,
+        -76.51
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "openrbNut3",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        62.75,
+        19.5,
+        -76.51
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "openrbBolt0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        42.25,
+        -42,
+        -69.05000000000001
+      ],
+      "phase": 0
+    },
+    {
+      "id": "openrbBolt1",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        42.25,
+        19.5,
+        -69.05000000000001
+      ],
+      "phase": 0
+    },
+    {
+      "id": "openrbBolt2",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        62.75,
+        -42,
+        -69.05000000000001
+      ],
+      "phase": 0
+    },
+    {
+      "id": "openrbBolt3",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        62.75,
+        19.5,
+        -69.05000000000001
+      ],
+      "phase": 0
+    },
+    {
+      "id": "rotorNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -23,
+        13,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "rotorNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -23,
+        26,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "rotorNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        23,
+        13,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "rotorNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        23,
+        26,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastStud0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -23,
+        13,
+        -36.2
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastStud1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -23,
+        26,
+        -36.2
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastStud2",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        23,
+        13,
+        -36.2
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastStud3",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        23,
+        26,
+        -36.2
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -23,
+        13,
+        -25.6
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -23,
+        26,
+        -25.6
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        23,
+        13,
+        -25.6
+      ],
+      "phase": 0
+    },
+    {
+      "id": "mastNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        23,
+        26,
+        -25.6
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hornBolt0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -8,
+        0,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hornBolt1",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        0,
+        -8,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hornBolt2",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        8,
+        0,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "hornBolt3",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        0,
+        8,
+        -32.9
+      ],
+      "phase": 0
+    },
+    {
+      "id": "pitchHornBolt0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        41.2,
+        8,
+        112
+      ],
+      "phase": 0
+    },
+    {
+      "id": "pitchHornBolt1",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        41.2,
+        -8,
+        112
+      ],
+      "phase": 0
+    },
+    {
+      "id": "pitchHornBolt2",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        40.9,
+        0.0,
+        120.0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "pitchHornBolt3",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        41.2,
+        0,
+        104
+      ],
+      "phase": 0
+    },
+    {
+      "id": "yokeNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -12,
+        14.8,
+        59.64
+      ],
+      "phase": 0
+    },
+    {
+      "id": "yokeNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -12,
+        27.3,
+        59.64
+      ],
+      "phase": 0
+    },
+    {
+      "id": "yokeNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        12,
+        24.3,
+        59.64
+      ],
+      "phase": 0
+    },
+    {
+      "id": "yokeBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -12,
+        14.8,
+        75
+      ],
+      "phase": 0
+    },
+    {
+      "id": "yokeBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -12,
+        27.3,
+        75
+      ],
+      "phase": 0
+    },
+    {
+      "id": "yokeBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        12,
+        24.3,
+        75
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "seat": [
+        -20,
+        12.8,
+        141.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "seat": [
+        -20,
+        12.8,
+        151.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "seat": [
+        20,
+        12.8,
+        141.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railNut3",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        1,
+        0
+      ],
+      "seat": [
+        20,
+        12.8,
+        151.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        -20,
+        27.7,
+        141.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        -20,
+        27.7,
+        151.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        20,
+        27.7,
+        141.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "railBolt3",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "seat": [
+        20,
+        27.7,
+        151.5
+      ],
+      "phase": 0
+    },
+    {
+      "id": "crankNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -53.9,
+        -24,
+        158.6
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "crankNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        10.2,
+        -24,
+        158.6
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "crankNut2",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        54.15,
+        -24,
+        158.6
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "crankBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -53.9,
+        -24,
+        163.55
+      ],
+      "phase": 0
+    },
+    {
+      "id": "crankBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        10.2,
+        -24,
+        163.55
+      ],
+      "phase": 0
+    },
+    {
+      "id": "crankBolt2",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        54.15,
+        -24,
+        163.55
+      ],
+      "phase": 0
+    },
+    {
+      "id": "middleServo0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        3.42,
+        -9.386658546366338,
+        163.1604400264209
+      ],
+      "phase": 0
+    },
+    {
+      "id": "centerLink0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        4.55,
+        -19.386658546366338,
+        147.1604400264209
+      ],
+      "phase": 0
+    },
+    {
+      "id": "centerLink1",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        -53.75,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "phase": 0
+    },
+    {
+      "id": "centerLower0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        -53.5,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "phase": 0
+    },
+    {
+      "id": "rightLink0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        53.75,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "phase": 0
+    },
+    {
+      "id": "rightLower0",
+      "type": "bolt",
+      "size": 2,
+      "length": 8,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        53.5,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "phase": 0
+    },
+    {
+      "id": "middleNut0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        9.45,
+        -9.386658546366338,
+        163.1604400264209
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "linkNutPos0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        10.55,
+        -19.386658546366338,
+        147.1604400264209
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkNutPos1",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        -47.65,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkNutNeg0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        47.65,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkLeftLowerNut0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        -47.65,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkRightLowerNut0",
+      "type": "nut",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        47.65,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "phase": 0
+    },
+    {
+      "id": "middleWasher0",
+      "type": "washer",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        9.149999999999999,
+        -9.386658546366338,
+        163.1604400264209
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkWasherPos0",
+      "type": "washer",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        10.55,
+        -19.386658546366338,
+        147.1604400264209
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkWasherPos1",
+      "type": "washer",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        -47.65,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkWasherPos2",
+      "type": "washer",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        -47.65,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkWasherNeg0",
+      "type": "washer",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        47.65,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "phase": 0
+    },
+    {
+      "id": "linkWasherNeg1",
+      "type": "washer",
+      "size": 2,
+      "length": 0,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "seat": [
+        47.65,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkMotorHead0",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -0.7999999999999999,
+        -22,
+        162.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkMotorHead1",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        0.9,
+        -22,
+        192.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkMotorHead2",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -0.9500000000000001,
+        -6,
+        162.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkMotorHead3",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        0.9,
+        -6,
+        192.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkPlateBolt0",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        0.9,
+        2.2,
+        182
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkPlateBolt1",
+      "type": "bolt",
+      "size": 3,
+      "length": 16,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        0.9,
+        2.2,
+        190.8
+      ],
+      "phase": 0
+    },
+    {
+      "id": "blinkPlateNut0",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        -12.4,
+        2.2,
+        182
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "blinkPlateNut1",
+      "type": "nut",
+      "size": 3,
+      "length": 0,
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "seat": [
+        -12.4,
+        2.2,
+        190.8
+      ],
+      "phase": 0.5235987755982988
+    },
+    {
+      "id": "eyeYawHead0",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -13.3,
+        -43.5,
+        111.55
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyeYawHead1",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -13.3,
+        -27.5,
+        109.7
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyeYawHead2",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        16.7,
+        -43.5,
+        111.55
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyeYawHead3",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        16.7,
+        -27.5,
+        111.55
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyePitchHead0",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        58.35,
+        2,
+        128.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyePitchHead1",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        58.35,
+        2,
+        158.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyePitchHead2",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        58.35,
+        18,
+        128.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyePitchHead3",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        58.35,
+        18,
+        158.5
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyePitchHead4",
+      "type": "head",
+      "size": 3,
+      "seat": [
+        58.35,
+        4.6,
+        164.3
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "eyePitchHead5",
+      "type": "head",
+      "size": 3,
+      "seat": [
+        58.35,
+        15.4,
+        164.3
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "jawMotorHead0",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -41.65,
+        -17,
+        84.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "jawMotorHead1",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -43.5,
+        -17,
+        114.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "jawMotorHead2",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -43.5,
+        -1,
+        84.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "jawMotorHead3",
+      "type": "head",
+      "size": 2,
+      "seat": [
+        -41.9,
+        -1,
+        114.5
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "phase": 0
+    },
+    {
+      "id": "cableSpanner",
+      "type": "spanner",
+      "tool": true,
+      "size": 3,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "outward": [
+        0,
+        1,
+        0
+      ],
+      "profile": [
+        [
+          -8,
+          -4
+        ],
+        [
+          -8,
+          2.1
+        ],
+        [
+          -3,
+          7.7
+        ],
+        [
+          -3,
+          56
+        ],
+        [
+          3,
+          56
+        ],
+        [
+          3,
+          7.7
+        ],
+        [
+          8,
+          2.1
+        ],
+        [
+          8,
+          -4
+        ],
+        [
+          2.81,
+          -4
+        ],
+        [
+          2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          -4
+        ]
+      ],
+      "thickness": 4.2,
+      "seat": [
+        -3,
+        121.6,
+        -66.46000000000001
+      ]
+    },
+    {
+      "id": "hatchSpanner",
+      "type": "spanner",
+      "tool": true,
+      "size": 3,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "outward": [
+        1,
+        0,
+        0
+      ],
+      "profile": [
+        [
+          -8,
+          -4
+        ],
+        [
+          -8,
+          2.1
+        ],
+        [
+          -3,
+          7.7
+        ],
+        [
+          -3,
+          56
+        ],
+        [
+          3,
+          56
+        ],
+        [
+          3,
+          7.7
+        ],
+        [
+          8,
+          2.1
+        ],
+        [
+          8,
+          -4
+        ],
+        [
+          2.81,
+          -4
+        ],
+        [
+          2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          -4
+        ]
+      ],
+      "thickness": 4.2,
+      "seat": [
+        41.2,
+        71,
+        -74.54
+      ]
+    },
+    {
+      "id": "mastSpanner",
+      "type": "spanner",
+      "tool": true,
+      "size": 3,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "outward": [
+        1,
+        0,
+        0
+      ],
+      "profile": [
+        [
+          -8,
+          -4
+        ],
+        [
+          -8,
+          2.1
+        ],
+        [
+          -3,
+          7.7
+        ],
+        [
+          -3,
+          56
+        ],
+        [
+          3,
+          56
+        ],
+        [
+          3,
+          7.7
+        ],
+        [
+          8,
+          2.1
+        ],
+        [
+          8,
+          -4
+        ],
+        [
+          2.81,
+          -4
+        ],
+        [
+          2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          -4
+        ]
+      ],
+      "thickness": 4.2,
+      "seat": [
+        23,
+        26,
+        -32.66
+      ]
+    },
+    {
+      "id": "crankSpanner",
+      "type": "spanner",
+      "tool": true,
+      "size": 3,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "outward": [
+        0,
+        -1,
+        0
+      ],
+      "profile": [
+        [
+          -8,
+          -4
+        ],
+        [
+          -8,
+          2.1
+        ],
+        [
+          -3,
+          7.7
+        ],
+        [
+          -3,
+          56
+        ],
+        [
+          3,
+          56
+        ],
+        [
+          3,
+          7.7
+        ],
+        [
+          8,
+          2.1
+        ],
+        [
+          8,
+          -4
+        ],
+        [
+          2.81,
+          -4
+        ],
+        [
+          2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          3.24
+        ],
+        [
+          -2.81,
+          -4
+        ]
+      ],
+      "thickness": 4.2,
+      "seat": [
+        10.2,
+        -24,
+        156.65
+      ]
+    },
+    {
+      "id": "lowerSpanner",
+      "type": "spanner",
+      "tool": true,
+      "size": 2,
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "outward": [
+        0,
+        0,
+        -1
+      ],
+      "profile": [
+        [
+          -5.3,
+          -3.2
+        ],
+        [
+          -5.3,
+          2.1
+        ],
+        [
+          -3,
+          5.5
+        ],
+        [
+          -3,
+          56
+        ],
+        [
+          3,
+          56
+        ],
+        [
+          3,
+          5.5
+        ],
+        [
+          5.3,
+          2.1
+        ],
+        [
+          5.3,
+          -3.2
+        ],
+        [
+          2.06,
+          -3.2
+        ],
+        [
+          2.06,
+          2.49
+        ],
+        [
+          -2.06,
+          2.49
+        ],
+        [
+          -2.06,
+          -3.2
+        ]
+      ],
+      "thickness": 3,
+      "seat": [
+        -47.53,
+        -32.56928161008641,
+        109.46606791561702
+      ]
+    },
+    {
+      "id": "hubSocket",
+      "type": "socket",
+      "tool": true,
+      "size": 3,
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "seat": [
+        -30.8,
+        46.2,
+        -77.72
+      ],
+      "radius": 4.65,
+      "opening": 3.25,
+      "depth": 5.6,
+      "length": 22
+    },
+    {
+      "id": "hubKey",
+      "type": "tool",
+      "tool": true,
+      "size": 3,
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "seat": [
+        -30.8,
+        46.2,
+        -69.48
+      ],
+      "radius": 1.48,
+      "length": 29
+    },
+    {
+      "id": "c3Nut0",
+      "type": "nut",
+      "size": 3,
+      "seat": [
+        -74.65,
+        -17.5,
+        -76.4
+      ],
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "motion": "fixed"
+    },
+    {
+      "id": "c3Nut1",
+      "type": "nut",
+      "size": 3,
+      "seat": [
+        -33.35,
+        -15.9,
+        -76.4
+      ],
+      "axis": [
+        0,
+        0,
+        1
+      ],
+      "motion": "fixed"
+    },
+    {
+      "id": "CameraPCBWasherLeft",
+      "type": "washer",
+      "size": 3,
+      "seat": [
+        -14.0,
+        -56.6,
+        103.0
+      ],
+      "axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "exact_cad": true
+    },
+    {
+      "id": "CameraPCBNutLeft",
+      "type": "nut",
+      "size": 2,
+      "seat": [
+        -14.0,
+        -57.1,
+        103.0
+      ],
+      "axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "exact_cad": true
+    },
+    {
+      "id": "CameraPCBWasherRight",
+      "type": "washer",
+      "size": 3,
+      "seat": [
+        14.0,
+        -56.6,
+        103.0
+      ],
+      "axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "exact_cad": true
+    },
+    {
+      "id": "CameraPCBNutRight",
+      "type": "nut",
+      "size": 2,
+      "seat": [
+        14.0,
+        -57.1,
+        103.0
+      ],
+      "axis": [
+        0.0,
+        -1.0,
+        0.0
+      ],
+      "exact_cad": true
+    },
+    {
+      "id": "ServiceHatchNutKeeperLeftScrew",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "seat": [
+        -41.2,
+        61.0,
+        -69.98
+      ],
+      "phase": 0
+    },
+    {
+      "id": "ServiceHatchNutKeeperRightScrew",
+      "type": "bolt",
+      "size": 3,
+      "length": 8,
+      "axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "seat": [
+        41.2,
+        61.0,
+        -69.98
+      ],
+      "phase": 0
+    },
+    {
+      "id": "PitchDriveScrew",
+      "type": "bolt",
+      "size": 3,
+      "length": 8.0,
+      "axis": [
+        0.0,
+        0.0,
+        -1.0
+      ],
+      "seat": [
+        45.900000000000006,
+        0.0,
+        117.5
+      ],
+      "phase": 0
+    }
+  ]
+}

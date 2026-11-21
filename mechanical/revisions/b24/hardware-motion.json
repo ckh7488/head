@@ -1,0 +1,326 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "fasteners": {
+    "XL430YawSideL0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430YawSideL1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430YawSideR0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430YawSideR1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot2": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "YawBracketFoot3": {
+      "collisions": [],
+      "under_1mm": {
+        "HarnessWdata": 0.92
+      }
+    },
+    "XL430PitchSide0": {
+      "collisions": [],
+      "under_1mm": {
+        "ID5EHKeeper": 0.451
+      }
+    },
+    "XL430PitchSide1": {
+      "collisions": [],
+      "under_1mm": {
+        "ID5EHKeeper": 0.451
+      }
+    },
+    "XL430PitchKeeper0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "XL430PitchKeeper1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawFoot0": {
+      "collisions": [],
+      "under_1mm": {
+        "Part038": 0.75,
+        "Part073": 0.466,
+        "Part076": 0.195
+      }
+    },
+    "EyeYawFoot1": {
+      "collisions": [],
+      "under_1mm": {
+        "Part038": 0.75,
+        "Part077": 0.195
+      }
+    },
+    "EyePitchStayFrame0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchStayFrame1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CradleMountFrameL": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CradleMountFrameR": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawHornScrew2": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkHornScrew0": {
+      "collisions": [],
+      "under_1mm": {
+        "Part056": 0.789
+      }
+    },
+    "BlinkHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "JawHornScrew0": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "JawHornScrew1": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawTiePinL": {
+      "collisions": [],
+      "under_1mm": {
+        "Jaw_36_left_jaw_servo_stay": 0.989
+      }
+    },
+    "EyeYawTiePinR": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyePitchLinkHornPin": {
+      "collisions": [],
+      "under_1mm": {
+        "Part019": 0.75,
+        "Part027": 0.15,
+        "Part042": 0.3
+      }
+    },
+    "EyePitchLinkCradlePin": {
+      "collisions": [],
+      "under_1mm": {
+        "Part027": 0.8
+      }
+    },
+    "ID5KeeperScrew1": {
+      "collisions": [],
+      "under_1mm": {
+        "Part018": 0.9
+      }
+    },
+    "ID5KeeperScrew2": {
+      "collisions": [],
+      "under_1mm": {
+        "Part018": 0.9
+      }
+    },
+    "c3Bolt0": {
+      "collisions": [],
+      "under_1mm": {
+        "c3Nut0": 0.149
+      }
+    },
+    "c3Bolt1": {
+      "collisions": [],
+      "under_1mm": {
+        "c3Nut1": 0.149
+      }
+    },
+    "BlinkPivotServo": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotServoRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotDrive": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotDriveRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotUpperL": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotUpperLRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotUpperR": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotUpperRRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotLowerL": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotLowerLRetainer": {
+      "collisions": [],
+      "under_1mm": {
+        "Part029": 0.83
+      }
+    },
+    "BlinkPivotLowerR": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "BlinkPivotLowerRRetainer": {
+      "collisions": [],
+      "under_1mm": {
+        "Part033": 0.83
+      }
+    },
+    "EyeYawDrivePivot": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "EyeYawDrivePivotRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "PitchLimitLowerPin": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "PitchLimitLowerRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "PitchLimitUpperPin": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "PitchLimitUpperRetainer": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CameraTrayScrewLeft": {
+      "collisions": [],
+      "under_1mm": {
+        "Part073": 0.218
+      }
+    },
+    "CameraTrayScrewRight": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CameraPCBScrewLeft": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CameraPCBWasherLeft": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CameraPCBNutLeft": {
+      "collisions": [],
+      "under_1mm": {
+        "Part066": 0.5
+      }
+    },
+    "CameraPCBScrewRight": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CameraPCBWasherRight": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "CameraPCBNutRight": {
+      "collisions": [],
+      "under_1mm": {
+        "Part066": 0.5
+      }
+    },
+    "ServiceHatchNutKeeperLeftScrew": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "ServiceHatchNutKeeperRightScrew": {
+      "collisions": [],
+      "under_1mm": {}
+    },
+    "PitchDriveScrew": {
+      "collisions": [],
+      "under_1mm": {
+        "Part011": 0.84,
+        "Part014": 0.32
+      }
+    }
+  },
+  "yaw_gap_mm": {
+    "XL430YawSideL0": 10.75,
+    "XL430YawSideL1": 3.691,
+    "XL430YawSideR0": 10.75,
+    "XL430YawSideR1": 3.691,
+    "YawBracketFoot0": 19.509,
+    "YawBracketFoot1": 15.096,
+    "YawBracketFoot2": 19.509,
+    "YawBracketFoot3": 15.096,
+    "c3Bolt0": 39.177,
+    "c3Bolt1": 19.35,
+    "ServiceHatchNutKeeperLeftScrew": 37.243,
+    "ServiceHatchNutKeeperRightScrew": 37.243
+  },
+  "joint_pairs": {
+    "Part047 / Part056": 0.0,
+    "Part054 / Part056": 0.0,
+    "Part053 / Part057": 0.0,
+    "Part055 / Part060": 0.0
+  },
+  "hardware_spec_sha256": "2a99800c8b2459d0cf0e811befc7315a09a46530aeb929a68abced7283cdf4bc"
+}

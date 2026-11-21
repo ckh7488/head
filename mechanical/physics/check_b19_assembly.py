@@ -408,7 +408,7 @@ def b22_plan():
     return plan
 
 
-PLANS = {'b19': B19_PLAN, 'b20': PLAN, 'b21': b21_plan(), 'b22': b22_plan(), 'b23': b22_plan()}
+PLANS = {'b19': B19_PLAN, 'b20': PLAN, 'b21': b21_plan(), 'b22': b22_plan(), 'b23': b22_plan(), 'b24': b22_plan()}
 B22_INTEGRAL_PRINTS = {
     'front-skull-with-nasal-tray': frozenset(('Part073', 'Part065')),
     'jaw-with-hinge-arms': frozenset(('Jaw_30_moving_jaw', 'Jaw_38_left_jaw_drive_arm', 'Jaw_39_right_jaw_pivot_arm')),
@@ -421,9 +421,9 @@ B22_CAMERA_PATH_CHECKS = {
 
 def assembly_plan(revision, layout=None):
     plan = PLANS[revision]
-    if revision == 'b23' and (not layout or not layout['motion_geometry'].get('camera_cable')):
-        raise ValueError('B23 assembly requires the final camera route and service cover geometry')
-    if revision not in ('b22', 'b23') or not layout or not layout['motion_geometry'].get('camera_cable'):
+    if revision in ('b23', 'b24') and (not layout or not layout['motion_geometry'].get('camera_cable')):
+        raise ValueError('Assembly requires the final camera route and service cover geometry')
+    if revision not in ('b22', 'b23', 'b24') or not layout or not layout['motion_geometry'].get('camera_cable'):
         return plan
     geometry = layout['motion_geometry']
     plug_feed = geometry['camera_cable'].get('plug_feed', {})
@@ -502,7 +502,10 @@ def assembly_plan(revision, layout=None):
             result.append(dict(row, text=changes.get(stage, row['text'])))
         if stage in after:
             result.append(after[stage])
-    return b23_service_plan(result, layout) if revision == 'b23' else result
+    if revision == 'b22':
+        return result
+    service = b23_service_plan(result, layout)
+    return b24_plan(service, layout) if revision == 'b24' else service
 
 
 def b23_service_plan(plan, layout):
@@ -561,6 +564,28 @@ def b23_service_plan(plan, layout):
     return result
 
 
+def b24_plan(plan, layout):
+    geometry = layout['motion_geometry']
+    coupler = geometry.get('pitch_coupler')
+    if coupler:
+        result = []
+        for stage in plan:
+            if stage['id'] != 'neck-dowels':
+                result.append(stage)
+                continue
+            result.append(dict(stage, text='양쪽 프레임 허브에 Ø3×12 핀을 넣어 바깥으로 튀어나오지 않게 약 0.4 mm씩 안에 둡니다. 움직임을 확인한 뒤 핀은 함께 회전하는 허브에만 고정합니다.'))
+            result.append(step('pitch-drive-lock', 'neck',
+                               '오른쪽 목 축의 M3 탭과 클램프 위의 구멍을 맞춥니다. 위에서 일반 M3×8 한 개를 넣고 2.5 mm 육각렌치로 조입니다. 나사와 축은 접착 없이 분리할 수 있게 둡니다.',
+                               bolts=[coupler['actor']]))
+    else:
+        result = plan
+    if geometry.get('eye_pitch_bearings'):
+        from b24_eye_bearing_assembly import plan as eye_plan
+
+        return eye_plan(result, layout)
+    return result
+
+
 def plan_hash(plan):
     return sha256(json.dumps(plan, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
 
@@ -612,7 +637,7 @@ class World:
         self.screws = dict(CAD_SCREWS)
         self.headless = {}
         self.native_hardware = {item['name'] for item in spec if item['name'].startswith(
-            ('CameraPCB', 'CameraTrayScrew', 'ServiceHatchNutKeeper'))}
+            ('CameraPCB', 'CameraTrayScrew', 'ServiceHatchNutKeeper', 'PitchDriveScrew'))}
         self.neutral_nuts = {}
         self.layout = None
         self.actor_offsets = {}
@@ -1137,10 +1162,10 @@ def blink_access_cases(world, step, obstacles):
 def run(cad, hardware, spec, revision='b19', source=None, hatch_paths=None):
     world = World(cad, hardware, spec)
     cad_sha256 = None
-    release_geometry = revision in ('b22', 'b23')
-    strict_approach = revision == 'b23'
-    qualified_tools = revision in ('b21', 'b22', 'b23')
-    if revision in ('b20', 'b21', 'b22', 'b23'):
+    release_geometry = revision in ('b22', 'b23', 'b24')
+    strict_approach = revision in ('b23', 'b24')
+    qualified_tools = revision in ('b21', 'b22', 'b23', 'b24')
+    if revision in ('b20', 'b21', 'b22', 'b23', 'b24'):
         world.layout = json.loads((cad/'cad_parts.json').read_text())
         cad_sha256 = world.layout['source_sha256']
         if not re.fullmatch(r'[0-9a-f]{64}', cad_sha256):
@@ -1189,7 +1214,7 @@ def run(cad, hardware, spec, revision='b19', source=None, hatch_paths=None):
                 moving = [p for p in installed.pop(other) if not p.startswith(FLEXIBLE)]
                 world.closed = st.get('closed_lids', False)
                 alternative, hits = find_clear(world, moving, rigid, offset, strict=strict_approach)
-                if revision == 'b23' and st['id'] == 'front-shell':
+                if strict_approach and st['id'] == 'front-shell':
                     supports = ('Part044', 'EyePitchLinkCradlePin')
                     if 'Part073' not in moving or not set(supports) <= set(rigid):
                         raise ValueError('Front skull insertion must include the completed eye link and pin')
@@ -1264,7 +1289,7 @@ def run(cad, hardware, spec, revision='b19', source=None, hatch_paths=None):
                 moving_end = np.asarray(end, float)
                 for (a, b), hit in sweep_shifted(world, parts, rigid, shift, moving_end).items():
                     issues.append(f'{a} ↔ {b} on the path segment ending at {tuple(end)} ({hit["overlap_mm3"]} mm³)')
-            if revision in ('b20', 'b21', 'b22', 'b23') and st['id'] == 'eye-tie':
+            if revision in ('b20', 'b21', 'b22', 'b23', 'b24') and st['id'] == 'eye-tie':
                 clearance = {}
                 legs = zip(EYE_TIE_TRAVEL_ERRORS_MM.items(), points[:-1], points[1:], strict=True)
                 for (leg, error), start, end in legs:
@@ -1422,6 +1447,27 @@ def run(cad, hardware, spec, revision='b19', source=None, hatch_paths=None):
             row['yaw_driver_adjustment'] = check
             if check['status'] != 'pass':
                 issues.append('The four side screws have no verified final driver route')
+        if revision == 'b24' and st['id'] == 'pitch-horn-bolts' and world.layout['motion_geometry'].get('pitch_coupler'):
+            from check_b24_pitch_coupler import oem_head_approaches
+
+            check = oem_head_approaches(source, cad_sha256, world, st['bolts'])
+            row['pitch_horn_head_approaches'] = check
+            if check['status'] != 'pass':
+                issues.append('The stock pitch horn screws have no continuous head or tip clearance')
+        if revision == 'b24' and st['id'] == 'pitch-drive-lock':
+            from check_b24_pitch_coupler import key_approach
+
+            check = key_approach(world, rigid, st['bolts'][0])
+            row['pitch_drive_key'] = check
+            if check['status'] != 'pass':
+                issues.append('The 2.5 mm neck-drive hex key cannot be placed and turned')
+        if revision == 'b24' and 'eye_bearing_alignment' in st:
+            from b24_eye_bearing_assembly import axis_gauge
+
+            check = axis_gauge(world, fitted_before_step, st['eye_bearing_alignment'])
+            row['eye_bearing_alignment'] = check
+            if check['status'] != 'pass':
+                issues.append('The stock alignment rod does not pass through both eye-pitch bearings')
         if st['id'] == 'camera-tray-bolts':
             heads = camera_tray_head_passage(source, cad_sha256, world, st['bolts'])
             row['camera_tray_head_passage'] = heads
@@ -1430,7 +1476,7 @@ def run(cad, hardware, spec, revision='b19', source=None, hatch_paths=None):
                     issues.append(f'{name}: continuous socket head passage {head["status"]}')
         report.append(row)
         print(st['id'], 'CLEAR' if not issues else issues, notes if notes else '', flush=True)
-    if revision == 'b23':
+    if strict_approach:
         from check_b23_service import check_service
 
         covers = check_service(source, world, installed['base'], hardware, hatch_paths)

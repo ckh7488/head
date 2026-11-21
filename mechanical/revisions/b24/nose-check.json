@@ -1,0 +1,64 @@
+{
+  "status": "pass",
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "wall_samples": 651,
+  "wall_minimum_mm": 1.277779108942255,
+  "wall_minimum_location_mm": [
+    6.360237626531255,
+    -40.48960727328877,
+    77.14126290180816
+  ],
+  "tie_size_mm": [
+    2.5,
+    1.05
+  ],
+  "buckle_size_mm": [
+    2.95,
+    4.9,
+    3.6
+  ],
+  "motion": {
+    "pose_count": 1105,
+    "parts": [
+      "EyeYawDrivePivot",
+      "EyeYawDrivePivotRetainer",
+      "EyeYawFoot0",
+      "EyeYawFoot1",
+      "EyeYawHornScrew0",
+      "EyeYawHornScrew1",
+      "EyeYawHornScrew2",
+      "Jaw_30_moving_jaw",
+      "Part024",
+      "Part033",
+      "Part034",
+      "Part038",
+      "Part039",
+      "Part040",
+      "Part078",
+      "Part079"
+    ],
+    "minimum_by_buckle_drop_mm": {
+      "0.0": [
+        0.2796879287328501,
+        "Part038",
+        [
+          7.0,
+          -8.0,
+          0.0,
+          9.11
+        ]
+      ],
+      "0.25": [
+        0.2796879287328501,
+        "Part038",
+        [
+          7.0,
+          -8.0,
+          0.0,
+          9.11
+        ]
+      ]
+    },
+    "contacts": []
+  }
+}

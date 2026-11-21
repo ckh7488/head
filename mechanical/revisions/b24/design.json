@@ -1,0 +1,200 @@
+{
+  "reference_cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "blink_actuator": "XL330-M077-T",
+  "eye_pitch_bearings": {
+    "vendor_model": "NSK MR63ZZMC3P6",
+    "reference": "https://www.nsk.com/eu-en/engineering/products/bearings/ball-bearings/deep-groove-ball-bearings/extra-small-ball-bearings-and-miniature-ball-bearings-metric-series/mr63zzmc3p6-apn.html",
+    "dimensions_mm": [
+      3.0,
+      6.0,
+      2.5
+    ],
+    "pocket_diameter_mm": 6.24,
+    "abutment_diameter_mm": 5.2,
+    "frame_alignment_jig": {
+      "diameter_mm": 2.98,
+      "length_mm": 150.0,
+      "axis_yz_mm": [
+        -39.0,
+        119.0
+      ],
+      "feed_offset_mm": [
+        -162.0,
+        0.0,
+        0.0
+      ]
+    },
+    "supports": [
+      {
+        "side": "left",
+        "bracket": "Part025",
+        "pin": "Part026",
+        "bearing": "EyePitchBearingL",
+        "bolt": "CradleMountFrameL",
+        "insertion_mm": [
+          -10.0,
+          0.0,
+          0.0
+        ],
+        "bearing_seat_x_mm": -66.67,
+        "print_orientation": "x-",
+        "removed_material_mm3": 79.45160705879107
+      },
+      {
+        "side": "right",
+        "bracket": "Part027",
+        "pin": "Part028",
+        "bearing": "EyePitchBearingR",
+        "bolt": "CradleMountFrameR",
+        "insertion_mm": [
+          10.0,
+          0.0,
+          0.0
+        ],
+        "bearing_seat_x_mm": 66.67,
+        "print_orientation": "x+",
+        "removed_material_mm3": 79.45160705879834
+      }
+    ]
+  },
+  "pitch_coupler": {
+    "actor": "PitchDriveScrew",
+    "m3_size_mm": 3.0,
+    "m3_length_mm": 8.0,
+    "m3_seat_mm": [
+      45.900000000000006,
+      0.0,
+      117.5
+    ],
+    "m3_axis": [
+      0.0,
+      0.0,
+      -1.0
+    ],
+    "upper_horn_bolt": "pitchHornBolt2",
+    "upper_horn_seat_mm": [
+      40.9,
+      0.0,
+      120.0
+    ],
+    "shaft_diameter_mm": 8.0,
+    "shaft_length_mm": 27.3,
+    "d_flat_depth_mm": 1.0,
+    "d_flat_length_from_motor_end_mm": 9.95,
+    "m3_from_motor_end_mm": 7.2,
+    "shaft_m3_tap_drill_mm": 2.5,
+    "original_frame_cross_hole_from_outer_end_mm": 5.5,
+    "original_frame_cross_hole_mm": 3.0,
+    "bore_pilot_mm": 3.0,
+    "bore_finish_mm": 3.1,
+    "head_pocket_diameter_mm": 6.44,
+    "hardware_spec": {
+      "name": "PitchDriveScrew",
+      "motion": "head",
+      "skip": [
+        "Part015",
+        "Part016"
+      ],
+      "shapes": [
+        [
+          "cyl",
+          2.78,
+          3.0,
+          [
+            45.900000000000006,
+            0.0,
+            120.55
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        ],
+        [
+          "cyl",
+          1.35,
+          7.9,
+          [
+            45.900000000000006,
+            0.0,
+            117.45
+          ],
+          [
+            0.0,
+            0.0,
+            -1.0
+          ]
+        ]
+      ]
+    }
+  },
+  "blink_shell_relief": {
+    "part": "Part073",
+    "regions": [
+      {
+        "side": "left",
+        "world_bounds_mm": [
+          [
+            -55.2,
+            -30.96,
+            127.95
+          ],
+          [
+            -54.14,
+            -28.97,
+            129.58
+          ]
+        ],
+        "removed_mm3": 0.9755600072967354
+      }
+    ],
+    "removed_mm3": 0.9755600072967354
+  },
+  "blink_link_relief": {
+    "part": "Part057",
+    "profile_yz_mm": [
+      [
+        -40.0,
+        111.33
+      ],
+      [
+        -35.5,
+        111.33
+      ],
+      [
+        -34.13,
+        111.6
+      ],
+      [
+        -33.68,
+        111.8
+      ],
+      [
+        -33.12,
+        112.05
+      ],
+      [
+        -32.34,
+        114.9
+      ],
+      [
+        -34.3,
+        115.75
+      ],
+      [
+        -40.0,
+        115.75
+      ]
+    ],
+    "removed_mm3": 10.850537485676227
+  },
+  "print_sha256": {
+    "08_pitch_horn_to_8mm_clamp-B24.stl": "6002dd2c5789b9050dbd06618220bca36d4f207727e01cf1762d909c68c6af3b",
+    "13_left_eye_cradle_mount-B24.stl": "1c6f62bc9d7b4314c48cbe426776302bc2013d08db7155ee9c53419bc2ed1510",
+    "13_right_eye_cradle_mount-B24.stl": "4051d4d6d39a768419af88655893947e2702abf2869df3a46152c8a441fc97f1",
+    "23_left_short_lid_link-B24.stl": "5f2de08e19170f1f38df94b3626ae46aed60a06ffa57a759f36d139b0f772815",
+    "28_skull_front_with_camera_tray-B24.npz": "9efe5c3187c522e839a03acd4f569170d8e9ef8b8f1e05975d861bf8804b30d3"
+  }
+}

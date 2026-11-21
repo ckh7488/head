@@ -1,12 +1,52 @@
 # 웹 뷰어
 
-브라우저에서 B22의 조립 순서와 공구 경로를 볼 수 있습니다. 아래의 B15 뷰어에서는 배선을 살펴보고 여섯 축을 움직일 수 있습니다.
+## B24 조립 순서
 
-최근 개정의 [B18 후면 연결부](../mechanical/revisions/b18/)와 [B18 개선 시안](../mechanical/revisions/b18/study/)은 HTML을 내려받아 브라우저에서 직접 엽니다.
+`R5-B24-assembly.html`은 조립 완료 상태에서 시작합니다. **검사 위치**에서 눈 상하 베어링의 정렬봉과 목 상하 축의 M3 체결 공구를 확인할 수 있습니다. **배선 자세 비교**는 체결품과 배선이 장착된 검사 자세를 보여줍니다. [B24 CAD와 조립](../mechanical/revisions/b24/)
 
-## 로컬 실행
+저장소에서 다시 만들려면 FreeCAD Python 모듈과 기구 검사 의존성이 있는 환경에서 아래 명령을 실행합니다. [기구 검사 의존성](../mechanical/physics/requirements.txt)
 
-저장소 루트에서 실행합니다. 터미널에 표시된 주소를 브라우저에 입력하면 구동 뷰어가 열립니다. 주소 끝에 `?view=wiring`을 붙이면 **배선·체결** 화면으로 시작합니다. 단계별 조립은 `/assembly/`, 조립 완료 모습은 `/assembly/#complete`에서 확인합니다.
+```sh
+rev=mechanical/revisions/b24
+out=build/b24-review
+assembly="$rev/R5-B24-Assembly.FCStd"
+python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
+python web/b19/export_wire_states.py "$assembly" "$rev/camera-check.json" "$rev/camera-paths.npz" "$out/wire-states.json" --layout "$out/cad/cad_parts.json"
+python web/b19/build_b19_viewer.py "$out/cad" "$rev/hardware.json" "$rev/hardware-spec.json" "$rev/assembly.json" --revision B24 --assembly-cad "$assembly" --stop-report "$rev/neck-stop.json" --wire-states "$out/wire-states.json" --output "$out/viewer"
+npm ci --prefix web
+python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B24-assembly.html" --revision B24
+```
+
+생성한 `build/b24-review/R5-B24-assembly.html`을 브라우저에서 엽니다. 로컬 파일 열기가 제한된 환경에선 `python -m http.server 8000 --bind 127.0.0.1 --directory build/b24-review`로 연 다음 브라우저에서 이 주소를 사용합니다. [로컬 B24 조립 화면](http://127.0.0.1:8000/R5-B24-assembly.html)
+
+## B23 조립 순서
+
+전달된 `R5-B23-assembly.html`을 브라우저에서 엽니다. 3D 모델과 142단계가 이 파일에 들어 있습니다. 마지막 조립 상태에서 **외장 숨기기**를 켜면 머리와 받침 안의 배선이 보입니다. 단계 목록에서 목 좌우 정지 블록, 두 덮개 체결과 앞 해골의 삽입을 볼 수 있습니다. [B23 CAD와 검사](../mechanical/revisions/b23/)
+
+저장소에서 다시 만들려면 FreeCAD Python 모듈과 기구 검사 의존성이 있는 환경에서 아래 명령을 실행합니다. [기구 검사 의존성](../mechanical/physics/requirements.txt)
+
+```sh
+rev=mechanical/revisions/b23
+out=build/b23-review
+assembly="$rev/R5-B23-Assembly.FCStd"
+python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
+python web/b19/export_wire_states.py "$assembly" "$rev/camera-check.json" "$rev/camera-paths.npz" "$out/wire-states.json" --layout "$out/cad/cad_parts.json"
+python web/b19/build_b19_viewer.py "$out/cad" "$rev/hardware.json" "$rev/hardware-spec.json" "$rev/assembly.json" --revision B23 --assembly-cad "$assembly" --stop-report "$rev/neck-stop.json" --wire-states "$out/wire-states.json" --output "$out/viewer"
+npm ci --prefix web
+python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B23-assembly.html" --revision B23
+```
+
+생성한 파일은 `build/b23-review/R5-B23-assembly.html`입니다. 브라우저에서 로컬 파일 열기를 제한한다면 같은 폴더를 로컬 서버로 띄웁니다.
+
+```sh
+python -m http.server 8000 --bind 127.0.0.1 --directory build/b23-review
+```
+
+서버를 띄운 뒤 이 주소에서 B23을 엽니다. [로컬 B23 조립 화면](http://127.0.0.1:8000/R5-B23-assembly.html)
+
+## 이전 뷰어의 로컬 실행
+
+저장소 루트에서 실행합니다. 터미널에 표시된 주소를 브라우저에 입력하면 이전 구동 뷰어가 열립니다. 주소 끝에 `?view=wiring`을 붙이면 **배선·체결** 화면으로 시작합니다. 단계별 조립은 `/assembly/`, 조립 완료 모습은 `/assembly/#complete`에서 확인합니다.
 
 ```sh
 npm ci --prefix web
@@ -24,20 +64,7 @@ Windows PowerShell에서는 JavaScript의 MIME 유형을 지정하고 서버를 
 py -3.12 -c "import mimetypes, runpy; mimetypes.init(); mimetypes.add_type('text/javascript', '.js'); runpy.run_module('http.server', run_name='__main__')" 8000 --bind 127.0.0.1 --directory web
 ```
 
-## B23 조립 순서
-
-B23 화면은 체결품과 배선을 장착한 상태에서 시작합니다. 목 좌우 스토퍼와 두 덮개 체결, 앞 해골의 직선 삽입 순서를 각 단계에서 확인합니다. [B23 CAD와 검사](../mechanical/revisions/b23/)
-
-```sh
-rev=mechanical/revisions/b23
-out=build/b23-review
-assembly="$rev/R5-B23-Assembly.FCStd"
-python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
-python web/b19/export_wire_states.py "$assembly" "$rev/camera-check.json" "$rev/camera-paths.npz" "$out/wire-states.json" --layout "$out/cad/cad_parts.json"
-python web/b19/build_b19_viewer.py "$out/cad" "$rev/hardware.json" "$rev/hardware-spec.json" "$rev/assembly.json" --revision B23 --assembly-cad "$assembly" --stop-report "$rev/neck-stop.json" --wire-states "$out/wire-states.json" --output "$out/viewer"
-npm ci --prefix web
-python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B23-assembly.html" --revision B23
-```
+B18 참고 화면은 내려받아 브라우저에서 바로 엽니다. [후면 연결부](../mechanical/revisions/b18/) · [개선 시안](../mechanical/revisions/b18/study/)
 
 ## B22 조립 순서
 
@@ -60,7 +87,7 @@ python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B22-assembly.html" --re
 
 ## B21 조립 순서
 
-위 서버를 띄우고 `http://127.0.0.1:8000/b19/`를 열면 B21 조립 122단계를 볼 수 있습니다. 파란색은 이번에 끼우는 부품이고 주황색은 체결품과 핀입니다. 공구 표시를 켜면 검사를 통과한 스패너·소켓 경로가 나타납니다. 마지막 단계에서 외장 숨기기를 누르면 내부 배선과 체결품이 보입니다. [B21 CAD와 검사](../mechanical/revisions/b21/)
+이전 뷰어의 로컬 서버에서 `http://127.0.0.1:8000/b19/`를 열면 B21 조립 122단계를 볼 수 있습니다. 파란색은 이번에 끼우는 부품이고 주황색은 체결품과 핀입니다. 공구 표시를 켜면 검사를 통과한 스패너·소켓 경로가 나타납니다. 마지막 단계에서 외장 숨기기를 누르면 내부 배선과 체결품이 보입니다. [B21 CAD와 검사](../mechanical/revisions/b21/)
 
 [B21 검사](../mechanical/revisions/b21/#다시-만들기)에서 나온 `assembly.json`을 지정합니다. 단일 HTML을 만들면 서버 없이 브라우저에서 열 수 있습니다.
 

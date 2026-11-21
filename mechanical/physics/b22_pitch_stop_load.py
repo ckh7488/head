@@ -174,9 +174,14 @@ def peak_energy(rows):
     return maxima
 
 
-def report(cad, grams_file, release_deg, stops_deg, include_traces=True):
+def report(cad, grams_file, release_deg, stops_deg, include_traces=True, initial_body_offset_deg=0.):
     manifest = json.loads((cad/'cad_parts.json').read_text())
     sliced = json.loads(grams_file.read_text())
+    if not np.isfinite(initial_body_offset_deg) or initial_body_offset_deg < 0.:
+        raise ValueError('The initial body offset must be finite and nonnegative')
+    encoder_guard = release_deg
+    if initial_body_offset_deg:
+        release_deg = (encoder_guard[0] - initial_body_offset_deg, encoder_guard[1] + initial_body_offset_deg)
     release, stops = np.radians(release_deg), np.radians(stops_deg)
     if not stops[0] < release[0] < release[1] < stops[1]:
         raise ValueError('The powered pitch interval must fit inside the stop interval')
@@ -209,7 +214,7 @@ def report(cad, grams_file, release_deg, stops_deg, include_traces=True):
             rows[f'{key}-jaw-{angle:g}'] = {**load, 'touch_point_mm': witnesses[exposed_part]}
     nominal = {name: row for name, row in rows.items() if name.startswith('plates-0-jaw-')}
     forward = {name: row for name, row in rows.items() if name.startswith('plates-0-forward-75g-')}
-    return {
+    result = {
         'cad_sha256': manifest['source_sha256'], 'sliced_grams_sha256': sha256(grams_file.read_bytes()).hexdigest(),
         'command_pitch_deg': release_deg, 'mechanical_stop_pitch_deg': stops_deg,
         'pitch_axis_mm': (NECK_PIVOT*1000.).tolist(), 'touch_force_N': TOUCH_N,
@@ -227,6 +232,9 @@ def report(cad, grams_file, release_deg, stops_deg, include_traces=True):
         'nominal_no_ballast_maximum': peak_energy(nominal), 'forward_75g_sensitivity_maximum': peak_energy(forward),
         'maximum_fitted_ballast_plates': max_plates,
     }
+    if initial_body_offset_deg:
+        result.update(initial_encoder_guard_deg=encoder_guard, initial_body_offset_deg=initial_body_offset_deg)
+    return result
 
 
 if __name__ == '__main__':
@@ -236,8 +244,11 @@ if __name__ == '__main__':
     parser.add_argument('output', type=Path)
     parser.add_argument('--command-angles', nargs=2, type=float, default=(-15., 6.))
     parser.add_argument('--stop-angles', nargs=2, type=float, default=(-16.7, 7.5))
+    parser.add_argument('--initial-body-offset-deg', type=float, default=0.,
+                        help='Expand the encoder guard in both directions to cover elastic motion of the head.')
     parser.add_argument('--bounds-only', action='store_true')
     args = parser.parse_args()
-    result = report(args.cad, args.sliced_grams, args.command_angles, args.stop_angles, not args.bounds_only)
+    result = report(args.cad, args.sliced_grams, args.command_angles, args.stop_angles, not args.bounds_only,
+                    args.initial_body_offset_deg)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, allow_nan=False)+'\n')

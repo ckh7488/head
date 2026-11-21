@@ -9,7 +9,7 @@ import re
 
 import numpy as np
 
-from b20_dynamics import NORMAL_FRICTION, UPPER_FRICTION, jaw_profile_move, load_bodies, run_trial
+from b20_dynamics import NORMAL_FRICTION, PWM, UPPER_FRICTION, jaw_profile_move, load_bodies, run_trial
 from multibody import pos, quintic
 
 FIRMWARE = Path(__file__).resolve().parents[2] / 'control/openrb/R5B1/R5B1.ino'
@@ -65,8 +65,16 @@ def audit(cad, grams, output):
         raise ValueError('The firmware jaw command exceeds the CAD operating range')
     from check_b22_neck import encoder_feedback_limits
 
-    pitch_feedback, _, _, firmware_hash = encoder_feedback_limits()
+    pitch_feedback, pitch_ticks, _, firmware_hash = encoder_feedback_limits()
     yaw_limit, yaw_feedback = 60., None
+    duty = PWM
+    low_supply = (11.1, 11.1, 5.)
+    pitch_command = motion['pitch_stop']['powered_deg']
+    if 'pitch_coupler' in motion:
+        raw = FIRMWARE.read_text()
+        duty = np.array([float(reg) for reg in re.search(r'\bpwm\[count\]\s*=\s*\{([^}]+)\}', raw)[1].split(',')[-3:]])/885.
+        low_supply = (10.62, 10.62, 4.27)
+        pitch_command = tuple(ticks * 360 / 4096 for ticks in pitch_ticks)
     if 'yaw_limit' in motion:
         source = FIRMWARE.read_text()
         yaw_ticks = int(re.search(r'\bneckYawCalibrationTicks\s*=\s*(\d+)\s*;', source)[1])
@@ -76,17 +84,17 @@ def audit(cad, grams, output):
         left, right = motion['yaw_limit']['nominal_stop_deg']
         if not left < -yaw_feedback < 0 < yaw_feedback < right:
             raise ValueError('The guarded yaw travel must stay inside both CAD yaw stops')
-    trajectory = partial(command, pitch_limits=motion['pitch_stop']['powered_deg'], yaw_limit=yaw_limit,
+    trajectory = partial(command, pitch_limits=pitch_command, yaw_limit=yaw_limit,
                          jaw_limit=jaw, jaw_speed=speed*.229*6., jaw_acceleration=acceleration*214.577*.1)
     output.mkdir(parents=True, exist_ok=True)
     trials = {}
     for name, volts, derating, friction, backlash in (
         ('nominal', (12., 12., 5.), .85, NORMAL_FRICTION, .35),
-        ('low_supply_warm', (11.1, 11.1, 5.), .55, UPPER_FRICTION, .75),
+        ('low_supply_warm', low_supply, .55, UPPER_FRICTION, .75),
     ):
         row = run_trial(bodies, pos(model['jaw_pivot_mm']), output / name, volts=volts,
                         derating=derating, friction=friction, backlash_deg=backlash,
-                        firmware_profile=True, trajectory=trajectory)
+                        firmware_profile=True, trajectory=trajectory, pwm=duty)
         yaw, pitch, jaw_range = row['simulated_travel_deg']
         row['operating_envelope_pass'] = bool(min(row['minimum_planned_speed_margin_Nm']) > 0.
                                               and (yaw_feedback is None or -yaw_feedback <= yaw[0] <= yaw[1] <= yaw_feedback)

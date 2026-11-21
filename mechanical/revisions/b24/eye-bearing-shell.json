@@ -1,0 +1,27 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "shell_mesh_sha256": "d30af4b706212f4537e94c7bc74e7b1accdd49b4f5b92adb38504bea7b3e9af0",
+  "signed_absolute_x_range_mm": [
+    66.55,
+    69.2
+  ],
+  "radial_axis_relative_yz_mm": 0.1,
+  "witness_circumscribed_radius_mm": 3.15,
+  "sample_spacing_mm": 0.05,
+  "rows": [
+    {
+      "side": "L",
+      "sampled_min_mm": 0.27999572753905966,
+      "continuous_min_mm": 0.25499572753905964,
+      "nearest_feed_at_mm": 26.0,
+      "samples": 1681
+    },
+    {
+      "side": "R",
+      "sampled_min_mm": 0.27999572753905966,
+      "continuous_min_mm": 0.25499572753905964,
+      "nearest_feed_at_mm": 30.3,
+      "samples": 1681
+    }
+  ]
+}

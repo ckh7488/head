@@ -1,0 +1,556 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "solver_sha256": "843f4e8206691d617f657cd07b9021b26d13d90ceb177387c1b2502ec3948877",
+  "elastic_equations_sha256": "444236fc49a5649e2489ef0062afe0b557f6ebfb7fa11e6dd199cd041dd4e7d5",
+  "actor_sha256": {
+    "Part015": "5e2cf381cf6480d98d4ea60d33e04ee03db27e3d9ac1dbb8415b3b83f3b3f4df",
+    "Part016": "dab6f6e4b77142ac6afcec933211719a141912908c3d68bda0cd0bc0878e594b",
+    "PitchDriveScrew": "614ace27da6e7134767088e1d75b85733b83b6694117a9dd2e849d3e78d7d9c7"
+  },
+  "reused_elastic_sha256": "b61a69f84727e2d8103175bca6804ab29ad3540db52a041c3d641953dbf9cd09",
+  "force_path_sha256": "861ce95da14c48d5f49027541d9fcd768846954ae92bf00e5c17157b9ee0a5c4",
+  "max_modeled_operating_torque_Nm": 0.07859756185782622,
+  "operating_torque_within_reversal_proof": true,
+  "seated_angle_screen": {
+    "lower_modulus_MPa": 500.0,
+    "max_seated_deg_per_Nm_at_E700": 12.296809106499637,
+    "max_modeled_elastic_angle_deg": 1.3530989001627804
+  },
+  "measured_areas": {
+    "cap_projected_area_mm2": 13.989583214070965,
+    "first_D_flat_overlap_mm2": 14.941209793799542,
+    "first_D_flat_centred_second_moment_about_x_mm4": 47.94074456157978
+  },
+  "mechanical_bounds": {
+    "torques": {
+      "0.078601223025": {
+        "positive_fastener_force_N": 26.200407674999997,
+        "screw_root_bending_MPa_at_full_stack_lever": 43.91625189574125,
+        "screw_root_shear_MPa": 5.5575835301945276,
+        "screw_root_vm_with_250N_preload_MPa": 97.42252874407322,
+        "projected_PETG_bore_pressure_MPa": 3.608871580578512,
+        "preload_N_for_D_face_friction_only": {
+          "0.1": 262.00407674999997,
+          "0.2": 131.00203837499998,
+          "0.3": 87.33469224999999
+        }
+      },
+      "0.12": {
+        "positive_fastener_force_N": 40.0,
+        "screw_root_bending_MPa_at_full_stack_lever": 67.04666956407006,
+        "screw_root_shear_MPa": 8.48472832809771,
+        "screw_root_vm_with_250N_preload_MPa": 120.97219036482225,
+        "projected_PETG_bore_pressure_MPa": 5.5096418732782375,
+        "preload_N_for_D_face_friction_only": {
+          "0.1": 400.0,
+          "0.2": 200.0,
+          "0.3": 133.33333333333334
+        }
+      },
+      "0.313559322034": {
+        "positive_fastener_force_N": 104.51977401133333,
+        "screw_root_bending_MPa_at_full_stack_lever": 175.19256877622857,
+        "screw_root_shear_MPa": 22.170547185008264,
+        "screw_root_vm_with_250N_preload_MPa": 231.4301966514924,
+        "projected_PETG_bore_pressure_MPa": 14.396663086960514,
+        "preload_N_for_D_face_friction_only": {
+          "0.1": 1045.197740113333,
+          "0.2": 522.5988700566666,
+          "0.3": 348.3992467044444
+        }
+      },
+      "0.5085": {
+        "positive_fastener_force_N": 169.49999999999997,
+        "screw_root_bending_MPa_at_full_stack_lever": 284.1102622777468,
+        "screw_root_shear_MPa": 35.954036290314036,
+        "screw_root_vm_with_250N_preload_MPa": 342.8430144863025,
+        "projected_PETG_bore_pressure_MPa": 23.347107438016526,
+        "preload_N_for_D_face_friction_only": {
+          "0.1": 1694.9999999999995,
+          "0.2": 847.4999999999998,
+          "0.3": 564.9999999999999
+        }
+      }
+    },
+    "average_cap_pressure_at_150_and_250N_MPa": [
+      10.72226368038809,
+      17.870439467313485
+    ],
+    "average_flat_pressure_at_150_and_250N_MPa": [
+      10.039347688046556,
+      16.73224614674426
+    ],
+    "first_seating_torque_setting_Nm": [
+      0.07,
+      0.08
+    ],
+    "unmeasured_nut_factor_sensitivity": [
+      0.16,
+      0.3
+    ],
+    "preload_from_tightening_sensitivity_N": [
+      77.77777777777779,
+      166.66666666666666
+    ],
+    "average_cap_pressure_from_tightening_sensitivity_MPa": [
+      5.559692278719751,
+      11.913626311542322
+    ],
+    "full_contact_first_lift_Nm_sensitivity": [
+      0.09432471929626879,
+      0.2021243984920045
+    ],
+    "nominal_clearance_potential_lash_peak_to_peak_deg": 1.0417557952818006,
+    "bench_reversal": {
+      "proof_torque_Nm_each_sign": 0.12,
+      "dial_arm_mm": 50.0,
+      "force_N_each_sign": 2.4,
+      "neutral_after_unloading_limit_deg": 0.1,
+      "neutral_after_unloading_dial_limit_mm": 0.08726641829491544,
+      "scope": "Fixture the four OEM mounts and measure the shaft without gearbox play. Check seating, installed elastic travel and residual motion after unloading. Bench is pending."
+    }
+  },
+  "elastic_steel": [
+    {
+      "mesh_mm": 0.65,
+      "elements": 23264,
+      "local_vm_max_MPa_per_Nmm": {
+        "new_tap": 0.04407321864192607,
+        "outboard_dowel": 0.04143735562001196
+      },
+      "local_vm_p99_MPa_per_Nmm": {
+        "new_tap": 0.03571134025416089,
+        "outboard_dowel": 0.0330100141531217
+      }
+    },
+    {
+      "mesh_mm": 0.5,
+      "elements": 46104,
+      "local_vm_max_MPa_per_Nmm": {
+        "new_tap": 0.044730247131741625,
+        "outboard_dowel": 0.04072957082900995
+      },
+      "local_vm_p99_MPa_per_Nmm": {
+        "new_tap": 0.0364814796040955,
+        "outboard_dowel": 0.0338505301675066
+      }
+    }
+  ],
+  "elastic_PETG_holder": [
+    {
+      "mesh_mm": 0.65,
+      "elements": 52538,
+      "drive_bore_selected_faces": [
+        78,
+        76
+      ],
+      "flat_gap_closing_compliance_at_E700_mm_per_N": 0.001741905130123141,
+      "nominal_gap_closing_force_at_E700_N": 45.926726212893435,
+      "seated_deg_per_Nm_at_E700": {
+        "pressure_couple": 9.298044087875127,
+        "friction_force": 11.623003861044422,
+        "minimum_of_both": 3.7845343460976935
+      },
+      "normal_pressure_share_at_minimum": 0.5438671993577225,
+      "fallback_hole_compliance_mm_per_N_at_E700": 0.0018852584703854206,
+      "loads": {
+        "0.078601223025": {
+          "drive_hole_transverse_load_N": 26.200407674999997,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 11.495841372579537,
+                "local_layer_tension_MPa": 9.66072717485041,
+                "local_layer_compression_MPa": 8.349249666069207,
+                "local_layer_shear_MPa": 5.286091675250637
+              },
+              {
+                "local_vm_MPa": 11.753100325762878,
+                "local_layer_tension_MPa": 5.560576360603212,
+                "local_layer_compression_MPa": 4.965642199608903,
+                "local_layer_shear_MPa": 4.516476532949007
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 16.831681368136483,
+                "local_layer_tension_MPa": 8.856464272452701,
+                "local_layer_compression_MPa": 6.73571240059521,
+                "local_layer_shear_MPa": 4.971670501061726
+              },
+              {
+                "local_vm_MPa": 14.88031523529995,
+                "local_layer_tension_MPa": 6.153079351489436,
+                "local_layer_compression_MPa": 6.535234511908289,
+                "local_layer_shear_MPa": 4.750187777444069
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 23.21617743296774,
+                "local_layer_tension_MPa": 8.320289004187547,
+                "local_layer_compression_MPa": 10.368446074196969,
+                "local_layer_shear_MPa": 7.4793137431872765
+              },
+              {
+                "local_vm_MPa": 23.02813483503312,
+                "local_layer_tension_MPa": 6.5480813454135784,
+                "local_layer_compression_MPa": 9.48603966163276,
+                "local_layer_shear_MPa": 7.352224778010362
+              }
+            ]
+          }
+        },
+        "0.12": {
+          "drive_hole_transverse_load_N": 40.0,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 17.55062976909123,
+                "local_layer_tension_MPa": 14.74897229796691,
+                "local_layer_compression_MPa": 12.746747714213498,
+                "local_layer_shear_MPa": 8.07024339593697
+              },
+              {
+                "local_vm_MPa": 17.94338541835364,
+                "local_layer_tension_MPa": 8.489297463732267,
+                "local_layer_compression_MPa": 7.5810151677098325,
+                "local_layer_shear_MPa": 6.8952767284740615
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 21.92265391067147,
+                "local_layer_tension_MPa": 13.94470939556918,
+                "local_layer_compression_MPa": 11.1332104487395,
+                "local_layer_shear_MPa": 7.755822221711264
+              },
+              {
+                "local_vm_MPa": 17.448397177134524,
+                "local_layer_tension_MPa": 9.081800454618502,
+                "local_layer_compression_MPa": 8.277935695740474,
+                "local_layer_shear_MPa": 5.862077897818049
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 26.77101232244954,
+                "local_layer_tension_MPa": 13.408534127304078,
+                "local_layer_compression_MPa": 10.839782186989959,
+                "local_layer_shear_MPa": 7.887817271903216
+              },
+              {
+                "local_vm_MPa": 24.158411767736336,
+                "local_layer_tension_MPa": 9.476802448542639,
+                "local_layer_compression_MPa": 10.428921487778936,
+                "local_layer_shear_MPa": 7.796475042740539
+              }
+            ]
+          }
+        },
+        "0.313559322034": {
+          "drive_hole_transverse_load_N": 104.51977401133333,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 45.85969643054986,
+                "local_layer_tension_MPa": 38.53898128707311,
+                "local_layer_compression_MPa": 33.3071797617268,
+                "local_layer_shear_MPa": 21.0875003989947
+              },
+              {
+                "local_vm_MPa": 46.88596472311438,
+                "local_layer_tension_MPa": 22.182486310606933,
+                "local_layer_compression_MPa": 19.809149802638036,
+                "local_layer_shear_MPa": 18.01731913514285
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 47.8273839225127,
+                "local_layer_tension_MPa": 37.73471838467534,
+                "local_layer_compression_MPa": 31.693642496252885,
+                "local_layer_shear_MPa": 20.77307922472781
+              },
+              {
+                "local_vm_MPa": 39.95083054229149,
+                "local_layer_tension_MPa": 22.774989301493207,
+                "local_layer_compression_MPa": 19.31054984055717,
+                "local_layer_shear_MPa": 16.41168526634691
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 51.38241152092725,
+                "local_layer_tension_MPa": 37.198543116410214,
+                "local_layer_compression_MPa": 30.61795098593689,
+                "local_layer_shear_MPa": 20.56346510857789
+              },
+              {
+                "local_vm_MPa": 40.51775246887326,
+                "local_layer_tension_MPa": 23.169991295417372,
+                "local_layer_compression_MPa": 19.80700183789896,
+                "local_layer_shear_MPa": 15.34135331700288
+              }
+            ]
+          }
+        },
+        "0.5085": {
+          "drive_hole_transverse_load_N": 169.49999999999997,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 74.37079364652404,
+                "local_layer_tension_MPa": 62.498770112634986,
+                "local_layer_compression_MPa": 54.014343438979786,
+                "local_layer_shear_MPa": 34.19765639028297
+              },
+              {
+                "local_vm_MPa": 76.03509571027351,
+                "local_layer_tension_MPa": 35.973398002565396,
+                "local_layer_compression_MPa": 32.12455177317034,
+                "local_layer_shear_MPa": 29.21873513690879
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 74.69927501570147,
+                "local_layer_tension_MPa": 61.69450721023723,
+                "local_layer_compression_MPa": 52.400806173505714,
+                "local_layer_shear_MPa": 33.883235216006604
+              },
+              {
+                "local_vm_MPa": 67.97833421444116,
+                "local_layer_tension_MPa": 36.56590099345157,
+                "local_layer_compression_MPa": 31.109082856654773,
+                "local_layer_shear_MPa": 27.61307309440757
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 77.78249582563586,
+                "local_layer_tension_MPa": 61.15833194197225,
+                "local_layer_compression_MPa": 51.325114663189765,
+                "local_layer_shear_MPa": 33.67362109983927
+              },
+              {
+                "local_vm_MPa": 64.72777234279428,
+                "local_layer_tension_MPa": 36.96090298737573,
+                "local_layer_compression_MPa": 31.349454541674497,
+                "local_layer_shear_MPa": 26.542682221924487
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "mesh_mm": 0.5,
+      "elements": 94283,
+      "drive_bore_selected_faces": [
+        114,
+        114
+      ],
+      "flat_gap_closing_compliance_at_E700_mm_per_N": 0.001806930995219198,
+      "nominal_gap_closing_force_at_E700_N": 44.27396519937123,
+      "seated_deg_per_Nm_at_E700": {
+        "pressure_couple": 9.781312096993041,
+        "friction_force": 12.296809106499637,
+        "minimum_of_both": 3.946402431579167
+      },
+      "normal_pressure_share_at_minimum": 0.5446868773260222,
+      "fallback_hole_compliance_mm_per_N_at_E700": 0.0019776527278666267,
+      "loads": {
+        "0.078601223025": {
+          "drive_hole_transverse_load_N": 26.200407674999997,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 12.054382539558596,
+                "local_layer_tension_MPa": 6.708514987817082,
+                "local_layer_compression_MPa": 6.041244223837268,
+                "local_layer_shear_MPa": 5.3448517270924985
+              },
+              {
+                "local_vm_MPa": 12.392218460480766,
+                "local_layer_tension_MPa": 5.238451249050538,
+                "local_layer_compression_MPa": 5.717848524633765,
+                "local_layer_shear_MPa": 5.283427513720041
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 14.493882261103197,
+                "local_layer_tension_MPa": 5.262025913403279,
+                "local_layer_compression_MPa": 7.3502239774021625,
+                "local_layer_shear_MPa": 4.032938561862794
+              },
+              {
+                "local_vm_MPa": 14.432983418593725,
+                "local_layer_tension_MPa": 4.870971005470617,
+                "local_layer_compression_MPa": 7.621282209281099,
+                "local_layer_shear_MPa": 4.122907141408623
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 22.143230353775298,
+                "local_layer_tension_MPa": 7.78502431594022,
+                "local_layer_compression_MPa": 10.967131418546934,
+                "local_layer_shear_MPa": 5.9009578573751815
+              },
+              {
+                "local_vm_MPa": 21.382027263188437,
+                "local_layer_tension_MPa": 7.310301177159602,
+                "local_layer_compression_MPa": 10.7261834091037,
+                "local_layer_shear_MPa": 6.093847905369718
+              }
+            ]
+          }
+        },
+        "0.12": {
+          "drive_hole_transverse_load_N": 40.0,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 18.40335110672447,
+                "local_layer_tension_MPa": 10.241848250656414,
+                "local_layer_compression_MPa": 9.223130111218417,
+                "local_layer_shear_MPa": 8.159952002872778
+              },
+              {
+                "local_vm_MPa": 18.91912311319526,
+                "local_layer_tension_MPa": 7.99751105254593,
+                "local_layer_compression_MPa": 8.729403901741003,
+                "local_layer_shear_MPa": 8.066176037041448
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 18.633925492326153,
+                "local_layer_tension_MPa": 8.79535917624261,
+                "local_layer_compression_MPa": 9.417899584694538,
+                "local_layer_shear_MPa": 6.482249545278801
+              },
+              {
+                "local_vm_MPa": 17.892853819715015,
+                "local_layer_tension_MPa": 7.373441747261699,
+                "local_layer_compression_MPa": 10.23423302256015,
+                "local_layer_shear_MPa": 6.5079339111131445
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 23.722573690802935,
+                "local_layer_tension_MPa": 8.512906996983396,
+                "local_layer_compression_MPa": 11.823722956354985,
+                "local_layer_shear_MPa": 6.375390834216667
+              },
+              {
+                "local_vm_MPa": 23.23807891279664,
+                "local_layer_tension_MPa": 7.948641291434894,
+                "local_layer_compression_MPa": 12.287267184546208,
+                "local_layer_shear_MPa": 6.52980897755864
+              }
+            ]
+          }
+        },
+        "0.313559322034": {
+          "drive_hole_transverse_load_N": 104.51977401133333,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 48.08785246815153,
+                "local_layer_tension_MPa": 26.76189161542441,
+                "local_layer_compression_MPa": 24.09998687254181,
+                "local_layer_shear_MPa": 21.32190848208973
+              },
+              {
+                "local_vm_MPa": 49.43556180709402,
+                "local_layer_tension_MPa": 20.89745119663101,
+                "local_layer_compression_MPa": 22.809883076590523,
+                "local_layer_shear_MPa": 21.076872413180112
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 43.080589203310176,
+                "local_layer_tension_MPa": 25.31540254101065,
+                "local_layer_compression_MPa": 23.439927249059785,
+                "local_layer_shear_MPa": 19.643654186710176
+              },
+              {
+                "local_vm_MPa": 43.73654903424232,
+                "local_layer_tension_MPa": 20.103899118829684,
+                "local_layer_compression_MPa": 24.314712197409655,
+                "local_layer_shear_MPa": 19.518401055125977
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 44.85077998110538,
+                "local_layer_tension_MPa": 24.351076491401404,
+                "local_layer_compression_MPa": 23.336159074213118,
+                "local_layer_shear_MPa": 18.525165544986177
+              },
+              {
+                "local_vm_MPa": 43.499952223922925,
+                "local_layer_tension_MPa": 19.757901837047662,
+                "local_layer_compression_MPa": 25.317931611289197,
+                "local_layer_shear_MPa": 18.479565455919612
+              }
+            ]
+          }
+        },
+        "0.5085": {
+          "drive_hole_transverse_load_N": 169.49999999999997,
+          "by_preload_N": {
+            "0.0": [
+              {
+                "local_vm_MPa": 77.98420031474498,
+                "local_layer_tension_MPa": 43.399831962156696,
+                "local_layer_compression_MPa": 39.08301384628791,
+                "local_layer_shear_MPa": 34.577796612173444
+              },
+              {
+                "local_vm_MPa": 80.16978419216481,
+                "local_layer_tension_MPa": 33.88945308516335,
+                "local_layer_compression_MPa": 36.99084903362741,
+                "local_layer_shear_MPa": 34.18042095696313
+              }
+            ],
+            "150.0": [
+              {
+                "local_vm_MPa": 72.09994132778806,
+                "local_layer_tension_MPa": 41.95334288774279,
+                "local_layer_compression_MPa": 38.310482997531935,
+                "local_layer_shear_MPa": 32.899432815830444
+              },
+              {
+                "local_vm_MPa": 74.02836455157762,
+                "local_layer_tension_MPa": 33.0071624894916,
+                "local_layer_compression_MPa": 38.49567815444675,
+                "local_layer_shear_MPa": 32.621903542535186
+              }
+            ],
+            "250.0": [
+              {
+                "local_vm_MPa": 69.95550293229682,
+                "local_layer_tension_MPa": 40.98901683813345,
+                "local_layer_compression_MPa": 38.005594628231016,
+                "local_layer_shear_MPa": 31.78071978375362
+              },
+              {
+                "local_vm_MPa": 70.72743504123774,
+                "local_layer_tension_MPa": 32.5792114218932,
+                "local_layer_compression_MPa": 39.49889756832623,
+                "local_layer_shear_MPa": 31.58297442779377
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "scope": "Steel is screened with a torsional couple across the open major-size tap and dowel bores. The PETG holder is clamped at four OEM flange patches, then loaded through the positive M3 bore with a conservative 3 mm torque lever. Tightening preload after the D-flat seats and prior gap closure are screened separately. Flat-pressure first lift is an ideal fully seated, uniform-foundation estimate distinct from backup side-load screening. Printed layer normal is CAD X. No thread-notch, fatigue, dynamic impact, or as-built preload claim."
+}

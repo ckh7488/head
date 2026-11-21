@@ -57,24 +57,31 @@ def test_jaw_calibration_rejects_more_than_62_ticks(opening_tick):
     ]
 
 
-@pytest.mark.parametrize('row', [(2219, 2048, 1996), (1877, 2048, 2100),
-                                 (2219, 2048, 1980), (1877, 2048, 2116)])
-def test_pitch_calibration_rejects_more_than_51_ticks_of_positive_travel(row):
-    assert list(issues(replaced_axis(4, row))) == [
-        'ID 5 neck-pitch positive travel exceeds 4.5° (51 ticks). Recalibrate the positive endpoint.',
+@pytest.mark.parametrize('closed_tick', [975, 3025])
+def test_blink_calibration_rejects_more_than_1024_ticks(closed_tick):
+    assert list(issues(replaced_axis(2, (2000, 2000, closed_tick)))) == [
+        'ID 3 blink closing exceeds 90° (1024 ticks). Recalibrate the eyelids.',
     ]
 
 
-@pytest.mark.parametrize('row', [(2219, 2048, 1997), (1877, 2048, 2099)])
-def test_pitch_calibration_accepts_nominal_171_tick_negative_travel(row):
+@pytest.mark.parametrize('row', [(2203, 2048, 2013), (1893, 2048, 2083),
+                                 (2203, 2048, 1980), (1893, 2048, 2116)])
+def test_pitch_calibration_rejects_more_than_34_ticks_of_positive_travel(row):
+    assert list(issues(replaced_axis(4, row))) == [
+        'ID 5 neck-pitch positive travel exceeds 2.99° (34 ticks). Recalibrate the positive endpoint.',
+    ]
+
+
+@pytest.mark.parametrize('row', [(2203, 2048, 2014), (1893, 2048, 2082)])
+def test_pitch_calibration_accepts_nominal_155_tick_negative_travel(row):
     assert not list(issues(replaced_axis(4, row), nominal_neck=True))
 
 
-@pytest.mark.parametrize('row', [(2220, 2048, 1997), (1876, 2048, 2099),
-                                 (2248, 2048, 1997), (1848, 2048, 2099)])
-def test_pitch_calibration_rejects_more_than_171_ticks_of_negative_travel(row):
+@pytest.mark.parametrize('row', [(2204, 2048, 2014), (1892, 2048, 2082),
+                                 (2248, 2048, 2014), (1848, 2048, 2082)])
+def test_pitch_calibration_rejects_more_than_155_ticks_of_negative_travel(row):
     assert list(issues(replaced_axis(4, row))) == [
-        'ID 5 neck-pitch negative travel exceeds the 15° endpoint (171 ticks). Recalibrate the negative endpoint.',
+        'ID 5 neck-pitch negative travel exceeds the 13.62° endpoint (155 ticks). Recalibrate the negative endpoint.',
     ]
 
 

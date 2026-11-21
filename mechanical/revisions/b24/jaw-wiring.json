@@ -1,0 +1,443 @@
+{
+  "cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "clearance_bands": [
+    {
+      "up_to_deg": 9.0,
+      "sheath_inflation_mm": 1.0,
+      "max_sample_spacing_deg": 0.25,
+      "maximum_chin_displacement_to_nearest_sample_mm": 0.22781519869414174
+    }
+  ],
+  "scope": "fixed neck, eye and hatch pose per captured wire path; jaw-only sweep",
+  "poses": [
+    {
+      "fixed_pose": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        0,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        45,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        6,
+        -8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -60,
+        -15,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -60,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -60,
+        6,
+        -8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -45,
+        6,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -20,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        20,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        50,
+        6,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        55,
+        6,
+        -8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        6,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        6,
+        8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        -15,
+        -8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -60,
+        -15,
+        8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        0,
+        6,
+        8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        0,
+        0,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -55,
+        6,
+        4,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -30,
+        6,
+        -4,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -10,
+        6,
+        0,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        5,
+        6,
+        0,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        37,
+        6,
+        -4,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        57,
+        6,
+        4,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -60,
+        3,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        3,
+        -8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        0,
+        3,
+        8,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        40,
+        -3,
+        4,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -45,
+        -8,
+        -4,
+        30,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        60,
+        0,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -2,
+        -2,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -2,
+        -2,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -2,
+        2,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        -2,
+        2,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        2,
+        -2,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        2,
+        -2,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        2,
+        2,
+        -8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    },
+    {
+      "fixed_pose": [
+        2,
+        2,
+        8,
+        0,
+        0
+      ],
+      "first_angle_deg": null,
+      "contacts": []
+    }
+  ]
+}

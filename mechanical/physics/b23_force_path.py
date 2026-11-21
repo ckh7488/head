@@ -164,7 +164,10 @@ def checks_by_mode(bodies, jaw_pivot, model, geometry):
     cup_weight = .00981 * cup['mass_g']
     cup_axial_moment = np.linalg.norm(cup['cup_com_xy_mm']) * .001 * cup_weight
     axes = np.array([AXIS_Z, AXIS_X, AXIS_X])
-    warm = motor_parameters((11.1, 11.1, 5.), .55)
+    positive_pitch_coupler = 'pitch_coupler' in model['motion_geometry']
+    supply = (10.62, 10.62, 4.5) if positive_pitch_coupler else (11.1, 11.1, 5.)
+    pwm = np.array([int(x) for x in re.search(r'\bpwm\[count\]\s*=\s*\{([^}]+)\}', source)[1].split(',')[-3:]]) / 885.
+    warm = motor_parameters(supply, .55)
     results = {}
     for mode, speed_register, active in (
         ('exhibit_tracking', [*exhibit_speed, 0], [True, True, False]),
@@ -205,7 +208,7 @@ def checks_by_mode(bodies, jaw_pivot, model, geometry):
             torque = drive + DAMPING_NM_PER_RAD_S * velocities
             demand = abs(torque) + UPPER_FRICTION * active
             peak_torque = np.maximum(peak_torque, demand.max(axis=0))
-            min_margin = np.minimum(min_margin, (capacity(warm, velocities, torque) - demand).min(axis=0))
+            min_margin = np.minimum(min_margin, (capacity(warm, velocities, torque, pwm=pwm) - demand).min(axis=0))
             yaw_axial, yaw_bend, yaw_radial = axial[:, 0], bend[:, 0], radial[:, 0]
             signed_yaw_axial = [min(signed_yaw_axial[0], yaw_axial.min()), max(signed_yaw_axial[1], yaw_axial.max())]
             ring_load_min = min(ring_load_min, (yaw_axial/2. - yaw_bend/.080).min())
@@ -226,7 +229,9 @@ def checks_by_mode(bodies, jaw_pivot, model, geometry):
             floor_stability = min(floor_stability, (weight * radial_limit - rocking - cup_axial_moment).min())
             sample_count += len(velocities)
         result = {
-            'samples': sample_count, 'moving_motor_axes': active, 'velocity_cap_deg_s': vmax.tolist(), 'acceleration_cap_deg_s2': amax.tolist(),
+            'samples': sample_count, 'moving_motor_axes': active,
+            'warm_supply_V_by_axis': supply, 'pwm_duty_by_axis_for_active_axes': pwm.tolist(),
+            'velocity_cap_deg_s': vmax.tolist(), 'acceleration_cap_deg_s2': amax.tolist(),
             'joint_peaks': {name: dict(zip(('drive_Nm', 'radial_N', 'axial_N', 'cross_axis_bend_Nm'), rp.tolist()))
                             for name, rp in zip(('yaw', 'pitch', 'jaw'), peak, strict=True)},
             'warm_peak_motor_demand_Nm': peak_torque.tolist(),
@@ -263,6 +268,9 @@ def audit(assembly, cad, grams):
     geometry = datums(assembly, cad, weights, jaw_pivot)
     peak_modes = checks_by_mode(bodies, jaw_pivot, model, geometry)
     pitch = dimensions(assembly)
+    positive_pitch_coupler = model['motion_geometry'].get('pitch_coupler')
+    if positive_pitch_coupler:
+        pitch['horn_axis_x_mm'] = positive_pitch_coupler['m3_seat_mm'][0]
     section = section_properties(pitch)
     pitch_load = {}
     for name, mode in peak_modes.items():
@@ -271,6 +279,11 @@ def audit(assembly, cad, grams):
         # Upstream friction passes through the linkage. Use it as an upper load bound.
         loads['pitch_torque_Nm'] = mode['warm_peak_motor_demand_Nm'][1]
         pitch_load[name] = evaluate(pitch, section, loads)
+        if positive_pitch_coupler:
+            del pitch_load[name]['D_flat']
+    if positive_pitch_coupler:
+        del pitch['d_flat_interface']
+        pitch['d_flat_insertion_length_mm'] = pitch.pop('d_flat_axial_bond_length_mm')
     geometry_jaw = geometry['jaw']
     jaw_fixture = {}
     span_mm = geometry_jaw['right_bearing_x_mm'] - geometry_jaw['left_output_x_mm']
@@ -292,12 +305,14 @@ def audit(assembly, cad, grams):
             'firmware_sha256': digest(FIRMWARE), 'moving_mass_g': [1000.*b.mass for b in bodies],
             'moving_com_mm': [list(b.center*1000.) for b in bodies],
             'geometry': geometry, 'pitch_geometry': pitch, 'pitch_loads': pitch_load,
+            'pitch_coupling': 'positive_M3' if positive_pitch_coupler else 'bonded_D_flat',
             'modes': peak_modes, 'jaw_fixture': jaw_fixture,
             'scope': 'Gravity and firmware-profile load screen. Nominal axes use no external contact. '
                      'Sampled conservative velocity/acceleration sign combinations, not cycle certification. '
                      'Manufacturer stall model scaled to 55 percent with upper friction, unmeasured. '
                      'Light touch is a separate static load sensitivity. '
-                     'Actual gear play, fit, thermal, screw preload and bond properties require hardware.'}
+                     'Actual gear play, fit, thermal and screw preload require hardware. '
+                     'For the positive pitch joint use the separate holder and drive screw strength report.'}
 
 
 if __name__ == '__main__':
