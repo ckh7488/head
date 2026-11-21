@@ -1,0 +1,133 @@
+{
+  "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "p2s_sha256": "540c14f1d74139db92ae8929a89a7a8bba5447e08ed3d0d7c083002e44ff04b3",
+  "geometry": {
+    "rear_skull_retention": {
+      "parts": [
+        "Part019",
+        "Part074"
+      ],
+      "stations": {
+        "left": {
+          "screw": "RearSkullScrewLeft",
+          "nut": "RearSkullNutLeft",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "seat_mm": [
+            -77.65,
+            27.7,
+            117.75
+          ],
+          "nut_axis": [
+            -1,
+            0,
+            0
+          ],
+          "nut_seat_mm": [
+            -62.21,
+            27.7,
+            117.75
+          ],
+          "length_mm": 16.0,
+          "thread_past_nut_mm": 0.5599999999999952
+        },
+        "right": {
+          "screw": "RearSkullScrewRight",
+          "nut": "RearSkullNutRight",
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "seat_mm": [
+            75.3,
+            27.7,
+            117.75
+          ],
+          "nut_axis": [
+            1,
+            0,
+            0
+          ],
+          "nut_seat_mm": [
+            62.21,
+            27.7,
+            117.75
+          ],
+          "length_mm": 16.0,
+          "thread_past_nut_mm": 2.9100000000000037
+        }
+      },
+      "shell_removal_offset_mm": [
+        0.0,
+        68.0,
+        0.0
+      ],
+      "radial_face_relief_mm": 0.3499999999999943
+    },
+    "blink_fit": {
+      "shell": {
+        "part": "Part073",
+        "source_cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+        "reinstated_mm3": 0.9755646232806612,
+        "restored_bounds_mm": [
+          [
+            -55.2,
+            -30.96,
+            127.95
+          ],
+          [
+            -54.14,
+            -28.97,
+            129.58
+          ]
+        ]
+      },
+      "left_lid": {
+        "part": "Part078",
+        "relief_bounds_mm": [
+          [
+            -55.1,
+            -35.0,
+            106.0
+          ],
+          [
+            -54.2,
+            -27.0,
+            111.5
+          ]
+        ],
+        "removed_mm3": 4.09696358083238,
+        "retained_pin_cap_radius_mm": 1.35,
+        "bearing_bore_and_axial_pin_stop_unchanged": true
+      },
+      "maximum_radial_bearing_center_deviation_mm": 0.025,
+      "bearing_fit": {
+        "finished_relieved_pocket_diameter_mm": 10.24,
+        "retained_outboard_shoulder_diameter_mm": 9.36,
+        "centred_locating_band_width_mm": 1.2,
+        "nominal_band_ID_minus_measured_bearing_OD_mm": 0.03,
+        "inboard_axial_end_float_per_bearing_mm": 0.1
+      },
+      "prints": {
+        "28_skull_front_with_camera_tray-B24.stl": "28_skull_front_with_camera_tray-B25.npz",
+        "32_left_eyelid-B21.stl": "32_left_eyelid-B25.stl"
+      }
+    },
+    "hatch_terminal": {
+      "part": "HubBodyJ2",
+      "installed_height_mm": 13.8,
+      "datasheet": "https://www.phoenixcontact.com/en-pc/products/pcb-terminal-block-mkds-15-2-508-1715721"
+    }
+  },
+  "print_inputs_sha256": {
+    "09_head_frame-B25.stl": "a4c5259893178d5e0eca2490b40ce69061660b378abc5df997c0f3d796ee7364",
+    "28_skull_front_with_camera_tray-B25.npz": "0b00f02930b7211f390b0932b4b02b0dd85adc6a09f94806826f0fe200e5252c",
+    "29_skull_rear-B25.npz": "96d0716e062e01d7a8418cfffa4c56281e4018c6cd7fe84a5bb2b4da3cd94c3e",
+    "32_left_eyelid-B25.stl": "9090f380cfe0179207112a924e41ff6d916f62cbf4ed89f865cfec132e33c181"
+  }
+}

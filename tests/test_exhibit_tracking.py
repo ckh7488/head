@@ -105,6 +105,15 @@ def test_park_confirms_fresh_feedback_and_keeps_the_load_offset():
     assert reused.goals == drift.goals
 
 
+def test_eye_offset_does_not_block_a_centered_neck():
+    planner = Planner(exhibit=True)
+    planner.start_centering(ZERO)
+    feedback = (.6, 0., 0., 0., 0.)
+    assert planner.step((8., 0.), feedback, 0.).phase == 'RETURN'
+    assert planner.step((8., 0.), feedback, .12).keep_neutral
+    assert planner.step((8., 0.), feedback, .24).phase == 'TRACK'
+
+
 def test_blocked_return_does_not_claim_park_or_keep_applying_trim():
     planner = Planner(exhibit=True)
     planner.start_centering(ZERO)

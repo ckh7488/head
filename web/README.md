@@ -1,5 +1,24 @@
 # 웹 뷰어
 
+## B25 조립 미리보기
+
+B25 조립 단계에는 뒤 외장 너트와 좌우 M3×16 체결이 추가됐습니다. 조립 중 확인된 문제를 볼 수 있는 오프라인 미리보기입니다. [B25 기구 후보](../mechanical/revisions/b25/)
+
+```sh
+export PYTHONPATH="$PWD/mechanical${PYTHONPATH:+:$PYTHONPATH}"
+b24=mechanical/revisions/b24
+b25=mechanical/revisions/b25
+out=build/b25-preview
+assembly="$b25/R5-B25-Assembly.FCStd"
+python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
+python mechanical/physics/check_b19_assembly.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision b25 --source "$assembly"
+python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision B25 --assembly-cad "$assembly" --output "$out/viewer" --preview
+npm ci --prefix web
+python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B25-assembly-preview.html" --revision B25 --preview
+```
+
+조립 검사가 출구 코드 1을 반환하면 생성된 `assembly.json`의 문제를 확인할 수 있습니다. 같은 입력에서 생성된 보고서가 있을 때 이어서 미리보기를 만듭니다. 실제 하부 덮개 배선과 공구 진입은 검토 중입니다.
+
 ## B24 조립 순서
 
 `R5-B24-assembly.html`은 조립 완료 상태에서 시작합니다. **검사 위치**에서 눈 상하 베어링의 정렬봉과 목 상하 축의 M3 체결 공구를 확인할 수 있습니다. **배선 자세 비교**는 체결품과 배선이 장착된 검사 자세를 보여줍니다. [B24 CAD와 조립](../mechanical/revisions/b24/)

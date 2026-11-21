@@ -22,6 +22,7 @@ HEAD_BOLT_LENGTH = 8.
 DRIVE_AXIS = (0., 0., -1.)
 DRIVE_HOLE_MM = 3.10
 DRIVE_PILOT_MM = 3.00
+TAP_DRILL_MM = 2.50
 HEAD_POCKET_RADIUS_MM = 3.22
 PRINT_NAME = '08_pitch_horn_to_8mm_clamp-B24.stl'
 
@@ -41,12 +42,16 @@ def holder(horn, screw_bore_mm):
     ]).removeSplitter(), 'M3 neck-coupling holder')
 
 
-def apply(doc, print_dir=None):
-    shaft = detached_shape(doc.Part015)
-    shaft = check_solid(shaft.cut([
+def drive_shaft(raw_shaft, bore_mm):
+    return check_solid(raw_shaft.cut([
         box(44.9, SHAFT_INBOARD_X+D_FLAT_LENGTH_MM, -6., 6., 115., 117.),
-        cylinder(1.55, 8.2, (DRIVE_SEAT[0], 0., 115.1), DRIVE_AXIS),
-    ]).removeSplitter(), 'M3 tapped steel drive shaft')
+        cylinder(bore_mm/2, 8.2, (DRIVE_SEAT[0], 0., 115.1), DRIVE_AXIS),
+    ]).removeSplitter(), 'right steel drive shaft')
+
+
+def apply(doc, print_dir=None):
+    raw_shaft = detached_shape(doc.Part015)
+    shaft = drive_shaft(raw_shaft, DRIVE_HOLE_MM)
     horn = detached_shape(doc.Part016)
     finished = holder(horn, DRIVE_HOLE_MM)
     screw = socket_screw(3, HEAD_BOLT_LENGTH, DRIVE_SEAT, DRIVE_AXIS)
@@ -62,7 +67,7 @@ def apply(doc, print_dir=None):
     if print_dir is not None:
         print_dir.mkdir(parents=True, exist_ok=True)
         print_mesh(holder(horn, DRIVE_PILOT_MM), print_dir/PRINT_NAME, 'x+')
-        machining = shaft.copy().translate(App.Vector(-SHAFT_INBOARD_X, 0., -112.))
+        machining = drive_shaft(raw_shaft, TAP_DRILL_MM).translate(App.Vector(-SHAFT_INBOARD_X, 0., -112.))
         machining.exportStep(str(print_dir/'pitch-drive-shaft-B24.step'))
     report = {
         'actor': DRIVE_SCREW, 'm3_size_mm': 3., 'm3_length_mm': HEAD_BOLT_LENGTH,
@@ -70,7 +75,7 @@ def apply(doc, print_dir=None):
         'upper_horn_bolt': 'pitchHornBolt2', 'upper_horn_seat_mm': UPPER_HORN_SEAT,
         'shaft_diameter_mm': 8., 'shaft_length_mm': 27.30,
         'd_flat_depth_mm': 1., 'd_flat_length_from_motor_end_mm': D_FLAT_LENGTH_MM,
-        'm3_from_motor_end_mm': M3_FROM_INBOARD_MM, 'shaft_m3_tap_drill_mm': 2.50,
+        'm3_from_motor_end_mm': M3_FROM_INBOARD_MM, 'shaft_m3_tap_drill_mm': TAP_DRILL_MM,
         'original_frame_cross_hole_from_outer_end_mm': 5.50, 'original_frame_cross_hole_mm': 3.,
         'bore_pilot_mm': DRIVE_PILOT_MM, 'bore_finish_mm': DRIVE_HOLE_MM,
         'head_pocket_diameter_mm': 2.*HEAD_POCKET_RADIUS_MM,

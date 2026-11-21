@@ -138,7 +138,7 @@ def assembly_motion(layout, hardware, stock, steps, revision):
     motion = {row['id']: row['motion'] for row in hardware if 'motion' in row and not row.get('tool')}
     motion.update({row['name']: row['motion'] for row in stock})
     motion.update(layout['world_motion'])
-    if revision in ('B22', 'B23', 'B24'):
+    if revision in ('B22', 'B23', 'B24', 'B25'):
         for step in steps:
             owner = FASTENER_OWNERS.get(step['id'])
             if owner is None:
@@ -343,16 +343,16 @@ def load_stop_locations(report, cad_hash, steps, world_motion):
 
 
 def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None, stop_report=None,
-          guard_cad=None, guard_report=None, wire_states=None):
+          guard_cad=None, guard_report=None, wire_states=None, preview=False):
     data = json.loads(hardware.read_text())
     stock = json.loads(spec.read_text())
     world = C.World(cad, data['hardware'], stock)
     checked = json.loads(report.read_text())
     layout = json.loads((cad/'cad_parts.json').read_text())
-    service_covers = revision in ('B23', 'B24')
+    service_covers = revision in ('B23', 'B24', 'B25')
     rig = layout['motion_geometry']
-    if revision == 'B24' and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
-        raise ValueError('B24 CAD must include both revised pitch axes')
+    if revision in ('B24', 'B25') and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
+        raise ValueError('Current CAD must include both revised pitch axes')
     plan = C.assembly_plan(revision.lower(), layout)
     if [(row['id'], row['context'], row['text']) for row in checked] != [
             (step['id'], step['ctx'], step['text']) for step in plan]:
@@ -377,7 +377,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         for cap in rig['bottom_board_service_nuts']:
             keeper_names.add(cap['keeper'])
             native_screws.add(cap['screw'])
-    if revision == 'B24':
+    if revision in ('B24', 'B25'):
         native_screws.add(rig['pitch_coupler']['actor'])
     b19_names = {item['name'] for item in stock} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
@@ -447,9 +447,13 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             notes.append(f'네 공구 자리와 모터 높이 세 위치의 CAD 최소 여유 · {closest:.3f} mm')
         if front := row.get('front_link_clearance'):
             notes.append(f'앞 외장을 정면에서 넣을 때 링크 주변 CAD 여유 하한 · {front["continuous_lower_bound_mm"]:.3f} mm')
-        if service := row.get('service_access'):
-            if service['status'] != 'pass':
+        service = row.get('service_access')
+        if service and service['status'] != 'pass':
+            if not preview:
                 raise ValueError(f'Unqualified cover service path for {st["id"]}')
+            notes.append('덮개를 내리는 경로의 배선과 공구 여유는 아직 검증 중입니다.')
+            service = None
+        if service:
             for fastener in service['fasteners']:
                 nut, bolt = fastener['nut'], fastener['bolt']
                 if nut not in fixed:
@@ -532,7 +536,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     review = None
     states = []
     if guard or wire_states or service_covers:
-        complete = next(step for step in steps if step['id'] == 'rear-skull')
+        complete = steps[-1] if revision == 'B25' else next(step for step in steps if step['id'] == 'rear-skull')
         fixed = complete['fixed'] + [name for move in complete['moves'] for name in move['ids']] + sorted(guard)
         if len(fixed) != len(set(fixed)):
             raise ValueError('Duplicate part in the final view')
@@ -595,7 +599,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
         **({'stops': stop_locations} if stop_locations else {}),
-        **({'assemblyViews': B24_ASSEMBLY_VIEWS} if revision == 'B24' else {}),
+        **({'assemblyViews': B24_ASSEMBLY_VIEWS} if revision in ('B24', 'B25') else {}),
         **({'finalView': review} if review else {}),
         **({'guardSha256': guard_hash} if guard_hash else {}),
         **({'wireStates': states, 'wireStatesSha256': sha256(wire_states.read_bytes()).hexdigest()} if states else {}),
@@ -616,6 +620,7 @@ if __name__ == '__main__':
     parser.add_argument('--guard-cad', type=Path, help='Guard assembly FCStd for the final view')
     parser.add_argument('--guard-report', type=Path, help='Passing guard report pairing the exact head and guard')
     parser.add_argument('--wire-states', type=Path, help='Exact camera centerlines and poses for comparison')
+    parser.add_argument('--preview', action='store_true', help='Display unresolved cover service without certifying it')
     args = parser.parse_args()
     build(args.cad, args.hardware, args.spec, args.report, args.output, args.revision, args.assembly_cad,
-          args.stop_report, args.guard_cad, args.guard_report, args.wire_states)
+          args.stop_report, args.guard_cad, args.guard_report, args.wire_states, args.preview)

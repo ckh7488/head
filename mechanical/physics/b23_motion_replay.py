@@ -48,6 +48,8 @@ class Firmware:
     jaw_trim_delay: float
     jaw_recovery_timeout: float
     jaw_lag_deg: float
+    jaw_position_gain: float
+    exhibit_jaw_position_gain: float
     sha: str
 
     @classmethod
@@ -55,8 +57,13 @@ class Firmware:
         content = (root/'control/openrb/R5B1/R5B1.ino').read_bytes()
         source = content.decode()
 
-        def val(key):
-            return float(re.search(rf'\b{key}\s*=\s*(\d+(?:\.\d+)?)', source)[1])
+        def val(key, default=None):
+            match = re.search(rf'\b{key}\s*=\s*(\d+(?:\.\d+)?)', source)
+            if match is not None:
+                return float(match[1])
+            if default is not None:
+                return default
+            raise ValueError(f'Firmware constant {key} is missing')
 
         def ar(key):
             return np.array([int(x) for x in re.search(rf'\b{key}\[count\]\s*=\s*\{{([^}}]+)\}}', source)[1].split(',')])
@@ -76,6 +83,8 @@ class Firmware:
         commanded = np.column_stack((-neg, ticks))*ENCODER_DEG
         drift = np.array([tolerance]*5 + [val('jawPositionTolerance')])*ENCODER_DEG
         feedback_bounds = commanded + np.column_stack((-drift, drift))
+        jaw_closing_tolerance = val('jawClosingTolerance', val('jawPositionTolerance'))
+        feedback_bounds[5, 0] = -jaw_closing_tolerance * ENCODER_DEG
         normal = ar('velocity')*VEL_UNIT
         exhibit, returning = normal.copy(), normal.copy()
         exhibit[3:5] = [val('exhibitYawVelocity')*VEL_UNIT, val('exhibitPitchVelocity')*VEL_UNIT]
@@ -84,11 +93,13 @@ class Firmware:
         return cls(logical, commanded, feedback_bounds, speeds, ar('acceleration')*ACC_UNIT, ar('pwm')[-3:],
                    val('goalPeriodMs')/1000, val('reportMs')/1000, val('timeoutMs')/1000,
                    val('exhibitJawPwm'), val('exhibitJawRecoveryPwm'), val('exhibitJawVelocity') * VEL_UNIT,
-                   val('exhibitJawStartTicks') * ENCODER_DEG, val('exhibitJawReadyTicks') * ENCODER_DEG,
+                   val('jawClosingTolerance', val('exhibitJawStartTicks')) * ENCODER_DEG,
+                   val('exhibitJawReadyTicks') * ENCODER_DEG,
                    val('exhibitJawRecoveryTicks') * ENCODER_DEG, val('exhibitJawEntryNeckTicks') * ENCODER_DEG,
-                   val('exhibitJawTrimTicks') * ENCODER_DEG, val('exhibitJawTrimOpenTicks') * ENCODER_DEG,
-                   val('exhibitJawTrimAfterMs') / 1000,
+                   val('exhibitJawTrimTicks', 0.) * ENCODER_DEG, val('exhibitJawTrimOpenTicks', 0.) * ENCODER_DEG,
+                   val('exhibitJawTrimAfterMs', 0.) / 1000,
                    val('exhibitJawRecoveryMs') / 1000, val('exhibitJawLagTicks') * ENCODER_DEG,
+                   val('jawPositionGain', 400.), val('exhibitJawPositionGain', 400.),
                    sha256(content).hexdigest())
 
     def motor_target(self, command):
@@ -202,6 +213,10 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
     active_mask = np.array([1,1,1,1,1,0], dtype=bool) if target else np.array([0,0,0,1,1,1],dtype=bool)
     cold_close = scenario.startswith('cold-close')
     holding_jaw = target is not None or cold_close
+    proportional_gain = PROPORTIONAL_GAIN.copy()
+    # Scale the fitted factory-gain jaw stiffness by the documented register ratio.
+    # The resulting response still needs measurement on the installed mechanism.
+    proportional_gain[2] *= (fw.exhibit_jaw_position_gain if holding_jaw else fw.jaw_position_gain) / 400.
     active_mask[5] = True
     recovering_jaw = cold_close
     recovered_at = None
@@ -220,9 +235,8 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         nonlocal pending, last_command
         physical = np.r_[ideal_eyes, np.degrees(state.qpos)]
         raw, _ = fw.reports(physical)
-        tolerance = 3 * ENCODER_DEG + 1e-9
-        legal = (active_mask & (raw >= fw.commanded[:, 0] - tolerance)
-                 & (raw <= fw.commanded[:, 1] + tolerance))
+        legal = (active_mask & (raw >= fw.feedback_limits[:, 0] - 1e-9)
+                 & (raw <= fw.feedback_limits[:, 1] + 1e-9))
         if holding_jaw:
             legal[5] = False
         old = goal.copy()
@@ -240,6 +254,10 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         states.append(physical)
         if last_command is not None and t-last_command>=fw.watchdog-1e-9:
             hold(t,'watchdog')
+        if recovering_jaw and fault is None and t >= fw.jaw_recovery_timeout - 1e-9:
+            fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
+            active_mask[5] = False
+            hold(t, 'jaw-recovery-timeout')
         if i>=next_report:
             raw, measured = fw.reports(physical)
             feedback_at = t
@@ -258,11 +276,8 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
                     recovered_at = t
                     if target is not None:
                         planner.start_centering(measured[:5])
-                elif t >= fw.jaw_recovery_timeout:
-                    fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
-                    active_mask[5] = False
-                    hold(t, 'jaw-recovery-timeout')
-                elif jaw_trimmed_at is None and t >= fw.jaw_trim_delay and fw.jaw_ready_deg < raw[5] <= fw.jaw_trim_from_deg:
+                elif (fw.jaw_trim_deg > 0 and jaw_trimmed_at is None and t >= fw.jaw_trim_delay
+                      and fw.jaw_ready_deg < raw[5] <= fw.jaw_trim_from_deg):
                     jaw_trimmed_at = t
                     goal[5] = -fw.jaw_trim_deg
             elif holding_jaw and t >= (recovered_at or 0.) + .6:
@@ -317,7 +332,7 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         ideal_eyes = next_ref[:3]
         ref_p, ref_v = next_ref, next_v
         converter = np.pi / 180
-        request = (PROPORTIONAL_GAIN*np.sign(ref_p[NECK_JAW]*converter-state.qpos)*
+        request = (proportional_gain*np.sign(ref_p[NECK_JAW]*converter-state.qpos)*
                    np.maximum(abs(ref_p[NECK_JAW]*converter-state.qpos)-radians(dead)/2,0.)
                    +DERIVATIVE_GAIN*(ref_v[NECK_JAW]*converter-state.qvel))
         if holding_jaw:
@@ -390,24 +405,28 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
     if cold_close:
         result['jaw_recovered_at_s'] = recovered_at
         result['jaw_trimmed_at_s'] = jaw_trimmed_at
-        if recovered_at is not None and target is not None:
+        if recovered_at is not None:
             post_recovery = matrix[round(recovered_at / dt):, 6]
-            result.update(jaw_after_recovery_range_deg=[float(post_recovery.min()), float(post_recovery.max())],
-                          exhibit_tracking_frames=sum(frame[3] == 'TRACK' for frame in frames))
+            result['jaw_after_recovery_range_deg'] = [float(post_recovery.min()), float(post_recovery.max())]
+            if target is not None:
+                result['exhibit_tracking_frames'] = sum(frame[3] == 'TRACK' for frame in frames)
     return result
 
 
-def main(cad, grams, jaw_stop, output, root=ROOT, trace=False):
+def main(cad, grams, jaw_stop, output, root=ROOT, trace=False, jaw_minimum_voltage=4.27):
     track=runpy.run_path(str(root/'control/pc/track.py'))
     firmware=Firmware.load(root,track)
     scene=json.loads((cad/'cad_parts.json').read_bytes())
     bodies,_,_ = load_bodies(scene, cad,json.loads(grams.read_bytes()))
     output.mkdir(parents=True,exist_ok=True)
+    if not 3.7 <= jaw_minimum_voltage <= 6.0:
+        raise ValueError('The jaw supply must be in the XL330 operating range 3.7–6.0 V')
+    warm_jaw_case = 'warm_jaw_recovery'
     supply={'nominal':((12.,12.,5.),.85,NORMAL_FRICTION,.35),
             'warm_low':((11.1,11.1,5.),.55,UPPER_FRICTION,.75),
-            'warm_minimum_rails':((10.62,10.62,4.27),.55,UPPER_FRICTION,.75),
+            'warm_minimum_rails':((10.62,10.62,jaw_minimum_voltage),.55,UPPER_FRICTION,.75),
             'warm_4p5V_jaw':((11.1,11.1,4.5),.55,UPPER_FRICTION,.75),
-            'warm_4p27V_jaw':((11.1,11.1,4.27),.55,UPPER_FRICTION,.75)}
+            warm_jaw_case:((11.1,11.1,jaw_minimum_voltage),.55,UPPER_FRICTION,.75)}
     jaw_stop_bytes = jaw_stop.read_bytes()
     stop, stiffness = jaw_parameters(json.loads(jaw_stop_bytes))
     jaw_mech=(radians(stop),stiffness)
@@ -421,7 +440,7 @@ def main(cad, grams, jaw_stop, output, root=ROOT, trace=False):
         model=mj.MjModel.from_xml_string(xml)
         if case=='warm_4p5V_jaw':
             scenarios=[('jaw-demo',1,.12,force) for force in (0.,.25,.5,1.)]
-        elif case=='warm_4p27V_jaw':
+        elif case==warm_jaw_case:
             cold_exhibit = [(scenario, sign, .12, 0.) for scenario in
                             ('cold-close-exhibit', 'cold-close-exhibit-limit') for sign in (-1, 1)]
             scenarios = cold + cold_exhibit + [('loss', 1, .12, 0.), ('loss', -1, .12, 0.)]
@@ -450,6 +469,13 @@ def main(cad, grams, jaw_stop, output, root=ROOT, trace=False):
             'installed_masses_g':[b.mass*1000 for b in bodies],
             'exhibit_jaw_hold': {'pwm_limit': firmware.jaw_hold_pwm, 'recovery_pwm_limit': firmware.jaw_recovery_pwm,
                                  'recovery_velocity_deg_s': firmware.jaw_recovery_rate,
+                                 'position_p_gain_register': firmware.exhibit_jaw_position_gain,
+                                 'reference_position_p_gain_register': 400,
+                                 'position_p_gain_model_Nm_per_rad':
+                                     PROPORTIONAL_GAIN[2] * firmware.exhibit_jaw_position_gain / 400.,
+                                 'recovery_closing_guard_deg': -firmware.jaw_recovery_end_deg,
+                                 'ready_opening_deg': firmware.jaw_ready_deg,
+                                 'minimum_jaw_supply_V': jaw_minimum_voltage,
                                  'recovery_limit_deg': firmware.jaw_recovery_limit_deg},
             'passive_jaw_model':{'positive_pitch_stop_deg':stop,'stop_stiffness_Nm_rad':stiffness,
                                     'negative_pitch_stop_deg':-1.5,'assumption':'Elastic opening stop and conservative lower tooth contact angle. Powered exhibit commands calibrated closed zero.'},
@@ -464,4 +490,6 @@ if __name__ == '__main__':
     for key in ('cad', 'grams', 'jaw_stop', 'output'):
         parser.add_argument(key, type=Path)
     parser.add_argument('--trace', action='store_true', help='Store the simulated trajectories and MuJoCo models.')
+    parser.add_argument('--jaw-minimum-voltage', type=float, default=4.27,
+                        help='Jaw voltage for the warm minimum-rail and cold-recovery cases.')
     main(**vars(parser.parse_args()))
