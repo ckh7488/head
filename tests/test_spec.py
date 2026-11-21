@@ -56,6 +56,30 @@ def test_records_reject_partial_stale_and_contradictory_evidence(tmp_path):
     assert all(rows[item][0] == 'UNVERIFIED' for item in ('P01', 'P03', 'P04', 'M01'))
 
 
+@pytest.mark.parametrize('item,measurement,failed_field,failed_value', [
+    ('P06', {'jaw_open_deg': 8., 'jaw_stop_reserve_deg': 2.}, 'jaw_open_deg', 7.99),
+    ('P06', {'jaw_open_deg': 8., 'jaw_stop_reserve_deg': 2.}, 'jaw_stop_reserve_deg', 1.99),
+    ('P07', {'camera_yaw_cycles': 1000, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
+             'camera_recognized_after': True}, 'camera_yaw_cycles', 999),
+    ('P07', {'camera_yaw_cycles': 1000, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
+             'camera_recognized_after': True}, 'camera_usb_reenumerations', 1),
+])
+def test_b25_records_require_actual_jaw_and_camera_thresholds(tmp_path, item, measurement, failed_field, failed_value):
+    records = tmp_path / 'spec/records'
+    records.mkdir(parents=True)
+    path = records / f'{item}.json'
+    observed = dict(revision='B25', cad_sha256=CAD_HASH, status='PASS', tester='Bench operator',
+                    date='2026-01-01', measurement='Bench test', result='Measured figures attached', **measurement)
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)[item][0] == 'PASS'
+    observed[failed_field] = failed_value
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)[item][0] == 'UNVERIFIED'
+    observed['status'] = 'FAIL'
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)[item][0] == 'FAIL'
+
+
 def test_empty_cad_result_has_no_coverage(tmp_path):
     relative = Path('mechanical/revisions/b22')
     release = tmp_path / relative

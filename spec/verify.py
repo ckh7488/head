@@ -1,4 +1,5 @@
 """Run the B22 acceptance checks. Exit 0 on PASS, 1 on FAIL, 2 on UNVERIFIED."""
+from argparse import ArgumentParser
 from hashlib import file_digest
 from pathlib import Path
 import tomllib
@@ -41,9 +42,20 @@ def checks(root=ROOT):
 
 
 def main():
-    results = checks()
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument('--b25-physical', action='store_true', help='Check B25 P06 and P07 bench records')
+    if parser.parse_args().b25_physical:
+        revision = 'B25'
+        cad = ROOT / 'mechanical/revisions/b25/R5-B25-Assembly.FCStd'
+        with cad.open('rb') as file:
+            cad_hash = file_digest(file, 'sha256').hexdigest()
+        records = check_records(ROOT, revision, cad_hash)
+        results = {item: records[item] for item in ('P06', 'P07')}
+    else:
+        revision = REVISION
+        results = checks()
     counts = dict.fromkeys(STATUSES, 0)
-    print(f'R5 {REVISION} 인수 검사')
+    print(f'R5 {revision} 인수 검사')
     for item, (status, detail) in results.items():
         counts[status] += 1
         print(f'{item:5} {status:10} {detail}')

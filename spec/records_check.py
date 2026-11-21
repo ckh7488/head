@@ -158,6 +158,21 @@ def physical_record(item, record):
             raise ValueError('실제 깜빡임 횟수와 걸린 횟수를 기록해야 합니다.')
         if record['status'] == 'PASS' and (cycles < 50 or binds):
             raise ValueError('P03 합격에는 50회 이상 구동과 걸림 0회가 필요합니다.')
+    if record.get('revision') == 'B25' and item == 'P06':
+        opening, reserve = (record[key] for key in ('jaw_open_deg', 'jaw_stop_reserve_deg'))
+        if any(type(value) not in (int, float) or not math.isfinite(value) for value in (opening, reserve)):
+            raise ValueError('실제 턱 열림각과 스토퍼 여유를 도 단위로 기록해야 합니다.')
+        if record['status'] == 'PASS' and (opening < 8 or reserve < 2):
+            raise ValueError('P06 합격에는 실제 열림 8°와 스토퍼 여유 2° 이상이 필요합니다.')
+    if record.get('revision') == 'B25' and item == 'P07':
+        cycles, disconnects, reenumerations = (record[key] for key in (
+            'camera_yaw_cycles', 'camera_usb_disconnects', 'camera_usb_reenumerations'))
+        recognized = record['camera_recognized_after']
+        if (any(type(count) is not int or count < 0 for count in (cycles, disconnects, reenumerations))
+                or type(recognized) is not bool):
+            raise ValueError('왕복·끊김·재인식 횟수와 시험 후 USB 인식을 기록해야 합니다.')
+        if record['status'] == 'PASS' and (cycles < 1000 or disconnects or reenumerations or not recognized):
+            raise ValueError('P07 합격에는 1,000회 이상 왕복, USB 연속 인식과 시험 후 인식이 필요합니다.')
     if item == 'P08' and record['status'] == 'PASS':
         rework = record['unplanned_rework_count']
         covers = record['retained_nut_covers']
