@@ -1,8 +1,8 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "source_sha256": "92638b0e64ef6576f2bd9da38ff7703be2ca18d8b5394f2a0d8014741bf8f2e9",
   "archive": "R5-B25-Bearing-Fit-STLs.zip",
-  "archive_sha256": "4162744f1e8a9f04461fc46bc92b7a33bed350fc856f287c8abaca2a0206809b",
+  "archive_sha256": "69249fbfbe63fd9fdb9d3f76a3bbacc189c69d906a9f15b88e050a3d6276e6d8",
   "parts": [
     {
       "source_file": "13_left_eye_cradle_mount-B24.stl",
@@ -321,7 +321,7 @@
       "plate": 9,
       "object_id": 96,
       "object_path": "3D/Objects/object_48.model",
-      "source_mesh_sha256": "92cb764eb5803d4f66760b170fcbeb0b6a63ad37fad12c155890545d6e31cdba",
+      "source_mesh_sha256": "a2b31cccd3c7548b0ac5f2de850d3d6feff789a9132176b7483342a8742d34c5",
       "part": "37",
       "cad_id": "Jaw_37_right_jaw_bearing_stay",
       "print_axis": "Z",
@@ -333,8 +333,8 @@
       "variants": [
         {
           "file": "p9-37-bearing-pocket-D10.05.stl",
-          "sha256": "6b272eaa6e2658febbad808e328958b1c0990d88db91393eba6d2b62e1091757",
-          "facets": 13108,
+          "sha256": "82056d714b8be3abf5d501b39a2484f91bbef331d1b458a37bdbfe432af209a8",
+          "facets": 13120,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -368,8 +368,8 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.10.stl",
-          "sha256": "18b71678a0344046301b16a14e6eb73ca656f6b929483a0af1fadb4b9dbdf080",
-          "facets": 13108,
+          "sha256": "bfad4c4373ff2ded3f9ccd0c20fd655dff3304f079c71372ca4fff5e8315e276",
+          "facets": 13120,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -403,8 +403,8 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.15.stl",
-          "sha256": "1344a5dfe455d0004cb0063ab9906c6668d7146fd350ec1c86fa42cc653936eb",
-          "facets": 13988,
+          "sha256": "3cdf04f8079f278ed6bd07df780916506f5ec4ac42bb7a205f2465c3910ec52f",
+          "facets": 14000,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -438,8 +438,8 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.20.stl",
-          "sha256": "086d07b918860a10beb60c207e5e748c6357f16332ac9b600c38d15ce191fb49",
-          "facets": 14756,
+          "sha256": "e160178aa4dd6407178aeed1cffbef3dd7b6f434bd4450f50f2139cca5e4ca2f",
+          "facets": 14768,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -473,15 +473,15 @@
         },
         {
           "file": "p9-37-bearing-pocket-D10.25.stl",
-          "sha256": "ac756e80632bef47ca15bb52aa7561f82f9726fc2e2a52b0e1711904e9a2e4da",
-          "facets": 13600,
+          "sha256": "8ee31da49eb23fd02f9cb5a628f1df76838f50e2049138746088cd72f2fca080",
+          "facets": 13612,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
           "min_triangle_area_mm2": 1.2774216884281486e-07,
-          "volume_delta_mm3": -10.116933,
+          "volume_delta_mm3": -10.116932,
           "sections": {
             "pocket": {
               "nominal_diameter_mm": 10.25,

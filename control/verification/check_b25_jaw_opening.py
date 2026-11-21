@@ -1,5 +1,6 @@
 """Bound the opening-stop reserve of the frozen B25 jaw under the fit conditions."""
 
+from argparse import ArgumentParser
 from hashlib import sha256
 from itertools import product
 import json
@@ -89,7 +90,7 @@ def contact(fixed, moving, pivot, shift):
     return high
 
 
-def verify_continuous_clearance(fixed, moving, pivot, rotation_radius, box, angle):
+def verify_continuous_clearance(fixed, moving, pivot, rotation_radius, box, angle, minimum=0.):
     stack = [(np.array([0., *-box]), np.array([angle, *box]))]
     scale = np.array([rotation_radius*radians(1.), 1., 1., 1.])
     request = fcl.DistanceRequest()
@@ -105,10 +106,10 @@ def verify_continuous_clearance(fixed, moving, pivot, rotation_radius, box, angl
         # translation half-diagonal plus the largest arc distance of the moving part.
         lower = gap - (widths[0] + np.linalg.norm(widths[1:])) / 2
         cells += 1
-        if lower > 0.:
+        if lower >= minimum and lower > 0.:
             lower_gap = min(lower_gap, lower)
             continue
-        if gap <= 0. or widths.max() < 1e-7:
+        if gap < minimum or gap <= 0. or widths.max() < 1e-7:
             raise ValueError(f'Cannot establish clearance near {mid.tolist()}')
         split = widths.argmax()
         upper_left, lower_right = high.copy(), low.copy()
@@ -117,7 +118,7 @@ def verify_continuous_clearance(fixed, moving, pivot, rotation_radius, box, angl
     return lower_gap, cells
 
 
-def check():
+def check(cad=CAD, powered_minimum=None):
     firmware = SKETCH.read_text()
     wire_limit = float(re.search(r'jawMaxDegrees = ([\d.]+)f;', firmware)[1])
     tolerance = int(re.search(r'jawPositionTolerance = (\d+);', firmware)[1])
@@ -126,7 +127,7 @@ def check():
     proof_angle = ceil((accepted + RESERVE) * 100) / 100
     if proof_angle > 6.:
         raise ValueError('Opening exceeds the rotation interval used for the offset envelope')
-    doc = App.openDocument(str(CAD))
+    doc = App.openDocument(str(cad.resolve()))
     try:
         pivot = np.array(tuple(doc.JawMotion.Placement.Base))
         phase = doc.getObject('Jaw_30_moving_jaw').getGlobalPlacement().Rotation.Angle
@@ -137,10 +138,14 @@ def check():
     fixed, moving = (fcl.CollisionObject(mesh_to_BVH(mesh)) for mesh in (stay, arm))
     radius = np.linalg.norm(arm.vertices[:, 1:] - pivot[1:], axis=1).max()
     clearance, cells = verify_continuous_clearance(fixed, moving, pivot, radius, box, proof_angle)
+    powered = None
+    if powered_minimum is not None:
+        gap, count = verify_continuous_clearance(fixed, moving, pivot, radius, box, accepted, powered_minimum)
+        powered = {'end_deg': accepted, 'minimum_mm': gap, 'required_mm': powered_minimum, 'verified_cells': count}
     witnesses = [(contact(fixed, moving, pivot, shift), shift) for shift in product(*[(-b, 0., b) for b in box])]
     first, shift = min((angle, shift) for angle, shift in witnesses if angle is not None)
     return {
-        'cad_sha256': sha256(CAD.read_bytes()).hexdigest(),
+        'cad_sha256': sha256(cad.read_bytes()).hexdigest(),
         'firmware_sha256': sha256(SKETCH.read_bytes()).hexdigest(),
         'pair': [STAY, ARM],
         'pivot_mm': pivot.tolist(),
@@ -157,6 +162,7 @@ def check():
         'reserve_from_accepted_feedback_at_least_deg': proof_angle - accepted,
         'earliest_sampled_contact_deg': first,
         'sampled_contact_shift_mm': list(shift),
+        'powered_clearance': powered,
         'scope': 'Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.',
         'references': {
             'conditions': '../spec/conditions.md',
@@ -168,4 +174,7 @@ def check():
 
 
 if __name__ == '__main__':
-    print(json.dumps(check(), indent=2))
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument('--cad', type=Path, default=CAD)
+    parser.add_argument('--powered-minimum', type=float, help='Also verify a clearance in mm over the powered interval')
+    print(json.dumps(check(**vars(parser.parse_args())), indent=2))

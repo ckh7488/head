@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "cad_sha256": "976e79b393027eb28b50f369da07e5fd7dfebd30b6e642486f83cc7ab0529935",
   "firmware_sha256": "da24b884be63e4f847e99a38a14c80c1afdd9cf6a29336c2d413df548b2a65b2",
   "pair": [
     "Jaw_37_right_jaw_bearing_stay",
@@ -30,16 +30,22 @@
   "feedback_opening_allowance_ticks": 5,
   "accepted_feedback_max_encoder_deg": 2.373046875,
   "contact_free_through_deg_in_relative_envelope": 4.38,
-  "continuous_lower_gap_mm": 0.009056558091597153,
-  "verified_cells": 51775,
+  "continuous_lower_gap_mm": 0.025730092465412246,
+  "verified_cells": 37,
   "reserve_from_goal_at_least_deg": 2.44640625,
   "reserve_from_accepted_feedback_at_least_deg": 2.006953125,
-  "earliest_sampled_contact_deg": 4.566400146484375,
+  "earliest_sampled_contact_deg": 5.5484619140625,
   "sampled_contact_shift_mm": [
-    0.34411303597846454,
+    -0.34411303597846454,
     -0.5005367147087989,
-    0.4586588806102753
+    -0.4586588806102753
   ],
+  "powered_clearance": {
+    "end_deg": 2.373046875,
+    "minimum_mm": 0.3119944187018201,
+    "required_mm": 0.3,
+    "verified_cells": 159
+  },
   "scope": "Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.",
   "references": {
     "conditions": "../spec/conditions.md",
@@ -47,27 +53,9 @@
     "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
     "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
   },
-  "checked_current_cad_sha256": "e899cec93a8a29a8fd749a94075c120674eae6da7227939de88900c3eae3b794",
-  "opening_stop_pair_in_current_cad": "Same installed vertex and triangle arrays, pivot and phase as the proof source.",
-  "separate_axial_gap_check": {
-    "closed_nominal_gap_mm": 0.399998,
-    "relative_side_face_offsets_mm": {
-      "stay_x": 0.1,
-      "arm_x": -0.2
-    },
-    "gap_at_allowed_offsets_mm": 0.099998,
-    "required_mm": 0.3,
-    "nearest_points_mm": [
-      [
-        44.500002,
-        -13.882022,
-        86.793116
-      ],
-      [
-        44.599999,
-        -13.882022,
-        86.793116
-      ]
-    ]
-  }
+  "nominal_first_stop_deg": 7.461456298828125,
+  "s04_target_deg": 8.0,
+  "requested_goal_span_ticks": 62,
+  "requested_direct_drive_output_deg": 5.44921875,
+  "s04_digital_status": "blocked"
 }

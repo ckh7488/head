@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "e899cec93a8a29a8fd749a94075c120674eae6da7227939de88900c3eae3b794",
-  "p2s_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
+  "cad_sha256": "976e79b393027eb28b50f369da07e5fd7dfebd30b6e642486f83cc7ab0529935",
+  "p2s_sha256": "92638b0e64ef6576f2bd9da38ff7703be2ca18d8b5394f2a0d8014741bf8f2e9",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -129,6 +129,9 @@
       "report": "heat-set-checks.json",
       "socket_head": 18,
       "pin_retainers": 9
+    },
+    "right_jaw_and_local_rotor_reliefs": {
+      "report": "local-geometry-checks.json"
     }
   },
   "print_inputs_sha256": {

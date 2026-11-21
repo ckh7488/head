@@ -127,8 +127,8 @@ def stl_variant(stock, mesh, archive, name, center, checks):
                 volume_delta_mm3=round(float(export.volume - stock.volume), 6), sections=row)
 
 
-def build(output, evidence):
-    with ZipFile(SOURCE) as project, ZipFile(output, 'w') as archive:
+def build(output, evidence, source_project=SOURCE):
+    with ZipFile(source_project) as project, ZipFile(output, 'w') as archive:
         rows = []
         for source, label, cad_id, center in EYES:
             stock, record = archived_mesh(project, source, 7)
@@ -165,7 +165,7 @@ def build(output, evidence):
         }
         rows.append(rail)
 
-    report = {'source_project': SOURCE.name, 'source_sha256': sha256(SOURCE.read_bytes()).hexdigest(),
+    report = {'source_project': source_project.name, 'source_sha256': sha256(source_project.read_bytes()).hexdigest(),
               'archive': output.name, 'archive_sha256': sha256(output.read_bytes()).hexdigest(),
               'parts': rows}
     evidence.write_text(json.dumps(report, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
@@ -175,4 +175,5 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('evidence', type=Path)
+    parser.add_argument('--source-project', type=Path, default=SOURCE)
     build(**vars(parser.parse_args()))

@@ -1,0 +1,43 @@
+{
+  "source_cad_sha256": "e899cec93a8a29a8fd749a94075c120674eae6da7227939de88900c3eae3b794",
+  "source_p2s_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
+  "cad_sha256": "976e79b393027eb28b50f369da07e5fd7dfebd30b6e642486f83cc7ab0529935",
+  "p2s_sha256": "92638b0e64ef6576f2bd9da38ff7703be2ca18d8b5394f2a0d8014741bf8f2e9",
+  "right_jaw": {
+    "right_arm_removed_mm3": 10.715773723628004,
+    "right_stay_removed_mm3": 0.5355008983603929
+  },
+  "yaw_rotor": {
+    "path_radius_mm": 40.0,
+    "centerline_gap_before_mm": 2.8500000000000014,
+    "centerline_gap_after_mm": 3.049999983827413,
+    "removed_volume_mm3": 3.006025999686244,
+    "removed_print_volume_mm3": 2.6882429481411236
+  },
+  "slicer": "Bambu Studio 02.09.01.70",
+  "slice_check": {
+    "5": {
+      "plate_sha256": "7c1b326bac561aec2359065f1133b09814f57fc8f2e5090d3082c730d1f4060c",
+      "return_code": 0,
+      "estimated_seconds": 50022,
+      "estimated_filament_g": 214.97,
+      "project_warning": ""
+    },
+    "8": {
+      "plate_sha256": "e2db12baf0f791986c16b4b5fc200cfbdf15c28201a32d6c6372748954388820",
+      "return_code": 0,
+      "estimated_seconds": 11424,
+      "estimated_filament_g": 46.15,
+      "project_warning": ""
+    },
+    "9": {
+      "plate_sha256": "aa6e700c9817c5012b62147c9c2df65b73506ab505b25f2bb84b5d1f69b3e028",
+      "return_code": 0,
+      "estimated_seconds": 6827,
+      "estimated_filament_g": 28.7,
+      "project_warning": ""
+    }
+  },
+  "matching_H4_options": 5,
+  "matching_B10_options": 5
+}
