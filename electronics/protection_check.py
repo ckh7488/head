@@ -1,4 +1,4 @@
-"""Screen A3 external protection and a possible current limit at each neck header."""
+"""Screen external protection and a possible current limit at each neck header."""
 
 from argparse import ArgumentParser
 from math import isfinite
@@ -48,6 +48,7 @@ def check_protection(service_loop_ohm):
         raise ValueError('service loop resistance must be finite and nonnegative')
     board, parts = load('servo-hub', 'R5_Servo_Hub')
     check_net(parts, 'J1', {1: 'GND', 2: '5V_IN'})
+    check_net(parts, 'J2', {1: 'GND', 2: '12V_IN'})
     if parts['F2'].GetValue() != '4A MINI':
         raise ValueError('F2 no longer matches the 4 A MINI fuse model')
     for output in ('J7', 'J8'):

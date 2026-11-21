@@ -21,7 +21,7 @@ def power_checker():
     return [SYSTEM_PYTHON, CHECKER]
 
 
-def test_a3_model_load_and_branch_limits(power_checker):
+def test_hub_model_load_and_branch_limits(power_checker):
     result = subprocess.run(power_checker, capture_output=True, text=True, check=True)
     limits = re.search(r'PH current estimate: ([\d.]+)–([\d.]+) A', result.stdout)
     assert limits is not None
@@ -67,18 +67,22 @@ def test_source_protection_screen_keeps_j8_above_floor_at_20_milliohms(power_che
         min_trip, max_trip, normal_load, max_allowed = map(float, values.groups())
         assert normal_load < min_trip <= max_trip < max_allowed
     assert 'first tabulated maximum opening time is at 5.40 A' in result.stdout
-    assert 'J8: 10.5281 V at the motor; 30.02 mΩ maximum' in result.stdout
+    normal = re.search(r'J8: ([\d.]+) V at the motor; ([\d.]+) mΩ maximum', result.stdout)
+    assert normal is not None
+    voltage, service_budget = map(float, normal.groups())
+    assert voltage == pytest.approx(10.516, abs=.001)
+    assert service_budget == pytest.approx(25.70, abs=.02)
     fault = re.search(r'J8 while the other neck branch limits: ([\d.]+) V; '
                       r'([\d.]+) V minimum after the common protector', result.stdout)
     assert fault is not None
     voltage, source_floor = map(float, fault.groups())
-    assert voltage == pytest.approx(10.45, abs=.001)
-    assert source_floor == pytest.approx(11.15, abs=.001)
+    assert voltage == pytest.approx(10.435, abs=.001)
+    assert source_floor == pytest.approx(11.165, abs=.001)
     assert 'Bench qualification pending' in result.stdout
 
-    result = subprocess.run([*command, '31'], capture_output=True, text=True)
+    result = subprocess.run([*command, '26'], capture_output=True, text=True)
     assert result.returncode == 1
-    assert 'J8: 10.4973 V at the motor' in result.stdout
+    assert 'J8: 10.4992 V at the motor' in result.stdout
     assert 'Source protection static screen failed' in result.stderr
 
 
