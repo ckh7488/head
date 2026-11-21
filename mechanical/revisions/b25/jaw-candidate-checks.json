@@ -1,0 +1,117 @@
+{
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "source_project_sha256": "540c14f1d74139db92ae8929a89a7a8bba5447e08ed3d0d7c083002e44ff04b3",
+  "candidate_cad_sha256": "a9ffb6a58fa95f3543b2751b3f037181d4801e280ef51fa30da919a4d160613f",
+  "candidate_project_sha256": "f07091876607e209fdffc5622650fc251f2ed71afbc1a65a144e30c79c377e8b",
+  "changed_plates": [
+    "4",
+    "6",
+    "9"
+  ],
+  "sliced_plates": {
+    "4": {
+      "plate_sha256": "c5fc5a4d27f2b21c66454a4a16ae04a68e9863b90b901ed187d6eb34b102ab44",
+      "return_code": 0,
+      "warning_message": "",
+      "seconds": 51383.06640625,
+      "filament_grams": 220.86663818359375,
+      "gcode_sha256": "9e7111f16e55347c5e1f35861fae5fb75cb491eaba9961b2e80268430f56eb29"
+    },
+    "5": {
+      "plate_sha256": "c32a2f96ba9bde12f6c43ce10b3fcfa363ec6bbb411837b94f021ce7d47f23b6",
+      "return_code": 0,
+      "warning_message": "",
+      "seconds": 49553.4453125,
+      "filament_grams": 214.96791076660156,
+      "gcode_sha256": "a0f15790000c7464e7725b5c22ab359211cb225998dff50951fcf130cc58dccc"
+    },
+    "6": {
+      "plate_sha256": "4777121a54cc74de20452d947cf9a2cd2790fa6a6569e12bb6804a05aa9d3989",
+      "return_code": 0,
+      "warning_message": "",
+      "seconds": 29661.79296875,
+      "filament_grams": 223.50161743164062,
+      "gcode_sha256": "95f7cb3935622dde49f439b69a9598e8b0c65295a791c3873e176dd67a8b0d39"
+    },
+    "9": {
+      "plate_sha256": "55c1bd5b3a59c0af77fd0d37f6c86612913911cedc3dc959c1cf7665205085cf",
+      "return_code": 0,
+      "warning_message": "",
+      "seconds": 6480.029296875,
+      "filament_grams": 32.59342575073242,
+      "gcode_sha256": "23483bd13b1d789680e159c85168b9250dafb121d2cef01763f96a1a1a4d199b"
+    }
+  },
+  "verified_retention": {
+    "left": {
+      "shell_feed_clearance_mm": 0.13999786376953124,
+      "minimum_vertical_jaw_insertion_clearance_mm": 0.0999969482421875,
+      "seated_driver_minimum_clearance_mm": 0.25713323081512546,
+      "minimum_motion_clearance_mm": 0.22708927706513077,
+      "stay_blocked_at_downward_displacement_mm": 0.25,
+      "nut_feed_lower_bound_mm": 0.1,
+      "screw_backout_lower_bound_mm": 13.309471791004428,
+      "supported_nut_bearing_area_mm2": 16.988863245074462,
+      "supported_nut_bearing_fraction": 0.980290508148322,
+      "minimum_supported_tab_depth_mm": 0.95
+    },
+    "right": {
+      "shell_feed_clearance_mm": 0.13999786376953124,
+      "minimum_vertical_jaw_insertion_clearance_mm": 0.0999969482421875,
+      "seated_driver_minimum_clearance_mm": 0.4564301362822651,
+      "minimum_motion_clearance_mm": 0.5177088696469236,
+      "stay_blocked_at_downward_displacement_mm": 0.25,
+      "nut_feed_lower_bound_mm": 0.1,
+      "screw_backout_lower_bound_mm": 9.790153378821845,
+      "supported_nut_bearing_area_mm2": 16.988863245074413,
+      "supported_nut_bearing_fraction": 0.9802905081483201,
+      "minimum_supported_tab_depth_mm": 3.6
+    }
+  },
+  "nominal_closing_stop": {
+    "left": {
+      "first_arm_contact_deg": -0.2033995795249939,
+      "clearance_to_arm_at_calibrated_zero_mm": 0.04682899747848065,
+      "unintended_jaw_contact_clearance_lower_bound_mm": 3.2952075380446186
+    },
+    "right": {
+      "first_arm_contact_deg": -0.20470546722412108,
+      "clearance_to_arm_at_calibrated_zero_mm": 0.03750150554971452,
+      "unintended_jaw_contact_clearance_lower_bound_mm": 3.1814937766297406
+    }
+  },
+  "tooth_clearance": {
+    "samples": 4947,
+    "firmware_sha256": "91b46e53c978693a42be75406eceed8041be19f971677fed993f47ebbc1eeb00",
+    "minimum_toleranced_gap_mm": 0.5565972853878665,
+    "vertical_error_mm": 0.4,
+    "neutral_error_deg": 0.7,
+    "encoder_envelope_deg": [
+      -0.4833984375,
+      9.7119140625
+    ]
+  },
+  "modeled_cold_recovery": {
+    "firmware_sha256": "91b46e53c978693a42be75406eceed8041be19f971677fed993f47ebbc1eeb00",
+    "sliced_weights_sha256": "30e3f0180f37af9dfd48283fed834bd4852785e5dd5a97c80dd0a27a15904db1",
+    "cases": 12,
+    "completed": 12,
+    "active_tracking_cases": 4,
+    "latest_recovery_s": 1.2,
+    "warm_jaw_minimum_volts": 4.07,
+    "warm_post_recovery_deg": [
+      0.9179705342348004,
+      0.9660237678377996
+    ],
+    "mass_scope": "Exact candidate CAD and model-only extrusion masses from plates 4, 5, 6, and 9. Plate 5 matches the repaired B25 production plate bit signature. The unchanged B24 model-only nasal tray mass is allocated out of the fused front shell."
+  },
+  "bench_screen": {
+    "assumed_force_per_tab_N": 5.0,
+    "provisional_bolt_torque_Nm": 0.05,
+    "assumed_nut_factor": 0.15,
+    "maximum_mean_supported_compression_MPa": 6.540232239689469,
+    "left_nominal_bending_stress_MPa": 9.518566911859594,
+    "right_nominal_bending_stress_MPa": 14.146672702580352,
+    "scope": "Initial clamp compression and rectangular-root cantilever calculation. Printed layer adhesion, slot and root stress concentration, assembled fit, repeated service loading and loaded tooth clearance remain physical bench checks."
+  }
+}
