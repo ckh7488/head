@@ -55,8 +55,13 @@ class Firmware:
         content = (root/'control/openrb/R5B1/R5B1.ino').read_bytes()
         source = content.decode()
 
-        def val(key):
-            return float(re.search(rf'\b{key}\s*=\s*(\d+(?:\.\d+)?)', source)[1])
+        def val(key, default=None):
+            match = re.search(rf'\b{key}\s*=\s*(\d+(?:\.\d+)?)', source)
+            if match is not None:
+                return float(match[1])
+            if default is not None:
+                return default
+            raise ValueError(f'Firmware constant {key} is missing')
 
         def ar(key):
             return np.array([int(x) for x in re.search(rf'\b{key}\[count\]\s*=\s*\{{([^}}]+)\}}', source)[1].split(',')])
@@ -86,8 +91,8 @@ class Firmware:
                    val('exhibitJawPwm'), val('exhibitJawRecoveryPwm'), val('exhibitJawVelocity') * VEL_UNIT,
                    val('exhibitJawStartTicks') * ENCODER_DEG, val('exhibitJawReadyTicks') * ENCODER_DEG,
                    val('exhibitJawRecoveryTicks') * ENCODER_DEG, val('exhibitJawEntryNeckTicks') * ENCODER_DEG,
-                   val('exhibitJawTrimTicks') * ENCODER_DEG, val('exhibitJawTrimOpenTicks') * ENCODER_DEG,
-                   val('exhibitJawTrimAfterMs') / 1000,
+                   val('exhibitJawTrimTicks', 0.) * ENCODER_DEG, val('exhibitJawTrimOpenTicks', 0.) * ENCODER_DEG,
+                   val('exhibitJawTrimAfterMs', 0.) / 1000,
                    val('exhibitJawRecoveryMs') / 1000, val('exhibitJawLagTicks') * ENCODER_DEG,
                    sha256(content).hexdigest())
 
@@ -220,9 +225,8 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         nonlocal pending, last_command
         physical = np.r_[ideal_eyes, np.degrees(state.qpos)]
         raw, _ = fw.reports(physical)
-        tolerance = 3 * ENCODER_DEG + 1e-9
-        legal = (active_mask & (raw >= fw.commanded[:, 0] - tolerance)
-                 & (raw <= fw.commanded[:, 1] + tolerance))
+        legal = (active_mask & (raw >= fw.feedback_limits[:, 0] - 1e-9)
+                 & (raw <= fw.feedback_limits[:, 1] + 1e-9))
         if holding_jaw:
             legal[5] = False
         old = goal.copy()
@@ -262,7 +266,8 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
                     fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
                     active_mask[5] = False
                     hold(t, 'jaw-recovery-timeout')
-                elif jaw_trimmed_at is None and t >= fw.jaw_trim_delay and fw.jaw_ready_deg < raw[5] <= fw.jaw_trim_from_deg:
+                elif (fw.jaw_trim_deg > 0 and jaw_trimmed_at is None and t >= fw.jaw_trim_delay
+                      and fw.jaw_ready_deg < raw[5] <= fw.jaw_trim_from_deg):
                     jaw_trimmed_at = t
                     goal[5] = -fw.jaw_trim_deg
             elif holding_jaw and t >= (recovered_at or 0.) + .6:

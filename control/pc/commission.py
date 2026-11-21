@@ -1,4 +1,4 @@
-"""Check or read servos without enabling torque, release armed axes, or reboot one servo."""
+"""Check or read servos without enabling torque, check and release all six expected drives, or reboot one servo."""
 from argparse import ArgumentParser
 import time
 
@@ -41,7 +41,7 @@ def main():
     action=argument.add_mutually_exclusive_group(required=True)
     action.add_argument('--read',type=int,choices=range(1,7))
     action.add_argument('--check',action='store_true',help='Read readiness and torque status for all six servos')
-    action.add_argument('--release',action='store_true')
+    action.add_argument('--release',action='store_true',help='Support the head and confirm torque off on IDs 1–6')
     action.add_argument('--reboot',type=int,choices=range(1,7),
                         help='Reboot one servo after its torque is verified off. Support the head first.')
     args=argument.parse_args()

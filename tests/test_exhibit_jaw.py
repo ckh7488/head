@@ -115,39 +115,34 @@ def test_exhibit_keeps_five_axes_when_jaw_calibration_is_unset(firmware_build):
         simulator.close()
 
 
-@pytest.mark.parametrize('close_feedback', [1988, 2011])
-def test_cold_trim_is_once_and_restores_zero_before_arming(firmware, close_feedback):
+@pytest.mark.parametrize('close_feedback', [1988, 2008])
+def test_late_cold_closure_arms_at_the_original_zero_goal(firmware, close_feedback):
     firmware.set(6, POSITION, 1904)
     firmware.exchange('follow 6 0')
     assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
-    firmware.trace()
+    assert jaw_writes(firmware, GOAL) == [2000]
     firmware.set(6, POSITION, 1980)
-    assert firmware.tick(1540) == [NEUTRAL_STATE]
-    assert not jaw_writes(firmware, GOAL)
-    assert firmware.tick(120) == [NEUTRAL_STATE]
-    assert jaw_writes(firmware, GOAL) == [2011]
-    assert firmware.tick(120) == [NEUTRAL_STATE]
+    assert firmware.tick(1660) == [NEUTRAL_STATE]
     assert not jaw_writes(firmware, GOAL)
 
     firmware.set(6, POSITION, close_feedback)
     assert firmware.tick(120) == ['ARMED_EXHIBIT 31', NEUTRAL_STATE]
     events = firmware.trace()
     assert [(e.register, e.value) for e in events if e.direction == 'w' and e.id == 6] == [
-        (GOAL, 2000), (PWM, 100),
+        (PWM, 100),
     ]
 
 
-def test_ignored_restore_cannot_leave_the_cold_trim_in_tracking(firmware):
+def test_stalled_cold_jaw_never_commands_past_zero_and_times_out(firmware):
     firmware.set(6, POSITION, 1904)
     firmware.exchange('follow 6 0')
     assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
-    firmware.trace()
+    assert jaw_writes(firmware, GOAL) == [2000]
     firmware.set(6, POSITION, 1981)
-    assert firmware.tick(1560) == [NEUTRAL_STATE]
-    assert jaw_writes(firmware, GOAL) == [2011]
-    firmware.set(6, POSITION, 1989)
-    firmware.fail('w', 6, GOAL, 'ignored')
-    assert firmware.tick(120) == ['ERROR EXHIBIT_JAW_TARGET ID6']
+    for _ in range(19):
+        assert firmware.tick(120) == [NEUTRAL_STATE]
+    assert firmware.tick(120) == ['ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6']
     events = firmware.trace()
     assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(6, 0)]
-    assert not [e for e in writes(events, PWM) if e.id == 6]
+    assert not [e for e in events if e.direction == 'w' and e.id == 6 and e.register in (GOAL, PWM)]
+    assert firmware.command('ARM_EXHIBIT') == ['LOCKED RELEASE_AFTER_FAULT']
