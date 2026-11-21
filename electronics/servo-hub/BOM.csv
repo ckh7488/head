@@ -9,12 +9,12 @@ H1,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hol
 H2,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hole,No part
 H3,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hole,No part
 H4,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hole,No part
-J1,5V IN - XT30,Connector_AMASS:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal,YES,Amass XT30PW-M,"Pad 2 positive, pad 1 GND"
+J1,5V IN - XT30,R5_Hub:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal,YES,Amass XT30PW-M,"Pad 2 positive, pad 1 GND"
 J2,12V IN - Terminal,"TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2-5.08_1x02_P5.08mm_Horizontal",YES,"Phoenix MKDS 1,5/2-5,08","Pad 1 positive, pad 2 GND"
-J3,OpenRB TTL - GND / DATA,Connector_JST:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical,YES,JST B2B-PH-K-S,"EH1 to PH1, EH3 to PH2, no wire on EH2"
-J4,ID1 Eye yaw,Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"
-J5,ID2 Eye pitch,Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"
-J6,ID3 Blink,Connector_JST:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"
+J3,OpenRB TTL - GND / DATA,R5_Hub:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical,YES,JST B2B-PH-K-S,"EH1 to PH1, EH3 to PH2, no wire on EH2"
+J4,ID1 Eye yaw,R5_Hub:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"
+J5,ID2 Eye pitch,R5_Hub:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"
+J6,ID3 Blink,R5_Hub:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"
 J7,ID4 Neck yaw,Connector_JST:JST_EH_B3B-EH-A_1x03_P2.50mm_Vertical,YES,JST B3B-EH-A,12 V output
 J8,ID5 Neck pitch,Connector_JST:JST_EH_B3B-EH-A_1x03_P2.50mm_Vertical,YES,JST B3B-EH-A,12 V output
 R1,0R,Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal,YES,0R through-hole axial 1/4 W,P7.62 mm
