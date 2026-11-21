@@ -1,0 +1,159 @@
+{
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "bosses": {
+    "Left": {
+      "pad_original_overlap_mm3": 131.60287273743884,
+      "wall_mm": 4.200000000000003,
+      "nominal_thread_projection_mm": 3.3999999999999972
+    },
+    "Right": {
+      "pad_original_overlap_mm3": 62.02712449508231,
+      "wall_mm": 4.200000000000003,
+      "nominal_thread_projection_mm": 3.3999999999999972
+    }
+  },
+  "screw_length_mm": 10.0,
+  "capture": {
+    "Left": {
+      "all_corners_have_intersection_in_first_2_5_mm": true,
+      "worst_first_observed_contact_mm": 1.2000000000000002,
+      "earliest_contact_mm": 0.8,
+      "corner_count": 27,
+      "rotations_for_which_this_one_head_never_contacts": []
+    },
+    "Right": {
+      "all_corners_have_intersection_in_first_2_5_mm": true,
+      "worst_first_observed_contact_mm": 1.85,
+      "earliest_contact_mm": 0.8,
+      "corner_count": 27,
+      "rotations_for_which_this_one_head_never_contacts": [
+        [
+          -1.5,
+          -1.5,
+          -2.5
+        ],
+        [
+          0.0,
+          -1.5,
+          -2.5
+        ],
+        [
+          1.5,
+          -1.5,
+          -2.5
+        ]
+      ]
+    }
+  },
+  "head_motion": {
+    "Left": [
+      8.713257626636436,
+      "Jaw_38_left_jaw_drive_arm",
+      0.0
+    ],
+    "Right": [
+      3.1936358211372635,
+      "Jaw_30_moving_jaw",
+      0.0
+    ]
+  },
+  "stage_and_boss_motion": {
+    "front_feed_sampled_mm": {
+      "Part011": 15.488463448644605,
+      "Part012": 29.50941595208851,
+      "Part013": 30.143117255905352,
+      "Part014": 19.136453688345245,
+      "Part015": 15.026184791243944,
+      "Part016": 24.640562227278863,
+      "Part018": 34.99166905654,
+      "Part019": 13.176194239679575,
+      "Part024": 18.65644365615498,
+      "PitchLimitLink": 50.61628004929469,
+      "PitchLimitUpperPin": 67.7088925316256,
+      "PitchLimitLowerPin": 53.32917464065034,
+      "HarnessID6EH": 48.55904798503622,
+      "jawMotorHead0": 25.049811358254683,
+      "jawMotorHead2": 32.94852641387068
+    },
+    "jaw_feed_sampled_mm": {
+      "Jaw_30_moving_jaw": 2.4867934423405447,
+      "Jaw_36_left_jaw_servo_stay": 0.7999999999999972,
+      "Jaw_37_right_jaw_bearing_stay": 0.7999999999999972,
+      "Jaw_38_left_jaw_drive_arm": 8.51271410906462,
+      "Jaw_39_right_jaw_pivot_arm": 13.369717175638048,
+      "Jaw_XL330_M288_Jaw": 25.453113507331352,
+      "Jaw_MR104ZZ_jaw_right": 25.79999999999999,
+      "Jaw_Pin_jaw_4x10": 20.599999237060544,
+      "JawHornScrew0": 20.891538478822287,
+      "JawHornScrew1": 24.529553495760922,
+      "Part074": 31.470075607299805
+    },
+    "running_sampled_mm": {
+      "Jaw_30_moving_jaw": 2.4867934423405447,
+      "Jaw_38_left_jaw_drive_arm": 8.51271410906462,
+      "Jaw_39_right_jaw_pivot_arm": 13.369717175638048,
+      "Jaw_Pin_jaw_4x10": 20.599999237060544,
+      "JawHornScrew0": 20.94599872904901,
+      "JawHornScrew1": 25.12863567710849,
+      "Part011": 15.142461790234373,
+      "Part012": 29.507823449051187,
+      "Part014": 19.13466075711159,
+      "Part018": 34.99061181795357,
+      "PitchLimitLink": 49.47789067187405,
+      "PitchLimitLowerPin": 52.100715253225154
+    }
+  },
+  "shell_reaction": {
+    "Part024": {
+      "down_first_overlap_sample_mm": 1.75,
+      "forward_first_overlap_sample_mm": null,
+      "support_witness_points_mm": [
+        [
+          -10.566897508024566,
+          -49.33650475734021,
+          125.0
+        ],
+        [
+          -10.560475663774657,
+          -49.332284493449464,
+          125.01704633874886
+        ]
+      ],
+      "minimum_gap_one_sample_before_mm": 0.018698352216661468
+    },
+    "Part025": {
+      "down_first_overlap_sample_mm": 0.4,
+      "forward_first_overlap_sample_mm": null,
+      "support_witness_points_mm": [
+        [
+          -67.02654266357422,
+          -16.545363805836786,
+          134.1284220803734
+        ],
+        [
+          -67.02654266357422,
+          -16.552209854125977,
+          134.14515686035156
+        ]
+      ],
+      "minimum_gap_one_sample_before_mm": 0.018080963417225725
+    },
+    "Part027": {
+      "down_first_overlap_sample_mm": 0.4,
+      "forward_first_overlap_sample_mm": null,
+      "support_witness_points_mm": [
+        [
+          66.73719024658203,
+          -9.263730268002789,
+          137.10727300576693
+        ],
+        [
+          66.73719024658203,
+          -9.270576477050781,
+          137.12400817871094
+        ]
+      ],
+      "minimum_gap_one_sample_before_mm": 0.01808138799414299
+    }
+  }
+}

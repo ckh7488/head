@@ -1,0 +1,524 @@
+{
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "active_sites": {
+    "m3_socket_screw": 18,
+    "m3_set_screw": 9
+  },
+  "status": "blocked",
+  "scope": "Separate nominal substitution trials on the original B25 CAD. Installed conditions, geometry variants and tooling paths require validation before use.",
+  "screened_seats": {
+    "EyeYawFoot0": {
+      "nut": {
+        "host": "Part039",
+        "scheme": "DIN934",
+        "standard_screw_length_mm": 16.0,
+        "nominal_thread_projection_mm": 0.95,
+        "seat": [
+          -8.0,
+          -47.6,
+          108.85
+        ],
+        "nut_install_blockers": {
+          "Part038": 35.83434
+        },
+        "seated_blockers": {
+          "Part038": 5.27028
+        },
+        "screw_tip_blockers": {},
+        "spanner_straight_angles_deg": []
+      }
+    },
+    "EyeYawFoot1": {
+      "nut": {
+        "host": "Part039",
+        "scheme": "DIN934",
+        "standard_screw_length_mm": 16.0,
+        "nominal_thread_projection_mm": 0.95,
+        "seat": [
+          8.0,
+          -47.6,
+          108.85
+        ],
+        "nut_install_blockers": {
+          "Part038": 35.77091
+        },
+        "seated_blockers": {
+          "Part038": 6.06325
+        },
+        "screw_tip_blockers": {},
+        "spanner_straight_angles_deg": []
+      }
+    },
+    "eyePitchHead4": {
+      "nut": {
+        "host": "Part064",
+        "scheme": "DIN934",
+        "standard_screw_length_mm": 12.0,
+        "nominal_thread_projection_mm": 2.25,
+        "seat": [
+          51.0,
+          4.6,
+          164.3
+        ],
+        "nut_install_blockers": {},
+        "seated_blockers": {},
+        "screw_tip_blockers": {},
+        "spanner_straight_angles_deg": [
+          0,
+          30,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300,
+          330
+        ]
+      }
+    },
+    "eyePitchHead5": {
+      "nut": {
+        "host": "Part064",
+        "scheme": "DIN934",
+        "standard_screw_length_mm": 12.0,
+        "nominal_thread_projection_mm": 2.25,
+        "seat": [
+          51.0,
+          15.4,
+          164.3
+        ],
+        "nut_install_blockers": {},
+        "seated_blockers": {},
+        "screw_tip_blockers": {},
+        "spanner_straight_angles_deg": [
+          0,
+          30,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          330
+        ]
+      }
+    },
+    "ID5KeeperScrew1": {
+      "nut": {
+        "host": "Part011",
+        "scheme": "DIN934",
+        "standard_screw_length_mm": 12.0,
+        "nominal_thread_projection_mm": 0.81,
+        "seat": [
+          17.0,
+          14.310000000000002,
+          84.0
+        ],
+        "nut_install_blockers": {
+          "Part018": 420.14946
+        },
+        "seated_blockers": {
+          "Part018": 68.65468
+        },
+        "screw_tip_blockers": {
+          "Part018": 22.56391
+        },
+        "spanner_straight_angles_deg": [
+          90,
+          270
+        ]
+      },
+      "insert": {
+        "host": "Part011",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.49,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "ID5KeeperScrew2": {
+      "nut": {
+        "host": "Part011",
+        "scheme": "DIN934",
+        "standard_screw_length_mm": 12.0,
+        "nominal_thread_projection_mm": 0.81,
+        "seat": [
+          17.0,
+          14.310000000000002,
+          108.0
+        ],
+        "nut_install_blockers": {
+          "Part018": 420.36925
+        },
+        "seated_blockers": {
+          "Part018": 68.65468
+        },
+        "screw_tip_blockers": {
+          "Part018": 22.56391
+        },
+        "spanner_straight_angles_deg": []
+      },
+      "insert": {
+        "host": "Part011",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.49,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "YawBracketFoot0": {
+      "insert": {
+        "host": "Part000",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "YawBracketFoot1": {
+      "insert": {
+        "host": "Part000",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "YawBracketFoot2": {
+      "insert": {
+        "host": "Part000",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "YawBracketFoot3": {
+      "insert": {
+        "host": "Part000",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "ServiceHatchNutKeeperLeftScrew": {
+      "insert": {
+        "host": "Part000",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 2.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 13.0817,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "ServiceHatchNutKeeperRightScrew": {
+      "insert": {
+        "host": "Part000",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 2.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 13.0817,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "EyePitchStayFrame0": {
+      "insert": {
+        "host": "Part019",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 3.6,
+        "required_wall_missing_mm3": 3.589747,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "EyePitchStayFrame1": {
+      "insert": {
+        "host": "Part019",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 3.6,
+        "required_wall_missing_mm3": 0.017558,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "CradleMountFrameL": {
+      "insert": {
+        "host": "Part019",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.45,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "CradleMountFrameR": {
+      "insert": {
+        "host": "Part019",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.45,
+        "required_wall_missing_mm3": 112.594681,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "CameraTrayScrewLeft": {
+      "insert": {
+        "host": "Part065",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.05,
+        "required_wall_missing_mm3": 38.513975,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "CameraTrayScrewRight": {
+      "insert": {
+        "host": "Part065",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 4.05,
+        "required_wall_missing_mm3": 26.656488,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 0.0,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "BlinkPivotServoRetainer": {
+      "insert": {
+        "host": "Part056",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 77.1889,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "BlinkPivotDriveRetainer": {
+      "insert": {
+        "host": "Part054",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 76.9747,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "BlinkPivotUpperLRetainer": {
+      "insert": {
+        "host": "Part057",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 77.1889,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "BlinkPivotUpperRRetainer": {
+      "insert": {
+        "host": "Part060",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 77.1889,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "BlinkPivotLowerLRetainer": {
+      "insert": {
+        "host": "Part057",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 77.1889,
+        "installed_addition_overlaps_mm3": {
+          "Part029": 0.08285
+        },
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "BlinkPivotLowerRRetainer": {
+      "insert": {
+        "host": "Part060",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 77.1889,
+        "installed_addition_overlaps_mm3": {
+          "Part033": 0.08285
+        },
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "EyeYawDrivePivotRetainer": {
+      "insert": {
+        "host": "Part040",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": 0.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 0.0,
+        "gross_addition_volume_mm3": 77.1889,
+        "installed_addition_overlaps_mm3": {
+          "Part039": 0.88063
+        },
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "PitchLimitLowerRetainer": {
+      "insert": {
+        "host": "Part011",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": -1.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 2.42729,
+        "gross_addition_volume_mm3": 17.2723,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    },
+    "PitchLimitUpperRetainer": {
+      "insert": {
+        "host": "Part019",
+        "scheme": "TC-M3x3.0",
+        "entry_from_seat_mm": -1.0,
+        "required_wall_missing_mm3": 0.0,
+        "bare_part_install_tool_overlap_mm3": 2.42729,
+        "gross_addition_volume_mm3": 17.2723,
+        "installed_addition_overlaps_mm3": {},
+        "required_proof": "assembly path, tolerances, and actual insert installation"
+      }
+    }
+  },
+  "reinforced_seat_trials": {
+    "YawBracketFoot0": {
+      "remaining_stock_behind_pilot_mm3": 254.14227930479998,
+      "test_body_mm3": 254.14227930479998
+    },
+    "YawBracketFoot1": {
+      "remaining_stock_behind_pilot_mm3": 254.14227930479998,
+      "test_body_mm3": 254.14227930479998
+    },
+    "YawBracketFoot2": {
+      "remaining_stock_behind_pilot_mm3": 254.14227930479998,
+      "test_body_mm3": 254.14227930479998
+    },
+    "YawBracketFoot3": {
+      "remaining_stock_behind_pilot_mm3": 254.14227930479998,
+      "test_body_mm3": 254.14227930479998
+    },
+    "eyePitchHead4": {
+      "spanner_open_directions_deg": [
+        120,
+        150,
+        180,
+        210,
+        240
+      ]
+    },
+    "eyePitchHead5": {
+      "spanner_open_directions_deg": [
+        120,
+        150,
+        180,
+        210,
+        240
+      ]
+    },
+    "EyeYawFoot0": {
+      "addition_mm3": 33.121423097949645,
+      "seated_addition_overlap_mm3": {
+        "Part038": 1.38272
+      },
+      "missing_wall_mm3": 28.14867,
+      "tool_overlap_mm3": 0.0
+    },
+    "EyeYawFoot1": {
+      "addition_mm3": 32.261261286958174,
+      "seated_addition_overlap_mm3": {
+        "Part038": 2.14815
+      },
+      "missing_wall_mm3": 28.14867,
+      "tool_overlap_mm3": 0.0
+    },
+    "EyePitchStayFrame0": {
+      "addition_mm3": 9.131899247360092,
+      "seated_addition_overlap_mm3": {
+        "CradleMountFrameR": 3.12381
+      },
+      "missing_wall_mm3": 0.0,
+      "tool_overlap_mm3": 0.0
+    },
+    "EyePitchStayFrame1": {
+      "addition_mm3": 2.5697238463934093,
+      "seated_addition_overlap_mm3": {
+        "CradleMountFrameR": 0.17213
+      },
+      "missing_wall_mm3": 0.0,
+      "tool_overlap_mm3": 0.0
+    },
+    "CradleMountFrameR": {
+      "addition_mm3": 26.269365629475516,
+      "seated_addition_overlap_mm3": {},
+      "missing_wall_mm3": 0.0,
+      "tool_overlap_mm3": 0.0
+    },
+    "CameraTrayScrewLeft": {
+      "addition_mm3": 53.788351912582094,
+      "seated_addition_overlap_mm3": {},
+      "missing_wall_mm3": 0.0,
+      "tool_overlap_mm3": 0.0
+    },
+    "CameraTrayScrewRight": {
+      "addition_mm3": 38.317420075279756,
+      "seated_addition_overlap_mm3": {},
+      "missing_wall_mm3": 0.0,
+      "tool_overlap_mm3": 0.0
+    }
+  }
+}

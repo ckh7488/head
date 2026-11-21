@@ -1,5 +1,5 @@
 {
-  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "source_cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
   "case_seats_sha256": "fb6aa2c8154c70ef80e2111fd1f946c3841f200ed5c5365902440aea13ff1faa",
   "module_parts": [
     "Jaw_30_moving_jaw",
@@ -831,40 +831,40 @@
         "bounds_lower_bound_mm": 22.720310926437378
       },
       "Jaw_37_right_jaw_bearing_stay": {
-        "bounds_lower_bound_mm": 103.75306352031059
+        "bounds_lower_bound_mm": 101.82581712529192
       },
       "Jaw_38_left_jaw_drive_arm": {
-        "bounds_lower_bound_mm": 28.848943536966917
+        "bounds_lower_bound_mm": 28.841619947836847
       },
       "Jaw_39_right_jaw_pivot_arm": {
-        "bounds_lower_bound_mm": 112.23417472747319
+        "bounds_lower_bound_mm": 110.33906821115185
       },
       "Jaw_XL330_M288_Jaw": {
-        "bounds_lower_bound_mm": 29.846337443805037
+        "bounds_lower_bound_mm": 28.695014369297766
       },
       "Jaw_MR104ZZ_jaw_right": {
-        "bounds_lower_bound_mm": 107.20102841498431
+        "bounds_lower_bound_mm": 105.30650733514409
       },
       "Jaw_Pin_jaw_4x10": {
-        "bounds_lower_bound_mm": 107.83980687560452
+        "bounds_lower_bound_mm": 105.97180727822098
       },
       "JawHornScrew0": {
-        "bounds_lower_bound_mm": 45.26062628697676
+        "bounds_lower_bound_mm": 44.73839840550142
       },
       "JawHornScrew1": {
-        "bounds_lower_bound_mm": 37.57869017231524
+        "bounds_lower_bound_mm": 36.94804399514083
       },
       "jawMotorHead0": {
-        "bounds_lower_bound_mm": 52.232079139030816
+        "bounds_lower_bound_mm": 51.577030654991944
       },
       "jawMotorHead1": {
-        "bounds_lower_bound_mm": 43.063577080463624
+        "bounds_lower_bound_mm": 42.35412217082909
       },
       "jawMotorHead2": {
-        "bounds_lower_bound_mm": 40.54078814492122
+        "bounds_lower_bound_mm": 39.78637326155614
       },
       "jawMotorHead3": {
-        "bounds_lower_bound_mm": 29.786817295888742
+        "bounds_lower_bound_mm": 28.640085276036746
       }
     },
     "RearSkullScrewRight": {

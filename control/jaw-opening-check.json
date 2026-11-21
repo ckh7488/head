@@ -46,5 +46,28 @@
     "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",
     "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
     "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
+  },
+  "checked_current_cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
+  "opening_stop_pair_in_current_cad": "Same installed vertex and triangle arrays, pivot and phase as the proof source.",
+  "separate_axial_gap_check": {
+    "closed_nominal_gap_mm": 0.399998,
+    "relative_side_face_offsets_mm": {
+      "stay_x": 0.1,
+      "arm_x": -0.2
+    },
+    "gap_at_allowed_offsets_mm": 0.099998,
+    "required_mm": 0.3,
+    "nearest_points_mm": [
+      [
+        44.500002,
+        -13.882022,
+        86.793116
+      ],
+      [
+        44.599999,
+        -13.882022,
+        86.793116
+      ]
+    ]
   }
 }
