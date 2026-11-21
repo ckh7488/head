@@ -625,8 +625,10 @@ def b25_plan(plan, geometry):
                                place=([rear['left']['nut'], rear['right']['nut']], (0., 35., 0.))))
         result.append(row)
         if row['id'] == 'rear-skull':
+            left = rear['left']['length_mm']
+            right = rear['right']['length_mm']
             result.append(step('rear-skull-lock', 'base',
-                               '양쪽에서 M3×16 원통머리 나사를 넣고 2.5 mm 육각렌치로 조입니다.',
+                               f'왼쪽 M3×{left:g}, 오른쪽 M3×{right:g} 원통머리 나사를 밖에서 넣고 2.5 mm 육각렌치로 조입니다.',
                                place=([rear['left']['screw']], (-28., 0., 0.)),
                                place2=([rear['right']['screw']], (28., 0., 0.))))
     return result

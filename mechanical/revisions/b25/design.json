@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
-  "p2s_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
+  "p2s_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -32,8 +32,9 @@
             27.7,
             117.75
           ],
-          "length_mm": 16.0,
-          "thread_past_nut_mm": 0.5599999999999952
+          "length_mm": 18.0,
+          "thread_past_nut_mm": 2.559999999999995,
+          "blind_bore_floor_abs_x_mm": 58.8
         },
         "right": {
           "screw": "RearSkullScrewRight",
@@ -59,7 +60,8 @@
             117.75
           ],
           "length_mm": 16.0,
-          "thread_past_nut_mm": 2.9100000000000037
+          "thread_past_nut_mm": 2.9100000000000037,
+          "blind_bore_floor_abs_x_mm": 58.949999999999996
         }
       },
       "shell_removal_offset_mm": [
@@ -125,9 +127,9 @@
     }
   },
   "print_inputs_sha256": {
-    "09_head_frame-B25.stl": "a4c5259893178d5e0eca2490b40ce69061660b378abc5df997c0f3d796ee7364",
+    "09_head_frame-B25.stl": "7b3128f2e279c71e2172a2080526c769209d681411434aaf983a8f9b1d6ad8aa",
     "28_skull_front_with_camera_tray-B25.npz": "0b00f02930b7211f390b0932b4b02b0dd85adc6a09f94806826f0fe200e5252c",
-    "29_skull_rear-B25.npz": "96d0716e062e01d7a8418cfffa4c56281e4018c6cd7fe84a5bb2b4da3cd94c3e",
+    "29_skull_rear-B25.npz": "ccd57a6205737d27de22190c8cf4ca5feff33a0f4996c5ea23990d54f6f5beae",
     "32_left_eyelid-B25.stl": "9090f380cfe0179207112a924e41ff6d916f62cbf4ed89f865cfec132e33c181"
   }
 }

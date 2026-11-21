@@ -10,7 +10,7 @@ B25의 변경은 발주표 및 조립 변경 안내를 먼저 적용합니다. �
 
 ## 기존 검증 기록
 
-- [형상](design.json) · [출력판 대조](print-build.json) · [정밀 슬라이스](print-precision-check.json) · [5번 판](plate5-check.json)
+- [형상](design.json) · [출력판 대조](print-build.json) · [뒤 외장 수정과 5·6번 판](rear-left-screw-fit.json) · [이전 정밀 슬라이스](print-precision-check.json)
 - [카메라와 눈꺼풀 형상](blink-fit.json) · [이전 CAD 검증과 재현 명령](https://github.com/ckh7488/head/blob/9c024361d586ff5ea582cbac3e1328d40d5b0c65/mechanical/revisions/b25/README.md)
 
 J2 정비선, 목 스토퍼와 턱 장착 시안은 별도 검토 기록에 있습니다. B25 검사 판정은 고정 조건을 따릅니다. [J2](j2-pigtail.md) · [목](neck-load-study.md) · [이전 턱 고정 시안](jaw-candidate.md) · [현재 턱 이탈 경로 검사](jaw-retention-witness.md)

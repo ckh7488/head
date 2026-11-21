@@ -12,7 +12,7 @@ import trimesh
 
 from build_b22_fused_skull import solid
 from build_b25_rear_retention import (
-    FRAME_FACE, LENGTH, NUT_FLATS, POCKET_INNER, POCKET_OUTER, SHELL_FACE, STATIONS, Y, Z,
+    FRAME_FACE, NUT_FLATS, POCKET_INNER, POCKET_OUTER, SHELL_FACE, STATIONS, Y, Z,
     mesh_cylinder, nut_channel,
 )
 from check_b19_assembly import sweep
@@ -61,10 +61,10 @@ class InstalledHead:
         return [{'parts': list(pair), **hit} for pair, hit in sweep(self, ['Part074'], actors, TRAVEL).items()]
 
 
-def station_checks(doc, world, shell, hand, side, seat):
+def station_checks(doc, world, shell, hand, side, seat, length):
     frame = world_shape(doc.Part019)
     # Straight socket screw translation plus 0.10 mm radius allowance on shank and head.
-    shank = mesh_cylinder(side, 1.6, seat-LENGTH, seat + 25.)
+    shank = mesh_cylinder(side, 1.6, seat-length, seat + 25.)
     head = mesh_cylinder(side, 2.88, seat+.000001, seat + 25.)
     driver = mesh_cylinder(side, 1.50, seat+3., seat + 40.)
     screw_path = shank + head
@@ -84,7 +84,7 @@ def station_checks(doc, world, shell, hand, side, seat):
         turned = nut.copy()
         turned.rotate(App.Vector(0., Y, Z), App.Vector(side, 0., 0.), angle)
         interference.append(frame.common(turned).Volume)
-    installed_shaft = mesh_cylinder(side, 1.5, seat-LENGTH, seat)
+    installed_shaft = mesh_cylinder(side, 1.5, seat-length, seat)
     blocked_with_screw = (shell.translate((0., .75, 0.)) ^ installed_shaft).volume()
     clearance = {
         'screw_to_shell_mm3': (screw_path ^ shell).volume(),
@@ -93,8 +93,8 @@ def station_checks(doc, world, shell, hand, side, seat):
     # Probe against the other actors, including the frame and stock connector solids.
     # Narrow prefilter avoids re-tessellating remote actors.
     hardware = ('RearSkullScrew'+hand, 'RearSkullNut'+hand, 'Part074')
-    lower = (min(side*(seat-LENGTH), side*(seat+40.)), Y-3., Z-3.)
-    upper = (max(side*(seat-LENGTH), side*(seat+40.)), Y+3., Z+3.)
+    lower = (min(side*(seat-length), side*(seat+40.)), Y-3., Z-3.)
+    upper = (max(side*(seat-length), side*(seat+40.)), Y+3., Z+3.)
     for name, obj in world.parts.items():
         if name in hardware:
             continue
@@ -111,7 +111,7 @@ def station_checks(doc, world, shell, hand, side, seat):
         for kind, probe in (('screw', screw_path), ('driver', driver)):
             if (overlap := (probe ^ obstacle).volume()) > GEOMETRIC_VOLUME:
                 clearance[f'{kind}_to_{name}_mm3'] = overlap
-    full_engagement = POCKET_OUTER-(seat-LENGTH)
+    full_engagement = POCKET_OUTER-(seat-length)
     passed = (not nut_blockers and max(clearance.values()) <= GEOMETRIC_VOLUME
               and min(interference) > .2 and blocked_with_screw > .5 and full_engagement >= 2.90)
     return {'status': 'pass' if passed else 'fail', 'nut_entry_obstructions_mm3': nut_blockers,
@@ -125,7 +125,9 @@ def check(source):
     try:
         world = InstalledHead(doc)
         shell = solid(world.mesh('Part074'))
-        stations = {hand.lower(): station_checks(doc, world, shell, hand, side, seat)
+        layout = json.loads(doc.R5.MotionGeometry)['rear_skull_retention']['stations']
+        stations = {hand.lower(): station_checks(doc, world, shell, hand, side, seat,
+                                                layout[hand.lower()]['length_mm'])
                     for hand, side, seat in STATIONS}
         blockers = world.sweep_collisions({'Part074', *(f'RearSkullScrew{hand}' for hand, _, _ in STATIONS)})
         passed = not blockers and all(row['status'] == 'pass' for row in stations.values())

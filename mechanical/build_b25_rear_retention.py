@@ -21,6 +21,8 @@ REAR_PRINT = '29_skull_rear-B25.npz'
 STATIONS = (('Left', -1, 77.65), ('Right', 1, 75.30))
 Y, Z = 27.70, 117.75
 LENGTH = 16.
+LEFT_LENGTH = 18.
+LEFT_BORE_FLOOR = 58.80
 FRAME_FACE = 67.20
 SHELL_FACE = 67.55
 NUT_FLATS = 5.5
@@ -29,6 +31,7 @@ POCKET_FLATS = 5.8
 POCKET_INNER, POCKET_OUTER = 61.95, 64.61
 HOLE = 1.76
 COUNTERBORE = 3.15
+LEFT_UNDERHEAD_RELIEF = (1.95, .75)
 
 
 def radial_point(side, radius):
@@ -92,8 +95,9 @@ def nut_channel(side, inner, outer, flats, rear_y):
 
 def frame_station(frame, side, screw_seat):
     pad = radial_cylinder(side, 4.90, 62., FRAME_FACE)
+    floor = LEFT_BORE_FLOOR if side < 0 else screw_seat-LENGTH-.35
     cutting = [
-        radial_cylinder(side, HOLE, screw_seat-LENGTH-.35, FRAME_FACE+.04),
+        radial_cylinder(side, HOLE, floor, FRAME_FACE+.04),
         nut_channel(side, POCKET_INNER, POCKET_OUTER, POCKET_FLATS, 62.),
     ]
     if pad.common(frame).Volume < 180.:
@@ -107,6 +111,9 @@ def shell_station(shell, side, screw_seat):
         mesh_cylinder(side, COUNTERBORE, screw_seat, 99.),
         mesh_cylinder(side, HOLE, SHELL_FACE-.05, screw_seat+.10),
     ]
+    if side < 0:
+        radius, depth = LEFT_UNDERHEAD_RELIEF
+        cutting.append(mesh_cylinder(side, radius, screw_seat-depth, screw_seat+.04))
     if (shell ^ boss).volume() < 360.:
         raise ValueError('Rear screw boss does not join the original skull')
     for cut in cutting:
@@ -119,9 +126,11 @@ def stock_station(doc, parent, side, hand, seat):
     axis = (-side, 0, 0)
     screw_name = f'RearSkullScrew{hand}'
     screw_seat = radial_point(side, seat)
-    screw = socket_screw(3, LENGTH, screw_seat, axis)
-    add_part(doc, parent, screw_name, 'M3 × 16 rear skull socket screw', screw, 'head')
-    replace(doc.getObject(screw_name), screw)
+    length = LEFT_LENGTH if side < 0 else LENGTH
+    screw = socket_screw(3, length, screw_seat, axis)
+    label = f'M3 × {length:g} rear skull socket screw'
+    actor = add_part(doc, parent, screw_name, label, screw, 'head')
+    replace(actor, screw)
 
     nut_name = f'RearSkullNut{hand}'
     nut_inner = POCKET_OUTER-NUT_LENGTH
@@ -133,7 +142,8 @@ def stock_station(doc, parent, side, hand, seat):
     replace(doc.getObject(nut_name), nut)
     return {'screw': screw_name, 'nut': nut_name, 'axis': list(axis), 'seat_mm': list(screw_seat),
             'nut_axis': [side, 0, 0], 'nut_seat_mm': list(nut_seat),
-            'length_mm': LENGTH, 'thread_past_nut_mm': nut_inner-seat+LENGTH}
+            'length_mm': length, 'thread_past_nut_mm': nut_inner-seat+length,
+            'blind_bore_floor_abs_x_mm': LEFT_BORE_FLOOR if side < 0 else seat-LENGTH-.35}
 
 
 def apply(doc, print_dir):

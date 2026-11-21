@@ -1,6 +1,6 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "source_project_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
   "units": "mm",
   "stl_origin": "Source orientation with lowest Z at the build plate",
   "parts": {
@@ -87,7 +87,7 @@
     },
     "09": {
       "source_part": "09_head_frame-B25.stl",
-      "source_mesh_sha256": "77015b61380ad008aa61f24e28b64667eab83f304c6500d07b58e472e886332c",
+      "source_mesh_sha256": "0036fa0b141ba1218ab8fea5919831cce961873837f694801fed71e515697d3b",
       "p2s_plate": 6,
       "p2s_settings": {
         "layer_height": "0.2",
@@ -138,31 +138,31 @@
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.10mm.stl",
           "bore_diameter_mm": 8.1,
-          "sha256": "c7e9c076e7a0d7fdf95c4c0156fd66fcc67ad7dd016ed54d6e792336af2035b6",
+          "sha256": "176a9fda85e195e531d015f155371881f8d0a4e9a07c7ee383e7802583e4c402",
           "min_sampled_boss_wall_mm": 2.348
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.15mm.stl",
           "bore_diameter_mm": 8.15,
-          "sha256": "ea80a7e696086607e2e23374b81307157bbba389b29335d707113c94e5e4e5db",
+          "sha256": "602312fd256ecec38dde559e70faf9a1d554efc87fdd4aef52d5945aa0d1dc32",
           "min_sampled_boss_wall_mm": 2.323
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.20mm.stl",
           "bore_diameter_mm": 8.2,
-          "sha256": "c8db6d8998686031832432d21825ab6fed2cfec85bdc9361ab06180f16783e66",
+          "sha256": "a69aa3dbbabd22ec128a8a77bd605295a8f4ea63854e7a1b55a1fd08f2b1803f",
           "min_sampled_boss_wall_mm": 2.298
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.25mm.stl",
           "bore_diameter_mm": 8.25,
-          "sha256": "0a50e7d9b8cf19d93c885345cb9bb43a718a59b4efa6b05a8a6a0428c6adbd19",
+          "sha256": "de535dc2c4c75661e07420a95c22ddd1210758c24eab21c28ce645bf91fcde76",
           "min_sampled_boss_wall_mm": 2.273
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.30mm.stl",
           "bore_diameter_mm": 8.3,
-          "sha256": "1514d0039199b0080a65f3a508345ed685aec06c38b1ef53f7a7ab9b4bf3fdb6",
+          "sha256": "6dba6e3faa73fb9987d9ec633ba6616720088145d73ed3cf10926a40faf259a9",
           "min_sampled_boss_wall_mm": 2.248
         }
       ]
