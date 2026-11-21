@@ -10,7 +10,7 @@ R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사�
 - [PCB와 전원 검토](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
 - [B24 원본의 독립 검토 결과](https://github.com/ckh7488/head/blob/765d379f9c37a0123b0e38612cc2745b216bceca/REVIEW.md)
 
-기존 B24 저장 보고서는 원본 펌웨어와 추적기의 해시로 검증합니다. 새 소프트웨어는 가상 테스트와 OpenRB 빌드로 확인합니다. 아직 남은 항목은 턱·뒤 외장 이탈 방지, 눈꺼풀과 목 하중·공차, 전원 여유·분기 보호, 조립과 실물 구동입니다. [저장 보고서 대조 방법](mechanical/revisions/b24/#파일과-검사-재현)
+기존 B24 저장 보고서는 원본 펌웨어와 추적기의 해시로 검증합니다. B25에서 확인한 뒤 외장 체결, 하부 덮개 정비와 목 하중 문제를 기구 검토에 기록했습니다. 전체 배선, 턱 체결 하중, 전원과 실물 조립·구동 기준은 제작 승인 전에 확인합니다. [B25 검토](mechanical/revisions/b25/) · [저장 보고서 대조 방법](mechanical/revisions/b24/#파일과-검사-재현)
 
 ![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)
 
@@ -27,6 +27,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 
 ## 최근 CAD
 
+- **B25 기구 후보** · M3 뒤 외장 고정, 눈꺼풀 여유, J2 실제 높이와 뒤 외장 출력 메시를 수정했습니다. [FreeCAD·P2S·검토](mechanical/revisions/b25/)
 - **B24 제작 검증** · 눈 상하 베어링과 목 상하축의 M3 체결을 추가하고, 깜빡임과 추적 복귀를 수정했습니다. [FreeCAD·P2S·조립·검증](mechanical/revisions/b24/) · [3D 조립 재현](web/README.md#b24-조립-순서)
 - **B23 기구 검증** · 앞 해골 삽입, 눈 상하 링크, 목 좌우축 하중과 스토퍼, 두 정비 덮개를 수정했습니다. [FreeCAD·P2S·조립과 검사](mechanical/revisions/b23/) · [3D 조립 재현](web/README.md#b23-조립-순서)
 - **B22 제작·조립** · 목 양방향 제한판, 카메라 고정·배선 및 투명 보호 케이스를 추가했습니다. [FreeCAD·P2S·조립 순서](mechanical/revisions/b22/) · [3D 조립 재현](web/README.md#b22-조립-순서)
