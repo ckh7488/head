@@ -2,6 +2,16 @@
 
 R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
 
+## 최종 검토 후보
+
+**B24 CAD와 서보 허브 A2, C3 A1, 갱신한 제어의 검토 브랜치입니다. 전체 출력·부품·PCB 발주는 보류합니다.**
+
+- [B24 조립·가공 유의점](mechanical/revisions/b24/) · [3D 조립 화면 생성](web/README.md#b24-조립-순서)
+- [PCB와 전원 검토](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
+- [B24 원본의 독립 검토 결과](https://github.com/ckh7488/head/blob/765d379f9c37a0123b0e38612cc2745b216bceca/REVIEW.md)
+
+기존 B24 저장 보고서는 원본 펌웨어와 추적기의 해시로 검증합니다. 새 소프트웨어는 가상 테스트와 OpenRB 빌드로 확인합니다. 아직 남은 항목은 턱·뒤 외장 이탈 방지, 눈꺼풀과 목 하중·공차, 전원 여유·분기 보호, 조립과 실물 구동입니다. [저장 보고서 대조 방법](mechanical/revisions/b24/#파일과-검사-재현)
+
 ![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)
 
 B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) · [모델과 자료 출처](web/README.md#모델과-자료-출처)
