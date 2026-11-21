@@ -1,0 +1,1862 @@
+{
+  "status": "blocked",
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "candidate_cad_sha256": "8b3c7281aa9b14513324ba168fb155a728347eab1339d77bb209527a4340df77",
+  "frame_valid_native_solid": true,
+  "wrench_width_and_thickness_mm": [
+    16.0,
+    4.2
+  ],
+  "target_continuous_tool_reserve_mm": 0.15,
+  "stations": {
+    "left": {
+      "loose_nut_seat_mm": [
+        -36.8,
+        -0.65,
+        128.7
+      ],
+      "frame_arm_root_overlap_mm3": 152.91074013764856,
+      "added_stay_root_overlap_mm3": 3.6750002503395094,
+      "stay_closed_bodies": 1,
+      "stock_bolt_projection_past_nut_mm": 1.9000000000000115,
+      "strength_screen": {
+        "single_stay_downward_load_N": 5.0,
+        "horizontal_arm_span_mm": 24.15,
+        "rectangular_arm_width_mm": 8.0,
+        "rectangular_arm_height_mm": 5.8,
+        "horizontal_arm_nominal_bending_MPa": 2.6921076099881094,
+        "scope": "Elastic rectangular arm section only. Root and stay joint, material anisotropy, local notches, clamp preload and cyclic strength require separate verification."
+      },
+      "hex_head_pocket": {
+        "nominal_overlap_mm3": 0.0,
+        "overlap_mm3_after_15_deg": 0.701862194995152
+      },
+      "checks": {
+        "front_shell_feed": {
+          "sampled_mm": 20.987223030597082,
+          "at": 0.0,
+          "continuous_lower_bound_mm": 20.862223030597082,
+          "sample_step_mm": 0.25
+        },
+        "added_stay_vertical_feed": {
+          "Part011": {
+            "sampled_mm": 0.0,
+            "at": -57.5,
+            "continuous_lower_bound_mm": 0.0,
+            "sample_step_mm": 0.25
+          },
+          "Part012": {
+            "sampled_mm": 6.450000762939453,
+            "at": -15.75,
+            "continuous_lower_bound_mm": 6.325000762939453,
+            "sample_step_mm": 0.25
+          },
+          "Part013": {
+            "sampled_mm": 1.9500007629394531,
+            "at": -11.75,
+            "continuous_lower_bound_mm": 1.8250007629394531,
+            "sample_step_mm": 0.25
+          },
+          "Part014": {
+            "sampled_mm": 81.45000076293945,
+            "at": -20.25,
+            "continuous_lower_bound_mm": 81.32500076293945,
+            "sample_step_mm": 0.25
+          },
+          "Part015": {
+            "sampled_mm": 71.15000152587889,
+            "at": -12.75,
+            "continuous_lower_bound_mm": 71.02500152587889,
+            "sample_step_mm": 0.25
+          },
+          "Part016": {
+            "sampled_mm": 68.45000076293944,
+            "at": -22.75,
+            "continuous_lower_bound_mm": 68.32500076293944,
+            "sample_step_mm": 0.25
+          },
+          "Part018": {
+            "sampled_mm": 29.450000762939453,
+            "at": -16.0,
+            "continuous_lower_bound_mm": 29.325000762939453,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 15.196717500686646,
+            "at": -37.0,
+            "continuous_lower_bound_mm": 15.071717500686646,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 21.450223207473755,
+            "at": -37.5,
+            "continuous_lower_bound_mm": 21.325223207473755,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 32.45022511482239,
+            "at": -11.5,
+            "continuous_lower_bound_mm": 32.32522511482239,
+            "sample_step_mm": 0.25
+          },
+          "Part073": {
+            "sampled_mm": 14.871975154813985,
+            "at": -18.5,
+            "continuous_lower_bound_mm": 14.746975154813985,
+            "sample_step_mm": 0.25
+          },
+          "Part074": {
+            "sampled_mm": 22.48514345173979,
+            "at": -16.75,
+            "continuous_lower_bound_mm": 22.36014345173979,
+            "sample_step_mm": 0.25
+          }
+        },
+        "added_frame_running": {
+          "Part011": {
+            "sampled_mm": 4.850128173828125,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 9.157256880090161,
+            "at": -9.628688524590164
+          },
+          "Part013": {
+            "sampled_mm": 9.332578504715029,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 81.58645184770486,
+            "at": -13.219836065573771
+          },
+          "Part015": {
+            "sampled_mm": 71.80816567722977,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 68.45918861237884,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 30.549742335787215,
+            "at": -14.815901639344263
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 10.119954530097093,
+            "at": -17.21
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 38.55375686694848,
+            "at": -17.21
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 23.16115445825736,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 8.632696690199001,
+            "at": -4.4
+          },
+          "Part025": {
+            "sampled_mm": 23.65019615084494,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 97.25001321685394,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 62.46576634249947,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 94.00724566088923,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 20.987223030597082,
+            "at": 0.0
+          },
+          "Part074": {
+            "sampled_mm": 29.3263920159864,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 33.37285360602695,
+            "at": 9.71
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 5.6999969482421875,
+            "at": 0.0
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 76.46581011443045,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 24.18994512111343,
+            "at": 9.317307692307693
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 82.80016312595946,
+            "at": -0.10730769230769227
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 8.199996948242188,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 77.9283909123996,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 20.25400963163736,
+            "at": 0.0
+          }
+        },
+        "added_stay_running": {
+          "Part011": {
+            "sampled_mm": 3.450000762939453,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 6.450000762939453,
+            "at": -17.21
+          },
+          "Part013": {
+            "sampled_mm": 2.254568010509304,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 81.45000076293944,
+            "at": -14.017868852459017
+          },
+          "Part015": {
+            "sampled_mm": 71.26235133036637,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 68.45000076293945,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 29.610633919467148,
+            "at": -16.01295081967213
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 26.670878064654875,
+            "at": 7.13
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 34.46961083628176,
+            "at": -17.21
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 32.681567836346716,
+            "at": 0.0
+          },
+          "Part019": {
+            "sampled_mm": 13.548618757927203,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 10.838826347098715,
+            "at": -8.4
+          },
+          "Part025": {
+            "sampled_mm": 23.918416517583793,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 97.32938198958897,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 65.16021046883752,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 94.11661320860094,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 20.252277515370995,
+            "at": 0.0
+          },
+          "Part074": {
+            "sampled_mm": 26.0675447333263,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 26.640729834816714,
+            "at": 9.71
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 74.72415138343392,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 18.224811783402128,
+            "at": 2.248846153846154
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 80.98502465468914,
+            "at": 7.353846153846154
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 1.1667261720990632,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 76.07703568281043,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 15.056062626731821,
+            "at": 0.0
+          }
+        },
+        "stock_bolt_running": {
+          "Part011": {
+            "sampled_mm": 6.450000762939453,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 9.450000762939453,
+            "at": -17.21
+          },
+          "Part013": {
+            "sampled_mm": 5.788135066936601,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 83.04999923706053,
+            "at": -16.411967213114757
+          },
+          "Part015": {
+            "sampled_mm": 72.85988265156622,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 70.04999923706055,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 31.199438369899916,
+            "at": -7.234590163934428
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 28.15973319553879,
+            "at": 7.13
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 35.686067398622235,
+            "at": -17.21
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 32.9928668059316,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 12.434118338908803,
+            "at": -8.4
+          },
+          "Part025": {
+            "sampled_mm": 26.090331902795622,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 99.0679851347306,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 66.254048547709,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 95.83771712810695,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 24.166276979278454,
+            "at": 0.0
+          },
+          "Part074": {
+            "sampled_mm": 29.608019301886266,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 29.50137588360445,
+            "at": 9.71
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 76.15528118960994,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 19.502661269597166,
+            "at": 7.746538461538462
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 82.40240273212083,
+            "at": 4.605
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 2.5,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 77.49062165857188,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 15.878444508200417,
+            "at": 0.0
+          }
+        },
+        "rear_cover_off_wrench_feed": {
+          "Part011": {
+            "sampled_mm": 1.2000423830940985,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 1.0750423830940985,
+            "sample_step_mm": 0.25
+          },
+          "Part012": {
+            "sampled_mm": 9.940825288772848,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 9.815825288772848,
+            "sample_step_mm": 0.25
+          },
+          "Part013": {
+            "sampled_mm": 13.009994506835938,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 12.884994506835938,
+            "sample_step_mm": 0.25
+          },
+          "Part014": {
+            "sampled_mm": 78.31998392683592,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 78.19498392683592,
+            "sample_step_mm": 0.25
+          },
+          "Part015": {
+            "sampled_mm": 68.93859547511519,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 68.81359547511519,
+            "sample_step_mm": 0.25
+          },
+          "Part016": {
+            "sampled_mm": 65.02554877413377,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 64.90054877413377,
+            "sample_step_mm": 0.25
+          },
+          "Part018": {
+            "sampled_mm": 27.64052031358723,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 27.51552031358723,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 3.733001708984375,
+            "at": 32.75,
+            "continuous_lower_bound_mm": 3.608001708984375,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 40.010887145996094,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 39.885887145996094,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 14.010887145996094,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 13.885887145996094,
+            "sample_step_mm": 0.25
+          },
+          "Part024": {
+            "sampled_mm": 10.84152126467726,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 10.71652126467726,
+            "sample_step_mm": 0.25
+          },
+          "Part025": {
+            "sampled_mm": 20.000003814697266,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 19.875003814697266,
+            "sample_step_mm": 0.25
+          },
+          "Part027": {
+            "sampled_mm": 93.60000228881835,
+            "at": 0.25,
+            "continuous_lower_bound_mm": 93.47500228881835,
+            "sample_step_mm": 0.25
+          },
+          "Part041": {
+            "sampled_mm": 59.298152405515154,
+            "at": 8.5,
+            "continuous_lower_bound_mm": 59.173152405515154,
+            "sample_step_mm": 0.25
+          },
+          "Part044": {
+            "sampled_mm": 90.3499984741211,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 90.2249984741211,
+            "sample_step_mm": 0.25
+          },
+          "Part073": {
+            "sampled_mm": 20.240434706438638,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 20.115434706438638,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 36.105048054127394,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 35.980048054127394,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 10.009994506835938,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 9.884994506835938,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 74.43088143578963,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 74.30588143578963,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 28.465628274590333,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 28.340628274590333,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 80.80980317245735,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 80.68480317245735,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 12.509994506835938,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 12.384994506835938,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 75.9898409141194,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 75.8648409141194,
+            "sample_step_mm": 0.25
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 23.521848236438352,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 23.396848236438352,
+            "sample_step_mm": 0.25
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 0.30999755859375,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 0.18499755859375,
+            "sample_step_mm": 0.25
+          }
+        },
+        "seated_wrench_frame_overlap_by_angle_mm3": {
+          "-15": 5.3478316526682335,
+          "-10": 1.997953815810753,
+          "-5": 0.0055705189863319024,
+          "5": 0.005570518986331884,
+          "10": 2.630868792322524,
+          "15": 36.48506325950477
+        },
+        "wrench_vs_seated_nut_overlap_mm3": 0.0,
+        "rear_cover_off_loose_nut_feed": {
+          "Part011": {
+            "sampled_mm": 7.724312904195397,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 7.599312904195397,
+            "sample_step_mm": 0.25
+          },
+          "Part012": {
+            "sampled_mm": 16.27467401884155,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 16.14967401884155,
+            "sample_step_mm": 0.25
+          },
+          "Part013": {
+            "sampled_mm": 17.946169718162736,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 17.821169718162736,
+            "sample_step_mm": 0.25
+          },
+          "Part014": {
+            "sampled_mm": 84.10032623762976,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 83.97532623762976,
+            "sample_step_mm": 0.25
+          },
+          "Part015": {
+            "sampled_mm": 75.00416655093235,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 74.87916655093235,
+            "sample_step_mm": 0.25
+          },
+          "Part016": {
+            "sampled_mm": 70.7117384618089,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 70.5867384618089,
+            "sample_step_mm": 0.25
+          },
+          "Part018": {
+            "sampled_mm": 33.88659765893714,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 33.76159765893714,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 8.501255692358288,
+            "at": 36.0,
+            "continuous_lower_bound_mm": 8.376255692358288,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 44.250892639160156,
+            "at": 23.5,
+            "continuous_lower_bound_mm": 44.125892639160156,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 18.250892639160156,
+            "at": 34.5,
+            "continuous_lower_bound_mm": 18.125892639160156,
+            "sample_step_mm": 0.25
+          },
+          "Part024": {
+            "sampled_mm": 15.272974083261762,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 15.147974083261762,
+            "sample_step_mm": 0.25
+          },
+          "Part025": {
+            "sampled_mm": 25.250003814697266,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 25.125003814697266,
+            "sample_step_mm": 0.25
+          },
+          "Part027": {
+            "sampled_mm": 98.85000228881835,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 98.72500228881835,
+            "sample_step_mm": 0.25
+          },
+          "Part041": {
+            "sampled_mm": 64.14627232994658,
+            "at": 9.0,
+            "continuous_lower_bound_mm": 64.02127232994658,
+            "sample_step_mm": 0.25
+          },
+          "Part044": {
+            "sampled_mm": 95.59999847412108,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 95.47499847412108,
+            "sample_step_mm": 0.25
+          },
+          "Part073": {
+            "sampled_mm": 25.28716124712092,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 25.16216124712092,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 42.18166430429191,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 42.05666430429191,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 14.304719500919967,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 14.179719500919967,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 81.09651807310638,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 80.97151807310638,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 33.273993078385,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 33.148993078385,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 87.48623918123725,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 87.36123918123725,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 16.75,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 16.625,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 82.69067650273165,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 82.56567650273165,
+            "sample_step_mm": 0.25
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 28.858490951537988,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 28.733490951537988,
+            "sample_step_mm": 0.25
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 0.350006103515625,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 0.225006103515625,
+            "sample_step_mm": 0.25
+          }
+        },
+        "loose_nut_descent_to_0_025_mm_above_seat": {
+          "Part011": {
+            "sampled_mm": 6.450000762939453,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 6.330921815571032,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part012": {
+            "sampled_mm": 12.86188708625434,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 12.742808138885918,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part013": {
+            "sampled_mm": 13.65386877603198,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 13.534789828663557,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part014": {
+            "sampled_mm": 83.50705358396833,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 83.3879746365999,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part015": {
+            "sampled_mm": 74.03335819075075,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 73.91427924338232,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part016": {
+            "sampled_mm": 70.23732148693153,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 70.11824253956311,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part018": {
+            "sampled_mm": 32.698415691690386,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 32.579336744321964,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 32.38264640908785,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 32.263567461719425,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 45.875176224593815,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 45.75609727722539,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 35.89219126249801,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 35.77311231512959,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part024": {
+            "sampled_mm": 13.449417635331917,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 13.330338687963495,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part025": {
+            "sampled_mm": 25.250003814697266,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 25.130924867328844,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part027": {
+            "sampled_mm": 98.85000228881835,
+            "at": -2.857894736842112,
+            "continuous_lower_bound_mm": 98.73092334144992,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part041": {
+            "sampled_mm": 64.48464029188452,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 64.3655613445161,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part044": {
+            "sampled_mm": 95.59999847412108,
+            "at": -3.810526315789483,
+            "continuous_lower_bound_mm": 95.48091952675266,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Part073": {
+            "sampled_mm": 25.16332852227076,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 25.044249574902338,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 38.15069955775712,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 38.0316206103887,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 9.80500509943773,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 9.685926152069309,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 79.28638042593384,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 79.16730147856542,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 28.85817794440872,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 28.739098997040298,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 85.64882515764474,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 85.52974621027631,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 12.224999999999994,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 12.105921052631572,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 80.8049126773331,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 80.68583372996468,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 24.584814927104894,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 24.465735979736472,
+            "sample_step_mm": 0.23815789473684268
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 0.025003051757806816,
+            "at": -4.525000000000011,
+            "continuous_lower_bound_mm": 0.0,
+            "sample_step_mm": 0.23815789473684268
+          }
+        },
+        "loose_nut_lift_above_seat_mm": 4.550000000000011,
+        "seated_and_lifted_nut_overlap_with_arm_mm3": [
+          0.0,
+          0.0
+        ],
+        "right_driver_seated_envelope": null
+      }
+    },
+    "right": {
+      "loose_nut_seat_mm": [
+        43.8,
+        16.5,
+        102.0
+      ],
+      "frame_arm_root_overlap_mm3": 59.40000000000019,
+      "added_stay_root_overlap_mm3": 7.818559059944851,
+      "stay_closed_bodies": 1,
+      "stock_bolt_projection_past_nut_mm": 0.8999999999999972,
+      "strength_screen": {
+        "single_stay_downward_load_N": 5.0,
+        "horizontal_arm_span_mm": 7.0,
+        "rectangular_arm_width_mm": 6.0,
+        "rectangular_arm_height_mm": 5.8,
+        "horizontal_arm_nominal_bending_MPa": 1.0404280618311534,
+        "scope": "Elastic rectangular arm section only. Root and stay joint, material anisotropy, local notches, clamp preload and cyclic strength require separate verification."
+      },
+      "checks": {
+        "front_shell_feed": {
+          "sampled_mm": 7.63613711928891,
+          "at": -5.0,
+          "continuous_lower_bound_mm": 7.51113711928891,
+          "sample_step_mm": 0.25
+        },
+        "added_stay_vertical_feed": {
+          "Part011": {
+            "sampled_mm": 0.0,
+            "at": -30.75,
+            "continuous_lower_bound_mm": 0.0,
+            "sample_step_mm": 0.25
+          },
+          "Part012": {
+            "sampled_mm": 89.01295640395747,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 88.88795640395747,
+            "sample_step_mm": 0.25
+          },
+          "Part013": {
+            "sampled_mm": 84.90906195212825,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 84.78406195212825,
+            "sample_step_mm": 0.25
+          },
+          "Part014": {
+            "sampled_mm": 6.445684172112698,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 6.320684172112698,
+            "sample_step_mm": 0.25
+          },
+          "Part015": {
+            "sampled_mm": 10.15001681786606,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 10.02501681786606,
+            "sample_step_mm": 0.25
+          },
+          "Part016": {
+            "sampled_mm": 2.551300048828125,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 2.426300048828125,
+            "sample_step_mm": 0.25
+          },
+          "Part018": {
+            "sampled_mm": 5.448406817866588,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 5.323406817866588,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 81.95957082079703,
+            "at": -14.75,
+            "continuous_lower_bound_mm": 81.83457082079703,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 73.81077565532699,
+            "at": -10.75,
+            "continuous_lower_bound_mm": 73.68577565532699,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 76.99807344032713,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 76.87307344032713,
+            "sample_step_mm": 0.25
+          },
+          "Part073": {
+            "sampled_mm": 9.266885392964776,
+            "at": -8.0,
+            "continuous_lower_bound_mm": 9.141885392964776,
+            "sample_step_mm": 0.25
+          },
+          "Part074": {
+            "sampled_mm": 7.059713422227972,
+            "at": -7.5,
+            "continuous_lower_bound_mm": 6.934713422227972,
+            "sample_step_mm": 0.25
+          }
+        },
+        "added_frame_running": {
+          "Part011": {
+            "sampled_mm": 1.3699989318847656,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 89.14390289490251,
+            "at": -8.431639344262296
+          },
+          "Part013": {
+            "sampled_mm": 85.28267001482934,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 3.5217200442369805,
+            "at": -6.037540983606558
+          },
+          "Part015": {
+            "sampled_mm": 6.750296537562798,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 0.0,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 4.825970751683265,
+            "at": -13.618852459016395
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 82.1456836414771,
+            "at": 7.13
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 74.46072736646929,
+            "at": -4.840491803278688
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 75.24814675145521,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 25.924594735393757,
+            "at": -8.4
+          },
+          "Part025": {
+            "sampled_mm": 105.61072204320561,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 18.062786729015784,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 3.5,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 16.51241262153174,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 8.639623088732046,
+            "at": 0.0
+          },
+          "Part074": {
+            "sampled_mm": 6.962588404129146,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 16.137911146118014,
+            "at": 9.71
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 81.45065954420953,
+            "at": 0.0
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 13.641883683893502,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 84.966049722355,
+            "at": 8.531923076923078
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 16.741282773065866,
+            "at": 8.13923076923077
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 57.06363779325393,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 15.642501379481878,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 60.23884296948986,
+            "at": 0.0
+          }
+        },
+        "added_stay_running": {
+          "Part011": {
+            "sampled_mm": 1.3699989318847656,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 89.0127089805749,
+            "at": 5.134918032786885
+          },
+          "Part013": {
+            "sampled_mm": 84.90906195212825,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 6.442238645050747,
+            "at": 5.134918032786885
+          },
+          "Part015": {
+            "sampled_mm": 10.15001681786606,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 2.551300048828125,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 5.445183759364666,
+            "at": -8.431639344262296
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 82.02949536325654,
+            "at": 7.13
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 74.00117050523333,
+            "at": 3.9378688524590153
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 76.99807344032713,
+            "at": 0.0
+          },
+          "Part019": {
+            "sampled_mm": 11.244994614033935,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 18.25103562940644,
+            "at": -1.5999999999999996
+          },
+          "Part025": {
+            "sampled_mm": 107.91258248873032,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 32.89993515351736,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 28.650001525878906,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 29.553263866606652,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 9.26885698698794,
+            "at": 0.0
+          },
+          "Part074": {
+            "sampled_mm": 7.40372823902805,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 10.176715836196104,
+            "at": 9.71
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 80.5999984741211,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 83.59999847412108,
+            "at": 2.641538461538462
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 2.0462825528471114,
+            "at": 7.353846153846154
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 54.5999994277954,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 0.8863583890547495,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 58.599998474121094,
+            "at": 0.0
+          }
+        },
+        "stock_bolt_running": {
+          "Part011": {
+            "sampled_mm": 1.3413075280954692,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 91.57921142325104,
+            "at": -4.840491803278688
+          },
+          "Part013": {
+            "sampled_mm": 87.87583175019347,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 9.694111011824077,
+            "at": -9.628688524590164
+          },
+          "Part015": {
+            "sampled_mm": 12.42902478657336,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 5.336938537565641,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 7.020000457763672,
+            "at": -17.21
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 83.55325781449204,
+            "at": 7.13
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 75.32759544955064,
+            "at": 7.13
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 78.81066482620663,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 32.03368065551608,
+            "at": -8.4
+          },
+          "Part025": {
+            "sampled_mm": 110.74178818537085,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 34.16253322917244,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 21.199996948242188,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 33.943024407812814,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 10.8384596511313,
+            "at": 0.0
+          },
+          "Part074": {
+            "sampled_mm": 8.628887722357794,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 17.766263325414712,
+            "at": 9.71
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 83.02026561778864,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 86.39774297176612,
+            "at": 2.641538461538462
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 18.84313880937931,
+            "at": 6.961153846153847
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 58.43483719559093,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 17.72087049484253,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 61.8781794278804,
+            "at": 0.0
+          }
+        },
+        "rear_cover_off_wrench_feed": {
+          "Part011": {
+            "sampled_mm": 0.0,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 0.0,
+            "sample_step_mm": 0.25
+          },
+          "Part012": {
+            "sampled_mm": 84.98824079728811,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 84.86324079728811,
+            "sample_step_mm": 0.25
+          },
+          "Part013": {
+            "sampled_mm": 80.8780906224462,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 80.7530906224462,
+            "sample_step_mm": 0.25
+          },
+          "Part014": {
+            "sampled_mm": 5.653424025522822,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 5.528424025522822,
+            "sample_step_mm": 0.25
+          },
+          "Part015": {
+            "sampled_mm": 9.652640201320938,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 9.527640201320938,
+            "sample_step_mm": 0.25
+          },
+          "Part016": {
+            "sampled_mm": 2.0574929637451067,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 1.9324929637451067,
+            "sample_step_mm": 0.25
+          },
+          "Part018": {
+            "sampled_mm": 1.7999992370605469,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 1.6749992370605469,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 78.29999923706053,
+            "at": 11.5,
+            "continuous_lower_bound_mm": 78.17499923706053,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 71.05786157315961,
+            "at": 7.5,
+            "continuous_lower_bound_mm": 70.93286157315961,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 69.94426334096534,
+            "at": 18.5,
+            "continuous_lower_bound_mm": 69.81926334096534,
+            "sample_step_mm": 0.25
+          },
+          "Part024": {
+            "sampled_mm": 30.675887120707685,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 30.550887120707685,
+            "sample_step_mm": 0.25
+          },
+          "Part025": {
+            "sampled_mm": 103.79622849249621,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 103.67122849249621,
+            "sample_step_mm": 0.25
+          },
+          "Part027": {
+            "sampled_mm": 28.67571599696101,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 28.55071599696101,
+            "sample_step_mm": 0.25
+          },
+          "Part041": {
+            "sampled_mm": 19.98999786376953,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 19.86499786376953,
+            "sample_step_mm": 0.25
+          },
+          "Part044": {
+            "sampled_mm": 29.45096130870098,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 29.32596130870098,
+            "sample_step_mm": 0.25
+          },
+          "Part073": {
+            "sampled_mm": 3.979999542236328,
+            "at": 2.5,
+            "continuous_lower_bound_mm": 3.854999542236328,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 17.035642558845353,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 16.910642558845353,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 77.2893897326992,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 77.1643897326992,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 16.844208808863193,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 16.719208808863193,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 81.00932291659696,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 80.88432291659696,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 19.944205103814472,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 19.819205103814472,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 53.08374339615701,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 52.95874339615701,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 18.844764301133463,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 18.719764301133463,
+            "sample_step_mm": 0.25
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 55.88174865559049,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 55.75674865559049,
+            "sample_step_mm": 0.25
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 0.30999755859375,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 0.18499755859375,
+            "sample_step_mm": 0.25
+          }
+        },
+        "seated_wrench_frame_overlap_by_angle_mm3": {
+          "-15": 2.2863386930413525,
+          "-10": 0.616780119715793,
+          "-5": 0.0,
+          "5": 0.0,
+          "10": 0.6167801197157833,
+          "15": 2.2863386930413228
+        },
+        "wrench_vs_seated_nut_overlap_mm3": 0.0,
+        "rear_cover_off_loose_nut_feed": {
+          "Part011": {
+            "sampled_mm": 2.970001220703125,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 2.845001220703125,
+            "sample_step_mm": 0.25
+          },
+          "Part012": {
+            "sampled_mm": 90.35807348003611,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 90.23307348003611,
+            "sample_step_mm": 0.25
+          },
+          "Part013": {
+            "sampled_mm": 86.31328893105974,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 86.18828893105974,
+            "sample_step_mm": 0.25
+          },
+          "Part014": {
+            "sampled_mm": 7.7040253983619404,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 7.5790253983619404,
+            "sample_step_mm": 0.25
+          },
+          "Part015": {
+            "sampled_mm": 9.926698514623014,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 9.801698514623014,
+            "sample_step_mm": 0.25
+          },
+          "Part016": {
+            "sampled_mm": 3.297432904058534,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 3.172432904058534,
+            "sample_step_mm": 0.25
+          },
+          "Part018": {
+            "sampled_mm": 7.115369661168248,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 6.990369661168248,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 83.54999923706053,
+            "at": 14.0,
+            "continuous_lower_bound_mm": 83.42499923706053,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 76.853331311365,
+            "at": 8.0,
+            "continuous_lower_bound_mm": 76.728331311365,
+            "sample_step_mm": 0.25
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 75.1119491432523,
+            "at": 19.0,
+            "continuous_lower_bound_mm": 74.9869491432523,
+            "sample_step_mm": 0.25
+          },
+          "Part024": {
+            "sampled_mm": 30.79763339661446,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 30.67263339661446,
+            "sample_step_mm": 0.25
+          },
+          "Part025": {
+            "sampled_mm": 108.79455598918852,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 108.66955598918852,
+            "sample_step_mm": 0.25
+          },
+          "Part027": {
+            "sampled_mm": 31.06597926314712,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 30.94097926314712,
+            "sample_step_mm": 0.25
+          },
+          "Part041": {
+            "sampled_mm": 18.550003051757812,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 18.425003051757812,
+            "sample_step_mm": 0.25
+          },
+          "Part044": {
+            "sampled_mm": 31.679793531941016,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 31.554793531941016,
+            "sample_step_mm": 0.25
+          },
+          "Part073": {
+            "sampled_mm": 9.230668155204933,
+            "at": 3.0,
+            "continuous_lower_bound_mm": 9.105668155204933,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 22.713714024438815,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 22.588714024438815,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 82.83130135178163,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 82.70630135178163,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 19.11538659247183,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 18.99038659247183,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 86.88308310015115,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 86.75808310015115,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 22.238057738456394,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 22.113057738456394,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 59.21800871648485,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 59.09300871648485,
+            "sample_step_mm": 0.25
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 21.11512067753926,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 20.99012067753926,
+            "sample_step_mm": 0.25
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 61.53749969673094,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 61.41249969673094,
+            "sample_step_mm": 0.25
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 0.0,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 0.0,
+            "sample_step_mm": 0.25
+          }
+        },
+        "loose_nut_descent_to_0_025_mm_above_seat": {
+          "Part011": {
+            "sampled_mm": 2.970001220703125,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 2.8525012207031253,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part012": {
+            "sampled_mm": 90.35807348003611,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 90.2405734800361,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part013": {
+            "sampled_mm": 86.31328893105974,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 86.19578893105974,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part014": {
+            "sampled_mm": 7.7040253983619404,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 7.586525398361941,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part015": {
+            "sampled_mm": 9.926698514623014,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 9.809198514623015,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part016": {
+            "sampled_mm": 3.297432904058534,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 3.1799329040585342,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part018": {
+            "sampled_mm": 7.115369661168248,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 6.997869661168249,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 83.85463929481432,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 83.73713929481431,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 76.53073041060846,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 76.41323041060845,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 77.08035802877465,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 76.96285802877465,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part024": {
+            "sampled_mm": 30.79763339661446,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 30.680133396614462,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part025": {
+            "sampled_mm": 108.79455598918852,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 108.67705598918852,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part027": {
+            "sampled_mm": 31.06597926314712,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 30.94847926314712,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part041": {
+            "sampled_mm": 18.550003051757812,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 18.432503051757813,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part044": {
+            "sampled_mm": 31.679793531941016,
+            "at": 0.0,
+            "continuous_lower_bound_mm": 31.562293531941016,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Part073": {
+            "sampled_mm": 9.655410036587083,
+            "at": -2.3499999999999983,
+            "continuous_lower_bound_mm": 9.537910036587084,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 21.01289298629282,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 20.89539298629282,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 82.83130135178163,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 82.71380135178163,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_37_right_jaw_bearing_stay": {
+            "sampled_mm": 17.472357864417784,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 17.354857864417784,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 86.56190896314021,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 86.4444089631402,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 20.59649004139771,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 20.47899004139771,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 58.71914320509254,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 58.60164320509254,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 19.472609341445057,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 19.355109341445058,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 61.53749969673094,
+            "at": -3.5249999999999972,
+            "continuous_lower_bound_mm": 61.41999969673094,
+            "sample_step_mm": 0.23499999999999982
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 0.0,
+            "at": -0.9399999999999993,
+            "continuous_lower_bound_mm": 0.0,
+            "sample_step_mm": 0.23499999999999982
+          }
+        },
+        "loose_nut_lift_above_seat_mm": 3.549999999999997,
+        "seated_and_lifted_nut_overlap_with_arm_mm3": [
+          0.0,
+          18.17225074420702
+        ],
+        "right_driver_seated_envelope": {
+          "Part011": {
+            "sampled_mm": 0.0,
+            "at": -17.21
+          },
+          "Part012": {
+            "sampled_mm": 93.24885804083834,
+            "at": -0.8503278688524603
+          },
+          "Part013": {
+            "sampled_mm": 89.79526307266559,
+            "at": 0.0
+          },
+          "Part014": {
+            "sampled_mm": 18.985940682874972,
+            "at": 1.1447540983606572
+          },
+          "Part015": {
+            "sampled_mm": 22.35278803012485,
+            "at": 0.0
+          },
+          "Part016": {
+            "sampled_mm": 14.948555739340868,
+            "at": 0.0
+          },
+          "Part018": {
+            "sampled_mm": 8.250694274902344,
+            "at": -17.21
+          },
+          "PitchLimitLink": {
+            "sampled_mm": 84.75069427490234,
+            "at": 2.7408196721311455
+          },
+          "PitchLimitLowerPin": {
+            "sampled_mm": 76.36352531988877,
+            "at": 7.13
+          },
+          "PitchLimitUpperPin": {
+            "sampled_mm": 81.38883697429046,
+            "at": 0.0
+          },
+          "Part024": {
+            "sampled_mm": 39.97044340671057,
+            "at": -8.4
+          },
+          "Part025": {
+            "sampled_mm": 115.00676826978896,
+            "at": 0.0
+          },
+          "Part027": {
+            "sampled_mm": 46.16732385146388,
+            "at": 0.0
+          },
+          "Part041": {
+            "sampled_mm": 36.19999694824219,
+            "at": 0.0
+          },
+          "Part044": {
+            "sampled_mm": 45.259408627806984,
+            "at": -8.4
+          },
+          "Part073": {
+            "sampled_mm": 12.066888444698378,
+            "at": 0.0
+          },
+          "Jaw_30_moving_jaw": {
+            "sampled_mm": 11.193107373191996,
+            "at": 9.71
+          },
+          "Jaw_36_left_jaw_servo_stay": {
+            "sampled_mm": 84.25030772036243,
+            "at": 0.0
+          },
+          "Jaw_38_left_jaw_drive_arm": {
+            "sampled_mm": 87.63871269422377,
+            "at": 1.4634615384615386
+          },
+          "Jaw_39_right_jaw_pivot_arm": {
+            "sampled_mm": 20.13399695822748,
+            "at": 8.13923076923077
+          },
+          "Jaw_XL330_M288_Jaw": {
+            "sampled_mm": 59.68205744612249,
+            "at": 0.0
+          },
+          "Jaw_MR104ZZ_jaw_right": {
+            "sampled_mm": 19.01248221511523,
+            "at": 0.0
+          },
+          "HarnessID6EH": {
+            "sampled_mm": 63.31820750689488,
+            "at": 0.0
+          },
+          "ModifiedFrame": {
+            "sampled_mm": 7.7020986154629085,
+            "at": 0.0
+          }
+        }
+      }
+    }
+  }
+}

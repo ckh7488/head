@@ -46,3 +46,7 @@ python mechanical/physics/b25_jaw_replay_masses.py mechanical/revisions/b24/slic
 python mechanical/physics/b23_motion_replay.py "$out/cad" "$out/masses.json" \
   mechanical/revisions/b24/jaw-stop.json "$out/replay" --jaw-minimum-voltage 4.07
 ```
+
+## 뒤쪽 너트 자리 시안
+
+일반 M3 너트를 뒤에서 넣도록 고정 위치를 옮긴 시안을 별도로 검사했습니다. 턱 삽입과 오른쪽 공구 접근에 간섭이 남았습니다. [뒤쪽 턱 고정 검사](jaw-relocated-mount.md)
