@@ -25,6 +25,7 @@ class Wire:
 
 SUPPLY_TAIL = Wire('Alpha Wire 6716', 16, 1.31, (.079, .083), 4.75, 5)
 POWER_WIRE = Wire('Alpha Wire 3055', 18, .823, (.077, .081), 7., 10)
+J2_SERVICE_WIRE = Wire('Alpha Wire EcoWire 6715', 18, .823, (.065, .069), 7., 5)
 MOTOR_WIRE = Wire('Alpha Wire 6712', 24, .205, (.041, .045), 25., 5)
 XT60_TAIL = Wire('Alpha Wire 6718', 12, 3.31, (.115, .119), 1.75, 5)
 # SPD1168X in local-sense CV mode at 20–30 °C. Round up the service manual

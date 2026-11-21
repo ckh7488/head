@@ -59,30 +59,33 @@ def sweep(shape, axis, distance, reserve=RESERVE):
     return box(low[0], high[0], low[1], high[1], low[2], high[2])
 
 
-def keyed_profile(y0, y1, width, height, radius):
-    """D-shaped XT60E-F section with two radiused corners on +X."""
+def keyed_profile(y0, y1, width, height, radius, reverse_key=False):
+    """D-shaped XT60E-F section, optionally rotated 180 degrees about +Y."""
     half_width, half_height = width / 2., height / 2.
     corner_x = X + half_width - radius
     shape = box(X-half_width, corner_x, y0, y1, Z-half_height, Z+half_height)
     middle = box(corner_x, X+half_width, y0, y1, Z-half_height+radius, Z+half_height-radius)
     curves = [cylinder(radius, y1-y0, (corner_x, y0, Z+side*(half_height-radius)), AXIS_Y)
               for side in (-1, 1)]
-    return shape.fuse([middle, *curves]).removeSplitter()
+    profile = shape.fuse([middle, *curves]).removeSplitter()
+    return profile.rotated(V(X, y0, Z), V(*AXIS_Y), 180.) if reverse_key else profile
 
 
-def fixed_station(saddle):
-    panel_back = PANEL + PANEL_DEPTH
-    opening = keyed_profile(PANEL-.1, panel_back+.2, 19.50, 12.05, 3.90)
-    screw_holes = [cylinder(1.55, REAR_WASHER_FRONT-PANEL+.2, (x, PANEL-.1, Z), AXIS_Y)
+def fixed_station(saddle, reverse_key=False, rear_offset=0.):
+    panel = PANEL+rear_offset
+    rear_washer = REAR_WASHER_FRONT+rear_offset
+    panel_back = panel+PANEL_DEPTH
+    opening = keyed_profile(panel-.1, panel_back+.2, 19.50, 12.05, 3.90, reverse_key)
+    screw_holes = [cylinder(1.55, rear_washer-panel+.2, (x, panel-.1, Z), AXIS_Y)
                    for x in MOUNT_X]
-    mount = box(X-19., X+19., PANEL, panel_back, Z-8., -66.10)
+    mount = box(X-19., X+19., panel, panel_back, Z-8., -66.10)
     # The flange passes the full web during installation from the mating side.
     web = box(X-19., X+19., 123., panel_back, -66.45, -63.40)
     # Put the loose nuts and wrench plane aft of the complete 20.2 mm socket body.
     ears = []
     for side in (-1, 1):
         x0, x1 = sorted((X+side*9.85, X+side*17.9))
-        ears.append(box(x0, x1, panel_back-.35, REAR_WASHER_FRONT, Z-4.5, Z+4.5))
+        ears.append(box(x0, x1, panel_back-.35, rear_washer, Z-4.5, Z+4.5))
     station = mount.fuse([web, *ears]).cut([opening, *screw_holes]).removeSplitter()
     revised_saddle = saddle.fuse(station).removeSplitter()
     if not revised_saddle.isValid() or len(revised_saddle.Solids) != 1:
@@ -90,8 +93,8 @@ def fixed_station(saddle):
     return station, revised_saddle
 
 
-def local_lead(x, y_start):
-    """Return the near-terminal lead through Y=100 mm, with exact tangent arcs."""
+def local_lead_edges(x, y_start):
+    """Return the near-terminal centerline through Y=100 mm as exact tangent arcs."""
     # Two opposite bends lead below the rear cable guide before its forward edge.
     y0, z0 = 79., -67.4
     angle = acos(1.-(z0-Z)/(2.*BEND_RADIUS))
@@ -107,11 +110,16 @@ def local_lead(x, y_start):
 
     start = V(x, y_start, z0)
     end = V(x, 100., Z)
-    edges = [Part.makeLine(start, down_arc(0.)),
-             Part.Arc(down_arc(0.), down_arc(angle/2.), down_arc(angle)).toShape(),
-             Part.Arc(level_arc(0.), level_arc(angle/2.), level_arc(angle)).toShape(),
-             Part.makeLine(level_arc(angle), end)]
-    profile = Part.Wire([Part.makeCircle(WIRE_RADIUS+WIRE_RESERVE, start, V(0., 1., 0.))])
+    return [Part.makeLine(start, down_arc(0.)),
+            Part.Arc(down_arc(0.), down_arc(angle/2.), down_arc(angle)).toShape(),
+            Part.Arc(level_arc(0.), level_arc(angle/2.), level_arc(angle)).toShape(),
+            Part.makeLine(level_arc(angle), end)]
+
+
+def local_lead(x, y_start):
+    """Return the reserved lead solid from the terminal to Y=100 mm."""
+    edges = local_lead_edges(x, y_start)
+    profile = Part.Wire([Part.makeCircle(WIRE_RADIUS+WIRE_RESERVE, edges[0].Vertexes[0].Point, V(*AXIS_Y))])
     return Part.Wire(edges).makePipeShell([profile], True, False)
 
 
@@ -129,7 +137,11 @@ def camera_usb_service(camera, targets):
     }
 
 
-def evaluate(doc):
+def evaluate(doc, reverse_key=False, rear_offset=0.):
+    socket_y = Y+rear_offset
+    panel = PANEL+rear_offset
+    rear_washer = REAR_WASHER_FRONT+rear_offset
+    nut_seat = NUT_SEAT+rear_offset
     moving = {obj.Name for obj in (*doc.HubInstalled.Group, *doc.HubCableSpace.Group)}
     moving.update(obj.Name for obj in doc.Objects if obj.Name.startswith('HubBolt'))
     shapes = {obj.Name: world_shape(obj) for obj in doc.Objects if obj.TypeId == 'Part::Feature'
@@ -141,38 +153,38 @@ def evaluate(doc):
     if not revised_base.isValid() or len(revised_base.Solids) != 1:
         raise ValueError('Rear wire relief must leave the base a single valid solid')
     base_relief_volume = native_base.Volume - revised_base.Volume
-    station, revised_saddle = fixed_station(detached_shape(doc.CableSaddle))
+    station, revised_saddle = fixed_station(detached_shape(doc.CableSaddle), reverse_key, rear_offset)
     station_targets = {name: shape for name, shape in fixed.items() if name != 'CableSaddle'}
     fixed.update(Part000=revised_base, CableSaddle=revised_saddle)
     # Solder cups are included. Flange and keyed body sweep independently along Y.
-    flange = box(X-17., X+17., Y, PANEL, Z-7.9, Z+7.9)
-    shell = keyed_profile(PANEL, Y+20.2, 19.10, 11.65, 3.90)
-    flange_holes = [cylinder(1.55, 4.3, (x, Y-.1, Z), AXIS_Y) for x in MOUNT_X]
+    flange = box(X-17., X+17., socket_y, panel, Z-7.9, Z+7.9)
+    shell = keyed_profile(panel, socket_y+20.2, 19.10, 11.65, 3.90, reverse_key)
+    flange_holes = [cylinder(1.55, 4.3, (x, socket_y-.1, Z), AXIS_Y) for x in MOUNT_X]
     socket = flange.cut(flange_holes).fuse(shell).removeSplitter()
-    shell_install = keyed_profile(PANEL-SOCKET_INSTALL_TRAVEL, Y+20.2,
-                                  19.10+2.*RESERVE, 11.65+2.*RESERVE, 3.90+RESERVE)
+    shell_install = keyed_profile(panel-SOCKET_INSTALL_TRAVEL, socket_y+20.2,
+                                  19.10+2.*RESERVE, 11.65+2.*RESERVE, 3.90+RESERVE, reverse_key)
     mount_hardware, tool_paths = {}, {}
     for i, x in enumerate(MOUNT_X, start=1):
-        head_seat = (x, Y-WASHER_THICKNESS, Z)
+        head_seat = (x, socket_y-WASHER_THICKNESS, Z)
         mount_hardware[f'M3 screw {i}'] = socket_screw(3, SCREW_LENGTH, head_seat, AXIS_Y)
-        for side, start_y in (('front', head_seat[1]), ('rear', REAR_WASHER_FRONT)):
+        for side, start_y in (('front', head_seat[1]), ('rear', rear_washer)):
             washer_seat = (x, start_y, Z)
             ring = cylinder(3.5, WASHER_THICKNESS, washer_seat, AXIS_Y)
             bore = cylinder(1.6, WASHER_THICKNESS, washer_seat, AXIS_Y)
             mount_hardware[f'M3 {side} washer {i}'] = ring.cut(bore)
-        mount_hardware[f'M3 nut {i}'] = nut(3, (x, NUT_SEAT, Z), AXIS_Y, (1., 0., 0.))
+        mount_hardware[f'M3 nut {i}'] = nut(3, (x, nut_seat, Z), AXIS_Y, (1., 0., 0.))
         tool_paths[f'2.5 mm hex driver {i}'] = cylinder(2.8, 35., (x, head_seat[1]-3.-35., Z), AXIS_Y)
         # Envelope of the stock 13 × 4.2 mm open-end wrench from below.
         # The open 5.5 mm jaw contains the nut and M3 shank.
-        spanner = box(x-6.5, x+6.5, NUT_SEAT, NUT_SEAT+4.2, Z-35., Z+3.)
-        jaw = box(x-2.78, x+2.78, NUT_SEAT-.1, NUT_SEAT+4.3, Z-3.25, Z+3.1)
+        spanner = box(x-6.5, x+6.5, nut_seat, nut_seat+4.2, Z-35., Z+3.)
+        jaw = box(x-2.78, x+2.78, nut_seat-.1, nut_seat+4.3, Z-3.25, Z+3.1)
         tool_paths[f'5.5 mm open-end wrench {i}'] = spanner.cut(jaw)
-    plug = box(X-15.55/2., X+15.55/2., Y-17.2, Y, Z-8.3/2., Z+8.3/2.)
+    plug = box(X-15.55/2., X+15.55/2., socket_y-17.2, socket_y, Z-8.3/2., Z+8.3/2.)
     plug_withdrawn = plug.translated(V(0., -WITHDRAW, 0.))
     plug_parked = plug_withdrawn.translated(V(0., 0., -PARK))
     # Side approach gauges cover 7 mm of the nominal 13.5 mm plastic length.
     # Confirm the available contact land with an actual mated connector pair.
-    grip_pads = [box(x0, x1, Y-13.5, Y-6.5, Z-7., Z+7.)
+    grip_pads = [box(x0, x1, socket_y-13.5, socket_y-6.5, Z-7., Z+7.)
                  for x0, x1 in ((X-16.5, X-15.55/2.), (X+15.55/2., X+16.5))]
     j2 = hatch['HubBodyJ2'].BoundBox
     if abs(j2.ZLength-J2_INSTALLED_HEIGHT) > .01 or abs(j2.YMax-74.15) > .1:
@@ -237,7 +249,7 @@ def evaluate(doc):
         'components': {'fixed_supply_socket': 'AMASS XT60E-F', 'hatch_pigtail': 'AMASS XT60U-M',
                        'sources': [SOCKET, SOCKET_DRAWING, PLUG_DRAWING]},
         'pin_map': {'+': 'A3 J2 pad 1 (/12V_IN)', '-': 'A3 J2 pad 2 (/GND)'},
-        'socket_face_center_mm': [X, Y, Z], 'unplug_axis': [0., -1., 0.],
+        'socket_face_center_mm': [X, socket_y, Z], 'unplug_axis': [0., -1., 0.],
         'socket_insertion_from_mating_side_mm': SOCKET_INSTALL_TRAVEL,
         'socket_mount_hardware': '2 M3 × 25 socket head screws, 4 M3 flat washers, 2 loose M3 plain hex nuts',
         'mount_wrench_underneath': '5.5 mm open-end, 13.0 mm max head width, 4.2 mm max head thickness',
