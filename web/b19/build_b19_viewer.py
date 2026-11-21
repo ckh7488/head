@@ -138,7 +138,7 @@ def assembly_motion(layout, hardware, stock, steps, revision):
     motion = {row['id']: row['motion'] for row in hardware if 'motion' in row and not row.get('tool')}
     motion.update({row['name']: row['motion'] for row in stock})
     motion.update(layout['world_motion'])
-    if revision in ('B22', 'B23', 'B24'):
+    if revision in ('B22', 'B23', 'B24', 'B25'):
         for step in steps:
             owner = FASTENER_OWNERS.get(step['id'])
             if owner is None:
@@ -349,10 +349,10 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     world = C.World(cad, data['hardware'], stock)
     checked = json.loads(report.read_text())
     layout = json.loads((cad/'cad_parts.json').read_text())
-    service_covers = revision in ('B23', 'B24')
+    service_covers = revision in ('B23', 'B24', 'B25')
     rig = layout['motion_geometry']
-    if revision == 'B24' and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
-        raise ValueError('B24 CAD must include both revised pitch axes')
+    if revision in ('B24', 'B25') and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
+        raise ValueError('Current CAD must include both revised pitch axes')
     plan = C.assembly_plan(revision.lower(), layout)
     if [(row['id'], row['context'], row['text']) for row in checked] != [
             (step['id'], step['ctx'], step['text']) for step in plan]:
@@ -377,7 +377,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         for cap in rig['bottom_board_service_nuts']:
             keeper_names.add(cap['keeper'])
             native_screws.add(cap['screw'])
-    if revision == 'B24':
+    if revision in ('B24', 'B25'):
         native_screws.add(rig['pitch_coupler']['actor'])
     b19_names = {item['name'] for item in stock} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
@@ -595,7 +595,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
         **({'stops': stop_locations} if stop_locations else {}),
-        **({'assemblyViews': B24_ASSEMBLY_VIEWS} if revision == 'B24' else {}),
+        **({'assemblyViews': B24_ASSEMBLY_VIEWS} if revision in ('B24', 'B25') else {}),
         **({'finalView': review} if review else {}),
         **({'guardSha256': guard_hash} if guard_hash else {}),
         **({'wireStates': states, 'wireStatesSha256': sha256(wire_states.read_bytes()).hexdigest()} if states else {}),

@@ -4,9 +4,9 @@ R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사�
 
 ## 최종 검토 후보
 
-**B24 CAD와 서보 허브 A2, C3 A1, 갱신한 제어의 검토 브랜치입니다. 전체 출력·부품·PCB 발주는 보류합니다.**
+**B25 기구 후보, 서보 허브 A3, C3 A1과 갱신한 제어를 검토합니다. 전체 출력·부품·PCB 발주는 보류합니다.**
 
-- [B24 조립·가공 유의점](mechanical/revisions/b24/) · [3D 조립 화면 생성](web/README.md#b24-조립-순서)
+- [B25 기구 후보](mechanical/revisions/b25/) · [B24 조립·가공 유의점](mechanical/revisions/b24/) · [3D 조립 미리보기](web/README.md#b25-조립-미리보기)
 - [PCB와 전원 검토](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
 - [B24 원본의 독립 검토 결과](https://github.com/ckh7488/head/blob/765d379f9c37a0123b0e38612cc2745b216bceca/REVIEW.md)
 

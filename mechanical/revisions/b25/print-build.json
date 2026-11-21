@@ -1,0 +1,42 @@
+{
+  "project_sha256": "72abe8425a2beb39224ee38acce200518bc526bafeeafbe95725c954c10f94e8",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "plate_sha256": {
+    "1": "9936a70947df764cfd242b03b7233d1201ffc1830909eff8db561b2ec5a327e8",
+    "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
+    "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
+    "4": "3c813f35d2680908a933a28fe9f4397e2c4226137b77edc4ab05ca34f47f943f",
+    "5": "a570a44f7fdb3f2e4b00379bd5b5f4c64e0ef733ec40c80f5d448123c77820a6",
+    "6": "0536ba67bd6a18bf8be05b5113a4684393c04585a22ead4540ff0847aac60430",
+    "7": "12808c8815aa78f96b1e14a2631771a8271b490224086f783760e00dafaa4fe4",
+    "8": "24077302c0150eb8ddf145fdbaf2b5788e481378a246c54160f9e3e8a4937185",
+    "9": "543ea929e027f8fe70c79ae76e927a2c8e8c8e3a23f8d7c73afb5c16c9fc84b9",
+    "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
+    "11": "8e5625005604535cd0ad25caae41485eee67fb7e4aa288b6269c4467e28e849c",
+    "12": "f1f5d30ee257338730eaca087eb50774b5ad546e2c265c74a1cb8d63b244280f"
+  },
+  "changed_plates": {
+    "4": [
+      "28_skull_front_with_camera_tray-B25.stl"
+    ],
+    "5": [
+      "29_skull_rear-B25.stl"
+    ],
+    "6": [
+      "09_head_frame-B25.stl"
+    ],
+    "9": [
+      "32_left_eyelid-B25.stl"
+    ]
+  },
+  "identical_to_b24_plates": [
+    1,
+    2,
+    3,
+    7,
+    8,
+    10,
+    11,
+    12
+  ]
+}
