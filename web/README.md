@@ -4,6 +4,8 @@
 
 B25 조립 단계에는 뒤 외장 너트와 좌우 M3×16 체결이 추가됐습니다. 조립 중 확인된 문제를 볼 수 있는 오프라인 미리보기입니다. [B25 기구 후보](../mechanical/revisions/b25/)
 
+XL330 케이스의 조립 설명에 B25의 동봉 나사 길이와 구멍 ID를 표시합니다. 미리보기의 나사와 공구 형상은 B24 조립 검사 형상을 사용하므로 실물 케이스 체결에는 B25 표를 따릅니다. C3 단계는 RF 실험 참고용입니다. [케이스 나사 배정](../mechanical/revisions/b25/xl330-case-screws.md) · [B25 발주와 조립](../mechanical/revisions/b25/assembly.md)
+
 ```sh
 export PYTHONPATH="$PWD/mechanical${PYTHONPATH:+:$PYTHONPATH}"
 b24=mechanical/revisions/b24

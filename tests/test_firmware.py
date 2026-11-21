@@ -382,6 +382,27 @@ def test_release_verifies_torque_after_an_openrb_only_restart(firmware):
     assert not writes(events, GOAL)
 
 
+def test_release_verifies_all_powered_servos_after_an_openrb_only_restart(firmware):
+    for servo in range(1, 7):
+        firmware.set(servo, TORQUE, 1)
+    firmware.fail('w', 4, TORQUE, 'ignored')  # The write reply succeeds, but the register stays on.
+
+    assert firmware.command('RELEASE') == ['ERROR RELEASE_UNCONFIRMED']
+    events = firmware.trace()
+    assert [(event.id, event.value) for event in writes(events, TORQUE)] == [
+        (servo, 0) for servo in range(1, 7)
+    ]
+    torque_reads = {e.id: e.value for e in events if e.direction == 'r' and e.register == TORQUE}
+    assert torque_reads == {1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0}
+
+    assert firmware.command('RELEASE') == ['RELEASED']
+    events = firmware.trace()
+    assert [(e.id, e.value) for e in events if e.direction == 'r' and e.register == TORQUE] == [
+        (1, 0), (2, 0), (3, 0), (4, 1), (4, 0), (5, 0), (6, 0),
+    ]
+    assert [event.id for event in writes(events, TORQUE)] == [4]
+
+
 @pytest.mark.parametrize('missing_or_wrong', ['absent', 'wrong_model', 'wrong_reply'])
 def test_release_continues_with_matching_servos_but_cannot_confirm_every_id(firmware, missing_or_wrong):
     firmware.set(4, TORQUE, 1)

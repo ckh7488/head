@@ -591,8 +591,34 @@ def b24_plan(plan, layout):
 
 def b25_plan(plan, geometry):
     rear = geometry['rear_skull_retention']['stations']
+    labels = {
+        'eye-yaw-motor-bench': (
+            '작업대에서 ID1 XL330-M077-T를 모터판 39에 맞춥니다. '
+            '동봉 PHS M2×8 TAP은 eyeYawHead0·eyeYawHead2·eyeYawHead3, '
+            'PHS M2×6 TAP은 eyeYawHead1에 씁니다.'
+        ),
+        'eye-pitch-motor-bench': (
+            '작업대에서 ID2 XL330-M077-T를 모터판 42에 맞춥니다. '
+            'eyePitchHead0~eyePitchHead3에 동봉 PHS M2×8 TAP 네 개를 씁니다.'
+        ),
+        'blink-motor-bench': (
+            '작업대에서 ID3 XL330-M077-T를 모터판 46에 맞춥니다. '
+            '동봉 PHS M2×8 TAP은 blinkMotorHead1·blinkMotorHead3, '
+            'PHS M2×6 TAP은 blinkMotorHead0·blinkMotorHead2에 씁니다.'
+        ),
+        'jaw-motor-bench': (
+            '작업대에서 ID6 XL330-M288-T를 턱 받침 36에 맞춥니다. '
+            '동봉 PHS M2×8 TAP은 jawMotorHead1·jawMotorHead2, '
+            'PHS M2×6 TAP은 jawMotorHead0·jawMotorHead3에 씁니다.'
+        ),
+        'c3-board': 'RF 실험 참고용입니다. B25 조립에서는 C3 보드와 왼쪽 캐리어 관련 단계를 건너뜁니다.',
+    }
     result = []
     for row in plan:
+        if row['id'] in labels:
+            row = dict(row, text=labels[row['id']])
+        elif row['id'].startswith('c3-'):
+            row = dict(row, text=f"RF 실험 참고 · {row['text']}")
         if row['id'] == 'rear-skull':
             result.append(step('rear-skull-nuts', 'base',
                                '뒤 외장을 끼우기 전에 프레임 양쪽 열린 슬롯으로 M3 육각너트를 넣습니다.',

@@ -1,6 +1,6 @@
 # B25 XL330 케이스 나사
 
-ROBOTIS XL330 패키지에 동봉된 **PHS M2×8 TAP 11개**와 **PHS M2×6 TAP 5개**를 아래 위치에 배정합니다. XL330-M077-T `902-0162-000` 세 개와 XL330-M288-T `902-0163-000` 한 개의 동봉품에 길이별로 40개와 24개가 들어 있으므로 케이스 나사를 따로 발주할 필요가 없습니다. 공통 BOM E2에서 케이스용 16개를 뺍니다. 케이스는 제조사 체결품 예외를 적용해 동봉 십자 둥근머리 탭 나사를 사용합니다. [M077 동봉품](https://en.robotis.com/shop_en/item.php?it_id=902-0162-000) · [M288 동봉품](https://en.robotis.com/shop_en/item.php?it_id=902-0163-000) · [ROBOTIS 케이스 조립 그림](https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/#how-to-assemble) · [공통 BOM](../../BOM.csv)
+XL330-M077-T `902-0162-000` 세 개와 XL330-M288-T `902-0163-000` 한 개를 준비합니다. 각 패키지에 **PHS M2×8 TAP 10개**와 **PHS M2×6 TAP 6개**가 들어 있습니다. B25 케이스에 각각 **11개**와 **5개**를 배정하며 별도 발주 수량은 0개입니다. 제조사 판매표는 8 mm를 프레임용, 6 mm를 혼용으로 표시합니다. 제조사 조립 그림의 M2 탭 나사는 판을 관통해 모터 케이스에 물립니다. B25는 같은 체결 방식을 사용하고, 6 mm 나사 다섯 개는 B25의 얕은 케이스 자리에 배정합니다. [M077 동봉품](https://en.robotis.com/shop_en/item.php?it_id=902-0162-000) · [M288 동봉품](https://en.robotis.com/shop_en/item.php?it_id=902-0163-000) · [ROBOTIS 케이스 조립 그림](https://emanual.robotis.com/assets/images/dxl/x/x330/xl330_assembly_integrated.png) · [B25 발주표](BOM.csv)
 
 | 모터와 출력 부품 | PHS M2×8 TAP | PHS M2×6 TAP |
 | --- | --- | --- |
@@ -13,9 +13,9 @@ ROBOTIS XL330 패키지에 동봉된 **PHS M2×8 TAP 11개**와 **PHS M2×6 TAP 
 
 ## 물림과 실물 확인
 
-Detail A의 케이스 구멍에는 **Ø2 × 3.50 mm** 입구와 이어지는 **Ø1.60 mm** 탭 파일럿이 있습니다. B25의 제조사 솔리드 네 개에서 16곳 모두 파일럿이 **15.00 mm** 이어진 뒤 반대편 Ø2 입구로 열립니다. 나사 끝이 파일럿에 들어가는 길이는 두꺼운 2.70 mm 자리에서 **1.80 mm**, 얕은 0.85–1.10 mm 자리에서 **1.40–1.65 mm**입니다. 나사 끝에서 파일럿 끝까지 **13.20–13.60 mm**가 남습니다. 도면의 3.0 mm 최대 깊이는 혼의 Ø12 피치원 구멍에 적용됩니다. [ROBOTIS 도면](https://docs.robotis.com/docs/dxl/model_reference/x_series/xl_series/xl330-m077/#drawings) · [도면 사본](https://www.besttechnology.co.jp/modules/knowledge/gate.php/X330_dimension.pdf?_noumb=&openfile=X330_dimension.pdf&refer=Dynamixel+XL330-M077&way=attach)
+Detail A의 케이스 구멍에는 **Ø2 × 3.50 mm** 입구와 이어지는 **Ø1.60 mm** 탭 파일럿이 있습니다. B25의 제조사 솔리드 네 개에서 16곳 모두 파일럿이 **15.00 mm** 이어진 뒤 반대편 Ø2 입구로 열립니다. 나사 끝이 파일럿에 들어가는 길이는 두꺼운 2.70 mm 자리에서 **1.80 mm**, 얕은 0.85–1.10 mm 자리에서 **1.40–1.65 mm**입니다. 나사 끝에서 파일럿 끝까지 **13.20–13.60 mm**가 남습니다. 이 값은 나사 끝의 명목 진입량입니다. 도면의 3.0 mm 최대 깊이는 혼의 Ø12 피치원 구멍에 적용됩니다. [ROBOTIS 도면](https://docs.robotis.com/docs/dxl/model_reference/x_series/xl_series/xl330-m077/#drawings) · [도면 사본](https://www.besttechnology.co.jp/modules/knowledge/gate.php/X330_dimension.pdf?_noumb=&openfile=X330_dimension.pdf&refer=Dynamixel+XL330-M077&way=attach)
 
-실물에서 각 출력물의 머리 받침면부터 케이스 접촉면까지 두께를 잽니다. 전원을 끈 모터의 케이스 구멍에 지름 1.6 mm보다 작은 매끈한 핀을 대어 나사 끝이 닿는 깊이까지 열린 것을 확인합니다. 동봉 나사의 머리 아래 길이와 끝의 불완전 나사산 길이도 기록합니다. 완전한 나사산의 물림 길이는 머리 아래 길이에서 출력물 두께, 케이스 입구 깊이, 불완전 나사산 길이를 뺀 값입니다. 작업대에서 손으로 나사를 조여 머리가 판에 앉아 판을 눌러 잡는지, 미리 걸리는 곳이나 헛도는 구멍이 있는지 확인합니다. 케이스와 판에 기준선을 표시해 작동 전후에 들뜸이나 회전 여부를 확인합니다. 실제 케이스의 나사산 성형과 조임 유지 판정은 P01과 모터 작동 시험에서 기록합니다. [실물 시험](../../../spec/bench.md)
+인용한 ROBOTIS 도면과 조립 그림에서 케이스의 수치화된 최소 물림 길이는 확인되지 않았습니다. 기존 실물 조립 시험에서 머리 받침면부터 케이스 접촉면까지의 출력물 두께와 케이스 입구 깊이, 동봉 나사의 머리 아래 길이와 끝의 불완전 나사산 길이를 잽니다. 완전한 나사산의 물림 길이는 머리 아래 길이에서 출력물 두께, 케이스 입구 깊이, 불완전 나사산 길이를 뺀 값입니다. 케이스의 나사 가용 깊이와 비교하고, 구멍의 나사산 성형과 머리가 판을 밀착시키는지 확인합니다. 조립·작동 전후의 들뜸, 헛돎과 풀림을 기존 실물 시험에서 기록합니다. [실물 시험](../../../spec/bench.md)
 
 ## CAD 확인 재현
 
