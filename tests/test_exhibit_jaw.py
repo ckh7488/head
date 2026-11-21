@@ -38,13 +38,13 @@ def test_tracking_latches_only_closed_jaw_and_preserves_watchdog(firmware):
 
 def test_cold_jaw_closes_before_tracking_is_enabled(firmware):
     firmware.set(6, POSITION, 1890)
-    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    assert not firmware.command('ARM_EXHIBIT')
     events = firmware.trace()
     assert [event.value for event in writes(events, PWM) if event.id == 6] == [100, 120]
     assert [event.value for event in writes(events, GOAL) if event.id == 6] == [2000]
-    assert firmware.command('GO_EXHIBIT 0 0 0 40 0') == ['ERROR EXHIBIT_JAW_CLOSING']
+    assert not firmware.command('GO_EXHIBIT 0 0 0 40 0')
     for _ in range(9):
-        assert firmware.tick(120) == [NEUTRAL_STATE]
+        assert not firmware.tick(120)
     assert not writes(firmware.trace(), GOAL)
     firmware.set(6, POSITION, 1992)
     assert firmware.tick(120) == ['ARMED_EXHIBIT 31', NEUTRAL_STATE]
@@ -68,7 +68,7 @@ def test_cold_start_rejects_unqualified_gap_or_neck(firmware, jaw_raw, neck_raw,
 @pytest.mark.parametrize('failure', ['torque', 'position', 'overclosure', 'timeout', 'pwm', 'hold'])
 def test_bad_cold_recovery_releases_only_jaw(firmware, failure):
     firmware.set(6, POSITION, 1904)
-    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    assert not firmware.command('ARM_EXHIBIT')
     firmware.trace()
     if failure == 'torque':
         firmware.set(5, TORQUE, 0)
@@ -122,10 +122,10 @@ def test_exhibit_keeps_five_axes_when_jaw_calibration_is_unset(firmware_build):
 def test_late_cold_closure_arms_at_the_original_zero_goal(firmware, close_feedback):
     firmware.set(6, POSITION, 1904)
     firmware.exchange('follow 6 0')
-    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    assert not firmware.command('ARM_EXHIBIT')
     assert jaw_writes(firmware, GOAL) == [2000]
     firmware.set(6, POSITION, 1980)
-    assert firmware.tick(1660) == [NEUTRAL_STATE]
+    assert not firmware.tick(1660)
     assert not jaw_writes(firmware, GOAL)
 
     firmware.set(6, POSITION, close_feedback)
@@ -139,11 +139,11 @@ def test_late_cold_closure_arms_at_the_original_zero_goal(firmware, close_feedba
 def test_stalled_cold_jaw_never_commands_past_zero_and_times_out(firmware):
     firmware.set(6, POSITION, 1904)
     firmware.exchange('follow 6 0')
-    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    assert not firmware.command('ARM_EXHIBIT')
     assert jaw_writes(firmware, GOAL) == [2000]
     firmware.set(6, POSITION, 1981)
     for _ in range(19):
-        assert firmware.tick(120) == [NEUTRAL_STATE]
+        assert not firmware.tick(120)
     assert firmware.tick(120) == ['ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6']
     events = firmware.trace()
     assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(6, 0)]
@@ -195,6 +195,13 @@ def test_exhibit_jaw_rejects_other_servo_position_during_tracking(firmware):
     assert firmware.command('CHECK 6')[0].split()[6] == '0'
 
 
+def test_already_closed_arm_validates_feedback_before_announcing_success(firmware):
+    firmware.fail('r', 6, POSITION, 'ok', 2)
+    firmware.fail('r', 6, POSITION, 'wrong_id', 2)
+    assert firmware.command('ARM_EXHIBIT') == ['ERROR READ_BUS ID6']
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
 def test_exhibit_jaw_cannot_finish_recovery_after_the_deadline(firmware):
     firmware.exchange('follow 6 0')
     firmware.set(6, POSITION, 1955)
@@ -219,9 +226,9 @@ def test_exhibit_jaw_pwm_confirmation_must_finish_before_deadline(firmware):
 def test_exhibit_jaw_timeout_does_not_wait_for_the_next_report(firmware):
     firmware.exchange('follow 6 0')
     firmware.set(6, POSITION, 1955)
-    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    assert not firmware.command('ARM_EXHIBIT')
     for _ in range(19):
-        assert firmware.tick(126) == [NEUTRAL_STATE]
+        assert not firmware.tick(126)
     assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(6)
     assert firmware.command('CHECK 6')[0].split()[6] == '0'
 
@@ -239,7 +246,37 @@ def test_exhibit_jaw_deadline_includes_arm_preflight_time(firmware):
 def test_release_stops_the_recovering_jaw_before_the_other_axes(firmware):
     firmware.exchange('follow 6 0')
     firmware.set(6, POSITION, 1955)
-    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    assert not firmware.command('ARM_EXHIBIT')
     firmware.trace()
+    firmware.fail('r', 6, 0, 'timeout', 2)
     assert firmware.command('RELEASE') == ['RELEASED']
     assert writes(firmware.trace(), TORQUE)[0].id == 6
+    firmware.command('CHECK 6')  # Consume the injected model-read faults.
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_recovery_rejects_multiregister_diagnostics_before_deadline(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, POSITION, 1955)
+    assert not firmware.command('ARM_EXHIBIT')
+    firmware.tick(2399)
+    firmware.trace()
+    assert not firmware.command('CHECK 6')
+    assert not firmware.command('PING')
+    assert not firmware.trace()
+    assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(1)
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_recovery_deadline_wins_over_neck_read_retries(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, POSITION, 1955)
+    assert not firmware.command('ARM_EXHIBIT')
+    firmware.trace()
+    firmware.fail('r', 4, POSITION, 'timeout')
+    firmware.fail('r', 4, TORQUE, 'timeout')
+    assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(2399)
+    events = firmware.trace()
+    jaw_release, = [event for event in writes(events, TORQUE) if event.id == 6]
+    assert jaw_release.value == 0 and jaw_release.time == 2400
+    assert not any(event.id == 4 and event.register == TORQUE for event in events)

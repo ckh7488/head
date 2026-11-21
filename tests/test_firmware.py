@@ -290,7 +290,7 @@ def test_report_limit_is_inclusive_at_eight_ticks(firmware, endpoint, direction,
     assert not any(e.direction == 'w' for e in firmware.trace())
 
 
-@pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'short'])
+@pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'short', 'truncated', 'wrong_id_denied'])
 def test_transient_read_is_retried(firmware, kind):
     arm(firmware, 8)
     firmware.fail('r', 4, POSITION, kind)
@@ -298,6 +298,16 @@ def test_transient_read_is_retried(firmware, kind):
     assert [(e.direction, e.register, e.result) for e in firmware.trace()] == [
         ('r', POSITION, kind), ('r', POSITION, 'ok'), ('r', TORQUE, 'ok'),
     ]
+
+
+@pytest.mark.parametrize('kind', ['wrong_id', 'wrong_id_alert', 'wrong_id_denied', 'extra', 'truncated'])
+def test_goal_write_retries_invalid_acknowledgements(firmware, kind):
+    arm(firmware, 1)
+    firmware.fail('w', 1, GOAL, kind)
+    assert not firmware.command('GO 10 0 0 0 0')
+    attempts = writes(firmware.trace(), GOAL)
+    assert [event.result for event in attempts] == [kind, 'ok']
+    assert attempts[0].value == attempts[1].value
 
 
 @pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'lost'])
