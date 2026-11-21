@@ -202,3 +202,25 @@ def test_exhibit_jaw_cannot_finish_recovery_after_the_deadline(firmware):
     firmware.set(6, POSITION, 2000)
     assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(2520)
     assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_exhibit_jaw_pwm_confirmation_must_finish_before_deadline(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, 132, 1955)
+    assert not any(line.startswith('ARMED_EXHIBIT') for line in firmware.command('ARM_EXHIBIT'))
+    firmware.set(6, 132, 2000)
+    firmware.fail('w', 6, PWM, 'timeout')
+    reply = firmware.tick(2399)
+    assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in reply
+    assert 'ARMED_EXHIBIT 31' not in reply
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_exhibit_jaw_timeout_does_not_wait_for_the_next_report(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, POSITION, 1955)
+    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    for _ in range(19):
+        assert firmware.tick(126) == [NEUTRAL_STATE]
+    assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(6)
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'

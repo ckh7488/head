@@ -96,7 +96,8 @@ public:
   bool readVerified(uint8_t id, Register reg, int32_t& value, uint8_t& status) {
     uint8_t request[] = {static_cast<uint8_t>(reg.address),
                          static_cast<uint8_t>(reg.address>>8),reg.size,0};
-    uint8_t response[4] = {};
+    // Dynamixel2Arduino 0.8.2 can stage one extra byte before rejecting a long reply.
+    uint8_t response[5] = {};
     if (!verifiedTransaction(id,DXL_INST_READ,request,sizeof(request),response,reg.size,status)) {
       return false;
     }
@@ -417,6 +418,12 @@ void stopOnFault(const char* reason, uint8_t id=0) {
   if (!holdAxes(!releaseJaw)) Serial.println("ERROR HOLD_UNCONFIRMED");
 }
 
+bool checkJawRecoveryTimeout() {
+  if (!exhibitJawClosing || static_cast<uint32_t>(millis()-jawTargetSince)<exhibitJawRecoveryMs) return false;
+  stopOnFault("EXHIBIT_JAW_CLOSE_TIMEOUT",count);
+  return true;
+}
+
 bool freeze() {
   if (exhibitJawClosing) {
     stopOnFault("EXHIBIT_JAW_CLOSE_CANCELLED",count);
@@ -586,16 +593,13 @@ void report(bool monitorTorque) {
           return;
         }
         const int32_t opening=jawOpening(raw[i]);
-        const uint32_t elapsed=static_cast<uint32_t>(millis()-jawTargetSince);
-        if (elapsed>=exhibitJawRecoveryMs) {
-          stopOnFault("EXHIBIT_JAW_CLOSE_TIMEOUT",i+1);
-          return;
-        }
+        if (checkJawRecoveryTimeout()) return;
         if (opening<=exhibitJawReadyTicks) {
           if (!writeVerifiedRegister(i+1,goalPwm,exhibitJawPwm)) {
             stopOnFault("EXHIBIT_JAW_PWM",i+1);
             return;
           }
+          if (checkJawRecoveryTimeout()) return;
           exhibitJawClosing=false;
           resetJawFollowing();
           Serial.println("ARMED_EXHIBIT 31");
@@ -938,6 +942,7 @@ void checkCommandTimeout() {
 }
 
 void loop() {
+  checkJawRecoveryTimeout();
   checkCommandTimeout();
   for (size_t remaining=sizeof(line);remaining>0 && Serial.available();remaining--) {
     char c=static_cast<char>(Serial.read());
@@ -945,7 +950,10 @@ void loop() {
       if (length>0 && line[length-1]=='\r') length--;
       if (!overflow && length>0) {
         line[length]='\0';
-        if (!memchr(line,'\r',length)) command(line);
+        if (!memchr(line,'\r',length)) {
+          command(line);
+          checkJawRecoveryTimeout();
+        }
       }
       length=0;
       overflow=false;

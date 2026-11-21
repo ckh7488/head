@@ -254,6 +254,10 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
         states.append(physical)
         if last_command is not None and t-last_command>=fw.watchdog-1e-9:
             hold(t,'watchdog')
+        if recovering_jaw and fault is None and t >= fw.jaw_recovery_timeout - 1e-9:
+            fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
+            active_mask[5] = False
+            hold(t, 'jaw-recovery-timeout')
         if i>=next_report:
             raw, measured = fw.reports(physical)
             feedback_at = t
@@ -266,10 +270,6 @@ def replay(cad, fw, track, model, motor, dead, case, scenario, direction, trace,
                     fault = {'at_s': t, 'ids': [5], 'reason': 'neck moved during jaw recovery'}
                     active_mask[5] = False
                     hold(t, 'jaw-recovery-neck-position')
-                elif t >= fw.jaw_recovery_timeout:
-                    fault = {'at_s': t, 'ids': [6], 'reason': 'jaw recovery timeout'}
-                    active_mask[5] = False
-                    hold(t, 'jaw-recovery-timeout')
                 elif abs(raw[5]) <= fw.jaw_ready_deg and not outside[5]:
                     recovering_jaw = False
                     goal[5] = 0.
