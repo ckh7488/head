@@ -343,12 +343,14 @@ bool releaseAxis(uint8_t i) {
 }
 
 void release() {
+  const uint8_t first=exhibitJawClosing ? trackerCount : 0;
   cancelMotion();
   jawDemoActive=false;
   exhibitJawHold=false;
   exhibitJawClosing=false;
   bool confirmed=true;
-  for (uint8_t i=0;i<count;i++) {
+  for (uint8_t offset=0;offset<count;offset++) {
+    const uint8_t i=(first+offset)%count;
     const uint8_t id=i+1;
     int32_t found=-1, torque=-1;
     // The actuator rail can remain powered when the OpenRB loses its armed mask.
@@ -567,6 +569,7 @@ bool verifyActiveTorque(uint8_t i) {
 void report(bool monitorTorque) {
   const uint8_t torqueAxis=monitorTorque ? scheduledTorqueCheck() : count;
   for (uint8_t i=0;i<count;i++) {
+    if (checkJawRecoveryTimeout()) return;
     if (!axisEnabled(armed,i)) continue;
     if ((jawDemoActive || exhibitJawClosing) && (i==neckYawAxis || i==neckPitchAxis)) {
       if (!verifyNeutralNeckAxis(i)) return;
@@ -623,6 +626,7 @@ void report(bool monitorTorque) {
 }
 
 void arm(uint8_t mask, ArmMode mode=ArmMode::normal) {
+  const uint32_t armStarted=millis();
   const bool startJawDemo=mode==ArmMode::jawDemo;
   const bool startExhibit=mode==ArmMode::exhibit;
   const auto& jaw=calibration[trackerCount];
@@ -753,6 +757,7 @@ void arm(uint8_t mask, ArmMode mode=ArmMode::normal) {
   lastGoal=static_cast<uint32_t>(millis())-goalPeriodMs;
   lastReport=millis();
   resetJawFollowing();
+  if (exhibitJawClosing) jawTargetSince=armStarted;
   if (!exhibitJawClosing) {
     Serial.print(startJawDemo ? "ARMED_JAW_DEMO " : startExhibit ? "ARMED_EXHIBIT " : "ARMED ");
     Serial.println(startExhibit ? trackerMask : mask);

@@ -224,3 +224,22 @@ def test_exhibit_jaw_timeout_does_not_wait_for_the_next_report(firmware):
         assert firmware.tick(126) == [NEUTRAL_STATE]
     assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(6)
     assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_exhibit_jaw_deadline_includes_arm_preflight_time(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, POSITION, 1955)
+    firmware.fail('r', 1, 0, 'timeout')
+    assert not any(line.startswith('ARMED_EXHIBIT') for line in firmware.command('ARM_EXHIBIT'))
+    firmware.set(6, POSITION, 2000)
+    assert 'ERROR EXHIBIT_JAW_CLOSE_TIMEOUT ID6' in firmware.tick(2399)
+    assert firmware.command('CHECK 6')[0].split()[6] == '0'
+
+
+def test_release_stops_the_recovering_jaw_before_the_other_axes(firmware):
+    firmware.exchange('follow 6 0')
+    firmware.set(6, POSITION, 1955)
+    assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
+    firmware.trace()
+    assert firmware.command('RELEASE') == ['RELEASED']
+    assert writes(firmware.trace(), TORQUE)[0].id == 6
