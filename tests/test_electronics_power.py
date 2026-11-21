@@ -22,10 +22,11 @@ def power_checker():
 
 def test_a3_model_load_and_branch_limits(power_checker):
     result = subprocess.run(power_checker, capture_output=True, text=True, check=True)
-    limits = re.search(r'PH current limit: ([\d.]+)–([\d.]+) A', result.stdout)
+    limits = re.search(r'PH current estimate: ([\d.]+)–([\d.]+) A', result.stdout)
     assert limits is not None
     lower, upper = map(float, limits.groups())
     assert 1.55 < lower <= upper < 2.0
+    assert 'PH current qualification required: fitted lower limit 1.539 A' in result.stdout
     voltages = [float(value) for value in re.findall(r'([\d.]+) V at the motor', result.stdout)]
     assert len(voltages) == 6
     eye_yaw, eye_pitch, blink, jaw, neck_yaw, neck_pitch = voltages

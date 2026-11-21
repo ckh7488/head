@@ -105,8 +105,10 @@ def ph_current_limits():
     # of the 0.1% / 25 ppm/°C resistor. Check the broader fitted upper curve too.
     lo_r = PH_LIMIT_OHMS * (1 - PH_LIMIT_TOLERANCE)
     hi_r = PH_LIMIT_OHMS * (1 + PH_LIMIT_TOLERANCE)
-    return (1.590 * (PH_LIMIT_OHMS / hi_r)**1.0708,
-            max(1.960 * (PH_LIMIT_OHMS / lo_r)**.947, 99.038 / lo_r**.947))
+    nominal_anchored_min = 1.590 * (PH_LIMIT_OHMS / hi_r)**1.0708
+    curve_min = 127.981 / hi_r**1.0708
+    curve_max = 99.038 / lo_r**.947
+    return nominal_anchored_min, curve_min, max(1.960 * (PH_LIMIT_OHMS / lo_r)**.947, curve_max)
 
 
 def check_hub(input_5v=INPUT_5V_LOADED):
@@ -118,7 +120,7 @@ def check_hub(input_5v=INPUT_5V_LOADED):
     check_net(parts, 'F2', {1: '12V_IN', 2: '12V_NECK'})
     if parts['F1'].GetValue() != '7.5A MINI':
         raise ValueError('5 V hub fuse must match the 7.5 A thermal and resistance budget')
-    lo_limit, hi_limit = ph_current_limits()
+    lo_limit, curve_min, hi_limit = ph_current_limits()
     if not XL330_STALL_A < lo_limit <= hi_limit < PH_RATING_A:
         raise ValueError('PH branch current limit must pass a normal stall and protect the 2 A contact')
     total_hub_a = 3 * XL330_STALL_A + HUB_IDLE_A
@@ -127,7 +129,10 @@ def check_hub(input_5v=INPUT_5V_LOADED):
         raise ValueError('The 5 V source cannot supply simultaneous stalls plus one limited PH fault')
     print(f'5 V source: {input_5v:.3f} V loaded floor, {INPUT_5V_MAX:.3f} V ceiling, '
           f'{total_source_a:.2f} A concurrent load')
-    print(f'PH current limit: {lo_limit:.3f}–{hi_limit:.3f} A per channel')
+    print(f'PH current estimate: {lo_limit:.3f}–{hi_limit:.3f} A per channel')
+    if curve_min < XL330_STALL_A:
+        print(f'PH current qualification required: fitted lower limit {curve_min:.3f} A '
+              f'is below modeled {XL330_STALL_A:.2f} A load')
     source_loop = wire_resistance('W1', 'W2', wire=POWER_WIRE) + wire_resistance('W33', 'W34', wire=SUPPLY_TAIL)
     junction_v = input_5v - total_source_a * (source_loop + SOURCE_CONTACT_OHM)
     hub_loop = wire_resistance('W3', 'W4', wire=POWER_WIRE) + HUB_XT30_CONTACT_OHM + HUB_FUSE_OHM
