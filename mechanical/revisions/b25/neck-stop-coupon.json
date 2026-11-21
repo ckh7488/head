@@ -1,0 +1,150 @@
+{
+  "status": "coupon geometry checked, physical sleeve properties unmeasured",
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "source_anchors": [
+    {
+      "part": "Part011",
+      "pin_center_mm": [
+        -44.0,
+        26.0,
+        87.0
+      ],
+      "ear_x_spans_mm": [
+        [
+          -54.0,
+          -45.9
+        ],
+        [
+          -42.1,
+          -34.0
+        ]
+      ]
+    },
+    {
+      "part": "Part019",
+      "pin_center_mm": [
+        -44.0,
+        37.0,
+        113.0
+      ],
+      "ear_x_spans_mm": [
+        [
+          -54.0,
+          -45.9
+        ],
+        [
+          -42.1,
+          -34.0
+        ]
+      ]
+    }
+  ],
+  "load_cases": [
+    {
+      "stop": "back",
+      "neck_pitch_deg": -16.46,
+      "clevis": "yoke",
+      "eye_angle_from_positive_z_toward_positive_y_deg": 32.257592501416546,
+      "load_along_eye": "push",
+      "force_unit_yz": [
+        -0.5337265821320344,
+        -0.8456571028056565
+      ],
+      "checked_radial_travel_mm": 0.16,
+      "radial_positions_checked": 9
+    },
+    {
+      "stop": "back",
+      "neck_pitch_deg": -16.46,
+      "clevis": "frame",
+      "eye_angle_from_positive_z_toward_positive_y_deg": 15.797592501416549,
+      "load_along_eye": "pull",
+      "force_unit_yz": [
+        0.27223981557690713,
+        0.9622294335628336
+      ],
+      "checked_radial_travel_mm": 0.16,
+      "radial_positions_checked": 9
+    },
+    {
+      "stop": "forward",
+      "neck_pitch_deg": 5.97,
+      "clevis": "yoke",
+      "eye_angle_from_positive_z_toward_positive_y_deg": 19.717068109738932,
+      "load_along_eye": "pull",
+      "force_unit_yz": [
+        0.33737570255864247,
+        0.9413700841449458
+      ],
+      "checked_radial_travel_mm": 0.16,
+      "radial_positions_checked": 9
+    },
+    {
+      "stop": "forward",
+      "neck_pitch_deg": 5.97,
+      "clevis": "frame",
+      "eye_angle_from_positive_z_toward_positive_y_deg": 25.68706810973893,
+      "load_along_eye": "push",
+      "force_unit_yz": [
+        -0.43345569679817525,
+        -0.9011748769873739
+      ],
+      "checked_radial_travel_mm": 0.16,
+      "radial_positions_checked": 9
+    }
+  ],
+  "retention": {
+    "sleeve_axial_envelope_to_keeper_mm": 0.2,
+    "centered_pin_axial_envelope_to_each_keeper_mm": 0.1,
+    "hard_radial_clearance_at_throat_mm": 0.35,
+    "sleeve_clear_of_central_link_slot": true,
+    "drift_clear": true
+  },
+  "sleeve_removal": {
+    "opposed_picks_per_sleeve": 2,
+    "pick_wire_diameter_mm": 0.7,
+    "pick_radial_arm_center_to_center_mm": 1.0,
+    "pick_hook_center_depth_from_outer_ear_face_mm": 7.95,
+    "pick_shank_initial_offset_each_side_mm": 0.55,
+    "pick_spread_each_side_mm": 0.37,
+    "required_sleeve_pull_mm": 8.0,
+    "insertion_and_withdrawal_increment_mm": 0.25,
+    "reached_inner_face_on_both_ears": true,
+    "verified_scope": "rigid tool reach and engagement geometry"
+  },
+  "fastener_and_tool_paths_checked": 10,
+  "dimensions_mm": {
+    "loaded_ear_width": 8.1,
+    "central_gap": 3.8,
+    "bore": 5.1,
+    "inner_throat": 4.7,
+    "inner_throat_axial_width": 0.5,
+    "uncompressed_sleeve_od": 5.12,
+    "uncompressed_sleeve_id": 3.98,
+    "sleeve_length": 7.5,
+    "load_eye_pin_span": 21.0,
+    "load_eye_diametral_play_at_stop_pin": 0.1
+  },
+  "bench_targets": {
+    "screening_loads_N": [
+      262.0,
+      381.0
+    ],
+    "series_compliance_mm_per_N": [
+      0.00025,
+      0.0004
+    ],
+    "half_budget_per_clevis_mm_per_N": [
+      0.000125,
+      0.0002
+    ],
+    "total_displacement_at_262_N_mm": [
+      0.0655,
+      0.1048
+    ],
+    "total_displacement_at_381_N_mm": [
+      0.09525,
+      0.1524
+    ]
+  }
+}
