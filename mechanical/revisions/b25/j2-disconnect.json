@@ -1,0 +1,119 @@
+{
+  "status": "pass_rigid_and_local_lead",
+  "components": {
+    "fixed_supply_socket": "AMASS XT60E-F",
+    "hatch_pigtail": "AMASS XT60U-M",
+    "sources": [
+      "https://www.hestore.hu/prod_getfile.php?id=17911",
+      "https://pliki.aksotronik.pl/pdf/012682.pdf",
+      "https://images.100y.com.tw/pdf_file/AMASS-XT60U.pdf"
+    ]
+  },
+  "pin_map": {
+    "+": "A3 J2 pad 1 (/12V_IN)",
+    "-": "A3 J2 pad 2 (/GND)"
+  },
+  "socket_face_center_mm": [
+    12.76,
+    168.0,
+    -74.6
+  ],
+  "unplug_axis": [
+    0.0,
+    -1.0,
+    0.0
+  ],
+  "socket_insertion_from_mating_side_mm": 25.0,
+  "socket_mount_hardware": "2 M3 \u00d7 25 socket head screws, 4 M3 flat washers, 2 loose M3 plain hex nuts",
+  "mount_wrench_underneath": "5.5 mm open-end, 13.0 mm max head width, 4.2 mm max head thickness",
+  "nominal_panel_ligament_mm": 1.2,
+  "plug_withdrawal_mm": 20.0,
+  "park_drop_mm": 18.0,
+  "hatch_drop_mm": 30.0,
+  "minimum_local_lead_radius_mm": 12.0,
+  "design_target_radius_mm": 10.285,
+  "reserved_local_lead_gap_mm": 2.5230000000000015,
+  "wire_envelope_reserve_mm": 0.25,
+  "plug_envelope_reserve_mm": 0.15,
+  "collision_volume_tolerance_mm3": 1e-05,
+  "camera_usb_world_x_mm": 56.5,
+  "camera_usb_axial_withdrawal_mm": 16.0,
+  "grip_approach_from_below_mm": 30.0,
+  "grip_nominal_axial_envelope_mm": 7.0,
+  "actual_mated_grip_length_verified": false,
+  "base_slot_cutter_mm": [
+    -2.6,
+    17.6,
+    85.5,
+    94.0,
+    -83.3,
+    -70.0
+  ],
+  "base_material_removed_mm3": 668.3487051200937,
+  "socket_bottom_above_native_base_bottom_mm": 0.5,
+  "lowered_plug_below_base_bottom_mm": 43.75,
+  "intersections_mm3": {
+    "camera_usb_service": {
+      "stationary_connector_grip": {},
+      "external_receiver_body": {},
+      "external_receiver_grip": {}
+    },
+    "station_installation": {},
+    "socket_installed": {},
+    "socket_flange_insertion": {},
+    "socket_keyed_body_insertion": {},
+    "ordinary_M3_socket_mount": {
+      "M3 screw 1": {},
+      "M3 front washer 1": {},
+      "M3 rear washer 1": {},
+      "M3 nut 1": {},
+      "M3 screw 2": {},
+      "M3 front washer 2": {},
+      "M3 rear washer 2": {},
+      "M3 nut 2": {}
+    },
+    "stock_driver_and_wrench_approach": {
+      "2.5 mm hex driver 1": {},
+      "5.5 mm open-end wrench 1": {},
+      "2.5 mm hex driver 2": {},
+      "5.5 mm open-end wrench 2": {}
+    },
+    "plug_withdrawal": {},
+    "plug_down_to_park": {},
+    "parked_plug_lowering": {},
+    "side_grip_approach": [
+      {},
+      {}
+    ],
+    "side_grip_withdrawal": [
+      {},
+      {}
+    ],
+    "side_grip_lower_to_park": [
+      {},
+      {}
+    ],
+    "hatch_relative_j2_exit": {
+      "J2+ lead": {},
+      "J2 GND lead": {}
+    },
+    "full_local_lead_lowering_sweep": {
+      "J2+ lead": {},
+      "J2 GND lead": {}
+    }
+  },
+  "unmodified_base_lead_sweep_intersections_mm3": {
+    "J2+ lead": {
+      "Part000": 259.71301363562435
+    },
+    "J2 GND lead": {
+      "Part000": 295.4015195291898
+    }
+  },
+  "pending": [
+    "Full-length pigtail routing, inextensible unplug/park motion, and fixed 12 V lead routing",
+    "Actual mated grip land, disconnection force, trial fit, strain relief, guard, and print strength",
+    "Protection upstream of either XT60 mating path and remaining J3/J7 harness clearance"
+  ],
+  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71"
+}
