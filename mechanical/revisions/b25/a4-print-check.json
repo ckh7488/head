@@ -1,0 +1,39 @@
+{
+  "project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "source_sliced_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "profile": "P2S, PETG HF, 0.4 mm nozzle, 0.20 mm layer",
+  "sliced_plates": {
+    "1": {
+      "return_code": 0,
+      "warning": "",
+      "time_s": 31709.62890625,
+      "mass_g": 240.6615753173828,
+      "names": [
+        "01_base_cup-hatch-capture"
+      ]
+    },
+    "11": {
+      "return_code": 0,
+      "warning": "",
+      "time_s": 5324.26953125,
+      "mass_g": 31.682619094848633,
+      "names": [
+        "42-rear-cable-cover-service",
+        "35_hub_service_hatch_B8_1",
+        "A4_J2_XT30_keeper"
+      ]
+    },
+    "12": {
+      "return_code": 0,
+      "warning": "",
+      "time_s": 14433.9453125,
+      "mass_g": 64.475830078125,
+      "names": [
+        "40-rear-cable-guide-service",
+        "26_u20cam_slotted_bracket-B23",
+        "35_hatch_nut_keeper_left-B23",
+        "35_hatch_nut_keeper_right-B23"
+      ]
+    }
+  }
+}

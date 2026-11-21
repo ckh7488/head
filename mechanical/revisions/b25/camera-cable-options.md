@@ -1,14 +1,9 @@
-# B25 카메라 USB 선 검토
+# B25 카메라 USB 경로
 
-기존 Ø4 mm 배선의 저장 경로는 입구 R12.69 mm, 로터 가이드 안 R14.00 mm, 출구 R12.71 mm입니다. 안쪽 가이드 시험 형상은 실제 선재의 반경, 가동 간극 1 mm, 길이 여유 10%를 함께 검사합니다. [입구 뒤 단면과 경로 검사](camera-guide-check.json) · [고정 조건 12절](../../../spec/conditions.md#12-움직이는-축을-지나는-배선)
+Sanwa KU-SLEN10BKK는 공칭 Ø2.5 mm PVC 선입니다. §12에 따른 R25 후방 진입 후보 1,728개가 모두 받침에 닿았습니다. 정확히 모델링한 한 경로의 홈은 358.28 mm³를 제거하고 받침 앞면과 오른쪽 면을 열었습니다. Sanwa 검토를 마치고 Eaton **U040-B03-C-2** 선재로 옮겼습니다. [Sanwa 규격](https://www.sanwa.co.jp/product/syohin?code=KU-SLEN10BKK&print=1) · [Eaton 규격](https://assets.tripplite.com/product-pdfs/en/u040b03c2.pdf) · [형상 검사](camera-route-62-r18.json)
 
-## 선정 선재
+Eaton 공칭 외경은 2.8 mm입니다. 실측 외경 3.00 mm 이하에 R18을 적용합니다. 목 자세 289개에서 R18 내부 경로와 R19 뒤쪽 굴곡을 사용했습니다. 두 고정점 사이 545.00 mm는 가장 긴 기준 경로 492.06 mm에 대해 **10.76%**의 여유입니다. 뒤쪽 순정 USB-A의 고정 경로 R25와 USB-A 외피를 A4 조립본에 대조했습니다. [형상 검사](camera-route-62-r18.json)
 
-**Sanwa Supply KU-SLEN10BKK 1 m**를 B25 BOM에 지정했습니다. 제조사는 공칭 Ø2.5 mm, USB 2.0 Hi-Speed 480 Mbps, PVC 피복 및 최소 굽힘 R15 mm를 명시합니다. 공개 규격의 제품 분류는 극세 케이블이고 고굴곡 또는 반복 굽힘 등급은 명시돼 있지 않습니다. R15 이상 경로를 설계 시안으로 검토하되, 확인된 규격만 적용한 12절 판정에는 일반 케이블의 10배, 공칭 R25 mm를 사용합니다. [제조사 규격](https://www.sanwa.co.jp/product/syohin?code=KU-SLEN10BKK&print=1) · [판매처](https://www.biccamera.com/bc/item/10116901/) · [한국 배송 지원](https://bc.help.buyee.jp/en/countries/)
+첫 머리 가이드는 앞 해골에 걸렸습니다. 코 트레이의 짧은 클립은 360개 자세에서 간섭이 없었습니다. 최종 62틱의 피드백 허용 범위에서는 다른 문제가 생겼습니다. 목 +3.691°·턱 67틱에서 선 중심이 턱에 닿았습니다. Ø3.0 mm에서 공칭 중심선 간격 2.50 mm, 검사 공차를 적용하면 2.90 mm가 필요합니다. R18과 길이 여유가 성립해도 이 조합에서는 설치 경로가 막힙니다. [간극 검사](camera-route-62-r18.json) · [수정안](frozen-fixes-check.md)
 
-U20CAM 보드 쪽은 동봉 케이블의 순정 플러그를 유지합니다. 연결은 두 축의 가동 구간 밖에서 고정합니다. USB 인식과 UVC 영상은 연결 뒤 확인하고, 목 좌우 끝–끝–시작점 1,000회 동안과 종료 뒤에 USB 인식이 유지돼야 합니다. [카메라 제조사 설명서](https://github.com/INNO-MAKER/U20CAM-1080P-S1/blob/main/U20CAM-1080P-S1%20UserManual-v1.1.pdf) · [발주표](BOM.csv) · [실물 시험](../../../spec/bench.md#b25-실물-시험)
-
-
-## 가이드와 전체 경로
-
-로터의 R40 통과 구간은 중심선 간극이 2.85 mm에서 3.05 mm로 늘었습니다. 전체 가동 경로에서는 Sanwa R25의 뒤쪽 고정선 진입과 10% 길이 여유가 남았습니다. 제품 최소 반경에 맞춰 R16으로 낮춘 시안도 뒤쪽 OpenRB USB 선과 0.96 mm 겹쳤습니다. 대체 실리콘 선재 Eaton U040-B03-C-2는 공칭 Ø2.8 mm에서 R16.8 이상이 필요합니다. 시험한 R18 경로의 경성 부품·선 자체 겹침은 289개 자세에서 없었고, 실제 고정점·인접 배선 공차와 약 87 mm의 여유를 넣을 공간은 미검증입니다. [국부 형상과 출력 검사](local-geometry-checks.json) · [Eaton 제조사 사양](https://assets.tripplite.com/product-pdfs/en/u040b03c2.pdf)
+카메라의 순정 키 플러그와 순정 USB-A 수 플러그를 재사용합니다. Eaton은 USB-C 플러그 두 개를 제거해 중앙 선재를 씁니다. 끝단의 실제 USB 인식과 설치 상태의 양쪽 고정, 굽힘·간극, 목 좌우 1,000회는 P07에서 확인합니다. [발주표](BOM.csv) · [접합·조립](assembly.md#카메라-usb-선재) · [실물 시험](../../../spec/bench.md#b25-실물-시험)

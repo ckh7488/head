@@ -1,6 +1,6 @@
 # B25 서보 허브 A4
 
-B25 서보 허브 A4는 12 V 입력 J2에 AMASS XT30PW-M을 사용합니다. 기판 제작 파일 검사를 통과했습니다. 아래 덮개의 전체 배선 경로와 두 입력 플러그의 교차 결합 방지를 확인한 뒤 조립과 통전을 진행합니다. [검사 조건 14절](../spec/conditions.md#14-전원과-환경)
+B25 서보 허브 A4는 12 V 입력 J2에 AMASS XT30PW-M을 사용합니다. 기판 제작 파일 검사를 통과했습니다. B25 조립 CAD에 A4 실장과 외부 XT60 정비점을 반영했습니다. 배선·조립 판정은 B25 결과표를 따릅니다. [검사 조건 14절](../spec/conditions.md#14-전원과-환경)
 
 | 보드 | 제작 파일 | JLCPCB 발주 옵션 |
 |---|---|---|
@@ -26,7 +26,7 @@ A4의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**입니다. 
 | 단자 | 연결 |
 |---|---|
 | J1 5 V 입력 | 패드 2는 +, 1은 GND. 기판 XT30PW-M에는 W3/W4의 XT30U-F가 연결 |
-| J2 12 V 목 전원 입력 | 패드 2는 +, 1은 GND. 기판 XT30PW-M에는 W8/W9의 12 V XT30U-F가 연결. 받침 밖 12 V 연결은 XT60U |
+| J2 12 V 목 전원 입력 | 패드 2는 +, 1은 GND. 기판 XT30PW-M에는 W8/W9의 12 V XT30U-F가 연결. 작업대에서 결합해 잠금쇠로 고정하며 조립 상태의 정비 분리는 받침 뒤 XT60 |
 | J3 OpenRB | OpenRB EH 1(GND) → PH 1, EH 3(DATA) → PH 2. EH 2는 비움 |
 | J4–J6 | ID 1–3. PH 1 GND / 2 **개별 전류 제한 5 V** / 3 DATA |
 | J7–J8 | ID 4·5. EH 1 GND / 2 **목 전원** / 3 DATA |
@@ -34,7 +34,7 @@ A4의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**입니다. 
 
 5 V 배선에는 XT30U-F 두 개와 XT30U-M 한 개가 필요합니다. F 한 개는 5 V 전원 꼬리에, 다른 한 개는 허브 J1 쪽 W3/W4에 씁니다. OpenRB 점퍼는 USB/VIN에 두고 USB로 공급합니다. 5 V와 목 전원은 GND·DATA를 공유하고 양극은 별도입니다. [OpenRB 전원과 포트](https://emanual.robotis.com/docs/en/parts/controller/openrb-150/)
 
-J1과 J2의 XT30 키는 극성 방향을 정합니다. 12 V 플러그를 J1에 연결하면 5 V 회로에 12 V가 인가됩니다. F1 7.5 A와 F2 4 A는 과전류에 대응합니다. 두 전원선 양끝에 전압을 표시하고, 정비 중 내부 12 V 플러그가 J1에 도달할 수 없도록 배선을 물리적으로 고정합니다. 두 어댑터를 분리한 상태에서 교차 결합 방지와 각 전원 플러그의 극성을 확인한 뒤 통전합니다. [AMASS XT30U](https://www.china-amass.com/biao/268.html)
+외부 5 V XT30과 12 V XT60은 간격이 각각 5.0 mm와 7.2 mm이며 반대편 외형에도 맞지 않습니다. 내부에서는 J1과 J2 모두 XT30을 쓰므로, 12 V J2 리드를 작업대에서 먼저 연결하고 H3·H4 잠금쇠로 고정합니다. 받침 뒤의 12 V 공급선과 같은 전압의 정비 접속부에는 각각 용도를 표시합니다. 전원은 +를 패드 2, GND를 패드 1에 연결합니다. [AMASS XT30U](https://www.china-amass.com/biao/268.html) · [AMASS XT60U](https://www.china-amass.com/biao/288.html) · [B25 조립과 배선](../mechanical/revisions/b25/assembly.md#전원-커넥터와-rf-부품)
 
 ### 전원 실물 검수
 

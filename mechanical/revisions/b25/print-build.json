@@ -1,8 +1,8 @@
 {
-  "project_sha256": "374035f76c859c284b307c380a9cf5d6d746bf7ad8fc0100fcf0f9636e3ebeca",
+  "project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
   "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
   "plate_sha256": {
-    "1": "fdd1978177929cc198c8778b8bc68ecf1cfbd325b43b6e96a641404bf8b6a048",
+    "1": "f6a81e6db6a9d636f38fc99e95fe763136fc42a972d0184b937ed8956fc48d14",
     "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
     "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
     "4": "ba800a1f9fd975e8eb8e8475d99dc2e2135b79a5c0cf0956ebbcb1c311eaa195",
@@ -12,16 +12,24 @@
     "8": "e2db12baf0f791986c16b4b5fc200cfbdf15c28201a32d6c6372748954388820",
     "9": "e5869cd0335534707603b67d9f957613fd1a9eb0a1ea8c176539f8a0f713696c",
     "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
-    "11": "8e5625005604535cd0ad25caae41485eee67fb7e4aa288b6269c4467e28e849c",
-    "12": "f1f5d30ee257338730eaca087eb50774b5ad546e2c265c74a1cb8d63b244280f"
+    "11": "0315eb9d4bbf181085ce95c524941ae186677934b4255d19d1e625ac44413848",
+    "12": "a0e495f0654b8011c9b2da9ef7f81d8727b8a5217d88bd64444509d9a2fcd9d2"
   },
   "changed_plates": {
-    "9": [
-      "37_right_cheek_bearing_stay-B22.stl"
+    "1": [
+      "01_base_cup-hatch-capture.stl"
+    ],
+    "11": [
+      "A4_J2_XT30_keeper.stl"
+    ],
+    "12": [
+      "40-rear-cable-guide-service.stl",
+      "26_u20cam_slotted_bracket-B23.stl",
+      "35_hatch_nut_keeper_left-B23.stl",
+      "35_hatch_nut_keeper_right-B23.stl"
     ]
   },
   "identical_to_b25_plates": [
-    1,
     2,
     3,
     4,
@@ -29,8 +37,12 @@
     6,
     7,
     8,
-    10,
+    9,
+    10
+  ],
+  "repacked_plates": [
     11,
     12
-  ]
+  ],
+  "source_project_sha256": "374035f76c859c284b307c380a9cf5d6d746bf7ad8fc0100fcf0f9636e3ebeca"
 }

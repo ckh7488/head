@@ -1,0 +1,304 @@
+{
+  "sanwa_sheltered_r25": {
+    "tested_first_arcs": 1728,
+    "obstructed_first_arcs": 1728,
+    "native_example_cut_mm3": 358.277,
+    "existing_front_and_side_shell_openings_mm2": [
+      37.76,
+      46.83
+    ]
+  },
+  "eaton": {
+    "part": "Eaton U040-B03-C-2",
+    "maximum_outside_diameter_mm_at_r18": 3.0,
+    "production_nominal_outside_diameter_mm": 2.8,
+    "candidate_neck_sample_count": 289,
+    "yaw_range_deg": [
+      -58.623,
+      58.623
+    ],
+    "pitch_range_deg": [
+      -14.326,
+      3.691
+    ],
+    "routing_radii_mm": {
+      "upper_family_minimum": 18,
+      "moving_return": 19,
+      "fixed_host_tail": 25
+    },
+    "anchor_to_anchor_mm": 545.0,
+    "longest_constrained_reference_mm": 492.056,
+    "reserve_percent": 10.7599,
+    "maximum_sampled_length_error_mm": 0.000803,
+    "rear_only": {
+      "source_sha256": "07598cf782f1f26cbf6f77cde0a0176f0125f1c85406d592be23aa03f239565f",
+      "case": "Eaton rear only independent engineering sample",
+      "added_saddle_mm3": 21038.698117636326,
+      "connection_to_stock_mm3": 64.37021586762587,
+      "pigtail_geometry": {
+        "connector_start_mm": [
+          85.95964517353734,
+          158.0,
+          -70.36976639322498
+        ],
+        "r25_pigtail_length_mm": 140.33981633974486
+      },
+      "connector_bbox_mm": [
+        78.10964517353734,
+        93.80964517353735,
+        158.0,
+        207.6,
+        -74.51976639322498,
+        -66.21976639322497
+      ],
+      "minimum_nominal_gaps_mm": [
+        [
+          0.0,
+          "OEM_fixed_pigtail",
+          "USB_A_connector"
+        ],
+        [
+          0.19999999999999632,
+          "rear_guard",
+          "OEM_fixed_pigtail"
+        ],
+        [
+          1.2999999999999972,
+          "rear_guard",
+          "CableGate"
+        ],
+        [
+          13.80964517353732,
+          "rear_guard",
+          "USB_A_connector"
+        ]
+      ],
+      "inadmissible_nominal_overlaps_mm3": [],
+      "guide_clamp_real_proof": "Existing grip untouched. New station guide holds modeled tangent only. \u00a711 installed pull and retention remain open."
+    },
+    "bench_1000_cycle_test_executed": false,
+    "nominal_jaw_clearance_failures": 34,
+    "manufacturing_screen_jaw_clearance_failures": 51
+  },
+  "head_trial": {
+    "component": "Part073",
+    "interfering_left_support_poses": 360,
+    "tested_poses": 360,
+    "preliminary_other_side_minimum_yoke_clearance_mm": 0.223,
+    "status": "The short clip clears the surveyed geometry. The cable centerline intersects the open jaw, so the complete route fails section 12.",
+    "short_Part065_clip": {
+      "pose_count": 360,
+      "collision_poses": 0,
+      "minimum_non_attachment_gap_mm": 1.5068739924821732,
+      "minimum_tray_fit_gap_mm": 0.24999999999999645,
+      "free_wire_od3_poses": 169,
+      "free_wire_od3_hits": 0
+    },
+    "jaw_clearance": {
+      "report": {
+        "jaw_feedback_ticks": 67,
+        "yaw_deg_datum": 0.0,
+        "neck_pitch_cases": 17,
+        "worst_case": {
+          "pitch_deg": 3.69140625,
+          "centerline_gap_between_mm": [
+            0.0,
+            0.000152587890625
+          ],
+          "minimum_nominal_OD2p8_clearance_mm": -1.4,
+          "minimum_nominal_OD3p0_clearance_mm": -1.5,
+          "sample_hit_pan_mm": [
+            0.55,
+            -31.53,
+            -9.17
+          ],
+          "sample_jaw_surface_pan_mm": [
+            0.5533202833658287,
+            -31.559512366352813,
+            -9.011129081756817
+          ],
+          "suggested_separation_normal_pan": [
+            -0.02054339250540885,
+            0.1826001153964501,
+            -0.9829726175644833
+          ]
+        },
+        "nominal_centerline_for_od3p0_1mm": 2.5,
+        "centerline_with_point4_manufacturing_screen_for_od3p0": 2.9,
+        "method": "Capsule collision radius bracket using identical triangulated jaw and native camera centerline sections. The wire/jaw poses of the upper span co-rotate in yaw. The earlier 289 pose capsule replay detected these same parts at the last three pitch samples across all 17 yaw samples."
+      },
+      "rows": [
+        {
+          "pitch_deg": -14.326171875,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -13.2000732421875,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -12.073974609375,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -10.9478759765625,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -9.82177734375,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -8.6956787109375,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -7.569580078125,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -6.4434814453125,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -5.3173828125,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -4.1912841796875,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -3.065185546875,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -1.9390869140625,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": -0.81298828125,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": 0.3131103515625,
+          "centerline_gap_between_mm": [
+            4.999847412109375,
+            null
+          ]
+        },
+        {
+          "pitch_deg": 1.439208984375,
+          "centerline_gap_between_mm": [
+            2.765350341796875,
+            2.7655029296875
+          ],
+          "minimum_nominal_OD2p8_clearance_mm": 1.365350341796875,
+          "minimum_nominal_OD3p0_clearance_mm": 1.265350341796875,
+          "sample_hit_pan_mm": [
+            1.09,
+            -30.17,
+            -4.69
+          ],
+          "sample_jaw_surface_pan_mm": [
+            1.1341046472036531,
+            -32.84132592802898,
+            -3.9553652993169655
+          ],
+          "suggested_separation_normal_pan": [
+            -0.01591736484743535,
+            0.9640813864015954,
+            -0.2651296246938305
+          ]
+        },
+        {
+          "pitch_deg": 2.5653076171875,
+          "centerline_gap_between_mm": [
+            0.40008544921875,
+            0.400238037109375
+          ],
+          "minimum_nominal_OD2p8_clearance_mm": -0.9999145507812499,
+          "minimum_nominal_OD3p0_clearance_mm": -1.09991455078125,
+          "sample_hit_pan_mm": [
+            1.09,
+            -30.17,
+            -4.69
+          ],
+          "sample_jaw_surface_pan_mm": [
+            1.0963706109458724,
+            -30.556734635241963,
+            -4.578344050514215
+          ],
+          "suggested_separation_normal_pan": [
+            -0.015824427504615757,
+            0.9606385087564692,
+            -0.27735039749078844
+          ]
+        },
+        {
+          "pitch_deg": 3.69140625,
+          "centerline_gap_between_mm": [
+            0.0,
+            0.000152587890625
+          ],
+          "minimum_nominal_OD2p8_clearance_mm": -1.4,
+          "minimum_nominal_OD3p0_clearance_mm": -1.5,
+          "sample_hit_pan_mm": [
+            0.55,
+            -31.53,
+            -9.17
+          ],
+          "sample_jaw_surface_pan_mm": [
+            0.5533202833658287,
+            -31.559512366352813,
+            -9.011129081756817
+          ],
+          "suggested_separation_normal_pan": [
+            -0.02054339250540885,
+            0.1826001153964501,
+            -0.9829726175644833
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "51ffd25b975ce01e541812e0fac97c98199579a22c98b474205d9e11fcf27246",
+  "cad_sha256": "f9d54bb599dcbabf79a78a1aaeb39814ae4a9a3696410677d312dfd4103fac11",
   "firmware_sha256": "0c7ea76720243aa7b73a08d12c9e523f261d9db66dcc0504bb39482659c6405d",
   "pair": [
     "Jaw_37_right_jaw_bearing_stay",
@@ -33,12 +33,12 @@
     -67.02407761767874,
     38.2396903195566
   ],
-  "jaw_tip_drop_at_goal_mm": 5.267213239577401,
+  "jaw_tip_drop_at_goal_mm": 5.267213239577387,
   "feedback_opening_allowance_ticks": 5,
   "accepted_feedback_max_encoder_deg": 5.888671875,
   "contact_free_through_deg_in_relative_envelope": 6.89,
   "required_stop_reserve_deg": 1.0,
-  "continuous_lower_gap_mm": 0.0007353185452853017,
+  "continuous_lower_gap_mm": 0.0007353185452853572,
   "verified_cells": 83,
   "reserve_from_goal_at_least_deg": 1.4407812499999997,
   "reserve_from_accepted_feedback_at_least_deg": 1.0013281249999997,
@@ -50,7 +50,7 @@
   ],
   "powered_clearance": {
     "end_deg": 5.888671875,
-    "minimum_mm": 0.3070255601330395,
+    "minimum_mm": 0.3070255601330377,
     "required_mm": 0.3,
     "verified_cells": 593
   },

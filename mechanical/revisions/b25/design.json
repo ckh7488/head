@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "51ffd25b975ce01e541812e0fac97c98199579a22c98b474205d9e11fcf27246",
-  "p2s_sha256": "374035f76c859c284b307c380a9cf5d6d746bf7ad8fc0100fcf0f9636e3ebeca",
+  "cad_sha256": "f9d54bb599dcbabf79a78a1aaeb39814ae4a9a3696410677d312dfd4103fac11",
+  "p2s_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -135,6 +135,12 @@
     },
     "jaw_stop_at_62_ticks": {
       "report": "jaw-62-stop.json"
+    },
+    "A4_station": {
+      "evidence": "a4-assembly.json",
+      "slice_evidence": "a4-print-check.json",
+      "revision": "A4",
+      "upstream_W6_W7_complete": false
     }
   },
   "print_inputs_sha256": {

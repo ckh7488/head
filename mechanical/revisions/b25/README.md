@@ -6,11 +6,11 @@
 - [B25 발주 변경과 조립](assembly.md) · [B25 발주표](BOM.csv) · [목 상하축 가공 STEP과 도면](pitch-drive-shaft.md)
 - [맞춤 게이지와 치수별 출력 파일](fit-gauge.md) · [서보 허브 A4 발주 검토](../../../electronics/README.md)
 
-B25의 변경은 발주표 및 조립 변경 안내를 먼저 적용합니다. 공통 부품표와 B24 조립 절차는 나머지 기구 자리에 사용합니다. 전원과 배선은 A4 문서와 고정 14절을 적용합니다. 기구 조립본에는 기존 A3 전장 형상이 표시되며, A4 하네스의 닫힘과 오결합 차단을 따로 검증합니다. 기존 전체 3MF의 3번 판에서는 C3 전용 캐리어와 클램프 두 개를 출력 목록에서 해제합니다. [B24 조립과 가공](../b24/) · [기존 공통 부품표](../../BOM.csv)
+B25의 변경은 발주표 및 조립 변경 안내를 먼저 적용합니다. 공통 부품표와 B24 조립 절차는 나머지 기구 자리에 사용합니다. 전원과 배선은 A4 문서와 고정 14절을 적용합니다. 기구 조립본에는 A4 허브, 내부 J2 고정편 및 외부 XT60 정비 위치가 들어 있습니다. 기존 전체 3MF의 3번 판에서는 C3 전용 캐리어와 클램프 두 개를 출력 목록에서 해제합니다. [B24 조립과 가공](../b24/) · [기존 공통 부품표](../../BOM.csv)
 
 ## 기존 검증 기록
 
 - [형상](design.json) · [출력판 대조](print-build.json) · [뒤 외장 수정과 5·6번 판](rear-left-screw-fit.json) · [이전 정밀 슬라이스](print-precision-check.json)
 - [카메라와 눈꺼풀 형상](blink-fit.json) · [이전 CAD 검증과 재현 명령](https://github.com/ckh7488/head/blob/9c024361d586ff5ea582cbac3e1328d40d5b0c65/mechanical/revisions/b25/README.md)
 
-J2 정비선, 목 스토퍼와 턱 장착 시안은 별도 검토 기록에 있습니다. B25 검사 판정은 고정 조건을 따릅니다. [J2](j2-pigtail.md) · [목](neck-load-study.md) · [이전 턱 고정 시안](jaw-candidate.md) · [현재 턱 이탈 경로 검사](jaw-retention-witness.md)
+62틱 턱, 세 점 고정, Eaton 카메라선과 A4의 최신 판정 및 남은 조립 조건은 결과표에 있습니다. [결과표](frozen-fixes-check.md) · [A4 CAD](a4-assembly.json) · [Eaton 경로](camera-route-62-r18.json) · [이전 목 스토퍼 시안](neck-load-study.md)
