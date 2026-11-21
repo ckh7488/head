@@ -26,6 +26,9 @@ PH_LIMIT_TOLERANCE = .003
 PH_SWITCH_HOT_OHM = .035
 XL330_MIN_V = 4.27
 XL330_MAX_V = 5.25
+XL430_MIN_V = 10.50
+NECK_SOURCE_MIN_V = 11.10
+NECK_NORMAL_A = 2 * XL430_STALL_A
 # Fuse and contact limits include installation and ageing allowances. Verify them hot on the bench.
 SOURCE_CONTACT_OHM = .012
 HUB_XT30_CONTACT_OHM = .004
@@ -111,24 +114,40 @@ def ph_current_limits():
     return nominal_anchored_min, curve_min, max(1.960 * (PH_LIMIT_OHMS / lo_r)**.947, curve_max)
 
 
+def hub_5v_current(ph_fault=False):
+    branch_a = ph_current_limits()[2] if ph_fault else XL330_STALL_A
+    return 2 * XL330_STALL_A + branch_a + HUB_IDLE_A
+
+
+def neck_voltages(board, parts, *, trunk_a=NECK_NORMAL_A):
+    """Calculate each loaded motor at the source floor and stated trunk current."""
+    check_net(parts, 'J2', {1: '12V_IN', 2: 'GND'})
+    check_net(parts, 'F2', {1: '12V_IN', 2: '12V_NECK'})
+    trunk = (wire_resistance('W6', 'W7', wire=XT60_TAIL)
+             + wire_resistance('W8', 'W9', wire=POWER_WIRE) + .012)
+    lead = copper_path(board, parts, '12V_IN', ('J2', 1), ('F2', 1))
+    for output, wires in (('J7', ('W22', 'W23')), ('J8', ('W25', 'W26'))):
+        check_net(parts, output, {1: 'GND', 2: '12V_NECK', 3: 'DXL_BUS'})
+        branch = copper_path(board, parts, '12V_NECK', ('F2', 2), (output, 2))
+        voltage = (NECK_SOURCE_MIN_V - trunk_a * (trunk + lead + branch + .038 + .015)
+                   - XL430_STALL_A * (wire_resistance(*wires, wire=MOTOR_WIRE) + .090))
+        yield output, lead + branch, voltage
+
+
 def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None):
     board, parts = load('servo-hub', 'R5_Servo_Hub')
     check_net(parts, 'J1', {1: 'GND', 2: '5V_IN'})
-    check_net(parts, 'J2', {1: '12V_IN', 2: 'GND'})
     check_net(parts, 'J3', {1: 'GND', 2: 'DXL_CTL'})
     check_net(parts, 'F1', {1: '5V_IN', 2: '5V_EYES'})
-    check_net(parts, 'F2', {1: '12V_IN', 2: '12V_NECK'})
     if parts['F1'].GetValue() != '7.5A MINI':
         raise ValueError('5 V hub fuse must match the 7.5 A thermal and resistance budget')
     lo_limit, curve_min, hi_limit = ph_current_limits()
     if not XL330_STALL_A < lo_limit <= hi_limit < PH_RATING_A:
         raise ValueError('PH branch current limit must pass a normal stall and protect the 2 A contact')
-    total_hub_a = 3 * XL330_STALL_A + HUB_IDLE_A
-    fault_hub_a = total_hub_a - XL330_STALL_A + hi_limit
+    fault_hub_a = hub_5v_current(ph_fault=True)
     if fault_hub_a + XL330_STALL_A >= SUPPLY_CURRENT:
         raise ValueError('The 5 V source cannot supply simultaneous stalls plus one limited PH fault')
-    if ph_fault:
-        total_hub_a = fault_hub_a
+    total_hub_a = hub_5v_current(ph_fault)
     total_source_a = total_hub_a + XL330_STALL_A
     load_case = ' with one PH branch in current limit' if ph_fault else ''
     print(f'5 V source: {input_5v:.3f} V loaded floor, {INPUT_5V_MAX:.3f} V ceiling, '
@@ -145,7 +164,6 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None):
     junction_v = input_5v - total_source_a * (source_loop + SOURCE_CONTACT_OHM)
     hub_loop = wire_resistance('W3', 'W4', wire=POWER_WIRE) + HUB_XT30_CONTACT_OHM + HUB_FUSE_OHM
     lead = copper_path(board, parts, '5V_IN', ('J1', 2), ('F1', 1))
-    neck_a = 2 * XL430_STALL_A
     voltages = {}
     for i, wires in enumerate((('W13', 'W14'), ('W16', 'W17'), ('W19', 'W20')), 1):
         switch, resistor, cap, output = f'U{i}', f'R{i+3}', f'C{i+2}', f'J{i+3}'
@@ -165,7 +183,7 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None):
         # to the explicit ground return. With one fault, place it on a different
         # branch from the healthy branch whose motor voltage is being checked.
         voltage = (junction_v - total_hub_a * (hub_loop + lead + feed)
-                   - (total_hub_a + neck_a) * ground - XL330_STALL_A * branch_loop)
+                   - (total_hub_a + NECK_NORMAL_A) * ground - XL330_STALL_A * branch_loop)
         print(f'{output}: {1000*(lead+feed+branch):.2f} mΩ positive PCB path, '
               f'{1000*ground:.2f} mΩ return, {voltage:.3f} V at the motor')
         voltages[output] = voltage
@@ -182,16 +200,9 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None):
     if INPUT_5V_MAX > XL330_MAX_V:
         failures.append('5 V source ceiling')
 
-    neck_trunk = (wire_resistance('W6', 'W7', wire=XT60_TAIL)
-                  + wire_resistance('W8', 'W9', wire=POWER_WIRE) + .012)
-    lead = copper_path(board, parts, '12V_IN', ('J2', 1), ('F2', 1))
-    for output, wires in (('J7', ('W22', 'W23')), ('J8', ('W25', 'W26'))):
-        check_net(parts, output, {1: 'GND', 2: '12V_NECK', 3: 'DXL_BUS'})
-        branch = copper_path(board, parts, '12V_NECK', ('F2', 2), (output, 2))
-        voltage = (11.10 - neck_a * (neck_trunk + lead + branch + .038 + .015)
-                   - XL430_STALL_A * (wire_resistance(*wires, wire=MOTOR_WIRE) + .090))
-        print(f'{output}: {1000*(lead+branch):.2f} mΩ positive PCB path, {voltage:.3f} V at the motor')
-        if voltage < 10.50:
+    for output, positive_ohm, voltage in neck_voltages(board, parts):
+        print(f'{output}: {1000*positive_ohm:.2f} mΩ positive PCB path, {voltage:.3f} V at the motor')
+        if voltage < XL430_MIN_V:
             failures.append(output)
     return failures
 

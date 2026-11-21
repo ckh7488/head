@@ -10,6 +10,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 SYSTEM_PYTHON = Path('/usr/bin/python3')
 CHECKER = ROOT / 'electronics' / 'power_check.py'
+PROTECTION_CHECKER = ROOT / 'electronics' / 'protection_check.py'
 
 
 @pytest.fixture(scope='module')
@@ -50,3 +51,40 @@ def test_short_source_tail_preserves_healthy_ph_branches_during_one_fault(power_
     short_tail = subprocess.run([*command, '--tail-mm', '100'], capture_output=True, text=True, check=True)
     assert '6.66 A concurrent load with one PH branch in current limit' in short_tail.stdout
     assert '5.1200 V' in short_tail.stdout
+
+
+def test_source_protection_screen_keeps_j8_above_floor_at_20_milliohms(power_checker):
+    command = [power_checker[0], PROTECTION_CHECKER, '--neck-service-loop-mohm']
+    result = subprocess.run([*command, '20'], capture_output=True, text=True, check=True)
+    for pattern in (
+        r'5 V INA301A2 trip estimate: ([\d.]+)–([\d.]+) A; required window ([\d.]+)–([\d.]+) A',
+        r'Neck source TPS259470L trip estimate: ([\d.]+)–([\d.]+) A; required window ([\d.]+)–([\d.]+) A',
+        r'J7/J8 TPS259470L trip estimate: ([\d.]+)–([\d.]+) A per header; '
+        r'screening window ([\d.]+)–([\d.]+) A \(catalog upper reference at 22 AWG\)',
+    ):
+        values = re.search(pattern, result.stdout)
+        assert values is not None
+        min_trip, max_trip, normal_load, max_allowed = map(float, values.groups())
+        assert normal_load < min_trip <= max_trip < max_allowed
+    assert 'first tabulated maximum opening time is at 5.40 A' in result.stdout
+    assert 'J8: 10.5281 V at the motor; 30.02 mΩ maximum' in result.stdout
+    fault = re.search(r'J8 while the other neck branch limits: ([\d.]+) V; '
+                      r'([\d.]+) V minimum after the common protector', result.stdout)
+    assert fault is not None
+    voltage, source_floor = map(float, fault.groups())
+    assert voltage == pytest.approx(10.45, abs=.001)
+    assert source_floor == pytest.approx(11.15, abs=.001)
+    assert 'Bench qualification pending' in result.stdout
+
+    result = subprocess.run([*command, '31'], capture_output=True, text=True)
+    assert result.returncode == 1
+    assert 'J8: 10.4973 V at the motor' in result.stdout
+    assert 'Source protection static screen failed' in result.stderr
+
+
+@pytest.mark.parametrize('value', ['nan', 'inf', '-1'])
+def test_source_protection_screen_rejects_invalid_resistance(power_checker, value):
+    result = subprocess.run([power_checker[0], PROTECTION_CHECKER, '--neck-service-loop-mohm', value],
+                            capture_output=True, text=True)
+    assert result.returncode == 2
+    assert 'must be finite and nonnegative' in result.stderr
