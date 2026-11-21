@@ -7,7 +7,7 @@ R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사�
 B25 기구, 서보 허브 A3와 OpenRB 제어를 사용합니다. 시험판과 맞춤 게이지는 별도로 준비합니다. 전체 출력과 발주 전에 해결할 항목은 판정표에서 확인합니다.
 
 - [B25 CAD와 출력판](mechanical/revisions/b25/) · [조립과 발주표](mechanical/revisions/b25/assembly.md) · [3D 조립 미리보기](web/README.md#b25-조립-미리보기)
-- [고정 검사 조건](spec/conditions.md) · [리뷰 판정](mechanical/revisions/b25/review-disposition.md) · [맞춤 게이지](mechanical/revisions/b25/fit-gauge.md)
+- [고정 검사 조건](spec/conditions.md) · [검토와 판정 절차](spec/review.md) · [리뷰 판정](mechanical/revisions/b25/review-disposition.md) · [맞춤 게이지](mechanical/revisions/b25/fit-gauge.md)
 - [서보 허브 A3](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
 
 ![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)

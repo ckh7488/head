@@ -1,0 +1,89 @@
+{
+  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "firmware_sha256": "91b46e53c978693a42be75406eceed8041be19f971677fed993f47ebbc1eeb00",
+  "CAD_jaw_pivot_mm": [
+    0.0,
+    -9.0,
+    92.0
+  ],
+  "CAD_jaw_Opening_deg": 0.0,
+  "CAD_world_JawMotion_placement_rotation_deg": 1.249999999999999,
+  "commanded_closed_deg_relative_to_calibrated_zero": 0.0,
+  "maximum_documented_calibration_span_ticks": 62,
+  "maximum_documented_calibration_span_relative_deg": 5.44921875,
+  "feedback_closing_tolerance_ticks": 5,
+  "firmware_repository_default_calibration": "unset; measured operating unit endpoint may differ",
+  "opening_pair": [
+    "Jaw_37_right_jaw_bearing_stay",
+    "Jaw_39_right_jaw_pivot_arm"
+  ],
+  "opening": [
+    {
+      "right_stay_y_shift_mm": 0.0,
+      "nominal_X_Z_shifts_mm": [
+        0.0,
+        0.0
+      ],
+      "first_contact_deg_from_CAD_zero": [
+        7.461454808712006,
+        7.461454810202122
+      ],
+      "margin_to_62_ticks_deg_upper_bound": 2.012236060202122
+    },
+    {
+      "right_stay_y_shift_mm": -0.1,
+      "nominal_X_Z_shifts_mm": [
+        0.0,
+        0.0
+      ],
+      "first_contact_deg_from_CAD_zero": [
+        7.147412039339544,
+        7.14741204082966
+      ],
+      "margin_to_62_ticks_deg_upper_bound": 1.6981932908296598
+    },
+    {
+      "right_stay_y_shift_mm": -0.2,
+      "nominal_X_Z_shifts_mm": [
+        0.0,
+        0.0
+      ],
+      "first_contact_deg_from_CAD_zero": [
+        6.795993629097938,
+        6.795993630588054
+      ],
+      "margin_to_62_ticks_deg_upper_bound": 1.346774880588054
+    }
+  ],
+  "closing_pair": [
+    "Part073",
+    "Jaw_30_moving_jaw"
+  ],
+  "closing": [
+    {
+      "moving_jaw_z_shift_mm": 0.0,
+      "nominal_X_Y_shifts_mm": [
+        0.0,
+        0.0
+      ],
+      "first_shell_contact_deg_from_CAD_zero_in_closing_direction": [
+        1.9792577356100085,
+        1.9792577371001245
+      ],
+      "margin_from_CAD_closed_reference_deg_upper_bound": 1.9792577371001245
+    },
+    {
+      "moving_jaw_z_shift_mm": 0.1,
+      "nominal_X_Y_shifts_mm": [
+        0.0,
+        0.0
+      ],
+      "first_shell_contact_deg_from_CAD_zero_in_closing_direction": [
+        1.909305214881897,
+        1.909305216372013
+      ],
+      "margin_from_CAD_closed_reference_deg_upper_bound": 1.909305216372013
+    }
+  ],
+  "scope": "Native installed meshes, test rotations about +X (opening) and -X (closing) applied on top of the saved CAD pose. Positive Z raises the jaw; negative Y moves the right stay forward. Single allowed unfavorable offsets suffice to falsify universal margin for the examined CAD or full permitted calibration span. Closing result uses the CAD closed reference; actual calibrated zero is established on the physical unit. Contact with shell/teeth is a geometry limit and a separate positive closing stop is not represented. Feedback tolerance is an observation allowance."
+}
