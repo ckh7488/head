@@ -1,32 +1,17 @@
 # R5 로봇 헤드
 
-R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
+코의 USB 카메라로 사람을 보고 눈·목·눈꺼풀·턱을 움직이는 전시용 해골입니다. 얼굴 추적은 PC에서, 여섯 축 구동은 OpenRB-150에서 실행합니다. A1 서보 허브가 전원을 공급하고 모터 통신을 분기합니다. A1 ESP32-C3 보드는 별도의 2.4 GHz 안테나 실험용입니다.
 
-![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)
+## 현재 검토 대상
 
-B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) · [모델과 자료 출처](web/README.md#모델과-자료-출처)
+**B24 기구·펌웨어와 A1 PCB 두 종이 검토 대상입니다. 전체 출력과 부품·PCB 발주는 보류 상태입니다.**
 
-## 디렉터리 구성
+| 확인할 내용 | 시작 파일 |
+| --- | --- |
+| 검토 대상 커밋, 다시 실행할 명령, 발견한 문제 | [B24·A1 검토 안내](REVIEW.md) |
+| FreeCAD 조립본, P2S 출력판, 조립 순서 | [B24 기구 파일](https://github.com/ckh7488/head/tree/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24) |
+| 대화 없이 3D 조립·구동 열기 | [브라우저용 모델 만들기](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/web/README.md#b24-조립-순서) |
+| 두 KiCad 프로젝트, PCB 출력 파일과 배선 | [A1 전자 설계](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/electronics/README.md) |
+| 펌웨어, 얼굴 추적, 실물 판정 | [제어](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/control/README.md) · [실물 검사](https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/spec/bench.md) |
 
-- [mechanical/](mechanical/README.md) · FreeCAD 조립본, P1S·P2S 출력판, 부품표, 기구 검증과 조립 순서
-- [electronics/](electronics/README.md) · KiCad 회로와 PCB, 발주 파일, 전원과 배선
-- [control/](control/README.md) · PC 얼굴 추적, OpenRB 펌웨어, 카메라와 모터 보정
-- [web/](web/README.md) · 3D 조립·구동·배선 뷰어, CAD 내보내기
-- [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
-
-## 최근 CAD
-
-- **B18 후면 연결부** · 외부에서 USB 두 개와 5 V·12 V 전원 플러그를 잡고 뺄 수 있는 배치입니다. [조립본과 뒤쪽 3D 보기](mechanical/revisions/b18/)
-- **B18 개선 시안** · 고정 허브, 30 mm 내려가는 덮개, 목 12 V 경로와 가림막을 비교합니다. 제작 전에 남은 확인 사항을 함께 기록했습니다. [FreeCAD와 전후 비교](mechanical/revisions/b18/study/)
-
-## B15 제작과 조립
-
-![B15 조립 외형과 외장 안쪽의 배선·체결품](mechanical/assembly/b15-readme.jpg)
-
-- [FreeCAD 조립본](mechanical/R5-B15-Assembly.FCStd) · [기구 부품표](mechanical/BOM.csv)
-- [P2S 전체판 12장과 선택 1장](mechanical/R5-B15-P2S.3mf) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [출력 설정](mechanical/README.md#p2s-출력-설정)
-- [조립 절차](mechanical/ASSEMBLY.md) · [체결품과 배선을 장착한 상태의 구동 검사](mechanical/ASSEMBLY.md#배선과-체결품을-단-상태의-구동-검사)
-
-P2S 출력판은 **0.4 mm 노즐과 Bambu PETG HF** 기준입니다.
-앞 해골의 출력 경사, 눈꺼풀 축 홈, 목 볼트와 JST 통로를 수정한 형상이 들어 있습니다.
-시험판 2번은 케이블, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어를 확인하는 데 씁니다. [출력 경로 검사](mechanical/README.md#출력-경로-검사)
+기본 브랜치의 CAD와 조립 문서는 B18 이하 이력입니다. [이전 첫 화면](https://github.com/ckh7488/head/blob/aea5a97dc126997b99470e445302394d638795f6/README.md)
