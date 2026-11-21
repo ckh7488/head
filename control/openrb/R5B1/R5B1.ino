@@ -28,6 +28,8 @@ constexpr uint16_t returnNeckVelocity = 7;
 constexpr uint16_t exhibitJawPwm = 100;
 constexpr uint16_t exhibitJawRecoveryPwm = 120;
 constexpr uint16_t exhibitJawVelocity = 6;
+constexpr uint16_t jawPositionGain = 400;
+constexpr uint16_t exhibitJawPositionGain = 1000;
 constexpr uint8_t exhibitJawStartTicks = 8;
 constexpr uint8_t exhibitJawReadyTicks = 12;
 constexpr uint8_t exhibitJawRecoveryTicks = 110;
@@ -42,6 +44,7 @@ constexpr uint32_t goalPeriodMs = 60;
 constexpr uint32_t reportMs = 120;
 constexpr uint8_t positionTolerance = 8;
 constexpr uint8_t jawPositionTolerance = 11;
+constexpr uint8_t jawClosingTolerance = 5;
 constexpr uint8_t eyeCalibrationTicks[] = {4096u*20u/360u-positionTolerance,
                                            4096u*8u/360u-positionTolerance};
 constexpr uint16_t neckYawCalibrationTicks = 659;
@@ -64,6 +67,7 @@ struct Register {
 constexpr Register modelNumber{0, 2}, driveMode{10, 1}, operatingMode{11, 1};
 constexpr Register startupConfiguration{60, 1};
 constexpr Register torqueEnable{64, 1}, statusReturnLevel{68, 1};
+constexpr Register positionPGain{84, 2};
 constexpr Register goalPwm{100, 2}, profileAcceleration{108, 4}, profileVelocity{112, 4};
 constexpr Register goalPosition{116, 4}, presentPosition{132, 4};
 
@@ -185,11 +189,22 @@ bool validCalibration(uint8_t i) {
   return (c.low<c.zero && c.zero<c.high) || (c.low>c.zero && c.zero>c.high);
 }
 
+int32_t jawOpening(int32_t position) {
+  const auto& c=calibration[trackerCount];
+  return (position-c.zero)*(c.high>c.zero ? 1 : -1);
+}
+
 bool inside(uint8_t i, int32_t value, uint8_t tolerance) {
+  if (value<0 || value>4095) return false;
   const auto& c = calibration[i];
+  if (i==trackerCount) {
+    const uint8_t closingTolerance=tolerance<jawClosingTolerance ? tolerance : jawClosingTolerance;
+    const int32_t opening=jawOpening(value);
+    return opening>=-closingTolerance && opening<=abs(c.high-c.zero)+tolerance;
+  }
   int32_t a = c.low<c.high ? c.low : c.high;
   int32_t b = c.low<c.high ? c.high : c.low;
-  return value>=0 && value<=4095 && value>=a-tolerance && value<=b+tolerance;
+  return value>=a-tolerance && value<=b+tolerance;
 }
 
 uint8_t feedbackTolerance(uint8_t i) {
@@ -296,18 +311,15 @@ bool readAxis(uint8_t i, AxisStatus& status) {
 }
 
 bool jawNearClosed(int32_t position) {
-  return position>=0 && position<=4095 &&
-         abs(position-calibration[trackerCount].zero)<=exhibitJawStartTicks;
-}
-
-int32_t jawOpening(int32_t position) {
-  const auto& c=calibration[trackerCount];
-  return (position-c.zero)*(c.high>c.zero ? 1 : -1);
+  if (position<0 || position>4095) return false;
+  const int32_t opening=jawOpening(position);
+  return opening>=-jawClosingTolerance && opening<=exhibitJawStartTicks;
 }
 
 bool jawCanClose(int32_t position) {
+  if (position<0 || position>4095) return false;
   const int32_t opening=jawOpening(position);
-  return position>=0 && position<=4095 && opening>=-exhibitJawStartTicks && opening<=exhibitJawRecoveryTicks;
+  return opening>=-jawClosingTolerance && opening<=exhibitJawRecoveryTicks;
 }
 
 bool readyToArm(uint8_t i, const AxisStatus& status, bool checkJawClosed=false) {
@@ -576,7 +588,7 @@ void report(bool monitorTorque) {
         }
         const int32_t opening=jawOpening(raw[i]);
         const uint32_t elapsed=static_cast<uint32_t>(millis()-jawTargetSince);
-        if (abs(opening)<=exhibitJawReadyTicks) {
+        if (opening<=exhibitJawReadyTicks) {
           if (!writeVerifiedRegister(i+1,goalPwm,exhibitJawPwm)) {
             stopOnFault("EXHIBIT_JAW_PWM",i+1);
             return;
@@ -672,7 +684,9 @@ void arm(uint8_t mask, ArmMode mode=ArmMode::normal) {
       const bool closedJaw=armExhibitJaw && i==trackerCount;
       const uint16_t wantedPwm=closedJaw ? exhibitJawPwm : i==blinkAxis && fastBlink ? blinkFastPwm : pwm[i];
       const uint16_t wantedVelocity=closedJaw ? exhibitJawVelocity : velocity[i];
-      if (!writeVerifiedRegister(id,goalPwm,wantedPwm) || writeRegister(id,profileVelocity,wantedVelocity)!=Transfer::ok ||
+      const uint16_t wantedJawGain=closedJaw ? exhibitJawPositionGain : jawPositionGain;
+      if ((i==trackerCount && !writeVerifiedRegister(id,positionPGain,wantedJawGain)) ||
+          !writeVerifiedRegister(id,goalPwm,wantedPwm) || writeRegister(id,profileVelocity,wantedVelocity)!=Transfer::ok ||
           writeRegister(id,profileAcceleration,acceleration[i])!=Transfer::ok) {
         printAxisError("LOCKED ARM_CONFIG",id);
         return;

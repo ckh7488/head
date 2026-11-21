@@ -174,6 +174,7 @@ private:
         }
         auto& registers = motors.at(id-1).registers;
         registers.at(64) = 0;
+        registers.at(84) = 400;
         registers.at(100) = 885;
         registers.at(108) = 0;
         registers.at(112) = 0;
@@ -186,7 +187,7 @@ private:
 
     static uint16_t registerSize(uint16_t address) {
         switch (address) {
-            case 0: case 100: return 2;
+            case 0: case 84: case 100: return 2;
             case 10: case 11: case 60: case 64: case 68: return 1;
             case 108: case 112: case 116: case 132: return 4;
             default: return 0;

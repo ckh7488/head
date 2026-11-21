@@ -4,6 +4,7 @@ from conftest import CALIBRATED, Firmware
 from test_firmware import GOAL, POSITION, TORQUE, writes
 
 
+POSITION_P_GAIN = 84
 PWM = 100
 NEUTRAL_STATE = 'STATE 31 0.000 0.000 0.000 0.000 0.000'
 
@@ -18,8 +19,10 @@ def test_tracking_latches_only_closed_jaw_and_preserves_watchdog(firmware):
     assert firmware.command('ARM_EXHIBIT') == ['ARMED_EXHIBIT 31', NEUTRAL_STATE]
     events = firmware.trace()
     assert [(event.register, event.value) for event in events if event.direction == 'w' and event.id == 6] == [
-        (PWM, 100), (112, 6), (108, 10), (GOAL, 2000), (TORQUE, 1),
+        (POSITION_P_GAIN, 1000), (PWM, 100), (112, 6), (108, 10), (GOAL, 2000), (TORQUE, 1),
     ]
+    assert any(event.direction == 'r' and event.id == 6 and event.register == POSITION_P_GAIN
+               and event.value == 1000 for event in events)
     assert firmware.command('GO 0 0 0 0 0') == ['ERROR EXHIBIT_PROFILE']
     assert not firmware.command('GO_EXHIBIT 0 0 0 0 0 5.5')
     assert not firmware.command('GO_EXHIBIT 0 0 0 15 -2')
@@ -52,7 +55,7 @@ def test_cold_jaw_closes_before_tracking_is_enabled(firmware):
 
 @pytest.mark.parametrize(('jaw_raw', 'neck_raw', 'reason'), [
     (1889, 2048, 'LOCKED EXHIBIT_JAW_RANGE ID6'),
-    (2009, 2048, 'LOCKED EXHIBIT_JAW_RANGE ID6'),
+    (2006, 2048, 'LOCKED EXHIBIT_JAW_RANGE ID6'),
     (1904, 2060, 'ERROR NECK_NOT_NEUTRAL ID5'),
 ])
 def test_cold_start_rejects_unqualified_gap_or_neck(firmware, jaw_raw, neck_raw, reason):
@@ -62,7 +65,7 @@ def test_cold_start_rejects_unqualified_gap_or_neck(firmware, jaw_raw, neck_raw,
     assert not any(event.direction == 'w' for event in firmware.trace())
 
 
-@pytest.mark.parametrize('failure', ['torque', 'position', 'timeout', 'pwm', 'hold'])
+@pytest.mark.parametrize('failure', ['torque', 'position', 'overclosure', 'timeout', 'pwm', 'hold'])
 def test_bad_cold_recovery_releases_only_jaw(firmware, failure):
     firmware.set(6, POSITION, 1904)
     assert firmware.command('ARM_EXHIBIT') == [NEUTRAL_STATE]
@@ -71,8 +74,8 @@ def test_bad_cold_recovery_releases_only_jaw(firmware, failure):
         firmware.set(5, TORQUE, 0)
         reply = firmware.tick(120)
         expected = 'EXHIBIT_JAW_NECK_TORQUE ID5'
-    elif failure == 'position':
-        firmware.set(6, POSITION, 1889)
+    elif failure in ('position', 'overclosure'):
+        firmware.set(6, POSITION, 1889 if failure == 'position' else 2006)
         reply = firmware.tick(120)
         expected = 'POSITION_LIMIT ID6'
     elif failure == 'pwm':
@@ -115,7 +118,7 @@ def test_exhibit_keeps_five_axes_when_jaw_calibration_is_unset(firmware_build):
         simulator.close()
 
 
-@pytest.mark.parametrize('close_feedback', [1988, 2008])
+@pytest.mark.parametrize('close_feedback', [1988, 2005])
 def test_late_cold_closure_arms_at_the_original_zero_goal(firmware, close_feedback):
     firmware.set(6, POSITION, 1904)
     firmware.exchange('follow 6 0')
@@ -146,3 +149,34 @@ def test_stalled_cold_jaw_never_commands_past_zero_and_times_out(firmware):
     assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(6, 0)]
     assert not [e for e in events if e.direction == 'w' and e.id == 6 and e.register in (GOAL, PWM)]
     assert firmware.command('ARM_EXHIBIT') == ['LOCKED RELEASE_AFTER_FAULT']
+
+
+@pytest.mark.parametrize(('kind', 'retries'), [('ignored', 1), ('wrong_id', 2)])
+def test_unverified_jaw_gain_blocks_arming(firmware, kind, retries):
+    direction = 'w' if kind == 'ignored' else 'r'
+    firmware.fail(direction, 6, POSITION_P_GAIN, kind, retries)
+    assert firmware.command('ARM_EXHIBIT') == ['LOCKED ARM_CONFIG ID6']
+    assert not writes(firmware.trace(), TORQUE)
+
+
+def test_direct_jaw_restores_factory_position_gain(firmware):
+    assert firmware.command('ARM_EXHIBIT')[0] == 'ARMED_EXHIBIT 31'
+    assert firmware.command('RELEASE') == ['RELEASED']
+    firmware.trace()
+    assert firmware.command('ARM_JAW_DEMO')[0] == 'ARMED_JAW_DEMO 56'
+    assert jaw_writes(firmware, POSITION_P_GAIN) == [400]
+
+
+@pytest.mark.parametrize('opening_direction', [-1, 1])
+def test_signed_closing_limit_rejects_overtravel_for_both_horn_directions(firmware_build, opening_direction):
+    simulator = Firmware(firmware_build((*CALIBRATED[:-1], (2000, 2000, 2000 + opening_direction * 62))))
+    try:
+        simulator.set(6, POSITION, 2000 - opening_direction * 6)
+        assert simulator.command('ARM_EXHIBIT') == ['LOCKED EXHIBIT_JAW_RANGE ID6']
+        assert not writes(simulator.trace(), TORQUE)
+        simulator.set(6, POSITION, 2000 - opening_direction * 5)
+        assert simulator.command('ARM_EXHIBIT')[0] == 'ARMED_EXHIBIT 31'
+        simulator.set(6, POSITION, 2000 - opening_direction * 6)
+        assert simulator.tick(120) == ['ERROR POSITION_LIMIT ID6']
+    finally:
+        simulator.close()
