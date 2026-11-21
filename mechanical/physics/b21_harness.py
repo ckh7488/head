@@ -35,16 +35,16 @@ class ChinScene(Scene):
         self.add(CHIN, 'jaw', mesh)
 
 
-def test_angles():
-    yield 0., CLEARANCE_BANDS[0][1]
+def test_angles(bands=CLEARANCE_BANDS):
+    yield 0., bands[0][1]
     start = 0.
-    for limit, allowance, step in CLEARANCE_BANDS:
+    for limit, allowance, step in bands:
         for angle in np.linspace(start, limit, ceil((limit-start)/step)+1)[1:]:
             yield float(angle), allowance
         start = limit
 
 
-def check_pose(cad, layout, wiring, lengths, pose):
+def check_pose(cad, layout, wiring, lengths, bands, pose):
     scene = ChinScene(trimesh.load_mesh(cad/'world'/f'{CHIN}.stl'))
     cables = capture(layout, wiring, lengths, pose)
     if {wire.name for wire in cables} != WIRE_NAMES:
@@ -53,7 +53,7 @@ def check_pose(cad, layout, wiring, lengths, pose):
     if stop:
         name = stop['modified_part']
         scene.add(name, layout['world_motion'][name], trimesh.load_mesh(cad/'world'/f'{name}.stl'))
-    for angle, allowance in test_angles():
+    for angle, allowance in test_angles(bands):
         motion = matrices(layout, *pose[:4], angle)
         contacts = [hit for wire in cables for hit in scene.hits(wire, motion, allowance)]
         if contacts:
@@ -67,14 +67,23 @@ def run(cad, jobs):
     lengths = read(ROOT/'mechanical/revisions/b20/physics/harness-cut-lengths.json')
     mesh = trimesh.load_mesh(cad/'world'/f'{CHIN}.stl')
     radius = np.linalg.norm(mesh.vertices[:, 1:] - np.asarray(layout['jaw_pivot_mm'])[1:], axis=1).max()
-    check = partial(check_pose, cad, layout, wiring, lengths)
+    limit = layout['motion_geometry'].get('jaw_stop', {}).get('released_clearance_deg')
+    bands = CLEARANCE_BANDS
+    if limit is not None:
+        from check_b22_harness import CAMERA_INTERNAL_RUN_MM
+
+        if not 0. < limit <= CLEARANCE_BANDS[0][0]:
+            raise ValueError('B22 jaw must remain within the 1 mm wire reserve band')
+        lengths['USB-Camera'] = CAMERA_INTERNAL_RUN_MM
+        bands = ((limit, 1., JAW_STEP_DEG),)
+    check = partial(check_pose, cad, layout, wiring, lengths, bands)
     with ProcessPoolExecutor(jobs) as pool:
         rows = list(pool.map(check, POSES))
     return {'cad_sha256': layout['source_sha256'],
             'clearance_bands': [{'up_to_deg': limit, 'sheath_inflation_mm': gap, 'max_sample_spacing_deg': step,
                                  'maximum_chin_displacement_to_nearest_sample_mm': float(
                                      2*radius*np.sin(np.deg2rad(step/4)))}
-                                for limit, gap, step in CLEARANCE_BANDS],
+                                for limit, gap, step in bands],
             'scope': 'fixed neck, eye and hatch pose per captured wire path; jaw-only sweep', 'poses': rows}
 
 

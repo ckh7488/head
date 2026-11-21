@@ -32,29 +32,48 @@ def test_rejects_bad_tick_rows(axis, row):
 
 
 def test_nominal_check_flags_31_degrees_when_60_was_expected():
-    shorter = replaced_axis(3, (1695, 2048, 2731))
+    shorter = replaced_axis(3, (1695, 2048, 2722))
     assert not list(issues(shorter))
     assert list(issues(shorter, nominal_neck=True)) == [
         'ID 4 neck-yaw low is 31.0°, expected about 60°.',
     ]
 
+@pytest.mark.parametrize(('axis', 'row', 'name', 'ticks'), [
+    (0, (1828, 2048, 2267), 'eye-yaw', 219), (1, (2131, 2048, 1964), 'eye-pitch', 83),
+    (3, (1374, 2048, 2723), 'neck-yaw', 674),
+])
+def test_calibration_leaves_eight_ticks_inside_cad_range(axis, row, name, ticks):
+    assert list(issues(replaced_axis(axis, row))) == [
+        f'ID {axis+1} {name} needs both endpoints within {ticks} ticks of zero.',
+    ]
 
-@pytest.mark.parametrize('opening_tick', [1908, 1852, 2092])
-def test_jaw_calibration_rejects_more_than_91_ticks(opening_tick):
+
+@pytest.mark.parametrize('opening_tick', [1937, 1852, 2063])
+def test_jaw_calibration_rejects_more_than_62_ticks(opening_tick):
     assert list(issues(replaced_axis(5, (2000, 2000, opening_tick)))) == [
-        'ID 6 jaw opening exceeds 8° (91 ticks). Recalibrate the jaw.',
+        'ID 6 jaw opening exceeds 5.5° (62 ticks). Recalibrate the jaw.',
     ]
 
 
-@pytest.mark.parametrize('row', [(2219, 2048, 1979), (1877, 2048, 2117)])
-def test_pitch_calibration_rejects_more_than_68_ticks_of_positive_travel(row):
+@pytest.mark.parametrize('row', [(2219, 2048, 1996), (1877, 2048, 2100),
+                                 (2219, 2048, 1980), (1877, 2048, 2116)])
+def test_pitch_calibration_rejects_more_than_51_ticks_of_positive_travel(row):
     assert list(issues(replaced_axis(4, row))) == [
-        'ID 5 neck-pitch positive travel exceeds 6° (68 ticks). Recalibrate the positive endpoint.',
+        'ID 5 neck-pitch positive travel exceeds 4.5° (51 ticks). Recalibrate the positive endpoint.',
     ]
 
 
-def test_pitch_positive_limit_does_not_change_negative_travel():
-    assert not list(issues(replaced_axis(4, (2276, 2048, 1980))))
+@pytest.mark.parametrize('row', [(2219, 2048, 1997), (1877, 2048, 2099)])
+def test_pitch_calibration_accepts_nominal_171_tick_negative_travel(row):
+    assert not list(issues(replaced_axis(4, row), nominal_neck=True))
+
+
+@pytest.mark.parametrize('row', [(2220, 2048, 1997), (1876, 2048, 2099),
+                                 (2248, 2048, 1997), (1848, 2048, 2099)])
+def test_pitch_calibration_rejects_more_than_171_ticks_of_negative_travel(row):
+    assert list(issues(replaced_axis(4, row))) == [
+        'ID 5 neck-pitch negative travel exceeds the 15° endpoint (171 ticks). Recalibrate the negative endpoint.',
+    ]
 
 
 def test_initializer_requires_six_integer_rows(tmp_path: Path):

@@ -366,11 +366,159 @@ def b21_plan():
     return revised
 
 
-PLANS = {'b19': B19_PLAN, 'b20': PLAN, 'b21': b21_plan()}
+B22_CHANGES = {
+    'head-frame': {
+        'text': '머리 프레임 09를 정면으로 두고 두 베어링 사이로 위에서 수직으로 내립니다.',
+    },
+    'blink-lid-links': {
+        'text': '양쪽 짧은 링크 23을 앞쪽 아래에서 비스듬히 올려 크랭크와 핀 구멍을 맞춥니다.',
+        'place': (['Part057'], (0., -10.6, -10.6)),
+        'place2': (['Part060'], (0., -10.6, -10.6)),
+    },
+}
+
+
+def b22_plan():
+    plan = []
+    for row in b21_plan():
+        if row['id'] == 'jaw-body':
+            plan.extend((
+                step('jaw-stay-bench', 'jawstay', '오른쪽 턱 베어링 받침 37을 작업대에 둡니다.',
+                     place=(['Jaw_37_right_jaw_bearing_stay'], (0, 0, 0))),
+                step('jaw-bearing-fit', 'jawstay',
+                     '받침 바깥쪽에서 MR104를 곧게 넣고 외륜만 눌러 안쪽 단턱까지 앉힙니다. 고정제는 외륜과 받침 사이에만 바릅니다.',
+                     place=(['Jaw_MR104ZZ_jaw_right'], (24, 0, 0))),
+                step('jaw-body', 'jaw',
+                     '베어링을 넣은 오른쪽 받침 37을 뒤쪽 위에서 비스듬히 내려 맞춥니다.',
+                     merge=('jawstay', (0, 12, 12))),
+            ))
+            continue
+        plan.append(dict(row, **B22_CHANGES.get(row['id'], {})))
+        if row['id'] == 'neck-dowels':
+            plan.extend((
+                step('pitch-stop-link', 'neck',
+                     '목을 정면에 두고 뒤에서 강철판을 넣어 원형 구멍은 아래쪽, 긴 구멍은 위쪽에 맞춥니다.',
+                     place=(['PitchLimitLink'], (0, 30, 0))),
+                step('pitch-stop-pins', 'neck',
+                     '프레임 안쪽에서 바깥쪽으로 Ø4×20 평행핀 두 개를 넣고 뒤에서 M3 무두나사를 조입니다. 전원을 끈 채 목을 움직여 양 끝에서 핀이 슬롯 끝에 먼저 닿는지 확인합니다.',
+                     pins=(['PitchLimitLowerPin'], (27, 0, 0)),
+                     pins2=(['PitchLimitUpperPin'], (27, 0, 0)),
+                     bolts=['PitchLimitLowerRetainer', 'PitchLimitUpperRetainer']),
+            ))
+    return plan
+
+
+PLANS = {'b19': B19_PLAN, 'b20': PLAN, 'b21': b21_plan(), 'b22': b22_plan()}
+B22_INTEGRAL_PRINTS = {
+    'front-skull-with-nasal-tray': frozenset(('Part073', 'Part065')),
+    'jaw-with-hinge-arms': frozenset(('Jaw_30_moving_jaw', 'Jaw_38_left_jaw_drive_arm', 'Jaw_39_right_jaw_pivot_arm')),
+}
+B22_CAMERA_PATH_CHECKS = {
+    'camera-pcb-fit': ('camera_pcb_clearance', (.20, .20, 0.)),
+    'camera-bezel': ('bezel_insertion_clearance', (.30,)*6),
+}
+
+
+def assembly_plan(revision, layout=None):
+    plan = PLANS[revision]
+    if revision != 'b22' or not layout or not layout['motion_geometry'].get('camera_cable'):
+        return plan
+    geometry = layout['motion_geometry']
+    plug_feed = geometry['camera_cable'].get('plug_feed', {})
+    pcb_mount = geometry.get('camera_pcb_mount', {})
+    changes = {
+        'rear-guide': 'OpenRB USB와 전원선 꼬리를 뒤로 빼고, 열린 가이드 40을 받침 뒤에서 밀어 넣습니다. 카메라 선은 이미 오른쪽 통로에 있습니다.',
+        'rear-cover': 'OpenRB USB와 전원선을 기존 가이드 홈에 놓고 타이를 건 뒤 덮개 42를 닫습니다.',
+        'camera': '브래킷의 타이 자리에 폭 2.5 mm 케이블 타이를 먼저 끼워 둡니다. 앞 외장에 카메라를 넣기 전에 작은 플러그를 연결합니다. 받침을 작업대 가까이에 두고 바깥쪽 USB-A에서 여분을 풀어 둔 채 카메라와 브래킷을 뒤 위에서 내려 넣습니다.',
+    }
+    after = {
+        'base-cup': step('camera-base-feed', 'base',
+                         '받침이 열린 상태에서 작은 카메라 플러그를 뒤 오른쪽 통로의 낮은 쪽으로 수평으로 넣습니다. 긴 변을 가로로 두고, 받침 위에서 플러그를 받아 안쪽에 둡니다. 큰 USB-A는 밖에 둡니다.',
+                         camera_feed=plug_feed.get('base', {'start_mm': [55., 100., -68.5],
+                                                            'end_mm': [55., 55., -68.5],
+                                                            'body_mm': [7.7, 5.2, 4.5], 'cross_tolerance_mm': .2})),
+        'rotor-studs': step('camera-rotor-feed', 'rotor',
+                            '회전판을 베어링에 내리기 전에 작은 플러그를 회전판 앞쪽 구멍 아래에서 위로 뺍니다. 선 외피를 열린 곡면에 얹어 손으로 부드럽게 미끄러지는지 확인합니다.',
+                            camera_feed=plug_feed.get('rotor', {'start_mm': [0., -36.3, -57.],
+                                                               'end_mm': [0., -36.3, -24.],
+                                                               'body_mm': [7.7, 4.5, 5.2], 'cross_tolerance_mm': .2})),
+        'camera': step('camera-nose-guide', 'front',
+                       '카메라를 자리에 댄 뒤 외피를 브래킷 위로 열린 홈에 얹습니다. 외피가 원래 모양을 유지하도록 미리 끼운 타이로 가볍게 잡습니다. 나머지 선은 목 쪽으로 내려 둡니다.'),
+        'mast-nuts': step('camera-route-set', 'base',
+                          '머리 뒷덮개를 닫기 전에 카메라 선을 배선도대로 놓습니다. 회전판 가이드에서는 외피가 양 끝 사이 약 51 mm 자유롭게 미끄러지게 하고, 남는 길이는 가림막 밖에서 정리합니다. 가림막 뒤 판을 조립할 때 카메라 외피만 오른쪽 분할 홈에 얹습니다. 출구 아래 바깥 면에 접착식 타이 마운트를 붙이고, USB-A 몸체 바로 앞의 외피를 재사용 타이로 받칩니다.',
+                          camera_tail_mount={'seat_mm': [56.5, 150., -69.5], 'body_mm': [14., 3., 14.],
+                                             'jacket_grip_y_mm': [152.5, 155.5]}),
+    }
+    camera_bench = []
+    if pcb_mount.get('insertion_offsets_mm'):
+        sides = ('Left', 'Right')
+        washers, nuts, screws = ([f'CameraPCB{kind}{side}' for side in sides]
+                                 for kind in ('Washer', 'Nut', 'Screw'))
+        camera_bench = [
+            step('camera-bracket-bench', 'camerabench',
+                 '작업대에 코 카메라 브래킷 26을 놓습니다. 아래가 열린 타이 홈에 폭 2.5 mm 타이를 걸어 둡니다.',
+                 place=(['Part066'], (0, 0, 0))),
+            step('camera-pcb-fit', 'camerabench',
+                 '렌즈를 단 카메라를 약 9 mm 들어 렌즈를 타원형 구멍 윗부분에 넣습니다. 기판을 아래로 내린 뒤 앞쪽으로 가볍게 눌러 자리에 맞춥니다.',
+                 path=(['Part067', 'Part068'], pcb_mount['insertion_offsets_mm'])),
+            step('camera-pcb-washers', 'camerabench',
+                 '윗쪽 두 구멍의 브래킷 앞면에 M3 평와셔를 한 개씩 댑니다.',
+                 nuts=(washers, (0, -15, 0))),
+            step('camera-pcb-screws', 'camerabench',
+                 '앞에서 4 mm 소켓으로 M2 너트를 잡고 뒤에서 1.5 mm 육각렌치로 M2×8 두 개를 조입니다.',
+                 nuts=(nuts, (0, -15, 0)), bolts=screws,
+                 hold_nuts={name: ('socket',) for name in nuts},
+                 paired_drivers=list(zip(nuts, screws))),
+        ]
+        changes['camera'] = '카메라를 앞 외장에 넣기 전에 작은 플러그를 연결합니다. 받침을 가까이 두고 USB-A 쪽 여분을 풀어 둔 채 카메라 모듈을 뒤 위에서 비스듬히 내려 코받침에 댑니다.'
+    result = []
+    for row in plan:
+        stage = row['id']
+        if stage in ('lid-left', 'lid-right') and camera_bench:
+            frame, lid = row['place'][0]
+            side = '왼쪽' if stage == 'lid-left' else '오른쪽'
+            result.append(dict(row, text=f'작업대에 {side} 눈틀을 놓습니다. 눈꺼풀을 열린 자세 그대로 뒤에서 곧게 밀어 넣습니다.',
+                               place=([frame], (0, 0, 0)), place2=([lid], (0, 60, 0))))
+        elif stage == 'jaw-body-arm' and camera_bench:
+            result.append(dict(row, text='턱 30과 구동팔 38, 힌지팔 39를 한 몸으로 출력한 부품을 작업대에 놓습니다.',
+                               integral_print='jaw-with-hinge-arms'))
+        elif stage == 'front-skull' and camera_bench:
+            result.append(step(stage, 'front', '코받침 25가 붙어서 출력된 앞 외장 28을 작업대에 놓습니다.',
+                               place=(['Part073', 'Part065'], (0, 0, 0)), integral_print='front-skull-with-nasal-tray'))
+            result.append(step('camera-bezel', 'front',
+                               '코 테두리 33을 앞쪽 아래에서 대고 오른쪽 위로 비켜 넣습니다. 안쪽 턱을 지난 뒤 가운데로 밀어 맞춥니다. 접합부에 에폭시를 소량 바르고 테이프로 자리를 잡아 굳힙니다.',
+                               path=(['Part080'], [(-2., -25., -4.25), (-2., -8., -4.25),
+                                                  (1.5, -4.5, -.75), (2.5, -3., .75), (2.5, -1., .75),
+                                                  (1.75, -.25, .5), (0., 0., 0.)])))
+        elif stage == 'camera' and camera_bench:
+            result.extend(camera_bench)
+            result.append(step('camera', 'front', changes[stage], merge=('camerabench', (0, 66, 45))))
+            result.append(step('camera-tray-bolts', 'front',
+                               '위에서 2.5 mm 육각렌치로 M3×8 두 개를 코받침 25의 탭 구멍에 조입니다.',
+                               bolts=['CameraTrayScrewLeft', 'CameraTrayScrewRight']))
+        else:
+            result.append(dict(row, text=changes.get(stage, row['text'])))
+        if stage in after:
+            result.append(after[stage])
+    return result
 
 
 def plan_hash(plan):
     return sha256(json.dumps(plan, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+
+def zero_offset_print_issues(stage, printed):
+    issues = []
+    for role in ('place', 'place2'):
+        if role not in stage:
+            continue
+        names, offset = stage[role]
+        simultaneous = printed.intersection(names)
+        if not any(offset) and len(simultaneous) > 1:
+            fused = B22_INTEGRAL_PRINTS.get(stage.get('integral_print'))
+            if simultaneous != fused:
+                issues.append(f'Separate printed parts require a checked insertion: {", ".join(sorted(simultaneous))}')
+    return issues
 
 
 def cylinder(radius, height, start, axis):
@@ -405,6 +553,8 @@ class World:
         self.rows = {row['id']: row for row in hardware if not row.get('tool')}
         self.screws = dict(CAD_SCREWS)
         self.headless = {}
+        self.camera_hardware = {item['name'] for item in spec
+                                if item['name'].startswith(('CameraPCB', 'CameraTrayScrew'))}
         self.neutral_nuts = {}
         self.layout = None
         for item in spec:
@@ -495,7 +645,7 @@ class World:
             return self.cache[key]
         if name in self.cache:
             return self.cache[name]
-        if name in self.headless:
+        if name in self.headless or name in self.camera_hardware:
             mesh = tr.load_mesh(self.world/f'{name}.stl')
         elif name in self.screws or (name in self.rows and self.rows[name]['type'] in ('bolt', 'head')):
             mesh = screw_mesh(*self.screw(name))
@@ -561,6 +711,159 @@ def sweep(world, moving, fixed, offset, final_only=False, limit=None):
     return hits
 
 
+def native_pin_passage(source, cad_sha256, moving, fixed, offset):
+    """Prove a round pin's complete straight insertion with a native swept solid."""
+    result = {'parts': [moving, fixed], 'offset_mm': list(offset), 'cad_sha256': cad_sha256}
+    if sha256(source.read_bytes()).hexdigest() != cad_sha256:
+        raise ValueError('Native assembly source differs from the checked world export')
+    try:
+        import FreeCAD as App
+        import Part
+
+        from export_cad import world_shape
+    except ImportError:
+        return dict(result, status='unknown', reason='FreeCAD native shape kernel unavailable')
+    doc = App.openDocument(str(source.resolve()))
+    try:
+        moving_obj, fixed_obj = (doc.getObject(name) for name in (moving, fixed))
+        if any(obj is None or obj.TypeId != 'Part::Feature' for obj in (moving_obj, fixed_obj)):
+            return dict(result, status='unknown', reason='both parts must be native solids')
+        pin, host = map(world_shape, (moving_obj, fixed_obj))
+        if not pin.isValid() or not host.isValid() or not pin.Solids or not host.Solids:
+            return dict(result, status='unknown', reason='invalid native solid')
+        axis = App.Vector(*offset)
+        travel = axis.Length
+        if travel <= 0 or np.count_nonzero(offset) != 1:
+            return dict(result, status='unknown', reason='pin path must be along one Cartesian axis')
+        axis.normalize()
+        surfaces = (face.Surface for face in pin.Faces)
+        round_faces = [surf for surf in surfaces if surf.__class__.__name__ == 'Cylinder'
+                       and abs(surf.Axis.dot(axis)) > 1 - 1e-10]
+        if not round_faces:
+            return dict(result, status='unknown', reason='missing coaxial cylindrical pin face')
+        cyl = max(round_faces, key=lambda surf: surf.Radius)
+        bounds = pin.BoundBox
+        corners = (App.Vector(bounds.XMin, bounds.YMin, bounds.ZMin),
+                   App.Vector(bounds.XMax, bounds.YMax, bounds.ZMax))
+        lo, hi = sorted(vertex.dot(axis) for vertex in corners)
+        start = cyl.Center + axis * (lo - cyl.Center.dot(axis))
+        nominal = Part.makeCylinder(cyl.Radius, hi - lo, start, axis)
+        outside = pin.cut(nominal).Volume
+        if outside > 1e-7:
+            return dict(result, status='unknown', reason='cylinder does not contain the complete pin',
+                        material_outside_mm3=outside)
+        swept = Part.makeCylinder(cyl.Radius, hi - lo + travel, start, axis)
+        volume = swept.common(host).Volume
+        gap = swept.distToShape(host)[0]
+        return dict(result, status='pass' if volume <= 1e-7 else 'fail',
+                    diameter_mm=2*cyl.Radius, pin_length_mm=hi-lo,
+                    material_outside_mm3=outside, swept_overlap_mm3=volume, swept_gap_mm=gap)
+    finally:
+        App.closeDocument(doc.Name)
+
+
+def camera_tray_head_passage(source, cad_sha256, world, names):
+    """Check a spinning M3 socket head at every point from entry to its seating face."""
+    if source is None:
+        return {name: {'status': 'unknown', 'reason': 'native assembly required'} for name in names}
+    if sha256(source.read_bytes()).hexdigest() != cad_sha256:
+        raise ValueError('Native assembly source differs from the checked world export')
+    try:
+        import FreeCAD as App
+        import Part
+
+        from export_cad import world_shape
+    except ImportError:
+        return {name: {'status': 'unknown', 'reason': 'FreeCAD native shape kernel unavailable'} for name in names}
+    doc = App.openDocument(str(source.resolve()))
+    try:
+        bracket = world_shape(doc.Part066)
+        result = {}
+        for name in names:
+            size, length, seat, axis = world.screw(name)
+            if size != 3 or tuple(axis) != (0., 0., -1.) or not bracket.isValid():
+                result[name] = {'status': 'unknown', 'reason': 'invalid top-down camera bracket screw'}
+                continue
+            radius, height = HEAD[size]
+            swept = Part.makeCylinder(radius, length+3.+height, App.Vector(*seat), App.Vector(0, 0, 1))
+            overlap = swept.common(bracket).Volume
+            result[name] = {'status': 'pass' if overlap <= 1e-7 else 'fail',
+                            'swept_overlap_mm3': overlap, 'head_diameter_mm': 2*radius}
+        return result
+    finally:
+        App.closeDocument(doc.Name)
+
+
+def jaw_bearing_passage(world, moving, fixed, offset):
+    """Bound the entire bearing translation by one swept circumscribed cylinder."""
+    result = {'parts': [moving, fixed], 'offset_mm': list(offset)}
+    distance, dy, dz = offset
+    if distance <= 0 or dy != 0 or dz != 0:
+        return dict(result, status='unknown', reason='bearing insertion must run from outside along X')
+    bearing, stay = world.mesh(moving), world.mesh(fixed)
+    if not bearing.is_volume or not stay.is_volume:
+        return dict(result, status='unknown', reason='bearing and stay must be closed solids')
+    x0, x1 = bearing.bounds[:, 0]
+    y, z = bearing.bounds[:, 1:].mean(axis=0)
+    radius = np.linalg.norm(bearing.vertices[:, 1:] - (y, z), axis=1).max()
+    sections = 128
+    envelope = tr.creation.cylinder(radius=radius / np.cos(np.pi / sections),
+                                    height=x1-x0+distance, sections=sections)
+    envelope.apply_transform(tr.geometry.align_vectors((0, 0, 1), (1, 0, 0)))
+    envelope.apply_translation(((x0+x1+distance)/2, y, z))
+    swept, host, moving_body = map(solid, (envelope, stay, bearing))
+    if any(body.is_empty() for body in (swept, host, moving_body)):
+        return dict(result, status='unknown', reason='unusable solid mesh')
+    outside = (moving_body - swept).volume()
+    overlap = (swept ^ host).volume()
+    if outside > 1e-7:
+        return dict(result, status='unknown', reason='envelope does not cover the full bearing',
+                    material_outside_mm3=outside)
+    return dict(result, status='pass' if overlap <= 1e-7 else 'fail',
+                measured_diameter_mm=float(2*radius), swept_overlap_mm3=overlap,
+                material_outside_mm3=outside)
+
+
+def camera_feed_segment(world, fixed, start, end, body, reserve):
+    travel = abs(end-start)
+    if np.count_nonzero(travel) != 1 or np.any(body <= 0) or reserve < 0:
+        raise ValueError('Invalid straight camera connector feed')
+    swept = tr.creation.box(body + travel + 2*reserve*(travel == 0))
+    swept.apply_translation((start+end)/2)
+    probe = fcl.CollisionObject(mesh_to_BVH(swept))
+    request = fcl.DistanceRequest()
+    gap, closest = float('inf'), None
+    for name in fixed:
+        other = world.mesh(name)
+        lo, hi = other.bounds
+        box_gap = np.linalg.norm(np.maximum(np.maximum(swept.bounds[0]-hi, lo-swept.bounds[1]), 0.))
+        if box_gap > gap:
+            continue
+        if box_gap == 0. and np.any(np.all((other.vertices > swept.bounds[0]) &
+                                          (other.vertices < swept.bounds[1]), axis=1)):
+            gap, closest = 0., name
+            break
+        obstacle = fcl.CollisionObject(mesh_to_BVH(other))
+        distance = fcl.distance(probe, obstacle, request, fcl.DistanceResult())
+        if distance < gap:
+            gap, closest = distance, name
+    return gap, closest
+
+
+def camera_feed_passage(world, fixed, feed):
+    start, end, body = (np.asarray(feed[key], float) for key in ('start_mm', 'end_mm', 'body_mm'))
+    reserve = float(feed['cross_tolerance_mm'])
+    gap, closest = camera_feed_segment(world, fixed, start, end, body, reserve)
+    if 'pull_end_mm' in feed:
+        pull_end = np.asarray(feed['pull_end_mm'], float)
+        pull_gap, pull_closest = camera_feed_segment(world, fixed, end, pull_end, body, reserve)
+        if pull_gap < gap:
+            gap, closest = pull_gap, pull_closest
+    status = 'pass' if closest is not None and np.isfinite(gap) and gap > 0 else 'fail'
+    return dict(feed, status=status, minimum_clearance_mm=float(gap) if np.isfinite(gap) else None,
+                closest_part=closest)
+
+
 def sweep_shifted(world, moving, fixed, shift, base):
     """Sweep parts that sit at `base` (relative to their CAD place) by `shift` back toward `base`."""
     saved = {}
@@ -577,25 +880,38 @@ def sweep_shifted(world, moving, fixed, shift, base):
                 world.cache[a] = saved[a]
 
 
-def travel_clearance(world, moving, fixed, start, end, *, starts_outside):
+def closed_clearance_mesh(world, name):
+    mesh = world.mesh(name)
+    if mesh.is_volume:
+        return mesh
+    if name == 'Part073':
+        key = ('closed_clearance', name)
+        if key not in world.cache:
+            pieces = sorted(mesh.split(only_watertight=False), key=lambda part: len(part.faces), reverse=True)
+            if pieces and pieces[0].is_volume and all(
+                    len(part.faces) == 2 and part.volume == 0. and part.area == 0. for part in pieces[1:]):
+                world.cache[key] = pieces[0]
+            else:
+                raise ValueError(f'{name}: skull contains components with unresolved material')
+        return world.cache[key]
+    raise ValueError(f'{name}: clearance requires a closed, oriented mesh')
+
+
+def travel_clearance(world, moving, fixed, start, end, *, starts_outside, sample_mm=PATH_SAMPLE_MM):
     """Lower-bound clearance between separated meshes along a straight translation."""
     length = np.linalg.norm(np.subtract(end, start))
-    count = max(1, int(np.ceil(length / PATH_SAMPLE_MM)))
+    count = max(1, int(np.ceil(length / sample_mm)))
     positions = np.linspace(start, end, count + 1)
     request = fcl.DistanceRequest()
     nearest = np.inf
     nearest_pair = None
     nearest_position = None
     for a in moving:
-        ma = world.mesh(a)
-        if not ma.is_volume:
-            raise ValueError(f'{a}: clearance requires a closed, oriented mesh')
+        ma = closed_clearance_mesh(world, a)
         oa = fcl.CollisionObject(mesh_to_BVH(ma))
         lows, highs = ma.bounds[:, None, :] + positions
         for b in fixed:
-            mb = world.mesh(b)
-            if not mb.is_volume:
-                raise ValueError(f'{b}: clearance requires a closed, oriented mesh')
+            mb = closed_clearance_mesh(world, b)
             # Positive separation at the start rules out containment that surface tests miss.
             bounds_distances = np.linalg.norm(np.maximum(np.maximum(
                 mb.bounds[0] - highs, lows - mb.bounds[1]), 0), axis=1)
@@ -751,16 +1067,22 @@ def blink_access_cases(world, step, obstacles):
     return results
 
 
-def run(cad, hardware, spec, revision='b19'):
+def run(cad, hardware, spec, revision='b19', source=None):
     world = World(cad, hardware, spec)
     cad_sha256 = None
-    if revision in ('b20', 'b21'):
+    qualified_tools = revision in ('b21', 'b22')
+    if revision in ('b20', 'b21', 'b22'):
         world.layout = json.loads((cad/'cad_parts.json').read_text())
         cad_sha256 = world.layout['source_sha256']
         if not re.fullmatch(r'[0-9a-f]{64}', cad_sha256):
             raise ValueError('Invalid exported CAD source hash')
-    plan = PLANS[revision]
-    if revision == 'b21':
+    plan = assembly_plan(revision, world.layout)
+    populated_camera = bool(world.layout and world.layout['motion_geometry'].get('camera_pcb_mount', {})
+                            .get('insertion_offsets_mm'))
+    printed = {part['name'] for part in world.layout['parts'] if part.get('printed')} if populated_camera else set()
+    pitch_pin_axes = {item['name']: np.asarray(item['shapes'][0][4], float)
+                      for item in spec if item.get('kind') == 'pin' and item['name'].startswith('PitchLimit')}
+    if qualified_tools:
         from check_b21_tools import ToolCheck
 
         tools = ToolCheck(world, hardware)
@@ -769,16 +1091,23 @@ def run(cad, hardware, spec, revision='b19'):
     report = []
     for st in plan:
         world.blink_pose = st.get('blink_deg')
-        if revision == 'b21':
+        if qualified_tools:
             for nut, phase in st.get('set_nut_phases', {}).items():
                 tools.require_nut_phase(nut, phase)
         ctx = installed.setdefault(st['ctx'], [])
         world.limit = st.get('limit', OVERLAP_LIMIT)
         rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
         fitted_before_step = tuple(rigid)
-        issues = []
+        issues = zero_offset_print_issues(st, printed)
         notes = []
+        approach_notes = issues if revision == 'b22' else notes
         clearance = None
+        frame_clearance = None
+        pitch_link_clearance = None
+        bearing_insertion = None
+        camera_path_clearance = None
+        lid_clearance = None
+        native_pin_checks = []
         tools_checked = {}
         drivers_checked = {}
         paired_checked = {}
@@ -791,7 +1120,7 @@ def run(cad, hardware, spec, revision='b19'):
                 alternative, hits = find_clear(world, moving, rigid, offset)
                 world.closed = False
                 if alternative:
-                    notes.append(f'{other} assembly: stated approach {tuple(offset)} is blocked; {alternative} is clear')
+                    approach_notes.append(f'{other} assembly: stated approach {tuple(offset)} is blocked; {alternative} is clear')
                     hits = {}
                 for (a, b), hit in hits.items():
                     issues.append(f'{a} ↔ {b} while moving in ({hit["at_mm"]} mm from seated, {hit["overlap_mm3"]} mm³)')
@@ -800,15 +1129,51 @@ def run(cad, hardware, spec, revision='b19'):
         for key in ('place', 'place2', 'pins', 'pins2'):
             if key in st:
                 parts, offset = st[key]
-                if revision == 'b21' and key in ('pins', 'pins2'):
+                if qualified_tools and key in ('pins', 'pins2'):
                     alternative, hits = False, sweep(world, parts, rigid, offset)
+                    if revision == 'b22' and source and st['id'] in ('neck-pins', 'neck-dowels'):
+                        for (a, b), mesh_hit in list(hits.items()):
+                            proof = native_pin_passage(source, cad_sha256, a, b, offset)
+                            native_pin_checks.append(dict(proof, mesh_hit=mesh_hit))
+                            if proof['status'] == 'pass':
+                                del hits[a, b]
+                    if revision == 'b22' and st['id'] == 'pitch-stop-pins':
+                        axis = -np.asarray(offset) / np.linalg.norm(offset)
+                        for part in parts:
+                            if part not in pitch_pin_axes or not np.allclose(axis, pitch_pin_axes[part]):
+                                issues.append(f'{part}: documented approach differs from the open end of the pin bore')
                 else:
                     alternative, hits = find_clear(world, parts, rigid, offset)
                 if alternative:
-                    notes.append(f'{", ".join(parts)}: stated approach {tuple(offset)} is blocked; {alternative} is clear')
+                    approach_notes.append(f'{", ".join(parts)}: stated approach {tuple(offset)} is blocked; {alternative} is clear')
                 elif alternative is False:
                     for (a, b), hit in hits.items():
                         issues.append(f'{a} ↔ {b} while moving in ({hit["at_mm"]} mm from seated, {hit["overlap_mm3"]} mm³)')
+                if revision == 'b22' and st['id'] == 'head-frame' and key == 'place':
+                    nearest, lower_bound, pair, position = travel_clearance(
+                        world, parts, ['Part011'], offset, (0., 0., 0.), starts_outside=False, sample_mm=.10)
+                    frame_clearance = {'parts': pair, 'offset_mm': position, 'sampled_min_mm': round(nearest, 3),
+                                       'continuous_lower_bound_mm': round(lower_bound, 3)}
+                    if lower_bound <= 0:
+                        issues.append('Head frame has no verified continuous clearance past the yoke')
+                if revision == 'b22' and st['id'] == 'pitch-stop-link' and key == 'place':
+                    nearest, lower_bound, pair, position = travel_clearance(
+                        world, parts, ['Part011', 'Part019'], offset, (0., 0., 0.), starts_outside=False, sample_mm=.10)
+                    pitch_link_clearance = {'parts': pair, 'offset_mm': position, 'sampled_min_mm': round(nearest, 3),
+                                            'continuous_lower_bound_mm': round(lower_bound, 3)}
+                    if lower_bound <= 0:
+                        issues.append('Pitch limit link has no verified continuous passage between clevises')
+                if revision == 'b22' and st['id'] == 'jaw-bearing-fit' and key == 'place':
+                    bearing_insertion = jaw_bearing_passage(world, parts[0], rigid[0], offset)
+                    if bearing_insertion['status'] != 'pass':
+                        issues.append(f'MR104 complete outer insertion: {bearing_insertion["status"]}')
+                if st['id'] in ('lid-left', 'lid-right') and key == 'place2':
+                    nearest, lower_bound, pair, position = travel_clearance(
+                        world, parts, rigid, offset, (0, 0, 0), starts_outside=False, sample_mm=.025)
+                    lid_clearance = {'parts': pair, 'offset_mm': position, 'sampled_min_mm': round(nearest, 3),
+                                     'continuous_lower_bound_mm': round(lower_bound, 3)}
+                    if lower_bound < .20:
+                        issues.append(f'{pair[0]} ↔ {pair[1]}: no continuous eyelid insertion clearance')
                 ctx.extend(parts)
                 rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
         if 'path' in st:
@@ -818,7 +1183,7 @@ def run(cad, hardware, spec, revision='b19'):
                 moving_end = np.asarray(end, float)
                 for (a, b), hit in sweep_shifted(world, parts, rigid, shift, moving_end).items():
                     issues.append(f'{a} ↔ {b} on the path segment ending at {tuple(end)} ({hit["overlap_mm3"]} mm³)')
-            if revision in ('b20', 'b21') and st['id'] == 'eye-tie':
+            if revision in ('b20', 'b21', 'b22') and st['id'] == 'eye-tie':
                 clearance = {}
                 legs = zip(EYE_TIE_TRAVEL_ERRORS_MM.items(), points[:-1], points[1:], strict=True)
                 for (leg, error), start, end in legs:
@@ -834,17 +1199,31 @@ def run(cad, hardware, spec, revision='b19'):
                     if lower_bound < np.sqrt(2) * error:
                         issues.append(f'{pair[0]} ↔ {pair[1]}: eye tie {leg} clearance only {lower_bound:.3f} mm; '
                                       f'allow ±{error:g} mm on both transverse axes')
+            if st['id'] in B22_CAMERA_PATH_CHECKS:
+                field, reserves = B22_CAMERA_PATH_CHECKS[st['id']]
+                camera_path_clearance = []
+                for start, end, reserve in zip(points[:-1], points[1:], reserves, strict=True):
+                    nearest, lower_bound, pair, position = travel_clearance(
+                        world, parts, rigid, start, end, starts_outside=False, sample_mm=.02)
+                    camera_path_clearance.append({
+                        'parts': pair, 'start_mm': start, 'end_mm': end, 'closest_offset_mm': position,
+                        'required_clearance_mm': reserve,
+                        'sampled_min_mm': round(nearest, 4),
+                        'continuous_lower_bound_mm': round(lower_bound, 4),
+                    })
+                    if lower_bound <= 0 or lower_bound < reserve:
+                        issues.append(f'{pair[0]} ↔ {pair[1]}: camera insertion lacks {reserve:g} mm clearance')
             ctx.extend(parts)
             rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
         for key in ('nuts', 'nuts2'):
             if key in st:
                 parts, offset = st[key]
                 alternative, hits = find_clear(world, parts, rigid, offset)
-                if revision == 'b21':
+                if qualified_tools:
                     for name in parts:
                         nut_entries[name] = (alternative or offset, tuple(rigid))
                 if alternative:
-                    notes.append(f'{", ".join(parts)}: stated approach {tuple(offset)} is blocked; {alternative} is clear')
+                    approach_notes.append(f'{", ".join(parts)}: stated approach {tuple(offset)} is blocked; {alternative} is clear')
                     hits = {}
                 for (a, b), hit in hits.items():
                     issues.append(f'{a} ↔ {b} while placing the nut ({hit["at_mm"]} mm, {hit["overlap_mm3"]} mm³)')
@@ -852,21 +1231,23 @@ def run(cad, hardware, spec, revision='b19'):
                 rigid = [p for p in ctx if not p.startswith(FLEXIBLE)]
         for name in st.get('bolts', []):
             size, length, seat, axis = world.screw(name)
+            if revision == 'b22' and st['id'] == 'pitch-stop-pins' and not np.allclose(axis, (0., -1., 0.)):
+                issues.append(f'{name}: hex-key approach is not the documented rear opening')
             approach = -np.asarray(axis, float)*(length+3.)
             for (a, b), hit in sweep(world, [name], rigid, approach).items():
                 issues.append(f'{a} ↔ {b} while driving the screw ({hit["at_mm"]} mm from seated, {hit["overlap_mm3"]} mm³)')
             ctx.append(name)
             rigid.append(name)
-            radii = B21_KEY_RADII if revision == 'b21' else KEY_RADIUS
+            radii = B21_KEY_RADII if qualified_tools else KEY_RADIUS
             reach, blocker = key_access(world, name, rigid, radii)
             if reach < KEY_WARN:
                 notes.append(f'{name}: straight key reach {reach} mm (blocked by {blocker})')
-            if revision == 'b21':
+            if qualified_tools:
                 status = 'pass' if reach >= KEY_WARN else 'unknown'
                 drivers_checked[name] = {'status': status, 'straight_key_reach_mm': reach, 'blocker': blocker}
                 if status != 'pass':
                     issues.append(f'{name}: driver route unknown')
-        if revision == 'b21':
+        if qualified_tools:
             for nut, modes in st.get('hold_nuts', {}).items():
                 def rotated_entry(mesh):
                     if nut not in nut_entries:
@@ -913,6 +1294,20 @@ def run(cad, hardware, spec, revision='b19'):
         row = {'id': st['id'], 'context': st['ctx'], 'text': st['text'], 'issues': issues, 'notes': notes}
         if clearance is not None:
             row['insertion_clearance'] = clearance
+        if frame_clearance is not None:
+            row['head_frame_clearance'] = frame_clearance
+        if pitch_link_clearance is not None:
+            row['pitch_link_clearance'] = pitch_link_clearance
+        if bearing_insertion is not None:
+            row['bearing_insertion'] = bearing_insertion
+        if camera_path_clearance is not None:
+            row[field] = camera_path_clearance
+        if lid_clearance is not None:
+            row['lid_insertion_clearance'] = lid_clearance
+        if 'integral_print' in st:
+            row['integral_print'] = st['integral_print']
+        if native_pin_checks:
+            row['native_pin_passages'] = native_pin_checks
         if tools_checked:
             row['tool_access'] = tools_checked
         if drivers_checked:
@@ -928,11 +1323,24 @@ def run(cad, hardware, spec, revision='b19'):
             for case in row['blink_access_cases']:
                 if case['status'] != 'pass':
                     issues.append(f'pin or key interference at {case["blink_deg"]:g}° lid position')
+        if 'camera_feed' in st:
+            camera_feed = camera_feed_passage(world, fitted_before_step, st['camera_feed'])
+            row['camera_feed'] = camera_feed
+            if camera_feed['status'] != 'pass':
+                issues.append(f'Camera connector feed blocked by {camera_feed["closest_part"]}')
+        if 'camera_tail_mount' in st:
+            row['camera_tail_mount'] = st['camera_tail_mount']
+        if st['id'] == 'camera-tray-bolts':
+            heads = camera_tray_head_passage(source, cad_sha256, world, st['bolts'])
+            row['camera_tray_head_passage'] = heads
+            for name, head in heads.items():
+                if head['status'] != 'pass':
+                    issues.append(f'{name}: continuous socket head passage {head["status"]}')
         report.append(row)
         print(st['id'], 'CLEAR' if not issues else issues, notes if notes else '', flush=True)
     if cad_sha256 is not None:
         report[0]['cad_sha256'] = cad_sha256
-    if revision == 'b21':
+    if qualified_tools:
         report[0]['plan_sha256'] = plan_hash(plan)
     return report
 
@@ -944,9 +1352,10 @@ if __name__ == '__main__':
     parser.add_argument('spec', type=Path, help='hardware-spec.json from build_b19_review_fixes.py')
     parser.add_argument('report', type=Path)
     parser.add_argument('--revision', choices=PLANS, default='b19')
+    parser.add_argument('--source', type=Path, help='native assembly for resolving round pin mesh artifacts')
     args = parser.parse_args()
     data = json.loads(args.hardware.read_text())
-    result = run(args.cad, data['hardware'], json.loads(args.spec.read_text()), args.revision)
+    result = run(args.cad, data['hardware'], json.loads(args.spec.read_text()), args.revision, args.source)
     args.report.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n')
     bad = [row['id'] for row in result if row['issues']]
     print(f'{len(result)} steps, {len(bad)} with blocking issues', bad)

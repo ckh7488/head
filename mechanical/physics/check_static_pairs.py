@@ -1,6 +1,7 @@
 """Check seated world meshes, including parts that move together."""
 
 from argparse import ArgumentParser
+from hashlib import file_digest
 from itertools import combinations
 import json
 from pathlib import Path
@@ -63,17 +64,63 @@ def regressions(rows, baseline):
             yield pair, 'worse or no longer measurable', current
 
 
+def resolve_native(rows, baseline, assembly, manifest):
+    with assembly.open('rb') as source:
+        if file_digest(source, 'sha256').hexdigest() != manifest['source_sha256']:
+            raise ValueError('Native assembly differs from the seated world export')
+    candidates = {pair for pair, _, _ in regressions(rows, baseline)}
+    if not candidates:
+        return rows
+
+    import FreeCAD as App
+    from export_cad import world_shape
+
+    doc = App.openDocument(str(assembly.resolve()))
+    try:
+        qualified = []
+        for row in rows:
+            a, b = row['a'], row['b']
+            objects = [doc.getObject(name) for name in (a, b)]
+            if (a, b) not in candidates or not all(obj and obj.isDerivedFrom('Part::Feature') for obj in objects):
+                qualified.append(row)
+                continue
+            first, second = map(world_shape, objects)
+            if not first.Solids or not second.Solids:
+                qualified.append(row)
+                continue
+            exact = first.common(second)
+            volume = float(exact.Volume)
+            if not np.isfinite(volume) or (not exact.isNull() and not exact.isValid()):
+                raise ValueError(f'Unresolved native seated overlap for {a} and {b}')
+            print(f'{a} / {b}: native solid overlap {volume:.6f} mm³')
+            if volume > OVERLAP_LIMIT:
+                bounds = exact.BoundBox
+                qualified.append(dict(row, mm3=volume, bounds=[
+                    [bounds.XMin, bounds.YMin, bounds.ZMin], [bounds.XMax, bounds.YMax, bounds.ZMax]],
+                    measured_with='native_solids'))
+        return qualified
+    finally:
+        App.closeDocument(doc.Name)
+
+
 if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('cad', type=Path)
     parser.add_argument('report', type=Path)
     parser.add_argument('--baseline', type=Path, help='Fail on new or worse seated contacts')
+    parser.add_argument('--exact-cad', type=Path, help='Use native solids to resolve new mesh overlap measurements')
     args = parser.parse_args()
     rows = check(args.cad)
+    baseline = json.loads(args.baseline.read_text()) if args.baseline else None
+    if args.exact_cad:
+        if baseline is None:
+            parser.error('--exact-cad requires --baseline')
+        rows = resolve_native(rows, baseline, args.exact_cad,
+                              json.loads((args.cad / 'cad_parts.json').read_text()))
     args.report.write_text(json.dumps(rows, indent=1, ensure_ascii=False) + '\n')
     print(f'{len(rows)} contacts, {sum(row["mm3"] is None for row in rows)} with unmeasurable volume')
-    if args.baseline:
-        failures = list(regressions(rows, json.loads(args.baseline.read_text())))
+    if baseline is not None:
+        failures = list(regressions(rows, baseline))
         for failure in failures:
             print(*failure)
         if failures:

@@ -1,0 +1,72 @@
+{
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "assembly": {
+    "steps": 136,
+    "blocking_issues": 0,
+    "plan_sha256": "8c25a64d7bed56f70f3d60e48adb8c51822b88ede042fa69e602a4302204b3c0"
+  },
+  "motion": {
+    "rigid_pose_samples": 26196,
+    "swept_fasteners": 61,
+    "motor_wire_poses": 100,
+    "jaw_wire_sweeps": 39,
+    "camera_routes": 21,
+    "camera_minimum_bend_radius_mm": 12.168713410223205
+  },
+  "actuation": {
+    "sliced_moving_pitch_assembly_g": 643.5194302354994,
+    "warm_supply_minimum_torque_margin_Nm": [
+      0.09917990024487407,
+      0.15547624334050242,
+      0.007035387530854139
+    ],
+    "torque_margin_axis_order": [
+      "neck_yaw",
+      "neck_pitch",
+      "jaw"
+    ],
+    "eye_torque_margin_Nm": [
+      0.0139642496540054,
+      0.012778487048106055
+    ],
+    "jaw_command_max_deg": 5.5
+  },
+  "released": {
+    "modeled_pitch_deg": [
+      -17.19789529808835,
+      7.102127837511331
+    ],
+    "verified_rigid_pitch_deg": [
+      -17.204140625,
+      7.12171875
+    ],
+    "modeled_jaw_deg": 9.769371776580808,
+    "verified_rigid_jaw_deg": 9.8
+  },
+  "guard": {
+    "touch_force_N": 1.0,
+    "remaining_clearance_mm": 34.062790209358326,
+    "fastener_tool_pairs": 35
+  },
+  "slicer": {
+    "project_sha256": "32963a8a705c075ed096742c91b5f4c2c07fde67850c51cfa241d2b5879cb0cb",
+    "changed_p2s_plates": [
+      1,
+      4,
+      6,
+      7,
+      8,
+      9,
+      12
+    ],
+    "plates_with_warnings": 0,
+    "unsupported_path_starts": 0,
+    "fused_front_shell_positive_bodies": 1
+  },
+  "firmware": {
+    "software_tests_passed": 138,
+    "compiled_target": "OpenRB-150",
+    "flash_bytes": 42260
+  },
+  "scope": "CAD fit, sampled routing, P2S extrusion, small-strain loads and multibody modeling. No assembled hardware measurements, printed-part fatigue, or dynamic cable wear testing."
+}

@@ -7,6 +7,7 @@ from scipy.optimize import brentq
 import trimesh as tr
 
 from check_head import pose as upper_pose
+from check_head import pitch_link_pose
 
 
 HATCH_TRAVEL = 30.
@@ -60,7 +61,10 @@ def matrices(layout, yaw=0., pitch=0., eye=0., drop=0., jaw=0., blink=0.):
     head = pan @ rotation(pitch, (1, 0, 0), (0, 0, 112))
     angles = (0., eye, 0., blink, jaw)
     transforms = dict(fixed=identity, hatch=hatch, pan=pan, head=head)
-    for mode in set(layout['world_motion'].values()) - transforms.keys():
+    modes = set(layout['world_motion'].values())
+    if 'pitch_link' in modes:
+        transforms['pitch_link'] = pan @ pitch_link_pose(pitch, layout)
+    for mode in modes - transforms.keys():
         transforms[mode] = head @ upper_pose(mode, angles, layout)
     return transforms
 

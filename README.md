@@ -16,6 +16,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 
 ## 최근 CAD
 
+- **B22 제작·조립** · 목 양방향 제한판, 카메라 고정·배선 및 투명 보호 케이스를 추가했습니다. [FreeCAD·P2S·조립 순서](mechanical/revisions/b22/) · [3D 조립 재현](web/README.md#b22-조립-순서)
 - **B21 제작·조립** · 눈·눈꺼풀 평행핀, M3 체결과 공구 접근, 턱 개방 스토퍼를 추가했습니다. [FreeCAD와 P2S 출력판](mechanical/revisions/b21/) · [조립 순서](mechanical/ASSEMBLY.md) · [3D 조립](web/README.md#b21-조립-순서)
 - **B20 제작·조립** · 눈 타이바를 왼쪽에서 곧게 넣도록 크래들을 바꿨습니다. B19 목 상하축, 체결품, 턱 수정도 포함합니다. [FreeCAD와 P2S 출력판](mechanical/revisions/b20/) · [3D 조립 재현](web/README.md#b20-조립-순서)
 - **B18 후면 연결부** · 외부에서 USB 두 개와 5 V·12 V 전원 플러그를 잡고 뺄 수 있는 배치입니다. [조립본과 뒤쪽 3D 보기](mechanical/revisions/b18/)

@@ -13,13 +13,15 @@ if (embedded) {
   if (!response.ok) throw new Error(`steps.json: ${response.status}`);
   data = await response.json();
 }
-const steps = data.steps;
+const steps = data.finalView ? [...data.steps, data.finalView] : data.steps;
+const stops = data.stops ?? [];
+const wireStates = data.wireStates ?? [];
 const revision = data.revision ?? "B19";
-const mainSteps = steps.filter(step => !step.continued).length;
-const blockedSteps = steps.filter(step => step.issues.length).length;
+const mainSteps = data.steps.filter(step => !step.continued).length;
+const blockedSteps = data.steps.filter(step => step.issues.length).length;
 document.title = `R5 ${revision} 조립 순서`;
 el("revision").textContent = revision;
-el("step-count").textContent = `CAD 조립 검사 ${steps.length}단계` + (blockedSteps ? ` · 확인 필요 ${blockedSteps}단계` : "");
+el("step-count").textContent = `CAD 조립 검사 ${data.steps.length}단계` + (blockedSteps ? ` · 확인 필요 ${blockedSteps}단계` : "");
 
 const renderer = new THREE.WebGLRenderer({ canvas: el("view"), antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -37,6 +39,11 @@ sun.position.set(200, -300, 400);
 scene.add(sun);
 const paths = new THREE.Group();
 scene.add(paths);
+const stopMarker = new THREE.Mesh(new THREE.SphereGeometry(.9, 16, 8),
+  new THREE.MeshBasicMaterial({ color: 0xe79022, depthTest: false }));
+stopMarker.visible = false;
+stopMarker.renderOrder = 6;
+scene.add(stopMarker);
 
 const loader = new GLTFLoader();
 const gltf = embedded
@@ -44,11 +51,13 @@ const gltf = embedded
   : await loader.loadAsync(`model.glb?rev=${data.modelSha256 ?? data.cadSha256 ?? revision}`);
 scene.add(gltf.scene);
 const wiring = new THREE.Group();
+const wireNodes = new Map();
 for (const wire of data.wires ?? []) {
   const material = new THREE.MeshStandardMaterial({ color: wire.color, side: THREE.DoubleSide, roughness: .76 });
   const mesh = new THREE.Mesh(new THREE.BufferGeometry(), material);
   mesh.name = wire.label;
   updateTube(mesh, wire.points.map(point => new THREE.Vector3(...point)), wire.diameter / 2);
+  wireNodes.set(wire.id, { mesh, wire, points: wire.points });
   wiring.add(mesh);
 }
 scene.add(wiring);
@@ -61,6 +70,7 @@ for (const name of Object.keys(data.parts)) {
     if (!mesh.isMesh) return;
     mesh.material = mesh.material.clone();
     mesh.material.side = THREE.DoubleSide;
+    if (data.parts[name].guardPanel) mesh.material.depthWrite = false;
     materials.push(mesh.material);
   });
   nodes.set(name, {
@@ -80,10 +90,10 @@ for (const step of steps) {
 }
 const hinge = new THREE.Vector3(0, -39, 119);
 const closed = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
-const state = { index: 0, t: 1, playing: true, last: 0 };
+const state = { index: 0, t: 1, playing: true, last: 0, stop: null, wirePose: null };
 const MOVE_SECONDS = 1.3;
 const HOLD_SECONDS = .9;
-const exterior = new Set(["Part073", "Part074"]);
+const exterior = new Set(["Part073", "Part074", ...Object.keys(data.parts).filter(name => data.parts[name].guardPanel)]);
 let cameraFrame;
 
 function showExterior(id) {
@@ -95,10 +105,21 @@ function selectedTools(step) {
   return name ? (step.toolPaths?.[Number(name)] ?? []) : [];
 }
 
-function partCenter(step, id) {
-  const point = new THREE.Vector3(...data.parts[id].center);
-  const matrix = step.actorPoses?.[id];
+function actorPoint(step, id, coordinates) {
+  const point = new THREE.Vector3(...coordinates);
+  const matrix = state.wirePose?.actorPoses[id] ?? step.actorPoses?.[id];
   return matrix ? point.applyMatrix4(new THREE.Matrix4().set(...matrix.flat())) : point;
+}
+
+function partCenter(step, id) {
+  return actorPoint(step, id, data.parts[id].center);
+}
+
+function stopPoint(step) {
+  const stop = state.stop;
+  const pose = stop.contactPose?.anchor;
+  if (pose) return new THREE.Vector3(...stop.center).applyMatrix4(new THREE.Matrix4().set(...pose.matrix.flat()));
+  return actorPoint(step, stop.actors[0], stop.center);
 }
 
 function toolLabel(tool) {
@@ -160,8 +181,23 @@ function pathLine(origin, path, color) {
   paths.add(line);
 }
 
+function applyActorPose(entry, matrix) {
+  entry.posedPosition.copy(entry.position).applyMatrix4(matrix);
+  entry.node.position.copy(entry.posedPosition);
+  entry.node.quaternion.copy(entry.quaternion).premultiply(new THREE.Quaternion().setFromRotationMatrix(matrix));
+}
+
 function show(step) {
   wiring.visible = Boolean(step.showWires);
+  for (const [id, entry] of wireNodes) {
+    const checkedPath = state.wirePose?.wirePoints[id];
+    entry.mesh.visible = state.wirePose ? Boolean(checkedPath) : !step.wireIds || step.wireIds.includes(id);
+    const points = checkedPath ?? entry.wire.points;
+    if (points !== entry.points) {
+      updateTube(entry.mesh, points.map(point => new THREE.Vector3(...point)), entry.wire.diameter / 2);
+      entry.points = points;
+    }
+  }
   for (const entry of nodes.values()) {
     entry.node.visible = false;
     entry.node.position.copy(entry.position);
@@ -188,12 +224,18 @@ function show(step) {
     entry.node.position.copy(entry.posedPosition);
     entry.node.quaternion.premultiply(closed);
   }
-  for (const [id, pose] of Object.entries(step.actorPoses ?? {})) {
-    const entry = nodes.get(id);
-    const matrix = new THREE.Matrix4().set(...pose.flat());
-    entry.posedPosition.copy(entry.position).applyMatrix4(matrix);
-    entry.node.position.copy(entry.posedPosition);
-    entry.node.quaternion.copy(entry.quaternion).premultiply(new THREE.Quaternion().setFromRotationMatrix(matrix));
+  for (const [id, pose] of Object.entries(state.wirePose?.actorPoses ?? step.actorPoses ?? {})) {
+    applyActorPose(nodes.get(id), new THREE.Matrix4().set(...pose.flat()));
+  }
+  stopMarker.visible = Boolean(state.stop);
+  el("stop-legend").hidden = !state.stop;
+  if (state.stop) {
+    stopMarker.position.copy(stopPoint(step));
+    for (const id of state.stop.actors) tint(nodes.get(id), 0xe79022, .45);
+    for (const pose of Object.values(state.stop.contactPose ?? {})) {
+      const matrix = new THREE.Matrix4().set(...pose.matrix.flat());
+      for (const id of pose.parts) applyActorPose(nodes.get(id), matrix);
+    }
   }
   for (const line of paths.children) {
     line.geometry.dispose();
@@ -203,6 +245,7 @@ function show(step) {
   for (const entry of toolNodes.values()) entry.node.visible = false;
   const tools = selectedTools(step);
   el("tool-legend").hidden = !tools.length;
+  if (state.stop) return;
   if (tools.length) {
     for (const tool of tools) pathLine(new THREE.Vector3(...tool.seat), tool.path, 0x10907d);
     return;
@@ -239,6 +282,13 @@ function place(step, t) {
 }
 
 function frame(step) {
+  if (state.stop) {
+    const center = stopPoint(step);
+    const side = Math.sign(center.x || 1);
+    const offset = new THREE.Vector3(side * .65, -1, .65).normalize().multiplyScalar(52);
+    moveCamera(center, center.clone().add(offset));
+    return;
+  }
   const box = new THREE.Box3();
   const tools = selectedTools(step);
   for (const tool of tools) {
@@ -283,40 +333,71 @@ function frame(step) {
   const halfFov = THREE.MathUtils.degToRad(camera.fov / 2);
   const fitFov = Math.min(halfFov, Math.atan(Math.tan(halfFov) * camera.aspect));
   const distance = radius * (step.showWires ? 1.06 / Math.sin(fitFov) : 3.1);
-  const target = { center, position: center.clone().add(dir.multiplyScalar(distance)) };
+  moveCamera(center, center.clone().add(dir.multiplyScalar(distance)));
+}
+
+function moveCamera(center, position) {
   const from = { center: controls.target.clone(), position: camera.position.clone() };
   cancelAnimationFrame(cameraFrame);
   const start = performance.now();
   const tween = now => {
     const k = Math.min(1, (now - start) / 450);
     const e = k * (2 - k);
-    controls.target.lerpVectors(from.center, target.center, e);
-    camera.position.lerpVectors(from.position, target.position, e);
+    controls.target.lerpVectors(from.center, center, e);
+    camera.position.lerpVectors(from.position, position, e);
     repaint = true;
     if (k < 1) cameraFrame = requestAnimationFrame(tween);
   };
   cameraFrame = requestAnimationFrame(tween);
 }
 
-function go(index) {
-  state.index = Math.max(0, Math.min(steps.length - 1, index));
-  const step = steps[state.index];
-  history.replaceState(null, "", "#" + step.id);
-  for (const button of document.querySelectorAll("#list button")) {
-    button.classList.toggle("active", Number(button.dataset.index) === state.index);
-  }
-  document.querySelector("#list button.active")?.scrollIntoView({ block: "nearest" });
-  el("meta").innerHTML = `<b>${step.label}</b> / ${mainSteps} · ${step.section}` +
-    (step.bench ? '<span class="bench">작업대</span>' : "");
-  el("title").textContent = step.continued ? `${step.label} 이어서` : `${step.label}단계`;
-  el("text").textContent = step.text;
+function updateNotes(step) {
   const notes = step.notes.slice();
   if (step.insertionClearance) {
     const { slide, lower } = step.insertionClearance;
     notes.push(`CAD 계산상 최소 여유 · 옆으로 밀 때 ${slide.continuous_lower_bound_mm} mm · 자리 맞출 때 ${lower.continuous_lower_bound_mm} mm`);
   }
   if (step.blinkDegrees !== undefined) notes.push(`검사한 눈꺼풀 위치 · ${step.blinkDegrees}°`);
+  if (state.stop?.firstContactDegrees !== undefined)
+    notes.push(`CAD에서 처음 닿는 각도 · ${state.stop.firstContactDegrees.toFixed(3)}°`);
+  if (state.wirePose) {
+    const [yaw, pitch, eye, , jaw] = state.wirePose.poseDegrees;
+    const scope = state.wirePose.fullHarness ? "CAD 배선 모델 표시" : "카메라 경로만 표시";
+    notes.push(`${scope} · 토크 해제 검사 자세 · 목 좌우 ${yaw}° · 상하 ${pitch}° · 눈 상하 ${eye}° · 턱 ${jaw}°`);
+  }
   el("notes").replaceChildren(...notes.map(note => Object.assign(document.createElement("li"), { textContent: note })));
+}
+
+function clearStop(step) {
+  if (!state.stop) return false;
+  state.stop = null;
+  el("stop-select").value = "";
+  updateNotes(step);
+  return true;
+}
+
+function go(index, stop = null) {
+  state.index = Math.max(0, Math.min(steps.length - 1, index));
+  state.stop = stop;
+  state.wirePose = null;
+  const step = steps[state.index];
+  const complete = step.id === "final-view";
+  if (complete) el("hide-exterior").checked = false;
+  el("stop-select").value = stop?.id ?? "";
+  el("wire-select").value = "";
+  el("wire-view").hidden = !complete || !wireStates.length;
+  el("play").hidden = complete;
+  el("scrub").hidden = complete;
+  history.replaceState(null, "", "#" + step.id);
+  for (const button of document.querySelectorAll("#list button")) {
+    button.classList.toggle("active", Number(button.dataset.index) === state.index);
+  }
+  document.querySelector("#list button.active")?.scrollIntoView({ block: "nearest" });
+  el("meta").innerHTML = (complete ? `CAD 조립 검사 ${data.steps.length}단계` : `<b>${step.label}</b> / ${mainSteps} · ${step.section}`) +
+    (step.bench ? '<span class="bench">작업대</span>' : "");
+  el("title").textContent = complete ? step.section : step.continued ? `${step.label} 이어서` : `${step.label}단계`;
+  el("text").textContent = step.text;
+  updateNotes(step);
   el("issues").hidden = !step.issues.length;
   el("issues").lastElementChild.replaceChildren(...step.issues.map(issue =>
     Object.assign(document.createElement("li"), { textContent: issue })));
@@ -364,14 +445,24 @@ function tick(now) {
 el("prev").onclick = () => go(state.index - 1);
 el("next").onclick = () => go(state.index + 1);
 el("play").onclick = () => {
+  const step = steps[state.index];
   state.playing = !state.playing;
   el("play").textContent = state.playing ? "❚❚" : "▶︎";
+  if (clearStop(step)) {
+    show(step);
+    frame(step);
+  }
 };
 el("scrub").oninput = event => {
+  const step = steps[state.index];
   state.playing = false;
   el("play").textContent = "▶︎";
   state.t = event.target.value / 1000;
-  place(steps[state.index], state.t);
+  if (clearStop(step)) {
+    show(step);
+    frame(step);
+  }
+  place(step, state.t);
 };
 el("hide-exterior").onchange = () => {
   const step = steps[state.index];
@@ -380,11 +471,35 @@ el("hide-exterior").onchange = () => {
 };
 el("tool-select").onchange = () => {
   const step = steps[state.index];
+  clearStop(step);
   show(step);
   state.t = state.playing ? 0 : 1;
   state.last = performance.now();
   place(step, state.t);
   frame(step);
+};
+el("stop-view").hidden = !stops.length;
+el("stop-select").append(...stops.map(stop => new Option(stop.label, stop.id)));
+el("stop-select").onchange = event => {
+  const stop = stops.find(location => location.id === event.target.value);
+  if (!stop) {
+    go(state.index);
+    return;
+  }
+  const step = steps.findIndex(row => row.id === stop.stage);
+  if (step < 0) throw new Error(`Missing stop inspection stage: ${stop.stage}`);
+  state.playing = false;
+  el("play").textContent = "▶︎";
+  el("hide-exterior").checked = true;
+  go(step, stop);
+};
+el("wire-select").append(...wireStates.map(pose => new Option(pose.label, pose.id)));
+el("wire-select").onchange = event => {
+  const step = steps[state.index];
+  state.wirePose = wireStates.find(pose => pose.id === event.target.value) ?? null;
+  updateNotes(step);
+  show(step);
+  place(step, 1);
 };
 addEventListener("keydown", event => {
   if (event.target instanceof Element && event.target.closest("button, input, select")) return;
@@ -401,6 +516,6 @@ makeList();
 resize();
 camera.position.set(250, -400, 300);
 const start = steps.findIndex(step => step.id === location.hash.slice(1));
-go(start < 0 ? 0 : start);
+go(start < 0 ? (data.finalView ? steps.length - 1 : 0) : start);
 el("loading").remove();
 requestAnimationFrame(tick);

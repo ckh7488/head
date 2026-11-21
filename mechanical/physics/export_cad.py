@@ -93,6 +93,7 @@ def extract(path, output, include_world):
         doc.CableSaddle.Shape.exportStep(str(output/'cable_saddle.step'))
         if doc.getObject('CableGate'):
             doc.CableGate.Shape.exportStep(str(output/'cable_gate.step'))
+        if doc.getObject('BallastTray'):
             doc.BallastTray.Shape.exportStep(str(output/'ballast_tray.step'))
         for name in ('Part073', 'Part074'):
             world_mesh(doc.getObject(name)).write(str(output/f'{name}.stl'))

@@ -13,7 +13,7 @@ import numpy as np
 import trimesh
 
 from build_b20_print import (
-    CORE, PRODUCTION, MODEL, MODEL_RELS, MODEL_SETTINGS, REVISIONS, replace_mesh, serialize, template_parts
+    CORE, PRODUCTION, MODEL, MODEL_RELS, MODEL_SETTINGS, REVISIONS, remove_part, replace_mesh, serialize, template_parts
 )
 
 
@@ -142,10 +142,37 @@ def add_board_clips(base, model, config, changes, names, clips):
     return additions
 
 
-def build(output, replacements, report, clips=(), support=()):
-    if output.resolve() == BASE.resolve():
-        raise ValueError('Choose a separate B21 project output')
-    with ZipFile(BASE) as base:
+def remove_ballast_plate(base, model, config, changes):
+    plate, = config.xpath("./plate[metadata[@key='plater_id'][@value='13']]")
+    parts = template_parts(config)
+    ballast = [parts[name][0] for name in ('43_neck_ballast_tray.stl', '44_ballast_cover.stl')]
+    if {obj.get('id') for obj in ballast} != {
+        slot.get('value') for slot in plate.findall("model_instance/metadata[@key='object_id']")
+    }:
+        raise ValueError('Optional plate contains unexpected parts')
+    rels = etree.fromstring(changes.get(MODEL_RELS, base.read(MODEL_RELS)))
+    deleted = set()
+    for obj in ballast:
+        remove_part(obj, model, config, rels, deleted)
+    config.remove(plate)
+    sequence_path = 'Metadata/filament_sequence.json'
+    sequence = json.loads(base.read(sequence_path))
+    del sequence['plate_13']
+    cut_path = 'Metadata/cut_information.xml'
+    cut = etree.fromstring(base.read(cut_path))
+    for path in deleted:
+        index = Path(path).stem.removeprefix('object_')
+        cut.remove(cut.find(f"object[@id='{index}']"))
+    changes.update({MODEL_RELS: serialize(rels), sequence_path: json.dumps(sequence, separators=(',', ':')).encode(),
+                    cut_path: serialize(cut)})
+    return deleted
+
+
+def build(output, replacements, report, clips=(), support=(), *, source=BASE, revision='B21', without_ballast=False,
+          normal_support=()):
+    if output.resolve() == source.resolve():
+        raise ValueError(f'Choose a separate {revision} project output')
+    with ZipFile(source) as base:
         model = etree.fromstring(base.read(MODEL))
         config = etree.fromstring(base.read(MODEL_SETTINGS))
         old_parts = template_parts(config)
@@ -164,16 +191,23 @@ def build(output, replacements, report, clips=(), support=()):
                 if setting is None:
                     setting = etree.SubElement(obj, 'metadata', key='enable_support')
                 setting.set('value', '1')
+            if old_name in normal_support:
+                setting = obj.find("metadata[@key='support_type']")
+                if setting is None:
+                    setting = etree.SubElement(obj, 'metadata', key='support_type')
+                setting.set('value', 'normal(auto)')
             names[object_id] = new_name
-        model.find(f"{CORE}metadata[@name='Title']").text = 'R5 B21 P2S'
+        model.find(f"{CORE}metadata[@name='Title']").text = f'R5 {revision} P2S'
+        deleted = remove_ballast_plate(base, model, config, changes) if without_ballast else set()
         changes[MODEL] = serialize(model)
         changes[MODEL_SETTINGS] = serialize(config)
         before = plate_signatures(base)
         output.parent.mkdir(parents=True, exist_ok=True)
         with ZipFile(output, 'w') as package:
             for item in base.infolist():
-                data = changes[item.filename] if item.filename in changes else base.read(item)
-                package.writestr(copy(item), data)
+                if item.filename not in deleted:
+                    data = changes[item.filename] if item.filename in changes else base.read(item)
+                    package.writestr(copy(item), data)
             for path, data in additions.items():
                 template = base.getinfo(MODEL)
                 item = ZipInfo(path, date_time=template.date_time)
@@ -182,8 +216,9 @@ def build(output, replacements, report, clips=(), support=()):
             after = plate_signatures(package)
             profile_key = 'Metadata/project_settings.config'
             profile = package.read(profile_key)
-            if profile != base.read(profile_key) or before.keys() != after.keys():
-                raise ValueError('The B20 plate set or printer settings changed')
+            removed = {13} if without_ballast else set()
+            if profile != base.read(profile_key) or before.keys() - removed != after.keys():
+                raise ValueError('The source plate set or printer settings changed')
     changed = {number: [names[row[0]] for row in rows if row[0] in names]
                for number, rows in after.items() if before[number] != rows}
     if set(names.values()) != {name for parts in changed.values() for name in parts}:
@@ -192,7 +227,9 @@ def build(output, replacements, report, clips=(), support=()):
               'profile_sha256': sha256(profile).hexdigest(),
               'plate_sha256': {number: plate_digest(rows) for number, rows in after.items()},
               'changed_plates': changed,
-              'identical_to_b20_plates': sorted(before.keys() - changed.keys())}
+              f'identical_to_{source.parent.name}_plates': sorted(after.keys() - changed.keys())}
+    if removed:
+        result['removed_plates'] = sorted(removed)
     text = json.dumps(result, indent=2) + '\n'
     if report:
         report.parent.mkdir(parents=True, exist_ok=True)

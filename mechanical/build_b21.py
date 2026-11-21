@@ -22,19 +22,20 @@ def write_json(path, value):
     path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
 
 
-def build(source, output):
+def build_base(source, output):
     prints = output / 'print'
     stage = output / 'stages'
     fastener_cad = stage / 'fasteners.FCStd'
     link_cad = stage / 'links.FCStd'
     mast_cad = stage / 'mast.FCStd'
-    assembly = output / 'R5-B21-Assembly.FCStd'
     fasteners.build(source, fastener_cad, prints)
     links.build(fastener_cad, link_cad, prints)
     mast.build(link_cad, mast_cad, prints)
-    jaw_stop.build(mast_cad, assembly, prints / '37_right_cheek_bearing_stay-B21.stl',
-                   output / 'jaw-stop.json', ROOT / 'mechanical/revisions/b20/physics/dynamics.json', fea=True)
+    return mast_cad
 
+
+def build_hardware(output):
+    prints = output / 'print'
     initial = {row['name']: row for row in read_json(fasteners.B19_HARDWARE)}
     combined = {row['name']: row for row in read_json(prints / 'hardware-spec.json')}
     for name in links.RETIRED_CAD:
@@ -53,6 +54,14 @@ def build(source, output):
     hardware = json.loads(raw)
     hardware['hardware'].extend(read_json(prints / 'hardware-rows.json'))
     write_json(output / 'hardware.json', hardware)
+
+
+def build(source, output):
+    assembly = output / 'R5-B21-Assembly.FCStd'
+    mast_cad = build_base(source, output)
+    jaw_stop.build(mast_cad, assembly, output / 'print/37_right_cheek_bearing_stay-B21.stl',
+                   output / 'jaw-stop.json', ROOT / 'mechanical/revisions/b20/physics/dynamics.json', fea=True)
+    build_hardware(output)
     print(assembly)
 
 

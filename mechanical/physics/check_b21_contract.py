@@ -11,13 +11,14 @@ import re
 
 import numpy as np
 
-from check_b19_assembly import PLANS, World, plan_hash
+from check_b19_assembly import B22_CAMERA_PATH_CHECKS, World, assembly_plan, plan_hash
 
 
 XL330 = 'https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/'
 XL330_BLINK = 'https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/'
 XL430 = 'https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/'
 OPENRB = 'https://emanual.robotis.com/docs/en/parts/controller/openrb-150/'
+CAMERA = 'https://github.com/INNO-MAKER/U20CAM-1080P-S1'
 
 
 @dataclass(frozen=True)
@@ -49,6 +50,11 @@ def vendor_interfaces():
         bolt = f'openrbBolt{i}'
         mounts[bolt] = VendorInterface('Part069', 2., OPENRB, 'supplied PCB through hole')
         mounts[f'openrbNut{i}'] = VendorInterface('Part069', 2., OPENRB, 'supplied PCB through hole', bolt)
+    for side in ('Left', 'Right'):
+        bolt = f'CameraPCBScrew{side}'
+        description = 'supplied PCB Ø2.2 mm hole, nominal centre inferred from vendor photos'
+        mounts[bolt] = VendorInterface('Part067', 2., CAMERA, description)
+        mounts[f'CameraPCBNut{side}'] = VendorInterface('Part067', 2., CAMERA, description, bolt)
     return mounts
 
 
@@ -283,7 +289,7 @@ def pivot_check(plan, world, specs, report, digest):
                    scope='CAD finished sizes and smooth pin geometry; machining fit remains a physical inspection')
 
 
-def assembly_check(rows, plan, digest):
+def assembly_check(rows, plan, digest, revision='b21'):
     failures, unknown = [], []
     if not rows or rows[0].get('cad_sha256') != digest:
         unknown.append('Assembly report is absent or identifies a different CAD source')
@@ -291,13 +297,51 @@ def assembly_check(rows, plan, digest):
         unknown.append('Assembly report identifies a different assembly plan')
     expected = [row['id'] for row in plan]
     if [row['id'] for row in rows] != expected:
-        unknown.append('Assembly report does not cover the full ordered B21 plan')
+        unknown.append('Assembly report does not cover the full ordered plan')
     else:
         for current, planned in zip(rows, plan, strict=True):
             stage = current['id']
             if current['text'] != planned['text'] or current['context'] != planned['ctx']:
                 unknown.append(f'{stage}: checked step differs from plan')
             failures.extend(f'{stage}: {issue}' for issue in current['issues'] if not issue.endswith(' route unknown'))
+            insertions = {'head-frame': 'head_frame_clearance', 'pitch-stop-link': 'pitch_link_clearance'}
+            if revision == 'b22' and stage in insertions:
+                clearance = current.get(insertions[stage], {}).get('continuous_lower_bound_mm')
+                if clearance is None:
+                    unknown.append(f'{stage}: missing continuous insertion clearance evidence')
+                elif not np.isfinite(clearance) or clearance <= 0:
+                    failures.append(f'{stage}: no continuous insertion clearance')
+            if stage in ('lid-left', 'lid-right') and 'place2' in planned:
+                clearance = current.get('lid_insertion_clearance', {}).get('continuous_lower_bound_mm')
+                if clearance is None or not np.isfinite(clearance) or clearance < .20:
+                    unknown.append(f'{stage}: missing clear complete eyelid insertion')
+            if 'integral_print' in planned and current.get('integral_print') != planned['integral_print']:
+                unknown.append(f'{stage}: missing declaration of single printed body')
+            if revision == 'b22' and stage == 'jaw-bearing-fit':
+                bearing = current.get('bearing_insertion', {})
+                if bearing.get('status') != 'pass' or bearing.get('swept_overlap_mm3', np.inf) > 1e-7:
+                    unknown.append(f'{stage}: missing clear complete bearing insertion')
+            if 'camera_feed' in planned:
+                feed = current.get('camera_feed', {})
+                if (feed.get('status') != 'pass' or
+                        any(feed.get(key) != value for key, value in planned['camera_feed'].items())):
+                    unknown.append(f'{stage}: missing clear complete camera feed')
+            if stage in B22_CAMERA_PATH_CHECKS:
+                field, reserves = B22_CAMERA_PATH_CHECKS[stage]
+                _, points = planned['path']
+                legs = current.get(field, [])
+                if [(tuple(leg.get('start_mm', ())), tuple(leg.get('end_mm', ()))) for leg in legs] != [
+                        (tuple(start), tuple(end)) for start, end in zip(points, points[1:])]:
+                    unknown.append(f'{stage}: missing complete camera insertion evidence')
+                elif any(not np.isfinite(leg.get('continuous_lower_bound_mm', -np.inf)) or
+                         leg['continuous_lower_bound_mm'] <= 0 or leg['continuous_lower_bound_mm'] < reserve
+                         for leg, reserve in zip(legs, reserves, strict=True)):
+                    failures.append(f'{stage}: insufficient continuous camera insertion clearance')
+            if stage == 'camera-tray-bolts':
+                heads = current.get('camera_tray_head_passage', {})
+                for name in planned['bolts']:
+                    if heads.get(name, {}).get('status') != 'pass':
+                        unknown.append(f'{stage}/{name}: missing clear continuous socket head passage')
             for name in planned.get('hold_nuts', ()):
                 access = current.get('tool_access', {}).get(name, {})
                 if access.get('status') == 'fail':
@@ -354,10 +398,10 @@ def light_touch_check(report, digest):
                    scope='numerical joint/load model, not measured servo output or printed durability')
 
 
-def run(cad, source, hardware, spec, bom, assembly, head, touch):
-    plan = PLANS['b21']
+def run(cad, source, hardware, spec, bom, assembly, head, touch, revision='b21'):
     digest = sha256(source.read_bytes()).hexdigest()
     layout = read(cad/'cad_parts.json')
+    plan = assembly_plan(revision, layout)
     if layout['source_sha256'] != digest:
         return [outcome('cad_source', unknown=['CAD export hash does not match source'])]
     entries = read(hardware)['hardware']
@@ -366,7 +410,7 @@ def run(cad, source, hardware, spec, bom, assembly, head, touch):
     checks = []
     for name, function in (
         ('fastener_stock', lambda: installed_fasteners(plan, world, layout, parts, bom)),
-        ('assembly_path_and_tools', lambda: assembly_check(read(assembly), plan, digest)),
+        ('assembly_path_and_tools', lambda: assembly_check(read(assembly), plan, digest, revision)),
         ('rigid_motion', lambda: rigid_motion_check(read(head), digest)),
         ('smooth_pivot_fit', lambda: pivot_check(plan, world, parts, read(touch), digest)),
         ('light_touch', lambda: light_touch_check(read(touch), digest)),
@@ -382,6 +426,7 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     for name in ('cad', 'source', 'hardware', 'spec', 'bom', 'assembly', 'head', 'touch', 'report'):
         parser.add_argument(f'--{name}', type=Path, required=True)
+    parser.add_argument('--revision', choices=('b21', 'b22'), default='b21')
     args = vars(parser.parse_args())
     target = args.pop('report')
     try:

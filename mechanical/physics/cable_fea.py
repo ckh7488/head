@@ -15,16 +15,17 @@ ELASTIC_MODULUS = 1450.
 POISSON = .37
 
 
-def mesh_step(path, edge_size):
+def mesh_step(path, edge_size, *, volume_algorithm=1, minimum_edge_ratio=.53):
     gmsh.initialize()
     try:
         gmsh.option.setNumber('General.Terminal',0)
         gmsh.option.setNumber('General.NumThreads',4)
+        gmsh.option.setNumber('Mesh.Algorithm3D', volume_algorithm)
         gmsh.model.add(path.stem)
         gmsh.model.occ.importShapes(str(path))
         gmsh.model.occ.synchronize()
         assert len(gmsh.model.getEntities(3))==1
-        gmsh.option.setNumber('Mesh.MeshSizeMin',edge_size*.53)
+        gmsh.option.setNumber('Mesh.MeshSizeMin',edge_size*minimum_edge_ratio)
         gmsh.option.setNumber('Mesh.MeshSizeMax',edge_size)
         gmsh.option.setNumber('Mesh.MinimumCirclePoints',16)
         gmsh.model.mesh.generate(3)

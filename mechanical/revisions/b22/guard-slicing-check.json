@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "project_sha256": "33195a88d6a8ac4b7c49e0f03764d94ca2b6d0f339f470b94640d0a7963ce912",
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "filament": "Bambu PETG HF @BBL P2S 0.4 nozzle",
+  "plate": "Textured PEI Plate",
+  "layer_height_mm": 0.2,
+  "objects": 9,
+  "unsupported_starts": 0,
+  "warning": "",
+  "predicted_seconds": 2595.49072265625,
+  "predicted_filament_g": 18.338176727294922
+}

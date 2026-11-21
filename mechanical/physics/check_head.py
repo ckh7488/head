@@ -2,7 +2,7 @@
 
 from argparse import ArgumentParser
 from itertools import product
-from math import cos, radians, sin
+from math import atan2, cos, radians, sin
 from pathlib import Path
 import json
 
@@ -13,7 +13,8 @@ from trimesh.collision import mesh_to_BVH
 
 AXES_BY_MOTION = {'fixed':(), 'head':(), 'pan':(0,), 'tilt':(1,), 'tilt_link':(1,), 'tilt_horn':(1,), 'look1':(1,2),
        'look2':(1,2), 'look_link':(1,2), 'look_horn':(1,2), 'lid1':(3,), 'lid2':(3,),
-       'blink_motor_horn':(3,), 'blink_shaft_crank':(3,), 'blink_drive_link':(3,), 'blink_lid_link':(3,), 'jaw':(4,)}
+       'blink_motor_horn':(3,), 'blink_shaft_crank':(3,), 'blink_drive_link':(3,), 'blink_lid_link':(3,), 'jaw':(4,),
+       'pitch_link':(0,)}
 
 PAIRS_BY_INTERFACE = {
     'links':(['Part057','Part060'],['Part011','Part012','Part013','Part014','Part015','Part016','Part019','Part024','Part025','Part027','Part029','Part033','Part041','Part042','Part044','Part048','Part063','Part064','Part073','Part074','Part076','Part077','Part078','Part079','Jaw_36_left_jaw_servo_stay','Jaw_37_right_jaw_bearing_stay','Jaw_38_left_jaw_drive_arm','Jaw_39_right_jaw_pivot_arm','Jaw_30_moving_jaw']),
@@ -51,11 +52,16 @@ MEASURE_GAP = {
 
 
 def sweep_angles(layout):
-    stop = layout['motion_geometry'].get('jaw_stop')
-    if stop is None:
-        return ANGLES
-    limit = float(stop['verified_clear_deg'])
-    return (*ANGLES[:-1], tuple(np.linspace(0., limit, len(ANGLES[-1]))))
+    geometry = layout['motion_geometry']
+    angles = list(ANGLES)
+    stop = geometry.get('jaw_stop')
+    if stop is not None:
+        angles[-1] = tuple(np.linspace(0., float(stop['verified_clear_deg']), len(ANGLES[-1])))
+    pitch_stop = geometry.get('pitch_stop')
+    if pitch_stop is not None:
+        low, high = pitch_stop['powered_deg']
+        angles[0] = (low, *ANGLES[0][1:-1], high)
+    return angles
 
 
 def translation(offset):
@@ -66,6 +72,18 @@ def translation(offset):
 
 def rotation(angle, axis, pivot):
     return tr.transformations.rotation_matrix(radians(angle), axis, pivot)
+
+
+def pitch_link_pose(pitch, layout):
+    """Rotate the steel link about its fixed pivot so the head pin stays on its slot axis."""
+    link = layout['motion_geometry']['pitch_stop']['link']
+    lower = np.asarray(link['pan_pin_mm'])
+    upper = np.asarray(link['head_pin_mm'])
+    moved = tr.transform_points([upper], rotation(pitch, (1, 0, 0), (0, 0, 112)))[0]
+    y0, z0 = (upper-lower)[1:]
+    y1, z1 = (moved-lower)[1:]
+    angle = atan2(y0*z1-z0*y1, y0*y1+z0*z1)
+    return tr.transformations.rotation_matrix(angle, (1, 0, 0), lower)
 
 
 def offset(angle, phase, radius):
@@ -82,6 +100,8 @@ def pose(kind, angles, layout):
     eye_yaw_rig = rig['eye_yaw']
     if kind == 'pan':
         return rotation(-neck, x_axis, (0, 0, 112))
+    if kind == 'pitch_link':
+        return rotation(-neck, x_axis, (0, 0, 112)) @ pitch_link_pose(neck, layout)
     if kind == 'jaw':
         return rotation(jaw, x_axis, layout['jaw_pivot_mm'])
     if kind in ('look1', 'look2', 'look_horn'):

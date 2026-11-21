@@ -21,12 +21,20 @@ def build(assets, output, revision, preview=False):
         raise ValueError('GLB and step metadata do not match')
     if not re.fullmatch(r'[0-9a-f]{64}', data.get('cadSha256', '')):
         raise ValueError('Viewer has no exact CAD digest')
-    if revision == 'B21' and not re.fullmatch(r'[0-9a-f]{64}', data.get('planSha256') or ''):
-        raise ValueError('B21 viewer has no checked assembly-plan digest')
+    has_qualified_tools = revision in ('B21', 'B22')
+    if has_qualified_tools and not re.fullmatch(r'[0-9a-f]{64}', data.get('planSha256') or ''):
+        raise ValueError(f'{revision} viewer has no checked assembly-plan digest')
     if not preview and any(step['issues'] for step in data['steps']):
         raise ValueError('Resolve assembly issues before packaging production review')
-    if revision == 'B21' and not data.get('wires'):
-        raise ValueError('B21 viewer has no CAD cable paths')
+    if has_qualified_tools and not data.get('wires'):
+        raise ValueError(f'{revision} viewer has no CAD cable paths')
+    if revision == 'B22' and not preview:
+        stops = data.get('stops', [])
+        angles = sorted(stop['firstContactDegrees'] for stop in stops)
+        if len(angles) != 2 or not angles[0] < 0 < angles[-1]:
+            raise ValueError('B22 viewer needs checked stops in both pitch directions')
+        if any({'head', 'anchor'} - stop.get('contactPose', {}).keys() for stop in stops):
+            raise ValueError('B22 viewer has no checked pitch pose for a stop')
 
     data['embeddedModel'] = base64.b64encode(model).decode('ascii')
     text = (VIEWER / 'viewer.js').read_text(encoding='utf-8')
@@ -34,6 +42,9 @@ def build(assets, output, revision, preview=False):
                              '--loader=js', '--sourcefile=viewer.js'],
                             input=text, text=True, encoding='utf-8', cwd=VIEWER, capture_output=True, check=True).stdout
     markup = (VIEWER / 'index.html').read_text(encoding='utf-8')
+    if preview:
+        status = '<span class="sub" id="step-count"></span>'
+        markup = markup.replace(status, status + '<span class="sub">중간 검토본</span>')
     css = (VIEWER / 'viewer.css').read_text(encoding='utf-8')
     markup = markup.replace('<link rel="stylesheet" href="viewer.css">', '<style>' + css + '</style>')
     markup, count = re.subn(r'\s*<script type="importmap">.*?</script>', '', markup, flags=re.S)

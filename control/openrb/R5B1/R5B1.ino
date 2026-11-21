@@ -6,16 +6,18 @@
 
 constexpr uint8_t trackerCount = 5;
 constexpr uint8_t count = trackerCount + 1;
-constexpr uint8_t jawMaxDegrees = 8;
-constexpr uint8_t jawMaxTravelTicks = 4096u*jawMaxDegrees/360u;
-constexpr uint8_t neckPitchMaxDegrees = 6;
-constexpr uint8_t neckPitchMaxPositiveTicks = 4096u*neckPitchMaxDegrees/360u;
+constexpr float jawMaxDegrees = 5.5f;
+constexpr uint8_t jawMaxTravelTicks = static_cast<uint8_t>(4096u*jawMaxDegrees/360u);
+constexpr float neckPitchMaxDegrees = 4.5f;
+constexpr uint8_t neckPitchMaxNegativeDegrees = 15;
+constexpr uint8_t neckPitchMaxPositiveTicks = static_cast<uint8_t>(4096u*neckPitchMaxDegrees/360u);
+constexpr uint8_t neckPitchMaxNegativeTicks = (4096u*neckPitchMaxNegativeDegrees+180u)/360u;
 constexpr uint16_t model[count] = {1190, 1190, 1200, 1060, 1060, 1200};
-constexpr float lowDeg[count]  = {-20, -8, 0, -60, -15, 0};
+constexpr float lowDeg[count]  = {-20, -8, 0, -60, -neckPitchMaxNegativeDegrees, 0};
 constexpr float highDeg[count] = {20, 8, 90, 60, neckPitchMaxDegrees, jawMaxDegrees};
 constexpr uint16_t pwm[count] = {180, 180, 200, 270, 300, 160};
-constexpr uint16_t velocity[count] = {75, 60, 160, 29, 19, 95};
-constexpr uint16_t acceleration[count] = {20, 16, 62, 12, 10, 40};
+constexpr uint16_t velocity[count] = {75, 60, 160, 29, 19, 35};
+constexpr uint16_t acceleration[count] = {20, 16, 62, 12, 10, 10};
 static_assert(sizeof(calibration)/sizeof(calibration[0]) == count, "One calibration row per axis");
 constexpr uint32_t busBaud = 57600;
 constexpr uint32_t busTimeoutMs = 14;
@@ -24,6 +26,10 @@ constexpr uint32_t goalPeriodMs = 60;
 constexpr uint32_t reportMs = 120;
 constexpr uint8_t holdTolerance = 3;
 constexpr uint8_t positionTolerance = 8;
+constexpr uint8_t jawPositionTolerance = 11;
+constexpr uint8_t eyeCalibrationTicks[] = {4096u*20u/360u-positionTolerance,
+                                           4096u*8u/360u-positionTolerance};
+constexpr uint16_t neckYawCalibrationTicks = 4096u*60u/360u-positionTolerance;
 constexpr uint8_t hardwareAlert = 0x80;
 constexpr uint8_t neckYawAxis = 3, neckPitchAxis = 4;
 constexpr uint8_t neckNeutralTolerance = 4096u*2u/360u;  // Direct drive, up to 2 degrees.
@@ -128,13 +134,28 @@ float limited(float value, float lo, float hi) {
   return value;
 }
 
+bool pitchEndpointsInRange(const Calibration& c) {
+  return abs(c.low-c.zero)<=neckPitchMaxNegativeTicks && abs(c.high-c.zero)<=neckPitchMaxPositiveTicks;
+}
+
+bool eyeEndpointsInRange(uint8_t i, const Calibration& c) {
+  return i>=sizeof(eyeCalibrationTicks) ||
+         (abs(c.low-c.zero)<=eyeCalibrationTicks[i] && abs(c.high-c.zero)<=eyeCalibrationTicks[i]);
+}
+
+bool yawEndpointsInRange(const Calibration& c) {
+  return abs(c.low-c.zero)<=neckYawCalibrationTicks && abs(c.high-c.zero)<=neckYawCalibrationTicks;
+}
+
 bool validCalibration(uint8_t i) {
   const auto& c = calibration[i];
   if (c.low<0 || c.low>4095 || c.zero<0 || c.zero>4095 || c.high<0 || c.high>4095) {
     return false;
   }
   if (i==trackerCount && abs(c.high-c.zero)>jawMaxTravelTicks) return false;
-  if (i==neckPitchAxis && abs(c.high-c.zero)>neckPitchMaxPositiveTicks) return false;
+  if (i==neckPitchAxis && !pitchEndpointsInRange(c)) return false;
+  if (i==neckYawAxis && !yawEndpointsInRange(c)) return false;
+  if (!eyeEndpointsInRange(i,c)) return false;
   if (lowDeg[i] == 0) return c.low==c.zero && abs(c.high-c.zero)>=4;
   return (c.low<c.zero && c.zero<c.high) || (c.low>c.zero && c.zero>c.high);
 }
@@ -404,7 +425,7 @@ void report() {
         return;
       }
     }
-    if (!inside(i,raw[i],positionTolerance)) {
+    if (!inside(i,raw[i],i==trackerCount ? jawPositionTolerance : positionTolerance)) {
       stopOnFault("POSITION_LIMIT",i+1);
       return;
     }
@@ -436,7 +457,6 @@ void arm(uint8_t mask, bool startJawDemo=false) {
     Serial.println("ERROR RELEASE_BEFORE_JAW_DEMO_CHANGE");
     return;
   }
-  if (startJawDemo && !checkNeckNeutral()) return;
   if (armed!=0 && armed!=mask) {
     Serial.println("ERROR RELEASE_BEFORE_MASK_CHANGE");
     return;
@@ -450,11 +470,16 @@ void arm(uint8_t mask, bool startJawDemo=false) {
         const auto& c=calibration[i];
         const char* error="LOCKED CALIBRATE";
         if (i==trackerCount && abs(c.high-c.zero)>jawMaxTravelTicks) error="LOCKED JAW_CALIBRATION_RANGE";
-        if (i==neckPitchAxis && abs(c.high-c.zero)>neckPitchMaxPositiveTicks) error="LOCKED PITCH_CALIBRATION_RANGE";
+        if (i==neckPitchAxis && !pitchEndpointsInRange(c)) error="LOCKED PITCH_CALIBRATION_RANGE";
+        if (i==neckYawAxis && c.low>=0 && c.zero>=0 && c.high>=0 && !yawEndpointsInRange(c))
+          error="LOCKED YAW_CALIBRATION_RANGE";
+        if (c.low>=0 && c.zero>=0 && c.high>=0 && !eyeEndpointsInRange(i,c))
+          error="LOCKED EYE_CALIBRATION_RANGE";
         printAxisError(error,i+1);
         return;
       }
     }
+    if (startJawDemo && !checkNeckNeutral()) return;
     for (uint8_t i=0;i<count;i++) {
       if (!axisEnabled(mask,i)) continue;
       AxisStatus status;

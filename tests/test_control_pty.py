@@ -120,7 +120,7 @@ def test_jaw_clack_runs_through_the_compiled_sketch(firmware):
     events = firmware.trace()
     commands = [e for e in events if e.direction == 'w' and e.register == 116]
     assert {(e.id, e.value) for e in commands if e.id in (4, 5)} == {(4, 2048), (5, 2048)}
-    assert [e.value for e in commands if e.id == 6][:5] == [2000, 1932, 2000, 1909, 2000]
+    assert [e.value for e in commands if e.id == 6][:5] == [2000, 1955, 2000, 1938, 2000]
     assert [(e.id, e.value) for e in events if e.direction == 'w' and e.register == 64] == [
         (4, 1), (5, 1), (6, 1),
     ]
@@ -143,7 +143,7 @@ def test_jaw_clack_stops_on_a_stalled_servo(firmware):
 ])
 def test_jaw_clack_refuses_to_arm_without_neutral_neck_confirmation(firmware, failure, message):
     if failure == 'off_center':
-        firmware.set(5, 132, 1980)
+        firmware.set(5, 132, 1997)
     else:
         firmware.fail('r', 5, 132, 'timeout', 2)
     with terminal(firmware) as port:

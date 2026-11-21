@@ -1,12 +1,12 @@
 # R5 기구 설계와 조립
 
-[B21 FreeCAD·P2S 출력판과 검사](revisions/b21/) · [이전 CAD 개정](revisions/)
+[B22 FreeCAD·P2S 출력판과 검사](revisions/b22/) · [B21 FreeCAD·P2S 출력판과 검사](revisions/b21/) · [이전 CAD 개정](revisions/)
 
 ## B15 조립
 
 FreeCAD에서 [B15 조립본](R5-B15-Assembly.FCStd)을 엽니다. `revise.py`가 출력을 위한 STL을 생성합니다. 턱의 `Opening`을 0~13°에서 조절할 수 있습니다. [P2S 전체판](R5-B15-P2S.3mf) · [P2S 시험판](R5-B15-Fit-P2S.3mf)
 
-최신 조립 순서와 공구 방향은 [B21 조립 절차서](ASSEMBLY.md)에 있습니다.
+B22 조립 순서와 공구 방향은 [B22 조립 절차서](revisions/b22/assembly.md)에 있습니다. [B21 조립 절차서](ASSEMBLY.md)
 
 ## P2S 출력 설정
 

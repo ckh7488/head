@@ -1,0 +1,230 @@
+{
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "production_plan_sha256": "8c25a64d7bed56f70f3d60e48adb8c51822b88ede042fa69e602a4302204b3c0",
+  "bezel_exterior_start_margin_mm": 8.301544189453125,
+  "degenerate_triangles_ignored": 8,
+  "local_operations": [
+    {
+      "id": "lid-left",
+      "context": "lidL",
+      "text": "작업대에 왼쪽 눈틀을 놓습니다. 눈꺼풀을 열린 자세 그대로 뒤에서 곧게 밀어 넣습니다.",
+      "issues": [],
+      "notes": [],
+      "lid_insertion_clearance": {
+        "parts": [
+          "Part078",
+          "Part076"
+        ],
+        "offset_mm": [
+          0.0,
+          5.275,
+          0.0
+        ],
+        "sampled_min_mm": 0.93,
+        "continuous_lower_bound_mm": 0.918
+      },
+      "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+      "plan_sha256": "60872b1d5f9b86dc5f0a21eea9f5aac0cb2f6aa3abcaee9803706a00a4629faf"
+    },
+    {
+      "id": "lid-right",
+      "context": "lidR",
+      "text": "작업대에 오른쪽 눈틀을 놓습니다. 눈꺼풀을 열린 자세 그대로 뒤에서 곧게 밀어 넣습니다.",
+      "issues": [],
+      "notes": [],
+      "lid_insertion_clearance": {
+        "parts": [
+          "Part079",
+          "Part077"
+        ],
+        "offset_mm": [
+          0.0,
+          5.275,
+          0.0
+        ],
+        "sampled_min_mm": 0.93,
+        "continuous_lower_bound_mm": 0.918
+      }
+    },
+    {
+      "id": "front-skull",
+      "context": "front",
+      "text": "코받침 25가 붙어서 출력된 앞 외장 28을 작업대에 놓습니다.",
+      "issues": [],
+      "notes": [],
+      "integral_print": "front-skull-with-nasal-tray"
+    },
+    {
+      "id": "camera-bezel",
+      "context": "front",
+      "text": "코 테두리 33을 앞쪽 아래에서 대고 오른쪽 위로 비켜 넣습니다. 안쪽 턱을 지난 뒤 가운데로 밀어 맞춥니다. 접합부에 에폭시를 소량 바르고 테이프로 자리를 잡아 굳힙니다.",
+      "issues": [],
+      "notes": [],
+      "bezel_insertion_clearance": [
+        {
+          "parts": [
+            "Part080",
+            "Part073"
+          ],
+          "start_mm": [
+            -2.0,
+            -25.0,
+            -4.25
+          ],
+          "end_mm": [
+            -2.0,
+            -8.0,
+            -4.25
+          ],
+          "closest_offset_mm": [
+            -2.0,
+            -8.0,
+            -4.25
+          ],
+          "required_clearance_mm": 0.3,
+          "sampled_min_mm": 1.661,
+          "continuous_lower_bound_mm": 1.651
+        },
+        {
+          "parts": [
+            "Part080",
+            "Part073"
+          ],
+          "start_mm": [
+            -2.0,
+            -8.0,
+            -4.25
+          ],
+          "end_mm": [
+            1.5,
+            -4.5,
+            -0.75
+          ],
+          "closest_offset_mm": [
+            0.533,
+            -5.467,
+            -1.717
+          ],
+          "required_clearance_mm": 0.3,
+          "sampled_min_mm": 0.5431,
+          "continuous_lower_bound_mm": 0.5332
+        },
+        {
+          "parts": [
+            "Part080",
+            "Part073"
+          ],
+          "start_mm": [
+            1.5,
+            -4.5,
+            -0.75
+          ],
+          "end_mm": [
+            2.5,
+            -3.0,
+            0.75
+          ],
+          "closest_offset_mm": [
+            2.102,
+            -3.597,
+            0.153
+          ],
+          "required_clearance_mm": 0.3,
+          "sampled_min_mm": 0.5346,
+          "continuous_lower_bound_mm": 0.5246
+        },
+        {
+          "parts": [
+            "Part080",
+            "Part073"
+          ],
+          "start_mm": [
+            2.5,
+            -3.0,
+            0.75
+          ],
+          "end_mm": [
+            2.5,
+            -1.0,
+            0.75
+          ],
+          "closest_offset_mm": [
+            2.5,
+            -2.78,
+            0.75
+          ],
+          "required_clearance_mm": 0.3,
+          "sampled_min_mm": 0.5646,
+          "continuous_lower_bound_mm": 0.5546
+        },
+        {
+          "parts": [
+            "Part080",
+            "Part073"
+          ],
+          "start_mm": [
+            2.5,
+            -1.0,
+            0.75
+          ],
+          "end_mm": [
+            1.75,
+            -0.25,
+            0.5
+          ],
+          "closest_offset_mm": [
+            2.118,
+            -0.618,
+            0.623
+          ],
+          "required_clearance_mm": 0.3,
+          "sampled_min_mm": 0.5149,
+          "continuous_lower_bound_mm": 0.505
+        },
+        {
+          "parts": [
+            "Part080",
+            "Part073"
+          ],
+          "start_mm": [
+            1.75,
+            -0.25,
+            0.5
+          ],
+          "end_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "closest_offset_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "required_clearance_mm": 0.3,
+          "sampled_min_mm": 0.5246,
+          "continuous_lower_bound_mm": 0.5146
+        }
+      ]
+    },
+    {
+      "id": "jaw-body-arm",
+      "context": "jawbody",
+      "text": "턱 30과 구동팔 38, 힌지팔 39를 한 몸으로 출력한 부품을 작업대에 놓습니다.",
+      "issues": [],
+      "notes": [],
+      "integral_print": "jaw-with-hinge-arms"
+    }
+  ],
+  "legacy_grouping_regression": {
+    "lid-left": [
+      "Separate printed parts require a checked insertion: Part076, Part078"
+    ],
+    "lid-right": [
+      "Separate printed parts require a checked insertion: Part077, Part079"
+    ],
+    "front-skull": [
+      "Separate printed parts require a checked insertion: Part065, Part073, Part080"
+    ]
+  }
+}

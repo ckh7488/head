@@ -1,0 +1,190 @@
+{
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "sliced_grams_sha256": "b12723dcceb09029328068df052e02d11785a1f780f8ff2ae8574b59fd472d60",
+  "firmware_sha256": "cb1a4a35f0ead9b6da34e2d9900ba667ac6d97816246efa7833417efb24c29df",
+  "status": "pass",
+  "jaw_command_deg": 5.5,
+  "jaw_feedback_limit_deg": 6.416015625,
+  "jaw_profile_velocity_reg": 35,
+  "jaw_profile_acceleration_reg": 10,
+  "joint_order": [
+    "neck_yaw",
+    "neck_pitch",
+    "jaw"
+  ],
+  "trials": {
+    "nominal": {
+      "supply_V": [
+        12.0,
+        12.0,
+        5.0
+      ],
+      "derating_factor": 0.85,
+      "friction_Nm": [
+        0.022,
+        0.02,
+        0.005
+      ],
+      "controller_deadband_deg": 0.35,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": true,
+      "torque_demand_bound_Nm": [
+        0.029807923699962553,
+        0.047767954628448184,
+        0.021802152674195604
+      ],
+      "applied_torque_peak_Nm": [
+        0.02981006793201557,
+        0.049124836304637085,
+        0.021006059153748584
+      ],
+      "shaft_speed_peak_deg_s": [
+        36.89594997305187,
+        21.846977728516848,
+        34.180955963557494
+      ],
+      "simulated_travel_deg": [
+        [
+          -59.49425718572478,
+          59.49682327854016
+        ],
+        [
+          -14.471737139177797,
+          4.755754092635282
+        ],
+        [
+          0.0,
+          6.293165097199731
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.3889830508474576,
+        0.43220338983050843,
+        0.07990960451977401
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.23080471965451566,
+        0.3241946801883619,
+        0.033583136733608535
+      ],
+      "error_peak_deg": [
+        0.6240564118762525,
+        0.8348492602566452,
+        1.5672431861573723
+      ],
+      "error_p95_deg": [
+        0.6226155178369297,
+        0.7827500393339489,
+        1.5179206914080627
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.02709053183182046,
+        "radial_reaction_N": 6.319614228416004,
+        "axial_reaction_N": 0.0024122282264462946,
+        "non_drive_moment_Nm": 0.010663962844774288
+      },
+      "static_inverse_torque_check_delta_Nm": 4.84989132187863e-12,
+      "jaw_commanded_peak_deg": 5.5,
+      "jaw_angle_at_peak_command_deg": 6.290240267829381,
+      "operating_envelope_pass": true
+    },
+    "low_supply_warm": {
+      "supply_V": [
+        11.1,
+        11.1,
+        5.0
+      ],
+      "derating_factor": 0.55,
+      "friction_Nm": [
+        0.045,
+        0.042,
+        0.012
+      ],
+      "controller_deadband_deg": 0.75,
+      "command_rate_scale": 1.0,
+      "command_amplitude_scale": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "uses_firmware_jaw_profile": true,
+      "torque_demand_bound_Nm": [
+        0.05280792369996255,
+        0.06976795462844819,
+        0.028802152674195603
+      ],
+      "applied_torque_peak_Nm": [
+        0.0528090578593816,
+        0.07143063551259374,
+        0.028948253653258434
+      ],
+      "shaft_speed_peak_deg_s": [
+        36.89550282519925,
+        21.839888031036054,
+        34.42763620219578
+      ],
+      "simulated_travel_deg": [
+        [
+          -58.94746220417553,
+          58.950047744089694
+        ],
+        [
+          -13.951048773219174,
+          3.8748729152245804
+        ],
+        [
+          -0.0011126850865380228,
+          6.01481624358487
+        ]
+      ],
+      "zero_speed_model_cap_Nm": [
+        0.23491525423728815,
+        0.26101694915254237,
+        0.05170621468926554
+      ],
+      "minimum_planned_speed_margin_Nm": [
+        0.09917990024487407,
+        0.15547624334050242,
+        0.007035387530854139
+      ],
+      "error_peak_deg": [
+        1.1708223311488648,
+        1.305062798650682,
+        2.2274938990511033
+      ],
+      "error_p95_deg": [
+        1.1693491198342765,
+        1.2848544522163692,
+        2.1605261817427976
+      ],
+      "saturated_percent": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "pitch_joint_envelope": {
+        "pitch_torque_Nm": 0.02709053183182046,
+        "radial_reaction_N": 6.319614228416004,
+        "axial_reaction_N": 0.0024122282264462946,
+        "non_drive_moment_Nm": 0.010663962844774288
+      },
+      "static_inverse_torque_check_delta_Nm": 4.84989132187863e-12,
+      "jaw_commanded_peak_deg": 5.5,
+      "jaw_angle_at_peak_command_deg": 6.011857054379172,
+      "operating_envelope_pass": true
+    }
+  },
+  "pitch_assembly_g": 643.5194302354994,
+  "pitch_link_g": 11.37652296100659,
+  "scope": "Installed masses, conservative actuator derating and supplied friction cases. Small steel link treated as a rigid part of the head for normal drive screening. Servo control is a fitted PD model without wiring load or continuous temperature validation."
+}

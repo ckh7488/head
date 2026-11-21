@@ -9,11 +9,11 @@ SECTIONS = {
     'neck': '목과 머리 프레임', 'pitchmotor': '목과 머리 프레임',
     'eyepitch': '눈 상하 모터', 'blinkhorn': '눈꺼풀 모터', 'blink': '눈꺼풀 모터',
     'eyeL': '눈 모듈', 'eyeR': '눈 모듈', 'eyetie': '눈 모듈', 'eyemod': '눈 모듈', 'eyeyaw': '눈 모듈',
-    'lidL': '눈꺼풀과 앞 외장', 'lidR': '눈꺼풀과 앞 외장', 'front': '눈꺼풀과 앞 외장',
-    'jawbody': '턱', 'jaw': '턱',
+    'lidL': '눈꺼풀과 앞 외장', 'lidR': '눈꺼풀과 앞 외장', 'front': '눈꺼풀과 앞 외장', 'camerabench': '코 카메라',
+    'jawstay': '턱', 'jawbody': '턱', 'jaw': '턱',
 }
 BENCH = {'hatch', 'c3', 'openrb', 'seat', 'rotor', 'pitchmotor', 'eyepitch', 'blinkhorn', 'blink', 'eyeL', 'eyeR',
-         'eyetie', 'eyemod', 'eyeyaw', 'lidL', 'lidR', 'front', 'jawbody', 'jaw'}
+         'eyetie', 'eyemod', 'eyeyaw', 'lidL', 'lidR', 'front', 'camerabench', 'jawstay', 'jawbody', 'jaw'}
 WORDS = {(1, 0, 0): '오른쪽(+x)', (-1, 0, 0): '왼쪽(−x)', (0, 1, 0): '뒤(+y)', (0, -1, 0): '앞(−y)',
          (0, 0, 1): '위(+z)', (0, 0, -1): '아래(−z)'}
 

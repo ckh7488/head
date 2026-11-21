@@ -34,6 +34,18 @@ COLORS = {
 FACE_LIMIT = {'bone': 30000, 'jaw': 12000, 'eye': 8000}
 BLOCKED = re.compile(r'(.+): stated approach \((.+?)\) is blocked; \((.+?)\) is clear')
 REAR_WIRING = ('RearLead', 'CableTie', 'InputXT', 'SupplyXT30', 'CameraUSB', 'ControlUSB')
+GUARD_PANELS = {'GuardFront', 'GuardLeft', 'GuardRight', 'GuardRearTop', 'GuardRearBottom', 'GuardRoof'}
+B22_FASTENER_OWNERS = {
+    'rear-guide-bolts': 'CableSaddle', 'rear-cover-bolts': 'CableGate',
+    'hub-bolts': 'HubHolder', 'hatch-bolts': 'Part000',
+    'c3-carrier-bolts': 'Part071', 'openrb-bolts': 'Part072', 'openrb-carrier-bolts': 'Part072',
+    'keeper-bolts': 'Part001', 'bearing-seat-bolts': 'Part001',
+    'rotor-studs': 'Part007', 'rotor-horn': 'Part007', 'base-deck-bolts': 'Part002',
+    'yoke-bolts': 'Part011', 'pitch-horn-bolts': 'Part016', 'blink-rail-bolts': 'Part063',
+    'eye-pitch-case-screws': 'Part041', 'eye-pitch-plate-screws': 'Part042',
+    'blink-case-screws': 'Part045', 'blink-motor-bolts': 'Part046', 'blink-clamps': 'Part054',
+    'eye-yaw-case-screws': 'Part038', 'jaw-motor-screws': 'Jaw_XL330_M288_Jaw', 'mast-nuts': 'Part010',
+}
 
 
 def numbers(text):
@@ -79,6 +91,102 @@ def load_wires(source, cad_hash):
         return wires
     finally:
         App.closeDocument(doc.Name)
+
+
+def load_guard(source, report, cad_hash):
+    if source is None and report is None:
+        return {}, None
+    if source is None or report is None:
+        raise ValueError('Supply both the guard CAD and its check report')
+    checks = json.loads(report.read_text(encoding='utf-8'))
+    guard_hash = sha256(source.read_bytes()).hexdigest()
+    if (checks.get('status') != 'pass' or checks.get('head_cad_sha256') != cad_hash
+            or checks.get('guard_cad_sha256') != guard_hash):
+        raise ValueError('Guard report does not qualify this head and guard CAD pair')
+
+    import FreeCAD as App
+    from export_cad import tessellate, world_shape
+
+    parts = {}
+    doc = App.openDocument(str(source.resolve()))
+    try:
+        for obj in doc.Objects:
+            if obj.TypeId != 'Part::Feature' or not obj.Name.startswith('Guard'):
+                continue
+            vertices, faces = tessellate(world_shape(obj)).Topology
+            mesh = trimesh.Trimesh(vertices=[list(v) for v in vertices], faces=faces)
+            if not len(mesh.faces):
+                raise ValueError(f'Guard part has no visible mesh: {obj.Name}')
+            parts[obj.Name] = mesh
+    finally:
+        App.closeDocument(doc.Name)
+    if not GUARD_PANELS <= parts.keys():
+        raise ValueError('Guard CAD is missing an installed panel')
+    return parts, guard_hash
+
+
+def assembly_motion(layout, hardware, stock, steps, revision):
+    motion = {row['id']: row['motion'] for row in hardware if 'motion' in row and not row.get('tool')}
+    motion.update({row['name']: row['motion'] for row in stock})
+    motion.update(layout['world_motion'])
+    if revision == 'B22':
+        for step in steps:
+            owner = B22_FASTENER_OWNERS.get(step['id'])
+            if owner is None:
+                continue
+            for move in step['moves']:
+                for actor in move['ids']:
+                    motion.setdefault(actor, motion[owner])
+    return motion
+
+
+def load_wire_states(report, layout, actors, world_motion, wires):
+    if report is None:
+        return []
+    from wiring_motion import matrices
+
+    data = json.loads(report.read_text(encoding='utf-8'))
+    if (data.get('cad_sha256') != layout['source_sha256']
+            or data.get('checked_geometry_cad_sha256') != layout['source_sha256']):
+        raise ValueError('Camera wire states and assembly use different CAD revisions')
+    if not re.fullmatch(r'[0-9a-f]{64}', data.get('routes_sha256', '')):
+        raise ValueError('Camera wire states do not identify the checked route archive')
+    (wire,) = [wire for wire in wires if wire['label'].split('  ·  ', 1)[0] == 'USB-Camera']
+    if not np.isclose(data['diameter_mm'], wire['diameter'], atol=.001, rtol=0):
+        raise ValueError('Camera wire states use a different jacket diameter from CAD')
+    missing = set(actors) - world_motion.keys()
+    if missing:
+        raise ValueError(f'Installed actors without a motion group: {sorted(missing)}')
+    wire_names = {wire['label'].split('  ·  ', 1)[0]: wire for wire in wires}
+    diameters = data.get('wireDiametersMm', {})
+    states = []
+    for row in data['states']:
+        degrees, points = np.asarray(row['pose_deg'], float), np.asarray(row['points'], float)
+        if (degrees.shape != (5,) or points.ndim != 2 or points.shape[1] != 3 or len(points) < 2
+                or not np.isfinite(degrees).all() or not np.isfinite(points).all()):
+            raise ValueError(f'Invalid camera geometry in {row["id"]}')
+        recorded = row.get('wirePoints', {})
+        show_all = (len(wire_names) == len(wires) and wire_names.keys() <= recorded.keys()
+                    and all(np.isclose(diameters.get(name, 0), model['diameter'], atol=.001, rtol=0)
+                            for name, model in wire_names.items()))
+        paths = {wire['id']: points.tolist()}
+        if show_all:
+            for name, model in wire_names.items():
+                path = np.asarray(recorded[name], float)
+                if path.ndim != 2 or path.shape[1] != 3 or len(path) < 2 or not np.isfinite(path).all():
+                    raise ValueError(f'Invalid wire geometry for {name} in {row["id"]}')
+                paths[model['id']] = path.tolist()
+        transforms = matrices(layout, *degrees)
+        poses = {}
+        for actor in actors:
+            pose = transforms[world_motion[actor]]
+            if not np.allclose(pose, np.eye(4)):
+                poses[actor] = pose.tolist()
+        states.append({'id': row['id'], 'label': row['label'], 'poseDegrees': degrees.tolist(),
+                       'actorPoses': poses, 'wirePoints': paths, 'fullHarness': show_all})
+    if not states or len({state['id'] for state in states}) != len(states):
+        raise ValueError('Camera wire state IDs must be unique')
+    return states
 
 
 def checked_tools(row, world, hardware, tools, phases):
@@ -137,29 +245,85 @@ def checked_tools(row, world, hardware, tools, phases):
     return choices
 
 
-def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None):
+def load_stop_locations(report, cad_hash, steps, world_motion):
+    if report is None:
+        return []
+    data = json.loads(report.read_text(encoding='utf-8'))
+    if data.get('cad_sha256') != cad_hash:
+        raise ValueError('Stop locations and assembly use different CAD revisions')
+    if data.get('status') != 'pass' or data.get('issues') or not data.get('locations'):
+        raise ValueError('Stop-location report did not pass')
+    visible = {step['id']: set(step['fixed']) | {part for move in step['moves'] for part in move['ids']}
+               for step in steps}
+    locations, seen = [], set()
+    for row in data['locations']:
+        sid, label, actors = row['id'], row['label'], row['actors']
+        if (row.get('status') != 'pass' or not sid or sid in seen or not label
+                or len(actors) != 2 or actors[0] == actors[1]):
+            raise ValueError(f'Invalid stop location {sid!r}')
+        seen.add(sid)
+        center = np.asarray(row['center_mm'], float)
+        if center.shape != (3,) or not np.isfinite(center).all():
+            raise ValueError(f'Invalid stop center for {sid}')
+        stage = row.get('stage')
+        if stage is None:
+            stage = next((name for name, ids in visible.items() if set(actors) <= ids), None)
+        if not set(actors) <= visible.get(stage, set()):
+            raise ValueError(f'Stop {sid} has hidden contact parts in {stage!r}')
+        angle = row['first_contact_deg']
+        if type(angle) not in (int, float) or not np.isfinite(angle):
+            raise ValueError(f'Invalid measured stop angle for {sid}')
+        location = {'id': sid, 'label': label, 'stage': stage, 'actors': actors,
+                    'center': center.tolist(), 'firstContactDegrees': angle}
+        if 'head_from_neutral' in row:
+            from check_b22_neck import rigid_group
+
+            groups = {name: rigid_group(world_motion[name]) for name in visible[stage] if name in world_motion}
+            moving = sorted(name for name, group in groups.items() if group == 'head')
+            if actors[0] not in groups or actors[0] in moving or actors[1] not in moving:
+                raise ValueError(f'Stop {sid} contact actors are assigned to the wrong motion groups')
+            contact_pose = {'head': {'matrix': row['head_from_neutral'], 'parts': moving}}
+            if 'anchor_from_neutral' in row:
+                anchor_group = groups[actors[0]]
+                anchor = sorted(name for name, group in groups.items() if group == anchor_group)
+                contact_pose['anchor'] = {'matrix': row['anchor_from_neutral'], 'parts': anchor}
+            for pose in contact_pose.values():
+                matrix = np.asarray(pose['matrix'], float)
+                if matrix.shape != (4, 4) or not np.isfinite(matrix).all():
+                    raise ValueError(f'Invalid witnessed pose for {sid}')
+                pose['matrix'] = matrix.tolist()
+            location['contactPose'] = contact_pose
+        locations.append(location)
+    return locations
+
+
+def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None, stop_report=None,
+          guard_cad=None, guard_report=None, wire_states=None):
     data = json.loads(hardware.read_text())
-    world = C.World(cad, data['hardware'], json.loads(spec.read_text()))
+    stock = json.loads(spec.read_text())
+    world = C.World(cad, data['hardware'], stock)
     checked = json.loads(report.read_text())
-    plan = C.PLANS[revision.lower()]
+    layout = json.loads((cad/'cad_parts.json').read_text())
+    plan = C.assembly_plan(revision.lower(), layout)
     if [(row['id'], row['context'], row['text']) for row in checked] != [
             (step['id'], step['ctx'], step['text']) for step in plan]:
         raise ValueError('Assembly report does not match the current assembly plan')
     manifest = {p['cad_id']: p['finish'] for p in json.loads((ROOT/'web/assets/assembly.json').read_text())['parts']}
-    layout = json.loads((cad/'cad_parts.json').read_text())
     world.layout = layout
     if revision != 'B19' and checked[0].get('cad_sha256') != layout['source_sha256']:
         raise ValueError('Assembly report and CAD export use different revisions')
-    if revision == 'B21' and checked[0].get('plan_sha256') != C.plan_hash(plan):
-        raise ValueError('B21 assembly plan differs from the one checked')
+    has_qualified_tools = revision in ('B21', 'B22')
+    if has_qualified_tools and checked[0].get('plan_sha256') != C.plan_hash(plan):
+        raise ValueError(f'{revision} assembly plan differs from the one checked')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
-    b19_names = {item['name'] for item in json.loads(spec.read_text())} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
+    b19_names = {item['name'] for item in stock} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
     hub_plugs = [name for name in layout['world_motion'] if name.startswith('HubPlug')]
     wires = load_wires(assembly_cad, layout['source_sha256'])
+    camera_wires = [wire['id'] for wire in wires if wire['label'].startswith('USB-Camera  ·  ')]
 
     installed, used, steps = {}, set(), []
-    tools, phases = {}, {}
+    tools, phases, feed_models = {}, {}, {}
     number, last_text, sub = 0, '', 0
     for st, row in zip(plan, checked, strict=True):
         if st.get('blink_deg') != row.get('blink_deg'):
@@ -207,6 +371,21 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             size, length, seat, axis = world.screw(name)
             moves.append({'ids': [name], 'path': [(-np.asarray(axis, float)*(length+3.)).round(2).tolist(), [0, 0, 0]]})
             ctx.append(name)
+        notes = list(dict.fromkeys(note_text(n) for n in row['notes']))
+        if feed := st.get('camera_feed'):
+            route = row['camera_feed']
+            if any(route[key] != value for key, value in feed.items()):
+                raise ValueError(f'Camera connector feed differs from the checked approach for {st["id"]}')
+            actor = f'checked-plug-{st["id"]}'
+            points = [route['start_mm'], route['end_mm']]
+            if 'pull_end_mm' in route:
+                points.append(route['pull_end_mm'])
+            path = np.asarray(points, float)
+            feed_models[actor] = trimesh.creation.box(extents=route['body_mm']).apply_translation(path[-1])
+            moves.append({'ids': [actor], 'path': (path-path[-1]).tolist()})
+            notes.append('작은 플러그의 검사 외곽을 표시합니다.')
+            if route['status'] == 'pass':
+                notes.append(f'공차 포함 CAD 최소 여유 · {route["minimum_clearance_mm"]:.3f} mm')
         if row['text']:
             number += 1
             label, last_text, sub = str(number), row['text'], 0
@@ -217,28 +396,44 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         if len(names) != len(set(names)):
             raise ValueError(f'Duplicate parts in {st["id"]}')
         used.update(names)
-        tool_paths = checked_tools(row, world, data['hardware'], tools, phases) if revision == 'B21' else []
+        tool_paths = checked_tools(row, world, data['hardware'], tools, phases) if has_qualified_tools else []
         poses = {name: matrix.tolist() for name in names if (matrix := world.blink_transform(name)) is not None}
         steps.append({
             'id': st['id'], 'label': label, 'section': SECTIONS[st['ctx']], 'bench': st['ctx'] in BENCH,
             'text': row['text'] or last_text, 'continued': not row['text'],
-            'notes': list(dict.fromkeys(note_text(n) for n in row['notes'])),
+            'notes': notes,
             'issues': row['issues'], 'fixed': fixed, 'moves': moves,
             'closedLids': bool(st.get('closed_lids')),
-            'showWires': st['id'] == 'rear-skull',
+            'showWires': st['id'] in ('rear-skull', 'camera-route-set'),
+            **({'wireIds': camera_wires} if st['id'] == 'camera-route-set' else {}),
             **({'toolPaths': tool_paths} if tool_paths else {}),
             **({'actorPoses': poses, 'blinkDegrees': st['blink_deg']} if poses else {}),
             **({'insertionClearance': row['insertion_clearance']} if 'insertion_clearance' in row else {}),
         })
 
     scene = trimesh.Scene()
+    motion = assembly_motion(layout, data['hardware'], stock, steps, revision)
+    stop_locations = load_stop_locations(stop_report, layout['source_sha256'], steps, motion)
+    stop_actors = {actor for location in stop_locations for actor in location['actors']}
+    guard, guard_hash = load_guard(guard_cad, guard_report, layout['source_sha256'])
+    review = None
+    states = []
+    if guard or wire_states:
+        complete = next(step for step in steps if step['id'] == 'rear-skull')
+        fixed = complete['fixed'] + [name for move in complete['moves'] for name in move['ids']] + sorted(guard)
+        if len(fixed) != len(set(fixed)):
+            raise ValueError('Duplicate part in the final view')
+        review = dict(id='final-view', label='완료', section='조립 완료', fixed=fixed,
+                      text='체결품과 배선이 있는 조립 상태입니다.', notes=[], issues=[], moves=[], showWires=True)
+        motion.update(dict.fromkeys(guard, 'fixed'))
+        states = load_wire_states(wire_states, layout, fixed, motion, wires)
     world.blink_pose = None
     materials = {name: trimesh.visual.material.PBRMaterial(
         name=name, baseColorFactor=np.array((*rgb, 255), dtype=np.uint8), roughnessFactor=.6,
         metallicFactor=.45 if name == 'steel' else 0.) for name, rgb in COLORS.items()}
     parts = {}
     for name in sorted(used):
-        mesh = world.mesh(name)
+        mesh = feed_models[name] if name in feed_models else world.mesh(name)
         if mesh is None:
             raise ValueError(f'Empty assembly mesh: {name}')
         mesh = mesh.copy()
@@ -249,7 +444,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         finish = ('b19' if name in b19_names else 'power' if name.startswith('RearLead')
                   else 'connector' if name in rear_wiring or name in hub_plugs else finish_of(name, manifest))
         limit = FACE_LIMIT.get(finish, 4000)
-        if len(mesh.faces) > limit:
+        if name not in stop_actors and len(mesh.faces) > limit:
             # Decimation can tear closed parts; torn faces render as black patches.
             for target in [t for t in (limit, 2*limit) if t < len(mesh.faces)]:
                 reduced = mesh.simplify_quadric_decimation(face_count=target)
@@ -265,6 +460,17 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     for name, mesh in tools.items():
         mesh.visual = trimesh.visual.TextureVisuals(material=materials['tool'])
         scene.add_geometry(mesh, node_name=name, geom_name=name)
+    guard_glass = trimesh.visual.material.PBRMaterial(name='clear PMMA', baseColorFactor=[194, 222, 232, 33],
+                                                      roughnessFactor=.32, metallicFactor=0., alphaMode='BLEND')
+    guard_base = trimesh.visual.material.PBRMaterial(name='guard plywood', baseColorFactor=[182, 155, 116, 255],
+                                                     roughnessFactor=.8, metallicFactor=0.)
+    for name, mesh in guard.items():
+        panel = name in GUARD_PANELS
+        material = guard_glass if panel else guard_base if name == 'GuardBase' else materials['steel']
+        mesh.visual = trimesh.visual.TextureVisuals(material=material)
+        scene.add_geometry(mesh, node_name=name, geom_name=name)
+        parts[name] = {'center': mesh.bounds.mean(axis=0).round(2).tolist(),
+                       'size': float(np.linalg.norm(mesh.extents).round(2)), 'guardPanel': panel}
     output.mkdir(parents=True, exist_ok=True)
     model = trimesh.exchange.gltf.export_glb(scene, include_normals=True)
     (output/'model.glb').write_bytes(model)
@@ -272,6 +478,10 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         'source': report.name, 'revision': revision, 'cadSha256': layout['source_sha256'],
         'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
+        **({'stops': stop_locations} if stop_locations else {}),
+        **({'finalView': review} if review else {}),
+        **({'guardSha256': guard_hash} if guard_hash else {}),
+        **({'wireStates': states, 'wireStatesSha256': sha256(wire_states.read_bytes()).hexdigest()} if states else {}),
     }, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
     print(f'{len(steps)} steps, {len(parts)} parts, model {(output/"model.glb").stat().st_size/1e6:.1f} MB')
 
@@ -285,5 +495,10 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=Path, default=HERE)
     parser.add_argument('--revision', choices=[key.upper() for key in C.PLANS], default='B19')
     parser.add_argument('--assembly-cad', type=Path, help='Matching FCStd for internal cable paths')
+    parser.add_argument('--stop-report', type=Path, help='Checked stop locations with the same CAD digest')
+    parser.add_argument('--guard-cad', type=Path, help='Guard assembly FCStd for the final view')
+    parser.add_argument('--guard-report', type=Path, help='Passing guard report pairing the exact head and guard')
+    parser.add_argument('--wire-states', type=Path, help='Exact camera centerlines and poses for comparison')
     args = parser.parse_args()
-    build(args.cad, args.hardware, args.spec, args.report, args.output, args.revision, args.assembly_cad)
+    build(args.cad, args.hardware, args.spec, args.report, args.output, args.revision, args.assembly_cad,
+          args.stop_report, args.guard_cad, args.guard_report, args.wire_states)

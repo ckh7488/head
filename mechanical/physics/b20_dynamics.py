@@ -78,7 +78,8 @@ def load_bodies(cad, directory, sliced_grams):
         bins[name].append(Mass(mass, pos(center), mass * np.diag((.001, .001, .0015))))
         accounting[f'{name}_additional_hardware'] = {'group': name, 'mass_g': 1000 * mass}
     bodies = tuple(combine(bins[key]) for key in ('yaw', 'head', 'jaw'))
-    return bodies, combine(bins['ballast_mount']), accounting
+    ballast_mount = combine(bins['ballast_mount']) if bins['ballast_mount'] else None
+    return bodies, ballast_mount, accounting
 
 
 def x_rotation(angle):
@@ -164,20 +165,19 @@ def model_xml(bodies, jaw_pivot, motor, friction):
     return ET.tostring(xml, encoding='unicode')
 
 
-def jaw_profile_move(t, travel):
-    accel_time = min(JAW_PROFILE_SPEED / JAW_PROFILE_ACCELERATION,
-                     np.sqrt(travel / JAW_PROFILE_ACCELERATION))
-    peak_speed = accel_time * JAW_PROFILE_ACCELERATION
+def jaw_profile_move(t, travel, speed_limit=JAW_PROFILE_SPEED, acceleration_limit=JAW_PROFILE_ACCELERATION):
+    accel_time = min(speed_limit / acceleration_limit, np.sqrt(travel / acceleration_limit))
+    peak_speed = accel_time * acceleration_limit
     cruise_time = max(0., (travel - peak_speed * accel_time) / peak_speed)
     duration = 2 * accel_time + cruise_time
     if t < accel_time:
-        state = (.5 * JAW_PROFILE_ACCELERATION * t**2, JAW_PROFILE_ACCELERATION * t, JAW_PROFILE_ACCELERATION)
+        state = (.5 * acceleration_limit * t**2, acceleration_limit * t, acceleration_limit)
     elif t < accel_time + cruise_time:
         state = (peak_speed * (t - .5 * accel_time), peak_speed, 0.)
     elif t < duration:
         remaining = duration - t
-        state = (travel - .5 * JAW_PROFILE_ACCELERATION * remaining**2,
-                 JAW_PROFILE_ACCELERATION * remaining, -JAW_PROFILE_ACCELERATION)
+        state = (travel - .5 * acceleration_limit * remaining**2,
+                 acceleration_limit * remaining, -acceleration_limit)
     else:
         state = (travel, 0., 0.)
     return state, duration
@@ -215,7 +215,8 @@ def trace_fields():
 
 
 def run_trial(bodies, jaw_pivot, output, *, volts, derating, friction, backlash_deg,
-              rate=1., pitch_cut=False, firmware_profile=False, amplitude=(1., 1., 1.)):
+              rate=1., pitch_cut=False, firmware_profile=False, amplitude=(1., 1., 1.),
+              trajectory=request):
     motor = motor_parameters(volts, derating)
     xml = model_xml(bodies, jaw_pivot, motor, friction)
     output.with_suffix('.xml').write_text(xml)
@@ -234,7 +235,7 @@ def run_trial(bodies, jaw_pivot, output, *, volts, derating, friction, backlash_
     amplitude = np.asarray(amplitude)
     for i in range(round(duration / dt) + 1):
         t = i * dt
-        goal, speed, accel = np.asarray(request(t, rate, pitch_cut, firmware_profile)) * amplitude
+        goal, speed, accel = np.asarray(trajectory(t, rate, pitch_cut, firmware_profile)) * amplitude
         delta = goal - actual.qpos
         effective = np.sign(delta) * np.maximum(np.abs(delta) - np.deg2rad(backlash_deg) / 2, 0.)
         requested = PROPORTIONAL_GAIN * effective + DERIVATIVE_GAIN * (speed - actual.qvel)
@@ -324,7 +325,7 @@ def simulate(cad_dir, grams_file, output):
     nominal_static = static_wrenches(bodies, jaw_pivot)
     forward = (bodies[0], combine([bodies[1], added_mass(.075, (0, -70, 45))]), bodies[2])
     forward_static = static_wrenches(forward, jaw_pivot)
-    ballast = cad['motion_geometry']['ballast']
+    ballast = cad['motion_geometry']['ballast'] if ballast_mount is not None else {'maximum_plates': 0}
     static_options = []
     balance = {}
     for plates in range(ballast['maximum_plates'] + 1):

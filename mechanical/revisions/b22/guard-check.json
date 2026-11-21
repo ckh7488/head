@@ -1,0 +1,1165 @@
+{
+  "head_cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "guard_cad_sha256": "10b56f6cb7a8f9dae7d071c878eba59c533aa7467d7cf6b6f9b6018dbb1d06f7",
+  "status": "pass",
+  "touch_force_N": 1.0,
+  "max_opening_mm": 5.7,
+  "min_leftover_clearance_after_touch_mm": 34.062790209358326,
+  "cover_and_roof_positively_retained": true,
+  "fastener_and_tool_paths_pass": true,
+  "optics": {
+    "passed": true,
+    "yaw_deg": [
+      -60.0,
+      60.0
+    ],
+    "pitch_deg": [
+      -17.2,
+      7.15
+    ],
+    "samples": 12291,
+    "opaque_intersections": [],
+    "scope": "Padded straight center-ray geometry; clear-sheet optical reflections require bench inspection."
+  },
+  "assembly": {
+    "passed": true,
+    "positive_retention": true,
+    "roof_slide_obstructions": [],
+    "rear_insertion_obstructions": [],
+    "retention_witness": {
+      "roof_lift": [
+        "GuardRoofFrontLeft",
+        "GuardRoofSideLeft",
+        "GuardRoofFrontRight",
+        "GuardRoofSideRight"
+      ],
+      "roof_rear_withdrawal": [
+        "GuardRoofStopTab"
+      ],
+      "roof_front_sliding": [
+        "GuardRoofFrontLeft",
+        "GuardRoofFrontRight"
+      ],
+      "rear_panel_lift": 76.284000000018
+    }
+  },
+  "hardware": {
+    "passed": true,
+    "seating_overlaps": [],
+    "tools": [
+      {
+        "id": "GuardFrontLeftLow11",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "id": "GuardFrontLeftLow12",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFrontLeftHigh11",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFrontLeftHigh12",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      {
+        "id": "GuardRearLeft11",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "id": "GuardRearLeft21",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -1.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardFrontRightLow11",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "id": "GuardFrontRightLow12",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardFrontRightHigh11",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFrontRightHigh12",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -0.0,
+          -1.0
+        ]
+      },
+      {
+        "id": "GuardRearRight11",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      {
+        "id": "GuardRearRight21",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -1.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardFloorLeftFrontBase",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFloorLeftFrontSide",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFloorLeftRearBase",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFloorLeftRearSide",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -1.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardFloorRightFrontBase",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardFloorRightFrontSide",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardFloorRightRearBase",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardFloorRightRearSide",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -1.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardBaseChock1",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardBaseChock2",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardBaseChock3",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardRoofFrontLeft",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          1.0,
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "id": "GuardRoofSideLeft",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -1.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardRoofFrontRight",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardRoofSideRight",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -0.0,
+          -1.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardRoofStopBracket",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardRoofStopTab",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardSeamLeftBottom",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardSeamLeftTop",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardSeamLeftJoin",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardSeamRightBottom",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardSeamRightTop",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      {
+        "id": "GuardSeamRightJoin",
+        "hex_blockers": [],
+        "spanner_blockers": [],
+        "spanner_direction": [
+          -1.0,
+          -0.0,
+          -0.0
+        ]
+      }
+    ]
+  },
+  "clearance": {
+    "wall_deflection_mm": 10.01192,
+    "roof_deflection_mm": 16.62744827586207,
+    "rear_seam_overlap_after_touch_mm": 1.15,
+    "min_rigid_clearance_mm": 35.70000076293945,
+    "min_leftover_clearance_after_touch_mm": 34.062790209358326,
+    "nearest_actor": "Part073",
+    "maximum_opening_mm": 5.7
+  },
+  "moving_clearance": {
+    "Part007": {
+      "side_clearance_mm": 82.64677776686943,
+      "roof_clearance_mm": 290.0240592956543,
+      "floor_clearance_mm": 35.70000076293945,
+      "chock_clearance_mm": 40.282304452594246
+    },
+    "Part010": {
+      "side_clearance_mm": 100.20947173372288,
+      "roof_clearance_mm": 194.0,
+      "floor_clearance_mm": 49.099998474121094,
+      "chock_clearance_mm": 62.29234719099094
+    },
+    "Part011": {
+      "side_clearance_mm": 78.44077034395072,
+      "roof_clearance_mm": 132.0,
+      "floor_clearance_mm": 149.0,
+      "chock_clearance_mm": 143.20628540472126
+    },
+    "Part012": {
+      "side_clearance_mm": 91.41075490146864,
+      "roof_clearance_mm": 141.0,
+      "floor_clearance_mm": 186.00357818603516,
+      "chock_clearance_mm": 182.01673366812034
+    },
+    "Part013": {
+      "side_clearance_mm": 79.8106111685426,
+      "roof_clearance_mm": 143.99618668413862,
+      "floor_clearance_mm": 188.99618668413862,
+      "chock_clearance_mm": 182.91293004185218
+    },
+    "Part014": {
+      "side_clearance_mm": 91.41075490146864,
+      "roof_clearance_mm": 141.0,
+      "floor_clearance_mm": 186.00357818603516,
+      "chock_clearance_mm": 182.01673366812034
+    },
+    "Part015": {
+      "side_clearance_mm": 79.81059935750635,
+      "roof_clearance_mm": 143.99613831956555,
+      "floor_clearance_mm": 188.99613831956555,
+      "chock_clearance_mm": 182.91288047870773
+    },
+    "Part016": {
+      "side_clearance_mm": 98.71817657503169,
+      "roof_clearance_mm": 134.4897979569423,
+      "floor_clearance_mm": 179.4913332148773,
+      "chock_clearance_mm": 177.37816803626603
+    },
+    "Part018": {
+      "side_clearance_mm": 105.50959847492713,
+      "roof_clearance_mm": 137.75,
+      "floor_clearance_mm": 158.75,
+      "chock_clearance_mm": 159.50226566797767
+    },
+    "Part019": {
+      "side_clearance_mm": 53.18811203713339,
+      "roof_clearance_mm": 95.52505236609824,
+      "floor_clearance_mm": 175.1707708728839,
+      "chock_clearance_mm": 167.1707708728839
+    },
+    "Part024": {
+      "side_clearance_mm": 61.2996137077817,
+      "roof_clearance_mm": 113.82772006314909,
+      "floor_clearance_mm": 179.54655698749585,
+      "chock_clearance_mm": 171.72834684756134
+    },
+    "Part025": {
+      "side_clearance_mm": 61.16770109457934,
+      "roof_clearance_mm": 98.1093701435152,
+      "floor_clearance_mm": 185.82427230286433,
+      "chock_clearance_mm": 177.99384540016538
+    },
+    "Part026": {
+      "side_clearance_mm": 63.890475544968936,
+      "roof_clearance_mm": 128.90400752879054,
+      "floor_clearance_mm": 194.41698758989597,
+      "chock_clearance_mm": 186.71192607664625
+    },
+    "Part027": {
+      "side_clearance_mm": 61.16770109457934,
+      "roof_clearance_mm": 98.1093701435152,
+      "floor_clearance_mm": 185.82427230286433,
+      "chock_clearance_mm": 177.99384540016538
+    },
+    "Part028": {
+      "side_clearance_mm": 63.890475544968936,
+      "roof_clearance_mm": 128.90400752879054,
+      "floor_clearance_mm": 194.41698758989597,
+      "chock_clearance_mm": 186.71192607664625
+    },
+    "Part029": {
+      "side_clearance_mm": 68.64304797696037,
+      "roof_clearance_mm": 107.51524974189405,
+      "floor_clearance_mm": 174.93314800278102,
+      "chock_clearance_mm": 167.62764215291674
+    },
+    "Part030": {
+      "side_clearance_mm": 75.1641186177188,
+      "roof_clearance_mm": 116.38938976235804,
+      "floor_clearance_mm": 181.79099068654116,
+      "chock_clearance_mm": 175.1484664592173
+    },
+    "Part031": {
+      "side_clearance_mm": 76.9180356186915,
+      "roof_clearance_mm": 120.01147408882835,
+      "floor_clearance_mm": 185.23735166881698,
+      "chock_clearance_mm": 178.79087456002318
+    },
+    "Part032": {
+      "side_clearance_mm": 87.0359374193336,
+      "roof_clearance_mm": 115.77493883190965,
+      "floor_clearance_mm": 181.05002630508486,
+      "chock_clearance_mm": 176.28864935176026
+    },
+    "Part033": {
+      "side_clearance_mm": 68.63455851658986,
+      "roof_clearance_mm": 107.51524974189405,
+      "floor_clearance_mm": 174.93314800278102,
+      "chock_clearance_mm": 167.6268703857284
+    },
+    "Part034": {
+      "side_clearance_mm": 75.1641186177188,
+      "roof_clearance_mm": 116.38938976235804,
+      "floor_clearance_mm": 181.79099068654116,
+      "chock_clearance_mm": 175.1484664592173
+    },
+    "Part035": {
+      "side_clearance_mm": 76.9180356186915,
+      "roof_clearance_mm": 120.01147408882835,
+      "floor_clearance_mm": 185.23735166881698,
+      "chock_clearance_mm": 178.79087456002318
+    },
+    "Part036": {
+      "side_clearance_mm": 87.03565829294381,
+      "roof_clearance_mm": 115.77493883190965,
+      "floor_clearance_mm": 181.05002630508486,
+      "chock_clearance_mm": 176.28859609455807
+    },
+    "Part037": {
+      "side_clearance_mm": 92.64073347821345,
+      "roof_clearance_mm": 130.97100395281097,
+      "floor_clearance_mm": 188.3555191665274,
+      "chock_clearance_mm": 184.57504830755377
+    },
+    "Part038": {
+      "side_clearance_mm": 83.52453423315205,
+      "roof_clearance_mm": 131.48238692404135,
+      "floor_clearance_mm": 156.3667343345403,
+      "chock_clearance_mm": 151.3941062916929
+    },
+    "Part039": {
+      "side_clearance_mm": 87.80137867586043,
+      "roof_clearance_mm": 129.75266790261196,
+      "floor_clearance_mm": 180.3670137053307,
+      "chock_clearance_mm": 175.7664423844711
+    },
+    "Part040": {
+      "side_clearance_mm": 93.59325584904107,
+      "roof_clearance_mm": 128.76666697854665,
+      "floor_clearance_mm": 181.26135069140526,
+      "chock_clearance_mm": 177.86228790599932
+    },
+    "Part041": {
+      "side_clearance_mm": 78.48295208763281,
+      "roof_clearance_mm": 98.38780262465787,
+      "floor_clearance_mm": 201.93737524989305,
+      "chock_clearance_mm": 195.55270390421174
+    },
+    "Part042": {
+      "side_clearance_mm": 76.80396725275212,
+      "roof_clearance_mm": 90.74697700252307,
+      "floor_clearance_mm": 199.07604635171305,
+      "chock_clearance_mm": 192.50402897749927
+    },
+    "Part043": {
+      "side_clearance_mm": 71.46153326844076,
+      "roof_clearance_mm": 94.03960717977213,
+      "floor_clearance_mm": 211.5916902365118,
+      "chock_clearance_mm": 204.39127994453864
+    },
+    "Part044": {
+      "side_clearance_mm": 68.73590883379947,
+      "roof_clearance_mm": 94.87014205886283,
+      "floor_clearance_mm": 186.53188322741278,
+      "chock_clearance_mm": 179.18935076751956
+    },
+    "Part045": {
+      "side_clearance_mm": 102.01798239652058,
+      "roof_clearance_mm": 63.079979491464826,
+      "floor_clearance_mm": 239.1356316633151,
+      "chock_clearance_mm": 236.19354020952406
+    },
+    "Part046": {
+      "side_clearance_mm": 108.58690552202984,
+      "roof_clearance_mm": 59.817221868411536,
+      "floor_clearance_mm": 236.2276979109705,
+      "chock_clearance_mm": 234.8051886880668
+    },
+    "Part047": {
+      "side_clearance_mm": 109.15556795850043,
+      "roof_clearance_mm": 73.89176823900539,
+      "floor_clearance_mm": 233.23337237259133,
+      "chock_clearance_mm": 232.03179822753896
+    },
+    "Part048": {
+      "side_clearance_mm": 78.56697898772445,
+      "roof_clearance_mm": 95.95444679959007,
+      "floor_clearance_mm": 226.85910482599706,
+      "chock_clearance_mm": 220.30134951153917
+    },
+    "Part050": {
+      "side_clearance_mm": 97.47356910571972,
+      "roof_clearance_mm": 95.52654878634758,
+      "floor_clearance_mm": 227.10501728878012,
+      "chock_clearance_mm": 223.49382115582813
+    },
+    "Part052": {
+      "side_clearance_mm": 101.47119476858424,
+      "roof_clearance_mm": 95.52654878634758,
+      "floor_clearance_mm": 227.10501728878012,
+      "chock_clearance_mm": 224.31640235969326
+    },
+    "Part053": {
+      "side_clearance_mm": 72.99862020585013,
+      "roof_clearance_mm": 85.62229597491273,
+      "floor_clearance_mm": 216.3878105496064,
+      "chock_clearance_mm": 209.3073947562097
+    },
+    "Part054": {
+      "side_clearance_mm": 101.017267189855,
+      "roof_clearance_mm": 86.68627195333647,
+      "floor_clearance_mm": 218.85200996022138,
+      "chock_clearance_mm": 216.1619167172963
+    },
+    "Part055": {
+      "side_clearance_mm": 72.79211334295573,
+      "roof_clearance_mm": 85.62229597491273,
+      "floor_clearance_mm": 216.38765295363,
+      "chock_clearance_mm": 209.2880024354683
+    },
+    "Part056": {
+      "side_clearance_mm": 111.65479038012927,
+      "roof_clearance_mm": 77.68550714869247,
+      "floor_clearance_mm": 220.19778838696433,
+      "chock_clearance_mm": 220.0489081966818
+    },
+    "Part057": {
+      "side_clearance_mm": 78.72922436668114,
+      "roof_clearance_mm": 87.64920011662255,
+      "floor_clearance_mm": 181.11919974694956,
+      "chock_clearance_mm": 174.9623586033347
+    },
+    "Part058": {
+      "side_clearance_mm": 75.7661240268166,
+      "roof_clearance_mm": 129.52948381432338,
+      "floor_clearance_mm": 194.975106485877,
+      "chock_clearance_mm": 188.3080825386632
+    },
+    "Part059": {
+      "side_clearance_mm": 101.20270840534543,
+      "roof_clearance_mm": 129.52948381432338,
+      "floor_clearance_mm": 194.975106485877,
+      "chock_clearance_mm": 192.98909134013644
+    },
+    "Part060": {
+      "side_clearance_mm": 78.72922436668114,
+      "roof_clearance_mm": 87.64920011662255,
+      "floor_clearance_mm": 181.11919974694956,
+      "chock_clearance_mm": 174.9623586033347
+    },
+    "Part061": {
+      "side_clearance_mm": 101.20270840534543,
+      "roof_clearance_mm": 129.52948381432338,
+      "floor_clearance_mm": 194.975106485877,
+      "chock_clearance_mm": 192.98909134013644
+    },
+    "Part062": {
+      "side_clearance_mm": 75.7661240268166,
+      "roof_clearance_mm": 129.52948381432338,
+      "floor_clearance_mm": 194.975106485877,
+      "chock_clearance_mm": 188.3080825386632
+    },
+    "Part063": {
+      "side_clearance_mm": 87.7877926461019,
+      "roof_clearance_mm": 60.45635828711005,
+      "floor_clearance_mm": 212.1314859309365,
+      "chock_clearance_mm": 207.00769027126364
+    },
+    "Part064": {
+      "side_clearance_mm": 69.16140674103785,
+      "roof_clearance_mm": 89.62501285553225,
+      "floor_clearance_mm": 208.6057393348716,
+      "chock_clearance_mm": 201.2239662578662
+    },
+    "Part065": {
+      "side_clearance_mm": 75.59084606130999,
+      "roof_clearance_mm": 171.99343566010208,
+      "floor_clearance_mm": 141.69782500215192,
+      "chock_clearance_mm": 135.52690529641262
+    },
+    "Part066": {
+      "side_clearance_mm": 76.6958464354488,
+      "roof_clearance_mm": 136.68221336757045,
+      "floor_clearance_mm": 145.97613053668113,
+      "chock_clearance_mm": 139.92894289252413
+    },
+    "Part067": {
+      "side_clearance_mm": 81.34885621716337,
+      "roof_clearance_mm": 139.86656785749992,
+      "floor_clearance_mm": 148.64426976476653,
+      "chock_clearance_mm": 143.39438336808067
+    },
+    "Part068": {
+      "side_clearance_mm": 73.29639093795767,
+      "roof_clearance_mm": 144.79613491824313,
+      "floor_clearance_mm": 156.1514452262026,
+      "chock_clearance_mm": 149.481494155526
+    },
+    "Part073": {
+      "side_clearance_mm": 56.59618228433638,
+      "roof_clearance_mm": 50.69023848522039,
+      "floor_clearance_mm": 117.05096321157018,
+      "chock_clearance_mm": 109.09779172176647
+    },
+    "Part074": {
+      "side_clearance_mm": 53.53093959697807,
+      "roof_clearance_mm": 51.950395734822735,
+      "floor_clearance_mm": 145.22069383224527,
+      "chock_clearance_mm": 137.2207563052356
+    },
+    "Part076": {
+      "side_clearance_mm": 62.94353074543622,
+      "roof_clearance_mm": 110.80326792974606,
+      "floor_clearance_mm": 178.83067723290782,
+      "chock_clearance_mm": 171.09704633027133
+    },
+    "Part077": {
+      "side_clearance_mm": 62.94353074543622,
+      "roof_clearance_mm": 110.80326792974606,
+      "floor_clearance_mm": 178.83067723290782,
+      "chock_clearance_mm": 171.09704633027133
+    },
+    "Part078": {
+      "side_clearance_mm": 61.502212352138756,
+      "roof_clearance_mm": 105.73129225360722,
+      "floor_clearance_mm": 175.618855624173,
+      "chock_clearance_mm": 167.81456017210337
+    },
+    "Part079": {
+      "side_clearance_mm": 61.502212352138756,
+      "roof_clearance_mm": 105.73129225360722,
+      "floor_clearance_mm": 175.618855624173,
+      "chock_clearance_mm": 167.81456017210337
+    },
+    "Part080": {
+      "side_clearance_mm": 69.6896784066329,
+      "roof_clearance_mm": 138.00348474289794,
+      "floor_clearance_mm": 151.57824507123615,
+      "chock_clearance_mm": 144.49936359834763
+    },
+    "Jaw_30_moving_jaw": {
+      "side_clearance_mm": 56.40339815323742,
+      "roof_clearance_mm": 159.58305923785284,
+      "floor_clearance_mm": 66.11854708577233,
+      "chock_clearance_mm": 58.19609880247993
+    },
+    "Jaw_36_left_jaw_servo_stay": {
+      "side_clearance_mm": 67.02282577937564,
+      "roof_clearance_mm": 131.81541568857995,
+      "floor_clearance_mm": 157.83024889247093,
+      "chock_clearance_mm": 150.4482797023449
+    },
+    "Jaw_37_right_jaw_bearing_stay": {
+      "side_clearance_mm": 67.41083252804094,
+      "roof_clearance_mm": 143.4043673315092,
+      "floor_clearance_mm": 150.95055378502443,
+      "chock_clearance_mm": 143.63552574336885
+    },
+    "Jaw_38_left_jaw_drive_arm": {
+      "side_clearance_mm": 69.83370053785737,
+      "roof_clearance_mm": 148.35088791064825,
+      "floor_clearance_mm": 139.80002523864798,
+      "chock_clearance_mm": 132.82060520219073
+    },
+    "Jaw_39_right_jaw_pivot_arm": {
+      "side_clearance_mm": 69.19395144894087,
+      "roof_clearance_mm": 152.86021645881647,
+      "floor_clearance_mm": 137.70824645720427,
+      "chock_clearance_mm": 130.66628525130093
+    },
+    "Jaw_XL330_M288_Jaw": {
+      "side_clearance_mm": 94.61289642247706,
+      "roof_clearance_mm": 139.08279441961258,
+      "floor_clearance_mm": 162.36452027800794,
+      "chock_clearance_mm": 159.77142407886757
+    },
+    "Jaw_MR104ZZ_jaw_right": {
+      "side_clearance_mm": 97.34610044594274,
+      "roof_clearance_mm": 159.18942827060275,
+      "floor_clearance_mm": 167.45415163614075,
+      "chock_clearance_mm": 165.39917236312357
+    },
+    "Jaw_Pin_jaw_4x10": {
+      "side_clearance_mm": 90.94136209933995,
+      "roof_clearance_mm": 159.94268765428887,
+      "floor_clearance_mm": 167.50084747872617,
+      "chock_clearance_mm": 163.85931226117614
+    },
+    "BlinkCollarLeft": {
+      "side_clearance_mm": 98.3957920417517,
+      "roof_clearance_mm": 93.76362240614003,
+      "floor_clearance_mm": 224.667015251116,
+      "chock_clearance_mm": 221.2898931250406
+    },
+    "BlinkCollarRight": {
+      "side_clearance_mm": 102.01298526681975,
+      "roof_clearance_mm": 93.76362240614003,
+      "floor_clearance_mm": 224.667015251116,
+      "chock_clearance_mm": 222.05363729148723
+    },
+    "ID5EHKeeper": {
+      "side_clearance_mm": 115.24800752500391,
+      "roof_clearance_mm": 149.6999969482422,
+      "floor_clearance_mm": 162.70147705078125,
+      "chock_clearance_mm": 166.6064915797291
+    },
+    "ID5KeeperScrew1": {
+      "side_clearance_mm": 113.25177641375635,
+      "roof_clearance_mm": 174.22000122070312,
+      "floor_clearance_mm": 163.22124481201172,
+      "chock_clearance_mm": 166.36066236004459
+    },
+    "ID5KeeperScrew2": {
+      "side_clearance_mm": 113.25177641375635,
+      "roof_clearance_mm": 150.22000122070312,
+      "floor_clearance_mm": 187.22124481201172,
+      "chock_clearance_mm": 188.95102469118635
+    },
+    "XL430PitchSide0": {
+      "side_clearance_mm": 113.06260074715624,
+      "roof_clearance_mm": 174.75100708007812,
+      "floor_clearance_mm": 163.75,
+      "chock_clearance_mm": 166.7863556407255
+    },
+    "XL430PitchSide1": {
+      "side_clearance_mm": 113.06260074715624,
+      "roof_clearance_mm": 150.75100708007812,
+      "floor_clearance_mm": 187.75,
+      "chock_clearance_mm": 189.39294714406492
+    },
+    "XL430PitchKeeper0": {
+      "side_clearance_mm": 117.9265547508349,
+      "roof_clearance_mm": 174.75100708007812,
+      "floor_clearance_mm": 163.75,
+      "chock_clearance_mm": 168.58748105364316
+    },
+    "XL430PitchKeeper1": {
+      "side_clearance_mm": 117.9265547508349,
+      "roof_clearance_mm": 150.75100708007812,
+      "floor_clearance_mm": 187.75,
+      "chock_clearance_mm": 190.98099059333757
+    },
+    "EyeYawFoot0": {
+      "side_clearance_mm": 89.5354819145602,
+      "roof_clearance_mm": 117.95865311803692,
+      "floor_clearance_mm": 177.0864838831132,
+      "chock_clearance_mm": 172.9046329198608
+    },
+    "EyeYawFoot1": {
+      "side_clearance_mm": 89.53573264481324,
+      "roof_clearance_mm": 117.95865311803692,
+      "floor_clearance_mm": 177.0864838831132,
+      "chock_clearance_mm": 172.90468532035712
+    },
+    "EyePitchStayFrame0": {
+      "side_clearance_mm": 73.94603117571148,
+      "roof_clearance_mm": 111.79616061497683,
+      "floor_clearance_mm": 208.88405595263998,
+      "chock_clearance_mm": 201.93202651649068
+    },
+    "EyePitchStayFrame1": {
+      "side_clearance_mm": 72.23255988384368,
+      "roof_clearance_mm": 102.8661473382802,
+      "floor_clearance_mm": 217.48156121174108,
+      "chock_clearance_mm": 210.3263887378067
+    },
+    "CradleMountFrameL": {
+      "side_clearance_mm": 63.78552871635323,
+      "roof_clearance_mm": 108.79941298380174,
+      "floor_clearance_mm": 215.01887832087567,
+      "chock_clearance_mm": 207.27922034770327
+    },
+    "CradleMountFrameR": {
+      "side_clearance_mm": 63.78570353046385,
+      "roof_clearance_mm": 108.80063933450197,
+      "floor_clearance_mm": 215.01769763320277,
+      "chock_clearance_mm": 207.27804990199724
+    },
+    "EyeYawHornScrew0": {
+      "side_clearance_mm": 97.52735121419028,
+      "roof_clearance_mm": 128.28496240520766,
+      "floor_clearance_mm": 182.46255683039652,
+      "chock_clearance_mm": 179.95668051222725
+    },
+    "EyeYawHornScrew1": {
+      "side_clearance_mm": 107.87904159917102,
+      "roof_clearance_mm": 131.56061477229133,
+      "floor_clearance_mm": 183.16945012735883,
+      "chock_clearance_mm": 183.44563835503274
+    },
+    "EyeYawHornScrew2": {
+      "side_clearance_mm": 101.53970443320597,
+      "roof_clearance_mm": 129.83214891225956,
+      "floor_clearance_mm": 183.22335632723622,
+      "chock_clearance_mm": 181.71586542043605
+    },
+    "EyePitchHornScrew0": {
+      "side_clearance_mm": 77.22498807884973,
+      "roof_clearance_mm": 103.91663120675244,
+      "floor_clearance_mm": 224.04436085758613,
+      "chock_clearance_mm": 217.35407959207996
+    },
+    "EyePitchHornScrew1": {
+      "side_clearance_mm": 74.58160043334702,
+      "roof_clearance_mm": 97.89835490514557,
+      "floor_clearance_mm": 228.15976636479465,
+      "chock_clearance_mm": 221.1763615821522
+    },
+    "BlinkHornScrew0": {
+      "side_clearance_mm": 112.53969919733969,
+      "roof_clearance_mm": 78.23953950983702,
+      "floor_clearance_mm": 240.81233609316746,
+      "chock_clearance_mm": 240.20634433401167
+    },
+    "BlinkHornScrew1": {
+      "side_clearance_mm": 115.17369052482441,
+      "roof_clearance_mm": 77.64536333702927,
+      "floor_clearance_mm": 248.54954077373714,
+      "chock_clearance_mm": 248.35472696832772
+    },
+    "JawHornScrew0": {
+      "side_clearance_mm": 89.0995076993363,
+      "roof_clearance_mm": 158.25560606860728,
+      "floor_clearance_mm": 165.67164455248897,
+      "chock_clearance_mm": 161.6626188884165
+    },
+    "JawHornScrew1": {
+      "side_clearance_mm": 91.54036692650897,
+      "roof_clearance_mm": 154.2827635514777,
+      "floor_clearance_mm": 173.27530071563638,
+      "chock_clearance_mm": 169.61902197552246
+    },
+    "EyeYawTiePinL": {
+      "side_clearance_mm": 94.20623661450776,
+      "roof_clearance_mm": 130.83336364905426,
+      "floor_clearance_mm": 185.67703025891092,
+      "chock_clearance_mm": 182.30270439098027
+    },
+    "EyeYawTiePinR": {
+      "side_clearance_mm": 94.20587423625103,
+      "roof_clearance_mm": 130.83336364905426,
+      "floor_clearance_mm": 185.67703025891092,
+      "chock_clearance_mm": 182.30262327736997
+    },
+    "EyePitchLinkHornPin": {
+      "side_clearance_mm": 70.77151035814505,
+      "roof_clearance_mm": 102.32845525077192,
+      "floor_clearance_mm": 219.79045228693585,
+      "chock_clearance_mm": 212.5016824686995
+    },
+    "EyePitchLinkCradlePin": {
+      "side_clearance_mm": 71.82538352488801,
+      "roof_clearance_mm": 128.23224992958004,
+      "floor_clearance_mm": 191.9287166785396,
+      "chock_clearance_mm": 184.84931045869146
+    },
+    "PitchPinDowelLeft": {
+      "side_clearance_mm": 83.9177832805976,
+      "roof_clearance_mm": 142.8154380120174,
+      "floor_clearance_mm": 187.8154380120174,
+      "chock_clearance_mm": 182.38675073539525
+    },
+    "PitchPinDowelRight": {
+      "side_clearance_mm": 83.91711279026069,
+      "roof_clearance_mm": 142.8154380120174,
+      "floor_clearance_mm": 187.8154380120174,
+      "chock_clearance_mm": 182.38663854709085
+    },
+    "BlinkPivotServo": {
+      "side_clearance_mm": 123.82295096597805,
+      "roof_clearance_mm": 81.99497525137579,
+      "floor_clearance_mm": 239.38423694568954,
+      "chock_clearance_mm": 241.86371602556582
+    },
+    "BlinkPivotServoRetainer": {
+      "side_clearance_mm": 121.72397534644229,
+      "roof_clearance_mm": 81.43429768391238,
+      "floor_clearance_mm": 238.8261255010732,
+      "chock_clearance_mm": 240.72570660604248
+    },
+    "BlinkPivotDrive": {
+      "side_clearance_mm": 116.18226391682623,
+      "roof_clearance_mm": 95.27280077759053,
+      "floor_clearance_mm": 222.27929724924778,
+      "chock_clearance_mm": 223.28732586547204
+    },
+    "BlinkPivotDriveRetainer": {
+      "side_clearance_mm": 114.37535095744688,
+      "roof_clearance_mm": 94.641699838481,
+      "floor_clearance_mm": 221.7288426504851,
+      "chock_clearance_mm": 222.25663455811534
+    },
+    "BlinkPivotUpperL": {
+      "side_clearance_mm": 84.36022677580499,
+      "roof_clearance_mm": 94.39914264885763,
+      "floor_clearance_mm": 219.77982262366754,
+      "chock_clearance_mm": 214.03090644232051
+    },
+    "BlinkPivotUpperLRetainer": {
+      "side_clearance_mm": 89.68838136759115,
+      "roof_clearance_mm": 93.77366579930646,
+      "floor_clearance_mm": 219.22169592021774,
+      "chock_clearance_mm": 214.31624168432188
+    },
+    "BlinkPivotUpperR": {
+      "side_clearance_mm": 84.36024813667149,
+      "roof_clearance_mm": 94.39956536419731,
+      "floor_clearance_mm": 219.7793684197045,
+      "chock_clearance_mm": 214.0304601054093
+    },
+    "BlinkPivotUpperRRetainer": {
+      "side_clearance_mm": 89.68841789141479,
+      "roof_clearance_mm": 93.77430716051148,
+      "floor_clearance_mm": 219.22102975440527,
+      "chock_clearance_mm": 214.31559132170787
+    },
+    "BlinkPivotLowerL": {
+      "side_clearance_mm": 79.18129305374327,
+      "roof_clearance_mm": 123.39826513649732,
+      "floor_clearance_mm": 183.18497484343737,
+      "chock_clearance_mm": 177.07187942307152
+    },
+    "BlinkPivotLowerLRetainer": {
+      "side_clearance_mm": 83.9363845293033,
+      "roof_clearance_mm": 122.77278772292777,
+      "floor_clearance_mm": 182.6268554726509,
+      "chock_clearance_mm": 177.27664660746373
+    },
+    "BlinkPivotLowerR": {
+      "side_clearance_mm": 79.18126804023785,
+      "roof_clearance_mm": 123.398687851837,
+      "floor_clearance_mm": 183.1845282095404,
+      "chock_clearance_mm": 177.07143390666334
+    },
+    "BlinkPivotLowerRRetainer": {
+      "side_clearance_mm": 83.93633693832115,
+      "roof_clearance_mm": 122.77342908413283,
+      "floor_clearance_mm": 182.62618930683843,
+      "chock_clearance_mm": 177.27598220130793
+    },
+    "EyeYawDrivePivot": {
+      "side_clearance_mm": 115.4010738669852,
+      "roof_clearance_mm": 132.18697798949495,
+      "floor_clearance_mm": 185.77461160404278,
+      "chock_clearance_mm": 188.27624834701697
+    },
+    "EyeYawDrivePivotRetainer": {
+      "side_clearance_mm": 113.94100703126377,
+      "roof_clearance_mm": 137.11891886580972,
+      "floor_clearance_mm": 182.66691945546452,
+      "chock_clearance_mm": 184.8614245439574
+    },
+    "PitchLimitLowerPin": {
+      "side_clearance_mm": 85.17247742097695,
+      "roof_clearance_mm": 172.00089263916016,
+      "floor_clearance_mm": 167.0,
+      "chock_clearance_mm": 162.14342515645367
+    },
+    "PitchLimitLowerRetainer": {
+      "side_clearance_mm": 100.62160626253117,
+      "roof_clearance_mm": 172.5,
+      "floor_clearance_mm": 167.50067138671875,
+      "chock_clearance_mm": 166.3440539088415
+    },
+    "PitchLimitUpperPin": {
+      "side_clearance_mm": 79.32190854463758,
+      "roof_clearance_mm": 141.17001391972119,
+      "floor_clearance_mm": 181.51217424032455,
+      "chock_clearance_mm": 175.43779510755743
+    },
+    "PitchLimitUpperRetainer": {
+      "side_clearance_mm": 92.54495853428355,
+      "roof_clearance_mm": 141.3540435508113,
+      "floor_clearance_mm": 181.25111810331595,
+      "chock_clearance_mm": 177.61834844041283
+    },
+    "PitchLimitLink": {
+      "side_clearance_mm": 74.87103425124586,
+      "roof_clearance_mm": 132.93417542738746,
+      "floor_clearance_mm": 154.83823116292677,
+      "chock_clearance_mm": 148.39970162663838
+    },
+    "CameraTrayScrewLeft": {
+      "side_clearance_mm": 83.31353683004329,
+      "roof_clearance_mm": 166.95026207005694,
+      "floor_clearance_mm": 142.9555432174978,
+      "chock_clearance_mm": 138.2310324450059
+    },
+    "CameraTrayScrewRight": {
+      "side_clearance_mm": 83.31324363336194,
+      "roof_clearance_mm": 166.95026207005694,
+      "floor_clearance_mm": 142.9555432174978,
+      "chock_clearance_mm": 138.23096899681627
+    },
+    "CameraPCBScrewLeft": {
+      "side_clearance_mm": 83.63262134823883,
+      "roof_clearance_mm": 138.21833058667252,
+      "floor_clearance_mm": 175.7749332259409,
+      "chock_clearance_mm": 170.4770940993391
+    },
+    "CameraPCBWasherLeft": {
+      "side_clearance_mm": 84.98446262609568,
+      "roof_clearance_mm": 137.3705958654524,
+      "floor_clearance_mm": 174.4901152869074,
+      "chock_clearance_mm": 169.4595431589114
+    },
+    "CameraPCBNutLeft": {
+      "side_clearance_mm": 84.09177536028517,
+      "roof_clearance_mm": 138.32888577166352,
+      "floor_clearance_mm": 175.77930270406654,
+      "chock_clearance_mm": 170.56341779710266
+    },
+    "CameraPCBScrewRight": {
+      "side_clearance_mm": 83.63262134823883,
+      "roof_clearance_mm": 138.21833058667252,
+      "floor_clearance_mm": 175.7749332259409,
+      "chock_clearance_mm": 170.4770940993391
+    },
+    "CameraPCBWasherRight": {
+      "side_clearance_mm": 84.98446262609568,
+      "roof_clearance_mm": 137.3705958654524,
+      "floor_clearance_mm": 174.4901152869074,
+      "chock_clearance_mm": 169.4595431589114
+    },
+    "CameraPCBNutRight": {
+      "side_clearance_mm": 84.09177536028517,
+      "roof_clearance_mm": 138.32888577166352,
+      "floor_clearance_mm": 175.77930270406654,
+      "chock_clearance_mm": 170.56341779710266
+    }
+  },
+  "fixed_assembly_overlaps": [],
+  "scope": "Rigid CAD, tool/cover paths and conservative static 1 N PMMA deflection calculation."
+}

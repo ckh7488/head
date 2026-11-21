@@ -17,12 +17,12 @@ HARNESS = ROOT / 'tests' / 'firmware'
 sys.path.insert(0, str(ROOT / 'control' / 'pc'))
 
 CALIBRATED = (
-    (1820, 2048, 2276),
-    (2139, 2048, 1957),
+    (1829, 2048, 2267),
+    (2131, 2048, 1965),
     (2000, 2000, 3024),
-    (1365, 2048, 2731),
-    (2219, 2048, 1980),
-    (2000, 2000, 1909),
+    (1374, 2048, 2722),
+    (2219, 2048, 1997),
+    (2000, 2000, 1938),
 )
 Event = namedtuple('Event', 'direction id register value result time')
 

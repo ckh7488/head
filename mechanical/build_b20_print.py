@@ -67,8 +67,19 @@ def load_jaw():
     return jaw
 
 
+def has_one_printed_body(mesh):
+    if mesh.body_count == 1:
+        return True
+    shells = mesh.split(only_watertight=False)
+    material = [shell for shell in shells if shell.volume > 0.]
+    if len(material) != 1 or any(not shell.is_watertight or shell.volume == 0. for shell in shells):
+        return False
+    outer, = material
+    return all(outer.contains(shell.vertices).all() for shell in shells if shell.volume < 0.)
+
+
 def replace_mesh(data, replacement):
-    if not replacement.is_volume or replacement.body_count != 1 or not replacement.nondegenerate_faces().all():
+    if not replacement.is_volume or not has_one_printed_body(replacement) or not replacement.nondegenerate_faces().all():
         raise ValueError("The replacement must be one closed solid with nondegenerate faces")
     model = etree.fromstring(data)
     mesh = model.find(".//" + CORE + "mesh")

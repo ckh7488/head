@@ -1,6 +1,6 @@
 # 웹 뷰어
 
-브라우저에서 B21의 조립 순서와 공구 경로를 볼 수 있습니다. 아래의 B15 뷰어에서는 배선을 살펴보고 여섯 축을 움직일 수 있습니다.
+브라우저에서 B22의 조립 순서와 공구 경로를 볼 수 있습니다. 아래의 B15 뷰어에서는 배선을 살펴보고 여섯 축을 움직일 수 있습니다.
 
 최근 개정의 [B18 후면 연결부](../mechanical/revisions/b18/)와 [B18 개선 시안](../mechanical/revisions/b18/study/)은 HTML을 내려받아 브라우저에서 직접 엽니다.
 
@@ -22,6 +22,25 @@ Windows PowerShell에서는 JavaScript의 MIME 유형을 지정하고 서버를 
 
 ```powershell
 py -3.12 -c "import mimetypes, runpy; mimetypes.init(); mimetypes.add_type('text/javascript', '.js'); runpy.run_module('http.server', run_name='__main__')" 8000 --bind 127.0.0.1 --directory web
+```
+
+## B22 조립 순서
+
+B22 조립 화면은 체결품과 배선이 들어간 완성 상태에서 시작합니다. 136단계의 삽입·공구 경로, 목 제한판이 닿는 두 위치, 체결품과 배선이 장착된 검사 자세 세 가지를 확인할 수 있습니다. [B22 CAD와 검사](../mechanical/revisions/b22/)
+
+저장소 루트에서 FreeCAD Python 모듈을 사용할 수 있는 환경에서 실행합니다.
+
+```sh
+rev=mechanical/revisions/b22
+out=build/b22-review
+assembly="$rev/R5-B22-Assembly.FCStd"
+python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
+python mechanical/build_b22_guard.py "$assembly" "$out/Guard.FCStd"
+python mechanical/physics/check_b22_guard.py "$out/Guard.FCStd" "$out/cad" "$out/guard-check.json"
+python web/b19/export_wire_states.py "$assembly" "$rev/camera-check.json" "$rev/camera-paths.npz" "$out/camera-shape-states.json"
+python web/b19/build_b19_viewer.py "$out/cad" "$rev/hardware.json" "$rev/hardware-spec.json" "$rev/assembly-check.json" --revision B22 --assembly-cad "$assembly" --stop-report "$rev/neck-stop.json" --guard-cad "$out/Guard.FCStd" --guard-report "$out/guard-check.json" --wire-states "$out/camera-shape-states.json" --output "$out/viewer"
+npm ci --prefix web
+python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B22-assembly.html" --revision B22
 ```
 
 ## B21 조립 순서

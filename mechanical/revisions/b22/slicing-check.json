@@ -1,0 +1,1084 @@
+{
+  "project_sha256": "32963a8a705c075ed096742c91b5f4c2c07fde67850c51cfa241d2b5879cb0cb",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "plate_sha256": {
+    "1": "46bf65fc1a1ddedea6ef4b9930b28271cdc3b18df1a51eedfe7fc66919dcebcb",
+    "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
+    "3": "66bbcead5c1c9e380e0695fea8733503764e05fb0d9882b46ec64bf20c805e2d",
+    "4": "21d6bb464a4d21c5665ff1020d66961acfb061c48dcb55f0c2d8e57e2da08713",
+    "5": "beab2bb3cf151826a3645d6a7ebaaa57a12e35a984c517e986a01e2a49e14c41",
+    "6": "2e2df6da9262962440d1fc7c38a874406b16a5e5ca8d637abefc9188c69ff50b",
+    "7": "87f7d856b87415a16cd67f05899428c78cf0b64a2b12148d14085b5a8f85df0c",
+    "8": "788f8a0e05cac0a6d3bf2007ae9b19f1838cf30e0829aa4491d3f9ac218fc7ae",
+    "9": "6de323f72171d3f098430fe25ecddb09377238e792c593529d941041bf0a0226",
+    "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
+    "11": "88ab835c0ee5d0251804209e9e4f67abbc3a434df7c78a79c0e150189bd4b885",
+    "12": "39d1c1568238bff4940710b16e7790c278df5ef1398bfc176f0f0c00cb36da68"
+  },
+  "changed_plates": {
+    "1": [
+      "01_base_cup-B22.stl"
+    ],
+    "4": [
+      "28_skull_front_with_camera_tray-B22.stl"
+    ],
+    "6": [
+      "09_head_frame-B22.stl"
+    ],
+    "7": [
+      "07_yoke-B22.stl"
+    ],
+    "8": [
+      "04_yaw_rotor-B22.stl"
+    ],
+    "9": [
+      "37_right_cheek_bearing_stay-B22.stl"
+    ],
+    "12": [
+      "26_u20cam_slotted_bracket-B22.stl"
+    ]
+  },
+  "identical_to_b21_plates": [
+    2,
+    3,
+    5,
+    10,
+    11
+  ],
+  "removed_plates": [
+    13
+  ],
+  "slicer": "Bambu Studio 02.09.01.70",
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "filament": "R5 B15 Bambu PETG HF 14 mm3/s @ P2S",
+  "plate_surface": "Textured PEI Plate",
+  "layer_height_mm": 0.2,
+  "raster_step_mm": 0.2,
+  "canonical_mesh_sha256": {
+    "07_yoke-B22.stl": "e17e62e0bed3607be3e8cf84f7519beb9e2e9b0428f6bec533380f2af9c138d0",
+    "09_head_frame-B22.stl": "db985679eb34363467769dfcb123515664c97f088f389a5e5e73cd7d4d3ba482",
+    "37_right_cheek_bearing_stay-B22.stl": "fc02289bdc470dd2112f3d8045792a93532dbb95af456c12600d2491761a9258",
+    "26_u20cam_slotted_bracket-B22.stl": "829e1c17f77592e6d3a1e91e5a4c852f1c18980a1b13b6c7ba70bc84ccc7e820",
+    "04_yaw_rotor-B22.stl": "e8fcaf31ae4cc7595acf167d659dabc796e454118221d64144c55d7d76949063",
+    "25_nasal_tray-B22.stl": "138ce2a2cfd7456027b46074b42efc77eb9e586924a2c1ef275bdd95ec875d20",
+    "01_base_cup-B22.stl": "b3bfb666b754c70f26eb6e8bd6cf7b1b8ec50b5de6f5e582616913051c2c1971"
+  },
+  "checks_by_plate": {
+    "1": {
+      "objects": 1,
+      "layers": 415,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 239.6945343017578,
+      "estimated_seconds": 31469.498046875,
+      "changed_parts": {
+        "01_base_cup-camera-relief": {
+          "first_z": 0.2,
+          "layers": 270,
+          "e_mm": 75261.97292005034,
+          "narrow_xy_mm": 0.0,
+          "xy_mm": 2360980.287677169,
+          "bed_area_mm2": 21896.0
+        }
+      },
+      "reference": "Current model and native P2S placement match direct plate 1 slice. Only file/object names differ."
+    },
+    "4": {
+      "objects": 1,
+      "layers": 523,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 221.24253845214844,
+      "estimated_seconds": 52000.2421875,
+      "changed_parts": {
+        "28_skull_front_with_camera_tray-B22": {
+          "first_z": 0.2,
+          "layers": 523,
+          "e_mm": 49555.46078004576,
+          "narrow_xy_mm": 60.6657257461439,
+          "xy_mm": 1573580.84453477,
+          "bed_area_mm2": 1589.04
+        }
+      },
+      "reference": "Sliced directly from this production project."
+    },
+    "6": {
+      "objects": 7,
+      "layers": 500,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "isolated_starts": [],
+      "filament_g": 182.52781677246094,
+      "estimated_seconds": 28542.509765625,
+      "changed_parts": {
+        "09_head_frame-B22": {
+          "first_z": 0.2,
+          "layers": 247,
+          "e_mm": 13228.424009996597,
+          "narrow_xy_mm": 0.0,
+          "xy_mm": 417818.0591394623,
+          "bed_area_mm2": 35.76
+        }
+      },
+      "reference": "Whole plate native model, placements and profile match direct plate 6 slice of final head frame."
+    },
+    "7": {
+      "objects": 9,
+      "layers": 271,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "isolated_starts": [],
+      "filament_g": 130.9878387451172,
+      "estimated_seconds": 26024.166015625,
+      "changed_parts": {
+        "07_yoke-B22": {
+          "first_z": 0.2,
+          "layers": 253,
+          "e_mm": 17077.411659996844,
+          "narrow_xy_mm": 0.0,
+          "xy_mm": 536759.707285978,
+          "bed_area_mm2": 469.8
+        }
+      },
+      "reference": "Whole plate native model, placements and profile match direct plate 7 slice of final neck yoke."
+    },
+    "8": {
+      "objects": 15,
+      "layers": 175,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 45.73591995239258,
+      "estimated_seconds": 11262.66015625,
+      "changed_parts": {
+        "04_yaw_rotor-B22": {
+          "first_z": 0.2,
+          "layers": 85,
+          "e_mm": 7299.639790001002,
+          "narrow_xy_mm": 0.0,
+          "xy_mm": 228577.44259734225,
+          "bed_area_mm2": 252.24
+        }
+      },
+      "reference": "Whole plate native model, placements and profile match direct plate 8 slice of enlarged camera plug passage."
+    },
+    "9": {
+      "objects": 7,
+      "layers": 215,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "isolated_starts": [],
+      "filament_g": 28.73068618774414,
+      "estimated_seconds": 6828.8974609375,
+      "changed_parts": {
+        "37_right_cheek_bearing_stay-B22": {
+          "first_z": 0.2,
+          "layers": 153,
+          "e_mm": 1586.045439999997,
+          "narrow_xy_mm": 0.0,
+          "xy_mm": 50146.99591412488,
+          "bed_area_mm2": 201.6
+        }
+      },
+      "reference": "Whole plate native model, placements and profile match direct plate 9 slice of final right jaw bearing stay."
+    },
+    "12": {
+      "objects": 1,
+      "layers": 183,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 5.781792163848877,
+      "estimated_seconds": 2625.671142578125,
+      "changed_parts": {
+        "26_u20cam_slotted_bracket-B22": {
+          "first_z": 0.2,
+          "layers": 183,
+          "e_mm": 1472.2586000000456,
+          "narrow_xy_mm": 0.0,
+          "xy_mm": 47074.25374910825,
+          "bed_area_mm2": 364.64
+        }
+      },
+      "reference": "Sliced directly from this production project."
+    }
+  },
+  "modeled_apertures": {
+    "P6_upper_clevis": {
+      "inlet_pin_pilot": {
+        "CAD_diameter_mm": 3.9,
+        "slicer_model_free_radius_mm": 1.8498,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": null
+      },
+      "far_pin_pilot": {
+        "CAD_diameter_mm": 3.9,
+        "slicer_model_free_radius_mm": 1.8498,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": null
+      },
+      "eject_port": {
+        "CAD_diameter_mm": 2.6,
+        "slicer_model_free_radius_mm": 1.1989,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": null
+      },
+      "M3_retainer_tap_pilot": {
+        "CAD_diameter_mm": 2.6,
+        "slicer_model_free_radius_mm": 1.2746,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 148.6834
+      },
+      "1p5_hex_key_access": {
+        "CAD_diameter_mm": 3.72,
+        "slicer_model_free_radius_mm": 1.8484,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 148.0628
+      }
+    },
+    "P7_lower_clevis_and_M3": {
+      "inlet_pin_pilot": {
+        "CAD_diameter_mm": 3.9,
+        "slicer_model_free_radius_mm": 1.8487,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": null
+      },
+      "far_pin_pilot": {
+        "CAD_diameter_mm": 3.9,
+        "slicer_model_free_radius_mm": 1.8487,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": null
+      },
+      "eject_port": {
+        "CAD_diameter_mm": 2.6,
+        "slicer_model_free_radius_mm": 1.1989,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": null
+      },
+      "M3_retainer_tap_pilot": {
+        "CAD_diameter_mm": 2.6,
+        "slicer_model_free_radius_mm": 1.2781,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 27.4992
+      },
+      "1p5_hex_key_access": {
+        "CAD_diameter_mm": 3.72,
+        "slicer_model_free_radius_mm": 1.8484,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 168.8516
+      },
+      "legacy_M3_1_screw": {
+        "CAD_diameter_mm": 3.4,
+        "slicer_model_free_radius_mm": 1.5984,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 85.3342
+      },
+      "legacy_M3_1_driver": {
+        "CAD_diameter_mm": 6.7,
+        "slicer_model_free_radius_mm": 17.9862,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 7.3582
+      },
+      "legacy_M3_2_screw": {
+        "CAD_diameter_mm": 3.4,
+        "slicer_model_free_radius_mm": 1.6053,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 4.47
+      },
+      "legacy_M3_2_driver": {
+        "CAD_diameter_mm": 6.7,
+        "slicer_model_free_radius_mm": 17.4919,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 7.2145
+      },
+      "legacy_M3_3_screw": {
+        "CAD_diameter_mm": 3.4,
+        "slicer_model_free_radius_mm": 1.6053,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 5.349
+      },
+      "legacy_M3_3_driver": {
+        "CAD_diameter_mm": 6.7,
+        "slicer_model_free_radius_mm": 41.5,
+        "support_intrusions": 0,
+        "support_intrusion_print_layers_mm": [],
+        "min_support_to_axis_mm": 7.1772
+      }
+    },
+    "P9_jaw_bearing_stay": {
+      "MR104ZZ_OD10_seat": {
+        "CAD_diameter_mm": 10.1,
+        "min_modeled_toolpath_free_radius_mm": 5.0376,
+        "support_intrusions": 13,
+        "min_support_bead_free_radius_mm": 4.063,
+        "intruding_support_layer_ranges": {
+          "Support interface": [
+            2.0,
+            2.54286,
+            3
+          ]
+        },
+        "sliced_layers_with_part_paths": 20,
+        "tested_plot_z_range_mm": [
+          1.6197,
+          5.6897
+        ]
+      },
+      "axial_shoulder_aperture": {
+        "CAD_diameter_mm": 7.1,
+        "min_modeled_toolpath_free_radius_mm": 3.5413,
+        "support_intrusions": 0,
+        "min_support_bead_free_radius_mm": 7.3204,
+        "intruding_support_layer_ranges": {},
+        "sliced_layers_with_part_paths": 2,
+        "tested_plot_z_range_mm": [
+          1.1497,
+          1.5797
+        ]
+      },
+      "shaft_4mm_full_span": {
+        "CAD_diameter_mm": 4.0,
+        "min_modeled_toolpath_free_radius_mm": 3.5249,
+        "support_intrusions": 0,
+        "min_support_bead_free_radius_mm": 4.063,
+        "intruding_support_layer_ranges": {},
+        "sliced_layers_with_part_paths": 50,
+        "tested_plot_z_range_mm": [
+          0.7997,
+          10.7997
+        ]
+      },
+      "outer_bearing_insertion_OD10p20": {
+        "CAD_diameter_mm": 10.2,
+        "min_modeled_toolpath_free_radius_mm": 5.2,
+        "support_intrusions": 214,
+        "min_support_bead_free_radius_mm": 4.294,
+        "intruding_support_layer_ranges": {
+          "Support": [
+            6.0,
+            28.575,
+            90
+          ],
+          "Support interface": [
+            6.2,
+            30.2,
+            11
+          ],
+          "Support transition": [
+            8.0,
+            28.85,
+            2
+          ]
+        },
+        "sliced_layers_with_part_paths": 124,
+        "tested_plot_z_range_mm": [
+          5.7097,
+          30.6997
+        ]
+      }
+    }
+  },
+  "jaw_bearing_support_cleanup": {
+    "verified_CAD_access": {
+      "bearing_sweep_OD10p04": {
+        "diameter_mm": 10.04,
+        "length_mm": 29.996000000000002,
+        "overlap_mm3": 0.0
+      },
+      "cleanup_tip_envelope_OD9p70": {
+        "diameter_mm": 9.7,
+        "length_mm": 29.996000000000002,
+        "overlap_mm3": 0.0
+      },
+      "canonical_world_sha256": "5a0334a3f7535696945e0ee6f7049fcebb0c125cb9b7332bd765329329740081",
+      "cleanup_plus_x_reach_mm": 28.996000000000002,
+      "usable_tool_example": {
+        "tip_diameter_mm": 1.2,
+        "lateral_offset_mm": 4.25,
+        "combined_radial_extent_mm": 4.85
+      }
+    },
+    "seating_side": "+X",
+    "remove_peripheral_support_before_bearing_install": true
+  },
+  "camera_audits": {
+    "base_nested_shells": {
+      "source_sha256": "b3bfb666b754c70f26eb6e8bd6cf7b1b8ec50b5de6f5e582616913051c2c1971",
+      "revised_closed_outer_solid_count": 1,
+      "closed_nested_voids": [
+        {
+          "volume_mm3": 0.20142963506474545,
+          "bounds_stl_mm": [
+            [
+              -43.519588470458984,
+              56.1960563659668,
+              7.0
+            ],
+            [
+              -40.648399353027344,
+              57.049171447753906,
+              7.239997863769531
+            ]
+          ]
+        },
+        {
+          "volume_mm3": 0.2014296350647451,
+          "bounds_stl_mm": [
+            [
+              40.648399353027344,
+              56.1960563659668,
+              7.0
+            ],
+            [
+              43.519588470458984,
+              57.049171447753906,
+              7.239997863769531
+            ]
+          ]
+        }
+      ],
+      "stock_body_count": 3,
+      "stock_closed_nested_voids": [
+        {
+          "volume_mm3": 0.20142966522129235,
+          "bounds_stl_mm": [
+            [
+              -43.5195885,
+              56.1922264,
+              -20.0
+            ],
+            [
+              -40.6483994,
+              57.0453415,
+              -19.7600021
+            ]
+          ]
+        },
+        {
+          "volume_mm3": 0.2014296652212918,
+          "bounds_stl_mm": [
+            [
+              40.6483994,
+              56.1922264,
+              -20.0
+            ],
+            [
+              43.5195885,
+              57.0453415,
+              -19.7600021
+            ]
+          ]
+        }
+      ]
+    },
+    "rotor_screw_holes_and_camera_throat": {
+      "mast_stud_1_head_recess": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 96,
+        "sacrificial_intrusion_segments": 479,
+        "sacrificial_intrusion_layers": 7
+      },
+      "mast_stud_1_M3_shank": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "mast_stud_2_head_recess": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 96,
+        "sacrificial_intrusion_segments": 452,
+        "sacrificial_intrusion_layers": 7
+      },
+      "mast_stud_2_M3_shank": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "mast_stud_3_head_recess": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 96,
+        "sacrificial_intrusion_segments": 431,
+        "sacrificial_intrusion_layers": 7
+      },
+      "mast_stud_3_M3_shank": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "mast_stud_4_head_recess": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 96,
+        "sacrificial_intrusion_segments": 449,
+        "sacrificial_intrusion_layers": 7
+      },
+      "mast_stud_4_M3_shank": {
+        "modeled_clearance_metric_mm": 1.7757,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "M2_horn_screw_1": {
+        "modeled_clearance_metric_mm": 1.1788,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "M2_horn_screw_2": {
+        "modeled_clearance_metric_mm": 1.1787,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "M2_horn_screw_3": {
+        "modeled_clearance_metric_mm": 1.1787,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "M2_horn_screw_4": {
+        "modeled_clearance_metric_mm": 1.1787,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 0,
+        "sacrificial_intrusion_layers": 0
+      },
+      "9p2x5p3_plug_at_Yoffset_-0.10": {
+        "modeled_clearance_metric_mm": 0.1851,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 319,
+        "sacrificial_intrusion_layers": 39
+      },
+      "9p2x5p3_plug_at_Yoffset_+0.00": {
+        "modeled_clearance_metric_mm": 0.2849,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 338,
+        "sacrificial_intrusion_layers": 39
+      },
+      "9p2x5p3_plug_at_Yoffset_+0.10": {
+        "modeled_clearance_metric_mm": 0.1849,
+        "model_intrusion_segments": 0,
+        "sacrificial_intrusion_segments": 366,
+        "sacrificial_intrusion_layers": 39
+      }
+    },
+    "mount_clearance_and_tap_pilots": {
+      "Part066_left": {
+        "smallest_modeled_radius_mm": 1.6909775769324393,
+        "model_gauge_hits": 0,
+        "support_gauge_hits": 0,
+        "model_layers_detected": [
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0,
+          1.2,
+          1.4,
+          1.6,
+          1.8,
+          2.0,
+          2.2,
+          2.4,
+          2.6,
+          2.8,
+          3.0,
+          3.2,
+          3.4,
+          3.6,
+          3.8,
+          4.0
+        ],
+        "sacrificial_layers_detected": [],
+        "gauge_radius_mm": 1.5
+      },
+      "Part066_right": {
+        "smallest_modeled_radius_mm": 1.690977576932437,
+        "model_gauge_hits": 0,
+        "support_gauge_hits": 0,
+        "model_layers_detected": [
+          0.2,
+          0.4,
+          0.6,
+          0.8,
+          1.0,
+          1.2,
+          1.4,
+          1.6,
+          1.8,
+          2.0,
+          2.2,
+          2.4,
+          2.6,
+          2.8,
+          3.0,
+          3.2,
+          3.4,
+          3.6,
+          3.8,
+          4.0
+        ],
+        "sacrificial_layers_detected": [],
+        "gauge_radius_mm": 1.5
+      }
+    },
+    "open_2p5mm_tie_notch": {
+      "regions": {
+        "full_tunnel": {
+          "CAD_overlap_mm3": 0.0,
+          "both_toolpath_clear_interval_Z_mm": [
+            77.15,
+            77.35
+          ],
+          "both_toolpath_clear_gap_mm": 0.19999999999998863,
+          "nominal_tie_gauge_height_mm": 1.05,
+          "nominal_center_collisions": {
+            "sacrificial": {
+              "count": 331,
+              "physical_intervals_mm": [
+                [
+                  75.35,
+                  75.55
+                ],
+                [
+                  75.55,
+                  75.75
+                ],
+                [
+                  75.75,
+                  75.95
+                ],
+                [
+                  75.95,
+                  76.15
+                ],
+                [
+                  76.15,
+                  76.35
+                ],
+                [
+                  76.35,
+                  76.55
+                ],
+                [
+                  76.55,
+                  76.75
+                ],
+                [
+                  76.75,
+                  76.95
+                ],
+                [
+                  76.95,
+                  77.15
+                ]
+              ]
+            },
+            "made_part": {
+              "count": 0,
+              "physical_intervals_mm": [
+                [
+                  77.35,
+                  77.55
+                ],
+                [
+                  77.55,
+                  77.75
+                ]
+              ]
+            }
+          }
+        },
+        "left_mouth": {
+          "CAD_overlap_mm3": 0.0,
+          "both_toolpath_clear_interval_Z_mm": [
+            75.79126290180815,
+            77.39126290180816
+          ],
+          "both_toolpath_clear_gap_mm": 1.6000000000000085,
+          "nominal_tie_gauge_height_mm": 1.05,
+          "nominal_center_collisions": {}
+        },
+        "right_mouth": {
+          "CAD_overlap_mm3": 0.0,
+          "both_toolpath_clear_interval_Z_mm": [
+            77.15,
+            77.39126290180816
+          ],
+          "both_toolpath_clear_gap_mm": 0.24126290180815602,
+          "nominal_tie_gauge_height_mm": 1.05,
+          "nominal_center_collisions": {
+            "sacrificial": {
+              "count": 25,
+              "physical_intervals_mm": [
+                [
+                  75.35,
+                  75.55
+                ],
+                [
+                  75.55,
+                  75.75
+                ],
+                [
+                  75.75,
+                  75.95
+                ],
+                [
+                  75.95,
+                  76.15
+                ],
+                [
+                  76.15,
+                  76.35
+                ],
+                [
+                  76.35,
+                  76.55
+                ],
+                [
+                  76.55,
+                  76.75
+                ],
+                [
+                  76.75,
+                  76.95
+                ],
+                [
+                  76.95,
+                  77.15
+                ]
+              ]
+            }
+          }
+        }
+      },
+      "common_clear_gap_mm": 0.19999999999998863,
+      "common_clear_Z_mm": [
+        77.15,
+        77.35
+      ],
+      "quantized_stock_2p5_by1p05_tie_can_pass": false,
+      "open_removal_note": "The clearance metric uses raw G-code with sacrificial support. Remove the support from the open underside before feeding the tie. Model intersections are zero at the stock gauge.",
+      "model_only_gauge_clear_interval_Z_mm": [
+        75.79126290180815,
+        77.35
+      ],
+      "model_only_gauge_clear_height_mm": 1.5587370981918411,
+      "model_only_stock_tie_passes_after_support_cleanup": true
+    },
+    "front_m2_and_lens_apertures": {
+      "left_m2_pcb_slot": {
+        "minimum_modeled_bead_clearance_mm": null,
+        "model_crossings": 0,
+        "support_crossings": 214,
+        "support_layers": 11
+      },
+      "right_m2_pcb_slot": {
+        "minimum_modeled_bead_clearance_mm": null,
+        "model_crossings": 0,
+        "support_crossings": 241,
+        "support_layers": 11
+      },
+      "camera_lens_at_lift_high": {
+        "minimum_modeled_bead_clearance_mm": 0.43656,
+        "model_crossings": 0,
+        "support_crossings": 1266,
+        "support_layers": 56
+      },
+      "camera_lens_at_lift_middle": {
+        "minimum_modeled_bead_clearance_mm": 0.58295,
+        "model_crossings": 0,
+        "support_crossings": 392,
+        "support_layers": 35
+      },
+      "camera_lens_at_seat_height": {
+        "minimum_modeled_bead_clearance_mm": null,
+        "model_crossings": 0,
+        "support_crossings": 39,
+        "support_layers": 9
+      }
+    }
+  },
+  "sliced_grams_sha256": "b12723dcceb09029328068df052e02d11785a1f780f8ff2ae8574b59fd472d60",
+  "installed_printed_grams_catalog": 1025.9552462279853,
+  "total_changed_filament_g": 854.70112657547,
+  "total_changed_print_seconds": 158753.64477539062,
+  "cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "fused_front_skull": {
+    "physical_plate4_parts": 1,
+    "logical_cad_bodies": [
+      "Part073",
+      "Part065"
+    ],
+    "exact_source_skull_world_sha256": "5b8eafb43913fdee7797596cb4b9fbf8129a466925543c00b42c9d32c4b8e5e3",
+    "exact_source_tray_world_sha256": "1178ffcd0ca00f9b21e165fff4536372beae410e9b7a4a429a970e43c1d59f1d",
+    "exact_source_printable_tray_sha256": "138ce2a2cfd7456027b46074b42efc77eb9e586924a2c1ef275bdd95ec875d20",
+    "indexed_mesh_sha256": "87aca252dc3cec783ece12aa6cb79abf0c007b1ed19b0e7e4e0f06148d555c36",
+    "maximum_mesh_simplification_mm": 0.0003,
+    "positive_closed_print_bodies": 1,
+    "old_front_skull_fdm_paths": {
+      "layers": 523,
+      "model_label_ids": [
+        1
+      ],
+      "path_arcs": 0,
+      "parts": {
+        "1": {
+          "first_z": 0.2,
+          "layers": 523,
+          "e_mm": 48612.39787004347,
+          "narrow_xy_mm": 60.665661738160104,
+          "xy_mm": 1544052.4389136604,
+          "bed_area_mm2": 1588.52
+        }
+      },
+      "islands": [],
+      "names": {
+        "1": "28_skull_front_1"
+      },
+      "warning_message": ""
+    },
+    "seam_toolpaths_and_M3_tap_pilot_paths": {
+      "sampled_seam_layers_with_continuous_model_extrusion": 27,
+      "bridging_extrusion_segments_sampled": 407,
+      "seam_extrusion_crossings": {
+        "-31.370817": {
+          "count": 11,
+          "shell_mm": 10.35281110562677,
+          "tray_mm": 232.78869066208117,
+          "largest_smaller_overlap_mm": 2.328011718535926
+        },
+        "-32.370817": {
+          "count": 13,
+          "shell_mm": 18.30715478777798,
+          "tray_mm": 272.6012005907764,
+          "largest_smaller_overlap_mm": 3.4265664893554657
+        },
+        "-33.370817": {
+          "count": 10,
+          "shell_mm": 16.091264556845616,
+          "tray_mm": 312.7119963588574,
+          "largest_smaller_overlap_mm": 3.5131839037619166
+        },
+        "-34.370817": {
+          "count": 8,
+          "shell_mm": 11.545697339277947,
+          "tray_mm": 311.38211517324737,
+          "largest_smaller_overlap_mm": 2.7715500317293724
+        },
+        "-35.370817": {
+          "count": 10,
+          "shell_mm": 11.972840369152497,
+          "tray_mm": 317.75033450123186,
+          "largest_smaller_overlap_mm": 2.5230878304163475
+        },
+        "-36.370817": {
+          "count": 7,
+          "shell_mm": 11.707765191302006,
+          "tray_mm": 271.3900981263204,
+          "largest_smaller_overlap_mm": 2.913456120031846
+        },
+        "-37.370817": {
+          "count": 10,
+          "shell_mm": 10.589837108046112,
+          "tray_mm": 310.7447720898122,
+          "largest_smaller_overlap_mm": 2.3165045104594775
+        },
+        "-38.370817": {
+          "count": 7,
+          "shell_mm": 10.282786735136078,
+          "tray_mm": 231.47281211883165,
+          "largest_smaller_overlap_mm": 2.540573952274382
+        },
+        "-39.370817": {
+          "count": 10,
+          "shell_mm": 12.027869187687475,
+          "tray_mm": 309.7253966435735,
+          "largest_smaller_overlap_mm": 2.413910793304151
+        },
+        "-40.370817": {
+          "count": 15,
+          "shell_mm": 13.224187467612609,
+          "tray_mm": 136.25415710439387,
+          "largest_smaller_overlap_mm": 1.5185770272385035
+        },
+        "-41.370817": {
+          "count": 19,
+          "shell_mm": 15.38679910451927,
+          "tray_mm": 104.50223463774775,
+          "largest_smaller_overlap_mm": 2.2780795049424825
+        },
+        "-42.370817": {
+          "count": 20,
+          "shell_mm": 22.797161234589623,
+          "tray_mm": 127.04264049469732,
+          "largest_smaller_overlap_mm": 2.3407741482611257
+        },
+        "-43.370819": {
+          "count": 19,
+          "shell_mm": 17.860839847431482,
+          "tray_mm": 91.05774125460707,
+          "largest_smaller_overlap_mm": 2.4180583476579507
+        },
+        "-44.370819": {
+          "count": 19,
+          "shell_mm": 20.899113792672257,
+          "tray_mm": 88.39214987183671,
+          "largest_smaller_overlap_mm": 2.1038588716236433
+        },
+        "-45.370819": {
+          "count": 18,
+          "shell_mm": 20.982713013309002,
+          "tray_mm": 82.13743752098597,
+          "largest_smaller_overlap_mm": 2.0279542384832503
+        },
+        "-46.370819": {
+          "count": 17,
+          "shell_mm": 19.019389772113417,
+          "tray_mm": 34.093787552978256,
+          "largest_smaller_overlap_mm": 1.8945186382343167
+        },
+        "-47.370819": {
+          "count": 13,
+          "shell_mm": 13.599488158783613,
+          "tray_mm": 27.194178058890337,
+          "largest_smaller_overlap_mm": 1.6633634022612966
+        },
+        "-47.370818": {
+          "count": 2,
+          "shell_mm": 1.6041405251057412,
+          "tray_mm": 1.2759755148443048,
+          "largest_smaller_overlap_mm": 0.5714724457728124
+        },
+        "-48.370819": {
+          "count": 15,
+          "shell_mm": 12.758499006574024,
+          "tray_mm": 23.08759028768269,
+          "largest_smaller_overlap_mm": 1.6970814937021697
+        },
+        "-49.370819": {
+          "count": 12,
+          "shell_mm": 10.059585306084898,
+          "tray_mm": 13.739245155304427,
+          "largest_smaller_overlap_mm": 1.0925296052701725
+        },
+        "-50.370819": {
+          "count": 14,
+          "shell_mm": 9.13548698764997,
+          "tray_mm": 19.463263822829184,
+          "largest_smaller_overlap_mm": 1.425161579135981
+        },
+        "-51.370819": {
+          "count": 17,
+          "shell_mm": 19.880507791122106,
+          "tray_mm": 27.847792497555183,
+          "largest_smaller_overlap_mm": 2.272277631160126
+        },
+        "-52.370819": {
+          "count": 7,
+          "shell_mm": 4.780265907881647,
+          "tray_mm": 30.714715838499068,
+          "largest_smaller_overlap_mm": 1.2067787810027966
+        },
+        "-52.370818": {
+          "count": 7,
+          "shell_mm": 7.20102509210986,
+          "tray_mm": 18.2022912943588,
+          "largest_smaller_overlap_mm": 1.9831560016059058
+        },
+        "-53.370819": {
+          "count": 12,
+          "shell_mm": 12.48542760716342,
+          "tray_mm": 43.098420691340266,
+          "largest_smaller_overlap_mm": 1.9440582793950298
+        },
+        "-54.370819": {
+          "count": 13,
+          "shell_mm": 22.237353558153075,
+          "tray_mm": 187.40996035650326,
+          "largest_smaller_overlap_mm": 6.232847013131253
+        },
+        "-55.370819": {
+          "count": 82,
+          "shell_mm": 152.35536876301666,
+          "tray_mm": 147.11076389089678,
+          "largest_smaller_overlap_mm": 2.3353777193376
+        }
+      },
+      "raw_2p5mm_horizontal_pilot_gauge": {
+        "left": {
+          "made_part": {
+            "segments": 12,
+            "layer_count": 3,
+            "deepest_ideal_gauge_cross_mm": 0.04222421225141473
+          },
+          "support": {
+            "segments": 214,
+            "layer_count": 10,
+            "deepest_ideal_gauge_cross_mm": 0.21
+          }
+        },
+        "right": {
+          "made_part": {
+            "segments": 12,
+            "layer_count": 3,
+            "deepest_ideal_gauge_cross_mm": 0.04222421225141473
+          },
+          "support": {
+            "segments": 214,
+            "layer_count": 10,
+            "deepest_ideal_gauge_cross_mm": 0.21
+          }
+        }
+      },
+      "pilot_tool_ingress_exact_fused_CAD": {
+        "bench_side": "from above tray before fitting camera bracket",
+        "approach_end_world_z_mm": 112.0,
+        "axes_world_xy_mm": [
+          [
+            -12.0,
+            -47.0
+          ],
+          [
+            12.0,
+            -47.0
+          ]
+        ],
+        "drill_bit_diameter_mm": 2.5,
+        "drill_start_world_z_mm": 66.8,
+        "driver_clearance_diameter_above_tray_mm": 6.0,
+        "drill_overlaps_mm3": [
+          0.0,
+          0.0
+        ],
+        "holder_overlaps_mm3": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "planned_horizontal_pilot_cleaning": "Clear support from the open top of the tray. Use a depth-marked \u00d82.5 mm drill for about 4 mm before hand-tapping M3.",
+    "mass": {
+      "fused_installed_g": 152.56941010121193,
+      "old_separate_skull_g": 149.66594498147444,
+      "logical_tray_g": 3.124621639787175,
+      "logical_skull_g": 149.44478846142476,
+      "bracket_g": 4.5327320659056465,
+      "allocation": "Actual model extrusion divided by fraction of deposited centerline inside the former tray CAD cross-section of each layer. Split is an approximation; combined model extrusion excludes support."
+    }
+  }
+}
