@@ -27,7 +27,7 @@ python mechanical/physics/verify_b23_release.py mechanical/revisions/b24 --revis
 
 - **가상 제어**는 206개 통과했습니다. 두 PCB는 ERC·DRC·미연결·회로도 대조 모두 0건이었습니다. 재생성한 Gerber·드릴·스텐실 ZIP의 구성과 파일 내용은 생성 시각을 제외하면 저장본과 일치했고 C3 실장 좌표도 일치했습니다. [가상 테스트][tests] · [PCB 검사와 내보내기][export]
 - **B24 저장 보고서**는 CAD·3MF·펌웨어 해시와 검사 결과의 일치를 확인합니다. 위 명령이 150단계 조립이나 26,196자세를 다시 계산하지는 않습니다. B24 모델 생성과 3D 조립 HTML은 별도 명령을 사용합니다. `spec/verify.py`의 기본 인수 검사는 B22 기록을 읽습니다. [저장 보고서][verification] · [CAD와 출력판][cad] · [3D 조립 HTML][viewer] · [인수 검사 리비전][spec]
-- **실물 인수**는 P01–P08, 눈 상하축 유격 M05, 눈꺼풀 실물 50회가 남아 있습니다. P2S 3MF는 0.4 mm 노즐과 PETG HF 설정이 포함된 프로젝트이며, 사용한 슬라이서 버전은 Bambu Studio 02.09.01.70입니다. [슬라이싱 기록][slice] · [실물 검사][bench]
+- **실물 인수**는 P01–P08, 눈 상하축 유격 M05, 눈꺼풀 실물 50회가 남아 있습니다. P2S 3MF는 0.4 mm 노즐과 PETG HF 설정이 포함된 프로젝트이며, 사용한 슬라이서 버전은 Bambu Studio 02.09.01.70입니다. [슬라이싱 기록][slice] · [B24 실물 검수][b24-bench] · [공통 검수 절차와 B22 출력 예시][bench]
 
 B24 CAD와 출력판을 소스에서 재생성하려면 FreeCAD 1.0을 호환되는 Python 3.12 환경에 설치합니다. 아래 FreeCAD 모듈 경로는 Debian 예시입니다. 3D HTML 생성에는 Node.js와 npm도 필요합니다. [기구 의존성][deps] · [HTML 생성 명령][viewer]
 
@@ -41,7 +41,7 @@ python mechanical/build_b24_print.py build/b24/R5-B24-P2S.3mf --print-dir build/
 python mechanical/physics/verify_b23_release.py mechanical/revisions/b24 --revision B24 --print-inputs build/b24/print
 ```
 
-다시 만든 3MF는 저장본과 바이트까지 일치했습니다. FreeCAD 파일은 저장 시각 등의 메타데이터가 달라질 수 있으므로, 기존 검사 기록의 해시는 저장본으로 대조하고 새 출력 메시의 해시는 위 명령으로 대조합니다. 150단계 조립부터 Bambu 슬라이스 검사까지 전부 다시 돌리는 통합 명령은 아직 없습니다.
+FreeCAD 1.0과 Python 3.12 환경에서 다시 만든 3MF는 저장본과 바이트까지 일치했습니다. Python 3.13에서 재생성했을 때는 4번 판 메시의 점·면 순서가 달랐고 좌표와 삼각형은 일치했습니다. FreeCAD 파일은 저장 시각 등의 메타데이터가 달라질 수 있으므로, 기존 검사 기록의 해시는 저장본으로 대조하고 새 출력 메시의 해시는 위 명령으로 대조합니다. 150단계 조립부터 Bambu 슬라이스 검사까지 전부 다시 돌리는 통합 명령은 아직 없습니다.
 
 ## 전자·제어 검토 결과
 
@@ -76,7 +76,7 @@ finally:
 PYTHON
 ```
 
-가상 시험 206개에는 위 리셋 문제를 판정하는 회귀 테스트가 없습니다. 전원 복구와 정지 처리는 실제 모터를 연결하는 첫 시험 전에 다룹니다. 카메라 샘플 영상은 PC에서 처리했으며, 실물 카메라 지연과 두 방향 USB-C 인식은 미검증입니다. [카메라 처리 코드][tracking] · [실물 검사][bench]
+가상 시험 206개에는 위 리셋 문제를 판정하는 회귀 테스트가 없습니다. 전원 복구와 정지 처리는 실제 모터를 연결하는 첫 시험 전에 다룹니다. 카메라 샘플 영상은 PC에서 처리했으며, 실물 카메라 지연과 두 방향 USB-C 인식은 미검증입니다. [카메라 처리 코드][tracking] · [B24 실물 검수][b24-bench]
 
 ## 기구·조립 검토 결과
 
@@ -129,3 +129,4 @@ PYTHON
 [jst]: https://www.jst-mfg.com/product/pdf/eng/ePH.pdf
 [tracking]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/control/pc/track.py#L413-L453
 [neck-stop]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24/neck-stop.json#L239-L244
+[b24-bench]: https://github.com/ckh7488/head/blob/2157cbfafac76ff17a58f86f65da18d7d153c68a/mechanical/revisions/b24/README.md#실물-검수
