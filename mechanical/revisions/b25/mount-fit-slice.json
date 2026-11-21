@@ -1,0 +1,28 @@
+{
+  "slicer": "Bambu Studio 02.09.01.70",
+  "source_projects": {
+    "fit-m2-mounts.zip": "d33173c9721879b966f73b0576abdd201380be7556aa6adf35c379bcd3e17c10",
+    "R5-B25-Bearing-Fit-STLs.zip": "4162744f1e8a9f04461fc46bc92b7a33bed350fc856f287c8abaca2a0206809b"
+  },
+  "method": "Smallest and largest STL for each of the seven source parts, original P2S orientation and part overrides.",
+  "return_code": 0,
+  "slice_warning": "",
+  "console_notes": "Two clipping diagnostics, P2S AMS unload estimator diagnostic, headless preview diagnostic.",
+  "layers": 215,
+  "sliced_objects": [
+    "ID1-xl330_eye_yaw_front_plate-D2.15",
+    "ID1-xl330_eye_yaw_front_plate-D2.35",
+    "ID2-xl330_m077_eye_pitch_front_plate-D2.15",
+    "ID2-xl330_m077_eye_pitch_front_plate-D2.35",
+    "ID3-xl330_m288_blink_front_plate-D2.15",
+    "ID3-xl330_m288_blink_front_plate-D2.35",
+    "ID6-36_left_cheek_servo_stay-D2.15",
+    "ID6-36_left_cheek_servo_stay-D2.35",
+    "p9-37-bearing-pocket-D10.05",
+    "p9-37-bearing-pocket-D10.25",
+    "p7-13L-bearing-pocket-D6.05",
+    "p7-13L-bearing-pocket-D6.25",
+    "p7-13R-bearing-pocket-D6.05",
+    "p7-13R-bearing-pocket-D6.25"
+  ]
+}

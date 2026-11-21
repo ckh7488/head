@@ -1,16 +1,14 @@
 # R5 로봇 헤드
 
-R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
+R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다.
 
-## 최종 검토 후보
+## B25 동결
 
-**B25 기구 후보, 서보 허브 A3, C3 A1과 갱신한 제어를 검토합니다. 전체 출력·부품·PCB 발주는 보류합니다.**
+B25 기구, 서보 허브 A3와 OpenRB 제어를 사용합니다. 시험판과 맞춤 게이지는 별도로 준비합니다. 전체 출력과 발주 전에 해결할 항목은 판정표에서 확인합니다.
 
-- [B25 기구 후보](mechanical/revisions/b25/) · [B24 조립·가공 유의점](mechanical/revisions/b24/) · [3D 조립 미리보기](web/README.md#b25-조립-미리보기)
-- [PCB와 전원 검토](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
-- [B24 원본의 독립 검토 결과](https://github.com/ckh7488/head/blob/765d379f9c37a0123b0e38612cc2745b216bceca/REVIEW.md)
-
-기존 B24 저장 보고서는 원본 펌웨어와 추적기의 해시로 검증합니다. B25에서 확인한 뒤 외장 체결, 하부 덮개 정비와 목 하중 문제를 기구 검토에 기록했습니다. 전체 배선, 턱 체결 하중, 전원과 실물 조립·구동 기준은 제작 승인 전에 확인합니다. [B25 검토](mechanical/revisions/b25/) · [저장 보고서 대조 방법](mechanical/revisions/b24/#파일과-검사-재현)
+- [B25 CAD와 출력판](mechanical/revisions/b25/) · [조립과 발주표](mechanical/revisions/b25/assembly.md) · [3D 조립 미리보기](web/README.md#b25-조립-미리보기)
+- [고정 검사 조건](spec/conditions.md) · [리뷰 판정](mechanical/revisions/b25/review-disposition.md) · [맞춤 게이지](mechanical/revisions/b25/fit-gauge.md)
+- [서보 허브 A3](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
 
 ![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)
 
@@ -23,7 +21,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 - [control/](control/README.md) · PC 얼굴 추적, OpenRB 펌웨어, 카메라와 모터 보정
 - [web/](web/README.md) · 3D 조립·구동·배선 뷰어, CAD 내보내기
 - [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
-- [spec/](spec/requirements.md) · B22 동작 장면, 조립과 실물 인수 검사
+- [spec/](spec/conditions.md) · B25 검사 조건과 실물 인수 검사
 
 ## 최근 CAD
 

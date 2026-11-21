@@ -1,0 +1,17 @@
+{
+  "project_sha256": "02a1c3fc44e7a8ca3b324e00633cc60f9f70e0b9c01748d41d617e7d3fd24878",
+  "slicer": "Bambu Studio 02.09.01.70",
+  "profile": "P2S, Bambu PETG HF, 0.4 mm nozzle, 0.20 mm layer, Textured PEI",
+  "return_code": 0,
+  "plate_count": 1,
+  "layers": 110,
+  "mesh_triangles": 47964,
+  "bounds_mm": [
+    127.6,
+    228.4,
+    22.0
+  ],
+  "estimated_seconds": 11387,
+  "estimated_filament_g": 56.72,
+  "slice_warning": ""
+}

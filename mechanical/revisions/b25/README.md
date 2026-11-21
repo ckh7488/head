@@ -1,41 +1,16 @@
-# R5 B25 기구 검토 후보
+# R5 B25 동결 검토
 
-**전체 출력과 발주는 보류합니다.** B25는 B24 조립에서 뒤 외장 고정, 눈꺼풀 간섭, J2 형상을 다시 만든 후보입니다. [FreeCAD 조립본](R5-B25-Assembly.FCStd) · [P2S 프로젝트](R5-B25-P2S.3mf) · [형상 기록](design.json) · [출력판 대조](print-build.json)
+**맞춤 게이지와 시험판을 사용합니다. 전체 출력과 발주 전에 판정표의 막음 항목을 해결해야 합니다.** [고정 검사 조건](../../../spec/conditions.md) · [리뷰 판정표](review-disposition.md)
 
-## 조립에서 바뀐 곳
+- [FreeCAD 조립본](R5-B25-Assembly.FCStd) · [B25 전체 P2S 프로젝트](R5-B25-P2S.3mf) · [3D 조립 미리보기](../../../web/README.md#b25-조립-미리보기)
+- [B25 발주 변경과 조립](assembly.md) · [B25 발주표](BOM.csv) · [목 상하축 가공 STEP과 도면](pitch-drive-shaft.md)
+- [맞춤 게이지와 치수별 출력 파일](fit-gauge.md) · [서보 허브 A3 발주 검토](../../../electronics/README.md)
 
-- **뒤 외장**은 B24 방향 그대로 밀어 넣습니다. 먼저 프레임 양쪽 뒤가 열린 슬롯에 일반 M3 육각너트를 넣습니다. 외장을 앉힌 뒤 좌우에서 M3×16 원통머리 나사 두 개를 넣고 2.5 mm 육각렌치로 조입니다. 분해할 때는 전원을 끄고 목과 외장을 받친 뒤 두 나사를 빼고 뒤로 곧게 빼냅니다.
-- **눈꺼풀**은 앞 외장 안쪽의 B24 국부 절삭을 되돌리고 왼쪽 눈꺼풀의 바깥 핀 멈춤턱 주변을 다듬었습니다. 핀 받침과 파일럿은 유지했습니다. 7번 판의 Ø10.24 mm 베어링 포켓은 턱을 보존하고, 각 포켓 가운데에 폭 1.0–1.2 mm 금속 시임 띠를 맞춥니다. 띠의 지름 간극 목표는 약 0.030 mm이고 양쪽 포켓 끝은 넓게 둡니다. 안쪽 간격통에는 약 0.10 mm 축방향 여유를 둡니다. 모터 링크를 풀고 한 바퀴 돌렸을 때 걸림이 없어야 합니다. 조립 상태에서 축 중심의 총 방사 편차가 베어링마다 0.025 mm 이내인지 측정합니다. 이 수치에는 띠 위치, 베어링 간극, 축 끼움이 모두 들어갑니다.
-- **하부 기판**의 J2는 실제 Phoenix 1715721의 기판 위 높이 13.8 mm를 표시합니다. J2 양극·접지 위치도 실제 패드와 일치시켰습니다. 기존 덮개를 내려서는 표준 드라이버로 J2에 접근할 수 없고, 빠져 있던 일곱 가닥의 동시 배선 경로도 아직 없습니다. [J2 제조사 사양](https://www.phoenixcontact.com/en-pc/products/pcb-terminal-block-mkds-15-2-508-1715721)
+B25의 변경은 발주표 및 조립 변경 안내를 먼저 적용합니다. 공통 부품표와 B24 조립 절차는 나머지 자리의 기준입니다. 기존 전체 3MF의 3번 판에서는 C3 전용 캐리어와 클램프 두 개를 출력 목록에서 해제합니다. [B24 조립과 가공](../b24/) · [기존 공통 부품표](../../BOM.csv)
 
-- **XL330 케이스**의 출력 두께에 따라 모터 동봉 M2×8 탭 나사 11개와 M2×6 탭 나사 5개를 나누어 씁니다. 16곳 모두 CAD에서 머리와 공구가 들어가는 경로를 확인했습니다. [나사 배정과 검사](xl330-case-screws.md)
+## 기존 검증 기록
 
-목 상하축의 기존 구동과 스토퍼는 외장에 직접 1 N이 걸리는 조건에서 여유가 부족합니다. 표준 M3 키퍼와 DIN 988 시임을 쓰는 별도 시안은 22개 정비 경로와 변경부의 외장 간극 하한 0.10 mm를 확인했습니다. 축 검수 하중은 시제품에서 측정한 스토퍼 힘으로 정합니다. [M3 스토퍼 시안](neck-stop-seats-m3.md) · [목 하중과 보강 후보](neck-load-study.md) · [스토퍼 시험편](neck-stop-coupon.md)
+- [형상](design.json) · [출력판 대조](print-build.json) · [정밀 슬라이스](print-precision-check.json) · [5번 판](plate5-check.json)
+- [카메라와 눈꺼풀 형상](blink-fit.json) · [이전 CAD 검증과 재현 명령](https://github.com/ckh7488/head/blob/9c024361d586ff5ea582cbac3e1328d40d5b0c65/mechanical/revisions/b25/README.md)
 
-조립 경로 152개 중 151개를 CAD에서 확인했습니다. 하부 덮개 별도 시안은 J2의 6715 정비선 두 가닥과 주차 자세에서의 덮개 30 mm 이동을 검사했습니다. 전체 가동 배선과 고정 전원선이 남아 있습니다. [J2 가동 전선 검사](j2-pigtail.md) · [B25 조립 미리보기 생성](../../../web/README.md#b25-조립-미리보기) · [A3 전원과 남은 시험](../../../electronics/README.md) · [B24 원본 기록과 가공 절차](../b24/)
-
-턱 받침을 뒤로 옮긴 시안은 왼쪽 너트까지의 직선 공구 접근을 확인했습니다. 턱 삽입, 왼쪽 공구 회전, 오른쪽 공구와 요크 간섭을 해결해야 합니다. [뒤쪽 턱 고정 시안](jaw-relocated-mount.md) · [턱 고정과 닫힘 시안](jaw-candidate.md)
-
-## 눈꺼풀 하중과 간극
-
-양쪽 눈꺼풀의 마찰을 각각 0.009 N·m로 놓고, 한쪽 눈꺼풀의 1 N 접촉을 16.6 mm 지레팔로 환산했습니다. 500 MPa PETG 레일과 0.8 mm 유한요소 메시를 사용했습니다. 각 베어링 중심에서 편차가 없는 경우와 반경 0.0125 mm 및 0.025 mm의 8방향을 독립적으로 조합하고, 하중 방향 편차도 확인했습니다. 0°부터 90°까지 명령 각도 94곳에서 앞 외장과 눈꺼풀·링크 간극을 계산했습니다.
-
-앞 외장과 오른쪽 눈꺼풀의 최소 표본 간극은 0.307 mm였습니다. 축 유격 0.10 mm와 축 기울기 0.48°에 따른 핀 이동을 합한 0.196 mm를 차감하면 표본에서 0.110 mm가 남습니다. 하중 결과의 범위는 시험한 각도·하중·방사 편차 조합입니다. 양쪽 외장과 안와 프레임을 포함한 무부하 검사에서 표본 사이의 연속 이동을 고려한 간극 하한은 0.258 mm였습니다. 출력 후에는 베어링 중심 편차, 온간 마찰과 실물 접촉을 확인해야 합니다. [B25 눈꺼풀 검사 결과](blink-fit.json)
-
-## 재현
-
-FreeCAD Python과 [기구 검사 의존성](../../physics/requirements.txt)을 설치한 환경에서 저장소 루트에서 실행합니다.
-
-```sh
-export PYTHONPATH="$PWD/mechanical${PYTHONPATH:+:$PYTHONPATH}"
-out=build/b25
-python mechanical/build_b25.py "$out"
-python mechanical/physics/export_cad.py --world --cad "$out/R5-B25-Assembly.FCStd" "$out/cad"
-python mechanical/physics/check_b25_rear_retention.py "$out/R5-B25-Assembly.FCStd" "$out/rear-retention.json"
-python mechanical/physics/check_b25_blink_fit.py "$out/cad" "$out/blink-fit.json"
-python mechanical/physics/check_b24_jaw_close.py "$out/cad" control/openrb/R5B1/R5B1.ino "$out/jaw-clearance.json"
-```
-
-기록된 눈꺼풀 검사 결과와 비교할 때는 `--cad`에 이 디렉터리의 조립본을 지정합니다. STEP 파일의 생성 시각을 제외한 형상 데이터 해시도 검사 JSON에 기록합니다. 유한요소 메시를 다시 만들면 하중 간극 결과가 소폭 달라질 수 있습니다.
-
-P2S 프로젝트는 B24와 같은 0.4 mm 노즐, PETG HF, Textured PEI와 0.20 mm 레이어 설정입니다. 앞 외장 판 4의 면 연결과 바깥 치수를 유지하며 슬라이싱 정밀도에서 면적이 0이 되던 삼각형을 정리했습니다. 판 4·6·9는 각각 523·500·215층까지 슬라이스했고 0.20 mm 격자에서 고립된 모델 압출 시작점이 검출되지 않았습니다. 판 5의 형상·배치·설정은 518층 검사를 수행한 프로젝트와 같습니다. [출력판 변경 기록](print-build.json) · [판 4·6·9 검사](print-precision-check.json) · [판 5 검사](plate5-check.json)
+J2 정비선, 목 스토퍼와 턱 장착 시안은 별도 검토 기록에 있습니다. B25 검사 판정은 고정 조건을 따릅니다. [J2](j2-pigtail.md) · [목](neck-load-study.md) · [이전 턱 고정 시안](jaw-candidate.md) · [현재 턱 이탈 경로 검사](jaw-retention-witness.md)
