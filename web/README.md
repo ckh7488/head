@@ -12,7 +12,7 @@ out=build/b25-preview
 assembly="$b25/R5-B25-Assembly.FCStd"
 python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
 python mechanical/physics/check_b19_assembly.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision b25 --source "$assembly"
-python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision B25 --assembly-cad "$assembly" --output "$out/viewer"
+python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision B25 --assembly-cad "$assembly" --output "$out/viewer" --preview
 npm ci --prefix web
 python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B25-assembly-preview.html" --revision B25 --preview
 ```
