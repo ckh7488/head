@@ -23,5 +23,12 @@
     "Embedded profile used because system preset files were missing",
     "Voronoi retry and organic support influence warnings",
     "Inherited T65535 log from the embedded AMS unload macro"
-  ]
+  ],
+  "independent_reslice": {
+    "raster_pitch_mm": 0.2,
+    "objects": 2,
+    "layers": 518,
+    "isolated_model_starts": 0,
+    "plate_warning_message": ""
+  }
 }
