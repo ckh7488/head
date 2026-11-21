@@ -71,6 +71,7 @@ struct InfoToParseDXLPacket_t {
     uint8_t id;
     uint8_t err_idx;
     uint16_t recv_param_len;
+    uint16_t packet_len;
     uint8_t* parameters;
     uint16_t capacity;
     uint8_t field;
@@ -90,6 +91,7 @@ inline DXLLibErrorCode_t parse_dxl_packet(InfoToParseDXLPacket_t* packet, uint8_
         case 0: packet->id = byte; break;
         case 1: packet->err_idx = byte; break;
         case 2: packet->length = byte; break;
+        case 3: packet->packet_len = byte; break;
         default:
             if (packet->recv_param_len == packet->length) {
                 packet->inst_idx = byte;
@@ -204,6 +206,14 @@ private:
         serial.input.push_back(result.rfind("wrong_id", 0) == 0 ? id % 6 + 1 : id);
         serial.input.push_back(status);
         serial.input.push_back(length);
+        uint8_t wireLength = 4 + length;
+        uint16_t previous = (DXL_INST_STATUS << 8) | status;
+        for (uint8_t n = 0; n < length; ++n) {
+            const uint8_t byte = uint32_t(value) >> (8*n);
+            if (previous == 0xffff && byte == 0xfd) ++wireLength;
+            previous = static_cast<uint16_t>((previous << 8) | byte);
+        }
+        serial.input.push_back(wireLength + (result == "wrong_wire_length" ? 1 : 0));
         for (uint8_t n = 0; n < length; ++n) serial.input.push_back(uint32_t(value) >> (8*n));
         if (result == "truncated") serial.readWait = 14;
         else serial.input.push_back(result == "crc" ? 0xfe : DXL_INST_STATUS);

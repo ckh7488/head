@@ -290,7 +290,8 @@ def test_report_limit_is_inclusive_at_eight_ticks(firmware, endpoint, direction,
     assert not any(e.direction == 'w' for e in firmware.trace())
 
 
-@pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'short', 'truncated', 'wrong_id_denied'])
+@pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'short', 'truncated',
+                                  'wrong_id_denied', 'wrong_wire_length'])
 def test_transient_read_is_retried(firmware, kind):
     arm(firmware, 8)
     firmware.fail('r', 4, POSITION, kind)

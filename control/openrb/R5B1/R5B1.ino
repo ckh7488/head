@@ -175,7 +175,15 @@ private:
       const int byte=Serial1.read();
       if (byte<0) continue;
       const auto result=parse_dxl_packet(&reply,static_cast<uint8_t>(byte));
-      if (result==DXL_LIB_OK && reply.inst_idx==DXL_INST_STATUS) return result;
+      if (result==DXL_LIB_OK && reply.inst_idx==DXL_INST_STATUS) {
+        uint16_t length=4+reply.recv_param_len;  // Instruction, status, and two CRC bytes.
+        uint16_t previous=(DXL_INST_STATUS<<8)|reply.err_idx;
+        for (uint16_t n=0;n<reply.recv_param_len;n++) {
+          if (previous==0xffff && buffer[n]==0xfd) ++length;
+          previous=static_cast<uint16_t>((previous<<8)|buffer[n]);
+        }
+        return reply.packet_len==length ? DXL_LIB_OK : DXL_LIB_ERROR_WRONG_PACKET;
+      }
       if (result==DXL_LIB_ERROR_LENGTH || result==DXL_LIB_ERROR_INVAILD_ID) return DXL_LIB_ERROR_WRONG_PACKET;
       if (result!=DXL_LIB_OK && result!=DXL_LIB_PROCEEDING) return result;
     }
