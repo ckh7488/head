@@ -1,4 +1,4 @@
-"""Exercise the built hub netlist and the qualified source at the CLI boundary."""
+"""Exercise the built hub netlist and source voltage calculations at the CLI boundary."""
 
 from pathlib import Path
 import re
@@ -38,3 +38,15 @@ def test_former_adapter_floor_fails_5v_branches(power_checker):
     result = subprocess.run([*power_checker, '--input-5v', '4.75'], capture_output=True, text=True)
     assert result.returncode == 1
     assert 'Insufficient modeled voltage at J4, J5, J6, ID6' in result.stderr
+
+
+def test_short_source_tail_preserves_healthy_ph_branches_during_one_fault(power_checker):
+    command = [*power_checker, '--ph-fault', '--input-5v', '5.14']
+    long_tail = subprocess.run(command, capture_output=True, text=True)
+    assert long_tail.returncode == 1
+    assert '5.1572 V' in long_tail.stdout
+    assert 'Insufficient modeled voltage at J4, J5, J6' in long_tail.stderr
+
+    short_tail = subprocess.run([*command, '--tail-mm', '100'], capture_output=True, text=True, check=True)
+    assert '6.66 A concurrent load with one PH branch in current limit' in short_tail.stdout
+    assert '5.1200 V' in short_tail.stdout

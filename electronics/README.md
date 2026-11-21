@@ -17,10 +17,22 @@ C3 RF 보드의 SMT 부품은 윗면에 실장합니다. C3 스텐실은 윗면 
 
 ## 전원과 배선
 
-- 기준 전원은 **SIGLENT SPD1168X**, 20–30 °C, 로컬 센스, 정전압 **5.21 V**, 전류 상한 **7.50 A**입니다. 설정 오차, 입력·부하 변동과 3 mV 리플을 합쳐 출력 단자에서 **5.17–5.25 V**를 사용했습니다. 16 AWG 전원 꼬리 W33·W34는 각 250 mm 이내입니다. 전원 본체는 받침 바깥에 둡니다. 국내 표시가는 약 **₩454,300**으로, 사용 가능한 계측기를 우선 연결할 수 있습니다. [SIGLENT 사양과 시험 방법](https://siglentna.com/wp-content/uploads/dlm_uploads/2023/04/SPD1000X-Series-Service-Manual_E01B.pdf) · [국내 판매 페이지](https://siglentkorea.com/product/siglent-%EC%8B%9C%EA%B8%80%EB%9F%B0%ED%8A%B8-spd1168x-programmable-dc-power-supply-%ED%8C%8C%EC%9B%8C%EC%84%9C%ED%94%8C%EB%9D%BC%EC%9D%B4-%EC%A0%84%EC%9B%90%EA%B3%B5%EA%B8%89%EA%B8%B0-128w-1/88/) · [전선 재단표](../mechanical/WIRING-CUT-LIST.csv)
+- 기준 시험 전원은 **SIGLENT SPD1168X**, 20–30 °C, 로컬 센스, 정전압 **5.21 V**, 전류 상한 **7.50 A**입니다. 설정 오차, 입력·부하 변동과 3 mV 리플을 합쳐 출력 단자에서 **5.17–5.25 V**를 사용했습니다. 16 AWG 전원 꼬리 W33·W34는 각 250 mm 이내입니다. 전원 본체는 받침 바깥에 둡니다. 국내 표시가는 약 **₩454,300**으로, 시제품 시험에는 사용 가능한 계측기를 우선 연결합니다. [SIGLENT 사양과 시험 방법](https://siglentna.com/wp-content/uploads/dlm_uploads/2023/04/SPD1000X-Series-Service-Manual_E01B.pdf) · [국내 판매 페이지](https://siglentkorea.com/product/siglent-%EC%8B%9C%EA%B8%80%EB%9F%B0%ED%8A%B8-spd1168x-programmable-dc-power-supply-%ED%8C%8C%EC%9B%8C%EC%84%9C%ED%94%8C%EB%9D%BC%EC%9D%B4-%EC%A0%84%EC%9B%90%EA%B3%B5%EA%B8%89%EA%B8%B0-128w-1/88/) · [전선 재단표](../mechanical/WIRING-CUT-LIST.csv)
 - 5 V 부하 계산에는 네 XL330에 각각 **1.55 A**, 허브 보조 부하 10 mA, 두 목 XL430에 각각 **1.40 A**를 적용했습니다. XL330 제조사 값은 5.00 V에서 1.47 A, 6.00 V에서 1.74 A이며, 5.25 V에서 선형 보간한 약 1.54 A보다 큰 값을 사용했습니다. WAGO 분기 전 공통선은 6.21 A, W3·W4와 F1은 4.66 A를 반영했습니다. 70 °C 전선, 수명 후 접점, 퓨즈와 스위치, PCB 트랙과 비아를 포함했습니다. [XL330-M077 사양](https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/#specifications) · [XL330-M288 사양](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#specifications) · [XL430 사양](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/#specifications) · [전압 계산](power_check.py)
 - 5.17 V 전원과 목 전원 입력 11.10 V에서 모터 단자 하한은 J4 **4.334 V**, J5 **4.325 V**, J6 **4.341 V**, 턱 **4.621 V**, 목 J7 **10.730 V**, J8 **10.647 V**입니다. XL330 단자 계산은 기존 하중 모델의 4.27–5.25 V 안에 듭니다. 종전 전원 허용 하한 4.75 V를 넣으면 네 XL330 모두 4.27 V 미만입니다. 목은 별도 정전압 12 V급 5 A 전원을 씁니다. [눈꺼풀 부하 모델](../mechanical/revisions/b24/blink-loaded.json)
-- 받침 외부의 소형 전원을 검토할 때는 정전압 영역, 8 A급 연속 정격과 아래 실물 검수 조건을 사용합니다. 예를 들어 12 V 입력 DIN형 **Phoenix Contact 2905007**은 5–18 V 조정과 8 A 정격을 제공하지만, 공개된 부하 변동 1% 미만은 10–100% 조건이며 리플은 20 mVpp 미만입니다. 5.17–5.25 V의 전체 운전 범위는 별도 검증이 필요합니다. [Phoenix Contact 데이터시트](https://www.phoenixcontact.com/en-us/products/dcdc-converters-quint-ps12dc12dc8-2905007?type=pdf)
+- J4–J6 중 하나가 1.997 A로 제한되고 나머지 XL330 세 개가 1.55 A씩 쓰면 전원은 **6.657 A**, F1은 **5.107 A**를 공급합니다. 정상인 모터 단자를 4.27 V 이상 유지하려면 전원 출력이 정상 부하에서는 **5.115 V**, 단일 PH 고장에서는 **5.158 V** 이상이어야 합니다. 전원 출력이 5.17 V일 때 단일 고장 중 정상인 J5의 계산값은 **4.283 V**입니다. 16 AWG W33·W34를 각 100 mm로 줄이면 단일 고장 계산 하한은 **5.120 V**입니다. [전압 계산](power_check.py)
+
+### 소형 전원 후보
+
+받침 옆에 전원을 놓고 100 mm 이하의 W33·W34를 연결할 수 있으면, 전원 출력 단자 **5.14–5.25 V**로 검수합니다. 5.14 V에서 단일 고장 중 정상인 J5의 계산값은 **4.290 V**입니다.
+
+소형 전원 시안은 **MEAN WELL GST120A24-R7B** 어댑터에서 외장 함의 **DDR-60G-5**와 **DDR-60G-12**에 각각 24 V를 공급합니다. 조정한 5 V 출력은 XT30으로, 목 출력은 XT60으로 연결하고 두 출력의 GND를 허브에서 만납니다. 24 V 입구는 전용 R7B 커넥터를 씁니다. XL430의 동작 상한은 12.00 V입니다. 12 V 고정 어댑터만 직결하면 허용 오차에서 이 값을 넘으므로 목에도 조정 가능한 출력이 필요합니다. [GST120A 사양](https://www.meanwell.com/Upload/PDF/GST120A/GST120A-SPEC.PDF) · [DDR-60 사양](https://www.meanwell.com/Upload/PDF/DDR-60/DDR-60-SPEC.PDF) · [XL430 동작 전압](https://emanual.robotis.com/docs/en/dxl/x/xl430-w250/#specifications)
+
+5.25 V에서 단일 PH 고장 부하는 **35.0 W**, 12.00 V에서 두 목 모터 부하는 **33.6 W**입니다. 수직 장착, 외장 함 내부 20–30 °C를 기준으로 두 변환기 입력이 22.8 V 이상이고 효율이 각각 80% 이상이면 어댑터에서 약 **3.76 A**를 공급합니다. 검수 시 24 V 어댑터의 정격 **5 A**와 변환기의 실제 입력·온도를 확인합니다. Kycon KPJX-CM-4S 접점은 양극 1·4번과 음극 2·3번을 각각 병렬로 씁니다. 제조사의 접점 상한 30 mΩ으로 계산한 3.76 A의 접점 쌍 강하는 약 **0.113 V**입니다. 두 DDR의 입력은 5번 양극·6번 음극이며, 출력은 1·2번 음극·3·4번 양극입니다. [GST120A 핀 배열](https://www.meanwell.com/Upload/PDF/GST120A/GST120A-SPEC.PDF) · [DDR-60 디레이팅 곡선](https://www.meanwell.com/Upload/PDF/DDR-60/DDR-60-SPEC.PDF) · [Kycon 커넥터 사양](https://www.mouser.com/datasheet/2/222/KPJX-CM-365189.pdf)
+
+시작 조정값은 5 V 레일 **5.19 V**, 목 레일 **11.55 V**입니다. 변환기 사양만으로 아래의 실제 전압 범위를 보증할 수 없으므로 무부하와 최대 부하, 리플과 과도까지 시험합니다. 각 변환기의 과부하 정격은 보호 기준과 별개이므로 출력 보호도 검수합니다. [DDR-60 사양](https://www.meanwell.com/Upload/PDF/DDR-60/DDR-60-SPEC.PDF)
+
+### 허브 단자와 배선
 
 | 단자 | 연결 |
 |---|---|
@@ -33,13 +45,14 @@ C3 RF 보드의 SMT 부품은 윗면에 실장합니다. C3 스텐실은 윗면 
 
 5 V 배선에는 XT30U-F 두 개와 XT30U-M 한 개가 필요합니다. F 한 개는 5 V 전원 꼬리에, 다른 한 개는 허브 J1 쪽 W3/W4에 씁니다. OpenRB 점퍼는 USB/VIN에 두고 USB로 공급합니다. 5 V와 목 전원은 GND·DATA를 공유하고 양극은 별도입니다. 모터를 빼고 두 입력을 각각 켜 TP1과 TP2를 TP3 기준으로 확인합니다. 전원을 끄고 번호를 붙인 모터선을 하나씩 꽂습니다. 첫 동작에서 저전압이나 통신 끊김이 보이면 해당 모터 단자와 입력 단자를 함께 잽니다. [OpenRB 전원과 포트](https://emanual.robotis.com/docs/en/parts/controller/openrb-150/)
 
-J4–J6는 각각 TPS2557과 지정 61.9 kΩ, 0.1%, 25 ppm/°C 저항을 사용합니다. 데이터시트의 61.9 kΩ 표값에 저항 변동을 적용한 추정치는 **1.585–1.997 A**입니다. 같은 데이터시트의 별도 근사식 하한은 **1.539 A**로, 부하 모델의 1.55 A보다 낮습니다. 따라서 공급 전류와 2 A PH 보호는 조립한 채널별 검사가 필요합니다. 제한기는 과부하 중 전류를 줄이며 과열 시 차단 후 자동 복귀합니다. 데이터시트의 단락 응답 3.5 µs는 일반값입니다. 공용 F1은 허브 입력에 있으며 턱의 별도 2 A 인라인 퓨즈도 사용합니다. [TPS2557 특성·허용 오차](https://www.ti.com/lit/ds/symlink/tps2557.pdf) · [JST PH](https://www.jst.com/wp-content/uploads/2025/06/ePH.pdf) · [JST EH](https://jst.es/wp-content/uploads/2025/06/eh-connector.pdf) · [MINI 퓨즈](https://www.littelfuse.com/assetdocs/littelfuse_datasheet_297_mini32v.pdf?assetguid=42c9dd21-a88e-4328-8e67-2f832444faf1)
+J4–J6는 각각 TPS2557과 지정 61.9 kΩ, 0.1%, 25 ppm/°C 저항을 사용합니다. 61.9 kΩ의 데이터시트 표와 근사식을 적용한 추정치는 **1.585–1.997 A**입니다. 같은 근사식만 사용한 하한은 **1.539 A**입니다. 식 (1)에 저항 변동 ±0.3%를 넣으면 1.55 A를 공급하려면 공칭 저항이 61.486 kΩ 이하여야 하고, 2.00 A를 넘지 않으려면 61.791 kΩ 이상이어야 합니다. 두 범위가 겹치지 않으므로 조립한 채널마다 검사합니다. 제한기는 과부하 중 전류를 줄이며 과열 시 차단 후 자동 복귀합니다. 데이터시트의 단락 응답 3.5 µs는 일반값입니다. 공용 F1은 허브 입력에 있으며 턱의 별도 2 A 인라인 퓨즈도 사용합니다. [TPS2557 특성·허용 오차](https://www.ti.com/lit/ds/symlink/tps2557.pdf) · [JST PH](https://www.jst.com/wp-content/uploads/2025/06/ePH.pdf) · [JST EH](https://jst.es/wp-content/uploads/2025/06/eh-connector.pdf) · [MINI 퓨즈](https://www.littelfuse.com/assetdocs/littelfuse_datasheet_297_mini32v.pdf?assetguid=42c9dd21-a88e-4328-8e67-2f832444faf1)
 
 ### 전원 실물 검수
 
-1. 모터를 빼고 네 5 V 모터 단자에 전자부하를 연결합니다. 전원 본체 출력에서 무부하부터 6.21 A까지 **5.17–5.25 V**인지 확인합니다. 전자부하를 각 1.55 A로 맞추고, 목의 두 단자에도 각 1.40 A를 걸어 동시에 측정합니다. 전원 단자와 각 모터 커넥터의 GND를 기준으로 잽니다.
-2. 정상 부하에서 5 V 모터 단자 **4.27–5.25 V**, 목 모터 단자 **10.50 V 이상**을 확인합니다. 냉간과 충분히 따뜻해진 상태에서 전원 투입·부하 변화·동시 구동 파형을 기록합니다. 전원 단자·외부 XT30·WAGO 접점에 배정한 12 mΩ, J1 4 mΩ, 설치된 F1 홀더와 퓨즈 35 mΩ, 턱 퓨즈 및 홀더 110 mΩ은 접점과 배선 온도를 반영해 전압 강하로 대조합니다.
-3. J4–J6를 한 개씩 전자부하로 과부하시키고, 해당 PH의 정상 1.55 A 통과 및 제한 동작 중 연속 2.00 A 미만을 확인합니다. 다른 5 V 분기에 정상 부하를 둔 상태에서 차단·복구, 전류 피크와 셸 온도를 기록합니다. 전원은 30분 예열하고 운전 온도에서 단자 전압을 다시 맞춥니다. 다른 분기가 전류 제한 중일 때도 J5 최저 전압을 잽니다. 충분히 정확한 계측으로 냉간·열간 제한 동작을 반복하고, 단락 중 다른 레일의 전압과 커넥터·퓨즈 온도도 기록합니다. 실제 모터를 연결한 뒤에는 전원 순서와 감속 중 역전류, 모터 단자 과도 파형을 함께 확인합니다.
+1. 모터를 빼고 네 5 V 모터 단자에 전자부하를 연결합니다. 전원 단자에서 무부하부터 정상 6.21 A와 단일 PH 고장 6.66 A까지 기준 전원은 **5.17–5.25 V**, 100 mm 꼬리를 쓰는 소형 후보는 **5.14–5.25 V**인지 확인합니다. 전자부하를 각 1.55 A로 맞추고, 목의 두 단자에도 각 1.40 A를 걸어 동시에 측정합니다. 전원 단자와 각 모터 커넥터의 GND를 기준으로 잽니다. 계측 오차가 ±5 mV이면 소형 후보의 예시 합격 판독 범위는 **5.145–5.245 V**입니다.
+2. 무부하부터 정상 동시 부하까지 보호장치 이후 목 전원 출력 **11.10–12.00 V**, 5 V 모터 단자 **4.27–5.25 V**, 목 모터 단자 **10.50–12.00 V**를 확인합니다. 냉간과 충분히 따뜻해진 상태에서 전원 투입·부하 변화·동시 구동 파형을 기록합니다. 전원 단자·외부 XT30·WAGO 접점에 배정한 12 mΩ, J1 4 mΩ, 설치된 F1 홀더와 퓨즈 35 mΩ, 턱 퓨즈 및 홀더 110 mΩ은 접점과 배선 온도를 반영해 전압 강하로 대조합니다.
+3. J4–J6를 한 개씩 전자부하로 과부하시키고, 해당 PH의 정상 1.55 A 통과 및 제한 동작 중 연속 2.00 A 미만을 확인합니다. 전류 계측 오차가 ±10 mA이면 제한값 판독치 **1.56 A 이상, 1.99 A 미만**을 합격으로 봅니다. 나머지 5 V와 목 분기에 위 부하를 공급하면서 정상 5 V 채널 **4.27–5.25 V**와 목 **10.50–12.00 V**를 확인합니다. 차단·복구, 전류 피크와 퓨즈·커넥터·케이스 온도를 기록합니다. 전원은 30분 예열하고 운전 온도에서 확인합니다. 조립한 채널마다 냉간과 열간에서 반복합니다. Littelfuse의 대표 열 디레이팅 표에서 60 °C 주변의 7.5 A 퓨즈는 5.5 A, 2 A 퓨즈는 1.6 A, 4 A 퓨즈는 2.9 A입니다. 특히 턱 1.55 A와 목 2.80 A에서 퓨즈 주변 온도와 불필요한 차단 여부를 확인합니다. [MINI 퓨즈 열 디레이팅](https://www.littelfuse.com/assetdocs/littelfuse_datasheet_297_mini32v.pdf?assetguid=42c9dd21-a88e-4328-8e67-2f832444faf1)
+4. 5 V 출력의 연속 전류를 **7.50 A 이하**, 목 출력은 **5.00 A 이하**에서 제한하거나 차단하도록 보호를 선정합니다. 목의 보호장치는 XT60이 분리되는 모든 경로와 허브 F2보다 전원 쪽에 둡니다. 모터를 빼고 5 V 공통선, 턱 퓨즈 뒤, 각 PH 출력과 12 V XT60 뒤·F2 앞의 단락을 따로 확인합니다. 첫 피크와 차단·재시작 시간을 기록해 실제 전선과 단자의 허용 곡선·온도 한계 안인지 판정합니다. 모터를 연결한 뒤에는 전원 순서와 감속 중 역전류, 모터 단자 과도 파형을 확인합니다. [J2 분리 시안의 보호 위치](../mechanical/revisions/b25/j2-disconnect.md#결선과-남은-검증)
 
 ## C3 첫 동작
 
@@ -55,6 +68,8 @@ U2는 AP7361C 1 A SOT-223이며 GND 방열 탭에 비아를 배치했습니다. 
 
 ```sh
 /usr/bin/python3 electronics/power_check.py
+/usr/bin/python3 electronics/power_check.py --ph-fault
+/usr/bin/python3 electronics/power_check.py --ph-fault --tail-mm 100 --input-5v 5.14
 /usr/bin/python3 electronics/export.py servo-hub
 /usr/bin/python3 electronics/export.py c3-rf
 ```

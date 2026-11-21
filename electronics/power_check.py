@@ -2,7 +2,7 @@
 
 from argparse import ArgumentParser
 from heapq import heappop, heappush
-from math import pi
+from math import isfinite, pi
 from pathlib import Path
 
 import pcbnew
@@ -111,7 +111,7 @@ def ph_current_limits():
     return nominal_anchored_min, curve_min, max(1.960 * (PH_LIMIT_OHMS / lo_r)**.947, curve_max)
 
 
-def check_hub(input_5v=INPUT_5V_LOADED):
+def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None):
     board, parts = load('servo-hub', 'R5_Servo_Hub')
     check_net(parts, 'J1', {1: 'GND', 2: '5V_IN'})
     check_net(parts, 'J2', {1: '12V_IN', 2: 'GND'})
@@ -124,16 +124,24 @@ def check_hub(input_5v=INPUT_5V_LOADED):
     if not XL330_STALL_A < lo_limit <= hi_limit < PH_RATING_A:
         raise ValueError('PH branch current limit must pass a normal stall and protect the 2 A contact')
     total_hub_a = 3 * XL330_STALL_A + HUB_IDLE_A
-    total_source_a = total_hub_a + XL330_STALL_A
-    if total_source_a - XL330_STALL_A + hi_limit >= SUPPLY_CURRENT:
+    fault_hub_a = total_hub_a - XL330_STALL_A + hi_limit
+    if fault_hub_a + XL330_STALL_A >= SUPPLY_CURRENT:
         raise ValueError('The 5 V source cannot supply simultaneous stalls plus one limited PH fault')
+    if ph_fault:
+        total_hub_a = fault_hub_a
+    total_source_a = total_hub_a + XL330_STALL_A
+    load_case = ' with one PH branch in current limit' if ph_fault else ''
     print(f'5 V source: {input_5v:.3f} V loaded floor, {INPUT_5V_MAX:.3f} V ceiling, '
-          f'{total_source_a:.2f} A concurrent load')
+          f'{total_source_a:.2f} A concurrent load{load_case}')
     print(f'PH current estimate: {lo_limit:.3f}–{hi_limit:.3f} A per channel')
     if curve_min < XL330_STALL_A:
         print(f'PH current qualification required: fitted lower limit {curve_min:.3f} A '
               f'is below modeled {XL330_STALL_A:.2f} A load')
-    source_loop = wire_resistance('W1', 'W2', wire=POWER_WIRE) + wire_resistance('W33', 'W34', wire=SUPPLY_TAIL)
+    if tail_mm is None:
+        tail_ohms = wire_resistance('W33', 'W34', wire=SUPPLY_TAIL)
+    else:
+        tail_ohms = 2 * tail_mm / 1000 * SUPPLY_TAIL.hot_ohms_per_m
+    source_loop = wire_resistance('W1', 'W2', wire=POWER_WIRE) + tail_ohms
     junction_v = input_5v - total_source_a * (source_loop + SOURCE_CONTACT_OHM)
     hub_loop = wire_resistance('W3', 'W4', wire=POWER_WIRE) + HUB_XT30_CONTACT_OHM + HUB_FUSE_OHM
     lead = copper_path(board, parts, '5V_IN', ('J1', 2), ('F1', 1))
@@ -154,7 +162,8 @@ def check_hub(input_5v=INPUT_5V_LOADED):
         ground = copper_path(board, parts, 'GND', (output, 1), ('J1', 1))
         branch_loop = branch + PH_SWITCH_HOT_OHM + wire_resistance(*wires, wire=MOTOR_WIRE) + PH_EH_CONTACT_OHM
         # Charge the whole hub current to the entire positive feed and both rails
-        # to the explicit ground return. Parallel copper pours lower the losses.
+        # to the explicit ground return. With one fault, place it on a different
+        # branch from the healthy branch whose motor voltage is being checked.
         voltage = (junction_v - total_hub_a * (hub_loop + lead + feed)
                    - (total_hub_a + neck_a) * ground - XL330_STALL_A * branch_loop)
         print(f'{output}: {1000*(lead+feed+branch):.2f} mΩ positive PCB path, '
@@ -167,6 +176,8 @@ def check_hub(input_5v=INPUT_5V_LOADED):
                 + JAW_FUSE_OHM + wire_resistance('W28', 'W29', wire=MOTOR_WIRE) + JAW_EH_CONTACT_OHM + .004)
     voltages['ID6'] = junction_v - XL330_STALL_A * jaw_loop
     print(f'ID6 fused branch: {voltages["ID6"]:.3f} V at the motor')
+    required_5v = input_5v - min(voltages.values()) + XL330_MIN_V
+    print(f'Minimum 5 V source terminal voltage for this load: {required_5v:.4f} V')
     failures = [output for output, voltage in voltages.items() if voltage < XL330_MIN_V]
     if INPUT_5V_MAX > XL330_MAX_V:
         failures.append('5 V source ceiling')
@@ -200,11 +211,17 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('--input-5v', type=float, default=INPUT_5V_LOADED,
                         help='Loaded voltage before the modeled 5 V harness, in volts')
+    parser.add_argument('--ph-fault', action='store_true',
+                        help='Check each healthy motor while another PH branch is in current limit')
+    parser.add_argument('--tail-mm', type=float,
+                        help='Length of each 16 AWG 5 V pigtail, overriding W33 and W34 in the cut list')
     options = parser.parse_args()
     if not 0 < options.input_5v <= INPUT_5V_MAX:
         parser.error(f'--input-5v must be greater than 0 and at most {INPUT_5V_MAX} V')
+    if options.tail_mm is not None and (not isfinite(options.tail_mm) or options.tail_mm <= 0):
+        parser.error('--tail-mm must be a finite positive length')
     check_wire_sizes()
-    failed = check_hub(options.input_5v)
+    failed = check_hub(options.input_5v, ph_fault=options.ph_fault, tail_mm=options.tail_mm)
     check_radio()
     if failed:
         raise SystemExit('Insufficient modeled voltage at ' + ', '.join(failed))
