@@ -5,6 +5,7 @@
 B25 조립 단계에는 뒤 외장 너트와 좌우 M3×16 체결이 추가됐습니다. 조립 중 확인된 문제를 볼 수 있는 오프라인 미리보기입니다. [B25 기구 후보](../mechanical/revisions/b25/)
 
 ```sh
+export PYTHONPATH="$PWD/mechanical${PYTHONPATH:+:$PYTHONPATH}"
 b24=mechanical/revisions/b24
 b25=mechanical/revisions/b25
 out=build/b25-preview

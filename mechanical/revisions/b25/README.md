@@ -15,6 +15,7 @@
 FreeCAD Python과 [기구 검사 의존성](../../physics/requirements.txt)을 설치한 환경에서 저장소 루트에서 실행합니다.
 
 ```sh
+export PYTHONPATH="$PWD/mechanical${PYTHONPATH:+:$PYTHONPATH}"
 out=build/b25
 python mechanical/build_b25.py "$out"
 python mechanical/physics/export_cad.py --world --cad "$out/R5-B25-Assembly.FCStd" "$out/cad"
