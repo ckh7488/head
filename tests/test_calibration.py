@@ -50,10 +50,10 @@ def test_calibration_leaves_eight_ticks_inside_cad_range(axis, row, name, ticks)
     ]
 
 
-@pytest.mark.parametrize('opening_tick', [1937, 1852, 2063])
-def test_jaw_calibration_rejects_more_than_62_ticks(opening_tick):
+@pytest.mark.parametrize('opening_tick', [1977, 1938, 2023])
+def test_jaw_calibration_rejects_more_than_22_ticks(opening_tick):
     assert list(issues(replaced_axis(5, (2000, 2000, opening_tick)))) == [
-        'ID 6 jaw opening exceeds 5.5° (62 ticks). Recalibrate the jaw.',
+        'ID 6 jaw opening exceeds 2.0° (22 ticks). Recalibrate the jaw.',
     ]
 
 

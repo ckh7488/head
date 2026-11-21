@@ -10,7 +10,7 @@ constexpr uint8_t blinkAxis = 2;
 constexpr uint16_t blinkTravelTicks = 1024;
 constexpr uint16_t blinkFastModel = 1190;
 constexpr uint16_t blinkFastPwm = 230;
-constexpr float jawMaxDegrees = 5.5f;
+constexpr float jawMaxDegrees = 2.0f;
 constexpr uint8_t jawMaxTravelTicks = static_cast<uint8_t>(4096u*jawMaxDegrees/360u);
 constexpr float neckPitchMaxDegrees = 4.5f;
 constexpr uint8_t neckPitchMaxNegativeDegrees = 15;
@@ -43,7 +43,7 @@ constexpr uint32_t timeoutMs = 400;
 constexpr uint32_t goalPeriodMs = 60;
 constexpr uint32_t reportMs = 120;
 constexpr uint8_t positionTolerance = 8;
-constexpr uint8_t jawPositionTolerance = 11;
+constexpr uint8_t jawPositionTolerance = 5;
 constexpr uint8_t jawClosingTolerance = 5;
 constexpr uint8_t eyeCalibrationTicks[] = {4096u*20u/360u-positionTolerance,
                                            4096u*8u/360u-positionTolerance};
@@ -55,7 +55,7 @@ constexpr uint8_t neckNeutralTolerance = 4096u*2u/360u;  // Direct drive, up to 
 constexpr uint8_t jawDemoMask = (1u<<neckYawAxis)|(1u<<neckPitchAxis)|(1u<<trackerCount);
 constexpr uint32_t jawDemoCenteringMs = 2*reportMs;
 constexpr uint32_t jawSettlingMs = 600;
-constexpr uint8_t jawFollowTolerance = 4096u*3u/360u;
+constexpr uint8_t jawFollowTolerance = positionTolerance;
 constexpr uint8_t jawLagReportsRequired = 2;
 
 struct Register {

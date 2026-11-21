@@ -24,7 +24,7 @@ def test_tracking_latches_only_closed_jaw_and_preserves_watchdog(firmware):
     assert any(event.direction == 'r' and event.id == 6 and event.register == POSITION_P_GAIN
                and event.value == 1000 for event in events)
     assert firmware.command('GO 0 0 0 0 0') == ['ERROR EXHIBIT_PROFILE']
-    assert not firmware.command('GO_EXHIBIT 0 0 0 0 0 5.5')
+    assert not firmware.command('GO_EXHIBIT 0 0 0 0 0 2.0')
     assert not firmware.command('GO_EXHIBIT 0 0 0 15 -2')
     assert not firmware.command('HOLD')
     assert not jaw_writes(firmware, GOAL)
@@ -169,7 +169,7 @@ def test_direct_jaw_restores_factory_position_gain(firmware):
 
 @pytest.mark.parametrize('opening_direction', [-1, 1])
 def test_signed_closing_limit_rejects_overtravel_for_both_horn_directions(firmware_build, opening_direction):
-    simulator = Firmware(firmware_build((*CALIBRATED[:-1], (2000, 2000, 2000 + opening_direction * 62))))
+    simulator = Firmware(firmware_build((*CALIBRATED[:-1], (2000, 2000, 2000 + opening_direction * 22))))
     try:
         simulator.set(6, POSITION, 2000 - opening_direction * 6)
         assert simulator.command('ARM_EXHIBIT') == ['LOCKED EXHIBIT_JAW_RANGE ID6']

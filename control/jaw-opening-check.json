@@ -1,0 +1,50 @@
+{
+  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "firmware_sha256": "da24b884be63e4f847e99a38a14c80c1afdd9cf6a29336c2d413df548b2a65b2",
+  "pair": [
+    "Jaw_37_right_jaw_bearing_stay",
+    "Jaw_39_right_jaw_pivot_arm"
+  ],
+  "pivot_mm": [
+    0.0,
+    -9.0,
+    92.0
+  ],
+  "tolerance_model": {
+    "fixed_warp_span_mm": 22.05651798923227,
+    "moving_warp_span_mm": 25.815693677573847,
+    "radial_fit_terms_mm": {
+      "glued_pin": 0.04800000000000004,
+      "bearing_pocket": 0.025,
+      "bearing_internal": 0.01
+    },
+    "relative_world_half_box_mm": [
+      0.34411303597846454,
+      0.5005367147087989,
+      0.4586588806102753
+    ]
+  },
+  "wire_goal_max_deg": 2.0,
+  "goal_span_max_ticks": 22,
+  "goal_span_max_encoder_deg": 1.93359375,
+  "feedback_opening_allowance_ticks": 5,
+  "accepted_feedback_max_encoder_deg": 2.373046875,
+  "contact_free_through_deg_in_relative_envelope": 4.38,
+  "continuous_lower_gap_mm": 0.009056558091597153,
+  "verified_cells": 51775,
+  "reserve_from_goal_at_least_deg": 2.44640625,
+  "reserve_from_accepted_feedback_at_least_deg": 2.006953125,
+  "earliest_sampled_contact_deg": 4.566400146484375,
+  "sampled_contact_shift_mm": [
+    0.34411303597846454,
+    -0.5005367147087989,
+    0.4586588806102753
+  ],
+  "scope": "Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.",
+  "references": {
+    "conditions": "../spec/conditions.md",
+    "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",
+    "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
+    "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
+  }
+}

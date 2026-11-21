@@ -22,7 +22,7 @@ CALIBRATED = (
     (2000, 2000, 3024),
     (1389, 2048, 2707),
     (2203, 2048, 2014),
-    (2000, 2000, 1938),
+    (2000, 2000, 1978),
 )
 Event = namedtuple('Event', 'direction id register value result time')
 
