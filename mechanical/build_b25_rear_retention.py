@@ -49,6 +49,40 @@ def mesh_from_solid(shape):
     return trimesh.Trimesh(data.vert_properties[:, :3], data.tri_verts, process=False)
 
 
+def retriangulate_collinear_faces(mesh):
+    """Split each long-edge neighbor at the existing middle vertex."""
+    collinear = np.flatnonzero(mesh.area_faces == 0.)
+    if not collinear.size:
+        return mesh
+
+    faces = mesh.faces.copy()
+    vertices = mesh.vertices
+    for index in collinear:
+        face = faces[index]
+        points = vertices[face]
+        edge_lengths = np.linalg.norm(np.roll(points, -1, axis=0) - points, axis=1)
+        start, middle, end = np.roll(face, -int(edge_lengths.argmax()) - 1)
+        if np.dot(vertices[start] - vertices[middle], vertices[end] - vertices[middle]) >= 0.:
+            raise ValueError('The zero-area rear print triangle has no interior vertex')
+
+        adjoining = np.flatnonzero((faces == start).any(axis=1) & (faces == end).any(axis=1))
+        neighbors = adjoining[adjoining != index]
+        if neighbors.size != 1:
+            raise ValueError('The collinear rear print triangle needs one long-edge neighbor')
+        neighbor, = neighbors
+        opposite, = faces[neighbor][~np.isin(faces[neighbor], (start, end))]
+        if np.any((faces == middle).any(axis=1) & (faces == opposite).any(axis=1)):
+            raise ValueError('The rear print triangle split would reuse an existing edge')
+
+        faces[index] = (start, middle, opposite)
+        faces[neighbor] = (middle, end, opposite)
+
+    repaired = trimesh.Trimesh(vertices, faces, process=False)
+    if not repaired.is_volume or repaired.body_count != 1 or np.any(repaired.area_faces == 0.):
+        raise ValueError('The retriangulated rear print must be one closed solid with nonzero faces')
+    return repaired
+
+
 def nut_channel(side, inner, outer, flats, rear_y):
     """Swept hex profile from its seated point towards the open rear."""
     hex_seat = hexagon(flats, outer-inner, radial_point(side, inner), (side, 0, 0))
@@ -123,7 +157,7 @@ def apply(doc, print_dir):
     print_dir.mkdir(parents=True, exist_ok=True)
     print_mesh(frame, print_dir/FRAME_PRINT, 'y+')
     # The +Y direction from the seam is up on the original rear-skull plate.
-    print_body = mesh_from_solid(shell.rotate((90., 0., 0.)))
+    print_body = retriangulate_collinear_faces(mesh_from_solid(shell.rotate((90., 0., 0.))))
     np.savez_compressed(print_dir/REAR_PRINT, vertices=print_body.vertices, faces=print_body.faces)
 
     replace(doc.Part019, frame)

@@ -1,0 +1,27 @@
+{
+  "project_sha256": "540c14f1d74139db92ae8929a89a7a8bba5447e08ed3d0d7c083002e44ff04b3",
+  "slicer": "BambuStudio 02.09.01.70",
+  "plate": 5,
+  "layers": 518,
+  "return_code": 0,
+  "elapsed_estimate": "13h53m21s",
+  "filament_g": 214.97,
+  "gcode_sha256": "a0f15790000c7464e7725b5c22ab359211cb225998dff50951fcf130cc58dccc",
+  "model_only_mass_g": {
+    "29_skull_rear-b25": 120.14896289434546,
+    "30_38_39_jaw_one_piece-b20": 45.95956989708982
+  },
+  "mesh": {
+    "identical_vertices": true,
+    "exact_oriented_surface_preserved": true,
+    "zero_area_faces_before": 1,
+    "zero_area_faces_after": 0,
+    "watertight": true,
+    "connected_bodies": 1
+  },
+  "remaining_slicer_messages": [
+    "Embedded profile used because system preset files were missing",
+    "Voronoi retry and organic support influence warnings",
+    "Inherited T65535 log from the embedded AMS unload macro"
+  ]
+}
