@@ -1,0 +1,4713 @@
+[
+  {
+    "id": "base-cup",
+    "context": "base",
+    "text": "받침 01을 작업대에 뒤집어 놓지 않고 바로 세웁니다.",
+    "issues": [],
+    "notes": [],
+    "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+    "plan_sha256": "befbcb175b77b4dfe294620fc10f1828b89f385a5d69096871be641ea4c9ff83"
+  },
+  {
+    "id": "camera-base-feed",
+    "context": "base",
+    "text": "받침이 열린 상태에서 작은 카메라 플러그를 뒤 오른쪽 통로의 낮은 쪽으로 수평으로 넣습니다. 긴 변을 가로로 두고, 받침 위에서 플러그를 받아 안쪽에 둡니다. 큰 USB-A는 밖에 둡니다.",
+    "issues": [],
+    "notes": [],
+    "camera_feed": {
+      "start_mm": [
+        54.625,
+        100.0,
+        -70.0
+      ],
+      "end_mm": [
+        54.625,
+        55.0,
+        -70.0
+      ],
+      "pull_end_mm": [
+        54.625,
+        55.0,
+        -26.0
+      ],
+      "body_mm": [
+        9.2,
+        7.0,
+        5.3
+      ],
+      "cross_tolerance_mm": 0.2,
+      "status": "pass",
+      "minimum_clearance_mm": 0.8083108067219388,
+      "closest_part": "Part000"
+    }
+  },
+  {
+    "id": "hatch-service-nuts",
+    "context": "base",
+    "text": "바닥 덮개용 M3 육각너트 네 개를 받침 위에서 육각 자리에 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "hatch-service-keepers",
+    "context": "base",
+    "text": "Ø2.5 mm 파일럿 두 곳에 M3 탭을 냅니다. 왼쪽과 오른쪽 너트 고정판을 위에서 내려 놓고 M3×8 한 개씩으로 고정합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "ServiceHatchNutKeeperLeftScrew": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "ServiceHatchNutKeeperRightScrew": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "rear-guide",
+    "context": "base",
+    "text": "OpenRB USB와 전원선 꼬리를 뒤로 빼고, 열린 가이드 40을 받침 뒤에서 밀어 넣습니다. 카메라 선은 이미 오른쪽 통로에 있습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "rear-guide-bolts",
+    "context": "base",
+    "text": "뒤에서 M3×16 두 개를 넣습니다. 받침 위로 5.5 mm 소켓을 내려 넣고 안쪽에서 뒤쪽 너트에 밀어 끼워 잡습니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "clipNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          -28.5,
+          81.75,
+          -71.0
+        ],
+        "travel_mm": 55.0,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0,
+        "waypoints_mm": [
+          [
+            -28.5,
+            73.75,
+            -24.0
+          ],
+          [
+            -28.5,
+            73.75,
+            -71.0
+          ],
+          [
+            -28.5,
+            81.75,
+            -71.0
+          ]
+        ]
+      },
+      "clipNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          28.5,
+          81.75,
+          -71.0
+        ],
+        "travel_mm": 55.0,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0,
+        "waypoints_mm": [
+          [
+            28.5,
+            73.75,
+            -24.0
+          ],
+          [
+            28.5,
+            73.75,
+            -71.0
+          ],
+          [
+            28.5,
+            81.75,
+            -71.0
+          ]
+        ]
+      }
+    },
+    "driver_access": {
+      "clipBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 25.5,
+        "blocker": "CableSaddle"
+      },
+      "clipBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "rear-cover-service-nuts",
+    "context": "base",
+    "text": "일반 M3 육각너트 다섯 개를 가이드 뒤 창으로 하나씩 수평으로 넣고 아래 받침 홈에 놓습니다.",
+    "issues": [],
+    "notes": [],
+    "actor_offsets": {
+      "cableNut0": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut1": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut2": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut3": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut4": [
+        0.0,
+        0.0,
+        -3.9
+      ]
+    }
+  },
+  {
+    "id": "rear-cover",
+    "context": "base",
+    "text": "OpenRB USB와 전원선을 기존 가이드 홈에 놓고 타이를 건 뒤 덮개 42를 닫습니다.",
+    "issues": [],
+    "notes": [],
+    "actor_offsets": {
+      "cableNut0": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut1": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut2": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut3": [
+        0.0,
+        0.0,
+        -3.9
+      ],
+      "cableNut4": [
+        0.0,
+        0.0,
+        -3.9
+      ]
+    }
+  },
+  {
+    "id": "rear-cover-bolts",
+    "context": "base",
+    "text": "위에서 M3×16 다섯 개를 손으로 먼저 걸어 너트를 올립니다. 뒤에서 5.5 mm 오픈 스패너로 잡고 위에서 2.5 mm 육각렌치로 조입니다. 스패너 머리는 폭 13 mm, 두께 4.2 mm 이하여야 합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "cableBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "cableBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "cableBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "cableBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "cableBolt4": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    },
+    "tool_access": {
+      "cableNut0": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "seat_mm": [
+          -47.0,
+          121.6,
+          -66.55000000000001
+        ],
+        "travel_mm": 30.0,
+        "head_width_mm": 13.0,
+        "thickness_mm": 4.2,
+        "profile_mm": [
+          [
+            -6.5,
+            -4
+          ],
+          [
+            -6.5,
+            2.1
+          ],
+          [
+            -3,
+            7.7
+          ],
+          [
+            -3,
+            56
+          ],
+          [
+            3,
+            56
+          ],
+          [
+            3,
+            7.7
+          ],
+          [
+            6.5,
+            2.1
+          ],
+          [
+            6.5,
+            -4
+          ],
+          [
+            2.81,
+            -4
+          ],
+          [
+            2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            -4
+          ]
+        ]
+      },
+      "cableNut1": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "seat_mm": [
+          -28.3,
+          121.6,
+          -66.55000000000001
+        ],
+        "travel_mm": 30.0,
+        "head_width_mm": 13.0,
+        "thickness_mm": 4.2,
+        "profile_mm": [
+          [
+            -6.5,
+            -4
+          ],
+          [
+            -6.5,
+            2.1
+          ],
+          [
+            -3,
+            7.7
+          ],
+          [
+            -3,
+            56
+          ],
+          [
+            3,
+            56
+          ],
+          [
+            3,
+            7.7
+          ],
+          [
+            6.5,
+            2.1
+          ],
+          [
+            6.5,
+            -4
+          ],
+          [
+            2.81,
+            -4
+          ],
+          [
+            2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            -4
+          ]
+        ]
+      },
+      "cableNut2": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "seat_mm": [
+          -3.0,
+          121.6,
+          -66.55000000000001
+        ],
+        "travel_mm": 30.0,
+        "head_width_mm": 13.0,
+        "thickness_mm": 4.2,
+        "profile_mm": [
+          [
+            -6.5,
+            -4
+          ],
+          [
+            -6.5,
+            2.1
+          ],
+          [
+            -3,
+            7.7
+          ],
+          [
+            -3,
+            56
+          ],
+          [
+            3,
+            56
+          ],
+          [
+            3,
+            7.7
+          ],
+          [
+            6.5,
+            2.1
+          ],
+          [
+            6.5,
+            -4
+          ],
+          [
+            2.81,
+            -4
+          ],
+          [
+            2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            -4
+          ]
+        ]
+      },
+      "cableNut3": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "seat_mm": [
+          22.0,
+          121.6,
+          -66.55000000000001
+        ],
+        "travel_mm": 30.0,
+        "head_width_mm": 13.0,
+        "thickness_mm": 4.2,
+        "profile_mm": [
+          [
+            -6.5,
+            -4
+          ],
+          [
+            -6.5,
+            2.1
+          ],
+          [
+            -3,
+            7.7
+          ],
+          [
+            -3,
+            56
+          ],
+          [
+            3,
+            56
+          ],
+          [
+            3,
+            7.7
+          ],
+          [
+            6.5,
+            2.1
+          ],
+          [
+            6.5,
+            -4
+          ],
+          [
+            2.81,
+            -4
+          ],
+          [
+            2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            -4
+          ]
+        ]
+      },
+      "cableNut4": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "seat_mm": [
+          47.0,
+          121.6,
+          -66.55000000000001
+        ],
+        "travel_mm": 30.0,
+        "head_width_mm": 13.0,
+        "thickness_mm": 4.2,
+        "profile_mm": [
+          [
+            -6.5,
+            -4
+          ],
+          [
+            -6.5,
+            2.1
+          ],
+          [
+            -3,
+            7.7
+          ],
+          [
+            -3,
+            56
+          ],
+          [
+            3,
+            56
+          ],
+          [
+            3,
+            7.7
+          ],
+          [
+            6.5,
+            2.1
+          ],
+          [
+            6.5,
+            -4
+          ],
+          [
+            2.81,
+            -4
+          ],
+          [
+            2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            3.24
+          ],
+          [
+            -2.81,
+            -4
+          ]
+        ]
+      }
+    },
+    "service_access": {
+      "status": "pass",
+      "orientation": "upright",
+      "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+      "bolt_radial_reserve_mm": 0.1,
+      "cover": [
+        "CableGate"
+      ],
+      "cover_path_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          25.0
+        ]
+      ],
+      "fasteners": [
+        {
+          "status": "pass",
+          "bolt": "cableBolt0",
+          "nut": "cableNut0",
+          "parked_offset_mm": [
+            0.0,
+            0.0,
+            -3.8999999999999915
+          ],
+          "bolt_path_mm": [
+            [
+              -47.0,
+              121.6,
+              -52.1
+            ],
+            [
+              -47.0,
+              121.6,
+              -32.1
+            ]
+          ],
+          "spanner_path_mm": [
+            [
+              -47.0,
+              121.6,
+              -66.55000000000001
+            ],
+            [
+              -47.0,
+              151.6,
+              -66.55000000000001
+            ]
+          ],
+          "collisions_mm3": {
+            "wrench": {},
+            "bolt": {},
+            "key": {},
+            "nut": {},
+            "nut_radial_reserve": {}
+          },
+          "nut_entry_overlap_mm3": 0.0,
+          "wrench_nut_overlap_mm3": 0.0,
+          "wrench_key_overlap_mm3": 0.0,
+          "parking_support_sample_mm3": 1.31177243348949,
+          "horizontal_barriers_mm": [
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55,
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55
+          ],
+          "parked_start_engagement_mm": 1.9500000000000028
+        },
+        {
+          "status": "pass",
+          "bolt": "cableBolt1",
+          "nut": "cableNut1",
+          "parked_offset_mm": [
+            0.0,
+            0.0,
+            -3.8999999999999915
+          ],
+          "bolt_path_mm": [
+            [
+              -28.3,
+              121.6,
+              -52.1
+            ],
+            [
+              -28.3,
+              121.6,
+              -32.1
+            ]
+          ],
+          "spanner_path_mm": [
+            [
+              -28.3,
+              121.6,
+              -66.55000000000001
+            ],
+            [
+              -28.3,
+              151.6,
+              -66.55000000000001
+            ]
+          ],
+          "collisions_mm3": {
+            "wrench": {},
+            "bolt": {},
+            "key": {},
+            "nut": {},
+            "nut_radial_reserve": {}
+          },
+          "nut_entry_overlap_mm3": 0.0,
+          "wrench_nut_overlap_mm3": 0.0,
+          "wrench_key_overlap_mm3": 0.0,
+          "parking_support_sample_mm3": 0.5561153768062765,
+          "horizontal_barriers_mm": [
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55,
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55
+          ],
+          "parked_start_engagement_mm": 1.9500000000000028
+        },
+        {
+          "status": "pass",
+          "bolt": "cableBolt2",
+          "nut": "cableNut2",
+          "parked_offset_mm": [
+            0.0,
+            0.0,
+            -3.8999999999999915
+          ],
+          "bolt_path_mm": [
+            [
+              -3.0,
+              121.6,
+              -52.1
+            ],
+            [
+              -3.0,
+              121.6,
+              -32.1
+            ]
+          ],
+          "spanner_path_mm": [
+            [
+              -3.0,
+              121.6,
+              -66.55000000000001
+            ],
+            [
+              -3.0,
+              151.6,
+              -66.55000000000001
+            ]
+          ],
+          "collisions_mm3": {
+            "wrench": {},
+            "bolt": {},
+            "key": {},
+            "nut": {},
+            "nut_radial_reserve": {}
+          },
+          "nut_entry_overlap_mm3": 0.0,
+          "wrench_nut_overlap_mm3": 0.0,
+          "wrench_key_overlap_mm3": 0.0,
+          "parking_support_sample_mm3": 1.3117724334898129,
+          "horizontal_barriers_mm": [
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55,
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55
+          ],
+          "parked_start_engagement_mm": 1.9500000000000028
+        },
+        {
+          "status": "pass",
+          "bolt": "cableBolt3",
+          "nut": "cableNut3",
+          "parked_offset_mm": [
+            0.0,
+            0.0,
+            -3.8999999999999915
+          ],
+          "bolt_path_mm": [
+            [
+              22.0,
+              121.6,
+              -52.1
+            ],
+            [
+              22.0,
+              121.6,
+              -32.1
+            ]
+          ],
+          "spanner_path_mm": [
+            [
+              22.0,
+              121.6,
+              -66.55000000000001
+            ],
+            [
+              22.0,
+              151.6,
+              -66.55000000000001
+            ]
+          ],
+          "collisions_mm3": {
+            "wrench": {},
+            "bolt": {},
+            "key": {},
+            "nut": {},
+            "nut_radial_reserve": {}
+          },
+          "nut_entry_overlap_mm3": 0.0,
+          "wrench_nut_overlap_mm3": 0.0,
+          "wrench_key_overlap_mm3": 0.0,
+          "parking_support_sample_mm3": 1.3117724334894905,
+          "horizontal_barriers_mm": [
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55,
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55
+          ],
+          "parked_start_engagement_mm": 1.9500000000000028
+        },
+        {
+          "status": "pass",
+          "bolt": "cableBolt4",
+          "nut": "cableNut4",
+          "parked_offset_mm": [
+            0.0,
+            0.0,
+            -3.8999999999999915
+          ],
+          "bolt_path_mm": [
+            [
+              47.0,
+              121.6,
+              -52.1
+            ],
+            [
+              47.0,
+              121.6,
+              -32.1
+            ]
+          ],
+          "spanner_path_mm": [
+            [
+              47.0,
+              121.6,
+              -66.55000000000001
+            ],
+            [
+              47.0,
+              151.6,
+              -66.55000000000001
+            ]
+          ],
+          "collisions_mm3": {
+            "wrench": {},
+            "bolt": {},
+            "key": {},
+            "nut": {},
+            "nut_radial_reserve": {}
+          },
+          "nut_entry_overlap_mm3": 0.0,
+          "wrench_nut_overlap_mm3": 0.0,
+          "wrench_key_overlap_mm3": 0.0,
+          "parking_support_sample_mm3": 1.3117724334894902,
+          "horizontal_barriers_mm": [
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55,
+            0.5,
+            0.55,
+            0.6000000000000001,
+            0.55
+          ],
+          "parked_start_engagement_mm": 1.9500000000000028
+        }
+      ],
+      "cover_collisions": [],
+      "scope": "Reversible CAD paths, stock hardware and nominal visible wires. P08 checks physical thread start, settling, access and the live harness."
+    }
+  },
+  {
+    "id": "hub-board",
+    "context": "hatch",
+    "text": "작업대에서 허브를 바닥 덮개 35의 네 기둥에 얹습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "hub-board-place",
+    "context": "hatch",
+    "text": "허브 기판과 부품을 위에서 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "hub-bolts",
+    "context": "hatch",
+    "text": "덮개 아래에서 5.5 mm 소켓에 M3 너트를 담아 대고, 기판 쪽에서 M3×8 네 개를 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "hubNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          -30.8,
+          46.2,
+          -78.85
+        ],
+        "travel_mm": 9.05,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "hubNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          -30.8,
+          72.8,
+          -78.85
+        ],
+        "travel_mm": 9.05,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "hubNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          30.8,
+          46.2,
+          -78.85
+        ],
+        "travel_mm": 9.05,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "hubNut3": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          30.8,
+          72.8,
+          -78.85
+        ],
+        "travel_mm": 9.05,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "hubBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hubBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hubBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hubBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "hatch-fit",
+    "context": "base",
+    "text": "허브를 단 바닥 덮개를 받침 아래에서 들어 올려 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "hatch-bolts",
+    "context": "base",
+    "text": "받침 밑에서 2.5 mm 육각렌치로 M3×8 네 개를 조입니다. 안쪽 너트는 고정판이 잡아줍니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "hatchBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hatchBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hatchBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hatchBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    },
+    "service_access": {
+      "status": "pass",
+      "orientation": "supported lowering",
+      "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+      "bolt_radial_reserve_mm": 0.1,
+      "cover": [
+        "HubHolder",
+        "HubPCB",
+        "HubBodyJ1",
+        "HubBodyJ2",
+        "HubBodyJ3",
+        "HubBodyJ4",
+        "HubBodyJ5",
+        "HubBodyJ6",
+        "HubBodyJ7",
+        "HubBodyJ8",
+        "HubBodyF1",
+        "HubBodyF2",
+        "HubBodyC1",
+        "HubBodyC2",
+        "HubBodyR1",
+        "HubBodyR2",
+        "HubBodyR3",
+        "HubBodyD1",
+        "HubBodyD2",
+        "HubPlugJ3",
+        "HubPlugJ4",
+        "HubPlugJ5",
+        "HubPlugJ6",
+        "HubPlugJ7",
+        "HubPlugJ8",
+        "hubNut0",
+        "hubNut1",
+        "hubNut2",
+        "hubNut3",
+        "hubBolt0",
+        "hubBolt1",
+        "hubBolt2",
+        "hubBolt3"
+      ],
+      "cover_path_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          -30.0
+        ]
+      ],
+      "fasteners": [
+        {
+          "status": "pass",
+          "bolt": "hatchBolt0",
+          "nut": "hatchNut0",
+          "keeper": "ServiceHatchNutKeeperLeft",
+          "bolt_path_mm": [
+            [
+              -41.2,
+              51.0,
+              -79.65
+            ],
+            [
+              -41.2,
+              51.0,
+              -94.65
+            ]
+          ],
+          "collisions_mm3": {
+            "bolt": {},
+            "key": {}
+          },
+          "capture_missing_mm3": {
+            "nut_wall": 0.0,
+            "roof_ring": 0.0,
+            "floor_ring": 0.0
+          },
+          "max_nut_entry_overlap_mm3": 0.0,
+          "vertical_nut_float_mm": 0.39999999999999725,
+          "nut_entry_transverse_error_per_axis_mm": 0.1
+        },
+        {
+          "status": "pass",
+          "bolt": "hatchBolt1",
+          "nut": "hatchNut1",
+          "keeper": "ServiceHatchNutKeeperLeft",
+          "bolt_path_mm": [
+            [
+              -41.2,
+              71.0,
+              -79.65
+            ],
+            [
+              -41.2,
+              71.0,
+              -94.65
+            ]
+          ],
+          "collisions_mm3": {
+            "bolt": {},
+            "key": {}
+          },
+          "capture_missing_mm3": {
+            "nut_wall": 0.0,
+            "roof_ring": 0.0,
+            "floor_ring": 0.0
+          },
+          "max_nut_entry_overlap_mm3": 0.0,
+          "vertical_nut_float_mm": 0.39999999999999725,
+          "nut_entry_transverse_error_per_axis_mm": 0.1
+        },
+        {
+          "status": "pass",
+          "bolt": "hatchBolt2",
+          "nut": "hatchNut2",
+          "keeper": "ServiceHatchNutKeeperRight",
+          "bolt_path_mm": [
+            [
+              41.2,
+              51.0,
+              -79.65
+            ],
+            [
+              41.2,
+              51.0,
+              -94.65
+            ]
+          ],
+          "collisions_mm3": {
+            "bolt": {},
+            "key": {}
+          },
+          "capture_missing_mm3": {
+            "nut_wall": 0.0,
+            "roof_ring": 0.0,
+            "floor_ring": 0.0
+          },
+          "max_nut_entry_overlap_mm3": 0.0,
+          "vertical_nut_float_mm": 0.39999999999999725,
+          "nut_entry_transverse_error_per_axis_mm": 0.1
+        },
+        {
+          "status": "pass",
+          "bolt": "hatchBolt3",
+          "nut": "hatchNut3",
+          "keeper": "ServiceHatchNutKeeperRight",
+          "bolt_path_mm": [
+            [
+              41.2,
+              71.0,
+              -79.65
+            ],
+            [
+              41.2,
+              71.0,
+              -94.65
+            ]
+          ],
+          "collisions_mm3": {
+            "bolt": {},
+            "key": {}
+          },
+          "capture_missing_mm3": {
+            "nut_wall": 0.0,
+            "roof_ring": 0.0,
+            "floor_ring": 0.0
+          },
+          "max_nut_entry_overlap_mm3": 0.0,
+          "vertical_nut_float_mm": 0.39999999999999725,
+          "nut_entry_transverse_error_per_axis_mm": 0.1
+        }
+      ],
+      "cover_collisions": [],
+      "scope": "Reversible CAD paths, stock hardware and nominal visible wires. P08 checks physical thread start, settling, access and the live harness.",
+      "wire_clearance": {
+        "status": "pass",
+        "samples": [
+          {
+            "drop_mm": 0,
+            "input_sha256": "510a0135fd52eecb08ad45d36cc7084105592673adf559190bfd3cc85fe85a85",
+            "wire_count": 19,
+            "contacts": [],
+            "max_endpoint_error_mm": 0.0,
+            "max_cut_length_error_mm": 4.27161239713314e-09
+          },
+          {
+            "drop_mm": 5,
+            "input_sha256": "93e299cc69d1af099198a7af5137b71dda5b6cd0834882803c894ac7eeb22229",
+            "wire_count": 19,
+            "contacts": [],
+            "max_endpoint_error_mm": 0.0,
+            "max_cut_length_error_mm": 3.4352183320152108e-09
+          },
+          {
+            "drop_mm": 10,
+            "input_sha256": "8152bff2de6502ccbddc2c8b6b53decf4cca436ad43b14979dac06c270735a63",
+            "wire_count": 19,
+            "contacts": [],
+            "max_endpoint_error_mm": 0.0,
+            "max_cut_length_error_mm": 3.6353640098241158e-09
+          },
+          {
+            "drop_mm": 15,
+            "input_sha256": "0631da6ae3dd33d48060967a6992db39847464b291fe039a9630ebb73d63eea3",
+            "wire_count": 19,
+            "contacts": [],
+            "max_endpoint_error_mm": 0.0,
+            "max_cut_length_error_mm": 3.5028620004595723e-09
+          },
+          {
+            "drop_mm": 25,
+            "input_sha256": "93b3aa8db0c5913857afb08e925deaee174e83e69e58f8996454a2b98c6696d5",
+            "wire_count": 19,
+            "contacts": [],
+            "max_endpoint_error_mm": 0.0,
+            "max_cut_length_error_mm": 3.2461002774653025e-09
+          },
+          {
+            "drop_mm": 30,
+            "input_sha256": "b06f6ff06a4825e3d6be9be6472c14cd99c9843fafdbe82b8bf0d73936d00b01",
+            "wire_count": 19,
+            "contacts": [],
+            "max_endpoint_error_mm": 0.0,
+            "max_cut_length_error_mm": 3.5617517823993694e-09
+          }
+        ],
+        "solid_reserve_mm": 0.25,
+        "scope": "Hatch-connected power/data centerlines against added cages and keepers. W31 stays on the base."
+      },
+      "after_unplug_path_mm": [
+        [
+          0.0,
+          0.0,
+          -30.0
+        ],
+        [
+          0.0,
+          0.0,
+          -65.0
+        ]
+      ]
+    }
+  },
+  {
+    "id": "c3-board",
+    "context": "c3",
+    "text": "선택 · 왼쪽 C3 캐리어 27을 작업대에 둡니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "c3-board-place",
+    "context": "c3",
+    "text": "C3 보드를 올립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "c3-clamps",
+    "context": "c3",
+    "text": "C3 기판 양쪽에 클램프를 위에서 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "c3-bolts",
+    "context": "c3",
+    "text": "C3 클램프 두 개를 M3×8 나사와 일반 M3 너트로 고정합니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "c3Nut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          -74.65,
+          -17.5,
+          -75.2
+        ],
+        "travel_mm": 7.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "c3Nut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          -33.35,
+          -15.9,
+          -75.2
+        ],
+        "travel_mm": 7.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "c3Bolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "c3Bolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "c3-carrier",
+    "context": "base",
+    "text": "왼쪽 캐리어를 받침에 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "c3-carrier-bolts",
+    "context": "base",
+    "text": "받침 아래에서 M3×8 네 개, 위에서 소켓으로 너트.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "carrierNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -76.0,
+          -28.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "carrierNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -76.0,
+          7.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "carrierNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -32.0,
+          -28.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "carrierNut3": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -32.0,
+          7.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "carrierBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "carrierBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "carrierBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "carrierBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "openrb-plate",
+    "context": "openrb",
+    "text": "오른쪽 캐리어 27을 작업대에 둡니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "openrb-board",
+    "context": "openrb",
+    "text": "USB-C를 먼저 꽂은 OpenRB를 네 기둥에 올립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "openrb-bolts",
+    "context": "openrb",
+    "text": "위에서 M2×8 네 개, 아래에서 4 mm 소켓으로 M2 너트.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "openrbNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          42.25,
+          -42.0,
+          -75.71
+        ],
+        "travel_mm": 6.59,
+        "outside_diameter_mm": 7.4,
+        "body_length_mm": 22.0
+      },
+      "openrbNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          42.25,
+          19.5,
+          -75.71
+        ],
+        "travel_mm": 6.59,
+        "outside_diameter_mm": 7.4,
+        "body_length_mm": 22.0
+      },
+      "openrbNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          62.75,
+          -42.0,
+          -75.71
+        ],
+        "travel_mm": 6.59,
+        "outside_diameter_mm": 7.4,
+        "body_length_mm": 22.0
+      },
+      "openrbNut3": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.0,
+          -0.0,
+          -1.0
+        ],
+        "seat_mm": [
+          62.75,
+          19.5,
+          -75.71
+        ],
+        "travel_mm": 6.59,
+        "outside_diameter_mm": 7.4,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "openrbBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "openrbBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "openrbBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "openrbBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "openrb-carrier",
+    "context": "base",
+    "text": "OpenRB 캐리어를 받침에 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "openrb-carrier-bolts",
+    "context": "base",
+    "text": "받침 아래에서 M3×8 네 개, 위에서 소켓으로 너트.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "carrierNut4": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          35.0,
+          -28.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "carrierNut5": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          35.0,
+          7.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "carrierNut6": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          70.0,
+          -28.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "carrierNut7": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          70.0,
+          7.0,
+          -73.1
+        ],
+        "travel_mm": 49.1,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "carrierBolt4": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "carrierBolt5": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "carrierBolt6": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "carrierBolt7": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "yaw-brackets",
+    "context": "base",
+    "text": "브래킷 05 두 개를 받침에 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "yaw-bracket-feet",
+    "context": "base",
+    "text": "위에서 M3×8 네 개로 브래킷 다리를 받침의 탭 구멍에 조입니다. 모터 고정 나사 머리가 이 길을 막으므로 모터보다 먼저 합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "YawBracketFoot0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "YawBracketFoot1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "YawBracketFoot2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "YawBracketFoot3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "yaw-motor",
+    "context": "base",
+    "text": "XL430 ID4를 두 브래킷 사이로 위에서 내리고 왼쪽 창에서 JST를 꽂습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "yaw-side-screws",
+    "context": "base",
+    "text": "위쪽의 M2.5×8 네 개를 손으로 걸어 둡니다. 회전판을 올려 높이를 맞출 때까지 모터가 아래위로 조금 움직여야 합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "XL430YawSideL0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "XL430YawSideL1": {
+        "status": "pass",
+        "straight_key_reach_mm": 24.5,
+        "blocker": "Part000"
+      },
+      "XL430YawSideR0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "XL430YawSideR1": {
+        "status": "pass",
+        "straight_key_reach_mm": 24.5,
+        "blocker": "Part000"
+      }
+    }
+  },
+  {
+    "id": "bearing-bench",
+    "context": "seat",
+    "text": "작업대에서 베어링 받침 02에 6816을 올립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "bearing-place",
+    "context": "seat",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "bearing-keepers",
+    "context": "seat",
+    "text": "외륜 눌림판 41 세 개를 올립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "keeper-bolts",
+    "context": "seat",
+    "text": "아래에서 M3×8 세 개, 위에서 소켓으로 너트.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "keeperNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          56.4,
+          0.0,
+          -32.35
+        ],
+        "travel_mm": 6.6,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "keeperNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -28.2,
+          48.844,
+          -32.35
+        ],
+        "travel_mm": 6.6,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "keeperNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -28.2,
+          -48.844,
+          -32.35
+        ],
+        "travel_mm": 6.6,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "keeperBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "keeperBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "keeperBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "bearing-seat",
+    "context": "base",
+    "text": "베어링을 단 받침 02를 받침의 세 기둥에 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "yaw-stop-pads",
+    "context": "base",
+    "text": "베어링이 들어간 받침에 좌우 정지 블록을 위에서 한 개씩 내려 놓습니다. 각 블록의 돌기를 받침 홈에 맞추고 다음 단계의 기존 M3 나사와 너트로 고정합니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "bearing-seat-bolts",
+    "context": "base",
+    "text": "바닥에서 M3×16 세 개를 넣고 위에서 5.5 mm 소켓으로 너트를 잡습니다. 양옆의 정지 블록을 바깥쪽과 앞쪽으로 가볍게 붙여 둔 상태로 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "seatNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          0.0,
+          -63.0,
+          -35.8
+        ],
+        "travel_mm": 11.8,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "seatNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          54.56,
+          31.5,
+          -35.8
+        ],
+        "travel_mm": 11.8,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "seatNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -54.56,
+          31.5,
+          -35.8
+        ],
+        "travel_mm": 11.8,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "seatBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "seatBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "seatBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "yaw-inner-shim",
+    "context": "base",
+    "text": "베어링 내륜 위에 두께 0.1 mm PET 링을 평평하게 놓습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "rotor-bench",
+    "context": "rotor",
+    "text": "작업대에서 회전판 04의 볼트 자리 서포트를 뺍니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "rotor-studs",
+    "context": "rotor",
+    "text": "아래에서 M3×16 네 개를 올립니다. 위 너트의 평평한 두 면을 앞뒤로 향하게 하고 스패너로 움직이지 않게 잡습니다. 아래에서 2.5 mm 육각렌치로 볼트를 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "rotorNut0": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -0.5,
+          -0.866025,
+          -0.0
+        ],
+        "seat_mm": [
+          -23.0,
+          13.0,
+          -32.66
+        ],
+        "travel_mm": 65.95,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut1": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.5,
+          0.866025,
+          0.0
+        ],
+        "seat_mm": [
+          -23.0,
+          26.0,
+          -32.66
+        ],
+        "travel_mm": 58.331,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut2": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          23.0,
+          13.0,
+          -32.66
+        ],
+        "travel_mm": 26.8,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut3": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.5,
+          0.866025,
+          0.0
+        ],
+        "seat_mm": [
+          23.0,
+          26.0,
+          -32.66
+        ],
+        "travel_mm": 35.331,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      }
+    },
+    "driver_access": {
+      "mastStud0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "mastStud1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "mastStud2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "mastStud3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    },
+    "paired_driver_access": {
+      "rotorNut0/mastStud0": {
+        "status": "pass",
+        "driver_axis_independent": true
+      },
+      "rotorNut1/mastStud1": {
+        "status": "pass",
+        "driver_axis_independent": true
+      },
+      "rotorNut2/mastStud2": {
+        "status": "pass",
+        "driver_axis_independent": true
+      },
+      "rotorNut3/mastStud3": {
+        "status": "pass",
+        "driver_axis_independent": true
+      }
+    }
+  },
+  {
+    "id": "camera-rotor-feed",
+    "context": "rotor",
+    "text": "회전판을 베어링에 내리기 전에 작은 플러그를 회전판 앞쪽 구멍 아래에서 위로 뺍니다. 선 외피를 열린 곡면에 얹어 손으로 부드럽게 미끄러지는지 확인합니다.",
+    "issues": [],
+    "notes": [],
+    "camera_feed": {
+      "start_mm": [
+        0.0,
+        -36.65,
+        -57.0
+      ],
+      "end_mm": [
+        0.0,
+        -36.65,
+        -24.0
+      ],
+      "body_mm": [
+        9.2,
+        5.3,
+        7.0
+      ],
+      "cross_tolerance_mm": 0.2,
+      "status": "pass",
+      "minimum_clearance_mm": 0.09999847412109375,
+      "closest_part": "Part007"
+    }
+  },
+  {
+    "id": "rotor",
+    "context": "base",
+    "text": "볼트를 세운 회전판을 베어링 내륜에 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "rotor-horn",
+    "context": "base",
+    "text": "모터 혼 구멍을 맞추고 위에서 M2×8 네 개를 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "hornBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hornBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hornBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "hornBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "yaw-side-tighten",
+    "context": "base",
+    "text": "회전판을 손으로 눌러 PET 링에 앉힌 뒤 긴 2 mm 볼 육각렌치를 받침 옆 구멍에 넣어 ID4 나사 네 개를 조입니다. 앞쪽 구멍은 곧게, 뒤쪽은 앞쪽으로 약 10° 기울입니다. 회전판이 가볍게 도는지 확인합니다.",
+    "issues": [],
+    "notes": [],
+    "yaw_driver_adjustment": {
+      "status": "pass",
+      "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+      "tool_rows": [
+        {
+          "side": -1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            -21.075,
+            4.0,
+            -51.25
+          ],
+          "outward": [
+            -1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.569999959312876,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            -21.075,
+            4.0,
+            -50.9
+          ],
+          "outward": [
+            -1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999999999995,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            -21.075,
+            4.0,
+            -50.55
+          ],
+          "outward": [
+            -1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.3699999999999972,
+          "nearest_actor": "Part001"
+        },
+        {
+          "side": -1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            -21.074620193825307,
+            27.554841343787164,
+            -51.25
+          ],
+          "outward": [
+            -0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999513336911,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            -21.074620193825307,
+            27.554841343787164,
+            -50.9
+          ],
+          "outward": [
+            -0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999912367041,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            -21.074620193825307,
+            27.554841343787164,
+            -50.55
+          ],
+          "outward": [
+            -0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.3699999999999972,
+          "nearest_actor": "Part001"
+        },
+        {
+          "side": 1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            21.075,
+            4.0,
+            -51.25
+          ],
+          "outward": [
+            1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999422504862,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            21.075,
+            4.0,
+            -50.9
+          ],
+          "outward": [
+            1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999999999976,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            21.075,
+            4.0,
+            -50.55
+          ],
+          "outward": [
+            1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.36999999999999744,
+          "nearest_actor": "Part001"
+        },
+        {
+          "side": 1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            21.074620193825307,
+            27.554841343787164,
+            -51.25
+          ],
+          "outward": [
+            0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999525020518,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            21.074620193825307,
+            27.554841343787164,
+            -50.9
+          ],
+          "outward": [
+            0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999836925884,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            21.074620193825307,
+            27.554841343787164,
+            -50.55
+          ],
+          "outward": [
+            0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.3699999999999972,
+          "nearest_actor": "Part001"
+        }
+      ],
+      "free_length_mm": 91.0
+    }
+  },
+  {
+    "id": "base-deck",
+    "context": "base",
+    "text": "상판 03을 위에서 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "base-deck-bolts",
+    "context": "base",
+    "text": "바닥 바깥 세 통로로 M3×8, 위에서 소켓으로 너트.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "lidNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          0.0,
+          -85.0,
+          -24.6
+        ],
+        "travel_mm": 9.4,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "lidNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          73.612,
+          42.5,
+          -24.6
+        ],
+        "travel_mm": 9.4,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "lidNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "seat_mm": [
+          -73.612,
+          42.5,
+          -24.6
+        ],
+        "travel_mm": 9.4,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "lidBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "lidBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "lidBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "mast",
+    "context": "neck",
+    "text": "작업대에 목 기둥 06을 세웁니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "yoke",
+    "context": "neck",
+    "text": "요크 07을 기둥 위에 얹습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "yoke-bolts",
+    "context": "neck",
+    "text": "옆 통로에서 스패너로 너트를 잡고 위에서 M3×16 세 개를 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "yokeNut0": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -12.0,
+          14.8,
+          57.69
+        ],
+        "travel_mm": 52.5,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "yokeNut1": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -12.0,
+          27.3,
+          57.69
+        ],
+        "travel_mm": 52.5,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "yokeNut2": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          12.0,
+          24.3,
+          57.69
+        ],
+        "travel_mm": 52.5,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      }
+    },
+    "driver_access": {
+      "yokeBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "yokeBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "yokeBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "pitch-horn-bench",
+    "context": "pitchmotor",
+    "text": "작업대에서 XL430 ID5에 08번 클램프를 M2×8 네 개로 조입니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "pitch-horn-place",
+    "context": "pitchmotor",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "pitch-horn-bolts",
+    "context": "pitchmotor",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "pitchHornBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "pitchHornBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "pitchHornBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "pitchHornBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "pitch-motor",
+    "context": "neck",
+    "text": "클램프를 단 모터를 요크 위에서 내려 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "pitch-side-screws",
+    "context": "neck",
+    "text": "요크 바깥 두 곳(x 23 mm)에 M2.5×8을 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "XL430PitchSide0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "XL430PitchSide1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "id5-keeper",
+    "context": "neck",
+    "text": "ID5 플러그를 꽂고 가드를 바깥에서 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "id5-keeper-screws",
+    "context": "neck",
+    "text": "가드를 새 M3 탭 두 곳에 M3×8로 고정하고, 본체에 물리는 두 곳은 모터 규격 M2.5×10으로 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "ID5KeeperScrew1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "ID5KeeperScrew2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "XL430PitchKeeper0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "XL430PitchKeeper1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "pitch-bearings",
+    "context": "neck",
+    "text": "688 두 개를 요크 양끝 바깥에서 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "head-frame",
+    "context": "neck",
+    "text": "머리 프레임 09를 정면으로 두고 두 베어링 사이로 위에서 수직으로 내립니다.",
+    "issues": [],
+    "notes": [],
+    "head_frame_clearance": {
+      "parts": [
+        "Part019",
+        "Part011"
+      ],
+      "offset_mm": [
+        0.0,
+        0.0,
+        14.3
+      ],
+      "sampled_min_mm": 0.58,
+      "continuous_lower_bound_mm": 0.53
+    }
+  },
+  {
+    "id": "neck-pins",
+    "context": "neck",
+    "text": "접착제를 바르기 전에 실측한 Ø3 연마 평행핀이 두 축의 직교 구멍에 잘 들어가는지 확인합니다. Ø8 축을 양쪽에서 끼우고 오른쪽 D-flat을 08번 클램프에 맞춥니다.",
+    "issues": [],
+    "notes": [],
+    "native_pin_passages": [
+      {
+        "parts": [
+          "Part013",
+          "Part019"
+        ],
+        "offset_mm": [
+          -24,
+          0,
+          0
+        ],
+        "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+        "status": "pass",
+        "diameter_mm": 8.0,
+        "pin_length_mm": 21.5,
+        "material_outside_mm3": 0.0,
+        "swept_overlap_mm3": 0.0,
+        "swept_gap_mm": 0.11999995973514757,
+        "mesh_hit": {
+          "at_mm": 18.5,
+          "overlap_mm3": 0.109
+        }
+      }
+    ]
+  },
+  {
+    "id": "neck-dowels",
+    "context": "neck",
+    "text": "축의 직교 구멍을 프레임 허브 세로 구멍에 맞추고 위에서 Ø3×12 평행핀을 넣습니다. 위아래 끝이 허브 면에서 각각 0.4 mm 들어가게 맞춥니다. 손으로 움직여 걸림을 확인한 뒤 핀은 회전하는 허브 안에만 고정합니다. 고정제가 베어링에 닿지 않게 하고, 오른쪽 D-flat 끝과 08번 클램프는 K2 에폭시로 고정합니다. 경화 후 손으로 다시 움직여 확인합니다.",
+    "issues": [],
+    "notes": [],
+    "native_pin_passages": [
+      {
+        "parts": [
+          "PitchPinDowelLeft",
+          "Part019"
+        ],
+        "offset_mm": [
+          0,
+          0,
+          16
+        ],
+        "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+        "status": "pass",
+        "diameter_mm": 3.0,
+        "pin_length_mm": 12.0,
+        "material_outside_mm3": 0.0,
+        "swept_overlap_mm3": 0.0,
+        "swept_gap_mm": 7.110846302088116e-15,
+        "mesh_hit": {
+          "at_mm": 2.0,
+          "overlap_mm3": 1.51
+        }
+      }
+    ]
+  },
+  {
+    "id": "pitch-stop-link",
+    "context": "neck",
+    "text": "목을 정면에 두고 뒤에서 강철판을 넣어 원형 구멍은 아래쪽, 긴 구멍은 위쪽에 맞춥니다.",
+    "issues": [],
+    "notes": [],
+    "pitch_link_clearance": {
+      "parts": [
+        "PitchLimitLink",
+        "Part011"
+      ],
+      "offset_mm": [
+        0.0,
+        13.0,
+        0.0
+      ],
+      "sampled_min_mm": 0.4,
+      "continuous_lower_bound_mm": 0.35
+    }
+  },
+  {
+    "id": "pitch-stop-pins",
+    "context": "neck",
+    "text": "프레임 안쪽에서 바깥쪽으로 Ø4×20 평행핀 두 개를 넣고 뒤에서 M3 무두나사를 조입니다. 전원을 끈 채 목을 움직여 양 끝에서 핀이 슬롯 끝에 먼저 닿는지 확인합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "PitchLimitLowerRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "PitchLimitUpperRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-pitch-stay",
+    "context": "neck",
+    "text": "머리 뒤에서 지지대 34를 프레임에 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-stay-screws",
+    "context": "neck",
+    "text": "뒤에서 M3×8 두 개로 지지대를 프레임 탭 구멍에 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "EyePitchStayFrame0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "EyePitchStayFrame1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-rail",
+    "context": "neck",
+    "text": "빈 레일 24를 앞에서 밀어 프레임에 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-rail-bolts",
+    "context": "neck",
+    "text": "뒤에서 M3×16 네 개, 앞쪽 통로에서 소켓으로 너트.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "railNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "outward": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -20.0,
+          14.0,
+          141.5
+        ],
+        "travel_mm": 50.3,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "railNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "outward": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -20.0,
+          14.0,
+          151.5
+        ],
+        "travel_mm": 50.3,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "railNut2": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "outward": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "seat_mm": [
+          20.0,
+          14.0,
+          141.5
+        ],
+        "travel_mm": 50.3,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "railNut3": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          1.0,
+          0.0
+        ],
+        "outward": [
+          -0.0,
+          -1.0,
+          -0.0
+        ],
+        "seat_mm": [
+          20.0,
+          14.0,
+          151.5
+        ],
+        "travel_mm": 50.3,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "railBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "railBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "railBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "railBolt3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-bearings",
+    "context": "neck",
+    "text": "MR104ZZ 두 개를 레일 가운데에서 바깥쪽으로 눌러 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-motor-bench",
+    "context": "eyepitch",
+    "text": "작업대에서 눈 상하 XL330을 모터판 42에 M2×6 네 개로 조입니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-plate",
+    "context": "eyepitch",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-case-screws",
+    "context": "eyepitch",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "eyePitchHead0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyePitchHead1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyePitchHead2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyePitchHead3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-pitch-horn",
+    "context": "eyepitch",
+    "text": "눈 상하 모터 혼에 17번을 장착합니다. 출력 혼의 표시와 구멍 두 개를 맞추고 M2×5 두 개를 조입니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-horn-screws",
+    "context": "eyepitch",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "EyePitchHornScrew0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "EyePitchHornScrew1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-pitch-link-pin",
+    "context": "eyepitch",
+    "text": "혼 바깥 구멍에 Ø2×6 핀을 고정제로 세웁니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-link",
+    "context": "eyepitch",
+    "text": "링크 18의 위쪽 구멍을 핀에 끼웁니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-motor",
+    "context": "neck",
+    "text": "모터·혼·링크를 머리 정면에서 비스듬히 밀어 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-pitch-plate-screws",
+    "context": "neck",
+    "text": "모터판 위 두 곳에 M3×8을 지지대 탭 구멍에 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "eyePitchHead4": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyePitchHead5": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-motor-bench",
+    "context": "blink",
+    "text": "작업대에서 눈꺼풀 XL330을 모터판 46에 M2×6 네 개로 조입니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-plate",
+    "context": "blink",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-case-screws",
+    "context": "blink",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "blinkMotorHead0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "blinkMotorHead1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "blinkMotorHead2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "blinkMotorHead3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-horn-link",
+    "context": "blinkhorn",
+    "text": "작업대에서 혼 19와 구동 링크 22의 핀 구멍을 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-horn-link-nut",
+    "context": "blinkhorn",
+    "text": "연마 핀을 넣고 링크가 돌아가는지 확인합니다. M3 무두나사는 핀이 옆으로 빠지지 않게 막는 깊이까지만 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "BlinkPivotServoRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-center-crank",
+    "context": "blinkhorn",
+    "text": "가운데 크랭크 21-2와 구동 링크의 핀 구멍을 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-center-crank-nut",
+    "context": "blinkhorn",
+    "text": "평행핀과 M3 무두나사를 끼워 링크를 연결합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "BlinkPivotDriveRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-horn",
+    "context": "blink",
+    "text": "링크를 단 혼을 모터의 출력 플랜지에 댑니다. 모터 전원을 끈 상태에서 플랜지를 돌려 두 나사 구멍을 먼저 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-horn-screws",
+    "context": "blink",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "BlinkHornScrew0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "BlinkHornScrew1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-motor",
+    "context": "neck",
+    "text": "모터판을 앞에서 레일에 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-motor-bolts",
+    "context": "neck",
+    "text": "양옆에서 M3×16과 너트로 모터판을 고정합니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "blinkPlateNut0": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "outward": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          -13.6,
+          2.2,
+          182.0
+        ],
+        "travel_mm": 65.85,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      },
+      "blinkPlateNut1": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "outward": [
+          -1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          -13.6,
+          2.2,
+          190.8
+        ],
+        "travel_mm": 65.85,
+        "outside_diameter_mm": 9.3,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "blinkPlateBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "blinkPlateBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "blink-spacers",
+    "context": "neck",
+    "text": "B19 간격통 45 두 개를 끼웁니다. 긴 왼쪽 것은 앞에서 곧게, 짧은 오른쪽 것은 앞 아래에서 비스듬히 넣어 가운데 크랭크 양옆에 둡니다. 축을 넣은 뒤 간격통이 축 방향으로 1 mm 남짓 노는 것은 정상입니다. 크랭크는 축 평면을 누르는 M3로 고정됩니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-shaft",
+    "context": "neck",
+    "text": "Ø4×112 축을 왼쪽에서 베어링·간격통·가운데 크랭크에 통과시킵니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-outer-cranks",
+    "context": "neck",
+    "text": "양끝 크랭크를 끼웁니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-clamps",
+    "context": "neck",
+    "text": "앞에서 스패너로 크랭크 너트를 잡고 위에서 M3×8 세 개를 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "crankNut0": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          -53.9,
+          -24.0,
+          156.65
+        ],
+        "travel_mm": 13.587,
+        "nut_rotation_deg": 0,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "crankNut1": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          10.2,
+          -24.0,
+          156.65
+        ],
+        "travel_mm": 13.587,
+        "nut_rotation_deg": 0,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "crankNut2": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          54.15,
+          -24.0,
+          156.65
+        ],
+        "travel_mm": 13.587,
+        "nut_rotation_deg": 0,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      }
+    },
+    "driver_access": {
+      "crankBolt0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "crankBolt1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "crankBolt2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-cradle",
+    "context": "eyemod",
+    "text": "작업대에 눈 크래들 12를 둡니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eyeball-L",
+    "context": "eyemod",
+    "text": "왼쪽 안구를 크래들 앞에서 곧게 밀어 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eyeball-R",
+    "context": "eyemod",
+    "text": "오른쪽 안구도 같은 방법으로 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-yaw-pins",
+    "context": "eyemod",
+    "text": "위에서 Ø2×24 핀을 넣고 크래들 위쪽에만 고정제를 바릅니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-tie",
+    "context": "eyemod",
+    "text": "두 눈을 정면으로 둡니다. 핀을 끼우지 않은 타이바 15의 들어가는 쪽 구멍 중심을 크래들 왼쪽 입구의 표시 홈에 맞춥니다. 타이바 윗면을 입구 천장보다 약 1.5 mm 낮게 두고 오른쪽으로 수평으로 밉니다. 두 크랭크 구멍과 좌우 위치가 맞으면 뒤로 밀면서 내려 구멍을 맞춥니다. 고정제 없이 경로를 확인한 뒤 타이바를 빼고, 크랭크 구멍에 경화가 느린 고정제를 소량 넣어 다시 끼웁니다.",
+    "issues": [],
+    "notes": [],
+    "insertion_clearance": {
+      "slide": {
+        "parts": [
+          "Part037",
+          "Part029"
+        ],
+        "offset_mm": [
+          -79.75,
+          -2.8,
+          0.8
+        ],
+        "sampled_min_mm": 0.9,
+        "continuous_lower_bound_mm": 0.775,
+        "required_transverse_error_per_axis_mm": 0.5
+      },
+      "lower": {
+        "parts": [
+          "Part037",
+          "Part029"
+        ],
+        "offset_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "sampled_min_mm": 0.35,
+        "continuous_lower_bound_mm": 0.229,
+        "required_transverse_error_per_axis_mm": 0.15
+      }
+    }
+  },
+  {
+    "id": "eye-tie-pins",
+    "context": "eyemod",
+    "text": "고정제가 굳기 전에 크래들 위 Ø2.2 구멍으로 Ø2×6 핀을 넣고, Ø1.5~2 mm 막대로 타이바를 지나 크랭크 구멍 바닥까지 밀어 넣습니다. 핀에는 고정제를 바르지 않습니다. 타이바가 핀 위에서 돌아야 합니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-mounts",
+    "context": "eyemod",
+    "text": "양쪽 지지대 13을 대고 바깥에서 Ø3×13 핀을 넣습니다. 지지대 쪽에만 고정제.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-mount-pins",
+    "context": "eyemod",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-yaw-motor-bench",
+    "context": "eyeyaw",
+    "text": "작업대에서 눈 좌우 XL330과 모터판 39를 M2×6 네 개로 조입니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-yaw-plate",
+    "context": "eyeyaw",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-yaw-case-screws",
+    "context": "eyeyaw",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "eyeYawHead0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyeYawHead1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyeYawHead2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "eyeYawHead3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-yaw-horn",
+    "context": "eyeyaw",
+    "text": "혼 16을 대고 M2×5 세 개를 조입니다. (-11.8, -35.5) 구멍은 눈틀에 닿으므로 비웁니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-yaw-horn-screws",
+    "context": "eyeyaw",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "EyeYawHornScrew0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "EyeYawHornScrew1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "EyeYawHornScrew2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-yaw-motor",
+    "context": "eyemod",
+    "text": "모터·모터판을 크래들 아래에서 올려 다리를 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-yaw-feet",
+    "context": "eyemod",
+    "text": "모터판 39 다리의 Ø2.6 구멍은 조립 전에 M3 탭을 냅니다. 크래들 위 카운터보어에서 M3×16 두 개를 모터판 다리의 탭에 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "EyeYawFoot0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "EyeYawFoot1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-tie-bolt",
+    "context": "eyemod",
+    "text": "눈 좌우 혼의 아래쪽에서 평행핀을 넣고 M3 무두나사를 끼워 타이바를 연결합니다. 연결부가 손으로 움직이는지 확인합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "EyeYawDrivePivotRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-module",
+    "context": "neck",
+    "text": "눈 모듈을 머리 프레임 앞에서 뒤로 밀어 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "eye-mount-screws",
+    "context": "neck",
+    "text": "바깥에서 M3×16으로 지지대 13 두 개를 프레임 통로에 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "CradleMountFrameL": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "CradleMountFrameR": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "eye-pitch-link-pin2",
+    "context": "neck",
+    "text": "크래들 바깥 귀의 안쪽에서 Ø2×6 핀을 밀어 링크 아래 구멍까지 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "lid-left",
+    "context": "lidL",
+    "text": "작업대에 왼쪽 눈틀을 놓습니다. 눈꺼풀을 열린 자세 그대로 뒤에서 곧게 밀어 넣습니다.",
+    "issues": [],
+    "notes": [],
+    "lid_insertion_clearance": {
+      "parts": [
+        "Part078",
+        "Part076"
+      ],
+      "offset_mm": [
+        0.0,
+        5.275,
+        0.0
+      ],
+      "sampled_min_mm": 0.93,
+      "continuous_lower_bound_mm": 0.918
+    }
+  },
+  {
+    "id": "lid-left-pins",
+    "context": "lidL",
+    "text": "Ø2×8 핀 두 개를 넣고 눈틀 쪽에만 고정제.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "lid-right",
+    "context": "lidR",
+    "text": "작업대에 오른쪽 눈틀을 놓습니다. 눈꺼풀을 열린 자세 그대로 뒤에서 곧게 밀어 넣습니다.",
+    "issues": [],
+    "notes": [],
+    "lid_insertion_clearance": {
+      "parts": [
+        "Part079",
+        "Part077"
+      ],
+      "offset_mm": [
+        0.0,
+        5.275,
+        0.0
+      ],
+      "sampled_min_mm": 0.93,
+      "continuous_lower_bound_mm": 0.918
+    }
+  },
+  {
+    "id": "lid-right-pins",
+    "context": "lidR",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-lid-links",
+    "context": "neck",
+    "text": "양쪽 짧은 링크 23을 앞쪽 아래에서 비스듬히 올려 크랭크와 핀 구멍을 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "blink-lid-link-nuts",
+    "context": "neck",
+    "text": "양쪽 크랭크 관절의 평행핀을 가운데 쪽에서 넣고 M3 무두나사로 빠짐을 막습니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "BlinkPivotUpperLRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "BlinkPivotUpperRRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 28.0,
+        "blocker": "Part054"
+      }
+    }
+  },
+  {
+    "id": "front-skull",
+    "context": "front",
+    "text": "코받침 25가 붙어서 출력된 앞 외장 28을 작업대에 놓습니다.",
+    "issues": [],
+    "notes": [],
+    "integral_print": "front-skull-with-nasal-tray"
+  },
+  {
+    "id": "camera-bezel",
+    "context": "front",
+    "text": "코 테두리 33을 앞쪽 아래에서 대고 오른쪽 위로 비켜 넣습니다. 안쪽 턱을 지난 뒤 가운데로 밀어 맞춥니다. 접합부에 에폭시를 소량 바르고 테이프로 자리를 잡아 굳힙니다.",
+    "issues": [],
+    "notes": [],
+    "bezel_insertion_clearance": [
+      {
+        "parts": [
+          "Part080",
+          "Part073"
+        ],
+        "start_mm": [
+          -2.0,
+          -25.0,
+          -4.25
+        ],
+        "end_mm": [
+          -2.0,
+          -8.0,
+          -4.25
+        ],
+        "closest_offset_mm": [
+          -2.0,
+          -8.0,
+          -4.25
+        ],
+        "required_clearance_mm": 0.3,
+        "sampled_min_mm": 1.661,
+        "continuous_lower_bound_mm": 1.651
+      },
+      {
+        "parts": [
+          "Part080",
+          "Part073"
+        ],
+        "start_mm": [
+          -2.0,
+          -8.0,
+          -4.25
+        ],
+        "end_mm": [
+          1.5,
+          -4.5,
+          -0.75
+        ],
+        "closest_offset_mm": [
+          0.533,
+          -5.467,
+          -1.717
+        ],
+        "required_clearance_mm": 0.3,
+        "sampled_min_mm": 0.5431,
+        "continuous_lower_bound_mm": 0.5332
+      },
+      {
+        "parts": [
+          "Part080",
+          "Part073"
+        ],
+        "start_mm": [
+          1.5,
+          -4.5,
+          -0.75
+        ],
+        "end_mm": [
+          2.5,
+          -3.0,
+          0.75
+        ],
+        "closest_offset_mm": [
+          2.102,
+          -3.597,
+          0.153
+        ],
+        "required_clearance_mm": 0.3,
+        "sampled_min_mm": 0.5346,
+        "continuous_lower_bound_mm": 0.5246
+      },
+      {
+        "parts": [
+          "Part080",
+          "Part073"
+        ],
+        "start_mm": [
+          2.5,
+          -3.0,
+          0.75
+        ],
+        "end_mm": [
+          2.5,
+          -1.0,
+          0.75
+        ],
+        "closest_offset_mm": [
+          2.5,
+          -2.78,
+          0.75
+        ],
+        "required_clearance_mm": 0.3,
+        "sampled_min_mm": 0.5646,
+        "continuous_lower_bound_mm": 0.5546
+      },
+      {
+        "parts": [
+          "Part080",
+          "Part073"
+        ],
+        "start_mm": [
+          2.5,
+          -1.0,
+          0.75
+        ],
+        "end_mm": [
+          1.75,
+          -0.25,
+          0.5
+        ],
+        "closest_offset_mm": [
+          2.118,
+          -0.618,
+          0.623
+        ],
+        "required_clearance_mm": 0.3,
+        "sampled_min_mm": 0.5149,
+        "continuous_lower_bound_mm": 0.505
+      },
+      {
+        "parts": [
+          "Part080",
+          "Part073"
+        ],
+        "start_mm": [
+          1.75,
+          -0.25,
+          0.5
+        ],
+        "end_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "closest_offset_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "required_clearance_mm": 0.3,
+        "sampled_min_mm": 0.5246,
+        "continuous_lower_bound_mm": 0.5146
+      }
+    ]
+  },
+  {
+    "id": "camera-bracket-bench",
+    "context": "camerabench",
+    "text": "작업대에 코 카메라 브래킷 26을 놓습니다. 아래가 열린 타이 홈에 폭 2.5 mm 타이를 걸어 둡니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "camera-pcb-fit",
+    "context": "camerabench",
+    "text": "렌즈를 단 카메라를 약 9 mm 들어 렌즈를 타원형 구멍 윗부분에 넣습니다. 기판을 아래로 내린 뒤 앞쪽으로 가볍게 눌러 자리에 맞춥니다.",
+    "issues": [],
+    "notes": [],
+    "camera_pcb_clearance": [
+      {
+        "parts": [
+          "Part067",
+          "Part066"
+        ],
+        "start_mm": [
+          0.0,
+          24.0,
+          9.35
+        ],
+        "end_mm": [
+          0.0,
+          0.24,
+          9.35
+        ],
+        "closest_offset_mm": [
+          0.0,
+          0.24,
+          9.35
+        ],
+        "required_clearance_mm": 0.2,
+        "sampled_min_mm": 0.26,
+        "continuous_lower_bound_mm": 0.25
+      },
+      {
+        "parts": [
+          "Part067",
+          "Part066"
+        ],
+        "start_mm": [
+          0.0,
+          0.24,
+          9.35
+        ],
+        "end_mm": [
+          0.0,
+          0.24,
+          0.0
+        ],
+        "closest_offset_mm": [
+          0.0,
+          0.24,
+          0.0
+        ],
+        "required_clearance_mm": 0.2,
+        "sampled_min_mm": 0.25,
+        "continuous_lower_bound_mm": 0.24
+      },
+      {
+        "parts": [
+          "Part067",
+          "Part066"
+        ],
+        "start_mm": [
+          0.0,
+          0.24,
+          0.0
+        ],
+        "end_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "closest_offset_mm": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "required_clearance_mm": 0.0,
+        "sampled_min_mm": 0.02,
+        "continuous_lower_bound_mm": 0.01
+      }
+    ]
+  },
+  {
+    "id": "camera-pcb-washers",
+    "context": "camerabench",
+    "text": "윗쪽 두 구멍의 브래킷 앞면에 M3 평와셔를 한 개씩 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "camera-pcb-screws",
+    "context": "camerabench",
+    "text": "앞에서 4 mm 소켓으로 M2 너트를 잡고 뒤에서 1.5 mm 육각렌치로 M2×8 두 개를 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "CameraPCBNutLeft": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          -14.0,
+          -57.9,
+          103.0
+        ],
+        "travel_mm": 13.65,
+        "outside_diameter_mm": 7.4,
+        "body_length_mm": 22.0
+      },
+      "CameraPCBNutRight": {
+        "status": "pass",
+        "tool": "socket",
+        "axis": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "outward": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "seat_mm": [
+          14.0,
+          -57.9,
+          103.0
+        ],
+        "travel_mm": 13.65,
+        "outside_diameter_mm": 7.4,
+        "body_length_mm": 22.0
+      }
+    },
+    "driver_access": {
+      "CameraPCBScrewLeft": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "CameraPCBScrewRight": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    },
+    "paired_driver_access": {
+      "CameraPCBNutLeft/CameraPCBScrewLeft": {
+        "status": "pass",
+        "driver_axis_independent": true
+      },
+      "CameraPCBNutRight/CameraPCBScrewRight": {
+        "status": "pass",
+        "driver_axis_independent": true
+      }
+    }
+  },
+  {
+    "id": "camera",
+    "context": "front",
+    "text": "카메라를 앞 외장에 넣기 전에 작은 플러그를 연결합니다. 받침을 가까이 두고 USB-A 쪽 여분을 풀어 둔 채 카메라 모듈을 뒤 위에서 비스듬히 내려 코받침에 댑니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "camera-tray-bolts",
+    "context": "front",
+    "text": "위에서 2.5 mm 육각렌치로 M3×8 두 개를 코받침 25의 탭 구멍에 조입니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "CameraTrayScrewLeft": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "CameraTrayScrewRight": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    },
+    "camera_tray_head_passage": {
+      "CameraTrayScrewLeft": {
+        "status": "pass",
+        "swept_overlap_mm3": 0.0,
+        "head_diameter_mm": 5.56
+      },
+      "CameraTrayScrewRight": {
+        "status": "pass",
+        "swept_overlap_mm3": 0.0,
+        "head_diameter_mm": 5.56
+      }
+    }
+  },
+  {
+    "id": "camera-nose-guide",
+    "context": "front",
+    "text": "카메라를 자리에 댄 뒤 외피를 브래킷 위로 열린 홈에 얹습니다. 외피가 원래 모양을 유지하도록 미리 끼운 타이로 가볍게 잡습니다. 나머지 선은 목 쪽으로 내려 둡니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "orbits",
+    "context": "front",
+    "text": "핀을 끼운 두 눈틀을 뒤에서 눈구멍으로 밀어 넣습니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "front-shell",
+    "context": "neck",
+    "text": "눈꺼풀을 닫아 둔 앞 외장을 정면에서 밀어 맞춥니다.",
+    "issues": [],
+    "notes": [],
+    "front_link_clearance": {
+      "parts": [
+        "Part073",
+        "Part044"
+      ],
+      "offset_mm": [
+        0.0,
+        -24.3,
+        0.0
+      ],
+      "sampled_minimum_mm": 0.5,
+      "continuous_lower_bound_mm": 0.45,
+      "required_mm": 0.2
+    }
+  },
+  {
+    "id": "blink-lower-joints",
+    "context": "neck",
+    "text": "두 눈을 정면으로 둡니다. 전원을 끈 상태에서 링크와 양쪽 눈꺼풀을 완전히 닫아 핀 구멍을 맞춥니다. 가운데 쪽에서 평행핀과 M3 무두나사를 끼운 뒤 손으로 열고 닫아 걸림을 확인합니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "BlinkPivotLowerLRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 30.5,
+        "blocker": "Part024"
+      },
+      "BlinkPivotLowerRRetainer": {
+        "status": "pass",
+        "straight_key_reach_mm": 30.5,
+        "blocker": "Part024"
+      }
+    },
+    "blink_deg": 90.0,
+    "blink_access_cases": [
+      {
+        "blink_deg": 85.0,
+        "status": "pass",
+        "blocking_pairs": []
+      },
+      {
+        "blink_deg": 87.5,
+        "status": "pass",
+        "blocking_pairs": []
+      }
+    ]
+  },
+  {
+    "id": "jaw-motor-bench",
+    "context": "jaw",
+    "text": "작업대에서 턱 XL330을 턱 받침 36에 M2×6 네 개로 조입니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "jaw-motor",
+    "context": "jaw",
+    "text": "",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "jaw-motor-screws",
+    "context": "jaw",
+    "text": "",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "jawMotorHead0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "jawMotorHead1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "jawMotorHead2": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "jawMotorHead3": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "jaw-body-arm",
+    "context": "jawbody",
+    "text": "턱 30과 구동팔 38, 힌지팔 39를 한 몸으로 출력한 부품을 작업대에 놓습니다.",
+    "issues": [],
+    "notes": [],
+    "integral_print": "jaw-with-hinge-arms"
+  },
+  {
+    "id": "jaw-arm",
+    "context": "jaw",
+    "text": "턱을 모터 혼에 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "jaw-arm-screws",
+    "context": "jaw",
+    "text": "구동팔을 모터 혼에 M2×6 두 개로 조입니다. (-9, 86)·(-3, 92) 구멍은 요크에 닿으므로 비웁니다.",
+    "issues": [],
+    "notes": [],
+    "driver_access": {
+      "JawHornScrew0": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      },
+      "JawHornScrew1": {
+        "status": "pass",
+        "straight_key_reach_mm": 35.0,
+        "blocker": null
+      }
+    }
+  },
+  {
+    "id": "jaw-stay-bench",
+    "context": "jawstay",
+    "text": "오른쪽 턱 베어링 받침 37을 작업대에 둡니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "jaw-bearing-fit",
+    "context": "jawstay",
+    "text": "받침 바깥쪽에서 MR104를 곧게 넣고 외륜만 눌러 안쪽 단턱까지 앉힙니다. 고정제는 외륜과 받침 사이에만 바릅니다.",
+    "issues": [],
+    "notes": [],
+    "bearing_insertion": {
+      "parts": [
+        "Jaw_MR104ZZ_jaw_right",
+        "Jaw_37_right_jaw_bearing_stay"
+      ],
+      "offset_mm": [
+        24,
+        0,
+        0
+      ],
+      "status": "pass",
+      "measured_diameter_mm": 10.002239265015692,
+      "swept_overlap_mm3": 0.0,
+      "material_outside_mm3": 0.0
+    }
+  },
+  {
+    "id": "jaw-body",
+    "context": "jaw",
+    "text": "베어링을 넣은 오른쪽 받침 37을 뒤쪽 위에서 비스듬히 내려 맞춥니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "jaw-pin",
+    "context": "jaw",
+    "text": "안쪽에서 Ø4×10 핀을 베어링과 힌지팔로 밀어 넣고 힌지팔 쪽에만 고정제.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "jaw-to-head",
+    "context": "neck",
+    "text": "머리를 높게 받치고 턱 조립체를 아래에서 올립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "head-on-base",
+    "context": "base",
+    "text": "작업대에서 조립한 머리를 기둥째 들어 회전판의 볼트 위에 내립니다.",
+    "issues": [],
+    "notes": []
+  },
+  {
+    "id": "mast-nuts",
+    "context": "base",
+    "text": "기둥 옆 열린 통로로 5.5 mm 스패너 두 개를 넣습니다. 아래 너트를 한 스패너로 잡고, 위 너트를 다른 스패너로 조입니다. 네 곳을 같은 방법으로 조입니다.",
+    "issues": [],
+    "notes": [],
+    "tool_access": {
+      "mastNut0": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -23.0,
+          13.0,
+          -25.36
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "mastNut1": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -23.0,
+          26.0,
+          -25.36
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "mastNut2": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          23.0,
+          13.0,
+          -25.36
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "mastNut3": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          23.0,
+          26.0,
+          -25.36
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut0": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -23.0,
+          13.0,
+          -32.66
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut1": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          -1.0,
+          -0.0,
+          -0.0
+        ],
+        "seat_mm": [
+          -23.0,
+          26.0,
+          -32.66
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut2": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          23.0,
+          13.0,
+          -32.66
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      },
+      "rotorNut3": {
+        "status": "pass",
+        "tool": "spanner",
+        "axis": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "outward": [
+          1.0,
+          0.0,
+          0.0
+        ],
+        "seat_mm": [
+          23.0,
+          26.0,
+          -32.66
+        ],
+        "travel_mm": 75.0,
+        "nut_rotation_deg": -30,
+        "head_width_mm": 16.0,
+        "thickness_mm": 4.2
+      }
+    },
+    "paired_tool_access": {
+      "rotorNut0/mastNut0": {
+        "status": "pass",
+        "insertion_order": [
+          "rotorNut0",
+          "mastNut0"
+        ]
+      },
+      "rotorNut1/mastNut1": {
+        "status": "pass",
+        "insertion_order": [
+          "rotorNut1",
+          "mastNut1"
+        ]
+      },
+      "rotorNut2/mastNut2": {
+        "status": "pass",
+        "insertion_order": [
+          "rotorNut2",
+          "mastNut2"
+        ]
+      },
+      "rotorNut3/mastNut3": {
+        "status": "pass",
+        "insertion_order": [
+          "rotorNut3",
+          "mastNut3"
+        ]
+      }
+    }
+  },
+  {
+    "id": "camera-route-set",
+    "context": "base",
+    "text": "머리 뒷덮개를 닫기 전에 카메라 선을 배선도대로 놓습니다. 회전판 가이드 안에서 외피가 약 51 mm 움직일 수 있게 둡니다. USB-A 바로 앞 외피를 받침 뒤 고정 지지대의 타이로 잡고 여분은 바깥에서 정리합니다.",
+    "issues": [],
+    "notes": [],
+    "camera_tail_mount": {
+      "seat_mm": [
+        56.5,
+        150.0,
+        -69.5
+      ],
+      "body_mm": [
+        14.0,
+        3.0,
+        14.0
+      ],
+      "jacket_grip_y_mm": [
+        152.5,
+        155.5
+      ]
+    }
+  },
+  {
+    "id": "rear-skull",
+    "context": "base",
+    "text": "배선을 마치고 뒤 해골 29를 이음면에 수직으로 밀어 넣습니다.",
+    "issues": [],
+    "notes": []
+  }
+]

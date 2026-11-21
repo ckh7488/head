@@ -1,0 +1,2209 @@
+[
+  {
+    "name": "XL430YawSideL0",
+    "motion": "fixed",
+    "skip": [
+      "Part008",
+      "Part017"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          -21.1,
+          4.0,
+          -50.9
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        7.9,
+        [
+          -18.5,
+          4.0,
+          -50.9
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430YawSideL1",
+    "motion": "fixed",
+    "skip": [
+      "Part008",
+      "Part017"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          -21.1,
+          28.0,
+          -50.9
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        7.9,
+        [
+          -18.5,
+          28.0,
+          -50.9
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430YawSideR0",
+    "motion": "fixed",
+    "skip": [
+      "Part009",
+      "Part017"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          21.1,
+          4.0,
+          -50.9
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        7.9,
+        [
+          18.5,
+          4.0,
+          -50.9
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430YawSideR1",
+    "motion": "fixed",
+    "skip": [
+      "Part009",
+      "Part017"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          21.1,
+          28.0,
+          -50.9
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        7.9,
+        [
+          18.5,
+          28.0,
+          -50.9
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "YawBracketFoot0",
+    "motion": "fixed",
+    "skip": [
+      "Part008",
+      "Part000"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -22.8,
+          5.0,
+          -61.35000000000001
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          -22.8,
+          5.0,
+          -64.45
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "YawBracketFoot1",
+    "motion": "fixed",
+    "skip": [
+      "Part008",
+      "Part000"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -22.8,
+          26.0,
+          -61.35000000000001
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          -22.8,
+          26.0,
+          -64.45
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "YawBracketFoot2",
+    "motion": "fixed",
+    "skip": [
+      "Part009",
+      "Part000"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          22.8,
+          5.0,
+          -61.35000000000001
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          22.8,
+          5.0,
+          -64.45
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "YawBracketFoot3",
+    "motion": "fixed",
+    "skip": [
+      "Part009",
+      "Part000"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          22.8,
+          26.0,
+          -61.35000000000001
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          22.8,
+          26.0,
+          -64.45
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430PitchSide0",
+    "motion": "pan",
+    "skip": [
+      "Part011",
+      "Part018"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          23.0,
+          21.2,
+          84.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        7.9,
+        [
+          23.0,
+          18.599999999999998,
+          84.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430PitchSide1",
+    "motion": "pan",
+    "skip": [
+      "Part011",
+      "Part018"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          23.0,
+          21.2,
+          108.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        7.9,
+        [
+          23.0,
+          18.599999999999998,
+          108.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430PitchKeeper0",
+    "motion": "pan",
+    "skip": [
+      "ID5EHKeeper",
+      "Part011",
+      "Part018"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          11.0,
+          24.8,
+          84.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        9.9,
+        [
+          11.0,
+          22.2,
+          84.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "XL430PitchKeeper1",
+    "motion": "pan",
+    "skip": [
+      "ID5EHKeeper",
+      "Part011",
+      "Part018"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.25,
+        2.5,
+        [
+          11.0,
+          24.8,
+          108.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.125,
+        9.9,
+        [
+          11.0,
+          22.2,
+          108.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawFoot0",
+    "motion": "tilt",
+    "skip": [
+      "Part024",
+      "Part039"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -8.0,
+          -47.6,
+          124.55
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        15.9,
+        [
+          -8.0,
+          -47.6,
+          121.45
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawFoot1",
+    "motion": "tilt",
+    "skip": [
+      "Part024",
+      "Part039"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          8.0,
+          -47.6,
+          124.55
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        15.9,
+        [
+          8.0,
+          -47.6,
+          121.45
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyePitchStayFrame0",
+    "motion": "head",
+    "skip": [
+      "Part064",
+      "Part019"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          53.0,
+          37.65,
+          142.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          53.0,
+          34.550000000000004,
+          142.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyePitchStayFrame1",
+    "motion": "head",
+    "skip": [
+      "Part064",
+      "Part019"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          53.0,
+          37.65,
+          151.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          53.0,
+          34.550000000000004,
+          151.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CradleMountFrameL",
+    "motion": "head",
+    "skip": [
+      "Part025",
+      "Part019"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -72.25,
+          27.0,
+          146.0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        15.9,
+        [
+          -69.15,
+          27.0,
+          146.0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CradleMountFrameR",
+    "motion": "head",
+    "skip": [
+      "Part027",
+      "Part019"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          72.25,
+          27.0,
+          146.0
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        15.9,
+        [
+          69.15,
+          27.0,
+          146.0
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawHornScrew0",
+    "motion": "look_horn",
+    "skip": [
+      "Part040",
+      "Part038"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          -5.8,
+          -41.5,
+          116.3
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        4.9,
+        [
+          -5.8,
+          -41.5,
+          114.2
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawHornScrew1",
+    "motion": "look_horn",
+    "skip": [
+      "Part040",
+      "Part038"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          -5.8,
+          -29.5,
+          116.3
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        4.9,
+        [
+          -5.8,
+          -29.5,
+          114.2
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawHornScrew2",
+    "motion": "look_horn",
+    "skip": [
+      "Part040",
+      "Part038"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          0.2,
+          -35.5,
+          116.3
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        4.9,
+        [
+          0.2,
+          -35.5,
+          114.2
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyePitchHornScrew0",
+    "motion": "tilt_horn",
+    "skip": [
+      "Part043",
+      "Part041"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          63.25,
+          4.262171464221788,
+          152.7542302283364
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        4.9,
+        [
+          61.150000000000006,
+          4.262171464221788,
+          152.7542302283364
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyePitchHornScrew1",
+    "motion": "tilt_horn",
+    "skip": [
+      "Part043",
+      "Part041"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          63.25,
+          11.754230228336423,
+          156.73782853577822
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        4.9,
+        [
+          61.150000000000006,
+          11.754230228336423,
+          156.73782853577822
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkHornScrew0",
+    "motion": "blink_motor_horn",
+    "skip": [
+      "Part047",
+      "Part045"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          6.35,
+          -17.355157420824483,
+          174.97422543533025
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        5.9,
+        [
+          4.25,
+          -17.355157420824483,
+          174.97422543533025
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkHornScrew1",
+    "motion": "blink_motor_horn",
+    "skip": [
+      "Part047",
+      "Part045"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          6.35,
+          -9.02577456466975,
+          173.35515742082447
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        5.9,
+        [
+          4.25,
+          -9.02577456466975,
+          173.35515742082447
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "JawHornScrew0",
+    "motion": "jaw",
+    "skip": [
+      "Jaw_38_left_jaw_drive_arm",
+      "Jaw_XL330_M288_Jaw",
+      "Jaw_30_moving_jaw"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          -48.949999999999996,
+          -15.0,
+          92.0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        5.9,
+        [
+          -46.85,
+          -15.0,
+          92.0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "JawHornScrew1",
+    "motion": "jaw",
+    "skip": [
+      "Jaw_38_left_jaw_drive_arm",
+      "Jaw_XL330_M288_Jaw",
+      "Jaw_30_moving_jaw"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          -48.949999999999996,
+          -9.0,
+          98.0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        0.9,
+        5.9,
+        [
+          -46.85,
+          -9.0,
+          98.0
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawTiePinL",
+    "motion": "look_link",
+    "skip": [
+      "Part029",
+      "Part037"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          -34.0,
+          -25.5,
+          111.8
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawTiePinR",
+    "motion": "look_link",
+    "skip": [
+      "Part033",
+      "Part037"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          34.0,
+          -25.5,
+          111.8
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyePitchLinkHornPin",
+    "motion": "tilt_link",
+    "skip": [
+      "Part043",
+      "Part044"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          58.65,
+          19.563047559630355,
+          148.07628295277263
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyePitchLinkCradlePin",
+    "motion": "tilt",
+    "skip": [
+      "Part024",
+      "Part044"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          58.0,
+          -29.436952440369645,
+          116.07628295277263
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ID5KeeperScrew1",
+    "motion": "pan",
+    "skip": [
+      "Part011",
+      "ID5EHKeeper"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          17.0,
+          26.150000000000002,
+          84.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          17.0,
+          23.05,
+          84.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ID5KeeperScrew2",
+    "motion": "pan",
+    "skip": [
+      "Part011",
+      "ID5EHKeeper"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          17.0,
+          26.150000000000002,
+          108.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          17.0,
+          23.05,
+          108.0
+        ],
+        [
+          0,
+          -1,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "c3Bolt0",
+    "motion": "fixed",
+    "skip": [
+      "C3Clamp0",
+      "Part071"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -74.65,
+          -17.5,
+          -65.65
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          -74.65,
+          -17.5,
+          -68.75
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "c3Bolt1",
+    "motion": "fixed",
+    "skip": [
+      "C3Clamp1",
+      "Part071"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -33.35,
+          -15.9,
+          -65.65
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          -33.35,
+          -15.9,
+          -68.75
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotServo",
+    "motion": "blink_drive_link",
+    "skip": [
+      "Part047",
+      "Part056",
+      "BlinkPivotServo",
+      "BlinkPivotServoRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          3.0500000000000003,
+          -9.386658546366338,
+          163.1604400264209
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotServoRetainer",
+    "motion": "blink_drive_link",
+    "skip": [
+      "Part047",
+      "Part056",
+      "BlinkPivotServo",
+      "BlinkPivotServoRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          9.15,
+          -9.386658546366338,
+          163.1604400264209
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotDrive",
+    "motion": "blink_shaft_crank",
+    "skip": [
+      "Part056",
+      "Part054",
+      "BlinkPivotDrive",
+      "BlinkPivotDriveRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          4.1499999999999995,
+          -19.386658546366338,
+          147.1604400264209
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotDriveRetainer",
+    "motion": "blink_shaft_crank",
+    "skip": [
+      "Part056",
+      "Part054",
+      "BlinkPivotDrive",
+      "BlinkPivotDriveRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          10.25,
+          -19.386658546366338,
+          147.1604400264209
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotUpperL",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part053",
+      "Part057",
+      "BlinkPivotUpperL",
+      "BlinkPivotUpperLRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          -54.050000000000004,
+          -17.569281610086414,
+          144.46606791561703
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotUpperLRetainer",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part053",
+      "Part057",
+      "BlinkPivotUpperL",
+      "BlinkPivotUpperLRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          -47.95,
+          -17.569281610086414,
+          144.46606791561703
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotUpperR",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part055",
+      "Part060",
+      "BlinkPivotUpperR",
+      "BlinkPivotUpperRRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          54.050000000000004,
+          -17.569281610086414,
+          144.46606791561703
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotUpperRRetainer",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part055",
+      "Part060",
+      "BlinkPivotUpperR",
+      "BlinkPivotUpperRRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          47.95,
+          -17.569281610086414,
+          144.46606791561703
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotLowerL",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part078",
+      "Part057",
+      "BlinkPivotLowerL",
+      "BlinkPivotLowerLRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          -54.050000000000004,
+          -32.56928161008641,
+          109.46606791561702
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotLowerLRetainer",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part078",
+      "Part057",
+      "BlinkPivotLowerL",
+      "BlinkPivotLowerLRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          -47.95,
+          -32.56928161008641,
+          109.46606791561702
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotLowerR",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part079",
+      "Part060",
+      "BlinkPivotLowerR",
+      "BlinkPivotLowerRRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        6.0,
+        [
+          54.050000000000004,
+          -32.56928161008641,
+          109.46606791561702
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "BlinkPivotLowerRRetainer",
+    "motion": "blink_lid_link",
+    "skip": [
+      "Part079",
+      "Part060",
+      "BlinkPivotLowerR",
+      "BlinkPivotLowerRRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          47.95,
+          -32.56928161008641,
+          109.46606791561702
+        ],
+        [
+          -1,
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawDrivePivot",
+    "motion": "look_horn",
+    "skip": [
+      "Part037",
+      "Part040",
+      "EyeYawDrivePivot",
+      "EyeYawDrivePivotRetainer"
+    ],
+    "kind": "pin",
+    "shapes": [
+      [
+        "cyl",
+        1.0,
+        5.0,
+        [
+          -5.8,
+          -22.0,
+          116.95
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "EyeYawDrivePivotRetainer",
+    "motion": "look_horn",
+    "skip": [
+      "Part037",
+      "Part040",
+      "EyeYawDrivePivot",
+      "EyeYawDrivePivotRetainer"
+    ],
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          -5.8,
+          -22.0,
+          111.85
+        ],
+        [
+          0,
+          0,
+          -1
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "PitchLimitLowerPin",
+    "motion": "pan",
+    "kind": "pin",
+    "skip": [
+      "Part011",
+      "PitchLimitLink",
+      "PitchLimitLowerPin",
+      "PitchLimitLowerRetainer"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.0,
+        20.0,
+        [
+          -34.0,
+          26.0,
+          87.0
+        ],
+        [
+          -1.0,
+          0.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "PitchLimitLowerRetainer",
+    "motion": "pan",
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "skip": [
+      "Part011",
+      "PitchLimitLink",
+      "PitchLimitLowerPin",
+      "PitchLimitLowerRetainer"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          -32.1,
+          27.5,
+          87.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "PitchLimitUpperPin",
+    "motion": "head",
+    "kind": "pin",
+    "skip": [
+      "Part019",
+      "PitchLimitLink",
+      "PitchLimitUpperPin",
+      "PitchLimitUpperRetainer"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.0,
+        20.0,
+        [
+          -34.0,
+          37.0,
+          113.0
+        ],
+        [
+          -1.0,
+          0.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "PitchLimitUpperRetainer",
+    "motion": "head",
+    "kind": "set_screw",
+    "key_af_mm": 1.5,
+    "skip": [
+      "Part019",
+      "PitchLimitLink",
+      "PitchLimitUpperPin",
+      "PitchLimitUpperRetainer"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.5,
+        3.0,
+        [
+          -32.1,
+          38.5,
+          113.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraTrayScrewLeft",
+    "motion": "head",
+    "skip": [
+      "Part065",
+      "Part066"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -12.0,
+          -47.0,
+          77.85
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          -12.0,
+          -47.0,
+          74.75
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraTrayScrewRight",
+    "motion": "head",
+    "skip": [
+      "Part065",
+      "Part066"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          12.0,
+          -47.0,
+          77.85
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          12.0,
+          -47.0,
+          74.75
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraPCBScrewLeft",
+    "motion": "head",
+    "skip": [
+      "Part066",
+      "Part067",
+      "CameraPCBWasherLeft",
+      "CameraPCBNutLeft"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          -14.0,
+          -49.25,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      [
+        "cyl",
+        1.0,
+        7.9,
+        [
+          -14.0,
+          -51.349999999999994,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraPCBWasherLeft",
+    "kind": "washer",
+    "motion": "head",
+    "skip": [
+      "Part066",
+      "CameraPCBScrewLeft",
+      "CameraPCBNutLeft"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        3.5,
+        0.5,
+        [
+          -14.0,
+          -56.6,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraPCBNutLeft",
+    "kind": "nut",
+    "motion": "head",
+    "skip": [
+      "CameraPCBScrewLeft",
+      "CameraPCBWasherLeft"
+    ],
+    "shapes": [
+      [
+        "hex",
+        4.0,
+        1.6,
+        [
+          -14.0,
+          -57.1,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraPCBScrewRight",
+    "motion": "head",
+    "skip": [
+      "Part066",
+      "Part067",
+      "CameraPCBWasherRight",
+      "CameraPCBNutRight"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        1.93,
+        2.0,
+        [
+          14.0,
+          -49.25,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ],
+      [
+        "cyl",
+        1.0,
+        7.9,
+        [
+          14.0,
+          -51.349999999999994,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraPCBWasherRight",
+    "kind": "washer",
+    "motion": "head",
+    "skip": [
+      "Part066",
+      "CameraPCBScrewRight",
+      "CameraPCBNutRight"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        3.5,
+        0.5,
+        [
+          14.0,
+          -56.6,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "CameraPCBNutRight",
+    "kind": "nut",
+    "motion": "head",
+    "skip": [
+      "CameraPCBScrewRight",
+      "CameraPCBWasherRight"
+    ],
+    "shapes": [
+      [
+        "hex",
+        4.0,
+        1.6,
+        [
+          14.0,
+          -57.1,
+          103.0
+        ],
+        [
+          0.0,
+          -1.0,
+          0.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ServiceHatchNutKeeperLeftScrew",
+    "motion": "fixed",
+    "skip": [
+      "Part000",
+      "ServiceHatchNutKeeperLeft"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          -41.2,
+          61.0,
+          -66.93
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          -41.2,
+          61.0,
+          -70.03
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ]
+    ]
+  },
+  {
+    "name": "ServiceHatchNutKeeperRightScrew",
+    "motion": "fixed",
+    "skip": [
+      "Part000",
+      "ServiceHatchNutKeeperRight"
+    ],
+    "shapes": [
+      [
+        "cyl",
+        2.78,
+        3.0,
+        [
+          41.2,
+          61.0,
+          -66.93
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ],
+      [
+        "cyl",
+        1.35,
+        7.9,
+        [
+          41.2,
+          61.0,
+          -70.03
+        ],
+        [
+          0.0,
+          0.0,
+          -1.0
+        ]
+      ]
+    ]
+  }
+]

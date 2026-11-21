@@ -78,8 +78,9 @@ def name_part(obj, part, new_name, face_count):
     part.find('mesh_stat').set('face_count', str(face_count))
 
 
-def add_board_clips(base, model, config, changes, names, clips):
-    template, _ = template_parts(config)['27_radio_plate.stl']
+def add_print_parts(base, model, config, changes, names, placements, *,
+                    template_name, plate_number, prefix, relation_prefix, uuid_prefix, support_enabled=None):
+    template, _ = template_parts(config)[template_name]
     old_id = template.get('id')
     resources = model.find(CORE + 'resources')
     build_items = model.find(CORE + 'build')
@@ -88,21 +89,21 @@ def add_board_clips(base, model, config, changes, names, clips):
     component = resource.find('.//' + CORE + 'component')
     old_target = component.get(PRODUCTION + 'path')
     source = base.read(old_target.lstrip('/'))
-    relations = etree.fromstring(base.read(MODEL_RELS))
+    relations = etree.fromstring(changes.get(MODEL_RELS, base.read(MODEL_RELS)))
     relation = relations.find(f"*[@Target='{old_target}']")
-    plate = config.xpath("./plate[metadata[@key='plater_id'][@value='3']]")[0]
+    plate = config.xpath("./plate[metadata[@key='plater_id'][@value=$plate]]", plate=str(plate_number))[0]
     slot = plate.xpath(f"./model_instance[metadata[@key='object_id'][@value='{old_id}']]")[0]
     last = max(int(row.get('id')) for row in resources)
     identify = max(int(row.get('value')) for row in config.findall(".//metadata[@key='identify_id']"))
     additions = {}
-    for index, path in enumerate(clips):
+    for index, (path, name, xy) in enumerate(placements):
         child_id, object_id = str(last + index*2 + 1), str(last + index*2 + 2)
-        target = f'/3D/Objects/b21_board_clip_{index+1}.model'
+        target = f'/3D/Objects/{prefix}_{index+1}.model'
         mesh = trimesh.load_mesh(path)
         native = etree.fromstring(replace_mesh(source, mesh))
         native_object = native.find(f".//{CORE}object")
         native_object.set('id', child_id)
-        native_object.set(PRODUCTION+'UUID', str(uuid5(NAMESPACE_URL, f'r5-b21/{path.name}/mesh')))
+        native_object.set(PRODUCTION+'UUID', str(uuid5(NAMESPACE_URL, f'{uuid_prefix}/{name}/mesh')))
         new_resource, new_item, obj, new_slot = map(deepcopy, (resource, item, template, slot))
         new_component = new_resource.find('.//' + CORE + 'component')
         part = obj.find('part')
@@ -115,31 +116,42 @@ def add_board_clips(base, model, config, changes, names, clips):
         new_slot.find("metadata[@key='object_id']").set('value', object_id)
         new_slot.find("metadata[@key='identify_id']").set('value', str(identify + index + 1))
         for label, element in (('resource', new_resource), ('component', new_component), ('item', new_item)):
-            element.set(PRODUCTION+'UUID', str(uuid5(NAMESPACE_URL, f'r5-b21/{path.name}/{label}')))
-        part.set('uuid', str(uuid5(NAMESPACE_URL, f'r5-b21/{path.name}/part')))
-        name_part(obj, part, path.name, len(mesh.faces))
+            element.set(PRODUCTION+'UUID', str(uuid5(NAMESPACE_URL, f'{uuid_prefix}/{name}/{label}')))
+        part.set('uuid', str(uuid5(NAMESPACE_URL, f'{uuid_prefix}/{name}/part')))
+        name_part(obj, part, name, len(mesh.faces))
+        if support_enabled is not None:
+            setting = obj.find("metadata[@key='enable_support']")
+            if setting is None:
+                setting = etree.SubElement(obj, 'metadata', key='enable_support')
+            setting.set('value', '1' if support_enabled else '0')
         matrix = part.find("metadata[@key='matrix']")
         local = np.fromstring(matrix.get('value'), sep=' ').reshape(4, 4)
         placed = np.fromstring(new_item.get('transform'), sep=' ')
         if not np.allclose(local[:3, :3], np.eye(3)) or not np.allclose(placed[:9], np.eye(3).reshape(-1)):
-            raise ValueError('The B20 board-carrier template is rotated')
-        xy = np.array([74. + index*16., 75.])
+            raise ValueError(f'{template_name} is not an unrotated print template')
+        xy = np.asarray(xy)
         placed[9:11] += xy - local[:2, 3]
         local[:2, 3] = xy
         matrix.set('value', ' '.join(f'{value:.9g}' for value in local.ravel()))
         new_item.set('transform', ' '.join(f'{value:.9g}' for value in placed))
         new_relation = deepcopy(relation)
         new_relation.set('Target', target)
-        new_relation.set('Id', f'rel-b21-clip-{index+1}')
+        new_relation.set('Id', f'{relation_prefix}-{index+1}')
         relations.append(new_relation)
         resources.append(new_resource)
         build_items.append(new_item)
         config.insert(config.index(plate), obj)
         plate.append(new_slot)
-        names[object_id] = path.name
+        names[object_id] = name
         additions[target.lstrip('/')] = serialize(native)
     changes[MODEL_RELS] = serialize(relations)
     return additions
+
+
+def add_board_clips(base, model, config, changes, names, clips):
+    placements = [(path, path.name, (74. + index*16., 75.)) for index, path in enumerate(clips)]
+    return add_print_parts(base, model, config, changes, names, placements, template_name='27_radio_plate.stl',
+                           plate_number=3, prefix='b21_board_clip', relation_prefix='rel-b21-clip', uuid_prefix='r5-b21')
 
 
 def remove_ballast_plate(base, model, config, changes):
@@ -169,9 +181,11 @@ def remove_ballast_plate(base, model, config, changes):
 
 
 def build(output, replacements, report, clips=(), support=(), *, source=BASE, revision='B21', without_ballast=False,
-          normal_support=()):
+          normal_support=(), extra_parts=(), indexed_parts=()):
     if output.resolve() == source.resolve():
         raise ValueError(f'Choose a separate {revision} project output')
+    if clips and extra_parts:
+        raise ValueError('Choose one set of new print objects')
     with ZipFile(source) as base:
         model = etree.fromstring(base.read(MODEL))
         config = etree.fromstring(base.read(MODEL_SETTINGS))
@@ -179,12 +193,14 @@ def build(output, replacements, report, clips=(), support=(), *, source=BASE, re
         changes = {}
         names = {}
         additions = add_board_clips(base, model, config, changes, names, clips) if clips else {}
+        for group in extra_parts:
+            additions.update(add_print_parts(base, model, config, changes, names, **group))
         for old_name, (new_name, mesh) in replacements.items():
             obj, part = old_parts[old_name]
             object_id = obj.get('id')
             component = model.find(f".//{CORE}object[@id='{object_id}']//{CORE}component")
             path = component.get(PRODUCTION + 'path').lstrip('/')
-            changes[path] = replace_mesh(base.read(path), mesh)
+            changes[path] = replace_mesh(base.read(path), mesh, indexed=old_name in indexed_parts)
             name_part(obj, part, new_name, len(mesh.faces))
             if old_name in support:
                 setting = obj.find("metadata[@key='enable_support']")

@@ -1,4 +1,4 @@
-"""Run normal B22 neck and jaw moves with exact sliced masses and a motor margin."""
+"""Run loaded neck and jaw moves with sliced masses and compare actuator margins."""
 
 from argparse import ArgumentParser
 from functools import partial
@@ -25,13 +25,13 @@ def jaw_config():
     return jaw, guard, speed, acceleration
 
 
-def command(t, rate, _cutoff, _profile, pitch_limits, jaw_limit, jaw_speed, jaw_acceleration):
+def command(t, rate, _cutoff, _profile, pitch_limits, jaw_limit, jaw_speed, jaw_acceleration, yaw_limit=60.):
     t *= rate
     lowest, highest = pitch_limits
     if t < 3.2:
-        yaw = quintic(t, 3.15, 0., 60.)
+        yaw = quintic(t, 3.15, 0., yaw_limit)
     else:
-        yaw = quintic(t - 3.2, 6.1, 60., -60.)
+        yaw = quintic(t - 3.2, 6.1, yaw_limit, -yaw_limit)
     if t < 2.3:
         pitch = quintic(t, 1.4, 0., lowest)
     elif t < 5.3:
@@ -66,7 +66,17 @@ def audit(cad, grams, output):
     from check_b22_neck import encoder_feedback_limits
 
     pitch_feedback, _, _, firmware_hash = encoder_feedback_limits()
-    trajectory = partial(command, pitch_limits=motion['pitch_stop']['powered_deg'],
+    yaw_limit, yaw_feedback = 60., None
+    if 'yaw_limit' in motion:
+        source = FIRMWARE.read_text()
+        yaw_ticks = int(re.search(r'\bneckYawCalibrationTicks\s*=\s*(\d+)\s*;', source)[1])
+        tolerance = int(re.search(r'\bpositionTolerance\s*=\s*(\d+)\s*;', source)[1])
+        yaw_limit = yaw_ticks * 360 / 4096
+        yaw_feedback = (yaw_ticks + tolerance) * 360 / 4096
+        left, right = motion['yaw_limit']['nominal_stop_deg']
+        if not left < -yaw_feedback < 0 < yaw_feedback < right:
+            raise ValueError('The guarded yaw travel must stay inside both CAD yaw stops')
+    trajectory = partial(command, pitch_limits=motion['pitch_stop']['powered_deg'], yaw_limit=yaw_limit,
                          jaw_limit=jaw, jaw_speed=speed*.229*6., jaw_acceleration=acceleration*214.577*.1)
     output.mkdir(parents=True, exist_ok=True)
     trials = {}
@@ -77,8 +87,9 @@ def audit(cad, grams, output):
         row = run_trial(bodies, pos(model['jaw_pivot_mm']), output / name, volts=volts,
                         derating=derating, friction=friction, backlash_deg=backlash,
                         firmware_profile=True, trajectory=trajectory)
-        pitch, jaw_range = row['simulated_travel_deg'][1:]
+        yaw, pitch, jaw_range = row['simulated_travel_deg']
         row['operating_envelope_pass'] = bool(min(row['minimum_planned_speed_margin_Nm']) > 0.
+                                              and (yaw_feedback is None or -yaw_feedback <= yaw[0] <= yaw[1] <= yaw_feedback)
                                               and pitch_feedback[0] <= pitch[0] <= pitch[1] <= pitch_feedback[1]
                                               and jaw_range[1] < jaw_feedback)
         trials[name] = row
@@ -98,6 +109,8 @@ def audit(cad, grams, output):
               'scope': 'Installed masses, conservative actuator derating and supplied friction cases. '
                        'Small steel link treated as a rigid part of the head for normal drive screening. '
                        'Servo control is a fitted PD model without wiring load or continuous temperature validation.'}
+    if yaw_feedback is not None:
+        report.update(yaw_command_limit_deg=yaw_limit, yaw_feedback_limit_deg=yaw_feedback)
     (output / 'drive.json').write_text(json.dumps(report, indent=2)+'\n')
     return passed
 

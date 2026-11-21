@@ -24,6 +24,21 @@ Windows PowerShell에서는 JavaScript의 MIME 유형을 지정하고 서버를 
 py -3.12 -c "import mimetypes, runpy; mimetypes.init(); mimetypes.add_type('text/javascript', '.js'); runpy.run_module('http.server', run_name='__main__')" 8000 --bind 127.0.0.1 --directory web
 ```
 
+## B23 조립 순서
+
+B23 화면은 체결품과 배선을 장착한 상태에서 시작합니다. 목 좌우 스토퍼와 두 덮개 체결, 앞 해골의 직선 삽입 순서를 각 단계에서 확인합니다. [B23 CAD와 검사](../mechanical/revisions/b23/)
+
+```sh
+rev=mechanical/revisions/b23
+out=build/b23-review
+assembly="$rev/R5-B23-Assembly.FCStd"
+python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
+python web/b19/export_wire_states.py "$assembly" "$rev/camera-check.json" "$rev/camera-paths.npz" "$out/wire-states.json" --layout "$out/cad/cad_parts.json"
+python web/b19/build_b19_viewer.py "$out/cad" "$rev/hardware.json" "$rev/hardware-spec.json" "$rev/assembly.json" --revision B23 --assembly-cad "$assembly" --stop-report "$rev/neck-stop.json" --wire-states "$out/wire-states.json" --output "$out/viewer"
+npm ci --prefix web
+python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B23-assembly.html" --revision B23
+```
+
 ## B22 조립 순서
 
 B22 조립 화면은 체결품과 배선이 들어간 완성 상태에서 시작합니다. 136단계의 삽입·공구 경로, 목 제한판이 닿는 두 위치, 체결품과 배선이 장착된 검사 자세 세 가지를 확인할 수 있습니다. [B22 CAD와 검사](../mechanical/revisions/b22/)

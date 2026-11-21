@@ -32,7 +32,7 @@ constexpr uint8_t positionTolerance = 8;
 constexpr uint8_t jawPositionTolerance = 11;
 constexpr uint8_t eyeCalibrationTicks[] = {4096u*20u/360u-positionTolerance,
                                            4096u*8u/360u-positionTolerance};
-constexpr uint16_t neckYawCalibrationTicks = 4096u*60u/360u-positionTolerance;
+constexpr uint16_t neckYawCalibrationTicks = 659;
 constexpr uint8_t hardwareAlert = 0x80;
 constexpr uint8_t neckYawAxis = 3, neckPitchAxis = 4;
 constexpr uint8_t trackerMask = (1u<<trackerCount)-1;

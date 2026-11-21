@@ -1,0 +1,40 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "source_shell_sha256": "5b8eafb43913fdee7797596cb4b9fbf8129a466925543c00b42c9d32c4b8e5e3",
+  "edited_shell_sha256": "8175ee9a596ab1a1511fe428e8ae09b7d0bd3c6e0849e85f0ae9fa1af8cd0f83",
+  "relief": {
+    "part": "Part073",
+    "world_bounds_mm": [
+      [
+        60.85,
+        -13.1,
+        112.4
+      ],
+      [
+        64.65,
+        -5.05,
+        117.35
+      ]
+    ],
+    "removed_mm3": 21.12679184487206
+  },
+  "sampled_neutral_view_angles": 30,
+  "new_see_through_rays_in_assembled_head": 0,
+  "views_with_local_visibility_change": [
+    "(0, 20)",
+    "(30, -20)",
+    "(30, 0)",
+    "(30, 20)",
+    "(60, -20)",
+    "(60, 0)",
+    "(60, 20)",
+    "(90, -20)",
+    "(90, 0)",
+    "(90, 20)",
+    "(135, -20)",
+    "(135, 0)",
+    "(135, 20)"
+  ],
+  "full_bounds_preserved": true,
+  "referenced_assembly_clearance": "front-841.json"
+}

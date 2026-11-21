@@ -31,16 +31,18 @@ def test_rejects_bad_tick_rows(axis, row):
     assert len(list(issues(replaced_axis(axis, row)))) == 1
 
 
-def test_nominal_check_flags_31_degrees_when_60_was_expected():
-    shorter = replaced_axis(3, (1695, 2048, 2722))
+def test_nominal_check_flags_31_degrees_when_57_9_was_expected():
+    shorter = replaced_axis(3, (1695, 2048, 2707))
     assert not list(issues(shorter))
     assert list(issues(shorter, nominal_neck=True)) == [
-        'ID 4 neck-yaw low is 31.0°, expected about 60°.',
+        'ID 4 neck-yaw low is 31.0°, expected about 57.9°.',
     ]
 
 @pytest.mark.parametrize(('axis', 'row', 'name', 'ticks'), [
     (0, (1828, 2048, 2267), 'eye-yaw', 219), (1, (2131, 2048, 1964), 'eye-pitch', 83),
-    (3, (1374, 2048, 2723), 'neck-yaw', 674),
+    (3, (1389, 2048, 2708), 'neck-yaw', 659),
+    (3, (2707, 2048, 1388), 'neck-yaw', 659),
+    (3, (1374, 2048, 2722), 'neck-yaw', 659),
 ])
 def test_calibration_leaves_eight_ticks_inside_cad_range(axis, row, name, ticks):
     assert list(issues(replaced_axis(axis, row))) == [

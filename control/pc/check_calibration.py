@@ -11,7 +11,8 @@ NAMES = (*AXES, 'jaw')
 UNSET = (-1, -1, -1)
 JAW_MAX_TICKS = int(JAW_MAX_DEGREES * 4096 / 360)
 NECK_YAW_AXIS = AXES.index('neck-yaw')
-NECK_YAW_LIMIT_TICKS = int(LIMITS[NECK_YAW_AXIS][1] * 4096 // 360) - 8
+NECK_YAW_LIMIT_TICKS = 659
+NECK_YAW_LIMIT_DEGREES = NECK_YAW_LIMIT_TICKS * 360 / 4096
 NECK_PITCH_AXIS = AXES.index('neck-pitch')
 PITCH_MAX_DEGREES = LIMITS[NECK_PITCH_AXIS][1]
 PITCH_MAX_TICKS = int(PITCH_MAX_DEGREES * 4096 // 360)
@@ -53,11 +54,12 @@ def issues(rows, nominal_neck=False):
         elif i == NECK_PITCH_AXIS and abs(low-zero) > PITCH_NEGATIVE_TICKS:
             yield (f'{prefix} negative travel exceeds the {PITCH_NEGATIVE_DEGREES:g}° endpoint '
                    f'({PITCH_NEGATIVE_TICKS} ticks). Recalibrate the negative endpoint.')
-        elif nominal_neck and i in (3, 4):
-            for end, span, expected in zip(('low', 'high'), (abs(low-zero), abs(high-zero)), LIMITS[i], strict=True):
+        elif nominal_neck and i in (NECK_YAW_AXIS, NECK_PITCH_AXIS):
+            limits = (NECK_YAW_LIMIT_DEGREES,)*2 if i == NECK_YAW_AXIS else LIMITS[i]
+            for end, span, expected in zip(('low', 'high'), (abs(low-zero), abs(high-zero)), limits, strict=True):
                 measured = span * 360 / 4096
                 if abs(measured-abs(expected)) > max(2., abs(expected)*.1):
-                    yield f'{prefix} {end} is {measured:.1f}°, expected about {abs(expected):g}°.'
+                    yield f'{prefix} {end} is {measured:.1f}°, expected about {abs(expected):.3g}°.'
 
 
 def main():

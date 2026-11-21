@@ -32,26 +32,26 @@ def test_profile_is_verified_before_motion_and_restores_plain_go(tracking):
     assert not tracking.command('GO_EXHIBIT 0 0 0 15 -6')
     events = tracking.trace()
     assert profile_events(events[:3]) == [('r', 4, 29), ('w', 5, 15), ('r', 5, 15)]
-    assert neck_goals(events[3:]) == [(4, 2217), (5, 2116)]
+    assert neck_goals(events[3:]) == [(4, 2213), (5, 2116)]
 
     assert not tracking.command('GO_RETURN 0 0 0 15 -6')
     assert not tracking.trace()
     tracking.tick(period)
     events = tracking.trace()
     assert profile_events(events[:4]) == [('w', 4, 7), ('r', 4, 7), ('w', 5, 7), ('r', 5, 7)]
-    assert neck_goals(events[4:]) == [(4, 2217), (5, 2116)]
+    assert neck_goals(events[4:]) == [(4, 2213), (5, 2116)]
 
     assert not tracking.command('GO_RETURN 0 0 0 14 -5')
     tracking.tick(period)
     events = tracking.trace()
     assert not profile_events(events)
-    assert neck_goals(events) == [(4, 2205), (5, 2105)]
+    assert neck_goals(events) == [(4, 2202), (5, 2105)]
 
     assert not tracking.command('GO 0 0 0 13 -4')
     tracking.tick(period)
     events = tracking.trace()
     assert profile_events(events[:4]) == [('w', 4, 29), ('r', 4, 29), ('w', 5, 19), ('r', 5, 19)]
-    assert neck_goals(events[4:]) == [(4, 2194), (5, 2094)]
+    assert neck_goals(events[4:]) == [(4, 2191), (5, 2094)]
     assert not writes(events, TORQUE)
 
 
@@ -66,7 +66,7 @@ def test_latest_profile_and_goal_share_the_existing_write_period(tracking):
     tracking.tick(1)
     events = tracking.trace()
     assert profile_events(events) == [('r', 4, 29), ('w', 5, 15), ('r', 5, 15)]
-    assert neck_goals(events) == [(4, 2183), (5, 2082)]
+    assert neck_goals(events) == [(4, 2180), (5, 2082)]
 
 
 def test_exhibit_heartbeat_survives_hold_then_watchdog_freezes(tracking):
@@ -142,7 +142,7 @@ def test_hold_cancels_paced_profile_change_and_fresh_arm_uses_normal(tracking):
     tracking.tick(period)
     events = tracking.trace()
     assert not profile_events(events)
-    assert neck_goals(events) == [(4, 2217), (5, 2116)]
+    assert neck_goals(events) == [(4, 2213), (5, 2116)]
 
     assert tracking.command('RELEASE') == ['RELEASED']
     tracking.trace()

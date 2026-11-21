@@ -109,19 +109,29 @@ if __name__ == '__main__':
     parser.add_argument('report', type=Path)
     parser.add_argument('--baseline', type=Path, help='Fail on new or worse seated contacts')
     parser.add_argument('--exact-cad', type=Path, help='Use native solids to resolve new mesh overlap measurements')
+    parser.add_argument('--summary', type=Path, help='Write input hashes and baseline comparison')
     args = parser.parse_args()
     rows = check(args.cad)
     baseline = json.loads(args.baseline.read_text()) if args.baseline else None
+    manifest = json.loads((args.cad / 'cad_parts.json').read_text())
     if args.exact_cad:
         if baseline is None:
             parser.error('--exact-cad requires --baseline')
-        rows = resolve_native(rows, baseline, args.exact_cad,
-                              json.loads((args.cad / 'cad_parts.json').read_text()))
+        rows = resolve_native(rows, baseline, args.exact_cad, manifest)
     args.report.write_text(json.dumps(rows, indent=1, ensure_ascii=False) + '\n')
-    print(f'{len(rows)} contacts, {sum(row["mm3"] is None for row in rows)} with unmeasurable volume')
-    if baseline is not None:
-        failures = list(regressions(rows, baseline))
-        for failure in failures:
-            print(*failure)
-        if failures:
-            raise SystemExit(1)
+    unresolved = sum(row['mm3'] is None for row in rows)
+    failures = list(regressions(rows, baseline)) if baseline is not None else None
+    if args.summary:
+        def digest(path):
+            with path.open('rb') as source:
+                return file_digest(source, 'sha256').hexdigest()
+
+        evidence = dict(cad_sha256=manifest['source_sha256'], contact_report_sha256=digest(args.report),
+                        baseline_sha256=digest(args.baseline) if args.baseline else None,
+                        seated_pairs=len(rows), unmeasurable_pairs=unresolved, regressions=failures)
+        args.summary.write_text(json.dumps(evidence, indent=2) + '\n')
+    print(f'{len(rows)} contacts, {unresolved} with unmeasurable volume')
+    for failure in failures or ():
+        print(*failure)
+    if failures:
+        raise SystemExit(1)

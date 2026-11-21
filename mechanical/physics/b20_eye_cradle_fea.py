@@ -28,7 +28,7 @@ SUPPORT_CASES = {'compliant': (700., 100., False), 'stiff': (1800., 2000., False
 TORQUES_NM = (.04, .08, STALL_NM)
 
 
-def regions(mesh):
+def regions(mesh, lug_yz):
     faces = mesh.boundary_facets()
     vertices = mesh.p[:, mesh.facets[:, faces]]
     x, y, z = vertices.mean(axis=1)
@@ -40,7 +40,7 @@ def regions(mesh):
 
     outer = bore(1.62, 0, EYE_Y, PIVOT_Z)
     left, right = faces[outer & (x<-57.)], faces[outer & (x>57.)]
-    lug = faces[bore(1.18, 0, -29., PIVOT_Z) & (x>57.)]
+    lug = faces[bore(1.18, 0, *lug_yz) & (x>57.)]
     yaw = {}
     for side, px in zip(('left', 'right'), EYE_X):
         wall = bore(1.13, 2, px, EYE_Y)
@@ -202,8 +202,8 @@ METRICS = ('absolute_displacement_mm', 'lower_bearing_to_motor_xy_mm', 'eye_pin_
            'left_rib_tension_p99_MPa')
 
 
-def solve_mesh(mesh, size, fixtures, directory):
-    left, right, lug, yaw, feet = regions(mesh)
+def solve_mesh(mesh, size, fixtures, directory, lug_yz):
+    left, right, lug, yaw, feet = regions(mesh, lug_yz)
     element = ElementVector(ElementTetP1())
     basis = Basis(mesh, element)
     indices = np.asarray(basis.split_indices())
@@ -259,11 +259,14 @@ def run(cad, sizes, fixtures, directory):
         doc = App.openDocument(str(cad.resolve()))
         try:
             world_shape(doc.Part024).exportStep(str(step))
+            pin = doc.getObject('EyePitchLinkCradlePin')
+            center = world_shape(pin).CenterOfMass if pin else None
+            lug_yz = (center.y, center.z) if center else (-29., PIVOT_Z)
         finally:
             App.closeDocument(doc.Name)
         for size in sizes:
             mesh = mesh_step(step, size)
-            for row in solve_mesh(mesh, size, fixtures, directory):
+            for row in solve_mesh(mesh, size, fixtures, directory, lug_yz):
                 print(f"Eye cradle h={size:g} mm, {mesh.nelements} tets, {row['fixture']}: "
                       f"stall relative bearing travel {row['results'][-1]['lower_bearing_to_motor_xy_mm']:.3f} mm", flush=True)
                 yield row

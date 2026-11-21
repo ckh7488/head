@@ -1,0 +1,1250 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "loads_sha256": "7d8cff507cd3050455f0f281cc171320aee41d5e22682ad84b2ff581a1b93102",
+  "load_cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "mesh": {
+    "frame": [
+      {
+        "mesh_mm": 1.6,
+        "elements": 84240,
+        "contact": {
+          "pitch-stop-back": {
+            "facets": 200,
+            "patch_area_mm2": 72.27909075836774,
+            "normal_compliance_mm_per_N_at_1GPa": 0.006906017560815788,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.13018933742565733,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.051305181464859816
+          },
+          "pitch-stop-forward": {
+            "facets": 128,
+            "patch_area_mm2": 71.92705708191133,
+            "normal_compliance_mm_per_N_at_1GPa": 0.006742706788687798,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.11454438323661754,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.05076746504506167
+          }
+        }
+      },
+      {
+        "mesh_mm": 1.4,
+        "elements": 109341,
+        "contact": {
+          "pitch-stop-back": {
+            "facets": 200,
+            "patch_area_mm2": 72.2818101987771,
+            "normal_compliance_mm_per_N_at_1GPa": 0.007043893340657352,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.1302822754045664,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.05184769055433146
+          },
+          "pitch-stop-forward": {
+            "facets": 133,
+            "patch_area_mm2": 70.95869713460115,
+            "normal_compliance_mm_per_N_at_1GPa": 0.006873014828117854,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.12762809091092228,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.051089676032566464
+          }
+        }
+      }
+    ],
+    "yoke": [
+      {
+        "mesh_mm": 1.6,
+        "elements": 98386,
+        "contact": {
+          "pitch-stop-back": {
+            "facets": 132,
+            "patch_area_mm2": 74.42244362613789,
+            "normal_compliance_mm_per_N_at_1GPa": 8.705640148039223e-05,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.012735617992345748,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.006091063152774846,
+            "coupled_bearings_normal_compliance_mm_per_N_at_1GPa": 0.003965130122842402
+          },
+          "pitch-stop-forward": {
+            "facets": 196,
+            "patch_area_mm2": 72.39083676689629,
+            "normal_compliance_mm_per_N_at_1GPa": 0.00012974169774678066,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.025451472340944296,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.008955119687919661,
+            "coupled_bearings_normal_compliance_mm_per_N_at_1GPa": 0.0021700080950345104
+          }
+        }
+      },
+      {
+        "mesh_mm": 1.4,
+        "elements": 128797,
+        "contact": {
+          "pitch-stop-back": {
+            "facets": 136,
+            "patch_area_mm2": 72.73163311754251,
+            "normal_compliance_mm_per_N_at_1GPa": 8.884318357163954e-05,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.013268568304213128,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.00618895375754677,
+            "coupled_bearings_normal_compliance_mm_per_N_at_1GPa": 0.003982179334268702
+          },
+          "pitch-stop-forward": {
+            "facets": 196,
+            "patch_area_mm2": 71.62642906453439,
+            "normal_compliance_mm_per_N_at_1GPa": 0.00013214024947672307,
+            "maximum_unclamped_element_von_mises_MPa_per_N": 0.027898890525483656,
+            "p99_unclamped_element_von_mises_MPa_per_N": 0.008774627260544824,
+            "coupled_bearings_normal_compliance_mm_per_N_at_1GPa": 0.0021303041003947016
+          }
+        }
+      }
+    ]
+  },
+  "modeled_arrest_budget_deg": {
+    "back": 0.76,
+    "forward": 1.16
+  },
+  "bounds": {
+    "pitch-stop-back": {
+      "contact_lever_mm": 35.31026795026883,
+      "local_FEM_compliance_mm_per_N_at_1GPa": 0.007132736524228992,
+      "coupled_bearings_compliance_mm_per_N_at_1GPa": 0.011026072674926054,
+      "gravity_torque_Nm": 0.003355393343214511,
+      "assistive_touch_torque_Nm": 0.12635451630926584,
+      "elastic_impacts": {
+        "gravity_only": {
+          "500.0": {
+            "peak_contact_force_N": 10.749388238579671,
+            "compression_mm": 0.1536878209642542,
+            "additional_rotation_deg": 0.24937968514472683,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 8.667882990307707,
+              "compression_mm": 0.19142176563897978,
+              "additional_rotation_deg": 0.31060821440105785
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 0.5573309550422489,
+                "maximum_unclamped_elastic_stress_MPa": 1.4004547589292438
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.0665274667304867,
+                "maximum_unclamped_elastic_stress_MPa": 0.14262899207209961
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 1.3781266972538042,
+              "slot_projected_bearing_MPa": 0.8957823532149726,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.16588562096573564,
+                  "pin_von_mises": 4.509393744803154
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.16588562096573564,
+                  "pin_von_mises": 4.509393744803154
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 7.936813706756305,
+              "right_radial_N": 2.543199807415637,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 15.145499204368896,
+            "compression_mm": 0.10851172523414847,
+            "additional_rotation_deg": 0.17607523942770328,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 12.209763060365326,
+              "compression_mm": 0.13501500738040342,
+              "additional_rotation_deg": 0.21908046987125404
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 0.7852591560389918,
+                "maximum_unclamped_elastic_stress_MPa": 1.97319009848323
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.09373479421080048,
+                "maximum_unclamped_elastic_stress_MPa": 0.2009590906945743
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 1.9417306672267816,
+              "slot_projected_bearing_MPa": 1.2621249336974079,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.23372683957359403,
+                  "pin_von_mises": 6.353572673929805
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.23372683957359403,
+                  "pin_von_mises": 6.353572673929805
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 12.089958243743554,
+              "right_radial_N": 2.4827447411787973,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 20.251330818873665,
+            "compression_mm": 0.08089421380991772,
+            "additional_rotation_deg": 0.13126201831334156,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 16.3297175434452,
+              "compression_mm": 0.10054987654524916,
+              "additional_rotation_deg": 0.16315604188328972
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 1.0499847336103576,
+                "maximum_unclamped_elastic_stress_MPa": 2.6383894590534824
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.12533454996679086,
+                "maximum_unclamped_elastic_stress_MPa": 0.2687061662214416
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 2.596324463958162,
+              "slot_projected_bearing_MPa": 1.6876109015728054,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.31252053732829727,
+                  "pin_von_mises": 8.495481090804345
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.31252053732829727,
+                  "pin_von_mises": 8.495481090804345
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 16.957787189430686,
+              "right_radial_N": 2.53651783367179,
+              "total_axial_N": 0.0
+            }
+          }
+        },
+        "gravity_and_pulse": {
+          "500.0": {
+            "peak_contact_force_N": 87.61658377652765,
+            "compression_mm": 1.2526854126096563,
+            "additional_rotation_deg": 2.0326548442289853,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 71.25065566591314,
+              "compression_mm": 1.5735014334820752,
+              "additional_rotation_deg": 2.5532230829650664
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 4.542717523073064,
+                "maximum_unclamped_elastic_stress_MPa": 11.41488789758084
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.5422549853871521,
+                "maximum_unclamped_elastic_stress_MPa": 1.162546626420669
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 11.232895355965084,
+              "slot_projected_bearing_MPa": 7.301381981377304,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.35210777432913,
+                  "pin_von_mises": 36.75536375222595
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.35210777432913,
+                  "pin_von_mises": 36.75536375222595
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 81.44339482120462,
+              "right_radial_N": 8.301217747297034,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 122.1981764254254,
+            "compression_mm": 0.8755033271247195,
+            "additional_rotation_deg": 1.4206248920160347,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 99.10267519152512,
+              "compression_mm": 1.095872897471373,
+              "additional_rotation_deg": 1.778204911849286
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 6.335693237609058,
+                "maximum_unclamped_elastic_stress_MPa": 15.920256474993067
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.7562788631534997,
+                "maximum_unclamped_elastic_stress_MPa": 1.6213948505510434
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 15.66643287505454,
+              "slot_projected_bearing_MPa": 10.18318136878545,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.885774327552861,
+                  "pin_von_mises": 51.26242351369151
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.885774327552861,
+                  "pin_von_mises": 51.26242351369151
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 114.66800826552297,
+              "right_radial_N": 12.238284708995042,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 162.37503308062452,
+            "compression_mm": 0.6486092573814887,
+            "additional_rotation_deg": 1.0524579720950802,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 131.51580041176615,
+              "compression_mm": 0.8098056478913703,
+              "additional_rotation_deg": 1.3140213468609343
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 8.418770468913554,
+                "maximum_unclamped_elastic_stress_MPa": 21.154588778635507
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.0049315711161122,
+                "maximum_unclamped_elastic_stress_MPa": 2.1544842173291325
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 20.8173119334134,
+              "slot_projected_bearing_MPa": 13.53125275671871,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 2.5057875475405016,
+                  "pin_von_mises": 68.11670973591345
+                },
+                "frame": {
+                  "projected_polymer_bearing": 2.5057875475405016,
+                  "pin_von_mises": 68.11670973591345
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 153.27136916806293,
+              "right_radial_N": 16.8628869350403,
+              "total_axial_N": 0.0
+            }
+          }
+        }
+      },
+      "steel_link": {
+        "incremental_axes_compliance_mm_per_N": 3.1882071033090526e-05,
+        "strip_net_area_mm2": 23.4,
+        "steel_slot_bearing_MPa_per_N": 0.08333333333333333,
+        "weak_axis_euler_buckling_N": 101659.35651460446,
+        "ears": {
+          "yoke": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          },
+          "frame": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          }
+        }
+      }
+    },
+    "pitch-stop-forward": {
+      "contact_lever_mm": 32.947093485602586,
+      "local_FEM_compliance_mm_per_N_at_1GPa": 0.007005155077594577,
+      "coupled_bearings_compliance_mm_per_N_at_1GPa": 0.009003318928512555,
+      "gravity_torque_Nm": 0.03425198176627579,
+      "assistive_touch_torque_Nm": 0.12635451630926584,
+      "elastic_impacts": {
+        "gravity_only": {
+          "500.0": {
+            "peak_contact_force_N": 35.55636370481054,
+            "compression_mm": 0.49938871833769016,
+            "additional_rotation_deg": 0.8684488636213232,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 31.4983941440541,
+              "compression_mm": 0.568272487718668,
+              "additional_rotation_deg": 0.9882393775920681
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 1.8165631025748754,
+                "maximum_unclamped_elastic_stress_MPa": 4.537990819379377
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.31199383825007715,
+                "maximum_unclamped_elastic_stress_MPa": 0.9919830984847898
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 4.558508167283404,
+              "slot_projected_bearing_MPa": 2.963030308734212,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.5487093164322614,
+                  "pin_von_mises": 14.915978520802234
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.5487093164322614,
+                  "pin_von_mises": 14.915978520802234
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 37.20433804298772,
+              "right_radial_N": 6.829529826457075,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 49.78249062291245,
+            "compression_mm": 0.35046043994019527,
+            "additional_rotation_deg": 0.6094590438955075,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 44.060987338843326,
+              "compression_mm": 0.398223082191457,
+              "additional_rotation_deg": 0.6925194152325537
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 2.543371318018875,
+                "maximum_unclamped_elastic_stress_MPa": 6.353644238993206
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.43682279931762463,
+                "maximum_unclamped_elastic_stress_MPa": 1.388876255974551
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 6.382370592681083,
+              "slot_projected_bearing_MPa": 4.148540885242704,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.7682483120819821,
+                  "pin_von_mises": 20.883872350055245
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.7682483120819821,
+                  "pin_von_mises": 20.883872350055245
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 50.912077320033795,
+              "right_radial_N": 8.443439464595695,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 66.30000669150176,
+            "compression_mm": 0.26032241069814094,
+            "additional_rotation_deg": 0.4527068663034739,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 58.66301296901578,
+              "compression_mm": 0.2954575651375721,
+              "additional_rotation_deg": 0.5138077358778853
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 3.387245862825814,
+                "maximum_unclamped_elastic_stress_MPa": 8.461743281417743
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.5817578460895556,
+                "maximum_unclamped_elastic_stress_MPa": 1.8496966285250416
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 8.500000857884842,
+              "slot_projected_bearing_MPa": 5.525000557625146,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.023148251412064,
+                  "pin_von_mises": 27.813009337782454
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.023148251412064,
+                  "pin_von_mises": 27.813009337782454
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 66.83034827660461,
+              "right_radial_N": 10.337650847999932,
+              "total_axial_N": 0.0
+            }
+          }
+        },
+        "gravity_and_pulse": {
+          "500.0": {
+            "peak_contact_force_N": 95.74751378253482,
+            "compression_mm": 1.3447727272913261,
+            "additional_rotation_deg": 2.3385917702197276,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 85.08650116610424,
+              "compression_mm": 1.535072469656895,
+              "additional_rotation_deg": 2.669527550176725
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 4.891709460073397,
+                "maximum_unclamped_elastic_stress_MPa": 12.220072393532138
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.8401487445656213,
+                "maximum_unclamped_elastic_stress_MPa": 2.6712494051061766
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 12.275322279812157,
+              "slot_projected_bearing_MPa": 7.978959481877902,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.4775850892366482,
+                  "pin_von_mises": 40.16630808642796
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.4775850892366482,
+                  "pin_von_mises": 40.16630808642796
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 95.12028459609964,
+              "right_radial_N": 13.567015066726087,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 133.13776953252585,
+            "compression_mm": 0.9372677160019437,
+            "additional_rotation_deg": 1.6299308594320896,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 118.09797544613932,
+              "compression_mm": 1.0673691767517983,
+              "additional_rotation_deg": 1.8561803953042302
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 6.801965513115244,
+                "maximum_unclamped_elastic_stress_MPa": 16.99211935357463
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.1682343019482353,
+                "maximum_unclamped_elastic_stress_MPa": 3.714396056995012
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 17.06894481186229,
+              "slot_projected_bearing_MPa": 11.094814127710487,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 2.0545952088352752,
+                  "pin_von_mises": 55.851608649902445
+                },
+                "frame": {
+                  "projected_polymer_bearing": 2.0545952088352752,
+                  "pin_von_mises": 55.851608649902445
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 131.16225455961188,
+              "right_radial_N": 17.889751175381694,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 176.56473467879712,
+            "compression_mm": 0.693269272049013,
+            "additional_rotation_deg": 1.2056117597102467,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 156.48481712741022,
+              "compression_mm": 0.7881392500907299,
+              "additional_rotation_deg": 1.3705929088566644
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 9.020635093515798,
+                "maximum_unclamped_elastic_stress_MPa": 22.534620009248393
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.5492897341634373,
+                "maximum_unclamped_elastic_stress_MPa": 4.925960203464829
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 22.636504445999634,
+              "slot_projected_bearing_MPa": 14.71372788989976,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 2.7247644240555107,
+                  "pin_von_mises": 74.06932305745792
+                },
+                "frame": {
+                  "projected_polymer_bearing": 2.7247644240555107,
+                  "pin_von_mises": 74.06932305745792
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 173.02264383674128,
+              "right_radial_N": 22.935396313399785,
+              "total_axial_N": 0.0
+            }
+          }
+        }
+      },
+      "steel_link": {
+        "incremental_axes_compliance_mm_per_N": 3.467831673735289e-05,
+        "strip_net_area_mm2": 23.4,
+        "steel_slot_bearing_MPa_per_N": 0.08333333333333333,
+        "weak_axis_euler_buckling_N": 34810.375036736026,
+        "ears": {
+          "yoke": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          },
+          "frame": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          }
+        }
+      }
+    }
+  },
+  "forward_75g_sensitivity_bounds": {
+    "pitch-stop-back": {
+      "contact_lever_mm": 35.31026795026883,
+      "local_FEM_compliance_mm_per_N_at_1GPa": 0.007132736524228992,
+      "coupled_bearings_compliance_mm_per_N_at_1GPa": 0.011026072674926054,
+      "gravity_torque_Nm": 0.003355393343214511,
+      "assistive_touch_torque_Nm": 0.12635451630926584,
+      "elastic_impacts": {
+        "gravity_only": {
+          "500.0": {
+            "peak_contact_force_N": 11.75781352696872,
+            "compression_mm": 0.16810563542382764,
+            "additional_rotation_deg": 0.2727745775171015,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 9.479262147473293,
+              "compression_mm": 0.2093402851945593,
+              "additional_rotation_deg": 0.33968348358630696
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 0.6096154773418068,
+                "maximum_unclamped_elastic_stress_MPa": 1.531834700076075
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.0727685642082673,
+                "maximum_unclamped_elastic_stress_MPa": 0.15600935189078552
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 1.5074119906370156,
+              "slot_projected_bearing_MPa": 0.97981779391406,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.18144773961371477,
+                  "pin_von_mises": 4.9324305341194306
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.18144773961371477,
+                  "pin_von_mises": 4.9324305341194306
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 9.12340807070363,
+              "right_radial_N": 2.696852522425549,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 16.570066319473636,
+            "compression_mm": 0.11871820527722673,
+            "additional_rotation_deg": 0.19263666090931045,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 13.356431214999619,
+              "compression_mm": 0.1476948119429819,
+              "additional_rotation_deg": 0.2396552014906707
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 0.8591196709968191,
+                "maximum_unclamped_elastic_stress_MPa": 2.1587859437055945
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.10255137421070554,
+                "maximum_unclamped_elastic_stress_MPa": 0.21986105676527737
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 2.1243674768555945,
+              "slot_projected_bearing_MPa": 1.3808388599561363,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.25571089999187707,
+                  "pin_von_mises": 6.951181942041456
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.25571089999187707,
+                  "pin_von_mises": 6.951181942041456
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 13.830517990411366,
+              "right_radial_N": 2.698206125185188,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 22.159210604571644,
+            "compression_mm": 0.08851526531948248,
+            "additional_rotation_deg": 0.1436282254337421,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 17.86638229681063,
+              "compression_mm": 0.11001185595985032,
+              "additional_rotation_deg": 0.17850940841848148
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 1.1489038943540908,
+                "maximum_unclamped_elastic_stress_MPa": 2.8869523787325915
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.13714232973543392,
+                "maximum_unclamped_elastic_stress_MPa": 0.29402099947420274
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 2.8409244364835446,
+              "slot_projected_bearing_MPa": 1.8466008837143035,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.3419631266137599,
+                  "pin_von_mises": 9.295841165304699
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.3419631266137599,
+                  "pin_von_mises": 9.295841165304699
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 19.347298330461165,
+              "right_radial_N": 2.9356721806433486,
+              "total_axial_N": 0.0
+            }
+          }
+        },
+        "gravity_and_pulse": {
+          "500.0": {
+            "peak_contact_force_N": 87.75052703003826,
+            "compression_mm": 1.2546004468709573,
+            "additional_rotation_deg": 2.0357622514270854,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 71.35837249453809,
+              "compression_mm": 1.575880254879119,
+              "additional_rotation_deg": 2.557083048753431
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 4.549662171432922,
+                "maximum_unclamped_elastic_stress_MPa": 11.432338329423294
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.5430839539892647,
+                "maximum_unclamped_elastic_stress_MPa": 1.164323861628763
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 11.250067567953623,
+              "slot_projected_bearing_MPa": 7.312543919169855,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.3541747998462692,
+                  "pin_von_mises": 36.811553263306365
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.3541747998462692,
+                  "pin_von_mises": 36.811553263306365
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 84.20731013484853,
+              "right_radial_N": 10.821135698557955,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 122.38748024798116,
+            "compression_mm": 0.8768596168119566,
+            "additional_rotation_deg": 1.4228256590842783,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 99.25501218525864,
+              "compression_mm": 1.0975574330542135,
+              "additional_rotation_deg": 1.7809383031526969
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 6.345508203621681,
+                "maximum_unclamped_elastic_stress_MPa": 15.944919407738412
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.7574504557574241,
+                "maximum_unclamped_elastic_stress_MPa": 1.6239066412508731
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 15.690702595895022,
+              "slot_projected_bearing_MPa": 10.198956687331762,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.8886956828392152,
+                  "pin_von_mises": 51.34183691418964
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.8886956828392152,
+                  "pin_von_mises": 51.34183691418964
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 118.66335373072974,
+              "right_radial_N": 15.896667762118975,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 162.6286137478167,
+            "compression_mm": 0.6496221887731771,
+            "additional_rotation_deg": 1.0541015929750408,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 131.72001358944337,
+              "compression_mm": 0.8110630860405439,
+              "additional_rotation_deg": 1.316061713675705
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 8.431918040876695,
+                "maximum_unclamped_elastic_stress_MPa": 21.18762584495591
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.0065009701391725,
+                "maximum_unclamped_elastic_stress_MPa": 2.1578488697324003
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 20.849822275361117,
+              "slot_projected_bearing_MPa": 13.552384478984724,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 2.5097008294416154,
+                  "pin_von_mises": 68.22308742449067
+                },
+                "frame": {
+                  "projected_polymer_bearing": 2.5097008294416154,
+                  "pin_von_mises": 68.22308742449067
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 158.69671334766895,
+              "right_radial_N": 21.842420098540675,
+              "total_axial_N": 0.0
+            }
+          }
+        }
+      },
+      "steel_link": {
+        "incremental_axes_compliance_mm_per_N": 3.1882071033090526e-05,
+        "strip_net_area_mm2": 23.4,
+        "steel_slot_bearing_MPa_per_N": 0.08333333333333333,
+        "weak_axis_euler_buckling_N": 101659.35651460446,
+        "ears": {
+          "yoke": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          },
+          "frame": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          }
+        }
+      }
+    },
+    "pitch-stop-forward": {
+      "contact_lever_mm": 32.947093485602586,
+      "local_FEM_compliance_mm_per_N_at_1GPa": 0.007005155077594577,
+      "coupled_bearings_compliance_mm_per_N_at_1GPa": 0.009003318928512555,
+      "gravity_torque_Nm": 0.08891872299365741,
+      "assistive_touch_torque_Nm": 0.12635451630926584,
+      "elastic_impacts": {
+        "gravity_only": {
+          "500.0": {
+            "peak_contact_force_N": 63.93105936892697,
+            "compression_mm": 0.8979109918346284,
+            "additional_rotation_deg": 1.5614885796530529,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 56.74023800311288,
+              "compression_mm": 1.023668573588692,
+              "additional_rotation_deg": 1.7801840065934564
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 3.2662171115772516,
+                "maximum_unclamped_elastic_stress_MPa": 8.159399057168981
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.5609712163340961,
+                "maximum_unclamped_elastic_stress_MPa": 1.7836056265118896
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 8.196289662682945,
+              "slot_projected_bearing_MPa": 5.327588280743914,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 0.9865904223599838,
+                  "pin_von_mises": 26.819230343006982
+                },
+                "frame": {
+                  "projected_polymer_bearing": 0.9865904223599838,
+                  "pin_von_mises": 26.819230343006982
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 66.8102267520586,
+              "right_radial_N": 12.255052525309587,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 89.14565885780067,
+            "compression_mm": 0.6275705861868672,
+            "additional_rotation_deg": 1.0913601817644805,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 79.00404523221327,
+              "compression_mm": 0.7140383431723427,
+              "additional_rotation_deg": 1.2417296685720352
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 4.554422830754725,
+                "maximum_unclamped_elastic_stress_MPa": 11.377490253017449
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.7822199283728869,
+                "maximum_unclamped_elastic_stress_MPa": 2.4870649772958933
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 11.42893062279496,
+              "slot_projected_bearing_MPa": 7.428804904816722,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.3757046120030965,
+                  "pin_von_mises": 37.3968143588828
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.3757046120030965,
+                  "pin_von_mises": 37.3968143588828
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 91.91357221335137,
+              "right_radial_N": 15.919765853923273,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 118.42661441198426,
+            "compression_mm": 0.46499394635051483,
+            "additional_rotation_deg": 0.8086355367480105,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 104.88794636426873,
+              "compression_mm": 0.5282704668005229,
+              "additional_rotation_deg": 0.9186749114091773
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 6.0503773639419425,
+                "maximum_unclamped_elastic_stress_MPa": 15.114562710445465
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.0391493991934275,
+                "maximum_unclamped_elastic_stress_MPa": 3.303971150783614
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 15.182899283587727,
+              "slot_projected_bearing_MPa": 9.868884534332022,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.8275712100614852,
+                  "pin_von_mises": 49.68024434460087
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.8275712100614852,
+                  "pin_von_mises": 49.68024434460087
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 121.06698320317943,
+              "right_radial_N": 20.19236470440416,
+              "total_axial_N": 0.0
+            }
+          }
+        },
+        "gravity_and_pulse": {
+          "500.0": {
+            "peak_contact_force_N": 110.59435820811301,
+            "compression_mm": 1.553296486093058,
+            "additional_rotation_deg": 2.701219548380617,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 98.40010604626907,
+              "compression_mm": 1.7752674247124955,
+              "additional_rotation_deg": 3.087232292206072
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 5.650229931882102,
+                "maximum_unclamped_elastic_stress_MPa": 14.114946803620152
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 0.9704242703953676,
+                "maximum_unclamped_elastic_stress_MPa": 3.0854598923842698
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 14.178763872835,
+              "slot_projected_bearing_MPa": 9.21619651734275,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 1.7067030587671757,
+                  "pin_von_mises": 46.39459437554743
+                },
+                "frame": {
+                  "projected_polymer_bearing": 1.7067030587671757,
+                  "pin_von_mises": 46.39459437554743
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 113.04307333726805,
+              "right_radial_N": 18.758802191354064,
+              "total_axial_N": 0.0
+            }
+          },
+          "1000.0": {
+            "peak_contact_force_N": 153.37168031216473,
+            "compression_mm": 1.0797110768063782,
+            "additional_rotation_deg": 1.877643253161744,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 136.16371613058345,
+              "compression_mm": 1.2306472912912036,
+              "additional_rotation_deg": 2.1401249215201656
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 7.835709459718848,
+                "maximum_unclamped_elastic_stress_MPa": 19.574534758041867
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.3457793270626865,
+                "maximum_unclamped_elastic_stress_MPa": 4.27889971873856
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 19.663035937457018,
+              "slot_projected_bearing_MPa": 12.78097335934706,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 2.3668469183976035,
+                  "pin_von_mises": 64.33978199312003
+                },
+                "frame": {
+                  "projected_polymer_bearing": 2.3668469183976035,
+                  "pin_von_mises": 64.33978199312003
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 155.64031106510703,
+              "right_radial_N": 24.996679144921963,
+              "total_axial_N": 0.0
+            }
+          },
+          "1800.0": {
+            "peak_contact_force_N": 203.06431442180718,
+            "compression_mm": 0.7973180470858975,
+            "additional_rotation_deg": 1.3865550552311323,
+            "with_coupled_unit_bearing_tractions": {
+              "peak_contact_force_N": 180.08654511067795,
+              "compression_mm": 0.9070098762322596,
+              "additional_rotation_deg": 1.5773117561189682
+            },
+            "parts": {
+              "frame": {
+                "p99_elastic_stress_MPa": 10.374490037585343,
+                "maximum_unclamped_elastic_stress_MPa": 25.916710781790513
+              },
+              "yoke": {
+                "p99_elastic_stress_MPa": 1.7818136689694346,
+                "maximum_unclamped_elastic_stress_MPa": 5.66526907768639
+              }
+            },
+            "steel_and_ears": {
+              "strip_gross_slot_edge_estimate_MPa": 26.033886464334252,
+              "slot_projected_bearing_MPa": 16.922026201817264,
+              "pin_and_ear_ratings_needed_MPa": {
+                "yoke": {
+                  "projected_polymer_bearing": 3.1337085558920856,
+                  "pin_von_mises": 85.18595932371218
+                },
+                "frame": {
+                  "projected_polymer_bearing": 3.1337085558920856,
+                  "pin_von_mises": 85.18595932371218
+                }
+              }
+            },
+            "bearing_reaction_envelope": {
+              "left_radial_N": 205.12168657489087,
+              "right_radial_N": 32.26296935486527,
+              "total_axial_N": 0.0
+            }
+          }
+        }
+      },
+      "steel_link": {
+        "incremental_axes_compliance_mm_per_N": 3.467831673735289e-05,
+        "strip_net_area_mm2": 23.4,
+        "steel_slot_bearing_MPa_per_N": 0.08333333333333333,
+        "weak_axis_euler_buckling_N": 34810.375036736026,
+        "ears": {
+          "yoke": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          },
+          "frame": {
+            "minimum_ear_axial_width_mm": 8.100000000000001,
+            "minimum_bore_wall_MPa_per_N": 0.015432098765432096,
+            "pin_von_mises_MPa_per_N": 0.4195023609454248
+          }
+        }
+      }
+    }
+  },
+  "topology_transfer": {
+    "reference_cad_sha256": "fcf1bd0bc4e86ac968a2ec15e40b0c7d37a034dba272a63357117ec586f2ed1f",
+    "reference_FE_sha256": "ef99172e8e0dee464395997550fbcc34b8b3b3e301e916bc1525ae44f24b5e20",
+    "unchanged_world_meshes_sha256": {
+      "Part011": "ad0877e6c3c6cf30be94e124ae3943d2309ac4d7b79aa7fdbc5aa1efb97d4a73",
+      "Part019": "e55fa2ce21d3c4443ee439517799f5ef78878bab2dd0866063640d5edfe335d9",
+      "Part012": "71527c4c627583f015e9f31cead375307bfa9ac8a2481aa7ee2a91e52955f7e8",
+      "Part014": "763946fb5547ede08a81f64742275e409fb85c1bcd79080b3157dbd2793cdb82",
+      "PitchLimitLink": "aee3679fda0efea322f49a083a95629e7866d5e07cc2bd55a81eef6b00d0f808",
+      "PitchLimitLowerPin": "9aba04937e2db513a7aba94786db35344247a1c7c0739a6faf32cb1d5d3843bf",
+      "PitchLimitUpperPin": "3db5906fb888b76b3e88df294b76c3df0cfb9e03babd967c783a1e5f52adce1e"
+    },
+    "frame": "Identical fixture, bearing bore, exactly identical frame shell and unit loads. Prior frame solves reused at both mesh spacings.",
+    "yoke": "Both meshes solved again with the native current CAD and the current production mass model to preserve exact bearing loads."
+  },
+  "solver_sha256": "b3c64c48686a20522a737f490ad448320d05b584f7b24736a0f8b486b81ece77",
+  "scope": "Small-strain homogeneous polymer with the yoke underside and frame shaft bores fixed. Pressure is spread over nominal contact faces or both pin ears. Bearing reactions apply peak elastic force to the rigid head at zero rebound speed. The coupled yoke sensitivity applies additional unit radial reactions at the seats. Layer adhesion, imperfect first-edge contact, bearing clearance and collapse require separate evidence.",
+  "equivalent_mass_measurement": {
+    "prior_grams_sha256": "0d637f4b811d37972cc9bbb71c23bcc654f5eecb01bfa57094279ab5f2151900",
+    "canonical_grams_sha256": "f8dcb715467a99b1af5f56469aabe7802ece53c8576a09a10f0ea1fbc69e1332",
+    "previous_FE_output_sha256": "0788975f673e552699fecc92d419c0085e58ca888b1bb4c2d84c05d66fb22c94",
+    "previous_load_report_sha256": "f206e467e41ffc3cbc8165951b297486a278d9dbe6ffad3cd2db66ca2a3c1c12",
+    "exact_fixed_base_delta_g": {
+      "01_base_cup_b8": -0.0019356169028128534
+    },
+    "physical_load_scope": "Full numerical equality of the old and new load reports after excluding the input mass-file digest. The only measured change is in the stationary base cup."
+  },
+  "fused_mass_transfer": {
+    "reference_strength_sha256": "3f2b42c780d48ce4a1db5ab64240e603279b624461f6391d8d975c07feb0a20a",
+    "reference_load_sha256": "270203a1c4d8ce21ba55d4cb822108a8fbc9a81985f8a9a9de409bfa6d31f22d",
+    "native_body_meshes_sha256": {
+      "Part011": "ad0877e6c3c6cf30be94e124ae3943d2309ac4d7b79aa7fdbc5aa1efb97d4a73",
+      "Part019": "e55fa2ce21d3c4443ee439517799f5ef78878bab2dd0866063640d5edfe335d9",
+      "Part012": "71527c4c627583f015e9f31cead375307bfa9ac8a2481aa7ee2a91e52955f7e8",
+      "Part014": "763946fb5547ede08a81f64742275e409fb85c1bcd79080b3157dbd2793cdb82",
+      "PitchLimitLink": "aee3679fda0efea322f49a083a95629e7866d5e07cc2bd55a81eef6b00d0f808",
+      "PitchLimitLowerPin": "9aba04937e2db513a7aba94786db35344247a1c7c0739a6faf32cb1d5d3843bf",
+      "PitchLimitUpperPin": "3db5906fb888b76b3e88df294b76c3df0cfb9e03babd967c783a1e5f52adce1e"
+    },
+    "unit_stop_bearing_reaction_delta_N": [
+      {
+        "stop": "pitch-stop-back",
+        "full_vector_difference_N": [
+          8.037863855455479e-06,
+          8.535178323804978e-05,
+          0.0
+        ],
+        "old_force": [
+          -0.5423602944693927,
+          -0.7932245001551088,
+          -0.09392515803609132,
+          -0.06863627008826959,
+          0.0
+        ],
+        "new_force": [
+          -0.5423681640878563,
+          -0.7932228641964917,
+          -0.09386228297693773,
+          -0.06869399056850276,
+          0.0
+        ]
+      },
+      {
+        "stop": "pitch-stop-forward",
+        "full_vector_difference_N": [
+          7.49992189928103e-06,
+          7.963953106968652e-05,
+          0.0
+        ],
+        "old_force": [
+          0.35527070483501777,
+          0.8960581385411522,
+          0.07013361615440114,
+          0.09372547381776852,
+          0.0
+        ],
+        "new_force": [
+          0.3552780872325465,
+          0.8960594610521061,
+          0.07005909452493352,
+          0.09375356263494707,
+          0.0
+        ]
+      }
+    ],
+    "retained_fem_mesh_unit_traction_uncertainty": "Original native finite-element compliances retained. The stop force scaling and loaded bearing reactions were recomputed with the revised measured mass. Maximum change in the nominal yoke bearing-force vector is below 0.002 N per 1 N applied at the stop."
+  }
+}

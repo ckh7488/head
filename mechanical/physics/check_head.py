@@ -95,9 +95,10 @@ def offset(angle, phase, radius):
 def pose(kind, angles, layout):
     neck, eye_pitch, eye_yaw, blink, jaw = angles
     x_axis, z_axis = (1, 0, 0), (0, 0, 1)
-    eye_pivot = (0, -39, 119)
     rig = layout['motion_geometry']
     eye_yaw_rig = rig['eye_yaw']
+    eye_pitch_rig = rig.get('eye_pitch', {})
+    eye_pivot = eye_pitch_rig.get('cradle_axis_mm', (0, -39, 119))
     if kind == 'pan':
         return rotation(-neck, x_axis, (0, 0, 112))
     if kind == 'pitch_link':
@@ -114,9 +115,12 @@ def pose(kind, angles, layout):
     if kind == 'tilt':
         return rotation(eye_pitch, x_axis, eye_pivot)
     if kind == 'tilt_horn':
-        return rotation(eye_pitch, x_axis, (58.65, 10., 151.))
+        pivot = eye_pitch_rig.get('servo_axis_mm', (58.65, 10., 151.))
+        return rotation(eye_pitch, x_axis, pivot)
     if kind == 'tilt_link':
-        return translation((0., *offset(eye_pitch, 0., 10.)))
+        phase = eye_pitch_rig.get('phase_deg', 0.)
+        radius = eye_pitch_rig.get('crank_radius_mm', 10.)
+        return translation((0., *offset(eye_pitch, phase, radius)))
     mechanism = rig['blink']
     pivots = {'lid1': eye_pivot, 'lid2': eye_pivot,
               'blink_motor_horn': (0., *mechanism['servo_yz_mm']),

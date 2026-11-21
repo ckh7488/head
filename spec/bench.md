@@ -1,6 +1,6 @@
-# B22 실물 시험
+# R5 실물 시험
 
-시험한 B22 버전, 날짜, 사용한 부품과 실측값을 해당 시험의 `records/P0x.json`에 사람이 기록합니다. [합격 기준](requirements.md) · [기록 형식](records/README.md)
+시험한 리비전과 CAD SHA-256, 날짜, 사용한 부품과 실측값을 해당 시험의 `records/P0x.json`에 기록합니다. B23의 판 배치, 홀 마감과 공구는 B23 조립 자료를 따릅니다. P03에서는 눈꺼풀 ID3 단자의 구동 중 전압도 함께 기록합니다. [합격 기준](requirements.md) · [기록 형식](records/README.md) · [B23 조립 자료](../mechanical/revisions/b23/assembly.md)
 
 B22 보호 케이스는 별도 선택품입니다. 접촉 검수는 보호 케이스를 실제로 설치한 상태에서 시행합니다.
 

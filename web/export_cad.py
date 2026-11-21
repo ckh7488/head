@@ -26,6 +26,10 @@ def export(cad, output, manifest_path):
     layout = json.loads((cad / 'cad_parts.json').read_text())
     motions = layout['world_motion']
     manifest['cad_sha256'] = layout['source_sha256']
+    if eye_pitch := layout.get('motion_geometry', {}).get('eye_pitch'):
+        manifest['eye_pitch'] = eye_pitch
+    else:
+        manifest.pop('eye_pitch', None)
     materials = {
         name: trimesh.visual.material.PBRMaterial(
             name=name, baseColorFactor=np.array((*rgb, 255), dtype=np.uint8),

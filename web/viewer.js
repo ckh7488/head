@@ -165,6 +165,7 @@ export class AssemblyViewer {
     const response = await fetch("./assets/assembly.json", { cache: "no-cache" });
     if (!response.ok) throw Error("Assembly metadata");
     const data = await response.json();
+    this.eyePitch = data.eye_pitch;
     const [model, wiring, connectors] = await Promise.all([
       loader.loadAsync(`./assets/assembly.glb?rev=${data.cad_sha256}`),
       loadWiring("./assets/wiring.json", data.cad_sha256),
@@ -338,7 +339,7 @@ export class AssemblyViewer {
       this.drop = drop;
       const byMotion = new Map();
       const matrixFor = motion => {
-        if (!byMotion.has(motion)) byMotion.set(motion, motionMatrix(motion, pose, drop));
+        if (!byMotion.has(motion)) byMotion.set(motion, motionMatrix(motion, pose, drop, this.eyePitch));
         return byMotion.get(motion);
       };
       for (const batch of this.fastenerBatches) batch.count = 0;
@@ -360,7 +361,7 @@ export class AssemblyViewer {
 
     if (this.detail && this.detail !== closeups.eyes && this.parts.length) {
       this.camera.updateMatrixWorld();
-      const point = V(...this.detail.anchor).applyMatrix4(motionMatrix(this.detail.motion, pose, drop)).project(this.camera);
+      const point = V(...this.detail.anchor).applyMatrix4(motionMatrix(this.detail.motion, pose, drop, this.eyePitch)).project(this.camera);
       this.anchor.hidden = point.z < -1 || point.z > 1 || Math.abs(point.x) > .76 || Math.abs(point.y) > .89;
       if (!this.anchor.hidden) {
         this.anchor.style.left = `${(point.x + 1) * 50}%`;

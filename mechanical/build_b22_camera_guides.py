@@ -79,7 +79,7 @@ def relief_cutter(points):
     return spheres[0].multiFuse(spheres[1:] + strokes).removeSplitter()
 
 
-def nose_cradle():
+def nose_cradle(tie_roof_drop=0.):
     start_x, start_y, start_z = NOSE_GUIDE_START
     end_x, end_y, end_z = CAMERA_SHEATH_END
     t = np.linspace(0., 1., 51)[:, None]
@@ -121,7 +121,7 @@ def nose_cradle():
 
     y = (front + rear) / 2.
     x, z = at(y)
-    roof = z - 3.72
+    roof = z - 3.72 - tie_roof_drop
     opening = [App.Vector(x-4.6, y+dy, height) for dy, height in
                ((-1.49, roof), (1.49, roof), (2.04, roof-1.6),
                 (2.04, 68.), (-2.04, 68.), (-2.04, roof-1.6))]

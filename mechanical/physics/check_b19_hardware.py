@@ -6,6 +6,7 @@ named in its spec; the parts it passes through are skipped. Pairs between the ba
 not yaw; build_b19_review_fixes.py and the yaw check below cover those.
 """
 from argparse import ArgumentParser
+from hashlib import sha256
 from itertools import product
 from pathlib import Path
 import json
@@ -107,7 +108,8 @@ def sweep(cad, spec):
                 near[name] = round(float(best), 3)
         report[item['name']] = {'collisions': hits, 'under_1mm': near}
     base = [item for item in spec if item['motion'] == 'fixed']
-    return {'fasteners': report, 'yaw_gap_mm': yaw_gaps(world, kinds, base),
+    return {'cad_sha256': layout['source_sha256'],
+            'fasteners': report, 'yaw_gap_mm': yaw_gaps(world, kinds, base),
             'joint_pairs': joint_pairs(meshes, kinds, layout)}
 
 
@@ -141,6 +143,7 @@ if __name__ == '__main__':
     parser.add_argument('report', type=Path)
     args = parser.parse_args()
     result = sweep(args.cad, json.loads(args.spec.read_text()))
+    result['hardware_spec_sha256'] = sha256(args.spec.read_bytes()).hexdigest()
     args.report.write_text(json.dumps(result, indent=2) + '\n')
     failed = [name for name, row in result['fasteners'].items() if row['collisions']]
     print(f"{len(result['fasteners'])} fasteners, {len(failed)} colliding", failed)

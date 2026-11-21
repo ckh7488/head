@@ -1,0 +1,46 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "status": "pass",
+  "positions": 841,
+  "translation_mm": [
+    [
+      0,
+      -84,
+      0
+    ],
+    [
+      0,
+      0,
+      0
+    ]
+  ],
+  "required_mm": 0.2,
+  "rows": [
+    {
+      "parts": [
+        "Part073",
+        "Part044"
+      ],
+      "minimum_sample_mm": 0.5,
+      "continuous_lower_bound_mm": 0.45,
+      "closest_offset_mm": [
+        0.0,
+        -24.3,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part073",
+        "EyePitchLinkCradlePin"
+      ],
+      "minimum_sample_mm": 1.9653800240130086,
+      "continuous_lower_bound_mm": 1.9153800240130086,
+      "closest_offset_mm": [
+        0.0,
+        -23.0,
+        0.0
+      ]
+    }
+  ]
+}

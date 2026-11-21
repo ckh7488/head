@@ -1,0 +1,77 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "pass": true,
+  "eye_pitch_phase_deg": -17.0,
+  "scope": "Frame clearance and link force path. P04 checks assembled backlash with support seating and gear play.",
+  "shape_sample_count": 85,
+  "clearance_pose_limit_deg": 8.4,
+  "relative_offset_each_axis_mm": 0.2,
+  "clearance": {
+    "horn_to_frame": {
+      "sampled_min_mm": 0.3914075908973507,
+      "angle_deg": 1.5999999999999996,
+      "continuous_min_bound_mm": 0.36430250568813655,
+      "toleranced_min_bound_mm": 0.017892344174361086
+    },
+    "rod_to_frame": {
+      "sampled_min_mm": 0.7047923986326079,
+      "angle_deg": -8.4,
+      "continuous_min_bound_mm": 0.6873391061126646,
+      "toleranced_min_bound_mm": 0.3409289445988891
+    },
+    "horn_to_motor_plate": {
+      "continuous_min_bound_mm": 0.29999999999999716,
+      "toleranced_min_bound_mm": 0.09999999999999715
+    },
+    "rod_to_horn": {
+      "continuous_min_bound_mm": 0.3499999999999943,
+      "toleranced_min_bound_mm": 0.1499999999999943
+    },
+    "rod_to_cradle": {
+      "continuous_min_bound_mm": 0.5499999999999972,
+      "toleranced_min_bound_mm": 0.34999999999999715
+    }
+  },
+  "force_path": {
+    "rod_axis_span_mm": 58.523499553598135,
+    "two_arm_radius_mm": [
+      10.000000000000009,
+      10.000000000000009
+    ],
+    "min_signed_effective_arm_mm": 6.710349856991984,
+    "max_signed_effective_arm_mm": 8.49404844030912,
+    "min_transmission_angle_deg": 42.14699583225602,
+    "endpoint_signed_arms_mm": [
+      [
+        8.494048440309111,
+        8.49404844030912
+      ],
+      [
+        6.710349856991984,
+        6.7103498569919955
+      ]
+    ],
+    "input_to_output_torque_ratio": [
+      0.9999999999999982,
+      0.9999999999999991
+    ],
+    "finished_bore_mm": [
+      2.08,
+      2.1
+    ],
+    "link_bore_only_max_reversal_deg": [
+      1.3662591204047205,
+      1.7079027369618414
+    ],
+    "with_unseated_cradle_support_max_reversal_deg": [
+      3.4171212464571,
+      3.7592393904924393
+    ],
+    "link_force_N_at_5p32mNm_nominal": 0.7928051611879401,
+    "link_force_N_at_19p32mNm_with_1N_touch": 2.8791345327351507,
+    "cradle_support_bore_and_pin_mm": [
+      3.24,
+      3.0
+    ]
+  }
+}

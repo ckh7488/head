@@ -1,0 +1,194 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "print_mass_map_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "firmware_sha256": "9501396375f6714d17f686bbb1333ceb9172eb5bed104aa72e60a7541cf68bf0",
+  "vendor_source": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/",
+  "powered_eye_span_deg": [
+    [
+      -20,
+      20
+    ],
+    [
+      -8,
+      8
+    ]
+  ],
+  "axis_order": [
+    "eye_yaw",
+    "eye_pitch",
+    "neck_pitch",
+    "neck_yaw"
+  ],
+  "profile_deg_s": [
+    103.05000000000001,
+    82.44,
+    26.106,
+    39.846000000000004
+  ],
+  "profile_deg_s2": [
+    429.154,
+    343.32320000000004,
+    214.577,
+    257.49240000000003
+  ],
+  "installed_masses_g": {
+    "Part024": 7.26437,
+    "Part029": 3.58545,
+    "Part030": 0.01574,
+    "Part031": 0.00401,
+    "Part032": 0.58811,
+    "Part033": 3.5854,
+    "Part034": 0.01574,
+    "Part035": 0.00401,
+    "Part036": 0.58811,
+    "Part037": 1.01087,
+    "Part038": 18.0,
+    "Part039": 1.65077,
+    "Part040": 0.7346,
+    "Part043": 0.68779,
+    "Part044": 1.10985,
+    "EyeYawFoot0": 1.4503,
+    "EyeYawFoot1": 1.4503,
+    "EyeYawHornScrew0": 0.30508,
+    "EyeYawHornScrew1": 0.30508,
+    "EyeYawHornScrew2": 0.30508,
+    "EyePitchHornScrew0": 0.30508,
+    "EyePitchHornScrew1": 0.30508,
+    "EyeYawTiePinL": 0.14703,
+    "EyeYawTiePinR": 0.14703,
+    "EyePitchLinkHornPin": 0.14703,
+    "EyePitchLinkCradlePin": 0.14703,
+    "EyeYawDrivePivot": 0.12252,
+    "EyeYawDrivePivotRetainer": 0.1654
+  },
+  "eye_yaw_moving_mass_g": 10.453013333778557,
+  "eye_pitch_moving_mass_g": 44.14680229173655,
+  "pitch_rod_neutral_center_distance_mm": 58.527057124350584,
+  "pitch_horn_and_cradle_radius_mm": [
+    9.999909771133098,
+    9.999934187070615
+  ],
+  "pitch_effective_lever_mins_mm": [
+    6.709748980980933,
+    6.7097302556929215
+  ],
+  "pitch_effective_lever_maxs_mm": [
+    8.493359221741178,
+    8.493354969350447
+  ],
+  "pitch_jacobian_min_max": 1.0000005006726724,
+  "pitch_jacobian_max": 1.0000027907661408,
+  "yaw_motor_and_eye_crank_radii_mm": [
+    13.500000001855508,
+    13.500000001844455,
+    13.500000001844455
+  ],
+  "yaw_effective_lever_mins_mm": [
+    12.020613174050014,
+    12.020409722134039
+  ],
+  "yaw_jacobian_min_max": [
+    0.9999845427431875,
+    1.000016925539202
+  ],
+  "torque_loads": {
+    "eye_yaw": {
+      "pose_deg": [
+        -20.0,
+        -8.0,
+        -15.0
+      ],
+      "gravity_Nm": 9.608675596325986e-06,
+      "acceleration_bound_Nm": 1.3194340859330717e-05,
+      "coupling_speed_bound_Nm": 1.3101257656501195e-06,
+      "sum_bound_Nm": 2.411314222130682e-05
+    },
+    "eye_pitch": {
+      "pose_deg": [
+        20.0,
+        8.0,
+        4.5
+      ],
+      "gravity_Nm": 0.002228458740051787,
+      "acceleration_bound_Nm": 9.667778280376839e-05,
+      "coupling_speed_bound_Nm": 9.708052575562603e-06,
+      "sum_bound_Nm": 0.002334844575431118
+    }
+  },
+  "torque_capacity_cases": {
+    "5V_derate_0.85": {
+      "capacity_at_profile_speed_Nm": [
+        0.02897437076824357,
+        0.030613394919679605
+      ],
+      "available_for_friction_Nm": [
+        0.028950257626022262,
+        0.028278550344248487
+      ],
+      "margin_with_3mNm_friction_Nm": [
+        0.025950257626022263,
+        0.025278550344248488
+      ],
+      "margin_with_friction_and_1N_at_14mm_Nm": [
+        0.011950257626022262,
+        0.011278550344248487
+      ]
+    },
+    "5V_derate_0.55": {
+      "capacity_at_profile_speed_Nm": [
+        0.018748122261804664,
+        0.019808667300969158
+      ],
+      "available_for_friction_Nm": [
+        0.018724009119583357,
+        0.01747382272553804
+      ],
+      "margin_with_3mNm_friction_Nm": [
+        0.015724009119583358,
+        0.01447382272553804
+      ],
+      "margin_with_friction_and_1N_at_14mm_Nm": [
+        0.0017240091195833574,
+        0.00047382272553803985
+      ]
+    },
+    "4.5V_derate_0.55": {
+      "capacity_at_profile_speed_Nm": [
+        0.016988362796226706,
+        0.018099686325638468
+      ],
+      "available_for_friction_Nm": [
+        0.0169642496540054,
+        0.01576484175020735
+      ],
+      "margin_with_3mNm_friction_Nm": [
+        0.0139642496540054,
+        0.01276484175020735
+      ],
+      "margin_with_friction_and_1N_at_14mm_Nm": [
+        -3.575034599460035e-05,
+        -0.0012351582497926502
+      ]
+    },
+    "3.7V_derate_0.55": {
+      "capacity_at_profile_speed_Nm": [
+        0.01401931624192172,
+        0.015242571637605173
+      ],
+      "available_for_friction_Nm": [
+        0.013995203099700412,
+        0.012907727062174055
+      ],
+      "margin_with_3mNm_friction_Nm": [
+        0.010995203099700413,
+        0.009907727062174056
+      ],
+      "margin_with_friction_and_1N_at_14mm_Nm": [
+        -0.003004796900299587,
+        -0.004092272937825945
+      ]
+    }
+  },
+  "sampled_cases": 100,
+  "scope": "CAD and fitted nominal servo model. Independent software-axis limits must be set in encoder ticks. Includes inertia from simultaneous regular motion at speed/acceleration envelopes. Real friction, wire drag, servo PWM response, reversal and temperature need bench measurements."
+}

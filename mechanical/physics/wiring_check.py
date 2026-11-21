@@ -183,10 +183,10 @@ def closest_segments(first, second, i, j):
     return dist[best,col], ss[best,col], tt[best,col]
 
 
-def segment_gap(first, second):
-    """Minimum surface distance for the piecewise-linear cables, including between nodes."""
+def segment_gap(first, second, minimum_gap=-.06):
+    """Report the closest segment pair when its surface gap is below the limit."""
     radii=(first.diameter+second.diameter)/2
-    candidates=first.tree.query_ball_tree(second.tree,radii+first.half_step+second.half_step)
+    candidates=first.tree.query_ball_tree(second.tree,radii+first.half_step+second.half_step+max(0.,minimum_gap))
     i=np.repeat(np.arange(len(candidates)),[len(row) for row in candidates])
     if not len(i):
         return None
@@ -194,11 +194,15 @@ def segment_gap(first, second):
     gap, s, t = closest_segments(first,second,i,j)
     k=int(np.argmin(gap))
     clearance=float(gap[k]-radii)
-    if clearance < -.06:
+    if clearance < minimum_gap:
         a=first.start[i[k]]+s[k]*(first.end[i[k]]-first.start[i[k]])
         b=second.start[j[k]]+t[k]*(second.end[j[k]]-second.start[j[k]])
-        return {'wire':first.name,'other':second.name,'point':((a+b)/2).round(2).tolist(),
-                'overlap_mm':round(-clearance,3)}
+        result={'wire':first.name,'other':second.name,'point':((a+b)/2).round(2).tolist()}
+        if minimum_gap < 0:
+            result['overlap_mm']=round(-clearance,3)
+        else:
+            result['surface_gap_mm']=round(clearance,3)
+        return result
     return None
 
 

@@ -1,0 +1,1427 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "grams_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "load_sha256": "7d8cff507cd3050455f0f281cc171320aee41d5e22682ad84b2ff581a1b93102",
+  "neck_strength_sha256": "49f87305f7d7f68237f78889f402c3e9832af2633689ab49a1ba6da8845c9c65",
+  "jaw_stop_sha256": "2eb7f6a5c6885f088550a3c6a56bee357867902590b2e548bc51509873c01920",
+  "solver_sha256": "72a6c6c628c247526370ce53e9f0d7a56122dd3bf6d0fe5790a87ad40c96ead6",
+  "command_pitch_deg": [
+    -15.0293,
+    4.4824
+  ],
+  "late_pitch_contact_deg": [
+    -16.46,
+    5.97
+  ],
+  "jaw_powered_open_deg": 5.5,
+  "jaw_latest_contact_deg": 8.13984375,
+  "joint_initial_speed_limits_deg_s": {
+    "pitch": 45.0,
+    "jaw_powered": 130.53000000000003
+  },
+  "starts_per_approximation": {
+    "powered_jaw": 5103,
+    "passive_jaw": 5103
+  },
+  "duration_s": 0.75,
+  "frozen_jaw_reference_extra_deg": {
+    "back": 0.31060821440105785,
+    "forward": 0.9882393775920681
+  },
+  "coupled_maximum_extra_deg": {
+    "back": 0.6344081669066742,
+    "forward": 1.0869544684541508
+  },
+  "coupled_maximum_linear_jaw_open_deg": 9.977138135701848,
+  "coupled_maximum_jaw_with_cad_calibration_deg": 9.663968589782716,
+  "coupled_jaw_retreat_retest": {
+    "normal_retreat_mm": 0.5099773985514624,
+    "first_contact_deg": 9.663968589782716,
+    "rigid_translation_mm": [
+      -0.2,
+      0.2,
+      0.2
+    ]
+  },
+  "coupled_jaw_maximum_by_pitch_bin": [
+    {
+      "pitch_range_deg": [
+        null,
+        0.0
+      ],
+      "witness": {
+        "time_s": 0.2932,
+        "initial_jaw_mode": "passive",
+        "initial_angle_and_speed_deg": [
+          -13.07813,
+          6.783203125000001,
+          45.0,
+          250.94614432517807
+        ],
+        "peak_angle_and_speed_deg": [
+          -0.11545755220200934,
+          9.71481081454257,
+          -7.629048064667701,
+          -30.944509856991782
+        ]
+      },
+      "raw_jaw_deg": 9.71481081454257,
+      "linear_jaw_with_margin_deg": 9.738613748249332,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.443770236786448,
+        "first_contact_deg": 9.46559669971466,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        0.0,
+        4.5
+      ],
+      "witness": {
+        "time_s": 0.49720000000000003,
+        "initial_jaw_mode": "powered",
+        "initial_angle_and_speed_deg": [
+          -13.32202625,
+          0.0,
+          45.0,
+          130.53000000000003
+        ],
+        "peak_angle_and_speed_deg": [
+          4.4509664749778635,
+          9.907143199585963,
+          -6.3635141860835525,
+          -10.385239999559262
+        ]
+      },
+      "raw_jaw_deg": 9.907143199585963,
+      "linear_jaw_with_margin_deg": 9.928388297226928,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.4964459166078399,
+        "first_contact_deg": 9.623379343032838,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        4.5,
+        5.5
+      ],
+      "witness": {
+        "time_s": 0.6592,
+        "initial_jaw_mode": "powered",
+        "initial_angle_and_speed_deg": [
+          -13.809818749999998,
+          0.0,
+          45.0,
+          130.53000000000003
+        ],
+        "peak_angle_and_speed_deg": [
+          5.37741063727268,
+          9.956463249736586,
+          0.48733293296905583,
+          -27.753030690094633
+        ]
+      },
+      "raw_jaw_deg": 9.956463249736586,
+      "linear_jaw_with_margin_deg": 9.977138135701848,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.5099773985514626,
+        "first_contact_deg": 9.663968589782716,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        5.5,
+        6.5
+      ],
+      "witness": {
+        "time_s": 0.7172000000000001,
+        "initial_jaw_mode": "passive",
+        "initial_angle_and_speed_deg": [
+          -11.614752499999998,
+          6.783203125000001,
+          -45.0,
+          -246.37738356497022
+        ],
+        "peak_angle_and_speed_deg": [
+          5.932133203164299,
+          9.935437886454178,
+          15.918771330832763,
+          -28.498467261454866
+        ]
+      },
+      "raw_jaw_deg": 9.935437886454178,
+      "linear_jaw_with_margin_deg": 9.956352091785677,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.5042078209132572,
+        "first_contact_deg": 9.646637625694275,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        6.5,
+        6.9
+      ],
+      "witness": {
+        "time_s": 0.2164,
+        "initial_jaw_mode": "powered",
+        "initial_angle_and_speed_deg": [
+          -13.809818749999998,
+          0.0,
+          45.0,
+          130.53000000000003
+        ],
+        "peak_angle_and_speed_deg": [
+          6.51886115254765,
+          9.649642132939613,
+          -51.18007150347267,
+          105.82958370293527
+        ]
+      },
+      "raw_jaw_deg": 9.649642132939613,
+      "linear_jaw_with_margin_deg": 9.67445621249188,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.4259620436968254,
+        "first_contact_deg": 9.412315259933472,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        6.9,
+        7.0
+      ],
+      "witness": {
+        "time_s": 0.2212,
+        "initial_jaw_mode": "powered",
+        "initial_angle_and_speed_deg": [
+          -14.5415075,
+          0.0,
+          45.0,
+          130.53000000000003
+        ],
+        "peak_angle_and_speed_deg": [
+          6.900328650608969,
+          8.906891674761072,
+          49.33902542827047,
+          -132.24809281384506
+        ]
+      },
+      "raw_jaw_deg": 8.906891674761072,
+      "linear_jaw_with_margin_deg": 8.954648494579086,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.22616517374764486,
+        "first_contact_deg": 8.814686922073363,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        7.0,
+        null
+      ],
+      "witness": {
+        "time_s": 0.2336,
+        "initial_jaw_mode": "powered",
+        "initial_angle_and_speed_deg": [
+          -14.29761125,
+          0.0,
+          -45.0,
+          -130.53000000000003
+        ],
+        "peak_angle_and_speed_deg": [
+          7.000017426283232,
+          8.436435573745692,
+          23.709463932127836,
+          -64.24366372697784
+        ]
+      },
+      "raw_jaw_deg": 8.436435573745692,
+      "linear_jaw_with_margin_deg": 8.49042926859816,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.09731194529079579,
+        "first_contact_deg": 8.429991061210636,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    }
+  ],
+  "energy_bounded_jaw_by_pitch_bin": [
+    {
+      "pitch_range_deg": [
+        null,
+        0.0
+      ],
+      "energy_linear_jaw_bound_deg": 9.793862763947088,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.45910569392240785,
+        "first_contact_deg": 9.511533418655397,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        0.0,
+        4.5
+      ],
+      "energy_linear_jaw_bound_deg": 9.972906376724962,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.508802790142966,
+        "first_contact_deg": 9.660425084114074,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        4.5,
+        5.5
+      ],
+      "energy_linear_jaw_bound_deg": 10.014289871980386,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.5202895978192796,
+        "first_contact_deg": 9.694829302787781,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        5.5,
+        6.5
+      ],
+      "energy_linear_jaw_bound_deg": 10.034475144472086,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.5258924194653259,
+        "first_contact_deg": 9.711644847869874,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        6.5,
+        6.9
+      ],
+      "energy_linear_jaw_bound_deg": 9.812265805734876,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.4642138221839467,
+        "first_contact_deg": 9.526867134094239,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        6.9,
+        7.0
+      ],
+      "energy_linear_jaw_bound_deg": 9.152231972905858,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.2810083763710203,
+        "first_contact_deg": 8.978654593467713,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    },
+    {
+      "pitch_range_deg": [
+        7.0,
+        null
+      ],
+      "energy_linear_jaw_bound_deg": 8.788912165754281,
+      "jaw_cad_calibration": {
+        "normal_retreat_mm": 0.18016177740718511,
+        "first_contact_deg": 8.677327756881716,
+        "rigid_translation_mm": [
+          -0.2,
+          0.2,
+          0.2
+        ]
+      }
+    }
+  ],
+  "energy_bounded_pitch_by_sign": {
+    "back": {
+      "extra_deg": 0.6724043014584457,
+      "absolute_deg": -17.132404301458447
+    },
+    "forward": {
+      "extra_deg": 1.0928900060133795,
+      "absolute_deg": 7.0628900060133795
+    }
+  },
+  "energy_bounded_pitch_extra_deg": {
+    "back": 0.6724043014584457,
+    "forward": 1.0928900060133795
+  },
+  "cases": [
+    {
+      "jaw_stiffness_Nm_rad": 19.18320669710246,
+      "step_s": 0.0004,
+      "maximum_energy_drift_J": 5.9441230014195545e-05,
+      "arrest_directions": {
+        "back": {
+          "time_s": 0.4112,
+          "initial_jaw_mode": "powered",
+          "initial_angle_and_speed_deg": [
+            -14.5415075,
+            0.0,
+            45.0,
+            130.53000000000003
+          ],
+          "peak_angle_and_speed_deg": [
+            -17.04656404409043,
+            7.862085203423616,
+            1.5741320148262212,
+            -120.74905292799079
+          ],
+          "extra_deg": 0.5865640440904294,
+          "extra_with_strap_energy_and_integration_margin_deg": 0.6113268488389467
+        },
+        "forward": {
+          "time_s": 0.3276,
+          "initial_jaw_mode": "passive",
+          "initial_angle_and_speed_deg": [
+            -15.0293,
+            6.783203125000001,
+            -45.0,
+            -256.79659807238517
+          ],
+          "peak_angle_and_speed_deg": [
+            7.042627573485821,
+            7.6582614147658825,
+            -1.6284569541304201,
+            -39.905019126952055
+          ],
+          "extra_deg": 1.0726275734858206,
+          "extra_with_strap_energy_and_integration_margin_deg": 1.0869544684541508
+        }
+      },
+      "initial_energy_upper_J": 0.06237660268357608,
+      "energy_jaw_by_pitch_bin": [
+        {
+          "pitch_range_deg": [
+            null,
+            0.0
+          ],
+          "energy_linear_jaw_bound_deg": 9.793862763947088,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.45910569392240785,
+            "first_contact_deg": 9.511533418655397,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            0.0,
+            4.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.972906376724962,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.508802790142966,
+            "first_contact_deg": 9.660425084114074,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            4.5,
+            5.5
+          ],
+          "energy_linear_jaw_bound_deg": 10.014289871980386,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.5202895978192796,
+            "first_contact_deg": 9.694829302787781,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            5.5,
+            6.5
+          ],
+          "energy_linear_jaw_bound_deg": 10.034475144472086,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.5258924194653259,
+            "first_contact_deg": 9.711644847869874,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            6.5,
+            6.9
+          ],
+          "energy_linear_jaw_bound_deg": 9.812265805734876,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.4642138221839467,
+            "first_contact_deg": 9.526867134094239,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            6.9,
+            7.0
+          ],
+          "energy_linear_jaw_bound_deg": 9.152231972905858,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.2810083763710203,
+            "first_contact_deg": 8.978654593467713,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            7.0,
+            null
+          ],
+          "energy_linear_jaw_bound_deg": 8.788912165754281,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.18016177740718511,
+            "first_contact_deg": 8.677327756881716,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      ],
+      "energy_pitch_bound": {
+        "back": {
+          "extra_deg": 0.6724043014584457,
+          "absolute_deg": -17.132404301458447
+        },
+        "forward": {
+          "extra_deg": 1.0928485038416351,
+          "absolute_deg": 7.062848503841635
+        }
+      },
+      "peak_linear_jaw_open_deg": 9.956463249736586,
+      "peak_linear_jaw_open_with_margin_deg": 9.977138135701848,
+      "peak_jaw_elastic_travel_with_margin_deg": 1.8372943857018467,
+      "peak_jaw_witness": {
+        "time_s": 0.6592,
+        "initial_jaw_mode": "powered",
+        "initial_angle_and_speed_deg": [
+          -13.809818749999998,
+          0.0,
+          45.0,
+          130.53000000000003
+        ],
+        "peak_angle_and_speed_deg": [
+          5.37741063727268,
+          9.956463249736586,
+          0.48733293296905583,
+          -27.753030690094633
+        ]
+      },
+      "jaw_by_pitch_bin": [
+        {
+          "pitch_range_deg": [
+            null,
+            0.0
+          ],
+          "witness": {
+            "time_s": 0.2932,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -13.07813,
+              6.783203125000001,
+              45.0,
+              250.94614432517807
+            ],
+            "peak_angle_and_speed_deg": [
+              -0.11545755220200934,
+              9.71481081454257,
+              -7.629048064667701,
+              -30.944509856991782
+            ]
+          },
+          "raw_jaw_deg": 9.71481081454257,
+          "linear_jaw_with_margin_deg": 9.738613748249332,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.443770236786448,
+            "first_contact_deg": 9.46559669971466,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            0.0,
+            4.5
+          ],
+          "witness": {
+            "time_s": 0.49720000000000003,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -13.32202625,
+              0.0,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              4.4509664749778635,
+              9.907143199585963,
+              -6.3635141860835525,
+              -10.385239999559262
+            ]
+          },
+          "raw_jaw_deg": 9.907143199585963,
+          "linear_jaw_with_margin_deg": 9.928388297226928,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.4964459166078399,
+            "first_contact_deg": 9.623379343032838,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            4.5,
+            5.5
+          ],
+          "witness": {
+            "time_s": 0.6592,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -13.809818749999998,
+              0.0,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              5.37741063727268,
+              9.956463249736586,
+              0.48733293296905583,
+              -27.753030690094633
+            ]
+          },
+          "raw_jaw_deg": 9.956463249736586,
+          "linear_jaw_with_margin_deg": 9.977138135701848,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.5099773985514626,
+            "first_contact_deg": 9.663968589782716,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            5.5,
+            6.5
+          ],
+          "witness": {
+            "time_s": 0.7172000000000001,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -11.614752499999998,
+              6.783203125000001,
+              -45.0,
+              -246.37738356497022
+            ],
+            "peak_angle_and_speed_deg": [
+              5.932133203164299,
+              9.935437886454178,
+              15.918771330832763,
+              -28.498467261454866
+            ]
+          },
+          "raw_jaw_deg": 9.935437886454178,
+          "linear_jaw_with_margin_deg": 9.956352091785677,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.5042078209132572,
+            "first_contact_deg": 9.646637625694275,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            6.5,
+            6.9
+          ],
+          "witness": {
+            "time_s": 0.2164,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -13.809818749999998,
+              0.0,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              6.51886115254765,
+              9.649642132939613,
+              -51.18007150347267,
+              105.82958370293527
+            ]
+          },
+          "raw_jaw_deg": 9.649642132939613,
+          "linear_jaw_with_margin_deg": 9.67445621249188,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.4259620436968254,
+            "first_contact_deg": 9.412315259933472,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            6.9,
+            7.0
+          ],
+          "witness": {
+            "time_s": 0.2212,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -14.5415075,
+              0.0,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              6.900328650608969,
+              8.906891674761072,
+              49.33902542827047,
+              -132.24809281384506
+            ]
+          },
+          "raw_jaw_deg": 8.906891674761072,
+          "linear_jaw_with_margin_deg": 8.954648494579086,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.22616517374764486,
+            "first_contact_deg": 8.814686922073363,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        },
+        {
+          "pitch_range_deg": [
+            7.0,
+            null
+          ],
+          "witness": {
+            "time_s": 0.22360000000000002,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -14.785403749999999,
+              0.0,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              7.002224295780092,
+              8.200119511134648,
+              47.677587090957516,
+              -122.78425273819849
+            ]
+          },
+          "raw_jaw_deg": 8.200119511134648,
+          "linear_jaw_with_margin_deg": 8.421228575974473
+        }
+      ],
+      "peak_jaw_stop_normal_retreat_mm": 0.5099773985514624,
+      "jaw_geometry_calibration": null
+    },
+    {
+      "jaw_stiffness_Nm_rad": 38.36641339420492,
+      "step_s": 0.0002,
+      "maximum_energy_drift_J": 4.291201748171658e-05,
+      "arrest_directions": {
+        "back": {
+          "time_s": 0.4928,
+          "initial_jaw_mode": "passive",
+          "initial_angle_and_speed_deg": [
+            -15.0293,
+            2.71328125,
+            -45.0,
+            -175.03999026812727
+          ],
+          "peak_angle_and_speed_deg": [
+            -17.072012656260988,
+            8.293149623102625,
+            0.06184323060465415,
+            -19.094199914597247
+          ],
+          "extra_deg": 0.6120126562609886,
+          "extra_with_strap_energy_and_integration_margin_deg": 0.6344081669066742
+        },
+        "forward": {
+          "time_s": 0.3226,
+          "initial_jaw_mode": "passive",
+          "initial_angle_and_speed_deg": [
+            -14.785403749999999,
+            8.13984375,
+            -45.0,
+            -276.45499346471496
+          ],
+          "peak_angle_and_speed_deg": [
+            7.039278631322746,
+            5.933629893683139,
+            -2.479732344562343,
+            -17.033834946772476
+          ],
+          "extra_deg": 1.0692786313227456,
+          "extra_with_strap_energy_and_integration_margin_deg": 1.0828073731158512
+        }
+      },
+      "initial_energy_upper_J": 0.06237660268357608,
+      "energy_jaw_by_pitch_bin": [
+        {
+          "pitch_range_deg": [
+            null,
+            0.0
+          ],
+          "energy_linear_jaw_bound_deg": 9.305408560709116
+        },
+        {
+          "pitch_range_deg": [
+            0.0,
+            4.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.433333718320139
+        },
+        {
+          "pitch_range_deg": [
+            4.5,
+            5.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.462891817139287
+        },
+        {
+          "pitch_range_deg": [
+            5.5,
+            6.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.477309070120947
+        },
+        {
+          "pitch_range_deg": [
+            6.5,
+            6.9
+          ],
+          "energy_linear_jaw_bound_deg": 9.320273919879975
+        },
+        {
+          "pitch_range_deg": [
+            6.9,
+            7.0
+          ],
+          "energy_linear_jaw_bound_deg": 8.853505094305596
+        },
+        {
+          "pitch_range_deg": [
+            7.0,
+            null
+          ],
+          "energy_linear_jaw_bound_deg": 8.596527115631035
+        }
+      ],
+      "energy_pitch_bound": {
+        "back": {
+          "extra_deg": 0.6721684145747401,
+          "absolute_deg": -17.13216841457474
+        },
+        "forward": {
+          "extra_deg": 1.0928562113878162,
+          "absolute_deg": 7.062856211387816
+        }
+      },
+      "peak_linear_jaw_open_deg": 9.437445026482774,
+      "peak_linear_jaw_open_with_margin_deg": 9.450840534384946,
+      "peak_jaw_elastic_travel_with_margin_deg": 1.3109967843849464,
+      "peak_jaw_witness": {
+        "time_s": 0.5880000000000001,
+        "initial_jaw_mode": "passive",
+        "initial_angle_and_speed_deg": [
+          -14.785403749999999,
+          4.069921875,
+          45.0,
+          206.40902847667687
+        ],
+        "peak_angle_and_speed_deg": [
+          6.007604188853045,
+          9.437445026482774,
+          24.947206933532424,
+          -24.3542454561913
+        ]
+      },
+      "jaw_by_pitch_bin": [
+        {
+          "pitch_range_deg": [
+            null,
+            0.0
+          ],
+          "witness": {
+            "time_s": 0.34,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.5415075,
+              4.069921875,
+              45.0,
+              205.88138041990123
+            ],
+            "peak_angle_and_speed_deg": [
+              -0.3021978522444467,
+              9.258744595788434,
+              -6.318049254872785,
+              8.478387860546068
+            ]
+          },
+          "raw_jaw_deg": 9.258744595788434,
+          "linear_jaw_with_margin_deg": 9.274252229624521
+        },
+        {
+          "pitch_range_deg": [
+            0.0,
+            4.5
+          ],
+          "witness": {
+            "time_s": 0.4424,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.053714999999999,
+              6.783203125000001,
+              45.0,
+              253.90518092860833
+            ],
+            "peak_angle_and_speed_deg": [
+              4.120482369890839,
+              9.39275123685018,
+              0.7987589567537254,
+              6.390222759517651
+            ]
+          },
+          "raw_jaw_deg": 9.39275123685018,
+          "linear_jaw_with_margin_deg": 9.406619447013162
+        },
+        {
+          "pitch_range_deg": [
+            4.5,
+            5.5
+          ],
+          "witness": {
+            "time_s": 0.4056,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.785403749999999,
+              6.783203125000001,
+              45.0,
+              256.0800028156887
+            ],
+            "peak_angle_and_speed_deg": [
+              5.300651549524091,
+              9.432575270779612,
+              17.91872738519238,
+              -21.420388085740576
+            ]
+          },
+          "raw_jaw_deg": 9.432575270779612,
+          "linear_jaw_with_margin_deg": 9.446020721453376
+        },
+        {
+          "pitch_range_deg": [
+            5.5,
+            6.5
+          ],
+          "witness": {
+            "time_s": 0.5880000000000001,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.785403749999999,
+              4.069921875,
+              45.0,
+              206.40902847667687
+            ],
+            "peak_angle_and_speed_deg": [
+              6.007604188853045,
+              9.437445026482774,
+              24.947206933532424,
+              -24.3542454561913
+            ]
+          },
+          "raw_jaw_deg": 9.437445026482774,
+          "linear_jaw_with_margin_deg": 9.450840534384946
+        },
+        {
+          "pitch_range_deg": [
+            6.5,
+            6.9
+          ],
+          "witness": {
+            "time_s": 0.20600000000000002,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -12.83423375,
+              0.0,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              6.506309585672014,
+              9.217568384375694,
+              -43.797388341329246,
+              63.67049924494206
+            ]
+          },
+          "raw_jaw_deg": 9.217568384375694,
+          "linear_jaw_with_margin_deg": 9.23365995187222
+        },
+        {
+          "pitch_range_deg": [
+            6.9,
+            7.0
+          ],
+          "witness": {
+            "time_s": 0.6236,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -14.785403749999999,
+              0.9166666666666666,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              6.9091430113949555,
+              8.632059262739082,
+              -50.27626168743789,
+              100.75022484309059
+            ]
+          },
+          "raw_jaw_deg": 8.632059262739082,
+          "linear_jaw_with_margin_deg": 8.666360233045824
+        },
+        {
+          "pitch_range_deg": [
+            7.0,
+            null
+          ],
+          "witness": {
+            "time_s": 0.2336,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -14.29761125,
+              0.0,
+              -45.0,
+              -130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              7.000017426283232,
+              8.436435573745692,
+              23.709463932127836,
+              -64.24366372697784
+            ]
+          },
+          "raw_jaw_deg": 8.436435573745692,
+          "linear_jaw_with_margin_deg": 8.49042926859816,
+          "jaw_cad_calibration": {
+            "normal_retreat_mm": 0.09731194529079579,
+            "first_contact_deg": 8.429991061210636,
+            "rigid_translation_mm": [
+              -0.2,
+              0.2,
+              0.2
+            ]
+          }
+        }
+      ],
+      "peak_jaw_stop_normal_retreat_mm": 0.3638930891058975,
+      "jaw_geometry_calibration": null
+    },
+    {
+      "jaw_stiffness_Nm_rad": 69.05954410956886,
+      "step_s": 0.0002,
+      "maximum_energy_drift_J": 6.096639482951194e-05,
+      "arrest_directions": {
+        "back": {
+          "time_s": 0.41140000000000004,
+          "initial_jaw_mode": "powered",
+          "initial_angle_and_speed_deg": [
+            -13.07813,
+            0.0,
+            45.0,
+            130.53000000000003
+          ],
+          "peak_angle_and_speed_deg": [
+            -17.061206660436206,
+            8.218833197201874,
+            0.3626421721843385,
+            9.284121374833658
+          ],
+          "extra_deg": 0.6012066604362051,
+          "extra_with_strap_energy_and_integration_margin_deg": 0.6256114401120197
+        },
+        "forward": {
+          "time_s": 0.3134,
+          "initial_jaw_mode": "passive",
+          "initial_angle_and_speed_deg": [
+            -14.785403749999999,
+            8.13984375,
+            -45.0,
+            -276.45499346471496
+          ],
+          "peak_angle_and_speed_deg": [
+            7.038957596394092,
+            7.554735014704286,
+            2.122894024973143,
+            -71.67302185580593
+          ],
+          "extra_deg": 1.0689575963940927,
+          "extra_with_strap_energy_and_integration_margin_deg": 1.0833990138042953
+        }
+      },
+      "initial_energy_upper_J": 0.06237660268357608,
+      "energy_jaw_by_pitch_bin": [
+        {
+          "pitch_range_deg": [
+            null,
+            0.0
+          ],
+          "energy_linear_jaw_bound_deg": 9.006724494031056
+        },
+        {
+          "pitch_range_deg": [
+            0.0,
+            4.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.102671461432907
+        },
+        {
+          "pitch_range_deg": [
+            4.5,
+            5.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.124836218872808
+        },
+        {
+          "pitch_range_deg": [
+            5.5,
+            6.5
+          ],
+          "energy_linear_jaw_bound_deg": 9.13564728888158
+        },
+        {
+          "pitch_range_deg": [
+            6.5,
+            6.9
+          ],
+          "energy_linear_jaw_bound_deg": 9.01864867065072
+        },
+        {
+          "pitch_range_deg": [
+            6.9,
+            7.0
+          ],
+          "energy_linear_jaw_bound_deg": 8.670735997787817
+        },
+        {
+          "pitch_range_deg": [
+            7.0,
+            null
+          ],
+          "energy_linear_jaw_bound_deg": 8.479175465756635
+        }
+      ],
+      "energy_pitch_bound": {
+        "back": {
+          "extra_deg": 0.6721897510767837,
+          "absolute_deg": -17.132189751076783
+        },
+        "forward": {
+          "extra_deg": 1.0928900060133795,
+          "absolute_deg": 7.0628900060133795
+        }
+      },
+      "peak_linear_jaw_open_deg": 9.09665372621586,
+      "peak_linear_jaw_open_with_margin_deg": 9.10763238673469,
+      "peak_jaw_elastic_travel_with_margin_deg": 0.9677886367346895,
+      "peak_jaw_witness": {
+        "time_s": 0.4796,
+        "initial_jaw_mode": "passive",
+        "initial_angle_and_speed_deg": [
+          -14.053714999999999,
+          5.4265625,
+          45.0,
+          231.1286706538353
+        ],
+        "peak_angle_and_speed_deg": [
+          5.475934874166639,
+          9.09665372621586,
+          6.533685101375661,
+          31.56200223907652
+        ]
+      },
+      "jaw_by_pitch_bin": [
+        {
+          "pitch_range_deg": [
+            null,
+            0.0
+          ],
+          "witness": {
+            "time_s": 0.41600000000000004,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.5415075,
+              5.4265625,
+              -45.0,
+              -232.39649161150967
+            ],
+            "peak_angle_and_speed_deg": [
+              -0.11353356077083122,
+              8.979246688367656,
+              -10.018969125186596,
+              -9.783913082237737
+            ]
+          },
+          "raw_jaw_deg": 8.979246688367656,
+          "linear_jaw_with_margin_deg": 8.991739757589452
+        },
+        {
+          "pitch_range_deg": [
+            0.0,
+            4.5
+          ],
+          "witness": {
+            "time_s": 0.49960000000000004,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -13.07813,
+              4.069921875,
+              45.0,
+              202.65195419083616
+            ],
+            "peak_angle_and_speed_deg": [
+              4.238564679784251,
+              9.054851057963395,
+              8.707389778665746,
+              -38.12797534375312
+            ]
+          },
+          "raw_jaw_deg": 9.054851057963395,
+          "linear_jaw_with_margin_deg": 9.066325206065372
+        },
+        {
+          "pitch_range_deg": [
+            4.5,
+            5.5
+          ],
+          "witness": {
+            "time_s": 0.4796,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.053714999999999,
+              5.4265625,
+              45.0,
+              231.1286706538353
+            ],
+            "peak_angle_and_speed_deg": [
+              5.475934874166639,
+              9.09665372621586,
+              6.533685101375661,
+              31.56200223907652
+            ]
+          },
+          "raw_jaw_deg": 9.09665372621586,
+          "linear_jaw_with_margin_deg": 9.10763238673469
+        },
+        {
+          "pitch_range_deg": [
+            5.5,
+            6.5
+          ],
+          "witness": {
+            "time_s": 0.6586000000000001,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -15.0293,
+              1.8333333333333333,
+              45.0,
+              130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              6.055717892240088,
+              9.091891184015822,
+              1.5362139179025738,
+              26.53776886520945
+            ]
+          },
+          "raw_jaw_deg": 9.091891184015822,
+          "linear_jaw_with_margin_deg": 9.102924136791623
+        },
+        {
+          "pitch_range_deg": [
+            6.5,
+            6.9
+          ],
+          "witness": {
+            "time_s": 0.2036,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.29761125,
+              4.069921875,
+              45.0,
+              205.35072997086957
+            ],
+            "peak_angle_and_speed_deg": [
+              6.504849493752446,
+              8.941043789268441,
+              -46.24079015608275,
+              -15.272671233087834
+            ]
+          },
+          "raw_jaw_deg": 8.941043789268441,
+          "linear_jaw_with_margin_deg": 8.95412319695316
+        },
+        {
+          "pitch_range_deg": [
+            6.9,
+            7.0
+          ],
+          "witness": {
+            "time_s": 0.2938,
+            "initial_jaw_mode": "powered",
+            "initial_angle_and_speed_deg": [
+              -12.5903375,
+              2.75,
+              -45.0,
+              -130.53000000000003
+            ],
+            "peak_angle_and_speed_deg": [
+              6.900161841706033,
+              8.480492690867605,
+              24.30442834792481,
+              -35.01893897795941
+            ]
+          },
+          "raw_jaw_deg": 8.480492690867605,
+          "linear_jaw_with_margin_deg": 8.510210076386205
+        },
+        {
+          "pitch_range_deg": [
+            7.0,
+            null
+          ],
+          "witness": {
+            "time_s": 0.7292000000000001,
+            "initial_jaw_mode": "passive",
+            "initial_angle_and_speed_deg": [
+              -14.5415075,
+              4.069921875,
+              -45.0,
+              -205.88138041990123
+            ],
+            "peak_angle_and_speed_deg": [
+              7.001834369618586,
+              8.35934744607639,
+              -16.223168566589575,
+              53.57846213371787
+            ]
+          },
+          "raw_jaw_deg": 8.35934744607639,
+          "linear_jaw_with_margin_deg": 8.40311430930694
+        }
+      ],
+      "peak_jaw_stop_normal_retreat_mm": 0.26862887904655897,
+      "jaw_geometry_calibration": {
+        "tested_retreat_mm": 0.2787729609605381,
+        "latest_contact_deg": 8.971954146385194
+      }
+    }
+  ],
+  "scope": "Concurrent cutoff with no external contact and both modeled stops elastic. The jaw closes against a spring with the same stiffness as its opening limit. Yaw is held level and fixed. The sampled grid includes independent maximal powered axis speeds and the free jaw speed available in one gravity stroke with additional pitch drive work. The full bounded gravitational strap energy and integration drift are added as margin. The all-time bounds project a continuous-initial-angle energy ceiling onto both elastic joints, using a 0.025\u00b0 minimum search and a curvature correction between samples. The linear jaw angle uses the minimum measured lever. A calibrated angle uses the next greater checked retreat of the exact jaw stop geometry when that evidence is available."
+}

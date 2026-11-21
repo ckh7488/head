@@ -55,7 +55,7 @@ def trajectories(powered, arrest, jaw, coupled=False):
                 for yaw, gaze in product((-60., 0., 60.), (-8., 0., 8.))]
 
 
-def build_scene(cad, layout, baseline, changed):
+def build_scene(cad, layout, baseline, changed, full_shapes):
     scene = Scene.__new__(Scene)
     scene.groups = {}
     world = cad / 'world'
@@ -63,18 +63,18 @@ def build_scene(cad, layout, baseline, changed):
     for name in changed:
         solid = trimesh.load_mesh(world/f'{name}.stl')
         old = baseline / 'world' / f'{name}.stl'
-        if old.exists():
+        if old.exists() and name not in full_shapes:
             solid = solid.difference(trimesh.load_mesh(old), engine='manifold')
         if len(solid.faces):
             scene.add(name, layout['world_motion'][name], solid)
     return scene
 
 
-def setup(cad, layout, baseline, changed, camera_run_mm, motors_only):
+def setup(cad, layout, baseline, changed, full_shapes, camera_run_mm, motors_only):
     global STATE
     lengths = read(CUT_LENGTHS)
     lengths[CAMERA_ROUTE] = camera_run_mm
-    STATE = layout, read(WIRE_DATA), lengths, build_scene(cad, layout, baseline, changed), motors_only
+    STATE = layout, read(WIRE_DATA), lengths, build_scene(cad, layout, baseline, changed, full_shapes), motors_only
 
 
 def check_sample(pose):
@@ -124,17 +124,19 @@ def check_sample(pose):
 
 
 def check(cad, output, baseline, powered, arrest, jaw, changed, jobs, camera_run_mm=CAMERA_INTERNAL_RUN_MM,
-          coupled=False, require_camera_bend=False, motors_only=False):
+          coupled=False, require_camera_bend=False, motors_only=False, full_shapes=()):
     layout = read(cad/'cad_parts.json')
     original = read(baseline/'cad_parts.json')
     for name in changed:
         if name not in layout['world_motion']:
             raise ValueError(f'Missing changed neck part {name}')
+    if not set(full_shapes) <= set(changed):
+        raise ValueError('Every whole-part screen must also be listed among the changed parts')
     cases = {name: [tuple(row) for row in positions]
              for name, positions in trajectories(powered, arrest, jaw, coupled)}
     poses = tuple(dict.fromkeys(pose for path in cases.values() for pose in path))
     with ProcessPoolExecutor(jobs, initializer=setup,
-                             initargs=(cad, layout, baseline, changed, camera_run_mm, motors_only)) as pool:
+                             initargs=(cad, layout, baseline, changed, full_shapes, camera_run_mm, motors_only)) as pool:
         evidence = list(pool.map(check_sample, poses))
     indexes = {pose: n for n, pose in enumerate(poses)}
     contacts = sum(bool(row['contacts']) for row in evidence)
@@ -157,6 +159,8 @@ def check(cad, output, baseline, powered, arrest, jaw, changed, jobs, camera_run
                        'Includes simultaneous axis motion and geometric reserves. Excludes elastic and friction forces.',
               'trajectories': {name: [indexes[pose] for pose in path] for name, path in cases.items()},
               'samples': evidence}
+    if full_shapes:
+        report['whole_part_mesh_keys'] = list(full_shapes)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + '\n')
     camera_summary = '' if motors_only else f', {bend_failures} camera bends below target'
@@ -175,6 +179,8 @@ if __name__ == '__main__':
     parser.add_argument('--jaw', type=float, default=11.175)
     parser.add_argument('--camera-run-mm', type=float, default=CAMERA_INTERNAL_RUN_MM)
     parser.add_argument('--changed', nargs='*', default=())
+    parser.add_argument('--full-shapes', nargs='*', default=(),
+                        help='Check these changed parts whole, including OEM meshes without closed volumes')
     parser.add_argument('--jobs', type=int, default=2)
     parser.add_argument('--coupled-cutoff', action='store_true')
     scope = parser.add_mutually_exclusive_group()
@@ -184,5 +190,5 @@ if __name__ == '__main__':
     if not 0 < args.camera_run_mm <= CAMERA_SUPPLIED_MM - CAMERA_REAR_RUN_MM:
         parser.error('--camera-run-mm must fit the supplied cable and rear run')
     if not check(args.cad, args.report, args.baseline, args.powered, args.arrest, args.jaw, args.changed, args.jobs,
-                 args.camera_run_mm, args.coupled_cutoff, args.require_camera_bend, args.motors_only):
+                 args.camera_run_mm, args.coupled_cutoff, args.require_camera_bend, args.motors_only, args.full_shapes):
         raise SystemExit(1)

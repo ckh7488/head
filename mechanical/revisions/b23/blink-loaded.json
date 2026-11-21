@@ -1,0 +1,1835 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "print_mass_map_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "firmware_sha256": "9501396375f6714d17f686bbb1333ceb9172eb5bed104aa72e60a7541cf68bf0",
+  "tracking_sha256": "8ba91193bf979078daf2444786aff79f3839290726545e3f1611aca52654960a",
+  "actuator_data": "https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/",
+  "method": "Ideal position tracker with firmware acceleration/profile limits and a linear DC torque-speed envelope at Goal PWM.",
+  "limits": "Rigid linked motion, fixed end-state calibration, assumed drag and warm derate, no measured motor PID, compliance or bus voltage.",
+  "camera_frame_rate_Hz": 30,
+  "goal_period_s": 0.06,
+  "step_s": 0.0004,
+  "velocity_profile_deg_s": 219.84,
+  "acceleration_profile_deg_s2": 1330.3774,
+  "goal_pwm": 200,
+  "nominal_5V_cold_static_pwm_torque_Nm": 0.11751412429378531,
+  "moving_mass_kg": 0.024308856744824667,
+  "rigid_inertia_kgm2": 1.2764542579994777e-06,
+  "gravity_amplitude_Nm": 0.0003524954981767588,
+  "touch_sensitivity_s": [
+    0.35,
+    0.5
+  ],
+  "touch_lever_mm": 16.6,
+  "cases": {
+    "4.5V_lossless": {
+      "trials": [
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.025136111488821344,
+            90.02508984505832
+          ],
+          "open_close_open_time_s": 1.4556,
+          "max_speed_deg_s": 126.12283191281892,
+          "max_requested_drive_Nm": 0.00038079503609084127,
+          "max_output_Nm": 0.00038079503609084127
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02504027100747075,
+            90.02493149157694
+          ],
+          "open_close_open_time_s": 1.478,
+          "max_speed_deg_s": 126.12277329234468,
+          "max_requested_drive_Nm": 0.0003807949847447289,
+          "max_output_Nm": 0.0003807949847447289
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02509198723653348,
+            90.02500974063861
+          ],
+          "open_close_open_time_s": 1.462,
+          "max_speed_deg_s": 126.12197162513166,
+          "max_requested_drive_Nm": 0.00038079501245159104,
+          "max_output_Nm": 0.00038079501245159104
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.025151800020533743,
+            90.02509403897372
+          ],
+          "open_close_open_time_s": 1.4568,
+          "max_speed_deg_s": 126.12244198297404,
+          "max_requested_drive_Nm": 0.0003807950444958089,
+          "max_output_Nm": 0.0003807950444958089
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.025214466904297943,
+            90.02498356494714
+          ],
+          "open_close_open_time_s": 1.4804000000000002,
+          "max_speed_deg_s": 126.1219981708521,
+          "max_requested_drive_Nm": 0.00038079507806867724,
+          "max_output_Nm": 0.00038079507806867724
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.025077430303770326,
+            90.02500551321545
+          ],
+          "open_close_open_time_s": 1.4648,
+          "max_speed_deg_s": 126.123445509683,
+          "max_requested_drive_Nm": 0.00038079500465277357,
+          "max_output_Nm": 0.00038079500465277357
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.025136111488821344,
+            90.02508984505832
+          ],
+          "open_close_open_time_s": 1.4556,
+          "max_speed_deg_s": 126.12283191281892,
+          "max_requested_drive_Nm": 0.00038079503609084127,
+          "max_output_Nm": 0.00038079503609084127
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.4556,
+        1.4804000000000002
+      ],
+      "all_cycles_within_S03_timing": true,
+      "max_requested_drive_Nm": 0.00038079507806867724
+    },
+    "4.5V_low_drag": {
+      "trials": [
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.024007591052372834,
+            89.39628172006223
+          ],
+          "open_close_open_time_s": 1.5028000000000001,
+          "max_speed_deg_s": 120.2821572389696,
+          "max_requested_drive_Nm": 0.004417031450405545,
+          "max_output_Nm": 0.004412444112210335
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.024018304285628254,
+            89.39635930163827
+          ],
+          "open_close_open_time_s": 1.5252000000000001,
+          "max_speed_deg_s": 120.2812692755412,
+          "max_requested_drive_Nm": 0.004403566725055965,
+          "max_output_Nm": 0.004399027066296526
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.023919253812365142,
+            89.84804460083063
+          ],
+          "open_close_open_time_s": 1.5156,
+          "max_speed_deg_s": 120.28165467227667,
+          "max_requested_drive_Nm": 0.004416045593356345,
+          "max_output_Nm": 0.004411472632556335
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.023868159006316787,
+            89.64048744380038
+          ],
+          "open_close_open_time_s": 1.5096000000000003,
+          "max_speed_deg_s": 120.28159073312767,
+          "max_requested_drive_Nm": 0.004415029342260689,
+          "max_output_Nm": 0.004410451291282765
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02404526811424699,
+            90.0238037327196
+          ],
+          "open_close_open_time_s": 1.5392000000000001,
+          "max_speed_deg_s": 120.2823041970518,
+          "max_requested_drive_Nm": 0.004410193689495652,
+          "max_output_Nm": 0.0044054620594852646
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.024051740598301532,
+            90.02391523913892
+          ],
+          "open_close_open_time_s": 1.5208000000000002,
+          "max_speed_deg_s": 120.2818447538199,
+          "max_requested_drive_Nm": 0.004417031450405545,
+          "max_output_Nm": 0.004412444112210335
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.024007591052372834,
+            89.39628172006223
+          ],
+          "open_close_open_time_s": 1.5028,
+          "max_speed_deg_s": 120.2821572389696,
+          "max_requested_drive_Nm": 0.004417031450405545,
+          "max_output_Nm": 0.004412444112210335
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.5028,
+        1.5392000000000001
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.004417031450405545
+    },
+    "4.5V_nominal_drag": {
+      "trials": [
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021871191502809303,
+            85.40759075546748
+          ],
+          "open_close_open_time_s": 1.5568,
+          "max_speed_deg_s": 109.68995919708641,
+          "max_requested_drive_Nm": 0.01175143690448742,
+          "max_output_Nm": 0.011739874964241805
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02185627517078898,
+            87.49565639994593
+          ],
+          "open_close_open_time_s": 1.6116,
+          "max_speed_deg_s": 109.69071136091613,
+          "max_requested_drive_Nm": 0.011751654915664725,
+          "max_output_Nm": 0.011740105640917875
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02187035350274565,
+            88.89389552269161
+          ],
+          "open_close_open_time_s": 1.6244,
+          "max_speed_deg_s": 109.69024891190337,
+          "max_requested_drive_Nm": 0.011751654915664725,
+          "max_output_Nm": 0.011740105640917875
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02191700717690409,
+            87.5962178984976
+          ],
+          "open_close_open_time_s": 1.6,
+          "max_speed_deg_s": 109.6905331786712,
+          "max_requested_drive_Nm": 0.011746894249303653,
+          "max_output_Nm": 0.011735340327691537
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021796887370491406,
+            87.59614048188526
+          ],
+          "open_close_open_time_s": 1.6184,
+          "max_speed_deg_s": 109.69077853760766,
+          "max_requested_drive_Nm": 0.011748331182447398,
+          "max_output_Nm": 0.011736797502323638
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021805375032479795,
+            87.5961441749252
+          ],
+          "open_close_open_time_s": 1.5996000000000001,
+          "max_speed_deg_s": 109.69054675541695,
+          "max_requested_drive_Nm": 0.01175143690448742,
+          "max_output_Nm": 0.011739874964241805
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021781890238696474,
+            87.59613541166519
+          ],
+          "open_close_open_time_s": 1.5972,
+          "max_speed_deg_s": 109.69034905186658,
+          "max_requested_drive_Nm": 0.01175143690448742,
+          "max_output_Nm": 0.011739874964241805
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.5568,
+        1.6244
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.011751654915664725
+    },
+    "4.5V_twice_drag": {
+      "trials": [
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.01883768019959045,
+            80.99492935445096
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23015462716637,
+          "max_requested_drive_Nm": 0.022453470014679133,
+          "max_output_Nm": 0.02243028687624797
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.018783851764502025,
+            81.88676244579571
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23063127385666,
+          "max_requested_drive_Nm": 0.02246339474827726,
+          "max_output_Nm": 0.022440214839051308
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.01883522873111701,
+            82.28297005552089
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23090662913087,
+          "max_requested_drive_Nm": 0.02246339474827726,
+          "max_output_Nm": 0.022440214839051308
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.018826441051180132,
+            80.99502543237632
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23038169497269,
+          "max_requested_drive_Nm": 0.022459033277365176,
+          "max_output_Nm": 0.022435855728787864
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.018833902133360888,
+            80.99503021304933
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23089042316042,
+          "max_requested_drive_Nm": 0.022454689549108824,
+          "max_output_Nm": 0.022431530276281333
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.01883768019959045,
+            80.99492935445096
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23015462716637,
+          "max_requested_drive_Nm": 0.022453470014679133,
+          "max_output_Nm": 0.02243028687624797
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.01883768019959045,
+            80.99492935445096
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 94.23015462716637,
+          "max_requested_drive_Nm": 0.022453470014679133,
+          "max_output_Nm": 0.02243028687624797
+        }
+      ],
+      "complete_cycles": 0,
+      "duration_range_s": null,
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.02246339474827726
+    },
+    "4.5V_one_lid_touch": {
+      "trials": [
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02180164382648093,
+            84.7551775539187
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 109.68994081409369,
+          "max_requested_drive_Nm": 0.028325122090420235,
+          "max_output_Nm": 0.027797809505754147
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021765469839523082,
+            84.75499541909363
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 109.69045722680202,
+          "max_requested_drive_Nm": 0.028309859790554483,
+          "max_output_Nm": 0.027797220799848536
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02178758742943819,
+            85.37425082019196
+          ],
+          "open_close_open_time_s": 1.592,
+          "max_speed_deg_s": 109.68998439456249,
+          "max_requested_drive_Nm": 0.028322668846967634,
+          "max_output_Nm": 0.02779524046848179
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02184108583353818,
+            84.9652432458097
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 109.68998623873595,
+          "max_requested_drive_Nm": 0.028308825980800305,
+          "max_output_Nm": 0.027805068759862453
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021799802982101994,
+            86.16152014730791
+          ],
+          "open_close_open_time_s": 1.624,
+          "max_speed_deg_s": 109.69010639505521,
+          "max_requested_drive_Nm": 0.028327685863250993,
+          "max_output_Nm": 0.0278004334940732
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02184747025115355,
+            87.59627044859312
+          ],
+          "open_close_open_time_s": 1.6316000000000002,
+          "max_speed_deg_s": 109.69064712695899,
+          "max_requested_drive_Nm": 0.02831901202861495,
+          "max_output_Nm": 0.02780328053732183
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.08705780095610605,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02181617208861941,
+            87.59625844363407
+          ],
+          "open_close_open_time_s": 1.6296,
+          "max_speed_deg_s": 109.69034647488566,
+          "max_requested_drive_Nm": 0.028313394468949427,
+          "max_output_Nm": 0.027797809505754147
+        }
+      ],
+      "complete_cycles": 4,
+      "duration_range_s": [
+        1.592,
+        1.6316000000000002
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.028327685863250993
+    },
+    "4.5V_warmer_with_inertia": {
+      "trials": [
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021138914057039618,
+            84.75448084850987
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 106.21124595078368,
+          "max_requested_drive_Nm": 0.011701483362532098,
+          "max_output_Nm": 0.011689918470270384
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021092381512338533,
+            84.90144362606296
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 106.21094206823481,
+          "max_requested_drive_Nm": 0.011700438333355769,
+          "max_output_Nm": 0.011688885669969513
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021216031772326435,
+            85.95806377059064
+          ],
+          "open_close_open_time_s": 1.618,
+          "max_speed_deg_s": 106.21097312318518,
+          "max_requested_drive_Nm": 0.011700438333355769,
+          "max_output_Nm": 0.011688885669969513
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02107315291583043,
+            85.4864911503044
+          ],
+          "open_close_open_time_s": 1.6088000000000002,
+          "max_speed_deg_s": 106.21093994050888,
+          "max_requested_drive_Nm": 0.011695804869813435,
+          "max_output_Nm": 0.011684248091622641
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021126453034549877,
+            86.76270846233274
+          ],
+          "open_close_open_time_s": 1.6504,
+          "max_speed_deg_s": 106.21083962376872,
+          "max_requested_drive_Nm": 0.011693852837491019,
+          "max_output_Nm": 0.011685289135407978
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.02107638101520188,
+            87.59560450318791
+          ],
+          "open_close_open_time_s": 1.6476000000000002,
+          "max_speed_deg_s": 106.21121557667016,
+          "max_requested_drive_Nm": 0.011701483362532098,
+          "max_output_Nm": 0.011689918470270384
+        },
+        {
+          "terminal_V": 4.5,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.4815384615384615,
+          "warm_pwm_zero_speed_torque_Nm": 0.07073446327683616,
+          "zero_load_pwm_speed_deg_s": 125.58018252933506,
+          "lid_motion_deg": [
+            -0.021210659265780033,
+            87.59552553528101
+          ],
+          "open_close_open_time_s": 1.6468,
+          "max_speed_deg_s": 106.2108788914428,
+          "max_requested_drive_Nm": 0.011701483362532098,
+          "max_output_Nm": 0.011689918470270384
+        }
+      ],
+      "complete_cycles": 5,
+      "duration_range_s": [
+        1.6088000000000002,
+        1.6504
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.011701483362532098
+    },
+    "5V_lossless": {
+      "trials": [
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.028025846030967822,
+            90.02789657963196
+          ],
+          "open_close_open_time_s": 1.3928,
+          "max_speed_deg_s": 140.21860665868422,
+          "max_requested_drive_Nm": 0.0003807965837918552,
+          "max_output_Nm": 0.0003807965837918552
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.0278784741344058,
+            90.0278041686411
+          ],
+          "open_close_open_time_s": 1.4008,
+          "max_speed_deg_s": 140.2178178114464,
+          "max_requested_drive_Nm": 0.00038079650488316406,
+          "max_output_Nm": 0.00038079650488316406
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02788400269569695,
+            90.02778304062485
+          ],
+          "open_close_open_time_s": 1.3992,
+          "max_speed_deg_s": 140.21662333468595,
+          "max_requested_drive_Nm": 0.0003807965078434145,
+          "max_output_Nm": 0.0003807965078434145
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.028050294587467033,
+            90.02784343405918
+          ],
+          "open_close_open_time_s": 1.3880000000000001,
+          "max_speed_deg_s": 140.21706448262822,
+          "max_requested_drive_Nm": 0.0003807965968823462,
+          "max_output_Nm": 0.0003807965968823462
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02806654506025117,
+            90.02778740541797
+          ],
+          "open_close_open_time_s": 1.4020000000000001,
+          "max_speed_deg_s": 140.27728511581728,
+          "max_requested_drive_Nm": 0.00038079660558330174,
+          "max_output_Nm": 0.00041483423516592405
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.027991010459334636,
+            90.0278833128021
+          ],
+          "open_close_open_time_s": 1.3932,
+          "max_speed_deg_s": 140.2172159924809,
+          "max_requested_drive_Nm": 0.00038079656513973414,
+          "max_output_Nm": 0.00038079656513973414
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.0,
+          "viscous_drag_Nms": 0.0,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.028055574615722556,
+            90.02786524873298
+          ],
+          "open_close_open_time_s": 1.3996,
+          "max_speed_deg_s": 140.21687645838844,
+          "max_requested_drive_Nm": 0.0003807965997094235,
+          "max_output_Nm": 0.0003807965997094235
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.3880000000000001,
+        1.4020000000000001
+      ],
+      "all_cycles_within_S03_timing": true,
+      "max_requested_drive_Nm": 0.00038079660558330174
+    },
+    "5V_low_drag": {
+      "trials": [
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.026712654440163033,
+            90.0266795615448
+          ],
+          "open_close_open_time_s": 1.4144,
+          "max_speed_deg_s": 134.0233271690588,
+          "max_requested_drive_Nm": 0.004529519366179248,
+          "max_output_Nm": 0.004524972248074724
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.026799836337707314,
+            90.02653162681833
+          ],
+          "open_close_open_time_s": 1.4224,
+          "max_speed_deg_s": 134.02322995548758,
+          "max_requested_drive_Nm": 0.004519105414415634,
+          "max_output_Nm": 0.0045143386543142925
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02677573880821506,
+            90.02652575878025
+          ],
+          "open_close_open_time_s": 1.4212,
+          "max_speed_deg_s": 134.0244317164994,
+          "max_requested_drive_Nm": 0.0045339712152034075,
+          "max_output_Nm": 0.004529414304547931
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.026692485694897548,
+            90.02658270824584
+          ],
+          "open_close_open_time_s": 1.4092000000000002,
+          "max_speed_deg_s": 134.02451831055674,
+          "max_requested_drive_Nm": 0.004533861873783363,
+          "max_output_Nm": 0.004529298758735603
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.026708200226949298,
+            90.02671079745143
+          ],
+          "open_close_open_time_s": 1.4228,
+          "max_speed_deg_s": 134.0421901129519,
+          "max_requested_drive_Nm": 0.004525379305902753,
+          "max_output_Nm": 0.004520847469147184
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.026708612742428674,
+            90.02671201201352
+          ],
+          "open_close_open_time_s": 1.4152,
+          "max_speed_deg_s": 134.02436119124158,
+          "max_requested_drive_Nm": 0.004520424453674056,
+          "max_output_Nm": 0.004520424453674056
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.003,
+          "viscous_drag_Nms": 0.0005,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.026683069494549246,
+            90.0266944294605
+          ],
+          "open_close_open_time_s": 1.416,
+          "max_speed_deg_s": 134.02500035623353,
+          "max_requested_drive_Nm": 0.004529519366179248,
+          "max_output_Nm": 0.004524972248074724
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.4092000000000002,
+        1.4228
+      ],
+      "all_cycles_within_S03_timing": true,
+      "max_requested_drive_Nm": 0.0045339712152034075
+    },
+    "5V_nominal_drag": {
+      "trials": [
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024511100857455292,
+            89.39689095049886
+          ],
+          "open_close_open_time_s": 1.476,
+          "max_speed_deg_s": 122.86737230374409,
+          "max_requested_drive_Nm": 0.012037073361901034,
+          "max_output_Nm": 0.012025522685391612
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02441843309089542,
+            89.64075885376059
+          ],
+          "open_close_open_time_s": 1.5032,
+          "max_speed_deg_s": 122.86845648913918,
+          "max_requested_drive_Nm": 0.01202753927046747,
+          "max_output_Nm": 0.012016037277735928
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024371561934175036,
+            90.02436977885739
+          ],
+          "open_close_open_time_s": 1.492,
+          "max_speed_deg_s": 122.86794970366446,
+          "max_requested_drive_Nm": 0.012038135394048412,
+          "max_output_Nm": 0.012026452049349922
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024572499179974668,
+            90.02447113187532
+          ],
+          "open_close_open_time_s": 1.4888000000000001,
+          "max_speed_deg_s": 122.86789741822439,
+          "max_requested_drive_Nm": 0.012035580747954194,
+          "max_output_Nm": 0.012024039557467323
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024505872991853646,
+            90.0243523845715
+          ],
+          "open_close_open_time_s": 1.5128000000000001,
+          "max_speed_deg_s": 122.86767045890882,
+          "max_requested_drive_Nm": 0.012024962268926723,
+          "max_output_Nm": 0.0120134430414615
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02455849941828576,
+            90.02446765356393
+          ],
+          "open_close_open_time_s": 1.4952,
+          "max_speed_deg_s": 122.86885231553231,
+          "max_requested_drive_Nm": 0.012037073361901034,
+          "max_output_Nm": 0.012025522685391612
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024511100857455292,
+            89.39689095049886
+          ],
+          "open_close_open_time_s": 1.476,
+          "max_speed_deg_s": 122.86737230374409,
+          "max_requested_drive_Nm": 0.012037073361901034,
+          "max_output_Nm": 0.012025522685391612
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.476,
+        1.5128000000000001
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.012038135394048412
+    },
+    "5V_twice_drag": {
+      "trials": [
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.021165147161299802,
+            84.75439337315292
+          ],
+          "open_close_open_time_s": null,
+          "max_speed_deg_s": 106.5733033358543,
+          "max_requested_drive_Nm": 0.02300390789085217,
+          "max_output_Nm": 0.02298073362938823
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02117867725886425,
+            85.20004419479068
+          ],
+          "open_close_open_time_s": 1.6084,
+          "max_speed_deg_s": 106.57368998555185,
+          "max_requested_drive_Nm": 0.022991310276000987,
+          "max_output_Nm": 0.022968148355279373
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.021253731860264167,
+            86.4074728950282
+          ],
+          "open_close_open_time_s": 1.62,
+          "max_speed_deg_s": 106.57385546196511,
+          "max_requested_drive_Nm": 0.022991310276000987,
+          "max_output_Nm": 0.022968148355279373
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.021283607311641372,
+            85.91691534876293
+          ],
+          "open_close_open_time_s": 1.6104000000000003,
+          "max_speed_deg_s": 106.57317728924716,
+          "max_requested_drive_Nm": 0.022985438655603988,
+          "max_output_Nm": 0.02296216599393421
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02127815155127101,
+            87.26465875854845
+          ],
+          "open_close_open_time_s": 1.6532,
+          "max_speed_deg_s": 106.57342475950173,
+          "max_requested_drive_Nm": 0.022990129638113442,
+          "max_output_Nm": 0.022966982872947246
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02120691835224309,
+            87.59552658833155
+          ],
+          "open_close_open_time_s": 1.6408,
+          "max_speed_deg_s": 106.5736971540226,
+          "max_requested_drive_Nm": 0.02300390789085217,
+          "max_output_Nm": 0.02298073362938823
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.018,
+          "viscous_drag_Nms": 0.0025,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02128595619441725,
+            87.59561781233482
+          ],
+          "open_close_open_time_s": 1.6388,
+          "max_speed_deg_s": 106.57315775242422,
+          "max_requested_drive_Nm": 0.02300390789085217,
+          "max_output_Nm": 0.02298073362938823
+        }
+      ],
+      "complete_cycles": 6,
+      "duration_range_s": [
+        1.6084,
+        1.6532
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.02300390789085217
+    },
+    "5V_one_lid_touch": {
+      "trials": [
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024473395751910893,
+            89.39688339707827
+          ],
+          "open_close_open_time_s": 1.5052,
+          "max_speed_deg_s": 122.86805297973781,
+          "max_requested_drive_Nm": 0.02860814538895645,
+          "max_output_Nm": 0.028068107257779352
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.0244743942145324,
+            89.39677749622004
+          ],
+          "open_close_open_time_s": 1.5288,
+          "max_speed_deg_s": 122.86772064159972,
+          "max_requested_drive_Nm": 0.0286003626713188,
+          "max_output_Nm": 0.02807219512675229
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024476461236002903,
+            89.39688503379246
+          ],
+          "open_close_open_time_s": 1.5112,
+          "max_speed_deg_s": 122.86716889621387,
+          "max_requested_drive_Nm": 0.02859775904401265,
+          "max_output_Nm": 0.02806938418412912
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024432189314562196,
+            87.88821959549426
+          ],
+          "open_close_open_time_s": 1.4836000000000003,
+          "max_speed_deg_s": 122.86756821013286,
+          "max_requested_drive_Nm": 0.028606081698511858,
+          "max_output_Nm": 0.028066182667804463
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024451368056420033,
+            88.67684827408134
+          ],
+          "open_close_open_time_s": 1.52,
+          "max_speed_deg_s": 122.8685810383452,
+          "max_requested_drive_Nm": 0.028605113050226182,
+          "max_output_Nm": 0.028069979519573518
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024506435263145183,
+            90.02445886400628
+          ],
+          "open_close_open_time_s": 1.5248000000000002,
+          "max_speed_deg_s": 122.86791936253337,
+          "max_requested_drive_Nm": 0.02860537087575394,
+          "max_output_Nm": 0.028065322280140304
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.8,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 0.0,
+          "touch_N": 1.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.09401129943502826,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.024473395751910893,
+            89.39688339707827
+          ],
+          "open_close_open_time_s": 1.5052,
+          "max_speed_deg_s": 122.86805297973781,
+          "max_requested_drive_Nm": 0.02859639574460261,
+          "max_output_Nm": 0.028068107257779352
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.4836000000000003,
+        1.5288
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.02860814538895645
+    },
+    "5V_warmer_with_inertia": {
+      "trials": [
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.0,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02370479204497711,
+            89.39612147768457
+          ],
+          "open_close_open_time_s": 1.5164,
+          "max_speed_deg_s": 119.19359984111631,
+          "max_requested_drive_Nm": 0.011985846683852327,
+          "max_output_Nm": 0.011974292527596572
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.016800000000000002,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.023824627175349247,
+            89.39597291345476
+          ],
+          "open_close_open_time_s": 1.5384,
+          "max_speed_deg_s": 119.19299796194379,
+          "max_requested_drive_Nm": 0.011965142282092629,
+          "max_output_Nm": 0.011953634716128293
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.025199999999999997,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.023733433035542515,
+            89.39610745827855
+          ],
+          "open_close_open_time_s": 1.5216,
+          "max_speed_deg_s": 119.19323462228901,
+          "max_requested_drive_Nm": 0.011977552961769075,
+          "max_output_Nm": 0.011966012512595192
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.033600000000000005,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.023795063612343598,
+            88.74476853019473
+          ],
+          "open_close_open_time_s": 1.5080000000000002,
+          "max_speed_deg_s": 119.1931002094939,
+          "max_requested_drive_Nm": 0.011981640473098723,
+          "max_output_Nm": 0.011969966084736086
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.041999999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.023837380080616026,
+            89.52407558152197
+          ],
+          "open_close_open_time_s": 1.544,
+          "max_speed_deg_s": 119.19351081909186,
+          "max_requested_drive_Nm": 0.01197395299573198,
+          "max_output_Nm": 0.011962429374647872
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.05039999999999999,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02363431935465352,
+            90.02359864267088
+          ],
+          "open_close_open_time_s": 1.534,
+          "max_speed_deg_s": 119.19348171625907,
+          "max_requested_drive_Nm": 0.011985846683852327,
+          "max_output_Nm": 0.011974292527596572
+        },
+        {
+          "terminal_V": 5.0,
+          "warm_stall_factor": 0.65,
+          "coulomb_drag_Nm": 0.009,
+          "viscous_drag_Nms": 0.00125,
+          "reflected_inertia_kgm2": 1.2764542579994777e-06,
+          "touch_N": 0.0,
+          "first_write_delay_s": 0.059699999999999996,
+          "rated_stall_Nm": 0.52,
+          "warm_pwm_zero_speed_torque_Nm": 0.07638418079096046,
+          "zero_load_pwm_speed_deg_s": 139.66101694915253,
+          "lid_motion_deg": [
+            -0.02370479204497711,
+            89.39612147768457
+          ],
+          "open_close_open_time_s": 1.5164,
+          "max_speed_deg_s": 119.19359984111631,
+          "max_requested_drive_Nm": 0.011985846683852327,
+          "max_output_Nm": 0.011974292527596572
+        }
+      ],
+      "complete_cycles": 7,
+      "duration_range_s": [
+        1.5080000000000002,
+        1.544
+      ],
+      "all_cycles_within_S03_timing": false,
+      "max_requested_drive_Nm": 0.011985846683852327
+    }
+  }
+}

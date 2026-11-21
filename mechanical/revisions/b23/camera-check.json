@@ -1,0 +1,455 @@
+{
+  "status": "pass",
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "routes_sha256": "c7073240cefd42a3830f62c3ec98399677d56f0af397e1b7249851252e5fb94a",
+  "camera_diameter_mm": 4.0,
+  "internal_length_mm": 337.29,
+  "solid_reserve_mm": 0.25,
+  "target_min_radius_mm": 12.0,
+  "scope": "Fixed length geometry at the listed poses. No friction, wear, or fatigue model.",
+  "samples": [
+    {
+      "pose_deg": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 1.5890578879407258e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.69459832204148,
+      "bend_point_mm": [
+        1.56,
+        -35.77,
+        -49.07
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.1,
+        8.0,
+        0.0,
+        9.1
+      ],
+      "status": "pass",
+      "length_error_mm": -6.8805408659500245e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.24517852042925,
+      "bend_point_mm": [
+        36.72,
+        -9.83,
+        -67.59
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.1,
+        8.0,
+        0.0,
+        9.1
+      ],
+      "status": "pass",
+      "length_error_mm": 7.645315633908467e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.16871341022397,
+      "bend_point_mm": [
+        -27.7,
+        -20.92,
+        -54.58
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -16.7,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 9.984205860291695e-05,
+      "maximum_endpoint_error_mm": 7.105427357601002e-15,
+      "minimum_radius_mm": 12.245178520405345,
+      "bend_point_mm": [
+        36.72,
+        -9.83,
+        -67.59
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -16.7,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 0.00010809807935174831,
+      "maximum_endpoint_error_mm": 7.105427357601002e-15,
+      "minimum_radius_mm": 12.168713410223205,
+      "bend_point_mm": [
+        -27.7,
+        -20.92,
+        -54.58
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.1,
+        0.0,
+        0.0,
+        8.6
+      ],
+      "status": "pass",
+      "length_error_mm": 5.406383252193336e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.43268268564671,
+      "bend_point_mm": [
+        0.25,
+        -31.18,
+        -26.55
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -30.0,
+        -5.0,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 4.8737617532879085e-05,
+      "maximum_endpoint_error_mm": 3.552713678800501e-15,
+      "minimum_radius_mm": 12.518150239720654,
+      "bend_point_mm": [
+        37.16,
+        7.1,
+        -3.34
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        30.0,
+        4.5,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 8.787934234533168e-06,
+      "maximum_endpoint_error_mm": 3.552713678800501e-15,
+      "minimum_radius_mm": 12.51310965408328,
+      "bend_point_mm": [
+        -14.79,
+        -32.04,
+        -52.38
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -8.0,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 8.862749893978616e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.69459832204148,
+      "bend_point_mm": [
+        1.56,
+        -35.77,
+        -49.07
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -17.2,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 0.00010116519791836254,
+      "maximum_endpoint_error_mm": 1.4210854715202004e-14,
+      "minimum_radius_mm": 12.245178520449752,
+      "bend_point_mm": [
+        36.72,
+        -9.83,
+        -67.59
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        -17.2,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 0.00013160125382682963,
+      "maximum_endpoint_error_mm": 1.4210854715202004e-14,
+      "minimum_radius_mm": 12.245178520449752,
+      "bend_point_mm": [
+        36.72,
+        -9.83,
+        -67.59
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -17.2,
+        -8.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 0.00017228406341018854,
+      "maximum_endpoint_error_mm": 2.5618982671915014e-14,
+      "minimum_radius_mm": 12.168713410225898,
+      "bend_point_mm": [
+        -27.7,
+        -20.92,
+        -54.58
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        60.0,
+        -17.2,
+        8.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 0.00016842377135617426,
+      "maximum_endpoint_error_mm": 2.5618982671915014e-14,
+      "minimum_radius_mm": 12.168713410225898,
+      "bend_point_mm": [
+        -27.7,
+        -20.92,
+        -54.58
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        0.0,
+        -17.2,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 3.4490398093112162e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.554781496409527,
+      "bend_point_mm": [
+        7.41,
+        -37.57,
+        58.03
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -45.0,
+        -8.0,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 7.695887745740038e-06,
+      "maximum_endpoint_error_mm": 1.0048591735576161e-14,
+      "minimum_radius_mm": 12.799405030443877,
+      "bend_point_mm": [
+        27.36,
+        -16.15,
+        79.56
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -15.0,
+        -2.0,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 2.236894545148971e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.799405030440198,
+      "bend_point_mm": [
+        14.69,
+        -24.23,
+        76.53
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        15.0,
+        1.5,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": -7.81036118269185e-06,
+      "maximum_endpoint_error_mm": 8.881784197001252e-16,
+      "minimum_radius_mm": 12.758354343406635,
+      "bend_point_mm": [
+        -6.68,
+        -34.91,
+        -51.11
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        45.0,
+        3.0,
+        0.0,
+        0.0,
+        9.79
+      ],
+      "status": "pass",
+      "length_error_mm": 9.160464173874061e-07,
+      "maximum_endpoint_error_mm": 7.105427357601002e-15,
+      "minimum_radius_mm": 12.276823642456238,
+      "bend_point_mm": [
+        -21.8,
+        -27.32,
+        -53.68
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        -60.0,
+        7.113,
+        8.0,
+        0.0,
+        8.87
+      ],
+      "status": "pass",
+      "length_error_mm": -8.88445583768771e-09,
+      "maximum_endpoint_error_mm": 7.105427357601002e-15,
+      "minimum_radius_mm": 12.24517852042925,
+      "bend_point_mm": [
+        36.72,
+        -9.83,
+        -67.59
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        0.0,
+        7.113,
+        0.0,
+        0.0,
+        8.87
+      ],
+      "status": "pass",
+      "length_error_mm": 1.8696082406677306e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.43725411125343,
+      "bend_point_mm": [
+        7.47,
+        -18.54,
+        43.89
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    },
+    {
+      "pose_deg": [
+        60.0,
+        7.113,
+        8.0,
+        0.0,
+        8.87
+      ],
+      "status": "pass",
+      "length_error_mm": -9.315310535384924e-06,
+      "maximum_endpoint_error_mm": 0.0,
+      "minimum_radius_mm": 12.16871341022397,
+      "bend_point_mm": [
+        -27.7,
+        -20.92,
+        -54.58
+      ],
+      "solid_contacts": [],
+      "wire_contacts": [],
+      "self_contact": null
+    }
+  ],
+  "reference_routes_sha256": "83af32fba18e9736317ab094123364a5b1327dc6e3d8b4f9dee6c744490ea960",
+  "reference_cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed"
+}

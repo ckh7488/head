@@ -3,6 +3,7 @@
 from argparse import ArgumentParser
 from hashlib import sha256
 import json
+from math import isfinite
 from pathlib import Path
 
 import numpy as np
@@ -36,7 +37,7 @@ def load_scene(cad, layout):
     return scene
 
 
-def measure(pose, paths, layout, wiring, scene):
+def measure(pose, paths, layout, wiring, scene, minimum_wire_gap=-.06):
     motion = matrices(layout, *pose)
     dimensions = {wire['id']: wire['diameter'] for wire in wiring['routes']}
     route = paths.pop(CAMERA)
@@ -48,7 +49,7 @@ def measure(pose, paths, layout, wiring, scene):
     endpoints_error = float(np.linalg.norm(route[[0, -1]]-endpoints, axis=1).max())
     length_error = float(cable.arc[-1])-LENGTH
     objects = scene.hits(cable, motion, SOLID_RESERVE)
-    wires = [hit for other in others if (hit := segment_gap(cable, other))]
+    wires = [hit for other in others if (hit := segment_gap(cable, other, minimum_wire_gap))]
     own = self_gap(cable)
     passed = abs(length_error) < .01 and endpoints_error < .01 and cable.radius >= RADIUS
     return {'pose_deg': pose, 'status': 'pass' if passed and not (objects or wires or own) else 'fail',
@@ -57,7 +58,10 @@ def measure(pose, paths, layout, wiring, scene):
             'solid_contacts': objects, 'wire_contacts': wires, 'self_contact': own}
 
 
-def check(cad, file, output):
+def check(cad, file, output, minimum_wire_gap=None):
+    if minimum_wire_gap is not None and (not isfinite(minimum_wire_gap) or minimum_wire_gap < 0):
+        raise ValueError('The minimum wire gap must be finite and nonnegative')
+    measure_args = {} if minimum_wire_gap is None else {'minimum_wire_gap': minimum_wire_gap}
     layout = read(cad/'cad_parts.json')
     wiring = read(WIRE_DATA)
     scene = load_scene(cad, layout)
@@ -75,7 +79,7 @@ def check(cad, file, output):
                     or any(points.ndim != 2 or points.shape[1] != 3 or len(points) < 3
                            or not np.isfinite(points).all() for points in paths.values())):
                 raise ValueError(f'Incomplete cable pose {index}')
-            rows.append(measure(pose.tolist(), paths, layout, wiring, scene))
+            rows.append(measure(pose.tolist(), paths, layout, wiring, scene, **measure_args))
     passed = all(row['status'] == 'pass' for row in rows)
     result = {'status': 'pass' if passed else 'fail', 'cad_sha256': layout['source_sha256'],
               'routes_sha256': sha256(file.read_bytes()).hexdigest(),
@@ -83,6 +87,8 @@ def check(cad, file, output):
               'solid_reserve_mm': SOLID_RESERVE, 'target_min_radius_mm': RADIUS,
               'scope': 'Fixed length geometry at the listed poses. No friction, wear, or fatigue model.',
               'samples': rows}
+    if minimum_wire_gap is not None:
+        result['minimum_wire_gap_mm'] = minimum_wire_gap
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2)+'\n')
     print(f'{len(rows)} camera routes, {sum(r["status"] == "pass" for r in rows)} pass', flush=True)
@@ -94,6 +100,10 @@ if __name__ == '__main__':
     parser.add_argument('cad', type=Path)
     parser.add_argument('paths', type=Path)
     parser.add_argument('report', type=Path)
+    parser.add_argument('--minimum-wire-gap', type=float, metavar='MM',
+                        help='Require a nonnegative surface gap to every neighboring cable.')
     args = parser.parse_args()
-    if not check(args.cad, args.paths, args.report):
+    if args.minimum_wire_gap is not None and (not isfinite(args.minimum_wire_gap) or args.minimum_wire_gap < 0):
+        parser.error('the minimum wire gap must be finite and nonnegative')
+    if not check(args.cad, args.paths, args.report, args.minimum_wire_gap):
         raise SystemExit(1)

@@ -1,0 +1,353 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "status": "pass",
+  "powered_pitch_deg": [
+    -15.0,
+    4.5
+  ],
+  "powered_feedback_pitch_deg": [
+    -15.732421875,
+    5.185546875
+  ],
+  "firmware_sha256": "9501396375f6714d17f686bbb1333ceb9172eb5bed104aa72e60a7541cf68bf0",
+  "command_ticks": [
+    -171,
+    51
+  ],
+  "feedback_tolerance_ticks": 8,
+  "required_nonstop_gap_mm": 0.1,
+  "released_overshoot_deg": {
+    "back": 0.76,
+    "forward": 1.16
+  },
+  "locations": [
+    {
+      "id": "pitch-stop-back",
+      "label": "목 상하 · 뒤로",
+      "stage": "pitch-stop-pins",
+      "actors": [
+        "PitchLimitLink",
+        "PitchLimitUpperPin"
+      ],
+      "status": "pass",
+      "first_contact_deg": -16.2,
+      "free_deg": -16.196875,
+      "center_mm": [
+        -44.0,
+        32.46018528891918,
+        102.25772026634795
+      ],
+      "witness_probe_deg": -16.21,
+      "witness_bounds_mm": [
+        [
+          -45.5,
+          31.844825056990317,
+          101.9988982327458
+        ],
+        [
+          -42.5,
+          33.07554552084803,
+          102.51654229995007
+        ]
+      ],
+      "head_from_neutral": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.9602936856769431,
+          0.2789911060392293,
+          -31.247003876393677
+        ],
+        [
+          0.0,
+          -0.2789911060392293,
+          0.9602936856769431,
+          4.447107204182373
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "anchor_from_neutral": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.9872227951578039,
+          0.15934601570423063,
+          -13.530896040370969
+        ],
+        [
+          0.0,
+          -0.15934601570423063,
+          0.9872227951578039,
+          5.254613229581054
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "margin_from_powered_limit_deg": 1.1968749999999986,
+      "margin_from_feedback_limit_deg": 0.4644531249999986,
+      "calibrated_contact_interval_deg": [
+        -16.444140625,
+        -15.952734374999999
+      ],
+      "calibrated_margin_from_feedback_limit_deg": 0.22031249999999858
+    },
+    {
+      "id": "pitch-stop-forward",
+      "label": "목 상하 · 앞으로",
+      "stage": "pitch-stop-pins",
+      "actors": [
+        "PitchLimitLink",
+        "PitchLimitUpperPin"
+      ],
+      "status": "pass",
+      "first_contact_deg": 5.7,
+      "free_deg": 5.696875,
+      "center_mm": [
+        -44.0,
+        39.04415738589689,
+        117.77857123047819
+      ],
+      "witness_probe_deg": 5.71,
+      "witness_bounds_mm": [
+        [
+          -45.5,
+          38.411090217577396,
+          117.5027937648386
+        ],
+        [
+          -42.5,
+          39.67722455421638,
+          118.05434869611778
+        ]
+      ],
+      "head_from_neutral": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.9950555699612263,
+          -0.09931974974363901,
+          11.12381197128757
+        ],
+        [
+          0.0,
+          0.09931974974363901,
+          0.9950555699612263,
+          0.5537761643426506
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "anchor_from_neutral": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.9985641778704754,
+          -0.05356848582759816,
+          4.697789642368679
+        ],
+        [
+          0.0,
+          0.05356848582759816,
+          0.9985641778704754,
+          -1.2678641062489078
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "margin_from_powered_limit_deg": 1.1968750000000004,
+      "margin_from_feedback_limit_deg": 0.5113281250000004,
+      "calibrated_contact_interval_deg": [
+        5.4361328125,
+        5.96171875
+      ],
+      "calibrated_margin_from_feedback_limit_deg": 0.25058593750000036
+    }
+  ],
+  "pitch_bearing_mates": [
+    [
+      "Part012",
+      "Part013"
+    ],
+    [
+      "Part014",
+      "Part015"
+    ]
+  ],
+  "pitch_drive_mate": [
+    "Part018",
+    "Part016"
+  ],
+  "coverage": "rigid pitch with sampled yaw, gaze, blink and jaw",
+  "local_pose_order": [
+    "eye_pitch",
+    "eye_yaw",
+    "blink",
+    "jaw"
+  ],
+  "issues": [],
+  "lower_link_pivot": {
+    "actors": [
+      "PitchLimitLowerPin",
+      "PitchLimitLink"
+    ],
+    "required_gap_mm": 0.02,
+    "nominal_radial_clearance_mm": 0.04999999999999982
+  },
+  "calibrated_span_tolerance_mm": {
+    "finished_slot_end": 0.1,
+    "lower_pivot_radial_play": 0.04999999999999982,
+    "combined": 0.14999999999999983
+  },
+  "calibrated_scope": "Finish both slot ends to the spacing measured on the assembled pivots.",
+  "recorded_released_jaw_deg": 9.0,
+  "requested_released_jaw_deg": 9.8,
+  "powered": {
+    "pitch_intervals": 1582,
+    "sampled_gap_mm": 0.31999969482421875,
+    "cross_pair_signs": 22430,
+    "continuous_lower_bound_mm": 0.10005075936824176,
+    "joint_cases": 518,
+    "pitch_deg": [
+      -15.732421875,
+      5.185546875
+    ],
+    "jaw_deg": [
+      0.0,
+      5.5
+    ],
+    "lower_link_pivot": {
+      "pitch_intervals": 1280,
+      "sampled_gap_mm": 0.04907760293710676,
+      "continuous_lower_bound_mm": 0.024774846928772947,
+      "closest": {
+        "actors": [
+          "PitchLimitLowerPin",
+          "PitchLimitLink"
+        ],
+        "pitch_deg": -0.015363693237304688,
+        "neck_yaw_deg": 0.0,
+        "local_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "samples_interval_deg": [
+          -0.030727386474609375,
+          0.0
+        ]
+      }
+    },
+    "closest": {
+      "actors": [
+        "Part011",
+        "Jaw_39_right_jaw_pivot_arm"
+      ],
+      "pitch_deg": 5.185546875,
+      "neck_yaw_deg": 0.0,
+      "local_deg": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "samples_interval_deg": [
+        5.185546875,
+        5.185546875
+      ]
+    }
+  },
+  "released": {
+    "pitch_intervals": 1932,
+    "sampled_gap_mm": 0.13008957785141484,
+    "cross_pair_signs": 22430,
+    "continuous_lower_bound_mm": 0.10066196322044263,
+    "joint_cases": 542,
+    "pitch_deg": [
+      -17.204140625,
+      7.12171875
+    ],
+    "jaw_deg": [
+      0.0,
+      9.8
+    ],
+    "lower_link_pivot": {
+      "pitch_intervals": 1280,
+      "sampled_gap_mm": 0.049077606736855135,
+      "continuous_lower_bound_mm": 0.020343195163957047,
+      "closest": {
+        "actors": [
+          "PitchLimitLowerPin",
+          "PitchLimitLink"
+        ],
+        "pitch_deg": -0.016800918579101563,
+        "neck_yaw_deg": 0.0,
+        "local_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "samples_interval_deg": [
+          -0.03360183715820313,
+          0.0
+        ]
+      }
+    },
+    "closest": {
+      "actors": [
+        "Part018",
+        "Part041"
+      ],
+      "pitch_deg": -17.204140625,
+      "neck_yaw_deg": 0.0,
+      "local_deg": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "samples_interval_deg": [
+        -17.204140625,
+        -17.204140625
+      ]
+    }
+  }
+}

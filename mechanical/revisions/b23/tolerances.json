@@ -1,0 +1,142 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "relative_offset_each_axis_mm": 0.25,
+  "interfaces": [
+    {
+      "parts": [
+        "Part078",
+        "Part076"
+      ],
+      "interface": "lid and hinge carrier",
+      "samples": 93,
+      "nominal_min_mm": 0.9300003051757812,
+      "assembly_bound_mm": 0.49698760328356195,
+      "angles_deg": [
+        0.0,
+        0,
+        0,
+        -1,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part078",
+        "Part073"
+      ],
+      "interface": "lid and front shell",
+      "samples": 93,
+      "nominal_min_mm": 0.740685366555429,
+      "assembly_bound_mm": 0.30767266466320975,
+      "angles_deg": [
+        0.0,
+        0,
+        0,
+        84,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part078",
+        "Part029"
+      ],
+      "interface": "lid and eyeball",
+      "samples": 2325,
+      "nominal_min_mm": 0.9423649009987624,
+      "assembly_bound_mm": 0.5093521991065431,
+      "angles_deg": [
+        0.0,
+        -8,
+        -10,
+        52,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part057",
+        "Part024"
+      ],
+      "interface": "link and eye cradle",
+      "samples": 837,
+      "nominal_min_mm": 1.000115921284839,
+      "assembly_bound_mm": 0.5671032193926197,
+      "angles_deg": [
+        0.0,
+        8,
+        0,
+        33,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part079",
+        "Part077"
+      ],
+      "interface": "lid and hinge carrier",
+      "samples": 93,
+      "nominal_min_mm": 0.9300003051757812,
+      "assembly_bound_mm": 0.49698760328356195,
+      "angles_deg": [
+        0.0,
+        0,
+        0,
+        -1,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part079",
+        "Part073"
+      ],
+      "interface": "lid and front shell",
+      "samples": 93,
+      "nominal_min_mm": 0.7410011435256421,
+      "assembly_bound_mm": 0.30798844163342276,
+      "angles_deg": [
+        0.0,
+        0,
+        0,
+        91,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part079",
+        "Part033"
+      ],
+      "interface": "lid and eyeball",
+      "samples": 2325,
+      "nominal_min_mm": 0.9423649459630922,
+      "assembly_bound_mm": 0.5093522440708729,
+      "angles_deg": [
+        0.0,
+        8,
+        10,
+        68,
+        0.0
+      ]
+    },
+    {
+      "parts": [
+        "Part060",
+        "Part024"
+      ],
+      "interface": "link and eye cradle",
+      "samples": 837,
+      "nominal_min_mm": 1.000115921284839,
+      "assembly_bound_mm": 0.5671032193926197,
+      "angles_deg": [
+        0.0,
+        8,
+        0,
+        33,
+        0.0
+      ]
+    }
+  ]
+}

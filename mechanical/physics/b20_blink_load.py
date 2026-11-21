@@ -253,7 +253,13 @@ def clamp_screen(cranks, shaft_y, shaft_top_z, radius, depth):
 
 
 def eye_cases(meshes, layout, modulus):
-    pitch = link(meshes['Part044'], (62.85, 20., 151.), (62.85, -29., 119.), modulus)
+    pitch_layout = layout.get('eye_pitch', {})
+    pitch_radius = pitch_layout.get('crank_radius_mm', 10.)
+    pitch_phase = pitch_layout.get('phase_deg', 0.)
+    pickup = pitch_radius*np.array([cos(radians(pitch_phase)), sin(radians(pitch_phase))])
+    motor_yz = np.asarray(pitch_layout.get('servo_axis_mm', (58.65, 10., 151.))[1:])
+    cradle_yz = np.asarray(pitch_layout.get('cradle_axis_mm', (0., -39., 119.))[1:])
+    pitch = link(meshes['Part044'], (62.85, *(motor_yz+pickup)), (62.85, *(cradle_yz+pickup)), modulus)
     center = layout['eye_yaw']['pivot_mm'][:2]
     yaw_z = 116.
     pin_x = center[0]
@@ -264,8 +270,8 @@ def eye_cases(meshes, layout, modulus):
         ('pitch', 'yaw_left', 'yaw_right'),
         (pitch, *(link(meshes['Part037'], (pin_x, yaw_y, yaw_z), (x, -25.5, yaw_z), modulus, (0, 0, 1))
                   for x in (-34, 34))),
-        (10., layout['eye_yaw']['radius_mm'], layout['eye_yaw']['radius_mm']), (0., 90., 90.),
-        ((-49., -32.), *((x-pin_x, -25.5-yaw_y) for x in (-34, 34))),
+        (pitch_radius, layout['eye_yaw']['radius_mm'], layout['eye_yaw']['radius_mm']), (pitch_phase, 90., 90.),
+        (cradle_yz-motor_yz, *((x-pin_x, -25.5-yaw_y) for x in (-34, 34))),
         mean_angles, strict=True,
     ):
         arm = float(np.min(abs(levers(np.linspace(start, end, 161), radius, phase, unit(np.asarray(span))))))

@@ -28,7 +28,8 @@ def geometry(guide, cover):
         screw_tip = cylinder(1.85, 3., (x, CAP_BOLT_Y, NUT_FLOOR_Z - 1.85))
         pockets.append(body.cut([parking, screw_tip]))
         seats.append(cylinder(3.20, COVER_SEAT_DEPTH + .13, (x, CAP_BOLT_Y, CAP_BOLT_SEAT_Z - COVER_SEAT_DEPTH)))
-    return (check_solid(guide.fuse(pockets), 'rear guide with nut pockets'),
+    guide_bolt_passages = [cylinder(3.20, 12., (x, 114., -71.), (0, 1, 0)) for x in (-28.5, 28.5)]
+    return (check_solid(guide.fuse(pockets).cut(guide_bolt_passages).removeSplitter(), 'rear guide with nut pockets'),
             check_solid(cover.cut(seats), 'rear cover with socket-head seats'))
 
 

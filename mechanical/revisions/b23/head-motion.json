@@ -1,0 +1,17 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "pose_samples": 26196,
+  "pairs": 572,
+  "clearance_mm": {
+    "Part024 / Part057": 1.009,
+    "Part057 / Part073": 0.95,
+    "Part024 / Part060": 1.009,
+    "Part041 / Part060": 9.652,
+    "Part060 / Part073": 0.95,
+    "Part073 / Part078": 0.741,
+    "Part076 / Part078": 0.93,
+    "Part073 / Part079": 0.741,
+    "Part077 / Part079": 0.93
+  },
+  "collisions": []
+}

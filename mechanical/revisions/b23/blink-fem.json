@@ -1,0 +1,34 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "modulus_MPa": 1000,
+  "trials": [
+    {
+      "torque_Nm": 0.04,
+      "mesh_mm": 1.45,
+      "left_bearing_mm": 0.13864194617187733,
+      "right_bearing_mm": 0.21704315491974607,
+      "motor_mount_mm": 0.16664049145452392
+    },
+    {
+      "torque_Nm": 0.12,
+      "mesh_mm": 1.45,
+      "left_bearing_mm": 0.415925838515632,
+      "right_bearing_mm": 0.651129464759238,
+      "motor_mount_mm": 0.49992147436357176
+    },
+    {
+      "torque_Nm": 0.04,
+      "mesh_mm": 1.1,
+      "left_bearing_mm": 0.14275268687230136,
+      "right_bearing_mm": 0.2291679420451615,
+      "motor_mount_mm": 0.16883374045682292
+    },
+    {
+      "torque_Nm": 0.12,
+      "mesh_mm": 1.1,
+      "left_bearing_mm": 0.42825806061690397,
+      "right_bearing_mm": 0.6875038261354842,
+      "motor_mount_mm": 0.5065012213704687
+    }
+  ]
+}

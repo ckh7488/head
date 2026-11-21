@@ -267,7 +267,7 @@ function place(step, t) {
     for (const id of move.ids) {
       const entry = nodes.get(id);
       if (!entry) continue;
-      entry.node.visible = stage * count >= k && showExterior(id);
+      entry.node.visible = (move.mounted || stage * count >= k) && showExterior(id);
       entry.node.position.copy(entry.posedPosition).add(offset);
     }
   });
@@ -307,6 +307,9 @@ function frame(step) {
         box.expandByPoint(at.clone().addScalar(-r));
       }
     }
+  }
+  if (box.isEmpty() && step.showWires) {
+    for (const id of step.fixed) box.expandByObject(nodes.get(id).node);
   }
   if (box.isEmpty()) return;
   const middle = box.getCenter(new THREE.Vector3());
@@ -405,6 +408,7 @@ function go(index, stop = null) {
   el("tool-view").hidden = !choices.length;
   el("tool-select").replaceChildren(new Option("공구 경로 숨기기", ""), ...choices.map((tools, i) =>
     new Option(tools.map(toolLabel).join(" → "), String(i))));
+  if (!step.moves.length && choices.length) el("tool-select").selectedIndex = 1;
   show(step);
   state.t = state.playing ? 0 : 1;
   state.last = performance.now();

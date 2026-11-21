@@ -1,0 +1,864 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "sliced_grams_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "command_pitch_deg": [
+    -15.0293,
+    4.4824
+  ],
+  "mechanical_stop_pitch_deg": [
+    -16.46,
+    5.97
+  ],
+  "pitch_axis_mm": [
+    0.0,
+    0.0,
+    112.0
+  ],
+  "touch_force_N": 1.0,
+  "touch_duration_s": 0.15,
+  "moving_strap": {
+    "mass_kg": 0.01137652296100659,
+    "gravity_energy_upper_J": 0.00016128166128783955,
+    "gravity_torque_upper_Nm": 0.003355393343214511,
+    "effective_pitch_inertia_upper_kg_m2": 2.0003575306837452e-05
+  },
+  "installed_head_plus_jaw_g": 632.1780090268585,
+  "installed_stop_parts_g": {
+    "Part011": 52.57726559310727,
+    "Part019": 40.72715329460863,
+    "PitchLimitLowerPin": 1.960353815840031,
+    "PitchLimitUpperPin": 1.9603538158400307
+  },
+  "exterior_levers_m_at_jaw_deg": {
+    "0.0": {
+      "Part073": 0.09866461750383883,
+      "Part074": 0.09805317632030955,
+      "Jaw_30_moving_jaw": 0.12635451630926584
+    },
+    "8.0": {
+      "Part073": 0.09866461750383883,
+      "Part074": 0.09805317632030955,
+      "Jaw_30_moving_jaw": 0.12618087874360548
+    }
+  },
+  "scope": "One inertially fixed jaw at each end of its stroke, level fixed carrier, no hinge friction or damping. Touch acts tangentially at the furthest exterior lever toward target. Touch and power cutoff samples provide sensitivity. Full-stroke force work and separate strap energy give upper bounds.",
+  "cases": {
+    "plates-0-jaw-0": {
+      "mass_kg": 0.6321780090268585,
+      "center_relative_to_axis_mm": [
+        -0.8798507810030005,
+        -4.06500319632599,
+        9.028418211455543
+      ],
+      "axis_inertia_kg_m2": 0.0020879278123794726,
+      "inertia_about_pivot_kg_m2": [
+        [
+          0.0020879278123794726,
+          2.399638350801397e-06,
+          -1.6800270851380978e-05
+        ],
+        [
+          2.399638350801397e-06,
+          0.002224382799833235,
+          -0.0002164203455008262
+        ],
+        [
+          -1.6800270851380978e-05,
+          -0.0002164203455008262,
+          0.002077527375341196
+        ]
+      ],
+      "maximum_gravity_torque_Nm": 0.030896588423061273,
+      "stops": {
+        "negative": {
+          "angle_deg": -16.46,
+          "closing_gravity_torque_Nm": 0.0,
+          "signed_gravity_torque_Nm": 0.008311752983376143,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+              "with_touch_energy_upper_J": 0.04962621302101768,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.04143859870841848,
+                "peak_start": {
+                  "release_deg": 4.4824,
+                  "touch_delay_s": 0.05,
+                  "impact_after_s": 0.1935864568143992
+                },
+                "peak_angular_speed_deg_s": 360.9794018548322
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.00038008899675506954,
+              "with_touch_energy_upper_J": 0.049845020356484915,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.04153178623729962,
+                "peak_start": {
+                  "release_deg": 3.9820999999999995,
+                  "touch_delay_s": 0.1,
+                  "impact_after_s": 0.24860041739031713
+                },
+                "peak_angular_speed_deg_s": 361.38506093735856
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.0008114206894473145,
+              "with_touch_energy_upper_J": 0.05027635204917716,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0004174758675331154,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.03533165136623369
+                },
+                "peak_angular_speed_deg_s": 36.23227287596694
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.039838309612704216,
+                "peak_start": {
+                  "release_deg": 4.4824,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.10777537203065668
+                },
+                "peak_angular_speed_deg_s": 353.9405666166619
+              }
+            }
+          }
+        },
+        "positive": {
+          "angle_deg": 5.97,
+          "closing_gravity_torque_Nm": 0.030896588423061273,
+          "signed_gravity_torque_Nm": 0.030896588423061273,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.00770891713038006,
+              "with_touch_energy_upper_J": 0.05717384849010991,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.007547647527232485,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.3439879916869581
+                },
+                "peak_angular_speed_deg_s": 154.0585109322049
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.053857296630656686,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.1046425667544871
+                },
+                "peak_angular_speed_deg_s": 411.53063056625865
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.00792772446584729,
+              "with_touch_energy_upper_J": 0.057392655825577135,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0077643767839839966,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.2673070353309687
+                },
+                "peak_angular_speed_deg_s": 156.25473681805443
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.05407409286983962,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.09791075070337343
+                },
+                "peak_angular_speed_deg_s": 412.3580828744811
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.008359056158539534,
+              "with_touch_energy_upper_J": 0.05782398751826938,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.008191616773432877,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.2285306982406845
+                },
+                "peak_angular_speed_deg_s": 160.49618137405258
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.05450125770744424,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.09334762513767995
+                },
+                "peak_angular_speed_deg_s": 413.9836151951721
+              }
+            }
+          }
+        }
+      },
+      "touch_point_mm": [
+        -1.4848474264144897,
+        -51.95984649658203,
+        -3.1765520572662327
+      ]
+    },
+    "plates-0-jaw-8": {
+      "mass_kg": 0.6321780090268585,
+      "center_relative_to_axis_mm": [
+        -0.8798507810030005,
+        -3.5052531809482543,
+        8.829198964494106
+      ],
+      "axis_inertia_kg_m2": 0.002086595983750692,
+      "inertia_about_pivot_kg_m2": [
+        [
+          0.002086595983750692,
+          2.130445226974581e-06,
+          -1.6791748922831664e-05
+        ],
+        [
+          2.130445226974581e-06,
+          0.002246208096250972,
+          -0.00019113172257875037
+        ],
+        [
+          -1.6791748922831664e-05,
+          -0.00019113172257875037,
+          0.0020543702502946785
+        ]
+      ],
+      "maximum_gravity_torque_Nm": 0.02731553208340449,
+      "stops": {
+        "negative": {
+          "angle_deg": -16.46,
+          "closing_gravity_torque_Nm": 0.0,
+          "signed_gravity_torque_Nm": 0.005332706544065145,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+              "with_touch_energy_upper_J": 0.04955823784674027,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.04242614045017003,
+                "peak_start": {
+                  "release_deg": 1.6056749999999993,
+                  "touch_delay_s": 0.1,
+                  "impact_after_s": 0.24983676509828584
+                },
+                "peak_angular_speed_deg_s": 365.3719553116002
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.0003799507503798484,
+              "with_touch_energy_upper_J": 0.04977690693583228,
+              "no_touch_simulation": {
+                "peak_energy_J": 6.515560404281037e-05,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.0716323107637012
+                },
+                "peak_angular_speed_deg_s": 14.318394844739915
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.042573934378157124,
+                "peak_start": {
+                  "release_deg": 4.4824,
+                  "touch_delay_s": 0.1,
+                  "impact_after_s": 0.24215277143413766
+                },
+                "peak_angular_speed_deg_s": 366.0077992723092
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.0008110099200193113,
+              "with_touch_energy_upper_J": 0.05020796610547175,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0004921218707302246,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.03401443120112937
+                },
+                "peak_angular_speed_deg_s": 39.35090998358286
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.04286833924177306,
+                "peak_start": {
+                  "release_deg": 4.357324999999998,
+                  "touch_delay_s": 0.15,
+                  "impact_after_s": 0.2976993630923028
+                },
+                "peak_angular_speed_deg_s": 367.27111724731515
+              }
+            }
+          }
+        },
+        "positive": {
+          "angle_deg": 5.97,
+          "closing_gravity_torque_Nm": 0.02731553208340449,
+          "signed_gravity_torque_Nm": 0.02731553208340449,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.006483253278036612,
+              "with_touch_energy_upper_J": 0.05588020946348905,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.006321980665183396,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.39763872485523294
+                },
+                "peak_angular_speed_deg_s": 141.04088627305498
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.05256801688313214,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.10587330374710024
+                },
+                "peak_angular_speed_deg_s": 406.704748923301
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.006701922367128622,
+              "with_touch_energy_upper_J": 0.056098878552581055,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.006538573975534562,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.2944441203851251
+                },
+                "peak_angular_speed_deg_s": 143.43659512758057
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.05278478592222018,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.0989864892778899
+                },
+                "peak_angular_speed_deg_s": 407.5424284169679
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.007132981536768084,
+              "with_touch_energy_upper_J": 0.05652993772222052,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.006965540079373077,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.24660789760786264
+                },
+                "peak_angular_speed_deg_s": 148.0457158954111
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.05321153266290111,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.09432149007602848
+                },
+                "peak_angular_speed_deg_s": 409.1865319050243
+              }
+            }
+          }
+        }
+      },
+      "touch_point_mm": [
+        -1.4848474264144897,
+        -38.29574833510777,
+        -8.229155448928285
+      ]
+    },
+    "plates-0-forward-75g-jaw-0": {
+      "mass_kg": 0.7071780090268585,
+      "center_relative_to_axis_mm": [
+        -0.7865379124848862,
+        -11.057761309775382,
+        12.843396335355846
+      ],
+      "axis_inertia_kg_m2": 0.002609552812379472,
+      "inertia_about_pivot_kg_m2": [
+        [
+          0.002609552812379472,
+          2.3996383508013968e-06,
+          -1.6800270851380974e-05
+        ],
+        [
+          2.3996383508013968e-06,
+          0.002378507799833235,
+          1.9829654499173746e-05
+        ],
+        [
+          -1.6800270851380974e-05,
+          1.9829654499173746e-05,
+          0.0024472773753411964
+        ]
+      ],
+      "maximum_gravity_torque_Nm": 0.0855633296504429,
+      "stops": {
+        "negative": {
+          "angle_deg": -16.46,
+          "closing_gravity_torque_Nm": 0.0,
+          "signed_gravity_torque_Nm": 0.04832233792730261,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+              "with_touch_energy_upper_J": 0.04962621302101768,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.01605924085901262,
+                "peak_start": {
+                  "release_deg": -2.3967250000000004,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.14966893107089177
+                },
+                "peak_angular_speed_deg_s": 201.00973491399577
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.00043423467579843244,
+              "with_touch_energy_upper_J": 0.049899166035528277,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.019110988050076674,
+                "peak_start": {
+                  "release_deg": 0.7301500000000006,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.14969316807149033
+                },
+                "peak_angular_speed_deg_s": 219.27855236942463
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.0009723029518135095,
+              "with_touch_energy_upper_J": 0.05043723431154336,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.021483999939166235,
+                "peak_start": {
+                  "release_deg": 2.9814999999999983,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.14956277350716754
+                },
+                "peak_angular_speed_deg_s": 232.49421772675598
+              }
+            }
+          }
+        },
+        "positive": {
+          "angle_deg": 5.97,
+          "closing_gravity_torque_Nm": 0.0855633296504429,
+          "signed_gravity_torque_Nm": 0.0855633296504429,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.025467866816425207,
+              "with_touch_energy_upper_J": 0.07493279817615506,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.025306629729591086,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.18347681202003885
+                },
+                "peak_angular_speed_deg_s": 252.33165743612116
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.07161624853402285,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.10211781467782002
+                },
+                "peak_angular_speed_deg_s": 424.48306529032817
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.025740819830935797,
+              "with_touch_energy_upper_J": 0.07520575119066564,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.025577489729340715,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.16209382863307226
+                },
+                "peak_angular_speed_deg_s": 253.67843188191551
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.0718870670477003,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.09565873717975723
+                },
+                "peak_angular_speed_deg_s": 425.2849042668639
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.02627888810695088,
+              "with_touch_energy_upper_J": 0.07574381946668073,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.026111450704748716,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.14875082775054305
+                },
+                "peak_angular_speed_deg_s": 256.3126763907813
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.07242099627765801,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.09128175473845523
+                },
+                "peak_angular_speed_deg_s": 426.86134892085295
+              }
+            }
+          }
+        }
+      },
+      "touch_point_mm": [
+        -1.4848474264144897,
+        -51.95984649658203,
+        -3.1765520572662327
+      ]
+    },
+    "plates-0-forward-75g-jaw-8": {
+      "mass_kg": 0.7071780090268585,
+      "center_relative_to_axis_mm": [
+        -0.7865379124848862,
+        -10.55737576927873,
+        12.665305352185685
+      ],
+      "axis_inertia_kg_m2": 0.002608220983750692,
+      "inertia_about_pivot_kg_m2": [
+        [
+          0.002608220983750692,
+          2.1304452269745803e-06,
+          -1.6791748922831664e-05
+        ],
+        [
+          2.1304452269745803e-06,
+          0.002400333096250972,
+          4.511827742124961e-05
+        ],
+        [
+          -1.6791748922831664e-05,
+          4.511827742124961e-05,
+          0.0024241202502946783
+        ]
+      ],
+      "maximum_gravity_torque_Nm": 0.08198227331078613,
+      "stops": {
+        "negative": {
+          "angle_deg": -16.46,
+          "closing_gravity_torque_Nm": 0.0,
+          "signed_gravity_torque_Nm": 0.04534329148799161,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+              "with_touch_energy_upper_J": 0.04955823784674027,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.017418749702144257,
+                "peak_start": {
+                  "release_deg": -1.7713500000000006,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.14988791284412228
+                },
+                "peak_angular_speed_deg_s": 209.3986740215297
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.0004340964294232114,
+              "with_touch_energy_upper_J": 0.04983105261487565,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.020596574479069606,
+                "peak_start": {
+                  "release_deg": 1.3555250000000005,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.1498107901818207
+                },
+                "peak_angular_speed_deg_s": 227.69995053657664
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.000971892182385506,
+              "with_touch_energy_upper_J": 0.05036884836783794,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.0,
+                "peak_start": null,
+                "peak_angular_speed_deg_s": 0.0
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.02306391503393288,
+                "peak_start": {
+                  "release_deg": 3.6068749999999983,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.14962485448479998
+                },
+                "peak_angular_speed_deg_s": 240.95278628532196
+              }
+            }
+          }
+        },
+        "positive": {
+          "angle_deg": 5.97,
+          "closing_gravity_torque_Nm": 0.08198227331078613,
+          "signed_gravity_torque_Nm": 0.08198227331078613,
+          "cases": {
+            "rest": {
+              "initial_speed_deg_s": 0.0,
+              "gravity_and_initial_energy_upper_J": 0.02424220296408176,
+              "with_touch_energy_upper_J": 0.0736391591495342,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.024080935189455793,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.18874173161784874
+                },
+                "peak_angular_speed_deg_s": 246.20797283486485
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.07032714779768434,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.10302786690657775
+                },
+                "peak_angular_speed_deg_s": 420.752727715886
+              }
+            },
+            "profile_cutoff": {
+              "initial_speed_deg_s": 26.106,
+              "gravity_and_initial_energy_upper_J": 0.02451501773221713,
+              "with_touch_energy_upper_J": 0.07391197391766957,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.02435168631009769,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.16609898544261117
+                },
+                "peak_angular_speed_deg_s": 247.58820902711133
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.07059784227569861,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.0964554069711681
+                },
+                "peak_angular_speed_deg_s": 421.56170444789825
+              }
+            },
+            "speed_sensitivity": {
+              "initial_speed_deg_s": 45.0,
+              "gravity_and_initial_energy_upper_J": 0.025052813485179428,
+              "with_touch_energy_upper_J": 0.07444976967063187,
+              "no_touch_simulation": {
+                "peak_energy_J": 0.024885398248993766,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": null,
+                  "impact_after_s": 0.1520506232127229
+                },
+                "peak_angular_speed_deg_s": 250.28667888998928
+              },
+              "one_newton_simulation": {
+                "peak_energy_J": 0.07113165613803663,
+                "peak_start": {
+                  "release_deg": -15.0293,
+                  "touch_delay_s": 0.0,
+                  "impact_after_s": 0.09200437151764339
+                },
+                "peak_angular_speed_deg_s": 423.15248741677436
+              }
+            }
+          }
+        }
+      },
+      "touch_point_mm": [
+        -1.4848474264144897,
+        -38.29574833510777,
+        -8.229155448928285
+      ]
+    }
+  },
+  "maximum": {
+    "negative": {
+      "rest": {
+        "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+        "with_touch_energy_upper_J": 0.04962621302101768,
+        "with_touch_simulated_peak_J": 0.04242614045017003
+      },
+      "profile_cutoff": {
+        "gravity_and_initial_energy_upper_J": 0.00043423467579843244,
+        "with_touch_energy_upper_J": 0.049899166035528277,
+        "with_touch_simulated_peak_J": 0.042573934378157124
+      },
+      "speed_sensitivity": {
+        "gravity_and_initial_energy_upper_J": 0.0009723029518135095,
+        "with_touch_energy_upper_J": 0.05043723431154336,
+        "with_touch_simulated_peak_J": 0.04286833924177306
+      }
+    },
+    "positive": {
+      "rest": {
+        "gravity_and_initial_energy_upper_J": 0.025467866816425207,
+        "with_touch_energy_upper_J": 0.07493279817615506,
+        "with_touch_simulated_peak_J": 0.07161624853402285
+      },
+      "profile_cutoff": {
+        "gravity_and_initial_energy_upper_J": 0.025740819830935797,
+        "with_touch_energy_upper_J": 0.07520575119066564,
+        "with_touch_simulated_peak_J": 0.0718870670477003
+      },
+      "speed_sensitivity": {
+        "gravity_and_initial_energy_upper_J": 0.02627888810695088,
+        "with_touch_energy_upper_J": 0.07574381946668073,
+        "with_touch_simulated_peak_J": 0.07242099627765801
+      }
+    }
+  },
+  "nominal_no_ballast_maximum": {
+    "negative": {
+      "rest": {
+        "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+        "with_touch_energy_upper_J": 0.04962621302101768,
+        "with_touch_simulated_peak_J": 0.04242614045017003
+      },
+      "profile_cutoff": {
+        "gravity_and_initial_energy_upper_J": 0.00038008899675506954,
+        "with_touch_energy_upper_J": 0.049845020356484915,
+        "with_touch_simulated_peak_J": 0.042573934378157124
+      },
+      "speed_sensitivity": {
+        "gravity_and_initial_energy_upper_J": 0.0008114206894473145,
+        "with_touch_energy_upper_J": 0.05027635204917716,
+        "with_touch_simulated_peak_J": 0.04286833924177306
+      }
+    },
+    "positive": {
+      "rest": {
+        "gravity_and_initial_energy_upper_J": 0.00770891713038006,
+        "with_touch_energy_upper_J": 0.05717384849010991,
+        "with_touch_simulated_peak_J": 0.053857296630656686
+      },
+      "profile_cutoff": {
+        "gravity_and_initial_energy_upper_J": 0.00792772446584729,
+        "with_touch_energy_upper_J": 0.057392655825577135,
+        "with_touch_simulated_peak_J": 0.05407409286983962
+      },
+      "speed_sensitivity": {
+        "gravity_and_initial_energy_upper_J": 0.008359056158539534,
+        "with_touch_energy_upper_J": 0.05782398751826938,
+        "with_touch_simulated_peak_J": 0.05450125770744424
+      }
+    }
+  },
+  "forward_75g_sensitivity_maximum": {
+    "negative": {
+      "rest": {
+        "gravity_and_initial_energy_upper_J": 0.00016128166128783955,
+        "with_touch_energy_upper_J": 0.04962621302101768,
+        "with_touch_simulated_peak_J": 0.017418749702144257
+      },
+      "profile_cutoff": {
+        "gravity_and_initial_energy_upper_J": 0.00043423467579843244,
+        "with_touch_energy_upper_J": 0.049899166035528277,
+        "with_touch_simulated_peak_J": 0.020596574479069606
+      },
+      "speed_sensitivity": {
+        "gravity_and_initial_energy_upper_J": 0.0009723029518135095,
+        "with_touch_energy_upper_J": 0.05043723431154336,
+        "with_touch_simulated_peak_J": 0.02306391503393288
+      }
+    },
+    "positive": {
+      "rest": {
+        "gravity_and_initial_energy_upper_J": 0.025467866816425207,
+        "with_touch_energy_upper_J": 0.07493279817615506,
+        "with_touch_simulated_peak_J": 0.07161624853402285
+      },
+      "profile_cutoff": {
+        "gravity_and_initial_energy_upper_J": 0.025740819830935797,
+        "with_touch_energy_upper_J": 0.07520575119066564,
+        "with_touch_simulated_peak_J": 0.0718870670477003
+      },
+      "speed_sensitivity": {
+        "gravity_and_initial_energy_upper_J": 0.02627888810695088,
+        "with_touch_energy_upper_J": 0.07574381946668073,
+        "with_touch_simulated_peak_J": 0.07242099627765801
+      }
+    }
+  },
+  "maximum_fitted_ballast_plates": 0
+}

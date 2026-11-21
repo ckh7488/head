@@ -1,0 +1,1236 @@
+{
+  "project_sha256": "16d5ff8fde519a4dc24741ee736c0e95650e75b96bf124e8499c2724603d1902",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "plate_sha256": {
+    "1": "9936a70947df764cfd242b03b7233d1201ffc1830909eff8db561b2ec5a327e8",
+    "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
+    "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
+    "4": "df567eeab2af556f4d0e553fd0db2869bc4fe028696722f178c28e90eabd72ca",
+    "5": "beab2bb3cf151826a3645d6a7ebaaa57a12e35a984c517e986a01e2a49e14c41",
+    "6": "03e361537dbf6a9c72e1654cfeca0bb547f36960faf05ae43ea55aa8bd4730dd",
+    "7": "183142d52a73440ca5283465f371a49072207ec0b3c3c141d832f7b3575d12d8",
+    "8": "677a50dcbc12a786c3cab0fa3c90c1f7b66a3c41d37644673c9bef7225061693",
+    "9": "6de323f72171d3f098430fe25ecddb09377238e792c593529d941041bf0a0226",
+    "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
+    "11": "8e5625005604535cd0ad25caae41485eee67fb7e4aa288b6269c4467e28e849c",
+    "12": "f1f5d30ee257338730eaca087eb50774b5ad546e2c265c74a1cb8d63b244280f"
+  },
+  "changed_plates": {
+    "1": [
+      "01_base_cup-hatch-capture.stl"
+    ],
+    "3": [
+      "05_yaw_servo_jaw_1-B23.stl",
+      "05_yaw_servo_jaw_2-B23.stl"
+    ],
+    "4": [
+      "28_skull_front_with_camera_tray-B23.stl"
+    ],
+    "6": [
+      "02_outer_bearing_seat-B23.stl",
+      "YawStopPadLeft.stl",
+      "YawStopPadRight.stl"
+    ],
+    "7": [
+      "12_eye_tilt_cradle-B23.stl"
+    ],
+    "8": [
+      "04_yaw_rotor-B23.stl",
+      "18_eye_pitch_link_58p5mm-B23.stl",
+      "17_eye_pitch_horn_10mm-B23.stl"
+    ],
+    "11": [
+      "40-rear-cable-guide-service.stl",
+      "42-rear-cable-cover-service.stl"
+    ],
+    "12": [
+      "26_u20cam_slotted_bracket-B23.stl",
+      "35_hatch_nut_keeper_left-B23.stl",
+      "35_hatch_nut_keeper_right-B23.stl"
+    ]
+  },
+  "identical_to_b22_plates": [
+    2,
+    5,
+    9,
+    10
+  ],
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "canonical_mesh_sha256": {
+    "01_base_cup-hatch-capture.stl": "a12810ffe60e810e8492b85853db9374209646e36cd21700ba2177079a2450c2",
+    "02_outer_bearing_seat-B23.stl": "6a34ee3c89dd4717619a4c4e4ef16808b98222702adb7cd24e36c8781a59c5bf",
+    "04_yaw_rotor-B23.stl": "22eb11531d9128efe4fca8ee9cfd8283a31f10e82a353c2f56bfe0dbc872fb22",
+    "05_yaw_servo_jaw_1-B23.stl": "c0a8e17ec2d32e2758725f8f26ee35f9805a34519c3a8dc9fd1f10ff31ab3fc6",
+    "05_yaw_servo_jaw_2-B23.stl": "3f827a6722f9bb8183caa7650e9f17dfcd0ef5f26fb66512a292bdd70bf89c61",
+    "12_eye_tilt_cradle-B23.stl": "62995a231f59da7f9830b46470c1ca9759e19ea6667be57e7bd2b3545dc6c644",
+    "17_eye_pitch_horn_10mm-B23.stl": "f320e66f0d89cf4bec1b3733369900ff0b39133617c757c8b72edee26fcf4c24",
+    "18_eye_pitch_link_58p5mm-B23.stl": "da005669c9f5f7e4cdabb97297f5deedca4793d9eac5c07d6b7330c631604d19",
+    "26_u20cam_slotted_bracket-B23.stl": "c32d3ef0ba69ae7258d9334d1459ef3c8e902b7df0f3d17974b26e114649e7fa",
+    "35_hatch_two_nut_keeper.stl": "99a662a0e6f54b60559f0d94b775c3d193a63dc41c2b45aea5186b3bbeb94491",
+    "40-rear-cable-guide-service.stl": "979a5842392954999ddd2cf03bb038b58cc773cc27bb55953aa57d3025416c03",
+    "42-rear-cable-cover-service.stl": "b17c0d07291a84f9b920fd2dc556f253ea01dd9f5a3a2be8202d1d67d0253879",
+    "YawStopPadLeft.stl": "cabf84ad59950d2a37ba59aceb0b1a41e2aa94be31c1cf0ecb5dc62ae125abd3",
+    "YawStopPadRight.stl": "1fbe5cad8b7b62e891799afb880c84960c4a230a2d57d87975cbab6b950f4e97"
+  },
+  "baseline_project_sha256": "32963a8a705c075ed096742c91b5f4c2c07fde67850c51cfa241d2b5879cb0cb",
+  "slicer": "Bambu Studio 02.09.01.70",
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "layer_height_mm": 0.2,
+  "plate_surface": "Textured PEI Plate",
+  "filament": "R5 B15 Bambu PETG HF 14 mm3/s @ P2S",
+  "raster_step_mm": 0.2,
+  "checks_by_plate": {
+    "1": {
+      "objects": 1,
+      "object_names": [
+        "01_base_cup-hatch-capture"
+      ],
+      "layers": 413,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 240.71441650390625,
+      "estimated_seconds": 31777.125,
+      "b22_filament_g": 239.6945343017578,
+      "b22_estimated_seconds": 31469.498046875,
+      "diff_filament_g": 1.0198822021484375,
+      "diff_estimated_seconds": 307.626953125,
+      "gcode_sha256": "49fba70d7225e6419adce4f04ffbee9ed5750e6eac0024d5cc44ee6d4c35e3a9"
+    },
+    "3": {
+      "objects": 6,
+      "object_names": [
+        "27_openrb_plate_1",
+        "27_c3_carrier-B21",
+        "05_yaw_servo_jaw_1-B23",
+        "05_yaw_servo_jaw_2-B23",
+        "51_c3_clamp_left-B21",
+        "51_c3_clamp_right-B21"
+      ],
+      "layers": 113,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 21.35329246520996,
+      "estimated_seconds": 3992.930419921875,
+      "b22_filament_g": 21.392242431640625,
+      "b22_estimated_seconds": 3986.602783203125,
+      "diff_filament_g": -0.03894996643066406,
+      "diff_estimated_seconds": 6.32763671875,
+      "gcode_sha256": "92161b0c549fbb42cc014d5a058b950fc0825968b18bcca5fdffbc66770a6a5d"
+    },
+    "4": {
+      "objects": 1,
+      "object_names": [
+        "28_skull_front_with_camera_tray-B23"
+      ],
+      "layers": 523,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 221.0269775390625,
+      "estimated_seconds": 51974.6640625,
+      "b22_filament_g": 221.24253845214844,
+      "b22_estimated_seconds": 52000.2421875,
+      "diff_filament_g": -0.2155609130859375,
+      "diff_estimated_seconds": -25.578125,
+      "gcode_sha256": "cedb12a49c865dc7d17703a541253e7e59ee40a86e7dd1d39e91d170e95865f9"
+    },
+    "6": {
+      "objects": 9,
+      "object_names": [
+        "02_outer_bearing_seat-B23",
+        "09_head_frame-B22",
+        "06_neck_mast-B21",
+        "08_pitch_horn_to_8mm_clamp_1",
+        "41_outer_race_keeper_1",
+        "41_outer_race_keeper_1",
+        "41_outer_race_keeper_1",
+        "YawStopPadLeft",
+        "YawStopPadRight"
+      ],
+      "layers": 500,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 184.96951293945312,
+      "estimated_seconds": 29059.13671875,
+      "b22_filament_g": 182.52781677246094,
+      "b22_estimated_seconds": 28542.509765625,
+      "diff_filament_g": 2.4416961669921875,
+      "diff_estimated_seconds": 516.626953125,
+      "gcode_sha256": "351aab3f1a258f885c022c3a4f2000dd28520544caf0adbbc856c4b0cd6aec65"
+    },
+    "7": {
+      "objects": 9,
+      "object_names": [
+        "07_yoke-B22",
+        "24_blink_rail_with_bearing_shoulders_1",
+        "13_left_eye_cradle_mount_1",
+        "13_right_eye_cradle_mount_1",
+        "12_eye_tilt_cradle-B23",
+        "xl330_m288_blink_front_plate_1",
+        "xl330_m077_eye_pitch_front_plate_1",
+        "34_eye_pitch_motor_stay_1",
+        "xl330_eye_yaw_front_plate-B19"
+      ],
+      "layers": 271,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 131.01731872558594,
+      "estimated_seconds": 26035.521484375,
+      "b22_filament_g": 130.9878387451172,
+      "b22_estimated_seconds": 26024.166015625,
+      "diff_filament_g": 0.02947998046875,
+      "diff_estimated_seconds": 11.35546875,
+      "gcode_sha256": "11c7434447313fafe5b93e2e8f60e3d3b4cb46e4c8655baf7e3869915597d8bc"
+    },
+    "8": {
+      "objects": 15,
+      "object_names": [
+        "04_yaw_rotor-B23",
+        "18_eye_pitch_link_58p5mm-B23",
+        "ID5-keeper-B21",
+        "23_left_short_lid_link-B21",
+        "23_right_short_lid_link-B21",
+        "15_eye_yaw_offset_tie_bar-B21",
+        "16_eye_yaw_horn_13p5_mm-B21",
+        "17_eye_pitch_horn_10mm-B23",
+        "22_blink_drive_link-B21",
+        "19_blink_servo_horn-B21",
+        "21_blink_shaft_crank_1-B21",
+        "21_blink_shaft_crank_3-B21",
+        "21_blink_shaft_crank_2-B21",
+        "45_blink_shaft_spacer_left-B19",
+        "45_blink_shaft_spacer_right-B19"
+      ],
+      "layers": 175,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 45.82350540161133,
+      "estimated_seconds": 11310.75,
+      "b22_filament_g": 45.73591995239258,
+      "b22_estimated_seconds": 11262.66015625,
+      "diff_filament_g": 0.08758544921875,
+      "diff_estimated_seconds": 48.08984375,
+      "gcode_sha256": "3159ecce407d5ee2318ad0d5c6e4f4d806ad7696758bde8c7f935904efd4dc1d"
+    },
+    "11": {
+      "objects": 3,
+      "object_names": [
+        "40-rear-cable-guide-service",
+        "42-rear-cable-cover-service",
+        "35_hub_service_hatch_B8_1"
+      ],
+      "layers": 115,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 68.24071502685547,
+      "estimated_seconds": 12528.2724609375,
+      "b22_filament_g": 66.08155059814453,
+      "b22_estimated_seconds": 11780.6416015625,
+      "diff_filament_g": 2.1591644287109375,
+      "diff_estimated_seconds": 747.630859375,
+      "gcode_sha256": "9f997bfc28c742d181296344d12921f28a39c58724c58de85676913fa99ecfe6"
+    },
+    "12": {
+      "objects": 3,
+      "object_names": [
+        "26_u20cam_slotted_bracket-B23",
+        "35_hatch_nut_keeper_left-B23",
+        "35_hatch_nut_keeper_right-B23"
+      ],
+      "layers": 183,
+      "warnings": [],
+      "isolated_start_count": 0,
+      "filament_g": 6.531819820404053,
+      "estimated_seconds": 2796.795166015625,
+      "b22_filament_g": 5.781792163848877,
+      "b22_estimated_seconds": 2625.671142578125,
+      "diff_filament_g": 0.7500276565551758,
+      "diff_estimated_seconds": 171.1240234375,
+      "gcode_sha256": "f0792952394d5623a1d0ff565b69f14b4272acbcac8432f95d2706edd43312c4"
+    }
+  },
+  "local_gcode_checks": {
+    "P1": {
+      "four_AF5p5_nut_pockets": {
+        "world_to_gcode_shift_mm": [
+          104.99983215332031,
+          131.98165894160155,
+          83.0
+        ],
+        "nut_across_flats_mm": 5.5,
+        "checked_cavity_z_mm": [
+          -74.78,
+          -71.98
+        ],
+        "pockets": {
+          "hatchNut0": {
+            "model_min_mm": 0.1406097151285385,
+            "support_min_mm": null,
+            "support_hits": 0,
+            "model_hits": 0
+          },
+          "hatchNut1": {
+            "model_min_mm": 0.1406097151285385,
+            "support_min_mm": null,
+            "support_hits": 0,
+            "model_hits": 0
+          },
+          "hatchNut2": {
+            "model_min_mm": 0.14060971512853795,
+            "support_min_mm": null,
+            "support_hits": 0,
+            "model_hits": 0
+          },
+          "hatchNut3": {
+            "model_min_mm": 0.14062040493705516,
+            "support_min_mm": null,
+            "support_hits": 0,
+            "model_hits": 0
+          }
+        },
+        "minimum_model_edge_radial_gap_mm": 0.14060971512853795
+      },
+      "four_D3_hatch_bolt_passages": {
+        "world_to_gcode_shift_mm": [
+          104.99983215332031,
+          131.98165894160155,
+          83.0
+        ],
+        "probe_diameter_mm": 3.0,
+        "checked_cavity_z_mm": [
+          -77.23,
+          -74.78
+        ],
+        "pockets": {
+          "hatchNut0": {
+            "model_min_mm": 0.31542833247471624,
+            "support_min_mm": -0.21,
+            "support_hits": 6,
+            "model_hits": 0
+          },
+          "hatchNut1": {
+            "model_min_mm": 0.31542833247471624,
+            "support_min_mm": -0.21,
+            "support_hits": 6,
+            "model_hits": 0
+          },
+          "hatchNut2": {
+            "model_min_mm": 0.31542833247471624,
+            "support_min_mm": -0.21,
+            "support_hits": 6,
+            "model_hits": 0
+          },
+          "hatchNut3": {
+            "model_min_mm": 0.31542833247471624,
+            "support_min_mm": -0.21,
+            "support_hits": 6,
+            "model_hits": 0
+          }
+        },
+        "minimum_model_edge_radial_gap_mm": 0.31542833247471624
+      },
+      "two_printed_anchor_pilots_D2p3_probe": {
+        "world_to_gcode_shift_mm": [
+          104.99983215332031,
+          131.98165894160155,
+          83.0
+        ],
+        "probe_diameter_mm": 2.3,
+        "checked_cavity_z_mm": [
+          -77.98,
+          -71.98
+        ],
+        "pockets": {
+          "hatchNut0": {
+            "model_min_mm": 0.08331467035094206,
+            "support_min_mm": 4.507071620880904,
+            "support_hits": 0,
+            "model_hits": 0
+          },
+          "hatchNut1": {
+            "model_min_mm": 0.08331467035094156,
+            "support_min_mm": 4.506800094042477,
+            "support_hits": 0,
+            "model_hits": 0
+          }
+        },
+        "minimum_model_edge_radial_gap_mm": 0.08331467035094156
+      },
+      "sacrificial_support_removal": "Clear any support strands from the four straight hatch-bolt passages before inserting screws. The nut seats and keeper print openings are clear in the as-sliced paths.",
+      "axis_checks": {
+        "yaw_driver_-1_y_4": {
+          "diameter_mm": 2.36,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.5509136578310541,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 32.8,
+          "worst_feature": "Outer wall"
+        },
+        "yaw_driver_-1_y_28": {
+          "diameter_mm": 2.36,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.5502809610873216,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 31.6,
+          "worst_feature": "Outer wall"
+        },
+        "yaw_driver_1_y_4": {
+          "diameter_mm": 2.36,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.5509136578310541,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 32.8,
+          "worst_feature": "Outer wall"
+        },
+        "yaw_driver_1_y_28": {
+          "diameter_mm": 2.36,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.5504325810810538,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 32.8,
+          "worst_feature": "Outer wall"
+        }
+      }
+    },
+    "P11": {
+      "open_end_wrench_AF_mm": 5.5,
+      "wrench_max_head_width_mm": 13.0,
+      "wrench_max_thickness_mm": 4.2,
+      "fit_and_access": {
+        "socket_head_counterbore_0": {
+          "model": 0,
+          "support": 1002,
+          "deepest_mm": 0.0
+        },
+        "socket_head_counterbore_1": {
+          "model": 0,
+          "support": 994,
+          "deepest_mm": 0.0
+        },
+        "socket_head_counterbore_2": {
+          "model": 0,
+          "support": 943,
+          "deepest_mm": 0.0
+        },
+        "socket_head_counterbore_3": {
+          "model": 0,
+          "support": 993,
+          "deepest_mm": 0.0
+        },
+        "socket_head_counterbore_4": {
+          "model": 0,
+          "support": 1011,
+          "deepest_mm": 0.0
+        },
+        "park_nut_0": {
+          "model": 0,
+          "support": 242,
+          "deepest_mm": 0.0
+        },
+        "park_nut_1": {
+          "model": 0,
+          "support": 315,
+          "deepest_mm": 0.0
+        },
+        "park_nut_2": {
+          "model": 0,
+          "support": 226,
+          "deepest_mm": 0.0
+        },
+        "park_nut_3": {
+          "model": 0,
+          "support": 231,
+          "deepest_mm": 0.0
+        },
+        "park_nut_4": {
+          "model": 0,
+          "support": 238,
+          "deepest_mm": 0.0
+        },
+        "underneath_access_0": {
+          "model": 0,
+          "support": 238,
+          "deepest_mm": 0.0
+        },
+        "underneath_access_1": {
+          "model": 0,
+          "support": 145,
+          "deepest_mm": 0.0
+        },
+        "underneath_access_2": {
+          "model": 0,
+          "support": 236,
+          "deepest_mm": 0.0
+        },
+        "underneath_access_3": {
+          "model": 0,
+          "support": 239,
+          "deepest_mm": 0.0
+        },
+        "underneath_access_4": {
+          "model": 0,
+          "support": 240,
+          "deepest_mm": 0.0
+        },
+        "wrench_0": {
+          "model": 0,
+          "support": 2197,
+          "deepest_mm": 0.0
+        },
+        "wrench_1": {
+          "model": 0,
+          "support": 2469,
+          "deepest_mm": 0.0
+        },
+        "wrench_2": {
+          "model": 0,
+          "support": 2256,
+          "deepest_mm": 0.0
+        },
+        "wrench_3": {
+          "model": 0,
+          "support": 2182,
+          "deepest_mm": 0.0
+        },
+        "wrench_4": {
+          "model": 0,
+          "support": 2015,
+          "deepest_mm": 0.0
+        }
+      },
+      "sacrificial_support_removal": "Remove supports from the guide wrench and nut entries, access bores and cover counterbores before hardware fit.",
+      "clip_passages": {
+        "clip_head_diameter_mm": 5.56,
+        "cutter_nominal_diameter_mm": 6.4,
+        "world_clip_center_z_mm": -71.0,
+        "world_clip_bore_axis_Y_range_mm": [
+          93.65,
+          125.8
+        ],
+        "bead_model": "full_layer",
+        "holes": {
+          "-28.5": {
+            "model_hits": 0,
+            "support_hits": 2583,
+            "model_margin_mm": 0.034816223144536446,
+            "max_model_penetration_mm": 0.0,
+            "intrusions": []
+          },
+          "28.5": {
+            "model_hits": 0,
+            "support_hits": 2193,
+            "model_margin_mm": 0.034816223144536446,
+            "max_model_penetration_mm": 0.0,
+            "intrusions": []
+          }
+        },
+        "maximum_edge_intrusion_at_nominal_seat_mm": 0.015183776855474923,
+        "maximum_permanent_intrusion_for_expanded_D5p96_gauge_mm": 0.0,
+        "cleanup": "Clear the two straight clip passages and deburr the screw-head seat lips as needed."
+      }
+    },
+    "P12": {
+      "identical_keeper_meshes": true,
+      "keeper_M3_passages": {
+        "left": {
+          "world_to_gcode_shift_mm": [
+            169.19929313659668,
+            58.99999809265137,
+            71.9800033569336
+          ],
+          "screw_shank_diameter_mm": 3.0,
+          "checked_cavity_z_mm": [
+            -71.98,
+            -69.98
+          ],
+          "pockets": {
+            "clearance_0": {
+              "model_min_mm": 0.3902931365966761,
+              "support_min_mm": null,
+              "support_hits": 0,
+              "model_hits": 0
+            },
+            "clearance_1": {
+              "model_min_mm": 0.3902815635250595,
+              "support_min_mm": null,
+              "support_hits": 0,
+              "model_hits": 0
+            },
+            "clearance_2": {
+              "model_min_mm": 0.3902665455616685,
+              "support_min_mm": null,
+              "support_hits": 0,
+              "model_hits": 0
+            }
+          },
+          "minimum_model_edge_radial_gap_mm": 0.3902665455616685
+        },
+        "right": {
+          "world_to_gcode_shift_mm": [
+            106.79929542541504,
+            58.99999809265137,
+            71.9800033569336
+          ],
+          "screw_shank_diameter_mm": 3.0,
+          "checked_cavity_z_mm": [
+            -71.98,
+            -69.98
+          ],
+          "pockets": {
+            "clearance_0": {
+              "model_min_mm": 0.3902954254150268,
+              "support_min_mm": null,
+              "support_hits": 0,
+              "model_hits": 0
+            },
+            "clearance_1": {
+              "model_min_mm": 0.39028290060372295,
+              "support_min_mm": null,
+              "support_hits": 0,
+              "model_hits": 0
+            },
+            "clearance_2": {
+              "model_min_mm": 0.3902677862563835,
+              "support_min_mm": null,
+              "support_hits": 0,
+              "model_hits": 0
+            }
+          },
+          "minimum_model_edge_radial_gap_mm": 0.3902677862563835
+        }
+      },
+      "camera_tie_notch": {
+        "regions": {
+          "full_tunnel": {
+            "CAD_overlap_mm3": 0.0,
+            "nominal_tie_gauge_height_mm": 1.05,
+            "nominal_center_collisions": {
+              "sacrificial": {
+                "count": 221,
+                "physical_intervals_mm": [
+                  [
+                    75.15,
+                    75.35
+                  ],
+                  [
+                    75.35,
+                    75.55
+                  ],
+                  [
+                    75.55,
+                    75.75
+                  ],
+                  [
+                    75.75,
+                    75.95
+                  ],
+                  [
+                    75.95,
+                    76.15
+                  ],
+                  [
+                    76.15,
+                    76.35
+                  ],
+                  [
+                    76.35,
+                    76.55
+                  ],
+                  [
+                    76.55,
+                    76.75
+                  ],
+                  [
+                    76.75,
+                    76.95
+                  ]
+                ]
+              },
+              "made_part": {
+                "count": 0,
+                "physical_intervals_mm": [
+                  [
+                    77.15,
+                    77.35
+                  ],
+                  [
+                    77.35,
+                    77.55
+                  ]
+                ]
+              }
+            },
+            "after_support_removal_interval_Z_mm": [
+              75.54126290180815,
+              77.14126290180816
+            ],
+            "after_support_removal_gap_mm": 1.6000000000000085
+          },
+          "left_mouth": {
+            "CAD_overlap_mm3": 0.0,
+            "nominal_tie_gauge_height_mm": 1.05,
+            "nominal_center_collisions": {},
+            "after_support_removal_interval_Z_mm": [
+              75.54126290180815,
+              77.14126290180816
+            ],
+            "after_support_removal_gap_mm": 1.6000000000000085
+          },
+          "right_mouth": {
+            "CAD_overlap_mm3": 0.0,
+            "nominal_tie_gauge_height_mm": 1.05,
+            "nominal_center_collisions": {
+              "sacrificial": {
+                "count": 7,
+                "physical_intervals_mm": [
+                  [
+                    75.15,
+                    75.35
+                  ],
+                  [
+                    75.35,
+                    75.55
+                  ],
+                  [
+                    75.55,
+                    75.75
+                  ],
+                  [
+                    75.75,
+                    75.95
+                  ],
+                  [
+                    75.95,
+                    76.15
+                  ],
+                  [
+                    76.15,
+                    76.35
+                  ],
+                  [
+                    76.35,
+                    76.55
+                  ],
+                  [
+                    76.55,
+                    76.75
+                  ]
+                ]
+              }
+            },
+            "after_support_removal_interval_Z_mm": [
+              75.54126290180815,
+              77.14126290180816
+            ],
+            "after_support_removal_gap_mm": 1.6000000000000085
+          }
+        },
+        "common_clear_gap_mm": 1.6000000000000085,
+        "common_clear_Z_mm": [
+          75.54126290180815,
+          77.14126290180816
+        ],
+        "quantized_stock_2p5_by1p05_tie_can_pass": true
+      },
+      "sacrificial_support_removal": "Pull support down through the open bracket notch before fitting the cable tie."
+    },
+    "P3": {
+      "axis_checks": {
+        "jaw_1_y_4": {
+          "diameter_mm": 2.5,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.28299984661880095,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 18.4,
+          "worst_feature": "Outer wall"
+        },
+        "jaw_1_y_28": {
+          "diameter_mm": 2.5,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.28299984661880095,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 18.4,
+          "worst_feature": "Outer wall"
+        },
+        "jaw_2_y_4": {
+          "diameter_mm": 2.5,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.28299984661880107,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 18.4,
+          "worst_feature": "Outer wall"
+        },
+        "jaw_2_y_28": {
+          "diameter_mm": 2.5,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.28299984661880107,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 18.4,
+          "worst_feature": "Outer wall"
+        }
+      }
+    },
+    "P7": {
+      "axis_checks": {
+        "eye_cradle_pitch_pin": {
+          "diameter_mm": 2.0,
+          "model_hits": 0,
+          "support_hits": 193,
+          "minimum_model_bead_margin_mm": 0.14928694346424096,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 20.2,
+          "worst_feature": "Outer wall"
+        }
+      },
+      "sacrificial_support_removal": "Clear support through the visibly open 3.35 mm eye-pitch lug before inserting the pin."
+    },
+    "P8": {
+      "axis_checks": {
+        "horn_pin": {
+          "diameter_mm": 2.0,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.1936125324825755,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 1.2,
+          "worst_feature": "Outer wall"
+        },
+        "horn_M2_A": {
+          "diameter_mm": 2.0,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.1936125324825755,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 0.6,
+          "worst_feature": "Outer wall"
+        },
+        "horn_M2_B": {
+          "diameter_mm": 2.0,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.1936125324825755,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 1.6,
+          "worst_feature": "Outer wall"
+        },
+        "rod_front_D1p72_probe": {
+          "diameter_mm": 1.72,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.08527295688730466,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 1.2,
+          "worst_feature": "Outer wall"
+        },
+        "rod_rear_D1p72_probe": {
+          "diameter_mm": 1.72,
+          "model_hits": 0,
+          "support_hits": 0,
+          "minimum_model_bead_margin_mm": 0.08506125273948148,
+          "maximum_model_overlap_mm": 0.0,
+          "worst_layer_z_in_print_mm": 1.0,
+          "worst_feature": "Outer wall"
+        }
+      },
+      "rod_hole_finish": "Two nominal diameter 1.92 mm print pilots require reaming to 2.08\u20132.10 mm for the 2 mm pins.",
+      "yaw_stop": {
+        "rotor_lug": {
+          "world_to_plate_move_mm": [
+            55.59811210632324,
+            80.76515007019043,
+            46.299999232651366
+          ],
+          "raster_mm": 0.125,
+          "parts": {
+            "rotor_lug": {
+              "checked_contact_layers": 20,
+              "printed_tip_layers": 19,
+              "unattached_tip_layers": 0,
+              "first_printed_tip": {
+                "world_z_mm": -36.5,
+                "tip_extrusion_area_mm2": 10.3594,
+                "continuous_tip_to_root": true,
+                "tip_footprint_with_material_or_support_below_fraction": 1.0
+              },
+              "min_printed_tip_cross_section_mm2": 7.4062,
+              "max_removable_support_projection_mm2_just_below_tip": 10.703125
+            }
+          }
+        },
+        "sacrificial_support_removal": "Remove support from the rotor lug underside at the outside rim."
+      }
+    },
+    "P6": {
+      "yaw_stop": {
+        "key_and_fastener_checks": {
+          "scope": "G-code analytic bead-width geometry at the M3 through holes and around both nominal tapered keys.",
+          "M3_gauge_diameter_mm": 3.0,
+          "nominal_key_to_socket_clearance_mm": 0.14,
+          "results": {
+            "seat_cavity_Left": {
+              "permanent_hits": 0,
+              "support_hits": 0,
+              "min_permanent_gap_mm": 0.128147974250819,
+              "max_permanent_overlap_mm": 0.0,
+              "worst_layer_bed_Z_mm": 9.4
+            },
+            "M3_bolt_passage_Left": {
+              "permanent_hits": 0,
+              "support_hits": 0,
+              "min_permanent_gap_mm": 0.2406938657310225,
+              "max_permanent_overlap_mm": 0.0,
+              "worst_layer_bed_Z_mm": 2.6
+            },
+            "key_shape_against_nominal_pocket_Left": {
+              "permanent_hits": 0,
+              "support_hits": 1117,
+              "min_permanent_gap_mm": 0.1386088679673028,
+              "max_permanent_overlap_mm": 0.0,
+              "worst_layer_bed_Z_mm": 0.4
+            },
+            "seat_cavity_Right": {
+              "permanent_hits": 0,
+              "support_hits": 0,
+              "min_permanent_gap_mm": 0.1284620416177448,
+              "max_permanent_overlap_mm": 0.0,
+              "worst_layer_bed_Z_mm": 11.8
+            },
+            "M3_bolt_passage_Right": {
+              "permanent_hits": 0,
+              "support_hits": 0,
+              "min_permanent_gap_mm": 0.24049837068367771,
+              "max_permanent_overlap_mm": 0.0,
+              "worst_layer_bed_Z_mm": 0.8
+            },
+            "key_shape_against_nominal_pocket_Right": {
+              "permanent_hits": 0,
+              "support_hits": 1002,
+              "min_permanent_gap_mm": 0.13840358888704143,
+              "max_permanent_overlap_mm": 0.0,
+              "worst_layer_bed_Z_mm": 3.2
+            }
+          }
+        },
+        "printed_toes": {
+          "raster_mm": 0.125,
+          "parts": {
+            "YawStopPadRight": {
+              "checked_contact_layers": 21,
+              "printed_tip_layers": 20,
+              "unattached_tip_layers": 0,
+              "first_printed_tip": {
+                "world_z_mm": -36.75,
+                "tip_extrusion_area_mm2": 4.7031,
+                "continuous_tip_to_root": true,
+                "tip_footprint_with_material_or_support_below_fraction": 1.0
+              },
+              "min_printed_tip_cross_section_mm2": 4.4531,
+              "max_removable_support_projection_mm2_just_below_tip": 45.90625
+            },
+            "YawStopPadLeft": {
+              "checked_contact_layers": 21,
+              "printed_tip_layers": 20,
+              "unattached_tip_layers": 0,
+              "first_printed_tip": {
+                "world_z_mm": -36.75,
+                "tip_extrusion_area_mm2": 4.6719,
+                "continuous_tip_to_root": true,
+                "tip_footprint_with_material_or_support_below_fraction": 1.0
+              },
+              "min_printed_tip_cross_section_mm2": 4.1094,
+              "max_removable_support_projection_mm2_just_below_tip": 45.90625
+            }
+          }
+        },
+        "sacrificial_support_removal": "Clear the exposed underside of each individual stop toe and its key shoulder before inserting the pad. The keyed seat recesses and pad M3 passages have no slicer support in their gauge paths."
+      }
+    },
+    "P4": {
+      "one_print_with_tray": {
+        "indexed_mesh_sha256": "cedb58c1c6c3ca0eb2211b4b5e513a27ff667fc4e5640723b297edea5af3d0ed",
+        "closed_mesh_bodies": 1,
+        "faces": 234490,
+        "triangles_under_default_mesh_height_probe": 6,
+        "exact_source_skull_world_sha256": "8175ee9a596ab1a1511fe428e8ae09b7d0bd3c6e0849e85f0ae9fa1af8cd0f83",
+        "exact_source_tray_world_sha256": "1178ffcd0ca00f9b21e165fff4536372beae410e9b7a4a429a970e43c1d59f1d",
+        "exact_source_printable_tray_sha256": "138ce2a2cfd7456027b46074b42efc77eb9e586924a2c1ef275bdd95ec875d20"
+      },
+      "eye_relief": {
+        "world_relief_bounds_mm": [
+          [
+            60.85,
+            -13.1,
+            112.4
+          ],
+          [
+            64.65,
+            -5.05,
+            117.35
+          ]
+        ],
+        "test_inset_mm": {
+          "0.15": {
+            "min_model_bead_gap_mm": 0.13491668701171874,
+            "permanent_intrusions": 0,
+            "max_permanent_intrusion_mm": 0.0,
+            "support_intrusions": 95,
+            "support_z_levels": [
+              26.8,
+              27.0,
+              27.2,
+              27.4,
+              27.6,
+              27.8,
+              28.0,
+              33.4,
+              33.6,
+              33.8,
+              34.0,
+              34.2,
+              34.4,
+              34.6
+            ]
+          },
+          "0.2": {
+            "min_model_bead_gap_mm": 0.1849166870117301,
+            "permanent_intrusions": 0,
+            "max_permanent_intrusion_mm": 0.0,
+            "support_intrusions": 84,
+            "support_z_levels": [
+              26.8,
+              27.0,
+              27.2,
+              27.4,
+              27.6,
+              27.8,
+              28.0,
+              33.6,
+              33.8,
+              34.0,
+              34.2,
+              34.4,
+              34.6
+            ]
+          },
+          "0.3": {
+            "min_model_bead_gap_mm": 0.28491668701169603,
+            "permanent_intrusions": 0,
+            "max_permanent_intrusion_mm": 0.0,
+            "support_intrusions": 51,
+            "support_z_levels": [
+              27.0,
+              27.2,
+              27.4,
+              27.6,
+              27.8,
+              33.8,
+              34.0,
+              34.2,
+              34.4
+            ]
+          }
+        }
+      },
+      "back_opening_cleanup_path": {
+        "tool_cross_section_mm": [
+          0.85,
+          1.05
+        ],
+        "approach_from_world_Y_mm": [
+          14.5,
+          -12.9
+        ],
+        "sampled_paths": [
+          {
+            "world_center_xz_mm": [
+              61.65,
+              113.125
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              61.65,
+              114.9
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              61.65,
+              116.6
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              62.75,
+              113.125
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              62.75,
+              114.9
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              62.75,
+              116.6
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              63.85,
+              113.125
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              63.85,
+              114.9
+            ],
+            "overlap_mm3": 0.0
+          },
+          {
+            "world_center_xz_mm": [
+              63.85,
+              116.6
+            ],
+            "overlap_mm3": 0.0
+          }
+        ]
+      },
+      "slicer_stderr_repeated_from_b22": [
+        "[FillFloatingConcentric.cpp:487 detect_floating_line] ZFiller: encounter idx from clip: 281",
+        "[FillFloatingConcentric.cpp:487 detect_floating_line] ZFiller: encounter idx from clip: 281",
+        "[FillFloatingConcentric.cpp:487 detect_floating_line] ZFiller: encounter idx from clip: 277",
+        "[GCodeProcessor.cpp:5973 process_T] Invalid T command (T65535)."
+      ],
+      "slicer_return_code": 0,
+      "skull_to_tray_fusion": {
+        "sampled_seam_layers_with_continuous_model_extrusion": 27,
+        "bridging_extrusion_segments_sampled": 409,
+        "raw_2p5mm_horizontal_pilot_gauge": {
+          "left": {
+            "made_part": {
+              "segments": 12,
+              "layer_count": 3,
+              "deepest_ideal_gauge_cross_mm": 0.04222421225141473
+            },
+            "support": {
+              "segments": 214,
+              "layer_count": 10,
+              "deepest_ideal_gauge_cross_mm": 0.21
+            }
+          },
+          "right": {
+            "made_part": {
+              "segments": 10,
+              "layer_count": 3,
+              "deepest_ideal_gauge_cross_mm": 0.04222421225141473
+            },
+            "support": {
+              "segments": 214,
+              "layer_count": 10,
+              "deepest_ideal_gauge_cross_mm": 0.21
+            }
+          }
+        }
+      },
+      "fused_mass": {
+        "fused_installed_g": 152.5472165153188,
+        "old_separate_skull_g": 149.66594498147444,
+        "logical_tray_g": 3.1245991532735955,
+        "logical_skull_g": 149.4226173620452,
+        "bracket_g": 4.538895006125692,
+        "allocation": "Actual model extrusion divided by fraction of deposited centerline inside the former tray CAD cross-section of each layer. Split is an approximation; combined model extrusion excludes support."
+      },
+      "sacrificial_support_removal": "Remove support at the hidden right eye linkage relief and from tray pilot entrances. Finish both tray pilots with a depth-marked 2.5 mm bit, then hand-tap M3.",
+      "outer_wall_compare_to_b22": {
+        "plate_layers_compared": 523,
+        "raster_mm": 0.25,
+        "matching_within_mm": 0.5,
+        "B22_outer_wall_painted_area_over_layers_mm2": 272314.375,
+        "B23_outer_wall_painted_area_over_layers_mm2": 272317.125,
+        "baseline_outer_wall_unmatched_percent": 0.0,
+        "new_outer_wall_unmatched_percent": 0.0,
+        "worst_old_outer_wall_differences": [
+          {
+            "bed_z_mm": 0.2,
+            "baseline_px": 10310,
+            "missing_px": 0,
+            "new_px": 0
+          },
+          {
+            "bed_z_mm": 0.4,
+            "baseline_px": 10615,
+            "missing_px": 0,
+            "new_px": 0
+          },
+          {
+            "bed_z_mm": 0.6,
+            "baseline_px": 10508,
+            "missing_px": 0,
+            "new_px": 0
+          },
+          {
+            "bed_z_mm": 0.8,
+            "baseline_px": 10455,
+            "missing_px": 0,
+            "new_px": 0
+          },
+          {
+            "bed_z_mm": 1.0,
+            "baseline_px": 10415,
+            "missing_px": 0,
+            "new_px": 0
+          }
+        ]
+      }
+    }
+  },
+  "changed_plates_totals": {
+    "filament_g": 919.6775584220886,
+    "estimated_seconds": 169475.1953125,
+    "b22_filament_g": 913.444233417511,
+    "b22_estimated_seconds": 167691.99169921875,
+    "diff_filament_g": 6.233325004577637,
+    "diff_estimated_seconds": 1783.20361328125
+  },
+  "updated_installed_part_grams": {
+    "01_base_cup_b8": 232.67648418397656,
+    "05_yaw_servo_jaw_1": 4.1482183636533785,
+    "05_yaw_servo_jaw_2": 4.3816529939467035,
+    "02_outer_bearing_seat": 45.46950713069367,
+    "yawstoppadleft": 0.9377747150072666,
+    "yawstoppadright": 0.9343097852395404,
+    "12_eye_tilt_cradle-b20": 7.264370806456518,
+    "04_yaw_rotor": 22.53013351919729,
+    "18_eye_pitch_link_58p5mm": 1.1098464406349546,
+    "17_eye_pitch_horn_10mm": 0.687788420349592,
+    "40-rear-cable-guide-b18": 29.99302402278376,
+    "42-rear-cable-cover-b18": 13.43279423791048,
+    "26_u20cam_slotted_bracket-b19": 4.538895006125692,
+    "35_hatch_nut_keeper_left-b23": 0.373722522495931,
+    "35_hatch_nut_keeper_right-b23": 0.373722522495931,
+    "28_skull_front": 149.4226173620452,
+    "25_nasal_tray": 3.1245991532735955
+  },
+  "installed_printed_grams_catalog": 1031.039087283619,
+  "delta_installed_printed_grams_catalog": 5.083841055633684,
+  "sliced_grams_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "scope": "This checks CAD and Bambu G-code. Printer tolerances and hardware fit remain physical measurements."
+}

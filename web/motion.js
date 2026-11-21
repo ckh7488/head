@@ -85,7 +85,7 @@ function pivot(axis, degrees, x, y, z) {
     .multiply(rotate).multiply(new Matrix4().makeTranslation(-x, -y, -z));
 }
 
-export function motionMatrix(kind, pose, drop = 0) {
+export function motionMatrix(kind, pose, drop = 0, eyePitch = {}) {
   const result = new Matrix4();
   if (kind === "fixed") return result;
   if (kind === "hatch") return result.makeTranslation(0, 0, -clamp(drop, 0, 30));
@@ -100,11 +100,15 @@ export function motionMatrix(kind, pose, drop = 0) {
     result.premultiply(new Matrix4().makeTranslation(-13.5 * Math.sin(yaw * rad), 13.5 * (Math.cos(yaw * rad) - 1), 0));
   }
   if (kind === "tilt_horn") {
-    result.premultiply(pivot("x", pitch, 58.65, 10, 151));
+    result.premultiply(pivot("x", pitch, ...(eyePitch.servo_axis_mm ?? [58.65, 10, 151])));
   } else if (kind === "tilt_link") {
-    result.premultiply(new Matrix4().makeTranslation(0, 10 * (Math.cos(pitch * rad) - 1), 10 * Math.sin(pitch * rad)));
+    const start = (eyePitch.phase_deg ?? 0) * rad;
+    const end = start + pitch * rad;
+    const radius = eyePitch.crank_radius_mm ?? 10;
+    result.premultiply(new Matrix4().makeTranslation(
+      0, radius * (Math.cos(end) - Math.cos(start)), radius * (Math.sin(end) - Math.sin(start))));
   } else if (kind === "tilt" || kind === "look_link" || kind in eyeX) {
-    result.premultiply(pivot("x", pitch, 0, -39, 119));
+    result.premultiply(pivot("x", pitch, ...(eyePitch.cradle_axis_mm ?? [0, -39, 119])));
   }
   const lids = { lid1: [-34, -39, 119], lid2: [34, -39, 119], blink_motor_horn: [1.2, -14, 170], blink_shaft_crank: [0, -24, 154] };
   if (kind in lids) {

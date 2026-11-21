@@ -35,9 +35,10 @@ FACE_LIMIT = {'bone': 30000, 'jaw': 12000, 'eye': 8000}
 BLOCKED = re.compile(r'(.+): stated approach \((.+?)\) is blocked; \((.+?)\) is clear')
 REAR_WIRING = ('RearLead', 'CableTie', 'InputXT', 'SupplyXT30', 'CameraUSB', 'ControlUSB')
 GUARD_PANELS = {'GuardFront', 'GuardLeft', 'GuardRight', 'GuardRearTop', 'GuardRearBottom', 'GuardRoof'}
-B22_FASTENER_OWNERS = {
-    'rear-guide-bolts': 'CableSaddle', 'rear-cover-bolts': 'CableGate',
-    'hub-bolts': 'HubHolder', 'hatch-bolts': 'Part000',
+FASTENER_OWNERS = {
+    'rear-guide-bolts': 'CableSaddle', 'rear-cover-service-nuts': 'CableSaddle',
+    'rear-cover-bolts': 'CableGate', 'hub-bolts': 'HubHolder',
+    'hatch-service-nuts': 'Part000', 'hatch-bolts': 'Part000',
     'c3-carrier-bolts': 'Part071', 'openrb-bolts': 'Part072', 'openrb-carrier-bolts': 'Part072',
     'keeper-bolts': 'Part001', 'bearing-seat-bolts': 'Part001',
     'rotor-studs': 'Part007', 'rotor-horn': 'Part007', 'base-deck-bolts': 'Part002',
@@ -45,6 +46,10 @@ B22_FASTENER_OWNERS = {
     'eye-pitch-case-screws': 'Part041', 'eye-pitch-plate-screws': 'Part042',
     'blink-case-screws': 'Part045', 'blink-motor-bolts': 'Part046', 'blink-clamps': 'Part054',
     'eye-yaw-case-screws': 'Part038', 'jaw-motor-screws': 'Jaw_XL330_M288_Jaw', 'mast-nuts': 'Part010',
+}
+B23_PREPARATION = {
+    'eye-cradle': '안구를 넣기 전에 서포트를 빼고 긴 Ø2.2 mm 드릴을 손으로 돌려 위·아래 홀 한 쌍씩을 같은 축으로 마감합니다.',
+    'yaw-stop-pads': '회전판 돌기가 닿을 면을 손끝으로 밀어 왼쪽은 앞 왼쪽, 오른쪽은 앞 오른쪽 키 벽에 댄 채 공용 M3 너트를 조입니다.',
 }
 
 
@@ -129,9 +134,9 @@ def assembly_motion(layout, hardware, stock, steps, revision):
     motion = {row['id']: row['motion'] for row in hardware if 'motion' in row and not row.get('tool')}
     motion.update({row['name']: row['motion'] for row in stock})
     motion.update(layout['world_motion'])
-    if revision == 'B22':
+    if revision in ('B22', 'B23'):
         for step in steps:
-            owner = B22_FASTENER_OWNERS.get(step['id'])
+            owner = FASTENER_OWNERS.get(step['id'])
             if owner is None:
                 continue
             for move in step['moves']:
@@ -160,11 +165,14 @@ def load_wire_states(report, layout, actors, world_motion, wires):
     wire_names = {wire['label'].split('  ·  ', 1)[0]: wire for wire in wires}
     diameters = data.get('wireDiametersMm', {})
     states = []
+    yaw_limits = layout['motion_geometry'].get('yaw_limit', {}).get('nominal_stop_deg')
     for row in data['states']:
         degrees, points = np.asarray(row['pose_deg'], float), np.asarray(row['points'], float)
         if (degrees.shape != (5,) or points.ndim != 2 or points.shape[1] != 3 or len(points) < 2
                 or not np.isfinite(degrees).all() or not np.isfinite(points).all()):
             raise ValueError(f'Invalid camera geometry in {row["id"]}')
+        if yaw_limits is not None and not yaw_limits[0] < degrees[0] < yaw_limits[1]:
+            raise ValueError(f'Wire comparison is past a mechanical yaw stop: {row["id"]}')
         recorded = row.get('wirePoints', {})
         show_all = (len(wire_names) == len(wires) and wire_names.keys() <= recorded.keys()
                     and all(np.isclose(diameters.get(name, 0), model['diameter'], atol=.001, rtol=0)
@@ -206,7 +214,8 @@ def checked_tools(row, world, hardware, tools, phases):
         if route['tool'] == 'spanner':
             profile = next(value for value in hardware if value.get('tool') and value['type'] == 'spanner'
                            and value['size'] == stock['size'])
-            mesh = trimesh.creation.extrude_polygon(Polygon(profile['profile']), profile['thickness'])
+            polygon = Polygon(route.get('profile_mm', profile['profile']))
+            mesh = trimesh.creation.extrude_polygon(polygon, route.get('thickness_mm', profile['thickness']))
             mesh.apply_transform(arm_frame(axis, outward, seat))
         elif route['tool'] == 'socket':
             outer, inner = SOCKET_RADII[stock['size']]
@@ -242,6 +251,21 @@ def checked_tools(row, world, hardware, tools, phases):
         tools[mesh_id] = C.cylinder(C.B21_KEY_RADII[size], reach, tip, -axis)
         choices.append([by_nut[nut], {'id': mesh_id, 'nut': bolt, 'kind': 'driver-axis', 'size': size,
                                       'seat': tip.tolist(), 'path': [[0, 0, 0], [0, 0, 0]]}])
+    if (yaw := row.get('yaw_driver_adjustment')) and yaw['status'] == 'pass':
+        front = min(route['y_mm'] for route in yaw['tool_rows'])
+        for route in yaw['tool_rows']:
+            if route['z_adjustment_mm'] != 0:
+                continue
+            left = route['side'] < 0
+            near = route['y_mm'] == front
+            side = '왼쪽' if left else '오른쪽'
+            station = '앞' if near else '뒤'
+            tip = route['seat_mm']
+            name = f'tool-yaw-{"left" if left else "right"}-{"front" if near else "rear"}'
+            tools[name] = C.cylinder(route['radius_mm'], yaw['free_length_mm'], tip, route['outward'])
+            choices.append([{'id': name, 'nut': f'{side} {station} · 2 mm 볼 육각렌치',
+                             'kind': 'driver-axis', 'size': 2, 'seat': tip,
+                             'path': [[0, 0, 0], [0, 0, 0]]}])
     return choices
 
 
@@ -312,10 +336,22 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     world.layout = layout
     if revision != 'B19' and checked[0].get('cad_sha256') != layout['source_sha256']:
         raise ValueError('Assembly report and CAD export use different revisions')
-    has_qualified_tools = revision in ('B21', 'B22')
+    if revision == 'B23':
+        if layout['world_sha256'].keys() != layout['world_motion'].keys():
+            raise ValueError('CAD world export has incomplete mesh provenance')
+        for name, digest in layout['world_sha256'].items():
+            if sha256((cad/'world'/f'{name}.stl').read_bytes()).hexdigest() != digest:
+                raise ValueError(f'CAD world export mesh changed after validation: {name}')
+    has_qualified_tools = revision in ('B21', 'B22', 'B23')
     if has_qualified_tools and checked[0].get('plan_sha256') != C.plan_hash(plan):
         raise ValueError(f'{revision} assembly plan differs from the one checked')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
+    keeper_names = set()
+    keeper_screws = set()
+    if revision == 'B23':
+        for cap in layout['motion_geometry']['bottom_board_service_nuts']:
+            keeper_names.add(cap['keeper'])
+            keeper_screws.add(cap['screw'])
     b19_names = {item['name'] for item in stock} | {'PitchPinDowelLeft', 'PitchPinDowelRight'}
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
     hub_plugs = [name for name in layout['world_motion'] if name.startswith('HubPlug')]
@@ -328,6 +364,9 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     for st, row in zip(plan, checked, strict=True):
         if st.get('blink_deg') != row.get('blink_deg'):
             raise ValueError(f'Assembly pose differs from the checked pose for {st["id"]}')
+        offsets = st.get('actor_offsets', {})
+        if json.dumps(offsets, sort_keys=True) != json.dumps(row.get('actor_offsets', {}), sort_keys=True):
+            raise ValueError(f'Assembly offsets differ from the checked offsets for {st["id"]}')
         world.blink_pose = st.get('blink_deg')
         for name, phase in st.get('set_nut_phases', {}).items():
             if phases.setdefault(name, phase) != phase:
@@ -372,6 +411,30 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             moves.append({'ids': [name], 'path': [(-np.asarray(axis, float)*(length+3.)).round(2).tolist(), [0, 0, 0]]})
             ctx.append(name)
         notes = list(dict.fromkeys(note_text(n) for n in row['notes']))
+        if revision == 'B23' and st['id'] in B23_PREPARATION:
+            notes.insert(0, B23_PREPARATION[st['id']])
+        if (yaw := row.get('yaw_driver_adjustment')) and yaw['status'] == 'pass':
+            closest = min(record['minimum_driver_gap_mm'] for record in yaw['tool_rows'])
+            notes.append(f'네 공구 자리와 모터 높이 세 위치의 CAD 최소 여유 · {closest:.3f} mm')
+        if front := row.get('front_link_clearance'):
+            notes.append(f'앞 외장을 정면에서 넣을 때 링크 주변 CAD 여유 하한 · {front["continuous_lower_bound_mm"]:.3f} mm')
+        if service := row.get('service_access'):
+            if service['status'] != 'pass':
+                raise ValueError(f'Unqualified cover service path for {st["id"]}')
+            for fastener in service['fasteners']:
+                nut, bolt = fastener['nut'], fastener['bolt']
+                if nut not in fixed:
+                    raise ValueError(f'Cover nut is missing before its screw is inserted: {nut}')
+                screw_move = next(i for i, move in enumerate(moves) if move['ids'] == [bolt])
+                positions = np.asarray(fastener['bolt_path_mm'], float)
+                _, _, seat, _ = world.screw(bolt)
+                if not np.allclose(positions[0], seat, atol=.001):
+                    raise ValueError(f'Service path starts at the wrong screw seat: {bolt}')
+                moves[screw_move]['path'] = (positions[::-1]-seat).round(3).tolist()
+                parked = np.asarray(fastener.get('parked_offset_mm', [0, 0, 0]), float).round(3).tolist()
+                if any(parked):
+                    moves.insert(screw_move + 1, {'ids': [nut], 'path': [parked, [0, 0, 0]], 'mounted': True})
+            notes.append('나사를 뺀 뒤 너트가 남는 덮개 경로를 CAD에서 확인했습니다.')
         if feed := st.get('camera_feed'):
             route = row['camera_feed']
             if any(route[key] != value for key, value in feed.items()):
@@ -392,12 +455,18 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         else:
             sub += 1
             label = f'{number}-{sub + 1}'
-        names = fixed + [name for move in moves for name in move['ids']]
+        names = fixed + [name for move in moves if not move.get('mounted') for name in move['ids']]
         if len(names) != len(set(names)):
             raise ValueError(f'Duplicate parts in {st["id"]}')
         used.update(names)
         tool_paths = checked_tools(row, world, data['hardware'], tools, phases) if has_qualified_tools else []
         poses = {name: matrix.tolist() for name in names if (matrix := world.blink_transform(name)) is not None}
+        for name, offset in offsets.items():
+            if name not in names or name in poses:
+                raise ValueError(f'Invalid checked assembly offset for {name} in {st["id"]}')
+            pose = np.eye(4)
+            pose[:3, 3] = offset
+            poses[name] = pose.tolist()
         steps.append({
             'id': st['id'], 'label': label, 'section': SECTIONS[st['ctx']], 'bench': st['ctx'] in BENCH,
             'text': row['text'] or last_text, 'continued': not row['text'],
@@ -407,7 +476,9 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             'showWires': st['id'] in ('rear-skull', 'camera-route-set'),
             **({'wireIds': camera_wires} if st['id'] == 'camera-route-set' else {}),
             **({'toolPaths': tool_paths} if tool_paths else {}),
-            **({'actorPoses': poses, 'blinkDegrees': st['blink_deg']} if poses else {}),
+            **({'actorPoses': poses} if poses else {}),
+            **({'blinkDegrees': st['blink_deg']} if 'blink_deg' in st else {}),
+            **({'serviceChecked': True} if service else {}),
             **({'insertionClearance': row['insertion_clearance']} if 'insertion_clearance' in row else {}),
         })
 
@@ -418,7 +489,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     guard, guard_hash = load_guard(guard_cad, guard_report, layout['source_sha256'])
     review = None
     states = []
-    if guard or wire_states:
+    if guard or wire_states or revision == 'B23':
         complete = next(step for step in steps if step['id'] == 'rear-skull')
         fixed = complete['fixed'] + [name for move in complete['moves'] for name in move['ids']] + sorted(guard)
         if len(fixed) != len(set(fixed)):
@@ -433,7 +504,10 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         metallicFactor=.45 if name == 'steel' else 0.) for name, rgb in COLORS.items()}
     parts = {}
     for name in sorted(used):
-        mesh = feed_models[name] if name in feed_models else world.mesh(name)
+        if name in keeper_screws:
+            mesh = trimesh.load_mesh(world.world/f'{name}.stl')
+        else:
+            mesh = feed_models[name] if name in feed_models else world.mesh(name)
         if mesh is None:
             raise ValueError(f'Empty assembly mesh: {name}')
         mesh = mesh.copy()
@@ -441,7 +515,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             nut = world.rows[name]
             mesh.apply_transform(trimesh.transformations.rotation_matrix(
                 np.radians(phases[name]), nut['axis'], nut['seat']))
-        finish = ('b19' if name in b19_names else 'power' if name.startswith('RearLead')
+        finish = ('frame' if name in keeper_names else 'b19' if name in b19_names else 'power' if name.startswith('RearLead')
                   else 'connector' if name in rear_wiring or name in hub_plugs else finish_of(name, manifest))
         limit = FACE_LIMIT.get(finish, 4000)
         if name not in stop_actors and len(mesh.faces) > limit:

@@ -61,7 +61,7 @@ def test_goal_limits_cover_reversed_and_one_sided_axes(firmware):
     arm(firmware, 63)
     firmware.command('GO -1e9 1e9 1e9 1e9 -1e9 5.5')
     assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [
-        (1, 1829), (2, 1965), (3, 3024), (4, 2722), (5, 2219), (6, 1938),
+        (1, 1829), (2, 1965), (3, 3024), (4, 2707), (5, 2219), (6, 1938),
     ]
     firmware.command('GO 0 0 0 0 0 0')
     firmware.tick(60)
@@ -87,7 +87,9 @@ def test_jaw_arming_rejects_overlong_calibration(firmware_build, opening_tick):
         simulator.close()
 
 @pytest.mark.parametrize(('axis', 'row', 'name'), [
-    (0, (1828, 2048, 2267), 'EYE'), (1, (2131, 2048, 1964), 'EYE'), (3, (1374, 2048, 2723), 'YAW'),
+    (0, (1828, 2048, 2267), 'EYE'), (1, (2131, 2048, 1964), 'EYE'),
+    (3, (1389, 2048, 2708), 'YAW'), (3, (2707, 2048, 1388), 'YAW'),
+    (3, (1374, 2048, 2722), 'YAW'),
 ])
 def test_arming_keeps_feedback_inside_cad_travel(firmware_build, axis, row, name):
     rows = list(CALIBRATED)
@@ -192,7 +194,7 @@ def test_crlf_and_fragmented_input(firmware):
     firmware.receive(b'GO 0 0 0 15')
     assert not writes(firmware.trace(), GOAL)
     firmware.receive(b' 0\r\n')
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2217]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2213]
 
 
 def test_hold_discards_queued_setpoint(firmware):
@@ -202,11 +204,11 @@ def test_hold_discards_queued_setpoint(firmware):
     firmware.set(4, POSITION, 2100)
     firmware.command('HOLD')
     firmware.tick(60)
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2217, 2100]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2213, 2100]
 
 
 @pytest.mark.parametrize(('mask', 'servo', 'measured', 'goal'), [
-    (8, 4, 2725, 2722), (8, 4, 1371, 1374), (16, 5, 1994, 1997),
+    (8, 4, 2710, 2707), (8, 4, 1386, 1389), (16, 5, 1994, 1997),
 ])
 def test_hold_is_clamped_even_when_measured_tick_is_just_outside(firmware, mask, servo, measured, goal):
     arm(firmware, mask)
@@ -215,13 +217,14 @@ def test_hold_is_clamped_even_when_measured_tick_is_just_outside(firmware, mask,
     assert [e.value for e in writes(firmware.trace(), GOAL)] == [goal]
 
 
+@pytest.mark.parametrize(('endpoint', 'direction'), [(1389, -1), (2707, 1)])
 @pytest.mark.parametrize('delta', [8, 9])
-def test_report_limit_is_inclusive_at_eight_ticks(firmware, delta):
+def test_report_limit_is_inclusive_at_eight_ticks(firmware, endpoint, direction, delta):
     arm(firmware, 8)
-    firmware.set(4, POSITION, 2722+delta)
+    firmware.set(4, POSITION, endpoint+direction*delta)
     reply = firmware.tick(120)
     if delta == 8:
-        assert reply == ['STATE 8 0.000 0.000 0.000 60.000 0.000']
+        assert reply == [f'STATE 8 0.000 0.000 0.000 {60*direction:.3f} 0.000']
     else:
         assert reply == ['ERROR POSITION_LIMIT ID4', 'ERROR HOLD_UNCONFIRMED']
     assert not any(e.direction == 'w' for e in firmware.trace())
@@ -241,7 +244,7 @@ def test_transient_write_retries_the_same_tick(firmware, kind):
     firmware.fail('w', 4, GOAL, kind)
     assert not firmware.command('GO 0 0 0 30 0')
     assert [(e.id, e.value, e.result) for e in writes(firmware.trace(), GOAL)] == [
-        (4, 2385, kind), (4, 2385, 'ok'),
+        (4, 2378, kind), (4, 2378, 'ok'),
     ]
     assert firmware.tick(120)[0].startswith('STATE 8 ')
 
@@ -515,11 +518,11 @@ def test_pacing_applies_latest_goal_as_reports_continue(firmware):
     firmware.command('GO 0 0 0 5 0')
     firmware.command('GO 0 0 0 10 0')
     firmware.command('GO 0 0 0 25 0')
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2104]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2103]
     firmware.tick(period-1)
     assert not writes(firmware.trace(), GOAL)
     firmware.tick(1)
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2329]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2323]
     assert firmware.tick(report-period)[0].startswith('STATE 8 ')
 
 
@@ -531,7 +534,7 @@ def test_slow_usb_read_requests_do_not_flush_stale_goal_before_watchdog(firmware
     firmware.set(4, POSITION, 2100)
     firmware.fail('r', 4, POSITION, 'timeout', 32)
     firmware.receive(b'READ 4\n'*16)
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2160, 2100]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2158, 2100]
 
 
 def test_all_six_axes_have_bus_headroom(firmware):

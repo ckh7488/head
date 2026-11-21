@@ -1,0 +1,960 @@
+{
+  "modified_part": "Jaw_37_right_jaw_bearing_stay",
+  "software_open_deg": 5.9,
+  "verified_clear_deg": 6.6,
+  "nominal_contact_deg": 7.461457243419829,
+  "compound_clear_travel_deg": 6.6,
+  "bench_approach_offset_mm": [
+    0.0,
+    12.0,
+    12.0
+  ],
+  "released_clearance_deg": 9.0,
+  "max_powered_feedback_deg": 6.591796875,
+  "contact_trials": [
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 6.795994531540643,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.05525779831386659,
+      "continuous_lower_bound_through_verified_travel_mm": 0.04448730298285432,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.30000305175781
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 7.461457243419829,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.25338360412555233,
+      "continuous_lower_bound_through_verified_travel_mm": 0.24261310879454007,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.043608819870723,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.3999977111816406,
+      "continuous_lower_bound_through_verified_travel_mm": 0.38922721585062836,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        72.0
+      ]
+    }
+  ],
+  "compound_contact_trials": [
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        -0.2,
+        -0.2
+      ],
+      "first_contact_deg": 6.697881898425875,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.02794177606555175,
+      "continuous_lower_bound_through_verified_travel_mm": 0.017171280734539482,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.10000305175781
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 6.795994531540643,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.05525779831386659,
+      "continuous_lower_bound_through_verified_travel_mm": 0.04448730298285432,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.30000305175781
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        -0.2,
+        0.2
+      ],
+      "first_contact_deg": 6.896600160144624,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.08257382056218143,
+      "continuous_lower_bound_through_verified_travel_mm": 0.07180332523116917,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.50000305175782
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        -0.2,
+        0.0,
+        -0.2
+      ],
+      "first_contact_deg": 7.37314685639881,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.22606758187723747,
+      "continuous_lower_bound_through_verified_travel_mm": 0.2152970865462252,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        -0.2,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 7.461457243419829,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.25338360412555233,
+      "continuous_lower_bound_through_verified_travel_mm": 0.24261310879454007,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        -0.2,
+        0.0,
+        0.2
+      ],
+      "first_contact_deg": 7.55161616007487,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.28069962637386714,
+      "continuous_lower_bound_through_verified_travel_mm": 0.2699291310428549,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        0.2,
+        -0.2
+      ],
+      "first_contact_deg": 7.949349721272785,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4241933876889195,
+      "continuous_lower_bound_through_verified_travel_mm": 0.41342289235790725,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.043608819870723,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4515094099372343,
+      "continuous_lower_bound_through_verified_travel_mm": 0.44073891460622205,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        -0.2,
+        0.2,
+        0.2
+      ],
+      "first_contact_deg": 8.13984375,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.4788254321855492,
+      "continuous_lower_bound_through_verified_travel_mm": 0.4680549368545369,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.8,
+        -10.89500026702881,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        -0.2
+      ],
+      "first_contact_deg": 6.697881898425875,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.02794177606555175,
+      "continuous_lower_bound_through_verified_travel_mm": 0.017171280734539482,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.10000305175781
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 6.795994531540643,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.05525779831386659,
+      "continuous_lower_bound_through_verified_travel_mm": 0.04448730298285432,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.30000305175781
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.0,
+        -0.2,
+        0.2
+      ],
+      "first_contact_deg": 6.896600160144624,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.08257382056218143,
+      "continuous_lower_bound_through_verified_travel_mm": 0.07180332523116917,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.50000305175782
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        -0.2
+      ],
+      "first_contact_deg": 7.37314685639881,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.22606758187723747,
+      "continuous_lower_bound_through_verified_travel_mm": 0.2152970865462252,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 7.461457243419829,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.25338360412555233,
+      "continuous_lower_bound_through_verified_travel_mm": 0.24261310879454007,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.0,
+        0.0,
+        0.2
+      ],
+      "first_contact_deg": 7.55161616007487,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.28069962637386714,
+      "continuous_lower_bound_through_verified_travel_mm": 0.2699291310428549,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        -0.2
+      ],
+      "first_contact_deg": 7.949349721272785,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.3999977111816406,
+      "continuous_lower_bound_through_verified_travel_mm": 0.38922721585062836,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.043608819870723,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.3999977111816406,
+      "continuous_lower_bound_through_verified_travel_mm": 0.38922721585062836,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.0,
+        0.2,
+        0.2
+      ],
+      "first_contact_deg": 8.13984375,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.3999977111816406,
+      "continuous_lower_bound_through_verified_travel_mm": 0.38922721585062836,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        48.0,
+        -10.89500026702881,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.2,
+        -0.2,
+        -0.2
+      ],
+      "first_contact_deg": 6.697881898425875,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.02794177606555175,
+      "continuous_lower_bound_through_verified_travel_mm": 0.017171280734539482,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.10000305175781
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.2,
+        -0.2,
+        0.0
+      ],
+      "first_contact_deg": 6.795994531540643,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.05525779831386659,
+      "continuous_lower_bound_through_verified_travel_mm": 0.04448730298285432,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.30000305175781
+      ]
+    },
+    {
+      "face_shift_mm": -0.2,
+      "rigid_translation_mm": [
+        0.2,
+        -0.2,
+        0.2
+      ],
+      "first_contact_deg": 6.896600160144624,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.08257382056218143,
+      "continuous_lower_bound_through_verified_travel_mm": 0.07180332523116917,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.79000015258789,
+        75.50000305175782
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.2,
+        0.0,
+        -0.2
+      ],
+      "first_contact_deg": 7.37314685639881,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.19999771118163778,
+      "continuous_lower_bound_through_verified_travel_mm": 0.18922721585062552,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.2,
+        0.0,
+        0.0
+      ],
+      "first_contact_deg": 7.461457243419829,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.19999771118163778,
+      "continuous_lower_bound_through_verified_travel_mm": 0.18922721585062552,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.0,
+      "rigid_translation_mm": [
+        0.2,
+        0.0,
+        0.2
+      ],
+      "first_contact_deg": 7.55161616007487,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.19999771118163778,
+      "continuous_lower_bound_through_verified_travel_mm": 0.18922721585062552,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -11.095000267028809,
+        72.2
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.2,
+        0.2,
+        -0.2
+      ],
+      "first_contact_deg": 7.949349721272785,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.19999771118163778,
+      "continuous_lower_bound_through_verified_travel_mm": 0.18922721585062552,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        71.8
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.2,
+        0.2,
+        0.0
+      ],
+      "first_contact_deg": 8.043608819870723,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.19999771118163778,
+      "continuous_lower_bound_through_verified_travel_mm": 0.18922721585062552,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        47.0,
+        -10.89500026702881,
+        72.0
+      ]
+    },
+    {
+      "face_shift_mm": 0.2,
+      "rigid_translation_mm": [
+        0.2,
+        0.2,
+        0.2
+      ],
+      "first_contact_deg": 8.13984375,
+      "minimum_sampled_clearance_through_verified_travel_mm": 0.19999771118163778,
+      "continuous_lower_bound_through_verified_travel_mm": 0.18922721585062552,
+      "contact_part": "Jaw_39_right_jaw_pivot_arm",
+      "contact_point_mm": [
+        48.2,
+        -10.89500026702881,
+        72.2
+      ]
+    }
+  ],
+  "neighbor_pose_comparisons": 283,
+  "neck_pitch_gaps": {
+    "Part011": {
+      "sample_step_deg": 0.247916666666665,
+      "sampled_minimum_mm": 0.7000007629394531,
+      "continuous_lower_bound_mm": 0.5823891491964835
+    },
+    "Part018": {
+      "sample_step_deg": 0.247916666666665,
+      "sampled_minimum_mm": 4.400287628173828,
+      "continuous_lower_bound_mm": 4.319551077768638
+    }
+  },
+  "neck_pitch_gaps_by_stop_shift_mm": {
+    "(-0.2, -0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.7476336128764132,
+        "continuous_lower_bound_mm": 0.6300219991334436
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.1195510777686355
+      }
+    },
+    "(-0.2, -0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.900000762939456,
+        "continuous_lower_bound_mm": 0.7823891491964864
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.1195510777686355
+      }
+    },
+    "(-0.2, 0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.7476336128764132,
+        "continuous_lower_bound_mm": 0.6300219991334436
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.1195510777686355
+      }
+    },
+    "(-0.2, 0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.6848987896111881,
+        "continuous_lower_bound_mm": 0.5672871758682185
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.200287628173825,
+        "continuous_lower_bound_mm": 4.1195510777686355
+      }
+    },
+    "(0.2, -0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.5000007629394503,
+        "continuous_lower_bound_mm": 0.3823891491964807
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.519551077768641
+      }
+    },
+    "(0.2, -0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.5000007629394503,
+        "continuous_lower_bound_mm": 0.3823891491964807
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.519551077768641
+      }
+    },
+    "(0.2, 0.2, -0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.5000007629394503,
+        "continuous_lower_bound_mm": 0.3823891491964807
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.519551077768641
+      }
+    },
+    "(0.2, 0.2, 0.2)": {
+      "Part011": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 0.5000007629394503,
+        "continuous_lower_bound_mm": 0.3823891491964807
+      },
+      "Part018": {
+        "sample_step_deg": 0.247916666666665,
+        "sampled_minimum_mm": 4.600287628173831,
+        "continuous_lower_bound_mm": 4.519551077768641
+      }
+    }
+  },
+  "print_sha256": "fc02289bdc470dd2112f3d8045792a93532dbb95af456c12600d2491761a9258",
+  "added_volume_mm3": 1256.4100639987155,
+  "bearing_entry": {
+    "diameter_mm": 10.2,
+    "center_yz_mm": [
+      -9.0,
+      92.0
+    ],
+    "entry_axis": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "cut_depth_x_mm": [
+      44.02,
+      70.0
+    ],
+    "removed_volume_mm3": 5.5996030767864795,
+    "sweep_diameter_mm": 10.04,
+    "sweep_obstruction_mm3": 0.0,
+    "retained_shoulder_volume_mm3": 20.63848879073551
+  },
+  "reference_powered_model": {
+    "source_cad_sha256": "9ed25081889f5846ff2d7c70c99e39580195da25de1857a4c046a16143fdfe02",
+    "command_deg": 6.0,
+    "mujoco_peak_deg": 6.572205720574027,
+    "external_closing_disturbances_N": [
+      0.0,
+      0.25,
+      0.5,
+      1.0
+    ]
+  },
+  "gravity_drop": {
+    "jaw_mass_kg": 0.047600094067609885,
+    "gravity_energy_from_closed_no_friction_J": 0.00221529030032177,
+    "minimum_contact_lever_mm": 15.903576918022326,
+    "gravity_tangential_force_N": 0.8837508023440077,
+    "latest_static_contact_deg": 8.13984375,
+    "initial_speed_deg_s": 130.53000000000003,
+    "jaw_pivot_inertia_kg_m2": 0.0001944071372122037,
+    "initial_kinetic_energy_J": 0.0005044958761193876
+  },
+  "local_FE": {
+    "scope": "Homogeneous elastic stop with a fixed upper stem. Gravity drop from closed, without friction, servo torque or hinge compliance. The impact combines full closed-to-stop gravity energy and initial opening at the configured profile speed ceiling. The largest calculated normal displacement is applied as a rigid retreat of the stop for each tolerance case, and the exact pivot-arm contact is measured again.",
+    "meshes": [
+      {
+        "mesh_mm": 0.68,
+        "elements": 22594,
+        "contact_load_facets": 9,
+        "compliance_mm_per_N_at_1000_MPa": 0.006017854891881143,
+        "impact_cases": [
+          {
+            "modulus_MPa": 500.0,
+            "force_N": 22.161292567920523,
+            "deflection_mm": 0.2667268857805395,
+            "additional_opening_deg": 0.960936330026145,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.93593924331665,
+            "independent_minimum_lever_upper_deg": 9.100780080026146,
+            "deflected_contact": {
+              "first_contact_deg": 8.93593924331665,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          },
+          {
+            "modulus_MPa": 1000.0,
+            "force_N": 30.961758576979985,
+            "deflection_mm": 0.18632337031372195,
+            "additional_opening_deg": 0.6712667721644187,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.69568955898285,
+            "independent_minimum_lever_upper_deg": 8.81111052216442,
+            "deflected_contact": {
+              "first_contact_deg": 8.69568955898285,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          },
+          {
+            "modulus_MPa": 1800.0,
+            "force_N": 41.22989040279894,
+            "deflection_mm": 0.13784194314011497,
+            "additional_opening_deg": 0.49660284742993377,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.550985672950745,
+            "independent_minimum_lever_upper_deg": 8.636446597429934,
+            "deflected_contact": {
+              "first_contact_deg": 8.550985672950745,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          }
+        ],
+        "load_patches": [
+          {
+            "center_xz_mm": [
+              46.8,
+              72.0
+            ],
+            "facets": 18,
+            "deflection_mm_per_N_at_1000_MPa": 0.004693179748557825
+          },
+          {
+            "center_xz_mm": [
+              46.8,
+              75.30000305175781
+            ],
+            "facets": 17,
+            "deflection_mm_per_N_at_1000_MPa": 0.003357132036820261
+          },
+          {
+            "center_xz_mm": [
+              48.0,
+              72.0
+            ],
+            "facets": 9,
+            "deflection_mm_per_N_at_1000_MPa": 0.006017854891881143
+          },
+          {
+            "center_xz_mm": [
+              48.0,
+              75.30000305175781
+            ],
+            "facets": 9,
+            "deflection_mm_per_N_at_1000_MPa": 0.004269177673647315
+          }
+        ]
+      },
+      {
+        "mesh_mm": 0.5,
+        "elements": 53769,
+        "contact_load_facets": 12,
+        "compliance_mm_per_N_at_1000_MPa": 0.006550099560678579,
+        "impact_cases": [
+          {
+            "modulus_MPa": 500.0,
+            "force_N": 21.280055240233455,
+            "deflection_mm": 0.2787729609605381,
+            "additional_opening_deg": 1.0043346970142075,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.971954146385194,
+            "independent_minimum_lever_upper_deg": 9.144178447014209,
+            "deflected_contact": {
+              "first_contact_deg": 8.971954146385194,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          },
+          {
+            "modulus_MPa": 1000.0,
+            "force_N": 29.714939712368057,
+            "deflection_mm": 0.1946358135555725,
+            "additional_opening_deg": 0.7012139920669025,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.720558526039124,
+            "independent_minimum_lever_upper_deg": 8.841057742066903,
+            "deflected_contact": {
+              "first_contact_deg": 8.720558526039124,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          },
+          {
+            "modulus_MPa": 1800.0,
+            "force_N": 39.55677246801391,
+            "deflection_mm": 0.14394488775811137,
+            "additional_opening_deg": 0.5185899117875763,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.5691541929245,
+            "independent_minimum_lever_upper_deg": 8.658433661787576,
+            "deflected_contact": {
+              "first_contact_deg": 8.5691541929245,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          }
+        ],
+        "load_patches": [
+          {
+            "center_xz_mm": [
+              46.8,
+              72.0
+            ],
+            "facets": 27,
+            "deflection_mm_per_N_at_1000_MPa": 0.005161460113797194
+          },
+          {
+            "center_xz_mm": [
+              46.8,
+              75.30000305175781
+            ],
+            "facets": 26,
+            "deflection_mm_per_N_at_1000_MPa": 0.0033753806188003147
+          },
+          {
+            "center_xz_mm": [
+              48.0,
+              72.0
+            ],
+            "facets": 12,
+            "deflection_mm_per_N_at_1000_MPa": 0.006550099560678579
+          },
+          {
+            "center_xz_mm": [
+              48.0,
+              75.30000305175781
+            ],
+            "facets": 12,
+            "deflection_mm_per_N_at_1000_MPa": 0.004613797453162982
+          }
+        ]
+      },
+      {
+        "mesh_mm": 0.38,
+        "elements": 116488,
+        "contact_load_facets": 24,
+        "compliance_mm_per_N_at_1000_MPa": 0.00659232220089813,
+        "impact_cases": [
+          {
+            "modulus_MPa": 500.0,
+            "force_N": 21.214756004302725,
+            "deflection_mm": 0.27970901398760356,
+            "additional_opening_deg": 1.0077070130741574,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.974724523544314,
+            "independent_minimum_lever_upper_deg": 9.147550763074157,
+            "deflected_contact": {
+              "first_contact_deg": 8.974724523544314,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          },
+          {
+            "modulus_MPa": 1000.0,
+            "force_N": 29.622549134276767,
+            "deflection_mm": 0.19528138830508843,
+            "additional_opening_deg": 0.7035398027130322,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.722491347312928,
+            "independent_minimum_lever_upper_deg": 8.843383552713032,
+            "deflected_contact": {
+              "first_contact_deg": 8.722491347312928,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          },
+          {
+            "modulus_MPa": 1800.0,
+            "force_N": 39.432791527500676,
+            "deflection_mm": 0.144418703905628,
+            "additional_opening_deg": 0.5202969281184173,
+            "opening_with_static_face_tolerance_and_impact_deg": 8.570571595191957,
+            "independent_minimum_lever_upper_deg": 8.660140678118418,
+            "deflected_contact": {
+              "first_contact_deg": 8.570571595191957,
+              "rigid_translation_mm": [
+                -0.2,
+                0.2,
+                0.2
+              ]
+            }
+          }
+        ],
+        "load_patches": [
+          {
+            "center_xz_mm": [
+              46.8,
+              72.0
+            ],
+            "facets": 49,
+            "deflection_mm_per_N_at_1000_MPa": 0.00509355749961438
+          },
+          {
+            "center_xz_mm": [
+              46.8,
+              75.30000305175781
+            ],
+            "facets": 45,
+            "deflection_mm_per_N_at_1000_MPa": 0.0035191918341102835
+          },
+          {
+            "center_xz_mm": [
+              48.0,
+              72.0
+            ],
+            "facets": 24,
+            "deflection_mm_per_N_at_1000_MPa": 0.00659232220089813
+          },
+          {
+            "center_xz_mm": [
+              48.0,
+              75.30000305175781
+            ],
+            "facets": 22,
+            "deflection_mm_per_N_at_1000_MPa": 0.004683198923526771
+          }
+        ]
+      }
+    ]
+  },
+  "modeled_impact_max_deg": 8.974724523544314,
+  "source_sha256": "4f54aca808eb5c261664270aef27dd23c9cb72ae0792768f0921d25e895d5f2a",
+  "cad_sha256": "3760c20419cda650f115009460d9e54c6bd279fce404f0ddbbc2ed0f855a4c98"
+}

@@ -1,0 +1,586 @@
+[
+ {
+  "a": "BlinkHornScrew0",
+  "b": "Part045",
+  "la": "M2 × 6 · 19 blink horn to the XL330 horn",
+  "lb": "XL330 M288 blink",
+  "ma": "blink_motor_horn",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "BlinkHornScrew1",
+  "b": "Part045",
+  "la": "M2 × 6 · 19 blink horn to the XL330 horn001",
+  "lb": "XL330 M288 blink",
+  "ma": "blink_motor_horn",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "CableSaddle",
+  "b": "HubRearClearance",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 208.3944999045502,
+  "bounds": [
+   [
+    -13.55,
+    92.14,
+    -68.5
+   ],
+   [
+    -1.4,
+    96.0,
+    -62.0
+   ]
+  ]
+ },
+ {
+  "a": "CableSaddle",
+  "b": "HubRearClearance001",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 219.21331342247086,
+  "bounds": [
+   [
+    7.8,
+    91.39,
+    -68.5
+   ],
+   [
+    17.9,
+    96.0,
+    -62.8
+   ]
+  ]
+ },
+ {
+  "a": "CableSaddle",
+  "b": "HubRearClearance002",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 150.71568563982507,
+  "bounds": [
+   [
+    -1.3,
+    92.82,
+    -68.5
+   ],
+   [
+    7.5,
+    96.0,
+    -62.2
+   ]
+  ]
+ },
+ {
+  "a": "CradleMountFrameL",
+  "b": "Part019",
+  "la": "M3 × 16 · 13 cradle mount into the 2.5 mm channel of the 09 frame",
+  "lb": "09 head frame",
+  "ma": "head",
+  "mb": "head",
+  "mm3": 3.2240576812963417,
+  "bounds": [
+   [
+    -64.75,
+    25.5,
+    144.5
+   ],
+   [
+    -53.2,
+    28.5,
+    147.5
+   ]
+  ]
+ },
+ {
+  "a": "CradleMountFrameR",
+  "b": "Part019",
+  "la": "M3 × 16 · 13 cradle mount into the 2.5 mm channel of the 09 frame001",
+  "lb": "09 head frame",
+  "ma": "head",
+  "mb": "head",
+  "mm3": 3.2240176730963532,
+  "bounds": [
+   [
+    53.2,
+    25.5,
+    144.5
+   ],
+   [
+    64.75,
+    28.5,
+    147.5
+   ]
+  ]
+ },
+ {
+  "a": "EyePitchHornScrew0",
+  "b": "Part041",
+  "la": "M2 × 5 · 17 eye pitch horn to the XL330 horn",
+  "lb": "XL330 M077 eye pitch",
+  "ma": "tilt_horn",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "EyePitchHornScrew1",
+  "b": "Part041",
+  "la": "M2 × 5 · 17 eye pitch horn to the XL330 horn001",
+  "lb": "XL330 M077 eye pitch",
+  "ma": "tilt_horn",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "EyePitchStayFrame0",
+  "b": "Part019",
+  "la": "M3 × 8 · 34 stay into the tapped 09 frame",
+  "lb": "09 head frame",
+  "ma": "head",
+  "mb": "head",
+  "mm3": 7.736265284660324,
+  "bounds": [
+   [
+    51.5,
+    26.6,
+    140.5
+   ],
+   [
+    54.5,
+    31.0,
+    143.5
+   ]
+  ]
+ },
+ {
+  "a": "EyePitchStayFrame1",
+  "b": "Part019",
+  "la": "M3 × 8 · 34 stay into the tapped 09 frame001",
+  "lb": "09 head frame",
+  "ma": "head",
+  "mb": "head",
+  "mm3": 7.736265284660324,
+  "bounds": [
+   [
+    51.5,
+    26.6,
+    149.5
+   ],
+   [
+    54.5,
+    31.0,
+    152.5
+   ]
+  ]
+ },
+ {
+  "a": "EyeYawFoot0",
+  "b": "Part039",
+  "la": "M3 × 16 · 12 cradle into the tapped foot of the eye yaw plate",
+  "lb": "XL330 eye yaw front plate",
+  "ma": "tilt",
+  "mb": "tilt",
+  "mm3": 4.747263559200538,
+  "bounds": [
+   [
+    -9.5,
+    -49.1,
+    108.85
+   ],
+   [
+    -6.5,
+    -46.1,
+    111.55
+   ]
+  ]
+ },
+ {
+  "a": "EyeYawFoot1",
+  "b": "Part039",
+  "la": "M3 × 16 · 12 cradle into the tapped foot of the eye yaw plate001",
+  "lb": "XL330 eye yaw front plate",
+  "ma": "tilt",
+  "mb": "tilt",
+  "mm3": 4.747263093240434,
+  "bounds": [
+   [
+    6.5,
+    -49.1,
+    108.85
+   ],
+   [
+    9.5,
+    -46.1,
+    111.55
+   ]
+  ]
+ },
+ {
+  "a": "EyeYawHornScrew0",
+  "b": "Part038",
+  "la": "M2 × 5 · 16 eye yaw horn to the XL330 horn",
+  "lb": "XL330 M077 eye yaw",
+  "ma": "look_horn",
+  "mb": "tilt",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "EyeYawHornScrew1",
+  "b": "Part038",
+  "la": "M2 × 5 · 16 eye yaw horn to the XL330 horn001",
+  "lb": "XL330 M077 eye yaw",
+  "ma": "look_horn",
+  "mb": "tilt",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "EyeYawHornScrew2",
+  "b": "Part038",
+  "la": "M2 × 5 · 16 eye yaw horn to the XL330 horn002",
+  "lb": "XL330 M077 eye yaw",
+  "ma": "look_horn",
+  "mb": "tilt",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "HarnessID1EH",
+  "b": "Part038",
+  "la": null,
+  "lb": "XL330 M077 eye yaw",
+  "ma": null,
+  "mb": "tilt",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "HarnessID6EH",
+  "b": "Jaw_XL330_M288_Jaw",
+  "la": null,
+  "lb": "XL330-M288-T jaw motor · ID 6",
+  "ma": null,
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "HubBodyJ1",
+  "b": "HubRearClearance",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 5.346325924850817,
+  "bounds": [
+   [
+    -13.55,
+    75.1,
+    -72.5
+   ],
+   [
+    -1.4,
+    75.15,
+    -63.7
+   ]
+  ]
+ },
+ {
+  "a": "JawHornScrew0",
+  "b": "Jaw_XL330_M288_Jaw",
+  "la": "M2 × 6 · 38 jaw drive arm to the XL330 horn",
+  "lb": "XL330-M288-T jaw motor · ID 6",
+  "ma": "jaw",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "JawHornScrew1",
+  "b": "Jaw_XL330_M288_Jaw",
+  "la": "M2 × 6 · 38 jaw drive arm to the XL330 horn001",
+  "lb": "XL330-M288-T jaw motor · ID 6",
+  "ma": "jaw",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Jaw_36_left_jaw_servo_stay",
+  "b": "Jaw_XL330_M288_Jaw",
+  "la": "36 left cheek servo stay",
+  "lb": "XL330-M288-T jaw motor · ID 6",
+  "ma": "head",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Jaw_38_left_jaw_drive_arm",
+  "b": "Jaw_XL330_M288_Jaw",
+  "la": "38 jaw drive arm / left",
+  "lb": "XL330-M288-T jaw motor · ID 6",
+  "ma": "jaw",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part000",
+  "b": "YawBracketFoot0",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 6.042071213712006,
+  "bounds": [
+   [
+    -24.3,
+    3.5,
+    -72.4
+   ],
+   [
+    -21.3,
+    6.5,
+    -68.4
+   ]
+  ]
+ },
+ {
+  "a": "Part000",
+  "b": "YawBracketFoot1",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 6.042073196920683,
+  "bounds": [
+   [
+    -24.3,
+    24.5,
+    -72.4
+   ],
+   [
+    -21.3,
+    27.5,
+    -68.4
+   ]
+  ]
+ },
+ {
+  "a": "Part000",
+  "b": "YawBracketFoot2",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 6.042071618050613,
+  "bounds": [
+   [
+    21.3,
+    3.5,
+    -72.4
+   ],
+   [
+    24.3,
+    6.5,
+    -68.4
+   ]
+  ]
+ },
+ {
+  "a": "Part000",
+  "b": "YawBracketFoot3",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": 6.042073601245647,
+  "bounds": [
+   [
+    21.3,
+    24.5,
+    -72.4
+   ],
+   [
+    24.3,
+    27.5,
+    -68.4
+   ]
+  ]
+ },
+ {
+  "a": "Part007",
+  "b": "Part017",
+  "la": "04 yaw rotor",
+  "lb": null,
+  "ma": "pan",
+  "mb": null,
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part016",
+  "b": "Part018",
+  "la": "08 pitch horn to 8mm clamp",
+  "lb": "XL430 neck pitch",
+  "ma": "head",
+  "mb": "pan",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part017",
+  "b": "XL430YawSideL0",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part017",
+  "b": "XL430YawSideL1",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part017",
+  "b": "XL430YawSideR0",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part017",
+  "b": "XL430YawSideR1",
+  "la": null,
+  "lb": null,
+  "ma": null,
+  "mb": null,
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part018",
+  "b": "XL430PitchKeeper0",
+  "la": "XL430 neck pitch",
+  "lb": "M2.5 × 10 · XL430 ID5 to 07 yoke through the ID5 keeper",
+  "ma": "pan",
+  "mb": "pan",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part018",
+  "b": "XL430PitchKeeper1",
+  "la": "XL430 neck pitch",
+  "lb": "M2.5 × 10 · XL430 ID5 to 07 yoke through the ID5 keeper001",
+  "ma": "pan",
+  "mb": "pan",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part018",
+  "b": "XL430PitchSide0",
+  "la": "XL430 neck pitch",
+  "lb": "M2.5 × 8 · XL430 ID5 to 07 yoke",
+  "ma": "pan",
+  "mb": "pan",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part018",
+  "b": "XL430PitchSide1",
+  "la": "XL430 neck pitch",
+  "lb": "M2.5 × 8 · XL430 ID5 to 07 yoke001",
+  "ma": "pan",
+  "mb": "pan",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part038",
+  "b": "Part039",
+  "la": "XL330 M077 eye yaw",
+  "lb": "XL330 eye yaw front plate",
+  "ma": "tilt",
+  "mb": "tilt",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part038",
+  "b": "Part040",
+  "la": "XL330 M077 eye yaw",
+  "lb": "16 eye yaw horn 13p5 mm",
+  "ma": "tilt",
+  "mb": "look_horn",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part041",
+  "b": "Part042",
+  "la": "XL330 M077 eye pitch",
+  "lb": "XL330 M077 eye pitch front plate",
+  "ma": "head",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part041",
+  "b": "Part043",
+  "la": "XL330 M077 eye pitch",
+  "lb": "17 eye pitch horn 10mm",
+  "ma": "head",
+  "mb": "tilt_horn",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part045",
+  "b": "Part046",
+  "la": "XL330 M288 blink",
+  "lb": "XL330 M288 blink front plate",
+  "ma": "head",
+  "mb": "head",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ },
+ {
+  "a": "Part045",
+  "b": "Part047",
+  "la": "XL330 M288 blink",
+  "lb": "19 blink servo horn",
+  "ma": "head",
+  "mb": "blink_motor_horn",
+  "mm3": null,
+  "bounds": "Not all meshes are volumes!"
+ }
+]

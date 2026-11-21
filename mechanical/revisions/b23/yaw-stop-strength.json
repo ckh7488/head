@@ -1,0 +1,417 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "sliced_grams_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "solver_sha256": "868a6dc5ad898e276383e76b8b38cac3f5624d281212b5749dd2f17ad0481594",
+  "cad_actor_sha256": {
+    "Part007": "b5e31d5f1a56886faca8e05f5e2938f9dfc6afe0c56fdec4853466063e38bfc7",
+    "Part001": "8077843199f5ccb8432e2d588b4d31c1847381c36df5df9fe40588388b4b65a5",
+    "YawStopPadLeft": "34f2a4c6c52e03e1831587f49f7ff10f36b3b86b0a8afef3b67c191aefd7edcc",
+    "YawStopPadRight": "1d657f311a18b952959d313466b8ba7503a6fed6da4a63b20b7d7c9f6a3b2447"
+  },
+  "reused_elastic_source_sha256": "6e1cfbd636686ed70891787b3d8381fd3eed26d1c7a225b87ee34e4364122135",
+  "incident": {
+    "initial_speed_deg_s": [
+      39.846000000000004,
+      45.0,
+      145.0
+    ],
+    "released_pitch_and_jaw_pose_grid": 4859,
+    "yaw_L_kg_m2_s": 0.0017558501727834022,
+    "total_kinetic_bound_J": 0.010234002106583873,
+    "contact_speed_deg_s": 45.75639302491259,
+    "max_cross_axis_momentum_kg_m2_s": 0.00010112547113364195,
+    "minimum_yaw_inertia_kg_m2": 0.002297498090289666,
+    "incident_contact_energy_J": 0.0007325308651693676,
+    "first_compression_energy_before_grid_allowance_J": 0.000750459501288716,
+    "incident_screen_J": 0.0007654686913144904
+  },
+  "mesh_levels": {
+    "1.8": {
+      "Part007": {
+        "mesh_mm": 1.8,
+        "element_count": 103923,
+        "cases": {
+          "back_full": {
+            "contact_facets": 23,
+            "compliance_mm_per_N_at_1GPa": 0.002188411285499945,
+            "local_peak_von_mises_MPa_per_N": 0.15037587099764568,
+            "local_p99_von_mises_MPa_per_N": 0.11329818932132296,
+            "local_peak_layer_tension_MPa_per_N": 0.07255775141238492,
+            "local_peak_layer_shear_MPa_per_N": 0.05494745104868253
+          },
+          "back_outer_half": {
+            "contact_facets": 11,
+            "compliance_mm_per_N_at_1GPa": 0.002666208042522337,
+            "local_peak_von_mises_MPa_per_N": 0.17849263828896514,
+            "local_p99_von_mises_MPa_per_N": 0.15222259303055555,
+            "local_peak_layer_tension_MPa_per_N": 0.08841539260156872,
+            "local_peak_layer_shear_MPa_per_N": 0.07105880383039806
+          },
+          "forward_full": {
+            "contact_facets": 23,
+            "compliance_mm_per_N_at_1GPa": 0.002181342966920551,
+            "local_peak_von_mises_MPa_per_N": 0.15474943586822554,
+            "local_p99_von_mises_MPa_per_N": 0.11215631503777158,
+            "local_peak_layer_tension_MPa_per_N": 0.09647709517466067,
+            "local_peak_layer_shear_MPa_per_N": 0.038010293992869384
+          },
+          "forward_outer_half": {
+            "contact_facets": 11,
+            "compliance_mm_per_N_at_1GPa": 0.0026671320692404758,
+            "local_peak_von_mises_MPa_per_N": 0.16581635189902572,
+            "local_p99_von_mises_MPa_per_N": 0.15476442932311787,
+            "local_peak_layer_tension_MPa_per_N": 0.1106093616616907,
+            "local_peak_layer_shear_MPa_per_N": 0.04996603616643438
+          }
+        }
+      },
+      "Part001": {
+        "mesh_mm": 1.8,
+        "element_count": 82165,
+        "cases": {
+          "back_full": {
+            "contact_facets": 16,
+            "compliance_mm_per_N_at_1GPa": 0.0017067525174587939,
+            "local_peak_von_mises_MPa_per_N": 0.32116757620925335,
+            "local_p99_von_mises_MPa_per_N": 0.1393486751017943,
+            "local_peak_layer_tension_MPa_per_N": 0.09743358255686155,
+            "local_peak_layer_shear_MPa_per_N": 0.14462069490644772
+          },
+          "back_outer_half": {
+            "contact_facets": 6,
+            "compliance_mm_per_N_at_1GPa": 0.001555212055352917,
+            "local_peak_von_mises_MPa_per_N": 0.31614900905720744,
+            "local_p99_von_mises_MPa_per_N": 0.13632058758389226,
+            "local_peak_layer_tension_MPa_per_N": 0.10305380688938727,
+            "local_peak_layer_shear_MPa_per_N": 0.14449176924911905
+          },
+          "forward_full": {
+            "contact_facets": 15,
+            "compliance_mm_per_N_at_1GPa": 0.0017103973556202169,
+            "local_peak_von_mises_MPa_per_N": 0.31533459051155704,
+            "local_p99_von_mises_MPa_per_N": 0.1350607082152633,
+            "local_peak_layer_tension_MPa_per_N": 0.12924355352495753,
+            "local_peak_layer_shear_MPa_per_N": 0.13377165650788986
+          },
+          "forward_outer_half": {
+            "contact_facets": 8,
+            "compliance_mm_per_N_at_1GPa": 0.0015775182637560508,
+            "local_peak_von_mises_MPa_per_N": 0.3120500767828019,
+            "local_p99_von_mises_MPa_per_N": 0.13252413931338433,
+            "local_peak_layer_tension_MPa_per_N": 0.1313735076594431,
+            "local_peak_layer_shear_MPa_per_N": 0.13278947317157927
+          }
+        }
+      },
+      "YawStopPadLeft": {
+        "mesh_mm": 1.8,
+        "element_count": 2225,
+        "cases": {
+          "forward_full": {
+            "contact_facets": 16,
+            "compliance_mm_per_N_at_1GPa": 0.0021821886260463908,
+            "local_peak_von_mises_MPa_per_N": 0.3132277551501137,
+            "local_p99_von_mises_MPa_per_N": 0.24124622293431655,
+            "local_peak_layer_tension_MPa_per_N": 0.13297199019962777,
+            "local_peak_layer_shear_MPa_per_N": 0.11740674335285532
+          },
+          "forward_outer_half": {
+            "contact_facets": 7,
+            "compliance_mm_per_N_at_1GPa": 0.001860709073940587,
+            "local_peak_von_mises_MPa_per_N": 0.28666819247299064,
+            "local_p99_von_mises_MPa_per_N": 0.2266950948254614,
+            "local_peak_layer_tension_MPa_per_N": 0.13032783965126865,
+            "local_peak_layer_shear_MPa_per_N": 0.10797164158413249
+          }
+        }
+      },
+      "YawStopPadRight": {
+        "mesh_mm": 1.8,
+        "element_count": 2157,
+        "cases": {
+          "back_full": {
+            "contact_facets": 16,
+            "compliance_mm_per_N_at_1GPa": 0.002374496774832187,
+            "local_peak_von_mises_MPa_per_N": 0.28621291264329,
+            "local_p99_von_mises_MPa_per_N": 0.20477577668846905,
+            "local_peak_layer_tension_MPa_per_N": 0.13112229523426178,
+            "local_peak_layer_shear_MPa_per_N": 0.09158005265913274
+          },
+          "back_outer_half": {
+            "contact_facets": 7,
+            "compliance_mm_per_N_at_1GPa": 0.0020298720892459824,
+            "local_peak_von_mises_MPa_per_N": 0.26045751957048513,
+            "local_p99_von_mises_MPa_per_N": 0.19018146285154916,
+            "local_peak_layer_tension_MPa_per_N": 0.12600677564103924,
+            "local_peak_layer_shear_MPa_per_N": 0.08767009894298446
+          }
+        }
+      }
+    },
+    "1.55": {
+      "Part007": {
+        "mesh_mm": 1.55,
+        "element_count": 126999,
+        "cases": {
+          "back_full": {
+            "contact_facets": 23,
+            "compliance_mm_per_N_at_1GPa": 0.002199595754111618,
+            "local_peak_von_mises_MPa_per_N": 0.16308063505268267,
+            "local_p99_von_mises_MPa_per_N": 0.11014821863095099,
+            "local_peak_layer_tension_MPa_per_N": 0.06298665060481072,
+            "local_peak_layer_shear_MPa_per_N": 0.04549638735871899
+          },
+          "back_outer_half": {
+            "contact_facets": 11,
+            "compliance_mm_per_N_at_1GPa": 0.0026940628665577254,
+            "local_peak_von_mises_MPa_per_N": 0.17732591083790591,
+            "local_p99_von_mises_MPa_per_N": 0.1553875985309945,
+            "local_peak_layer_tension_MPa_per_N": 0.0861211845609369,
+            "local_peak_layer_shear_MPa_per_N": 0.05920243918888436
+          },
+          "forward_full": {
+            "contact_facets": 23,
+            "compliance_mm_per_N_at_1GPa": 0.002196608573281202,
+            "local_peak_von_mises_MPa_per_N": 0.1534751940030675,
+            "local_p99_von_mises_MPa_per_N": 0.11921862487719931,
+            "local_peak_layer_tension_MPa_per_N": 0.05429419828142772,
+            "local_peak_layer_shear_MPa_per_N": 0.06508155641337508
+          },
+          "forward_outer_half": {
+            "contact_facets": 11,
+            "compliance_mm_per_N_at_1GPa": 0.002694148481587367,
+            "local_peak_von_mises_MPa_per_N": 0.17817477663575876,
+            "local_p99_von_mises_MPa_per_N": 0.15637398012758622,
+            "local_peak_layer_tension_MPa_per_N": 0.06983910436380622,
+            "local_peak_layer_shear_MPa_per_N": 0.08019892871544643
+          }
+        }
+      },
+      "Part001": {
+        "mesh_mm": 1.55,
+        "element_count": 116525,
+        "cases": {
+          "back_full": {
+            "contact_facets": 21,
+            "compliance_mm_per_N_at_1GPa": 0.0017195123550257005,
+            "local_peak_von_mises_MPa_per_N": 0.22343213362153305,
+            "local_p99_von_mises_MPa_per_N": 0.09678885840517736,
+            "local_peak_layer_tension_MPa_per_N": 0.1540292842185257,
+            "local_peak_layer_shear_MPa_per_N": 0.10821234327060363
+          },
+          "back_outer_half": {
+            "contact_facets": 10,
+            "compliance_mm_per_N_at_1GPa": 0.001564950236036527,
+            "local_peak_von_mises_MPa_per_N": 0.21655422352931294,
+            "local_p99_von_mises_MPa_per_N": 0.12556889860622472,
+            "local_peak_layer_tension_MPa_per_N": 0.13869843141693794,
+            "local_peak_layer_shear_MPa_per_N": 0.10444060447931379
+          },
+          "forward_full": {
+            "contact_facets": 20,
+            "compliance_mm_per_N_at_1GPa": 0.001724640490928153,
+            "local_peak_von_mises_MPa_per_N": 0.23843664638248027,
+            "local_p99_von_mises_MPa_per_N": 0.0973232489622264,
+            "local_peak_layer_tension_MPa_per_N": 0.18366545481850152,
+            "local_peak_layer_shear_MPa_per_N": 0.07684707187963066
+          },
+          "forward_outer_half": {
+            "contact_facets": 9,
+            "compliance_mm_per_N_at_1GPa": 0.0015633236262639792,
+            "local_peak_von_mises_MPa_per_N": 0.23131321159098983,
+            "local_p99_von_mises_MPa_per_N": 0.11308681807557729,
+            "local_peak_layer_tension_MPa_per_N": 0.16882965170557554,
+            "local_peak_layer_shear_MPa_per_N": 0.075810285465487
+          }
+        }
+      },
+      "YawStopPadLeft": {
+        "mesh_mm": 1.55,
+        "element_count": 2804,
+        "cases": {
+          "forward_full": {
+            "contact_facets": 17,
+            "compliance_mm_per_N_at_1GPa": 0.0021556753124899685,
+            "local_peak_von_mises_MPa_per_N": 0.3482286145176994,
+            "local_p99_von_mises_MPa_per_N": 0.23061986797030717,
+            "local_peak_layer_tension_MPa_per_N": 0.14931763161152634,
+            "local_peak_layer_shear_MPa_per_N": 0.11708431721358958
+          },
+          "forward_outer_half": {
+            "contact_facets": 7,
+            "compliance_mm_per_N_at_1GPa": 0.0018238558012501796,
+            "local_peak_von_mises_MPa_per_N": 0.3212930238999359,
+            "local_p99_von_mises_MPa_per_N": 0.20944642732684635,
+            "local_peak_layer_tension_MPa_per_N": 0.14830037657172318,
+            "local_peak_layer_shear_MPa_per_N": 0.11059732493342
+          }
+        }
+      },
+      "YawStopPadRight": {
+        "mesh_mm": 1.55,
+        "element_count": 2721,
+        "cases": {
+          "back_full": {
+            "contact_facets": 17,
+            "compliance_mm_per_N_at_1GPa": 0.002468803106322949,
+            "local_peak_von_mises_MPa_per_N": 0.31900047894452155,
+            "local_p99_von_mises_MPa_per_N": 0.2503917356605544,
+            "local_peak_layer_tension_MPa_per_N": 0.16971243681508297,
+            "local_peak_layer_shear_MPa_per_N": 0.11561849775000978
+          },
+          "back_outer_half": {
+            "contact_facets": 7,
+            "compliance_mm_per_N_at_1GPa": 0.002100910142513846,
+            "local_peak_von_mises_MPa_per_N": 0.28813733917735374,
+            "local_p99_von_mises_MPa_per_N": 0.23209894082372495,
+            "local_peak_layer_tension_MPa_per_N": 0.1624552646003742,
+            "local_peak_layer_shear_MPa_per_N": 0.1098135259504707
+          }
+        }
+      }
+    }
+  },
+  "tangential_build_allowance_deg": 0.5053520949103252,
+  "firmware_yaw_feedback_deg_abs": 58.623046875,
+  "keyed_fit": {
+    "nominal_dry_tangential_witness_mm": {
+      "45.35_-1": -0.3665656926532273,
+      "45.35_+1": 0.3292643387285631,
+      "48.45_-1": -0.29707469706327844,
+      "48.45_+1": 0.25315572081323967
+    },
+    "absolute_witness_mm": 0.3665656926532273,
+    "sampled_support_directions": 1441
+  },
+  "minimum_PETG_model_MPa": 500.0,
+  "direction_results": {
+    "back": {
+      "late_abs_deg": 60.28204474660901,
+      "earliest_geometric_deg": 59.09464790508967,
+      "powered_feedback_margin_deg": 0.4716010300896727,
+      "samples": [
+        {
+          "compliance_mm_per_N": 0.012539321155581852,
+          "peak_contact_force_N": 11.049476462427103,
+          "compression_mm": 0.1385529339634159,
+          "additional_rotation_deg": 0.1750495778447306,
+          "von_mises_peak_MPa": 3.548733573818908,
+          "von_mises_p99_MPa": 2.2626651245944673,
+          "layer_tension_MPa": 1.448832714890393,
+          "layer_shear_MPa": 1.5979829643486454,
+          "standalone_1N_touch_elastic_deg": 0.03257726215483197,
+          "standalone_1N_touch_layer_tension_MPa": 0.26963220221728784,
+          "standalone_1N_touch_layer_shear_MPa": 0.2973895200976539
+        },
+        {
+          "compliance_mm_per_N": 0.012502584374242473,
+          "peak_contact_force_N": 11.065698086772889,
+          "compression_mm": 0.13834982398977155,
+          "additional_rotation_deg": 0.17479296606376402,
+          "von_mises_peak_MPa": 3.498409484659485,
+          "von_mises_p99_MPa": 2.1044906496160567,
+          "layer_tension_MPa": 1.3943529361314686,
+          "layer_shear_MPa": 1.5989022945344065,
+          "standalone_1N_touch_elastic_deg": 0.0324818196869688,
+          "standalone_1N_touch_layer_tension_MPa": 0.2591129475707609,
+          "standalone_1N_touch_layer_shear_MPa": 0.29712440493287023
+        },
+        {
+          "compliance_mm_per_N": 0.012775822430920535,
+          "peak_contact_force_N": 10.946726825129229,
+          "compression_mm": 0.13985343811764553,
+          "additional_rotation_deg": 0.17669265169867962,
+          "von_mises_peak_MPa": 3.492011100091066,
+          "von_mises_p99_MPa": 2.7409699295460577,
+          "layer_tension_MPa": 1.857795684641718,
+          "layer_shear_MPa": 1.2656441108011753,
+          "standalone_1N_touch_elastic_deg": 0.03319169446349253,
+          "standalone_1N_touch_layer_tension_MPa": 0.34898670741203003,
+          "standalone_1N_touch_layer_shear_MPa": 0.23775110182210948
+        },
+        {
+          "compliance_mm_per_N": 0.012719846490216197,
+          "peak_contact_force_N": 10.970786890593146,
+          "compression_mm": 0.1395467251252211,
+          "additional_rotation_deg": 0.17630514651703139,
+          "von_mises_peak_MPa": 3.161093343337303,
+          "von_mises_p99_MPa": 2.5463080173094763,
+          "layer_tension_MPa": 1.7822620871856263,
+          "layer_shear_MPa": 1.2047407909072343,
+          "standalone_1N_touch_elastic_deg": 0.0330462684972809,
+          "standalone_1N_touch_layer_tension_MPa": 0.3340634838471428,
+          "standalone_1N_touch_layer_shear_MPa": 0.22581409807059194
+        }
+      ],
+      "within_released_guard": true,
+      "powered_guard_separated": true
+    },
+    "forward": {
+      "late_abs_deg": 60.27809279293049,
+      "earliest_geometric_deg": 59.09464790508967,
+      "powered_feedback_margin_deg": 0.4716010300896727,
+      "samples": [
+        {
+          "compliance_mm_per_N": 0.012147857897174317,
+          "peak_contact_force_N": 11.226098860200665,
+          "compression_mm": 0.13637305369334823,
+          "additional_rotation_deg": 0.17229548877485815,
+          "von_mises_peak_MPa": 3.539977287123634,
+          "von_mises_p99_MPa": 2.7082539483106465,
+          "layer_tension_MPa": 1.4927567076186552,
+          "layer_shear_MPa": 1.501733840650377,
+          "standalone_1N_touch_elastic_deg": 0.031560237306764334,
+          "standalone_1N_touch_layer_tension_MPa": 0.2734358065246318,
+          "standalone_1N_touch_layer_shear_MPa": 0.2750801934486896
+        },
+        {
+          "compliance_mm_per_N": 0.012210718813874227,
+          "peak_contact_force_N": 11.19716553378458,
+          "compression_mm": 0.1367254398454474,
+          "additional_rotation_deg": 0.17274069802015338,
+          "von_mises_peak_MPa": 3.494076364567221,
+          "von_mises_p99_MPa": 2.5383425024576836,
+          "layer_tension_MPa": 1.4710109120167008,
+          "layer_shear_MPa": 1.4868657122462194,
+          "standalone_1N_touch_elastic_deg": 0.03172355049870012,
+          "standalone_1N_touch_layer_tension_MPa": 0.2701487807236736,
+          "standalone_1N_touch_layer_shear_MPa": 0.27306048920634546
+        },
+        {
+          "compliance_mm_per_N": 0.012153848753398647,
+          "peak_contact_force_N": 11.223331743572963,
+          "compression_mm": 0.13640667652060373,
+          "additional_rotation_deg": 0.17233796829188214,
+          "von_mises_peak_MPa": 3.908285263336928,
+          "von_mises_p99_MPa": 2.5883232848897544,
+          "layer_tension_MPa": 2.061338329262254,
+          "layer_shear_MPa": 1.3140761340578462,
+          "standalone_1N_touch_elastic_deg": 0.031575801601779224,
+          "standalone_1N_touch_layer_tension_MPa": 0.3776788757813964,
+          "standalone_1N_touch_layer_shear_MPa": 0.24076532704835243
+        },
+        {
+          "compliance_mm_per_N": 0.012162655818203052,
+          "peak_contact_force_N": 11.219267560903251,
+          "compression_mm": 0.13645608987559668,
+          "additional_rotation_deg": 0.1724003977669136,
+          "von_mises_peak_MPa": 3.604672400585064,
+          "von_mises_p99_MPa": 2.3498355078551674,
+          "layer_tension_MPa": 1.894145034698958,
+          "layer_shear_MPa": 1.2408209799481953,
+          "standalone_1N_touch_elastic_deg": 0.03159868243044513,
+          "standalone_1N_touch_layer_tension_MPa": 0.3471713998570802,
+          "standalone_1N_touch_layer_shear_MPa": 0.22742585635693616
+        }
+      ],
+      "within_released_guard": true,
+      "powered_guard_separated": true
+    }
+  },
+  "standalone_1N_touch": {
+    "maximum_torque_Nm": 0.09325508182043263,
+    "static_stop_force_N": 2.056341385235559,
+    "scope": "Static direct 1 N held against the yaw stop. No concurrent powered motion or cut-off impact."
+  },
+  "scope": "First mechanical arrest after full power interruption on a level base, no external contact. Full-face and eccentric outer-half loading of the exact printed solids. Central rotor output fixture and three seat mount patches. The keyed pad is supported at its mechanically loaded flanks and around the stock clamped M3. Stop tolerance includes port clearance, assembly and print error. Installed screw preload, PETG fatigue/creep and the as-built stop angle require hardware."
+}

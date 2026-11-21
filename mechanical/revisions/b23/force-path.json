@@ -1,0 +1,658 @@
+{
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "sliced_grams_sha256": "42cffee717e355e3ab36a5c383b1d9ef2b815f76f854008311a2f01ff2b50614",
+  "firmware_sha256": "9501396375f6714d17f686bbb1333ceb9172eb5bed104aa72e60a7541cf68bf0",
+  "moving_mass_g": [
+    237.4659772517269,
+    595.9544379202551,
+    47.60009406760989
+  ],
+  "moving_com_mm": [
+    [
+      3.2799175693066434,
+      10.374532854142906,
+      55.70776165778296
+    ],
+    [
+      -1.801817285738711,
+      -1.1784776405154433,
+      127.09852143184003
+    ],
+    [
+      0.357387581498407,
+      -31.635633257993796,
+      40.16695816074846
+    ]
+  ],
+  "geometry": {
+    "yaw": {
+      "inner_ring_id_mm": 80.0,
+      "rotor_pilot_od_mm": 79.66,
+      "direct_rotor_to_bearing_gap_mm": 0.10000000000000142,
+      "direct_rotor_to_motor_gap_mm": 0.0,
+      "outer_capture_gap_mm": 0.20000000000000284,
+      "horn_screw_arm_mm": 8.0,
+      "has_modeled_inner_race_shim": true,
+      "bearing_to_shim_gap_mm": 0.0,
+      "rotor_to_shim_gap_mm": 0.0
+    },
+    "head_top_z_mm": 209.9466094970703,
+    "shell_touch_levers_m": [
+      0.08792429904481203,
+      0.09866461750383881
+    ],
+    "jaw": {
+      "left_output_x_mm": -43.80000000000182,
+      "right_bearing_x_mm": 42.0,
+      "bearing_width_mm": 4.0,
+      "steel_pin_diameter_mm": 4.0,
+      "arm_axial_projected_overlap_mm": 4.400000762939456,
+      "horn_screw_span_mm": 8.48528137423857,
+      "maximum_touch_lever_m": 0.1044228158618575
+    },
+    "base": {
+      "mass_g": 232.67648418397656,
+      "plane_z_mm": -83.0,
+      "inscribed_support_radius_about_yaw_axis_mm": 92.86461214022904,
+      "cup_com_xy_mm": [
+        -0.02767119142661269,
+        -9.211731257729284
+      ],
+      "support_area_mm2": 27162.31201418561,
+      "floor_outer_radius_mm": 93.0000040616219,
+      "floor_uniform_pressure_mean_radius_mm": 59.61742382768503
+    }
+  },
+  "pitch_geometry": {
+    "shaft_radius_mm": 4.0,
+    "cross_hole_radius_mm": 1.5,
+    "dowel_diameter_mm": 3.0,
+    "dowel_length_mm": 12.0,
+    "dowel_x_mm": 60.5,
+    "shaft_axis_z_mm": 112.0,
+    "bearing_x_mm": [
+      -51.5,
+      51.5
+    ],
+    "bearing_width_mm": 5.0,
+    "hub_x_mm": [
+      56.25,
+      64.75
+    ],
+    "hub_outer_radius_mm": 6.4,
+    "hub_inner_radius_mm": 4.12,
+    "hub_dowel_hole_radius_mm": 1.55,
+    "horn_axis_x_mm": 41.850000003966535,
+    "d_flat_axial_bond_length_mm": 6.300000007933065,
+    "horn_bore_radius_mm": 4.12,
+    "shaft_flat_z_mm": 3.0,
+    "horn_flat_z_mm": 3.1500000000000057,
+    "horn_mounting_screw_count": 4,
+    "horn_mounting_screw_radius_mm": 8.0
+  },
+  "pitch_loads": {
+    "exhibit_tracking": {
+      "input_peak_magnitudes": {
+        "pitch_torque_Nm": 0.0781718215670095,
+        "radial_reaction_N": 6.323207799948562,
+        "axial_reaction_N": 0.014655159784528079,
+        "non_drive_moment_Nm": 0.015660152512600087
+      },
+      "load_transfer": {
+        "largest_head_side_radial_N": 3.3136442156305925,
+        "drive_688_radial_N": 6.4040895993542915,
+        "clamp_radial_N": 3.090445383723699,
+        "shaft_bending_envelope_Nmm": 29.822797940675333,
+        "shaft_to_dowel_force_per_side_N": 19.542955391752376,
+        "dowel_to_frame_force_per_cheek_N": 7.724488297135325,
+        "dowel_combined_ear_force_bound_N": 9.486882868909913
+      },
+      "cross_drilled_shaft": {
+        "axial_plus_bending_MPa": 1.351316213977599,
+        "split_torsion_shear_MPa": 5.267423447875517,
+        "equivalent_MPa_before_cross_hole_3D_effects": 9.222977005709444
+      },
+      "steel_dowel": {
+        "bending_MPa": 8.917195108226103,
+        "shear_MPa": 3.686351203276278,
+        "equivalent_MPa": 10.967402800110012
+      },
+      "printed_hub": {
+        "projected_bearing_MPa": 1.682071430657786,
+        "projected_bearing_if_radial_load_enters_same_cheek_MPa": 2.2695964812556992,
+        "cheek_axial_retention_tearout_MPa": 0.0014435736588384632,
+        "cheek_torque_tearout_MPa": 1.1171934391619542,
+        "shaft_radial_bearing_MPa": 0.07531009580978619,
+        "minimum_dowel_engagement_mm": 1.88,
+        "minimum_front_edge_ligament_mm": 0.6771057451320106
+      },
+      "horn_fasteners": {
+        "four_screw_in_plane_N_per_screw": 3.2154807698999717,
+        "two_screw_in_plane_N_per_screw": 6.430961539799943,
+        "minimum_N_per_screw_for_no_friction_slip": {
+          "0.15": 21.436538465999813,
+          "0.25": 12.861923079599887,
+          "0.35": 9.18708791399992
+        }
+      },
+      "D_flat": {
+        "centered_free_play_deg_peak_to_peak": 6.724229311302279,
+        "radial_gap_mm": 0.1200000000000001,
+        "flat_gap_mm": 0.15000000000000568,
+        "clamp_radial_force_over_full_projected_shaft_contact_MPa": 0.06131836071095553,
+        "mechanical_edge_force_after_unbonded_slip_N": 31.709379835894477,
+        "edge_bearing_MPa_by_contact_width_mm": {
+          "0.2": 25.166174441242458,
+          "0.5": 10.066469776496984,
+          "1.0": 5.033234888248492
+        },
+        "full_bond_area_mm2": 155.24693036603279,
+        "flat_only_area_mm2": 33.336466561391674,
+        "flat_only_required_shear_MPa": 0.8276239628495212,
+        "bond_sensitivity": [
+          {
+            "coverage_fraction": 0.1,
+            "required_nominal_peak_shear_MPa": 1.342939160970967,
+            "required_MPa_at_edge_amplification_2": 2.685878321941934,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.19236181764236082,
+              "50.0": 0.057708545292708247,
+              "200.0": 0.014427136323177062,
+              "1000.0": 0.002885427264635412
+            }
+          },
+          {
+            "coverage_fraction": 0.25,
+            "required_nominal_peak_shear_MPa": 0.5371756643883868,
+            "required_MPa_at_edge_amplification_2": 1.0743513287767736,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.07694472705694433,
+              "50.0": 0.023083418117083296,
+              "200.0": 0.005770854529270824,
+              "1000.0": 0.001154170905854165
+            }
+          },
+          {
+            "coverage_fraction": 0.5,
+            "required_nominal_peak_shear_MPa": 0.2685878321941934,
+            "required_MPa_at_edge_amplification_2": 0.5371756643883868,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.038472363528472164,
+              "50.0": 0.011541709058541648,
+              "200.0": 0.002885427264635412,
+              "1000.0": 0.0005770854529270825
+            }
+          },
+          {
+            "coverage_fraction": 1.0,
+            "required_nominal_peak_shear_MPa": 0.1342939160970967,
+            "required_MPa_at_edge_amplification_2": 0.2685878321941934,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.019236181764236082,
+              "50.0": 0.005770854529270824,
+              "200.0": 0.001442713632317706,
+              "1000.0": 0.00028854272646354126
+            }
+          }
+        ]
+      }
+    },
+    "commissioning_neck": {
+      "input_peak_magnitudes": {
+        "pitch_torque_Nm": 0.07844036941817648,
+        "radial_reaction_N": 6.323207799948562,
+        "axial_reaction_N": 0.015108139575804326,
+        "non_drive_moment_Nm": 0.015776819764932136
+      },
+      "load_transfer": {
+        "largest_head_side_radial_N": 3.314776907400806,
+        "drive_688_radial_N": 6.406278687594568,
+        "clamp_radial_N": 3.091501780193762,
+        "shaft_bending_envelope_Nmm": 29.832992166607255,
+        "shaft_to_dowel_force_per_side_N": 19.61009235454412,
+        "dowel_to_frame_force_per_cheek_N": 7.751024646064868,
+        "dowel_combined_ear_force_bound_N": 9.51947429692978
+      },
+      "cross_drilled_shaft": {
+        "axial_plus_bending_MPa": 1.3517948199125998,
+        "split_torsion_shear_MPa": 5.285518910150257,
+        "equivalent_MPa_before_cross_hole_3D_effects": 9.254052068354188
+      },
+      "steel_dowel": {
+        "bending_MPa": 8.947829720740874,
+        "shear_MPa": 3.699015181005291,
+        "equivalent_MPa": 11.005080492177079
+      },
+      "printed_hub": {
+        "projected_bearing_MPa": 1.687850052647124,
+        "projected_bearing_if_radial_load_enters_same_cheek_MPa": 2.275575905653801,
+        "cheek_axial_retention_tearout_MPa": 0.0014881934176324198,
+        "cheek_torque_tearout_MPa": 1.1210313937012073,
+        "shaft_radial_bearing_MPa": 0.07533583880456378,
+        "minimum_dowel_engagement_mm": 1.88,
+        "minimum_front_edge_ligament_mm": 0.6771057451320106
+      },
+      "horn_fasteners": {
+        "four_screw_in_plane_N_per_screw": 3.224136989366455,
+        "two_screw_in_plane_N_per_screw": 6.44827397873291,
+        "minimum_N_per_screw_for_no_friction_slip": {
+          "0.15": 21.494246595776367,
+          "0.25": 12.89654795746582,
+          "0.35": 9.211819969618444
+        }
+      },
+      "D_flat": {
+        "centered_free_play_deg_peak_to_peak": 6.724229311302279,
+        "radial_gap_mm": 0.1200000000000001,
+        "flat_gap_mm": 0.15000000000000568,
+        "clamp_radial_force_over_full_projected_shaft_contact_MPa": 0.061339320958351026,
+        "mechanical_edge_force_after_unbonded_slip_N": 31.818312769093012,
+        "edge_bearing_MPa_by_contact_width_mm": {
+          "0.2": 25.25262915002132,
+          "0.5": 10.101051660008528,
+          "1.0": 5.050525830004264
+        },
+        "full_bond_area_mm2": 155.24693036603279,
+        "flat_only_area_mm2": 33.336466561391674,
+        "flat_only_required_shear_MPa": 0.8304671503398134,
+        "bond_sensitivity": [
+          {
+            "coverage_fraction": 0.1,
+            "required_nominal_peak_shear_MPa": 1.347552650375704,
+            "required_MPa_at_edge_amplification_2": 2.695105300751408,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.1930226485113223,
+              "50.0": 0.05790679455339669,
+              "200.0": 0.014476698638349172,
+              "1000.0": 0.0028953397276698344
+            }
+          },
+          {
+            "coverage_fraction": 0.25,
+            "required_nominal_peak_shear_MPa": 0.5390210601502815,
+            "required_MPa_at_edge_amplification_2": 1.078042120300563,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.07720905940452893,
+              "50.0": 0.023162717821358675,
+              "200.0": 0.005790679455339669,
+              "1000.0": 0.0011581358910679339
+            }
+          },
+          {
+            "coverage_fraction": 0.5,
+            "required_nominal_peak_shear_MPa": 0.26951053007514075,
+            "required_MPa_at_edge_amplification_2": 0.5390210601502815,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.03860452970226447,
+              "50.0": 0.011581358910679337,
+              "200.0": 0.0028953397276698344,
+              "1000.0": 0.0005790679455339669
+            }
+          },
+          {
+            "coverage_fraction": 1.0,
+            "required_nominal_peak_shear_MPa": 0.13475526503757038,
+            "required_MPa_at_edge_amplification_2": 0.26951053007514075,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.019302264851132234,
+              "50.0": 0.005790679455339669,
+              "200.0": 0.0014476698638349172,
+              "1000.0": 0.00028953397276698347
+            }
+          }
+        ]
+      }
+    },
+    "jaw_demo_centered_neck": {
+      "input_peak_magnitudes": {
+        "pitch_torque_Nm": 0.022611414255160306,
+        "radial_reaction_N": 6.3177682214365145,
+        "axial_reaction_N": 0.0,
+        "non_drive_moment_Nm": 0.010367838054726583
+      },
+      "load_transfer": {
+        "largest_head_side_radial_N": 3.2595427326088067,
+        "drive_688_radial_N": 6.299530774633416,
+        "clamp_radial_N": 3.0399880420246093,
+        "shaft_bending_envelope_Nmm": 29.33588459347926,
+        "shaft_to_dowel_force_per_side_N": 5.652853563790076,
+        "dowel_to_frame_force_per_cheek_N": 2.2343294718537847,
+        "dowel_combined_ear_force_bound_N": 2.7441036717427556
+      },
+      "cross_drilled_shaft": {
+        "axial_plus_bending_MPa": 1.3287163367923478,
+        "split_torsion_shear_MPa": 1.5236167105964304,
+        "equivalent_MPa_before_cross_hole_3D_effects": 2.954608391324464
+      },
+      "steel_dowel": {
+        "bending_MPa": 2.5793185531751996,
+        "shear_MPa": 1.0662869182243881,
+        "equivalent_MPa": 3.1723473288218607
+      },
+      "printed_hub": {
+        "projected_bearing_MPa": 0.4865432042097085,
+        "projected_bearing_if_radial_load_enters_same_cheek_MPa": 1.0644763128282912,
+        "cheek_axial_retention_tearout_MPa": 0.0,
+        "cheek_torque_tearout_MPa": 0.3231512730502765,
+        "shaft_radial_bearing_MPa": 0.07408051665020016,
+        "minimum_dowel_engagement_mm": 1.88,
+        "minimum_front_edge_ligament_mm": 0.6771057451320106
+      },
+      "horn_fasteners": {
+        "four_screw_in_plane_N_per_screw": 1.466603705979912,
+        "two_screw_in_plane_N_per_screw": 2.933207411959824,
+        "minimum_N_per_screw_for_no_friction_slip": {
+          "0.15": 9.77735803986608,
+          "0.25": 5.866414823919648,
+          "0.35": 4.190296302799749
+        }
+      },
+      "D_flat": {
+        "centered_free_play_deg_peak_to_peak": 6.724229311302279,
+        "radial_gap_mm": 0.1200000000000001,
+        "flat_gap_mm": 0.15000000000000568,
+        "clamp_radial_force_over_full_projected_shaft_contact_MPa": 0.06031722298009139,
+        "mechanical_edge_force_after_unbonded_slip_N": 9.172025275489126,
+        "edge_bearing_MPa_by_contact_width_mm": {
+          "0.2": 7.279385130110761,
+          "0.5": 2.9117540520443046,
+          "1.0": 1.4558770260221523
+        },
+        "full_bond_area_mm2": 155.24693036603279,
+        "flat_only_area_mm2": 33.336466561391674,
+        "flat_only_required_shear_MPa": 0.23939247233006541,
+        "bond_sensitivity": [
+          {
+            "coverage_fraction": 0.1,
+            "required_nominal_peak_shear_MPa": 0.38844874761133125,
+            "required_MPa_at_edge_amplification_2": 0.7768974952226625,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.05564118448817949,
+              "50.0": 0.016692355346453847,
+              "200.0": 0.004173088836613462,
+              "1000.0": 0.0008346177673226924
+            }
+          },
+          {
+            "coverage_fraction": 0.25,
+            "required_nominal_peak_shear_MPa": 0.1553794990445325,
+            "required_MPa_at_edge_amplification_2": 0.310758998089065,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.0222564737952718,
+              "50.0": 0.006676942138581539,
+              "200.0": 0.0016692355346453849,
+              "1000.0": 0.000333847106929077
+            }
+          },
+          {
+            "coverage_fraction": 0.5,
+            "required_nominal_peak_shear_MPa": 0.07768974952226625,
+            "required_MPa_at_edge_amplification_2": 0.1553794990445325,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.0111282368976359,
+              "50.0": 0.0033384710692907697,
+              "200.0": 0.0008346177673226924,
+              "1000.0": 0.0001669235534645385
+            }
+          },
+          {
+            "coverage_fraction": 1.0,
+            "required_nominal_peak_shear_MPa": 0.03884487476113312,
+            "required_MPa_at_edge_amplification_2": 0.07768974952226625,
+            "elastic_twist_deg_at_0p15mm_by_shear_modulus_MPa": {
+              "15.0": 0.00556411844881795,
+              "50.0": 0.0016692355346453849,
+              "200.0": 0.0004173088836613462,
+              "1000.0": 8.346177673226925e-05
+            }
+          }
+        ]
+      }
+    }
+  },
+  "modes": {
+    "exhibit_tracking": {
+      "samples": 32265,
+      "moving_motor_axes": [
+        true,
+        true,
+        false
+      ],
+      "velocity_cap_deg_s": [
+        39.846000000000004,
+        20.61,
+        0.0
+      ],
+      "acceleration_cap_deg_s2": [
+        257.49240000000003,
+        214.577,
+        0.0
+      ],
+      "joint_peaks": {
+        "yaw": {
+          "drive_Nm": 0.011332926729720551,
+          "radial_N": 0.026377300617926706,
+          "axial_N": 8.652694734987065,
+          "cross_axis_bend_Nm": 0.032264611200536204
+        },
+        "pitch": {
+          "drive_Nm": 0.03386038291078705,
+          "radial_N": 6.323207799948562,
+          "axial_N": 0.014655159784528079,
+          "cross_axis_bend_Nm": 0.015660152512600087
+        },
+        "jaw": {
+          "drive_Nm": 0.01743140676673024,
+          "radial_N": 0.47603147199915763,
+          "axial_N": 0.011764008307569004,
+          "cross_axis_bend_Nm": 0.0011304086263644758
+        }
+      },
+      "warm_peak_motor_demand_Nm": [
+        0.06467825345471648,
+        0.0781718215670095,
+        0.01743140676673024
+      ],
+      "warm_min_motor_margin_Nm": [
+        0.08052524639660677,
+        0.13664478704389973,
+        null
+      ],
+      "yaw_signed_axial_N": [
+        8.632580049666878,
+        8.652694734987065
+      ],
+      "min_two_point_yaw_ring_compression_N": 3.9174628296895397,
+      "floor_peak_rocking_moment_Nm": 0.033277375384802216,
+      "floor_min_flat_rocking_margin_Nm": 0.9601582884760623,
+      "light_touch_min_flat_rocking_margin_Nm": 0.667211678978992,
+      "floor_min_mu_for_translation": 0.0024148394091544198,
+      "floor_mu_necessary_for_twist": 0.011154510218690216,
+      "floor_mu_screen_with_uniform_pressure_and_combined_motion": 0.019614775489045274,
+      "light_touch_floor_min_mu_for_translation": 0.09397345395219905,
+      "light_touch_min_yaw_ring_compression_N": 0.8193802109761608,
+      "one_newton_external_torque_upper_Nm_by_axis": [
+        0.08792429904481203,
+        0.09866461750383881,
+        0.1044228158618575
+      ],
+      "one_newton_warm_margin_lower_Nm_by_axis": [
+        -0.0073990526482052565,
+        0.03798016954006092,
+        null
+      ],
+      "yaw_horn_equal_torque_share_N_per_screw": 2.02119542045989
+    },
+    "commissioning_neck": {
+      "samples": 32265,
+      "moving_motor_axes": [
+        true,
+        true,
+        false
+      ],
+      "velocity_cap_deg_s": [
+        39.846000000000004,
+        26.106,
+        0.0
+      ],
+      "acceleration_cap_deg_s2": [
+        257.49240000000003,
+        214.577,
+        0.0
+      ],
+      "joint_peaks": {
+        "yaw": {
+          "drive_Nm": 0.0113414664696833,
+          "radial_N": 0.02649989320723759,
+          "axial_N": 8.652694734987065,
+          "cross_axis_bend_Nm": 0.032264611200536204
+        },
+        "pitch": {
+          "drive_Nm": 0.03386038291078705,
+          "radial_N": 6.323207799948562,
+          "axial_N": 0.015108139575804326,
+          "cross_axis_bend_Nm": 0.015776819764932136
+        },
+        "jaw": {
+          "drive_Nm": 0.01743140676673024,
+          "radial_N": 0.47613074537290506,
+          "axial_N": 0.012017182311969068,
+          "cross_axis_bend_Nm": 0.0011458313568029877
+        }
+      },
+      "warm_peak_motor_demand_Nm": [
+        0.06468679319467922,
+        0.07844036941817648,
+        0.01743140676673024
+      ],
+      "warm_min_motor_margin_Nm": [
+        0.08051670665664402,
+        0.12386192529368126,
+        null
+      ],
+      "yaw_signed_axial_N": [
+        8.632398440030283,
+        8.652694734987065
+      ],
+      "min_two_point_yaw_ring_compression_N": 3.9174628296895397,
+      "floor_peak_rocking_moment_Nm": 0.033277375384802216,
+      "floor_min_flat_rocking_margin_Nm": 0.9601582884760623,
+      "light_touch_min_flat_rocking_margin_Nm": 0.667211678978992,
+      "floor_min_mu_for_translation": 0.0024261839551089656,
+      "floor_mu_necessary_for_twist": 0.01116186749948264,
+      "floor_mu_screen_with_uniform_pressure_and_combined_motion": 0.0196349952027099,
+      "light_touch_floor_min_mu_for_translation": 0.0939848973321406,
+      "light_touch_min_yaw_ring_compression_N": 0.8193802109761608,
+      "one_newton_external_torque_upper_Nm_by_axis": [
+        0.08792429904481203,
+        0.09866461750383881,
+        0.1044228158618575
+      ],
+      "one_newton_warm_margin_lower_Nm_by_axis": [
+        -0.007407592388168002,
+        0.025197307789842444,
+        null
+      ],
+      "yaw_horn_equal_torque_share_N_per_screw": 2.021462287333726
+    },
+    "jaw_demo_centered_neck": {
+      "samples": 537,
+      "moving_motor_axes": [
+        false,
+        false,
+        true
+      ],
+      "velocity_cap_deg_s": [
+        0.0,
+        0.0,
+        48.09
+      ],
+      "acceleration_cap_deg_s2": [
+        0.0,
+        0.0,
+        214.577
+      ],
+      "joint_peaks": {
+        "yaw": {
+          "drive_Nm": 7.256576648707732e-06,
+          "radial_N": 0.009767369846953236,
+          "axial_N": 8.647302935210067,
+          "cross_axis_bend_Nm": 0.0060161388329689
+        },
+        "pitch": {
+          "drive_Nm": 0.022611414255160306,
+          "radial_N": 6.3177682214365145,
+          "axial_N": 0.0,
+          "cross_axis_bend_Nm": 0.010367838054726583
+        },
+        "jaw": {
+          "drive_Nm": 0.011297934990227498,
+          "radial_N": 0.47153606823595295,
+          "axial_N": 0.0,
+          "cross_axis_bend_Nm": 0.00016811746819468337
+        }
+      },
+      "warm_peak_motor_demand_Nm": [
+        7.256576648707732e-06,
+        0.022611414255160306,
+        0.023390727637592874
+      ],
+      "warm_min_motor_margin_Nm": [
+        null,
+        null,
+        0.01302386955835868
+      ],
+      "yaw_signed_axial_N": [
+        8.63877603344044,
+        8.647302935210067
+      ],
+      "min_two_point_yaw_ring_compression_N": 4.247769344455238,
+      "floor_peak_rocking_moment_Nm": 0.0064044531536224065,
+      "floor_min_flat_rocking_margin_Nm": 0.9874399283272652,
+      "light_touch_min_flat_rocking_margin_Nm": 0.6944933188301949,
+      "floor_min_mu_for_translation": 0.0008942279279455172,
+      "floor_mu_necessary_for_twist": 7.143637623576822e-06,
+      "floor_mu_screen_with_uniform_pressure_and_combined_motion": 0.0009053716219422191,
+      "light_touch_floor_min_mu_for_translation": 0.0924468098366214,
+      "light_touch_min_yaw_ring_compression_N": 1.1496867257418595,
+      "one_newton_external_torque_upper_Nm_by_axis": [
+        0.08792429904481203,
+        0.09866461750383881,
+        0.1044228158618575
+      ],
+      "one_newton_warm_margin_lower_Nm_by_axis": [
+        null,
+        null,
+        -0.09139894630349882
+      ],
+      "yaw_horn_equal_torque_share_N_per_screw": 0.0002267680202721166
+    }
+  },
+  "jaw_fixture": {
+    "exhibit_tracking": {
+      "support_span_mm": 85.80000000000183,
+      "left_radial_bound_N": 0.24619732459590496,
+      "right_radial_bound_N": 0.2561839988336594,
+      "right_pin_projected_bearing_MPa": 0.014555906500713514,
+      "all_axial_to_one_support_bound_N": 0.011764008307569004,
+      "horn_screw_pair_tangential_N_per_screw": 2.054310988396004
+    },
+    "commissioning_neck": {
+      "support_span_mm": 85.80000000000183,
+      "left_radial_bound_N": 0.24642567205669638,
+      "right_radial_bound_N": 0.2564144289526413,
+      "right_pin_projected_bearing_MPa": 0.014568999118840015,
+      "all_axial_to_one_support_bound_N": 0.012017182311969068,
+      "horn_screw_pair_tangential_N_per_screw": 2.054310988396004
+    },
+    "jaw_demo_centered_neck": {
+      "support_span_mm": 85.80000000000183,
+      "left_radial_bound_N": 0.23278126263524804,
+      "right_radial_bound_N": 0.24267362770314496,
+      "right_pin_projected_bearing_MPa": 0.013788271910493085,
+      "all_axial_to_one_support_bound_N": 0.0,
+      "horn_screw_pair_tangential_N_per_screw": 2.7566236882382524
+    }
+  },
+  "scope": "Gravity and firmware-profile load screen. Nominal axes use no external contact. Sampled conservative velocity/acceleration sign combinations, not cycle certification. Manufacturer stall model scaled to 55 percent with upper friction, unmeasured. Light touch is a separate static load sensitivity. Actual gear play, fit, thermal, screw preload and bond properties require hardware."
+}

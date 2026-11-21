@@ -1,0 +1,457 @@
+{
+  "reference_cad_sha256": "4ebb5221977fa8bc8281a8aefc3dae852255978453129ed5835143339e25e5ed",
+  "cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+  "camera_saddle": {
+    "wall_mm": 1.2641386520300841,
+    "witness_xy_mm": [
+      6.387737626531255,
+      -40.450607273288774
+    ],
+    "tie_roof_center_mm": [
+      6.140237626531255,
+      -41.93960727328877,
+      77.14126290180816
+    ],
+    "tie_gauge_mm": [
+      9.2,
+      2.5,
+      1.05
+    ],
+    "tie_gauge_center_z_mm": 76.5
+  },
+  "yaw_inner_race_shim": {
+    "actor": "YawInnerRaceShim",
+    "id_mm": 80.1,
+    "od_mm": 84.5,
+    "thickness_mm": 0.1,
+    "z_mm": -38.0,
+    "shim_insert_offset_mm": [
+      0.0,
+      0.0,
+      12.0
+    ],
+    "stock": "K5 · cut one continuous 0.1 mm PET annulus",
+    "motor_slot_travel_mm": [
+      -0.35,
+      0.35
+    ],
+    "removed_bracket_mm3": {
+      "Part008": 22.51728947804895,
+      "Part009": 22.517289482631895
+    },
+    "driver_access": {
+      "tool_rows": [
+        {
+          "side": -1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            -21.075,
+            4.0,
+            -51.25
+          ],
+          "outward": [
+            -1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999593128745,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            -21.075,
+            4.0,
+            -50.9
+          ],
+          "outward": [
+            -1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999999999993,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            -21.075,
+            4.0,
+            -50.55
+          ],
+          "outward": [
+            -1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.3699999999999972,
+          "nearest_actor": "Part001"
+        },
+        {
+          "side": -1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            -21.074620193825307,
+            27.554841343787164,
+            -51.25
+          ],
+          "outward": [
+            -0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999513336929,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            -21.074620193825307,
+            27.554841343787164,
+            -50.9
+          ],
+          "outward": [
+            -0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999912367449,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": -1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            -21.074620193825307,
+            27.554841343787164,
+            -50.55
+          ],
+          "outward": [
+            -0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.3699999999999972,
+          "nearest_actor": "Part001"
+        },
+        {
+          "side": 1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            21.075,
+            4.0,
+            -51.25
+          ],
+          "outward": [
+            1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999422504894,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            21.075,
+            4.0,
+            -50.9
+          ],
+          "outward": [
+            1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999999999976,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 4.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            21.075,
+            4.0,
+            -50.55
+          ],
+          "outward": [
+            1.0,
+            -0.0,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.36999999999999744,
+          "nearest_actor": "Part001"
+        },
+        {
+          "side": 1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": -0.35,
+          "seat_mm": [
+            21.074620193825307,
+            27.554841343787164,
+            -51.25
+          ],
+          "outward": [
+            0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999525020525,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.0,
+          "seat_mm": [
+            21.074620193825307,
+            27.554841343787164,
+            -50.9
+          ],
+          "outward": [
+            0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.5699999836925436,
+          "nearest_actor": "Part000"
+        },
+        {
+          "side": 1,
+          "y_mm": 28.0,
+          "z_adjustment_mm": 0.35,
+          "seat_mm": [
+            21.074620193825307,
+            27.554841343787164,
+            -50.55
+          ],
+          "outward": [
+            0.984807753012208,
+            -0.17364817766693033,
+            0.0
+          ],
+          "radius_mm": 1.18,
+          "minimum_driver_gap_mm": 0.3699999999999972,
+          "nearest_actor": "Part001"
+        }
+      ],
+      "base_removed_mm3": 298.52135213214206,
+      "removed_inside_r75_mm3": 0.0,
+      "straight_tool_free_length_mm": 91.0
+    }
+  },
+  "eye_pitch": {
+    "phase_deg": -17.0,
+    "crank_radius_mm": 10.0,
+    "servo_axis_mm": [
+      58.65,
+      10.0,
+      151.0
+    ],
+    "cradle_axis_mm": [
+      0.0,
+      -39.0,
+      119.0
+    ],
+    "front_shell_relief": {
+      "part": "Part073",
+      "world_bounds_mm": [
+        [
+          60.85,
+          -13.1,
+          112.4
+        ],
+        [
+          64.65,
+          -5.05,
+          117.35
+        ]
+      ],
+      "removed_mm3": 21.12679184487206
+    }
+  },
+  "yaw_limit": {
+    "swept_addition_gap_mm": {
+      "Part000": 15.19021066345051,
+      "Part002": 0.44999999999999574,
+      "Part006": 1.2000000000000028,
+      "Part008": 11.185694406723366,
+      "Part009": 11.185694406723364,
+      "Part017": 8.2183911332961,
+      "YawInnerRaceShim": 2.7771388153995558,
+      "YawBearingRetainer1": 17.643973783813944,
+      "YawBearingRetainer2": 0.7099999999999884,
+      "YawBearingRetainer3": 61.22127148794186,
+      "Part001": 1.7216561793802851
+    },
+    "fixed_addition_gap_mm": {
+      "Part000": 12.000489827895148,
+      "Part002": 5.0000000000000036,
+      "Part006": 1.0,
+      "Part008": 23.792804381647205,
+      "Part009": 23.792804381647205,
+      "Part017": 26.563974932934443,
+      "YawInnerRaceShim": 3.228002478313798,
+      "YawBearingRetainer1": 7.3300712552264855,
+      "YawBearingRetainer2": 23.35478436863127,
+      "YawBearingRetainer3": 53.4405614206569
+    },
+    "seat_socket_gap_mm": [
+      1.1084255939105934,
+      1.1084255939105923
+    ],
+    "neutral_rotor_radial_insert_gap_mm": 0.5499999999999998,
+    "stops": [
+      {
+        "side": -1,
+        "first_touch_deg": -59.6,
+        "clearance_0p1_deg_before_mm": 0.07915064139274167,
+        "overlap_0p1_deg_after_mm3": 0.9642629958002071
+      },
+      {
+        "side": 1,
+        "first_touch_deg": 59.6,
+        "clearance_0p1_deg_before_mm": 0.07915064139272579,
+        "overlap_0p1_deg_after_mm3": 0.964262995801746
+      }
+    ],
+    "bearing_top_installation_overlap_mm3": 0.0,
+    "pad_actors": [
+      "YawStopPadLeft",
+      "YawStopPadRight"
+    ],
+    "pad_insert_offset_mm": [
+      0.0,
+      0.0,
+      12.0
+    ],
+    "pad_stock_seat_nuts": [
+      "seatNut2",
+      "seatNut1"
+    ],
+    "pad_stock_seat_bolts": [
+      "seatBolt2",
+      "seatBolt1"
+    ],
+    "pad_side_clearance_mm": 0.14,
+    "pad_positive_key_depth_mm": 3.3500000000000014,
+    "nominal_stop_deg": [
+      -59.6,
+      59.6
+    ],
+    "released_guard_deg": [
+      -60.35,
+      60.35
+    ],
+    "added_rotor_mm3": 92.67100681315424,
+    "seat_pocket_removed_mm3": 684.8269691270398,
+    "contact_radius_mm": [
+      45.35,
+      48.45
+    ],
+    "tangential_build_allowance_mm": 0.4
+  },
+  "rear_cable_service_nuts": {
+    "bolt_seats_mm": [
+      [
+        -47.0,
+        121.6,
+        -52.1
+      ],
+      [
+        -28.3,
+        121.6,
+        -52.1
+      ],
+      [
+        -3.0,
+        121.6,
+        -52.1
+      ],
+      [
+        22.0,
+        121.6,
+        -52.1
+      ],
+      [
+        47.0,
+        121.6,
+        -52.1
+      ]
+    ],
+    "bolt_length_mm": 16.0,
+    "parked_bottom_z_mm": -68.3,
+    "parking_rim_z_mm": -66.9,
+    "parking_pocket_across_flats_mm": 6.22,
+    "service_orientation": "upright"
+  },
+  "bottom_board_service_nuts": [
+    {
+      "keeper": "ServiceHatchNutKeeperLeft",
+      "screw": "ServiceHatchNutKeeperLeftScrew",
+      "seat_mm": [
+        -41.2,
+        61.0,
+        -69.98
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    },
+    {
+      "keeper": "ServiceHatchNutKeeperRight",
+      "screw": "ServiceHatchNutKeeperRightScrew",
+      "seat_mm": [
+        41.2,
+        61.0,
+        -69.98
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        -1.0
+      ]
+    }
+  ],
+  "print_sha256": {
+    "01_base_cup-hatch-capture.stl": "a12810ffe60e810e8492b85853db9374209646e36cd21700ba2177079a2450c2",
+    "02_outer_bearing_seat-B23.stl": "6a34ee3c89dd4717619a4c4e4ef16808b98222702adb7cd24e36c8781a59c5bf",
+    "04_yaw_rotor-B23.stl": "22eb11531d9128efe4fca8ee9cfd8283a31f10e82a353c2f56bfe0dbc872fb22",
+    "05_yaw_servo_jaw_1-B23.stl": "c0a8e17ec2d32e2758725f8f26ee35f9805a34519c3a8dc9fd1f10ff31ab3fc6",
+    "05_yaw_servo_jaw_2-B23.stl": "3f827a6722f9bb8183caa7650e9f17dfcd0ef5f26fb66512a292bdd70bf89c61",
+    "12_eye_tilt_cradle-B23.stl": "62995a231f59da7f9830b46470c1ca9759e19ea6667be57e7bd2b3545dc6c644",
+    "17_eye_pitch_horn_10mm-B23.stl": "f320e66f0d89cf4bec1b3733369900ff0b39133617c757c8b72edee26fcf4c24",
+    "18_eye_pitch_link_58p5mm-B23.stl": "da005669c9f5f7e4cdabb97297f5deedca4793d9eac5c07d6b7330c631604d19",
+    "26_u20cam_slotted_bracket-B23.stl": "c32d3ef0ba69ae7258d9334d1459ef3c8e902b7df0f3d17974b26e114649e7fa",
+    "35_hatch_two_nut_keeper.stl": "99a662a0e6f54b60559f0d94b775c3d193a63dc41c2b45aea5186b3bbeb94491",
+    "40-rear-cable-guide-service.stl": "979a5842392954999ddd2cf03bb038b58cc773cc27bb55953aa57d3025416c03",
+    "42-rear-cable-cover-service.stl": "b17c0d07291a84f9b920fd2dc556f253ea01dd9f5a3a2be8202d1d67d0253879",
+    "YawStopPadLeft.stl": "cabf84ad59950d2a37ba59aceb0b1a41e2aa94be31c1cf0ecb5dc62ae125abd3",
+    "YawStopPadRight.stl": "1fbe5cad8b7b62e891799afb880c84960c4a230a2d57d87975cbab6b950f4e97"
+  }
+}
