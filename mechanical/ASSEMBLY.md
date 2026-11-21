@@ -25,22 +25,23 @@
 
 ## 배선
 
-[전선 재단표](WIRING-CUT-LIST.csv)에 W1~W32의 시작·끝 단자, 모델 중심선 길이, 재단 길이가 있습니다. 재단 길이는 중심선에 양끝 탈피·압착 몫 약 10 mm를 더한 값입니다. "가조립 후 확정"이라고 적힌 선은 허브 덮개를 30 mm 내려 보고 길이를 맞춥니다.
+[전선 재단표](WIRING-CUT-LIST.csv)에 W1~W34의 시작·끝 단자, 모델 중심선 길이, 재단 길이가 있습니다. 재단 길이는 중심선에 양끝 탈피·압착 몫 약 10 mm를 더한 값입니다. "가조립 후 확정"이라고 적힌 선은 허브 덮개를 30 mm 내려 보고 길이를 맞춥니다.
 
 | 구간 | 전선과 단자 |
 |---|---|
 | 5 V 입력·목 전원 J2 | **Alpha Wire 3055, 18 AWG, 피복 Ø1.96–2.06 mm**. XT30U 납땜 컵에 연결해 허브 J1의 XT30PW-M에 꽂음. 목 전원 J2는 Phoenix 1715721에 7 mm 벗긴 연선을 끼워 0.5–0.6 N·m로 조임. [3055](https://www.alphawire.com/en/products/wire/hook-up-wire/premium/3055.aspx) · [J2 단자](https://www.phoenixcontact.com/en-us/products/printed-circuit-board-terminal-mkds-15-2-508-1715721) |
+| 5 V 기준 전원 꼬리 W33·W34 | **Alpha Wire 6716, 16 AWG, 피복 Ø2.01–2.11 mm**. SPD1168X 출력 단자에서 외부 XT30U-F까지 각 250 mm 이내. [6716](https://www.alphawire.com/products/wire/ecogen/ecowire/6716) · [전원 설정과 부하 검사](../electronics/README.md#전원과-배선) |
 | 목 전원 XT60U 꼬리 | **Alpha Wire 6718, 12 AWG, 피복 Ø2.92–3.03 mm**. J2 쪽 +와 GND를 각각 WAGO 221-412에서 18 AWG로 바꿈. [6718](https://www.alphawire.com/products/wire/ecogen/ecowire/6718) · [XT60U 도면](https://www.china-amass.com/public/upload/20240620/94b600a6a4c042646bc89646abc8ea85.pdf) · [221-412](https://www.wago.com/global/p/221-412) |
 | 모터·OpenRB 신호 | **Alpha Wire 6712, 24 AWG, 피복 Ø1.04–1.14 mm**. 허브 PH는 PHR-2/PHR-3과 SPH-002T-P0.5S. 모터와 OpenRB EH는 EHR-3과 SEH-001T-P0.6. [6712](https://www.alphawire.com/products/wire/ecogen/ecowire/6712) · [JST PH](https://www.jst-mfg.com/product/index.php?lang=en&series=199) · [JST EH](https://www.jst-mfg.com/product/pdf/eng/eEH.pdf) |
 | 카메라·OpenRB USB | 받침 안에서 중간 연결 없이 각각 받침 뒤로 뺌. 카메라는 동봉 1 m 케이블, OpenRB는 30 cm 안팎 USB-C–USB-A. PC까지는 USB-A 연장선. [B18 후면 연결부](revisions/b18/) |
 
 작업대에서 아래를 먼저 만듭니다.
 
-1. 빨강은 전원, 검정은 GND, 흰색은 DATA로 자르고 양끝에 번호(W1~W32)를 붙입니다.
+1. 빨강은 전원, 검정은 GND, 흰색은 DATA로 자르고 양끝에 번호(W1~W34)를 붙입니다.
 2. JST 단자는 한 가닥씩 압착합니다. 앞 날개는 구리, 뒤 날개는 피복을 잡습니다. 하우징에 끝까지 넣고 가볍게 당겨 잠겼는지 확인한 뒤, 1번 표시를 기준으로 연속성을 잽니다. [핀 순서](../electronics/README.md#전원과-배선)
-3. XT30U-M과 XT60U-M은 로봇 쪽 꼬리에, XT30U-F와 XT60U-F는 어댑터 출력선에 납땜합니다. 납땜부마다 열수축하고 완성 외경을 XT30U Ø4.0 mm, XT60U Ø5.6 mm 이내로 맞춥니다.
+3. XT30U-M과 XT60U-M은 로봇 쪽 꼬리에, 외부 XT30U-F와 XT60U-F는 각 전원 출력선에 납땜합니다. 다른 XT30U-F는 W3·W4의 허브 J1 쪽에 납땜합니다. 납땜부마다 열수축하고 완성 외경을 XT30U Ø4.0 mm, XT60U Ø5.6 mm 이내로 맞춥니다.
 4. ID4 하네스(W22~W24)는 플러그를 포함한 전체 길이를 120 mm 이하로 만듭니다. 그래야 실수로 12 V 단자를 5 V 모터에 꽂을 수 없습니다.
-5. WAGO 레버 단자에는 피복을 11 mm 벗겨 넣습니다. 턱 5 V에는 인라인 2 A 퓨즈(Littelfuse 0FHM0003ZXJV-F2)를 넣습니다. [221-413](https://www.wago.com/gb/installation-terminal-blocks-and-connectors/splicing-connector-with-levers/p/221-413)
+5. WAGO 레버 단자에는 피복을 11 mm 벗겨 넣습니다. 턱 5 V에는 인라인 2 A 퓨즈(Littelfuse 0FHM0003ZXJV-F2)를 넣습니다. 길게 나온 18 AWG 홀더 리드는 W5·W29를 가조립한 뒤 양쪽 각각 127 mm 이하로 정리하고, 접속부를 열수축합니다. [221-413](https://www.wago.com/gb/installation-terminal-blocks-and-connectors/splicing-connector-with-levers/p/221-413)
 
 (작업대)가 붙은 단계는 본체와 떨어진 작업대에서 따로 조립하는 단계입니다. 혼 구멍 위치의 괄호 숫자는 CAD 좌표(mm)이며, 3D 조립 순서 화면에서 확인할 수 있습니다.
 

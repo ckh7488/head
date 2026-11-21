@@ -12,7 +12,7 @@ from zipfile import ZIP_DEFLATED, ZipFile
 
 HERE = Path(__file__).resolve().parent
 PROJECTS = {"servo-hub": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
-REVISIONS = {"servo-hub": "A2", "c3-rf": "A1"}
+REVISIONS = {"servo-hub": "A3", "c3-rf": "A1"}
 COMMON_LAYERS = ["F.Cu", "B.Cu", "F.Mask", "B.Mask", "F.Silkscreen", "B.Silkscreen", "Edge.Cuts"]
 
 
@@ -42,14 +42,16 @@ def bom_rows(board_file):
     return board, bom, footprints, omitted
 
 
-def prepare_c3(board_file, work, output):
+def prepare_assembly(board_file, work, output, side, positions_name):
     import pcbnew
 
     board, bom, footprints, omitted = bom_rows(board_file)
+    pcb_side = pcbnew.F_Cu if side == "front" else pcbnew.B_Cu
     placements = {
         row["Ref"] for row in bom
         if row["Populate"] == "YES"
-        and not footprints[row["Ref"]].GetAttributes() & pcbnew.FP_THROUGH_HOLE
+        and footprints[row["Ref"]].GetLayer() == pcb_side
+        and footprints[row["Ref"]].GetAttributes() & pcbnew.FP_SMD
     }
     for ref in omitted:
         for pad in footprints[ref].Pads():
@@ -61,15 +63,15 @@ def prepare_c3(board_file, work, output):
     pcbnew.SaveBoard(str(stencil_board), board)
 
     candidate = work / "positions.csv"
-    kicad("pcb", "export", "pos", "--side", "front", "--format", "csv", "--units", "mm", "--exclude-dnp",
+    kicad("pcb", "export", "pos", "--side", side, "--format", "csv", "--units", "mm", "--exclude-dnp",
           "-o", candidate, board_file)
     with candidate.open(newline="") as stream:
         reader = csv.DictReader(stream)
         rows = [row for row in reader if row["Ref"] in placements]
         fields = reader.fieldnames
     if len(rows) != len(placements) or {row["Ref"] for row in rows} != placements:
-        raise ValueError("C3 positions do not match the assembly BOM")
-    with (output / "C3-front-positions-mm.csv").open("w", newline="") as stream:
+        raise ValueError(f"{side} positions do not match the assembly BOM")
+    with (output / positions_name).open("w", newline="") as stream:
         writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
@@ -132,14 +134,16 @@ def export(project, output_root):
         layers = COMMON_LAYERS.copy()
         if project == "c3-rf":
             layers += ["In1.Cu", "In2.Cu"]
-            stencil = work / "stencil"
-            plot(prepare_c3(board, work, output), ["F.Paste", "Edge.Cuts"], stencil)
-            for job in stencil.glob("*.gbrjob"):
-                job.unlink()
-            archive(stencil, output / f"{prefix}-Stencil.zip")
+            side, paste, positions = "front", "F.Paste", "C3-front-positions-mm.csv"
         else:
             hub, _, _, _ = bom_rows(board)
             check_hub_annular_rings(hub)
+            side, paste, positions = "back", "B.Paste", "R5-hub-back-positions-mm.csv"
+        stencil = work / "stencil"
+        plot(prepare_assembly(board, work, output, side, positions), [paste, "Edge.Cuts"], stencil)
+        for job in stencil.glob("*.gbrjob"):
+            job.unlink()
+        archive(stencil, output / f"{prefix}-Stencil.zip")
         plots = work / "gerbers"
         plot(board, layers, plots)
         if project == "c3-rf":
