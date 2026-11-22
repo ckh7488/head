@@ -2,7 +2,7 @@
 
 **B25 제작 전 판정을 마쳤습니다.** 오른쪽 턱 받침과 요크의 간극은 시험판에서 확인합니다. 시험 출력은 아래 목록을 씁니다. [최종 판정](frozen-fixes-check.md) · [고정 검사 조건](../../../spec/conditions.md) · [실물 시험](../../../spec/bench.md#b25-실물-시험)
 
-- [FreeCAD 조립본](R5-B25-Assembly.FCStd) · [B25 전체 P2S 프로젝트](R5-B25-P2S.3mf) · [웹 조립·구동·배선](https://r5-b1-review.ckh.chatgpt.site/b25/)
+- [FreeCAD 조립본](R5-B25-Assembly.FCStd) · [B25 전체 P2S 프로젝트](R5-B25-P2S.3mf) · [웹 조립·구동·배선(15번 장공 반영 전)](https://r5-b1-review.ckh.chatgpt.site/b25/)
 - [B25 발주 변경과 조립](assembly.md) · [B25 발주표](BOM.csv) · [목 상하축 가공 STEP과 도면](pitch-drive-shaft.md)
 - [서울 시험 출력 목록](01-seoul-print.md) · [시험 전 준비품](02-order-before.md) · [시험 뒤 전장 발주](03-order-after.md)
 - [맞춤 게이지와 치수별 출력 파일](fit-gauge.md) · [서보 허브 A4 발주 검토](../../../electronics/README.md)
@@ -11,6 +11,7 @@
 
 ## 기존 검증 기록
 
+- 15번 타이바의 서보 혼 구멍을 2.09 × 2.69 mm 장공으로 바꿨습니다. 좌우 구동 검사에서 약 ±17.06°부터 기존 안구 몸체 간섭이 재현됐습니다. [15번 변경 및 검사](eye-yaw-slot.json)
 - [형상](design.json) · [출력판 대조](print-build.json) · [뒤 외장 수정과 5·6번 판](rear-left-screw-fit.json) · [이전 정밀 슬라이스](print-precision-check.json)
 - [카메라와 눈꺼풀 형상](blink-fit.json) · [이전 CAD 검증과 재현 명령](https://github.com/ckh7488/head/blob/9c024361d586ff5ea582cbac3e1328d40d5b0c65/mechanical/revisions/b25/README.md)
 

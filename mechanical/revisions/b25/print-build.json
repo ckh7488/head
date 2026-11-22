@@ -1,7 +1,7 @@
 {
   "source_3mf_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
-  "project_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
-  "source_cad_sha256": "e0d2601abdf89c87271cd3002e6c099ad4592df810b195604784ce408d97d7eb",
+  "project_sha256": "35b54f7249005018236c33f4ed5aedd929296c2315143bd33ad8e29f2c7f91ef",
+  "source_cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
   "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
   "plate_sha256": {
     "1": "f6a81e6db6a9d636f38fc99e95fe763136fc42a972d0184b937ed8956fc48d14",
@@ -11,7 +11,7 @@
     "5": "ee94486896ac8408e007f119ccf021b78f03529ac8b64057fa8907ab25fe43af",
     "6": "490a23e1a606caea2f160512127647e079adb8324ae04fec7c7933b3235f71b0",
     "7": "cfb5fa71bc38daba82a25d971bec2c239ac01ed5381ff87a8a5f20a908d2b84e",
-    "8": "e2db12baf0f791986c16b4b5fc200cfbdf15c28201a32d6c6372748954388820",
+    "8": "89cbc5ad37012f8b7bd595a43f999e2ff5e4ce038f81d7c4d2db967abc75c8a9",
     "9": "d00a4be37bb78b8ba3265d915a2f0d9334c19b21171eeebbb8d42ad32b823027",
     "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
     "11": "b7f2090a36655e13e0dc17b87cc772fb8f35b346b512ebb23b3691cb46e85fae",
@@ -20,6 +20,9 @@
   "changed_plates": {
     "6": [
       "09_head_frame-B25.stl"
+    ],
+    "8": [
+      "15_eye_yaw_offset_tie_bar-B21.stl"
     ],
     "9": [
       "37_right_cheek_bearing_stay-B22.stl"
@@ -141,5 +144,9 @@
       }
     },
     "base_thin_wall_setting": false
+  },
+  "eye_yaw_drive_slot": {
+    "source_3mf_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+    "evidence": "eye-yaw-slot.json"
   }
 }

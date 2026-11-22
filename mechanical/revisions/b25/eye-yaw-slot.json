@@ -1,0 +1,122 @@
+{
+  "source_cad_sha256": "e0d2601abdf89c87271cd3002e6c099ad4592df810b195604784ce408d97d7eb",
+  "cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
+  "source_p2s_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+  "p2s_sha256": "35b54f7249005018236c33f4ed5aedd929296c2315143bd33ad8e29f2c7f91ef",
+  "center_xy_mm": [
+    -5.8,
+    -22.0
+  ],
+  "finished_slot_xy_mm": [
+    2.09,
+    2.69
+  ],
+  "p2s_slot_xy_mm": [
+    2.24,
+    2.84
+  ],
+  "local_boss_diameter_mm": 7.2,
+  "minimum_finished_wall_mm": 2.255,
+  "minimum_p2s_model_wall_mm": 2.18,
+  "pin_stop_plane_z_mm": 117.05,
+  "eye_side_bores": {
+    "centers_xy_mm": [
+      [
+        -34.0,
+        -25.5
+      ],
+      [
+        34.0,
+        -25.5
+      ]
+    ],
+    "diameter_mm": 2.09,
+    "p2s_pilot_diameter_mm": 1.92,
+    "native_and_p2s_geometry_unchanged": true
+  },
+  "neutral_drive_pin": {
+    "diameter_mm": 2.0,
+    "radial_gap_at_y_0_and_plus_minus_0p30_mm": 0.045,
+    "axial_gap_to_existing_stop_mm": 0.1
+  },
+  "eye_yaw_sweep": {
+    "checker": "mechanical/physics/check_eye_yaw.py",
+    "range_deg": [
+      -20,
+      20
+    ],
+    "step_deg": 0.05,
+    "other_axes": "neutral",
+    "angles": 801,
+    "pairs_before": 14,
+    "pairs_after": 15,
+    "minimum_candidate_mesh_gaps_mm": {
+      "Part011": 4.043282,
+      "Part019": 24.398369,
+      "Part024": 1.0,
+      "Part029": 0.0,
+      "Part033": 0.0,
+      "Part040": 0.300003,
+      "Part073": 15.421844,
+      "Part078": 6.390823,
+      "Part079": 6.390823,
+      "Jaw_36_left_jaw_servo_stay": 2.534967,
+      "Jaw_XL330_M288_Jaw": 2.177068,
+      "EyeYawHornScrew1": 1.970289,
+      "EyeYawTiePinL": 0.044977,
+      "EyeYawTiePinR": 0.044977,
+      "EyeYawDrivePivot": 0.045
+    },
+    "new_contact_pairs": [],
+    "existing_contact_ranges_sampled_deg": {
+      "Part029": [
+        17.1,
+        20.0
+      ],
+      "Part033": [
+        -20.0,
+        -17.1
+      ]
+    },
+    "existing_eye_body_contact_onset_abs_deg_native": 17.058,
+    "existing_eye_body_interference_at_endpoints_native": {
+      "Part033": {
+        "yaw_deg": -20.0,
+        "overlap_before_mm3": 1.873059,
+        "overlap_after_mm3": 1.873059
+      },
+      "Part029": {
+        "yaw_deg": 20.0,
+        "overlap_before_mm3": 1.873059,
+        "overlap_after_mm3": 1.873059
+      }
+    }
+  },
+  "assembly_sweep": {
+    "checker": "mechanical/physics/check_head.py",
+    "pose_samples_each": 26196,
+    "same_issues_before_and_after": [
+      {
+        "parts": [
+          "Part041",
+          "Part064"
+        ],
+        "angles_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "overlap_mm3": null
+      }
+    ]
+  },
+  "p2s_slice": {
+    "plate": 8,
+    "return_code": 0,
+    "plate_warnings": [],
+    "same_cli_log_before_and_after": "Invalid T command (T65535)"
+  },
+  "physical_fit_tested": false
+}
