@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
-  "p2s_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+  "cad_sha256": "e0d2601abdf89c87271cd3002e6c099ad4592df810b195604784ce408d97d7eb",
+  "p2s_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -150,6 +150,12 @@
       "source_trial": "stay_corners_trial_5",
       "evidence": "jaw-final-relief-verification.json",
       "pitch_clearance": "below_required"
+    },
+    "right_locator_reinforcement": {
+      "evidence": "print-build.json",
+      "right_stay_nominal_wall_mm": 1.43955,
+      "frame_minimum_nominal_wall_outside_insert_mm": 1.74938,
+      "yoke_clearance_disposition": "trial_print"
     }
   },
   "print_inputs_sha256": {

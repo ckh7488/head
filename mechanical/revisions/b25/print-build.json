@@ -1,5 +1,7 @@
 {
-  "project_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+  "source_3mf_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+  "project_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+  "source_cad_sha256": "e0d2601abdf89c87271cd3002e6c099ad4592df810b195604784ce408d97d7eb",
   "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
   "plate_sha256": {
     "1": "f6a81e6db6a9d636f38fc99e95fe763136fc42a972d0184b937ed8956fc48d14",
@@ -7,373 +9,137 @@
     "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
     "4": "e7fdaed84d92a967ea377b81d40e8d111a6894961511be762599e248e6a6a43a",
     "5": "ee94486896ac8408e007f119ccf021b78f03529ac8b64057fa8907ab25fe43af",
-    "6": "e248f0c129406ad697d199ca59a731cdd5e711b3f380506b2103de9da66a8f70",
+    "6": "490a23e1a606caea2f160512127647e079adb8324ae04fec7c7933b3235f71b0",
     "7": "cfb5fa71bc38daba82a25d971bec2c239ac01ed5381ff87a8a5f20a908d2b84e",
     "8": "e2db12baf0f791986c16b4b5fc200cfbdf15c28201a32d6c6372748954388820",
-    "9": "ddd32b6e3c1b9f4828a77c6328295b8d7c4c8787c0e2715c2287304b358863a0",
+    "9": "d00a4be37bb78b8ba3265d915a2f0d9334c19b21171eeebbb8d42ad32b823027",
     "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
     "11": "b7f2090a36655e13e0dc17b87cc772fb8f35b346b512ebb23b3691cb46e85fae",
     "12": "c287e38c9b020de5df351623e2a5ab503a979c09cbcb1ac06da9313bfc47565d"
   },
   "changed_plates": {
-    "4": [
-      "28_skull_front_with_camera_tray-B25.stl"
-    ],
-    "5": [
-      "30_38_39_jaw_one_piece-B20.3mf"
-    ],
     "6": [
       "09_head_frame-B25.stl"
     ],
     "9": [
-      "36_left_cheek_servo_stay.stl",
       "37_right_cheek_bearing_stay-B22.stl"
     ]
   },
-  "identical_to_current_plates": [
-    1,
-    2,
-    3,
-    7,
-    8,
-    10,
-    11,
-    12
-  ],
-  "preserved_parts_on_changed_plates": {
-    "9": [
-      "86",
-      "88",
-      "90",
-      "92",
-      "94"
+  "right_locator_reinforcement": {
+    "geometry": [
+      {
+        "part": "Jaw_37_right_jaw_bearing_stay",
+        "print_name": "37_right_cheek_bearing_stay-B22.stl",
+        "insert_outer_diameter_mm": null,
+        "axis_world_mm": {
+          "y": -8.75,
+          "z": 103.5,
+          "x_start": 62.55,
+          "x_end": 69.0
+        },
+        "outer_radius_mm": 2.96,
+        "minimum_added_radius_mm": 1.53,
+        "minimum_nominal_wall_mm": 1.439551170056222,
+        "added_volume_mm3": 3.510726532712319,
+        "conservative_wall_after_0p20_mm_outline_loss_mm": 1.239551170056222
+      },
+      {
+        "part": "Part019",
+        "print_name": "09_head_frame-B25.stl",
+        "insert_outer_diameter_mm": 4.6,
+        "axis_world_mm": {
+          "y": -8.75,
+          "z": 103.5,
+          "x_start": 71.4,
+          "x_end": 74.55
+        },
+        "outer_radius_mm": 4.05,
+        "minimum_added_radius_mm": 2.32,
+        "minimum_nominal_wall_mm": 1.7493831653833762,
+        "added_volume_mm3": 8.415226745657819,
+        "conservative_wall_after_0p20_mm_outline_loss_mm": 1.5493831653833763
+      }
     ],
-    "4": [],
-    "5": [
-      "16"
-    ],
-    "6": [
-      "20",
-      "24",
-      "26",
-      "28",
-      "30",
-      "32",
-      "124",
-      "126"
-    ]
-  },
-  "source_3mf_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
-  "source_cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
-  "mesh_deltas": {
-    "28_skull_front_with_camera_tray-B25.stl": {
-      "source_file": "28_skull_front_with_camera_tray-B25.stl",
-      "plate": 4,
-      "object_id": 14,
-      "object_path": "3D/Objects/object_7.model",
-      "source_mesh_sha256": "9eca9baf8e1a1d0cedfed451c32fdc18bdc37c1d6fc3892fb49bb22cc336dea4",
-      "operations": [
+    "fit": {
+      "B10": [
         {
-          "actor": "Part073",
-          "mode": "add",
-          "net_delta_mm3": 0.00010214370558969676,
-          "tool": "Part073-add.npz"
+          "file": "p9-37-bearing-pocket-D10.05.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.5108965076005916,
+          "sha256": "a07a9a418ad4406c6edc1d5d5a6725b078333bbc27e2c84ff7824b0c8f5ae864"
         },
         {
-          "actor": "Part073",
-          "mode": "subtract",
-          "net_delta_mm3": -6073.527570636157,
-          "tool": "Part073-subtract.npz"
+          "file": "p9-37-bearing-pocket-D10.10.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.510896507601501,
+          "sha256": "3d7ba28e07a76538fa755934f967cb6267a05b5cbe19578cb7e95c8446a0ac09"
         },
         {
-          "actor": "Part073",
-          "mode": "subtract",
-          "net_delta_mm3": -4.953724244987825,
-          "tool": "front-shell-left-tool.npz"
+          "file": "p9-37-bearing-pocket-D10.15.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.510732745454334,
+          "sha256": "5167b078666d7abf74d7a8ed639c28d7c46e7821674adb6133ad3cc2c321245d"
         },
         {
-          "actor": "Part073",
-          "mode": "subtract",
-          "net_delta_mm3": -6.762210258137202,
-          "tool": "front-shell-right-tool.npz"
-        }
-      ],
-      "bounds_mm": [
-        [
-          -80.203956604004,
-          -83.437227249146,
-          -52.3138199
-        ],
-        [
-          80.203956604004,
-          83.437227249146,
-          52.313819870508
-        ]
-      ],
-      "size_mm": [
-        160.407913208008,
-        166.874454498292,
-        104.627639770508
-      ],
-      "detached_boolean_roundoff_mm3": 2.707622227570952e-05,
-      "detached_boolean_roundoff_count": 51,
-      "indexed_dimensions_preserved": true,
-      "print_mesh_sha256": "00545dd0fddd4a78d5e305e9caf67902a150d96cb4a19cb733fae709357843ff",
-      "raw_archive_bounds_mm": [
-        [
-          -80.203956604004,
-          -83.437227249146,
-          -52.3138199
-        ],
-        [
-          80.203956604004,
-          83.437227249146,
-          52.313819870508
-        ]
-      ],
-      "archive_mesh_sha256": "feee1d1bfb4421b570783d604c9c8911b50875b3a63c49f9af73130067db8793",
-      "recenter_from_world_transform_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "support_before": null,
-      "support_after": null
-    },
-    "30_38_39_jaw_one_piece-B20.3mf": {
-      "source_file": "30_38_39_jaw_one_piece-B20.3mf",
-      "plate": 5,
-      "object_id": 18,
-      "object_path": "3D/Objects/object_9.model",
-      "source_mesh_sha256": "c5c332cfc0f7940cf64a69260f9ee1aeef9dd0ff8232d43cc554c1a619a85cad",
-      "operations": [
-        {
-          "actor": "Jaw_39_right_jaw_pivot_arm",
-          "mode": "subtract",
-          "net_delta_mm3": -0.6453321483131731,
-          "tool": "Jaw_39_right_jaw_pivot_arm-subtract.npz"
-        }
-      ],
-      "bounds_mm": [
-        [
-          -70.83682,
-          -34.28214,
-          -48.9524078
-        ],
-        [
-          70.83682,
-          34.28214,
-          54.6177422
-        ]
-      ],
-      "size_mm": [
-        141.67364,
-        68.56428,
-        103.57015000000001
-      ],
-      "detached_boolean_roundoff_mm3": 0,
-      "detached_boolean_roundoff_count": 0,
-      "indexed_dimensions_preserved": true,
-      "print_mesh_sha256": "f1bc85f38260df747f066db4f46b1946a39c1b296c18eff45fa3e3eedbe5eee5",
-      "raw_archive_bounds_mm": [
-        [
-          -70.83682,
-          -34.28214,
-          -48.9524078
-        ],
-        [
-          70.83682,
-          34.28214,
-          54.6177422
-        ]
-      ],
-      "archive_mesh_sha256": "c0c4e97a57f9e1c4ffb79ec7484f28f4e2788511c6a721a147ac9da3f3c40957",
-      "recenter_from_world_transform_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "support_before": null,
-      "support_after": null
-    },
-    "37_right_cheek_bearing_stay-B22.stl": {
-      "source_file": "37_right_cheek_bearing_stay-B22.stl",
-      "plate": 9,
-      "object_id": 96,
-      "object_path": "3D/Objects/object_48.model",
-      "source_mesh_sha256": "91bb267903c2ac79573d0fe24ec0b798deabecda60996ceecbf941012958bf9a",
-      "operations": [
-        {
-          "actor": "Jaw_37_right_jaw_bearing_stay",
-          "mode": "subtract",
-          "net_delta_mm3": -651.3002396500578,
-          "tool": "Jaw_37_right_jaw_bearing_stay-subtract.npz"
+          "file": "p9-37-bearing-pocket-D10.20.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.510732745454334,
+          "sha256": "878c43cdc3b63011b5e783629bc8d9000e9dc92d9030bde1d2d8a5f0e35ae67f"
         },
         {
-          "actor": "Jaw_37_right_jaw_bearing_stay",
-          "mode": "subtract",
-          "net_delta_mm3": -2.6777551971481444,
-          "tool": "right-stay-yoke-face-tool.npz"
+          "file": "p9-37-bearing-pocket-D10.25.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.5107327454534243,
+          "sha256": "b4c015e0b658365076bf6dc8bcdbc4837f549b9bc358c872cf05b035386e16b1"
         }
       ],
-      "bounds_mm": [
-        [
-          -18.75,
-          -12.4993839,
-          -15.2998562
-        ],
-        [
-          18.75,
-          12.4993839,
-          15.2998562
-        ]
-      ],
-      "size_mm": [
-        37.5,
-        24.9987678,
-        30.5997124
-      ],
-      "detached_boolean_roundoff_mm3": 3.963780598264098e-05,
-      "detached_boolean_roundoff_count": 161,
-      "indexed_dimensions_preserved": true,
-      "print_mesh_sha256": "d4ea2022204cd505235e8dbb9ccc36857ba9511f38d0709dd57e9f989c603f3c",
-      "raw_archive_bounds_mm": [
-        [
-          -18.75,
-          -12.4993839,
-          -15.2998562
-        ],
-        [
-          18.75,
-          12.4993839,
-          15.2998562
-        ]
-      ],
-      "archive_mesh_sha256": "5d2e4dc6ddf4e9c78a85b275b73d2b881bb4da05b8c7b97a3aaea3359c807fbb",
-      "recenter_from_world_transform_mm": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "support_before": null,
-      "support_after": null
-    },
-    "09_head_frame-B25.stl": {
-      "source_file": "09_head_frame-B25.stl",
-      "plate": 6,
-      "object_id": 22,
-      "object_path": "3D/Objects/object_11.model",
-      "source_mesh_sha256": "96fab3651f864a9bcbcff3cb533e51ca306bc880474f17d3eeed2d73caaec954",
-      "operations": [
+      "P8": [
         {
-          "actor": "Part019",
-          "mode": "exact native replacement",
-          "net_delta_mm3": 6481.095788381681
-        }
-      ],
-      "bounds_mm": [
-        [
-          -74.85500340175781,
-          -27.450000799999998,
-          -49.75181676
-        ],
-        [
-          75.74500270175781,
-          38.100002251757815,
-          30.24818324
-        ]
-      ],
-      "size_mm": [
-        150.60000610351562,
-        65.55000305175781,
-        80.0
-      ],
-      "indexed_dimensions_preserved": false,
-      "print_mesh_sha256": "d2d27cbef9bb2d6a1f930ab91b5463fa727605f0ff1235edc75a4bb4304fa820",
-      "raw_archive_bounds_mm": [
-        [
-          -75.3000031,
-          -32.7750015,
-          -19.6490059
-        ],
-        [
-          75.3000031,
-          32.7750015,
-          60.3509941
-        ]
-      ],
-      "archive_mesh_sha256": "3b80ede393c8b32da660147f6801f1f5eafa62a3e829fb7002b11dec0768dfa8",
-      "recenter_from_world_transform_mm": [
-        -0.4449996982421851,
-        -5.325000700000004,
-        30.102810859999998
-      ],
-      "support_before": null,
-      "support_after": "1"
-    },
-    "36_left_cheek_servo_stay.stl": {
-      "source_file": "36_left_cheek_servo_stay.stl",
-      "plate": 9,
-      "object_id": 84,
-      "object_path": "3D/Objects/object_42.model",
-      "source_mesh_sha256": "8ef82ad47fa9b0288aa85eda9d82b839225fdd7837ecd494c1240023dda44ade",
-      "operations": [
+          "file": "P8/09_head-frame_shaft-bore_ID8.10mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232884675788,
+          "sha256": "54315ec36a4155e7e8192cd8ca0889a451b3ff71858e24c8b45dadb06cb6a29f"
+        },
         {
-          "actor": "Jaw_36_left_jaw_servo_stay",
-          "mode": "exact native replacement",
-          "net_delta_mm3": -136.37863143864615
+          "file": "P8/09_head-frame_shaft-bore_ID8.15mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232903018477,
+          "sha256": "14b063b994f55696b809a23db612d2af33942981b3c28cd3033aba58095a15b3"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.20mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232765466499,
+          "sha256": "0a720fe2633b6b959cc442e5401809d5530ea8644a70daf9df505467e1abf19b"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.25mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232899387775,
+          "sha256": "3c427c41fd2dec5ba419fa290b0353d0457bc53719625ac9a421d17c12b0fe9c"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.30mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232908650069,
+          "sha256": "3416ca55318133de612ab799e8166cac1d90dad3bcb98818f23df741f885546b"
         }
-      ],
-      "bounds_mm": [
-        [
-          -19.5,
-          -18.8500004,
-          -16.5
-        ],
-        [
-          19.5,
-          18.419999580926515,
-          13.25
-        ]
-      ],
-      "size_mm": [
-        39.0,
-        37.269999980926514,
-        29.75
-      ],
-      "indexed_dimensions_preserved": false,
-      "print_mesh_sha256": "cedae885edab79f4dc8cf288920f9c7cc04cdf3526f53b27a45c0a13269ee0f8",
-      "raw_archive_bounds_mm": [
-        [
-          -19.5,
-          -18.635,
-          -13.25
-        ],
-        [
-          19.5,
-          18.635,
-          16.5
-        ]
-      ],
-      "archive_mesh_sha256": "13c0bbac124491e49229714b730459a5403ba9a5e66ae5f7e441f437fcac37ee",
-      "recenter_from_world_transform_mm": [
-        0.0,
-        0.21500039999999743,
-        3.25
-      ],
-      "support_before": null,
-      "support_after": "1"
-    }
-  },
-  "right_locator_thin_wall_override": {
-    "source_3mf_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
-    "output_3mf_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
-    "part": "37_right_cheek_bearing_stay-B22.stl",
-    "setting": {
-      "detect_thin_wall": "1"
+      ]
     },
-    "changed_plate": 9,
-    "object_id": 96,
-    "identical_global_settings": true
+    "plates": {
+      "6": {
+        "slice_return_code": 0,
+        "plate_warning": "",
+        "estimated_time_s": 32677.41015625,
+        "material_g": 200.98516845703125
+      },
+      "9": {
+        "slice_return_code": 0,
+        "plate_warning": "",
+        "estimated_time_s": 7119.61865234375,
+        "material_g": 29.153274536132812
+      }
+    },
+    "base_thin_wall_setting": false
   }
 }
