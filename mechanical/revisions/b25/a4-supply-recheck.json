@@ -1,0 +1,502 @@
+{
+  "combined_cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
+  "print_project_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
+  "option_1_fixed_routes": {
+    "stock_source": {
+      "WAGO 221-412": "https://www.wago.com/global/installation-terminal-blocks-and-connectors/compact-splicing-connector/p/221-412",
+      "AMASS XT60U-M/F": "https://images.100y.com.tw/pdf_file/AMASS-XT60U.pdf",
+      "XT60U-M ext supplier STEP": "https://www.lcsc.com/product-detail/C129184.html",
+      "XT60U-F ext supplier STEP": "https://www.lcsc.com/product-detail/C19191801.html",
+      "WAGO pitch corroboration": "https://mods.vorondesign.com/mods/deepfriedheroin/v0_bed_wagos",
+      "Alpha Wire EcoWire 6718": "https://www.alphawire.com/products/wire/ecogen/ecowire/6718"
+    },
+    "WAGO_rear_translation_mm": 23.0,
+    "new_printable_bounds_mm": {
+      "CableSaddle": [
+        -52.25,
+        78.26116278205923,
+        -82.6,
+        52.250000000000036,
+        249.80000000000004,
+        -22.5
+      ],
+      "CableGate": [
+        -50.5,
+        99.0,
+        -57.500000000000014,
+        50.5,
+        178.2,
+        -49.1
+      ]
+    },
+    "inlet_housing_and_adapter": [
+      -23.151000000000003,
+      167.54999999999998,
+      -61.45,
+      -7.85,
+      184.7,
+      -53.55
+    ],
+    "route_checks": {
+      "A4W6": {
+        "jacket_route_mm": 187.36454487303615,
+        "min_bend_centerline_radius_mm": 17.111363636363635,
+        "start_mm": [
+          -19.1,
+          167.54999999999998,
+          -57.5
+        ],
+        "end_mm": [
+          2.46,
+          230.0,
+          -74.6
+        ],
+        "WAGO_strip_mm": 11.0,
+        "solid_hits_mm3": {}
+      },
+      "A4W35": {
+        "jacket_route_mm": 33.82900770661284,
+        "min_bend_centerline_radius_mm": 175.92045454545448,
+        "start_mm": [
+          9.160000000000025,
+          196.2,
+          -74.6
+        ],
+        "end_mm": [
+          8.059999999999999,
+          230.0,
+          -74.6
+        ],
+        "WAGO_strip_mm": 11.0,
+        "solid_hits_mm3": {}
+      },
+      "A4W7": {
+        "jacket_route_mm": 193.77859505637386,
+        "min_bend_centerline_radius_mm": 17.111363636363635,
+        "start_mm": [
+          -11.9,
+          167.54999999999998,
+          -57.5
+        ],
+        "end_mm": [
+          17.46,
+          230.0,
+          -74.6
+        ],
+        "WAGO_strip_mm": 11.0,
+        "solid_hits_mm3": {}
+      },
+      "A4W36": {
+        "jacket_route_mm": 34.864294845920156,
+        "min_bend_centerline_radius_mm": 30.51231343283583,
+        "start_mm": [
+          16.360000000000003,
+          196.2,
+          -74.6
+        ],
+        "end_mm": [
+          23.060000000000002,
+          230.0,
+          -74.6
+        ],
+        "WAGO_strip_mm": 11.0,
+        "solid_hits_mm3": {}
+      }
+    },
+    "min_wire_to_wire_gap_mm_with_reserve": 0.8837897910277059,
+    "wire_solid_bounds_mm": {
+      "A4W6": [
+        -22.584361867084503,
+        139.72756613224493,
+        -77.91626028237823,
+        5.944361867084517,
+        230.0,
+        -17.277566132244964
+      ],
+      "A4W7": [
+        -15.24379933830721,
+        139.72756613224493,
+        -77.91626028237823,
+        20.803799338307247,
+        230.0,
+        -17.277566132244964
+      ],
+      "A4W35": [
+        6.159660330146366,
+        196.2,
+        -76.3613,
+        11.060339669853619,
+        230.0,
+        -72.83869999999999
+      ],
+      "A4W36": [
+        11.939605977882486,
+        196.2,
+        -76.3613,
+        27.48039402211752,
+        230.0,
+        -72.83869999999999
+      ]
+    },
+    "lowest_fixed_wire_reserved_z_mm": -77.91626028237823,
+    "table_plane_mm": -83.0,
+    "connector_release_checks": {
+      "axial_0_to_16_mm": {},
+      "grip_exit_0_to_16_mm": {}
+    },
+    "collar_driver_checks": {
+      "driver_1_hits_mm3": {},
+      "driver_2_hits_mm3": {}
+    },
+    "WAGO_use_envelopes": {
+      "A4WagoPositive": {
+        "external_bounds_mm": [
+          -1.34,
+          230.0,
+          -77.3,
+          11.86,
+          248.6,
+          -68.9
+        ],
+        "lever_and_finger_hits_mm3": {}
+      },
+      "A4WagoGround": {
+        "external_bounds_mm": [
+          13.66,
+          230.0,
+          -77.3,
+          26.860000000000003,
+          248.6,
+          -68.9
+        ],
+        "lever_and_finger_hits_mm3": {}
+      }
+    },
+    "min_manufacturer_bend_mm": 15.113,
+    "min_wire_outside_radius_mm": 15.600063636363634,
+    "boot_hits_mm3": {
+      "A4W6SupplyCup": {},
+      "A4W35SocketCup": {},
+      "A4W7SupplyCup": {},
+      "A4W36SocketCup": {}
+    },
+    "inlet_housing_fit_mm3": {
+      "CableSaddle": 0.0,
+      "CableGate": 0.0
+    },
+    "inlet_mated_male_female_overlap_mm3": 0.0,
+    "source_cad_sha256": "f9d54bb599dcbabf79a78a1aaeb39814ae4a9a3696410677d312dfd4103fac11",
+    "stock_model_sha256": {
+      "XT60U-M.step": "2723e1b1dcbac627bf027c60a6caabdf8880b736800cd42d1f27938e041c4dd4",
+      "XT60U-F.step": "e9cc28d47871fbd4d2a2cc046a06afff41999e7f94084e5a57f5b86efd9e8fdc"
+    },
+    "output_cad_sha256": "a3dda2c68beb165b2aab360cea5e68d0cd2594c269fedfd6c5022790143072cc"
+  },
+  "stock_port_datum_screen": [
+    {
+      "port_pitch_mm": 5.3,
+      "port_height_above_bottom_mm": 2.5500000000000003,
+      "minimum_inside_bend_mm": 15.62747197039778,
+      "minimum_reserved_pair_gap_mm": 0.8355654232890657,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.3,
+      "port_height_above_bottom_mm": 2.7,
+      "minimum_inside_bend_mm": 15.600063636363634,
+      "minimum_reserved_pair_gap_mm": 0.8355654232890657,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.3,
+      "port_height_above_bottom_mm": 2.85,
+      "minimum_inside_bend_mm": 15.572711627906974,
+      "minimum_reserved_pair_gap_mm": 0.8355654232890657,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.6,
+      "port_height_above_bottom_mm": 2.5500000000000003,
+      "minimum_inside_bend_mm": 15.62747197039778,
+      "minimum_reserved_pair_gap_mm": 0.8837897910277059,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.6,
+      "port_height_above_bottom_mm": 2.7,
+      "minimum_inside_bend_mm": 15.600063636363634,
+      "minimum_reserved_pair_gap_mm": 0.8837897910277059,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.6,
+      "port_height_above_bottom_mm": 2.85,
+      "minimum_inside_bend_mm": 15.572711627906974,
+      "minimum_reserved_pair_gap_mm": 0.8837897910277059,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.9,
+      "port_height_above_bottom_mm": 2.5500000000000003,
+      "minimum_inside_bend_mm": 15.62747197039778,
+      "minimum_reserved_pair_gap_mm": 0.9320142619592717,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.9,
+      "port_height_above_bottom_mm": 2.7,
+      "minimum_inside_bend_mm": 15.600063636363634,
+      "minimum_reserved_pair_gap_mm": 0.9320142619592717,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    },
+    {
+      "port_pitch_mm": 5.9,
+      "port_height_above_bottom_mm": 2.85,
+      "minimum_inside_bend_mm": 15.572711627906974,
+      "minimum_reserved_pair_gap_mm": 0.9320142619592717,
+      "hits": {
+        "A4W6": {},
+        "A4W35": {},
+        "A4W7": {},
+        "A4W36": {}
+      }
+    }
+  ],
+  "changed_station_tool_fit": {
+    "CableSaddle": {
+      "delta_solid_hits_mm3": {},
+      "changed_bounds_mm": [
+        -52.25,
+        78.26116278205923,
+        -82.6,
+        52.250000000000036,
+        249.80000000000004,
+        -22.5
+      ]
+    },
+    "CableGate": {
+      "delta_solid_hits_mm3": {},
+      "changed_bounds_mm": [
+        -50.5,
+        99.0,
+        -57.500000000000014,
+        50.5,
+        178.2,
+        -49.1
+      ]
+    },
+    "cover_lift_0_to_25_mm_0_5_mm_samples": {},
+    "service_socket_2_5_mm_hex_driver_1": {},
+    "old_13_mm_head_service_socket_5_5_mm_wrench_1": {
+      "A4W35SocketCup": 2.0033648417594314
+    },
+    "stock_Bahco_4020L_M_5_5_open_end_1": {
+      "intersections_mm3": {},
+      "sleeve_gap_with_0_25_mm_sleeve_reserve": 0.10000000000000053,
+      "nut_thickness_engaged_mm": 2.4
+    },
+    "service_socket_2_5_mm_hex_driver_2": {},
+    "old_13_mm_head_service_socket_5_5_mm_wrench_2": {
+      "A4W36SocketCup": 2.003364841759783
+    },
+    "stock_Bahco_4020L_M_5_5_open_end_2": {
+      "intersections_mm3": {},
+      "sleeve_gap_with_0_25_mm_sleeve_reserve": 0.10000000000000142,
+      "nut_thickness_engaged_mm": 2.4
+    },
+    "camera_usb_service": {
+      "stationary_connector_grip": {},
+      "external_receiver_body": {},
+      "external_receiver_grip": {}
+    },
+    "control_usb_grip_outward": {
+      "CableSaddle": 253.9775426217695,
+      "A4StationFastener5": 8.288308860248712,
+      "A4StationFastener7": 2.9442526582689164,
+      "A4StationFastener8": 9.930880803506907
+    },
+    "control_usb_grip_outward_shifted_X_plus_6_5": {
+      "CameraUSB": 87.14999999999998
+    }
+  },
+  "inherited_control_usb_grip_scope": "The old centered 18 mm ControlUSB hand gauge already intersected the earlier A4 station. This was reduced by the WAGO move. Check actual ControlUSB handling at P08.",
+  "combined_hatch_motion": {
+    "sample_count": 39,
+    "lowest_wire_z_mm": -165.37381174041033,
+    "min_reserved_pair_gap_mm": 2.4430000000000014,
+    "length_bounds_mm": [
+      170.57813519330762,
+      170.57813519332254
+    ],
+    "minimum_nonadjacent_self_gap_mm": 1.480625129128762,
+    "minimum_centerline_radius_mm": 12.000000000000014,
+    "rigid_plug_sweeps": {
+      "withdraw": {},
+      "park": {},
+      "hatch": {}
+    },
+    "continuous_lowering": {
+      "A4W8": {
+        "panels": 346,
+        "max_intersection_mm3": {}
+      },
+      "A4W9": {
+        "panels": 346,
+        "max_intersection_mm3": {}
+      }
+    },
+    "cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d"
+  },
+  "intentional_cup_contacts": [
+    "W8 and J2 positive own envelope",
+    "W9 and J2 ground own envelope"
+  ],
+  "five_volt_J1_hatch_route": {
+    "cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
+    "status": "pass_scoped",
+    "variant": "ground_guide_conservative_bend",
+    "specs": {
+      "J1+": {
+        "splice": [
+          -42.0,
+          55.5,
+          -61.7
+        ],
+        "fixed_guide": [
+          -55.0,
+          98.0,
+          -76.5
+        ],
+        "hatch_guide": [
+          -9.89,
+          117.11,
+          -74.17
+        ],
+        "terminal": [
+          -10.0,
+          83.0,
+          -70.0
+        ],
+        "cut_length": 186.507533392
+      },
+      "J1-": {
+        "splice": [
+          -54.5,
+          57.5,
+          -70.95
+        ],
+        "fixed_guide": [
+          -52.0,
+          98.0,
+          -81.0
+        ],
+        "hatch_guide": [
+          -8.5,
+          113.26,
+          -78.93
+        ],
+        "terminal": [
+          -5.0,
+          83.0,
+          -70.0
+        ],
+        "cut_length": 172.482996155
+      }
+    },
+    "continuous_failures": [],
+    "scope": "Exact W3 and W4 against current rigid solids, one another and the parked W8/W9 throughout vertical hatch translation, with 0.25 mm per lead reserve and own cup connection excluded. Only six poses checked against 17 archived neighboring cable centerlines. Legacy harness shapes do not establish J3 and J7 routes.",
+    "motion_bound": "Straight legs move at <=sqrt(1+(pi/4)^2) mm/mm. For the semicircle with ends moving by one vertical mm/mm on one side and fixed on the other, circumferential points have the same vertical bound plus axial slide |(sin(theta)-pi/2)*dr/ddrop| <= pi/4. Ends and local S-turns move 0 or 1 mm/mm. The sum bounds relative motion.",
+    "min_gap_by_category_mm": {
+      "fixed_rigid": 0.15270436579561691,
+      "moving_rigid": 0.8874342765973162,
+      "J1_pair": 0.11898541804836349,
+      "J2": 11.349542491738372
+    },
+    "sampled_neighbor_comparison": [
+      {
+        "pose_mm": 0,
+        "reference_sha256": "510a0135fd52eecb08ad45d36cc7084105592673adf559190bfd3cc85fe85a85",
+        "checked_neighbor_count": 17,
+        "min_gap_mm": 1.5327023658504904,
+        "hits_mm": {}
+      },
+      {
+        "pose_mm": 5,
+        "reference_sha256": "93e299cc69d1af099198a7af5137b71dda5b6cd0834882803c894ac7eeb22229",
+        "checked_neighbor_count": 17,
+        "min_gap_mm": 1.5327023658504904,
+        "hits_mm": {}
+      },
+      {
+        "pose_mm": 10,
+        "reference_sha256": "8152bff2de6502ccbddc2c8b6b53decf4cca436ad43b14979dac06c270735a63",
+        "checked_neighbor_count": 17,
+        "min_gap_mm": 1.5327023658504904,
+        "hits_mm": {}
+      },
+      {
+        "pose_mm": 15,
+        "reference_sha256": "0631da6ae3dd33d48060967a6992db39847464b291fe039a9630ebb73d63eea3",
+        "checked_neighbor_count": 17,
+        "min_gap_mm": 1.5327023658504904,
+        "hits_mm": {}
+      },
+      {
+        "pose_mm": 25,
+        "reference_sha256": "93b3aa8db0c5913857afb08e925deaee174e83e69e58f8996454a2b98c6696d5",
+        "checked_neighbor_count": 17,
+        "min_gap_mm": 1.5327023658504904,
+        "hits_mm": {}
+      },
+      {
+        "pose_mm": 30,
+        "reference_sha256": "b06f6ff06a4825e3d6be9be6472c14cd99c9843fafdbe82b8bf0d73936d00b01",
+        "checked_neighbor_count": 17,
+        "min_gap_mm": 1.5327023658504904,
+        "hits_mm": {}
+      }
+    ],
+    "continuous_intervals_count": 57
+  },
+  "full_tray_scope": "W10/W11/J3 and W22–W24/J7 are absent from the archived routed neighbor family. Full installed P08 and P02 remain open."
+}

@@ -1,0 +1,448 @@
+{
+  "native_cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
+  "print_project_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
+  "native": {
+    "rear_guide": {
+      "rear_u_guard_contiguous_joint_mm3": 64.37021586762637,
+      "rear_u_guard_added_volume_mm3": 20978.605016692272,
+      "nominal_gate_clearance_mm": 1.2999999999999972,
+      "inadmissible_stock_volume_overlaps": {},
+      "top_anchor_mm": [
+        58.0,
+        103.0,
+        -28.91788776547
+      ],
+      "fixed_guard_inner_y_limit_mm": 180.0,
+      "rear_tie_slot_y_range_mm": [
+        101.7,
+        104.3
+      ],
+      "guide_inner_x_range_mm": [
+        54.0,
+        62.2
+      ]
+    },
+    "host_tail": {
+      "rear_fixed_tail_radius_mm": 25.0,
+      "rear_fixed_tail_mm": 140.33981633974486,
+      "first_anchor_mm": [
+        58.0,
+        103.0,
+        -28.91788776547
+      ],
+      "usb_a_seat_mm": [
+        85.95964517353734,
+        158.0,
+        -70.36976639322208
+      ],
+      "splice_straight_y_mm": [
+        140.0,
+        153.0
+      ],
+      "minimum_reserve_x_mm": 85.95964517353734,
+      "stock_cad_overlaps": {
+        "tail_OD4.0": {},
+        "tail_OD4.2": {},
+        "splice_OD7x13": {},
+        "USB_A_body": {}
+      },
+      "plug_proxy": "Existing OEM-sized USB-A proxy in native CAD. Verify molded shoulders and outlet pull on received unit."
+    },
+    "head_guide": {
+      "attachment_overlap_mm3": 16.82534452590009,
+      "tray_added_volume_mm3": 94.7379679242922,
+      "head_anchor_mm": [
+        8.079443669120934,
+        -23.7902088750033,
+        71.57523500099146
+      ],
+      "head_anchor_tangent": [
+        -0.024480298769616667,
+        -0.3396116383167135,
+        0.940247121820635
+      ],
+      "saddle_parent": "Part065",
+      "saddle_bore_mm": 3.84,
+      "splice_start_after_anchor_mm": 3.5,
+      "splice_length_mm": 13.0,
+      "splice_od_mm": 4.6,
+      "fixed_eaton_preparation_length_mm": 10.0,
+      "fixed_oem_pigtail_diameter_mm": 4.0,
+      "fixed_oem_pigtail_length_mm": 17.831677790246935
+    },
+    "active_span": {
+      "neutral_sample_points": 1370,
+      "neutral_sample_length_mm": 549.9993801530458,
+      "clamp_length_mm": 550.0
+    },
+    "cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d"
+  },
+  "lower_and_rear_replay": {
+    "source_cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
+    "yaw_samples": 513,
+    "rear_return_samples": 73,
+    "length_allowance_mm": 0.2,
+    "radii_mm": [
+      18.25,
+      18.25,
+      21.0,
+      19.0
+    ],
+    "cut_between_anchors_mm": 550.0,
+    "longest_reference_mm": 494.8374815655011,
+    "reserve_percent": 11.147603099907277,
+    "return_center_y_mm": [
+      133.58125921724945,
+      156.8101513266222
+    ],
+    "max_rear_outer_y_mm": 177.3101513266222,
+    "moving_contacts": [],
+    "rear_contacts": [],
+    "fixed_contacts": []
+  },
+  "upper_route_source_cad_sha256": "f9d54bb599dcbabf79a78a1aaeb39814ae4a9a3696410677d312dfd4103fac11",
+  "upper_rotor_and_head_datums_mm": [
+    [
+      0.0,
+      -36.75,
+      -49.0
+    ],
+    [
+      8.079443669120934,
+      -23.7902088750033,
+      71.57523500099146
+    ]
+  ],
+  "upper_neck_cases_without_intersection": 289,
+  "upper_minimum_radius_mm": 18.2,
+  "historic_contact_recheck": {
+    "head_pitch_deg": 3.69140625,
+    "jaw_feedback_ticks": 67,
+    "centerline_gap_bracket_mm": [
+      3.0312042236328125,
+      3.03131103515625
+    ],
+    "worst_surface_gap_lower_mm": 1.0812042236328125,
+    "centerline_y_at_pan_z_minus_9p17_mm": -26.671342606894687
+  },
+  "upper_continuous_jaw_verification": {
+    "base_capsule_mm": 2.9499999999999997,
+    "rotation_lever_bound_mm": 170.0,
+    "cells": [
+      {
+        "limits_deg": [
+          3.6210250854492188,
+          3.69140625,
+          5.8426666259765625,
+          5.888671875
+        ],
+        "motion_pad_mm": 0.1726627203239248
+      },
+      {
+        "limits_deg": [
+          3.6210250854492188,
+          3.69140625,
+          5.796661376953125,
+          5.8426666259765625
+        ],
+        "motion_pad_mm": 0.1726627203239248
+      },
+      {
+        "limits_deg": [
+          3.5506439208984375,
+          3.6210250854492188,
+          5.796661376953125,
+          5.888671875
+        ],
+        "motion_pad_mm": 0.24091288115993048
+      },
+      {
+        "limits_deg": [
+          3.5506439208984375,
+          3.69140625,
+          5.70465087890625,
+          5.796661376953125
+        ],
+        "motion_pad_mm": 0.3453254406478496
+      },
+      {
+        "limits_deg": [
+          3.409881591796875,
+          3.5506439208984375,
+          5.70465087890625,
+          5.888671875
+        ],
+        "motion_pad_mm": 0.48182576231986096
+      },
+      {
+        "limits_deg": [
+          3.409881591796875,
+          3.69140625,
+          5.5206298828125,
+          5.70465087890625
+        ],
+        "motion_pad_mm": 0.6906508812956992
+      },
+      {
+        "limits_deg": [
+          3.12835693359375,
+          3.409881591796875,
+          5.5206298828125,
+          5.888671875
+        ],
+        "motion_pad_mm": 0.9636515246397219
+      },
+      {
+        "limits_deg": [
+          3.12835693359375,
+          3.69140625,
+          5.152587890625,
+          5.5206298828125
+        ],
+        "motion_pad_mm": 1.3813017625913984
+      },
+      {
+        "limits_deg": [
+          2.5653076171875,
+          3.12835693359375,
+          5.152587890625,
+          5.888671875
+        ],
+        "motion_pad_mm": 1.9273030492794438
+      },
+      {
+        "limits_deg": [
+          2.5653076171875,
+          3.69140625,
+          4.41650390625,
+          5.152587890625
+        ],
+        "motion_pad_mm": 2.7626035251827967
+      },
+      {
+        "limits_deg": [
+          1.439208984375,
+          2.5653076171875,
+          4.41650390625,
+          5.888671875
+        ],
+        "motion_pad_mm": 3.8546060985588877
+      },
+      {
+        "limits_deg": [
+          1.439208984375,
+          3.69140625,
+          2.9443359375,
+          4.41650390625
+        ],
+        "motion_pad_mm": 5.5252070503655935
+      },
+      {
+        "limits_deg": [
+          -0.81298828125,
+          1.439208984375,
+          2.9443359375,
+          5.888671875
+        ],
+        "motion_pad_mm": 7.709212197117775
+      },
+      {
+        "limits_deg": [
+          -0.81298828125,
+          3.69140625,
+          0.0,
+          2.9443359375
+        ],
+        "motion_pad_mm": 11.050414100731187
+      },
+      {
+        "limits_deg": [
+          -5.3173828125,
+          -0.81298828125,
+          0.0,
+          5.888671875
+        ],
+        "motion_pad_mm": 15.41842439423555
+      },
+      {
+        "limits_deg": [
+          -9.82177734375,
+          -5.3173828125,
+          0.0,
+          5.888671875
+        ],
+        "motion_pad_mm": 15.41842439423555
+      },
+      {
+        "limits_deg": [
+          -14.326171875,
+          -9.82177734375,
+          0.0,
+          5.888671875
+        ],
+        "motion_pad_mm": 15.41842439423555
+      }
+    ],
+    "unresolved": [],
+    "pending": 0
+  },
+  "head_joint_sweep_count": 121,
+  "head_joint_geometry": {
+    "saddle": [
+      {
+        "part": "Part011",
+        "motion": "pitch",
+        "angle_deg": 3.69140625,
+        "nominal_mesh_gap_mm": 2.2822711534914126
+      },
+      {
+        "part": "Part073",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 2.8781461790667815
+      },
+      {
+        "part": "Jaw_30_moving_jaw",
+        "motion": "jaw",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 24.978625511540837
+      }
+    ],
+    "tie": [
+      {
+        "part": "Part011",
+        "motion": "pitch",
+        "angle_deg": 3.69140625,
+        "nominal_mesh_gap_mm": 1.0817741173480666
+      },
+      {
+        "part": "Part073",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 4.380136804851528
+      },
+      {
+        "part": "Part018",
+        "motion": "pitch",
+        "angle_deg": 3.69140625,
+        "nominal_mesh_gap_mm": 8.35724410718901
+      },
+      {
+        "part": "Jaw_30_moving_jaw",
+        "motion": "jaw",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 27.171317203836132
+      }
+    ],
+    "fixed_eaton_leg": [
+      {
+        "part": "Part011",
+        "motion": "pitch",
+        "angle_deg": 3.69140625,
+        "nominal_mesh_gap_mm": 1.7635097564286117
+      },
+      {
+        "part": "Part073",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 3.466311979252402
+      },
+      {
+        "part": "Part038",
+        "motion": "eye",
+        "angle_deg": -7.75,
+        "nominal_mesh_gap_mm": 4.1371772835237
+      },
+      {
+        "part": "Part018",
+        "motion": "pitch",
+        "angle_deg": 3.69140625,
+        "nominal_mesh_gap_mm": 8.793238201579731
+      },
+      {
+        "part": "Jaw_30_moving_jaw",
+        "motion": "jaw",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 29.456534505299274
+      }
+    ],
+    "fixed_oem_pigtail": [
+      {
+        "part": "Part066",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 0.10361215816170419
+      },
+      {
+        "part": "Part038",
+        "motion": "eye",
+        "angle_deg": -7.875,
+        "nominal_mesh_gap_mm": 1.717441319563988
+      },
+      {
+        "part": "Part073",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 3.0196819097242438
+      },
+      {
+        "part": "Part067",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 3.3711280822753906
+      },
+      {
+        "part": "CameraTrayScrewRight",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 3.8467096219352923
+      },
+      {
+        "part": "Part068",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 6.168770492372425
+      },
+      {
+        "part": "Jaw_30_moving_jaw",
+        "motion": "jaw",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 34.37188298572788
+      }
+    ],
+    "fixed_splice": [
+      {
+        "part": "Part038",
+        "motion": "eye",
+        "angle_deg": -8.0,
+        "nominal_mesh_gap_mm": 1.5974349787495215
+      },
+      {
+        "part": "Part011",
+        "motion": "pitch",
+        "angle_deg": 3.69140625,
+        "nominal_mesh_gap_mm": 2.453966856483417
+      },
+      {
+        "part": "Part073",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 2.6501974326943656
+      },
+      {
+        "part": "Part066",
+        "motion": "pitch",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 2.8702828958175197
+      },
+      {
+        "part": "Jaw_30_moving_jaw",
+        "motion": "jaw",
+        "angle_deg": 0.0,
+        "nominal_mesh_gap_mm": 30.93857542055735
+      }
+    ]
+  },
+  "head_joint_followup": "Bench fit of the stock pigtail in its co-moving Part066 groove, nylon tie restraint, both splices, USB High-Speed and P02/P07.",
+  "physical_1000_cycle_test_executed": false
+}

@@ -13,4 +13,4 @@ B25의 변경은 발주표 및 조립 변경 안내를 먼저 적용합니다. �
 - [형상](design.json) · [출력판 대조](print-build.json) · [뒤 외장 수정과 5·6번 판](rear-left-screw-fit.json) · [이전 정밀 슬라이스](print-precision-check.json)
 - [카메라와 눈꺼풀 형상](blink-fit.json) · [이전 CAD 검증과 재현 명령](https://github.com/ckh7488/head/blob/9c024361d586ff5ea582cbac3e1328d40d5b0c65/mechanical/revisions/b25/README.md)
 
-62틱 턱, 세 점 고정, Eaton 카메라선과 A4의 최신 판정 및 남은 조립 조건은 결과표에 있습니다. [결과표](frozen-fixes-check.md) · [A4 CAD](a4-assembly.json) · [Eaton 경로](camera-route-62-r18.json) · [이전 목 스토퍼 시안](neck-load-study.md)
+62틱 턱, 세 점 고정, Eaton 카메라선과 A4의 최신 판정 및 남은 조립 조건은 결과표에 있습니다. [결과표](frozen-fixes-check.md) · [A4 재검증](a4-supply-recheck.json) · [Eaton 경로](camera-r18-recheck.json) · [이전 목 스토퍼 시안](neck-load-study.md)

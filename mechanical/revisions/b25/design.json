@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "f9d54bb599dcbabf79a78a1aaeb39814ae4a9a3696410677d312dfd4103fac11",
-  "p2s_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
+  "p2s_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -137,10 +137,14 @@
       "report": "jaw-62-stop.json"
     },
     "A4_station": {
-      "evidence": "a4-assembly.json",
-      "slice_evidence": "a4-print-check.json",
       "revision": "A4",
-      "upstream_W6_W7_complete": false
+      "evidence": "a4-supply-recheck.json",
+      "historical": "a4-assembly.json",
+      "upstream_W6_W7_model_complete": true
+    },
+    "camera_eaton_R18": {
+      "evidence": "camera-r18-recheck.json",
+      "active_mm": 550.0
     }
   },
   "print_inputs_sha256": {
