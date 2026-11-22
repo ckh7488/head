@@ -128,7 +128,8 @@ h1 {
   letter-spacing: -.025em;
   line-height: 1.5;
 }
-.assembly-link { display: inline-flex; margin-top: 12px; padding: 8px 13px; border: 1px solid #6b8956; border-radius: 8px; background: #28372a; color: var(--accent); font-weight: 700; }
+.demo-links { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+.assembly-link { display: inline-flex; padding: 8px 13px; border: 1px solid #6b8956; border-radius: 8px; background: #28372a; color: var(--accent); font-weight: 700; }
 .assembly-link:hover { background: #364831; }
 .spec { display: flex; align-items: center; gap: clamp(16px, 2.2vw, 34px); margin: 0 0 2px; flex: 0 0 auto; }
 .spec div + div { padding-left: clamp(16px, 2.2vw, 34px); border-left: 1px solid #29343b; }
@@ -268,7 +269,7 @@ h1 {
   font-size: .79rem;
 }
 .orbit-hint svg { width: 15px; height: 15px; }
-.stage.fallback-poster { background: #1a2025 url("./assets/assembly-poster.webp") 50% 48% / auto 88% no-repeat; }
+.stage.fallback-poster { background: #1a2025 url("./assets/b25-motion/assembly-poster.webp") 50% 48% / auto 88% no-repeat; }
 .anchor { position: absolute; pointer-events: none; display: flex; gap: 8px; align-items: center; z-index: 3; transform: translate(-5px,-50%); }
 .anchor span { width: 10px; height: 10px; background: var(--accent); border-radius: 50%; outline: 4px solid rgba(199,245,128,.25); }
 .anchor b { white-space:nowrap; font-size: .8rem; background: rgba(13,22,24,.9); color: #edffcf; border: 1px solid #66745a; padding: 4px 8px; border-radius: 6px; }

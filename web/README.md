@@ -1,25 +1,42 @@
 # 웹 뷰어
 
-## B25 조립 미리보기
+## B25 웹 화면
 
-B25 조립 단계에는 뒤 외장 너트와 왼쪽 M3×18·오른쪽 M3×16 체결이 표시됩니다. 조립 중 확인된 문제를 볼 수 있는 오프라인 미리보기입니다. [B25 기구 후보](../mechanical/revisions/b25/)
+B25 구동 데모, 단계별 조립, A4 배선·정비 화면과 제작 문서를 한곳에서 엽니다. 조립 화면의 **완성 상태**에서 외장을 숨기면 체결품과 선을 볼 수 있습니다. 배선에서는 뒤쪽 12 V 정비 플러그를 분리하고 하부 덮개를 30 mm 내리는 자세를 살펴봅니다. [B25 웹 화면](https://r5-b1-review.ckh.chatgpt.site/b25/) · [B25 제작 자료](../mechanical/revisions/b25/)
 
-XL330 케이스의 조립 설명에 B25의 동봉 나사 길이와 구멍 ID를 표시합니다. 미리보기의 나사와 공구 형상은 B24 조립 검사 형상을 사용하므로 실물 케이스 체결에는 B25 표를 따릅니다. C3 단계는 RF 실험 참고용입니다. [케이스 나사 배정](../mechanical/revisions/b25/xl330-case-screws.md) · [B25 발주와 조립](../mechanical/revisions/b25/assembly.md)
+3D 화면은 CAD를 설명하기 위한 시각화입니다. 실물 조립, 간극과 구동 확인은 P01–P08을 따릅니다. [B25 실물 시험](../spec/bench.md#b25-실물-시험)
+
+### 오프라인 조립 HTML 만들기
+
+저장소 루트에서 FreeCAD Python 모듈과 [기구 검사 의존성](../mechanical/physics/requirements.txt)을 준비합니다. 아래 FreeCAD 모듈 경로는 Linux 예시입니다.
 
 ```sh
-export PYTHONPATH="$PWD/mechanical${PYTHONPATH:+:$PYTHONPATH}"
+export PYTHONPATH="$PWD/mechanical:$PWD/mechanical/physics:/usr/lib/freecad-python3/lib"
+out=build/b25
 b24=mechanical/revisions/b24
-b25=mechanical/revisions/b25
-out=build/b25-preview
-assembly="$b25/R5-B25-Assembly.FCStd"
-python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
-python mechanical/physics/check_b19_assembly.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision b25 --source "$assembly"
-python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" "$out/assembly.json" --revision B25 --assembly-cad "$assembly" --output "$out/viewer" --preview
+assembly=mechanical/revisions/b25/R5-B25-Assembly.FCStd
 npm ci --prefix web
-python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B25-assembly-preview.html" --revision B25 --preview
+python mechanical/physics/export_cad.py --world --cad "$assembly" "$out/cad"
+python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardware-spec.json" --revision B25 --assembly-cad "$assembly" --output "$out/assembly-assets" --preview
+python web/b19/pack_standalone.py "$out/assembly-assets" "$out/R5-B25-assembly.html" --revision B25 --preview
 ```
 
-조립 검사가 출구 코드 1을 반환하면 생성된 `assembly.json`의 문제를 확인할 수 있습니다. 같은 입력에서 생성된 보고서가 있을 때 이어서 미리보기를 만듭니다. 실제 하부 덮개 배선과 공구 진입은 검토 중입니다.
+생성한 `build/b25/R5-B25-assembly.html`에는 모델과 조립 단계가 함께 들어 있습니다.
+
+### 웹 화면 묶음 만들기
+
+위 명령을 실행한 뒤 아래 순서로 조립, 구동, 배선과 문서를 한 디렉터리에 모읍니다. 문서 변환에는 Pandoc이 필요합니다.
+
+```sh
+python web/b19/pack_standalone.py "$out/assembly-assets" "$out/site/assembly" --revision B25 --preview --hosted
+node web/b25/package_demo.mjs "$out/site/demo"
+python web/wiring-review/export_pose_data.py "$out/cad/cad_parts.json" "$out/pose-data.json"
+node web/wiring-review/package_review.mjs "$out/cad" "$out/pose-data.json" "$out/site/wiring" "$(git rev-parse HEAD)"
+python web/b25/build_guide.py "$out/site" --offline "$out/R5-B25-assembly.html" --ref "$(git rev-parse HEAD)"
+python -m http.server 8000 --bind 127.0.0.1 --directory "$out/site"
+```
+
+이 주소에서 개요를 엽니다. [로컬 B25 웹 화면](http://127.0.0.1:8000/)
 
 ## B24 조립 순서
 

@@ -2,17 +2,14 @@
 
 R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다.
 
-## B25 동결
+## B25 조립과 구동
 
-B25 기구, 서보 허브 A4와 OpenRB 제어를 사용합니다. 시험판과 맞춤 게이지는 별도로 준비합니다. 전체 출력과 발주 전에 해결할 항목은 판정표에서 확인합니다.
+B25 기구와 A4 서보 허브를 사용합니다. 웹에서 완성 상태를 확인하고, 서울 시험 출력에서 끼움과 조립을 먼저 맞춥니다. 오른쪽 턱 받침과 요크의 간극, 배선과 조립품 강도는 실물에서 확인합니다.
 
-- [B25 CAD와 출력판](mechanical/revisions/b25/) · [조립과 발주표](mechanical/revisions/b25/assembly.md) · [3D 조립 미리보기](web/README.md#b25-조립-미리보기)
-- [고정 검사 조건](spec/conditions.md) · [검토와 판정 절차](spec/review.md) · [리뷰 판정](mechanical/revisions/b25/review-disposition.md) · [맞춤 게이지](mechanical/revisions/b25/fit-gauge.md)
-- [서보 허브 A4](electronics/README.md) · [OpenRB와 추적 재검사](control/README.md#하드웨어-없이-실행)
-
-![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)
-
-B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) · [모델과 자료 출처](web/README.md#모델과-자료-출처)
+- [B25 구동·조립·배선 화면](https://r5-b1-review.ckh.chatgpt.site/b25/) · [오프라인 조립 HTML 만들기](web/README.md#b25-웹-화면)
+- [서울 시험 출력](mechanical/revisions/b25/01-seoul-print.md) · [먼저 살 부품](mechanical/revisions/b25/02-order-before.md) · [시험 뒤 살 부품](mechanical/revisions/b25/03-order-after.md)
+- [FreeCAD와 P2S](mechanical/revisions/b25/) · [조립 절차](mechanical/revisions/b25/assembly.md) · [실물 검사](spec/bench.md#b25-실물-시험)
+- [A4 전원과 배선](electronics/README.md) · [OpenRB와 얼굴 추적](control/README.md)
 
 ## 디렉터리 구성
 
@@ -23,9 +20,7 @@ B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) ·
 - [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
 - [spec/](spec/conditions.md) · B25 검사 조건과 실물 인수 검사
 
-## 최근 CAD
-
-- **B25 기구 후보** · M3 뒤 외장 고정, 눈꺼풀 여유, J2 실제 높이와 뒤 외장 출력 메시를 수정했습니다. [FreeCAD·P2S·검토](mechanical/revisions/b25/)
+## 이전 CAD
 - **B24 제작 검증** · 눈 상하 베어링과 목 상하축의 M3 체결을 추가하고, 깜빡임과 추적 복귀를 수정했습니다. [FreeCAD·P2S·조립·검증](mechanical/revisions/b24/) · [3D 조립 재현](web/README.md#b24-조립-순서)
 - **B23 기구 검증** · 앞 해골 삽입, 눈 상하 링크, 목 좌우축 하중과 스토퍼, 두 정비 덮개를 수정했습니다. [FreeCAD·P2S·조립과 검사](mechanical/revisions/b23/) · [3D 조립 재현](web/README.md#b23-조립-순서)
 - **B22 제작·조립** · 목 양방향 제한판, 카메라 고정·배선 및 투명 보호 케이스를 추가했습니다. [FreeCAD·P2S·조립 순서](mechanical/revisions/b22/) · [3D 조립 재현](web/README.md#b22-조립-순서)

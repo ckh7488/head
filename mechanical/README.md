@@ -1,6 +1,8 @@
 # R5 기구 설계와 조립
 
-[B24 FreeCAD·P2S 출력판과 검사](revisions/b24/) · [이전 CAD 개정](revisions/)
+현재 기구는 **B25**입니다. P2S 0.4 mm 노즐, PETG HF, 0.20 mm 층으로 게이지와 시험 부품부터 출력합니다. [B25 FreeCAD와 P2S](revisions/b25/) · [서울 출력 목록](revisions/b25/01-seoul-print.md) · [B25 조립 절차](revisions/b25/assembly.md)
+
+아래 설정과 시간은 B15에서 사용한 값입니다. [이전 CAD 개정](revisions/)
 
 ## B15 조립
 

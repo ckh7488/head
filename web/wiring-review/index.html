@@ -3,86 +3,135 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>R5 B16 배선 검사</title>
+  <meta name="description" content="R5 B25 서보 허브 A4, 5 V와 12 V 배선, Eaton 카메라선 및 정비 체결 위치를 현재 FreeCAD 조립본에서 확인합니다.">
+  <title>R5 B25 배선과 체결</title>
   <link rel="stylesheet" href="./review.css">
-  <script type="importmap">{"imports":{"three":"../node_modules/three/build/three.module.js","three/addons/":"../node_modules/three/examples/jsm/"}}</script>
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.min.js","three/addons/":"./vendor/"}}</script>
 </head>
 <body>
+  <header class="masthead">
+    <a href="../" class="brand"><strong>R5</strong><span>B25</span></a>
+    <nav aria-label="B25 화면">
+      <a href="../">개요</a>
+      <a href="../assembly/">조립</a>
+      <a href="../demo/">구동</a>
+      <a href="./" aria-current="page">배선·체결</a>
+      <a href="../guide/">시험 안내</a>
+    </nav>
+  </header>
   <main>
-    <header>
-      <h1>R5 B16 배선 검사</h1>
-      <p id="status" role="status">CAD와 검사 자세 불러오는 중</p>
-    </header>
-    <section class="viewport" aria-label="배선 3D 모델">
-      <div id="scene"></div>
-      <div class="views">
-        <button id="base-view" type="button">받침 확대</button>
-        <button id="neck-view" type="button">목 확대</button>
-        <label><input id="shell" type="checkbox"> 외장</label>
-        <label><input id="wire-only" type="checkbox"> 배선만</label>
-      </div>
-    </section>
-    <aside aria-label="검사 자세">
-      <div id="comparison" hidden>
-        <div class="modes" aria-label="배선 수정 전후">
-          <button id="before" type="button" aria-pressed="false">수정 전</button>
-          <button id="after" type="button" aria-pressed="true">수정 후</button>
+    <div class="intro">
+      <h1>B25 배선과 체결</h1>
+      <p>A4 허브와 뒤쪽 전원 연결부를 확인하고, 하부 덮개에 연결된 선의 정비 위치를 살펴봅니다.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="3D 확인 항목">
+      <button type="button" id="tab-power" role="tab" aria-controls="panel-power" aria-selected="true" data-tab="power">12 V 정비</button>
+      <button type="button" id="tab-hub" role="tab" aria-controls="panel-hub" aria-selected="false" tabindex="-1" data-tab="hub">A4 허브·5 V</button>
+      <button type="button" id="tab-camera" role="tab" aria-controls="panel-camera" aria-selected="false" tabindex="-1" data-tab="camera">Eaton 카메라선</button>
+      <button type="button" id="tab-fasteners" role="tab" aria-controls="panel-fasteners" aria-selected="false" tabindex="-1" data-tab="fasteners">체결 위치</button>
+    </div>
+    <div class="workspace">
+      <section class="viewport" aria-label="B25 3D 모델">
+        <div class="scene" id="scene"></div>
+        <div class="scene-labels" id="scene-labels" aria-hidden="true"></div>
+        <div class="scene-top">
+          <span id="scene-caption">12 V 공급과 정비 플러그</span>
+          <button type="button" id="reset-view">시점 복원</button>
         </div>
-        <label class="select-label">볼 배선
-          <select id="wire-focus">
-            <option value="all">전체 배선</option>
-            <option value="crossing">받침 배선 교차</option>
-            <option value="jaw">턱 DATA 굽힘</option>
-            <option value="moving">ID1 · 카메라선</option>
-            <option value="j1">J1 5 V 루프</option>
-            <option value="j6">J6 DATA 분기</option>
-          </select>
-        </label>
-        <p class="hint" id="comparison-note"></p>
-        <button id="worst-pose" type="button" hidden>이 모델의 최저 반경 자세</button>
-        <dl id="comparison-totals" hidden>
-          <dt>복합 끝자세 배선 교차</dt><dd id="crossing-total"></dd>
-          <dt>턱 DATA 최저 R <span title="목표 5.715 mm">(기준 5.715)</span></dt><dd id="jaw-total"></dd>
-          <dt>ID1·카메라 부품 접촉 자세</dt><dd id="moving-total"></dd>
+        <p id="scene-status" role="status">현재 B25 형상을 불러오는 중</p>
+        <div class="scene-bottom">
+          <span>드래그 회전 · 휠 확대</span>
+          <label><input id="show-context" type="checkbox" checked> 주변 부품</label>
+        </div>
+      </section>
+      <section class="panel" id="panel-power" role="tabpanel" aria-labelledby="tab-power">
+        <h2>12 V 정비 경로</h2>
+        <p class="lead">외부 공급 XT60과 덮개 정비용 XT60은 서로 다른 위치에 있습니다. J2의 내부 XT30은 잠금쇠와 함께 덮개를 따라 움직입니다.</p>
+        <fieldset class="controls">
+          <legend>정비 위치</legend>
+          <div class="steps" id="service-steps">
+            <button type="button" data-stage="mated" aria-pressed="true">연결</button>
+            <button type="button" data-stage="withdrawn" aria-pressed="false">빼기</button>
+            <button type="button" data-stage="parked" aria-pressed="false">아래 대기</button>
+            <button type="button" data-stage="open" aria-pressed="false">30 mm 내림</button>
+          </div>
+          <label class="range-label" for="service-pose">정비 자세 <output id="service-value" for="service-pose">연결</output></label>
+          <input id="service-pose" type="range" min="0" max="38" step="1" value="0">
+        </fieldset>
+        <ul class="legend" aria-label="선 표시">
+          <li><span class="key positive"></span>양극 W6·W8·W35</li>
+          <li><span class="key ground"></span>GND W7·W9·W36</li>
+          <li><span class="key connector"></span>WAGO 221-412</li>
+        </ul>
+        <p class="note">작업 전에 5 V·12 V 어댑터와 USB를 분리하고 받침을 지지합니다. 플러그를 빼서 아래로 내린 뒤 덮개를 내립니다.</p>
+        <p class="scope">W8·W9와 외부 정비 플러그는 39개 CAD 자세를 표시합니다. J3·J7과 함께 배선한 상태 및 10 N 인장은 실물 P02·P08에서 확인합니다.</p>
+      </section>
+      <section class="panel" id="panel-hub" role="tabpanel" aria-labelledby="tab-hub" hidden>
+        <h2>A4 허브와 5 V</h2>
+        <p class="lead">외부 5 V는 XT30, 외부 12 V는 XT60입니다. 보드의 J1과 J2는 XT30PW-M이며 두 단자 모두 패드 2가 +, 패드 1이 GND입니다.</p>
+        <fieldset class="controls">
+          <legend>하부 덮개</legend>
+          <label class="range-label" for="hatch-pose">내린 거리 <output id="hatch-value" for="hatch-pose">0 mm</output></label>
+          <input id="hatch-pose" type="range" min="0" max="30" step="1" value="0">
+          <div class="steps">
+            <button type="button" data-drop="0" aria-pressed="true">닫기</button>
+            <button type="button" data-drop="30" aria-pressed="false">30 mm 내림</button>
+          </div>
+        </fieldset>
+        <ul class="legend" aria-label="5 V 선 표시">
+          <li><span class="key positive"></span>W3 양극</li>
+          <li><span class="key ground"></span>W4 GND</li>
+        </ul>
+        <p class="note">J2의 XT30U-F는 무전원 작업대에서 연결하고 H3·H4 잠금쇠로 잡습니다. 정비할 때는 뒤쪽 XT60에서 분리합니다.</p>
+        <p class="scope">덮개를 내리면 W3·W4와 단자 위치가 이동합니다. J3·J7은 커넥터 형상을 표시하며 가동 배선은 실물에서 함께 확인합니다.</p>
+      </section>
+      <section class="panel" id="panel-camera" role="tabpanel" aria-labelledby="tab-camera" hidden>
+        <h2>Eaton 카메라 USB</h2>
+        <p class="lead">Eaton U040-B03-C-2를 두 고정점 사이에 사용합니다. 순정 U20CAM 키 플러그와 USB-A 수 플러그는 꼬리선을 남겨 씁니다.</p>
+        <fieldset class="controls">
+          <legend>확대 위치</legend>
+          <div class="steps camera-steps" id="camera-views">
+            <button type="button" data-camera="overview" aria-pressed="true">전체 경로</button>
+            <button type="button" data-camera="head" aria-pressed="false">코 트레이</button>
+            <button type="button" data-camera="rear" aria-pressed="false">후면 가이드</button>
+          </div>
+        </fieldset>
+        <dl class="measurements">
+          <div><dt>고정점 사이</dt><dd>550 mm</dd></div>
+          <div><dt>최소 굽힘</dt><dd>R18.20 mm</dd></div>
+          <div><dt>길이 여유</dt><dd>11.15%</dd></div>
         </dl>
+        <p class="scope">3D 경로는 목 중립 자세입니다. 양쪽 타이 고정과 접합 뒤 USB 인식은 실물 P02·P07에서 확인합니다.</p>
+      </section>
+      <section class="panel" id="panel-fasteners" role="tabpanel" aria-labelledby="tab-fasteners" hidden>
+        <h2>정비 체결 위치</h2>
+        <p class="lead">목록에서 위치를 고르면 해당 조립면과 체결품을 확대합니다.</p>
+        <fieldset class="controls">
+          <legend>볼 체결품</legend>
+          <div class="steps fastener-steps" id="fastener-views">
+            <button type="button" data-fastener="keeper" aria-pressed="true">J2 잠금쇠</button>
+            <button type="button" data-fastener="inlet" aria-pressed="false">12 V 공급 입구</button>
+            <button type="button" data-fastener="socket" aria-pressed="false">XT60 정비 소켓</button>
+            <button type="button" data-fastener="hatch" aria-pressed="false">하부 덮개</button>
+            <button type="button" data-fastener="rear" aria-pressed="false">뒤 외장</button>
+            <button type="button" data-fastener="jaw" aria-pressed="false">턱 세 점</button>
+          </div>
+        </fieldset>
+        <div id="fastener-detail" class="note" aria-live="polite"></div>
+        <p class="scope">표시된 체결품의 규격과 조립 순서는 B25 조립 안내를 따릅니다.</p>
+      </section>
+    </div>
+    <section class="references" aria-label="관련 자료">
+      <h2>조립과 시험 자료</h2>
+      <div class="reference-links">
+        <a data-doc="mechanical/revisions/b25/assembly.md">B25 조립과 체결</a>
+        <a data-doc="mechanical/revisions/b25/j2-supply-delta.md">12 V 고정선 조립</a>
+        <a data-doc="electronics/README.md">A4 허브와 극성</a>
+        <a data-doc="mechanical/WIRING-CUT-LIST.csv">전선 재단표</a>
+        <a data-doc="mechanical/revisions/b25/frozen-fixes-check.md">CAD 판정과 실물 확인</a>
       </div>
-      <div id="result" aria-live="polite"></div>
-      <div id="positions"></div>
-      <div class="modes">
-        <button id="neck-mode" type="button" aria-pressed="true">목 구동</button>
-        <button id="hatch-mode" type="button" aria-pressed="false">바닥 덮개</button>
-      </div>
-      <fieldset id="neck-controls">
-        <label>좌우 <output id="yaw-value"></output><input id="yaw" type="range" min="-60" max="60" step="5" value="0"></label>
-        <label>상하 <output id="pitch-value"></output><input id="pitch" type="range" min="-15" max="6" step="3" value="0"></label>
-        <div class="corners" id="corners">
-          <button type="button" data-yaw="-60" data-pitch="-15">−60° / −15°</button>
-          <button type="button" data-yaw="-60" data-pitch="6">−60° / +6°</button>
-          <button type="button" data-yaw="60" data-pitch="-15">+60° / −15°</button>
-          <button type="button" data-yaw="60" data-pitch="6">+60° / +6°</button>
-        </div>
-      </fieldset>
-      <fieldset id="hatch-controls" hidden>
-        <label>내린 거리 <output id="drop-value"></output><input id="drop" type="range" min="0" max="30" step="1" value="0"></label>
-        <button id="open-hatch" type="button">30 mm 열기</button>
-      </fieldset>
-      <button type="button" id="play" aria-pressed="false">왕복 재생</button>
-      <label id="combined-label" class="select-label" hidden>덮개 30 mm + 목 끝자세
-        <select id="combined">
-          <option value="">자세 선택</option>
-        </select>
-      </label>
-      <div class="layers">
-        <label class="usb"><input id="camera" type="checkbox" checked> 카메라선</label>
-        <label class="motors"><input id="motors" type="checkbox" checked> 모터선</label>
-        <label class="power"><input id="power" type="checkbox" checked> 5 V 입력선</label>
-        <label class="hits"><input id="contacts" type="checkbox" checked> 간섭 위치</label>
-        <label class="bends"><input id="bends" type="checkbox"> 굽힘 위치</label>
-        <label id="neighbors-label" hidden><input id="neighbors" type="checkbox"> 기존 배선 비교</label>
-      </div>
-      <label id="extra-label" hidden>추가 검사 자세 <select id="extra"></select></label>
-      <p class="hint">드래그로 회전하고 휠로 확대합니다. 각 프레임은 해당 자세의 정적 검사 결과입니다. 5 V 루프의 처짐은 조립 후 확인합니다.</p>
-    </aside>
+      <p id="source-revision"></p>
+    </section>
   </main>
   <script type="module" src="./review.js"></script>
 </body>

@@ -30,6 +30,7 @@ COLORS = {
     'pcb': (48, 106, 76), 'connector': (194, 196, 180), 'power': (225, 171, 51),
     'terminal': (85, 145, 107), 'fuse': (181, 92, 67), 'capacitor': (112, 114, 117),
     'b19': (226, 92, 60), 'tool': (16, 144, 125),
+    'feed-wire': (198, 57, 48), 'return-wire': (52, 56, 68), 'camera-wire': (43, 157, 179),
 }
 FACE_LIMIT = {'bone': 30000, 'jaw': 12000, 'eye': 8000}
 BLOCKED = re.compile(r'(.+): stated approach \((.+?)\) is blocked; \((.+?)\) is clear')
@@ -347,18 +348,30 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     data = json.loads(hardware.read_text())
     stock = json.loads(spec.read_text())
     world = C.World(cad, data['hardware'], stock)
-    checked = json.loads(report.read_text())
     layout = json.loads((cad/'cad_parts.json').read_text())
     service_covers = revision in ('B23', 'B24', 'B25')
     rig = layout['motion_geometry']
     if revision in ('B24', 'B25') and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
         raise ValueError('Current CAD must include both revised pitch axes')
-    plan = C.assembly_plan(revision.lower(), layout)
+    world.layout = layout
+    illustration = report is None
+    if illustration:
+        if revision != 'B25' or not preview or assembly_cad is None:
+            raise ValueError('Report-free rendering requires B25 --preview and the exact --assembly-cad')
+        import b25_preview as B25
+
+        catalog, heat_screws, heat_retainers = B25.setup(layout, world)
+        plan = B25.plan(layout, heat_screws, heat_retainers, world)
+        checked = [dict(id=step['id'], context=step['ctx'], text=step['text'], notes=[], issues=[],
+                        **{key: step[key] for key in ('actor_offsets', 'blink_deg') if key in step}) for step in plan]
+        checked[0].update(cad_sha256=layout['source_sha256'], plan_sha256=C.plan_hash(plan))
+    else:
+        plan = C.assembly_plan(revision.lower(), layout)
+        checked = json.loads(report.read_text())
     if [(row['id'], row['context'], row['text']) for row in checked] != [
             (step['id'], step['ctx'], step['text']) for step in plan]:
         raise ValueError('Assembly report does not match the current assembly plan')
     manifest = {p['cad_id']: p['finish'] for p in json.loads((ROOT/'web/assets/assembly.json').read_text())['parts']}
-    world.layout = layout
     if revision != 'B19' and checked[0].get('cad_sha256') != layout['source_sha256']:
         raise ValueError('Assembly report and CAD export use different revisions')
     if service_covers:
@@ -383,6 +396,12 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     rear_wiring = [name for name in layout['world_motion'] if name.startswith(REAR_WIRING)]
     hub_plugs = [name for name in layout['world_motion'] if name.startswith('HubPlug')]
     wires = load_wires(assembly_cad, layout['source_sha256'])
+    if illustration:
+        rear_wiring = [name for name in rear_wiring if name not in ('InputXT60', 'InputXT60Mate')]
+        wires = [wire for wire in wires if not wire['label'].startswith('Archived camera route')]
+        native_screws.update(layout['world_motion'])
+        b19_names.update(name for name in native_screws if name.endswith('Insert') or 'Screw' in name
+                         or name.startswith(('HubBolt', 'A4InletBolt', 'A4StationFastener')))
     camera_wires = [wire['id'] for wire in wires if wire['label'].startswith('USB-Camera  ·  ')]
 
     installed, used, steps = {}, set(), []
@@ -427,6 +446,9 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             parts, points = st['path']
             moves.append({'ids': list(parts), 'path': [list(map(float, p)) for p in points]})
             ctx.extend(parts)
+        for name,offset in st.get('insert_moves', []):
+            moves.append({'ids': [name], 'path': [offset, [0, 0, 0]]})
+            ctx.append(name)
         for key in ('nuts', 'nuts2'):
             if key in st:
                 parts, offset = st[key]
@@ -483,18 +505,21 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             if route['status'] == 'pass':
                 notes.append(f'공차 포함 CAD 최소 여유 · {route["minimum_clearance_mm"]:.3f} mm')
         if jig := st.get('eye_bearing_alignment'):
-            alignment = row['eye_bearing_alignment']
             diameter, length = jig['diameter_mm'], jig['length_mm']
+            alignment = (dict(tool_diameter_mm=diameter, tool_length_mm=length,
+                              route_offset_mm=jig['feed_offset_mm'], status='illustration') if illustration
+                         else row['eye_bearing_alignment'])
             if ((alignment['tool_diameter_mm'], alignment['tool_length_mm']) != (diameter, length)
                     or not np.allclose(alignment['route_offset_mm'], jig['feed_offset_mm'])):
                 raise ValueError('Eye-bearing alignment gauge does not match the checked route')
-            if alignment['status'] == 'pass':
+            if alignment['status'] in ('pass', 'illustration'):
                 actor = 'checked-eye-bearing-alignment-gauge'
                 y, z = jig['axis_yz_mm']
                 feed_models[actor] = C.cylinder(diameter/2, length, (-length/2, y, z), (1., 0., 0.))
                 offset = alignment['route_offset_mm']
                 moves.append({'ids': [actor], 'path': [offset, [0., 0., 0.], offset], 'temporary': True})
-                notes.append(f'검사한 정렬봉 · 지름 {diameter:g} mm · 길이 {length:g} mm')
+                label = '정렬봉 위치' if illustration else '검사한 정렬봉'
+                notes.append(f'{label} · 지름 {diameter:g} mm · 길이 {length:g} mm')
         if row['text']:
             number += 1
             label, last_text, sub = str(number), row['text'], 0
@@ -505,7 +530,8 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         if len(names) != len(set(names)):
             raise ValueError(f'Duplicate parts in {st["id"]}')
         used.update(names)
-        tool_paths = checked_tools(row, world, data['hardware'], tools, phases) if has_qualified_tools else []
+        tool_paths = (B25.tools_for(st, world, tools, catalog) if illustration
+                      else checked_tools(row, world, data['hardware'], tools, phases) if has_qualified_tools else [])
         poses = {name: matrix.tolist() for name in names if (matrix := world.blink_transform(name)) is not None}
         for name, offset in offsets.items():
             if name not in names or name in poses:
@@ -519,8 +545,8 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             'notes': notes,
             'issues': row['issues'], 'fixed': fixed, 'moves': moves,
             'closedLids': bool(st.get('closed_lids')),
-            'showWires': st['id'] in ('rear-skull', 'camera-route-set'),
-            **({'wireIds': camera_wires} if st['id'] == 'camera-route-set' else {}),
+            'showWires': st['id'] == 'rear-skull' or (st['id'] == 'camera-route-set' and not illustration),
+            **({'wireIds': camera_wires} if st['id'] == 'camera-route-set' and not illustration else {}),
             **({'toolPaths': tool_paths} if tool_paths else {}),
             **({'actorPoses': poses} if poses else {}),
             **({'blinkDegrees': st['blink_deg']} if 'blink_deg' in st else {}),
@@ -542,6 +568,9 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             raise ValueError('Duplicate part in the final view')
         review = dict(id='final-view', label='완료', section='조립 완료', fixed=fixed,
                       text='체결품과 배선이 있는 조립 상태입니다.', notes=[], issues=[], moves=[], showWires=True)
+        if illustration:
+            review.update(text='B25 완성 상태입니다. 외장을 숨기면 내부 체결품과 배선을 볼 수 있습니다.',
+                          notes=['조립 움직임과 공구는 CAD 위치를 설명합니다. 출력 공차와 실물 조립은 가조립에서 확인합니다.'])
         motion.update(dict.fromkeys(guard, 'fixed'))
         states = load_wire_states(wire_states, layout, fixed, motion, wires)
     world.blink_pose = None
@@ -550,7 +579,9 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         metallicFactor=.45 if name == 'steel' else 0.) for name, rgb in COLORS.items()}
     parts = {}
     for name in sorted(used):
-        if name in native_screws:
+        if illustration and name in catalog:
+            mesh = B25.screw_model(*world.neutral_screw(name))
+        elif name in native_screws:
             mesh = trimesh.load_mesh(world.world/f'{name}.stl')
         else:
             mesh = feed_models[name] if name in feed_models else world.mesh(name)
@@ -563,6 +594,8 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
                 np.radians(phases[name]), nut['axis'], nut['seat']))
         finish = ('frame' if name in keeper_names else 'b19' if name in b19_names else 'power' if name.startswith('RearLead')
                   else 'connector' if name in rear_wiring or name in hub_plugs else finish_of(name, manifest))
+        if illustration:
+            finish = B25.finish(name) or finish
         limit = FACE_LIMIT.get(finish, 4000)
         if name not in stop_actors and len(mesh.faces) > limit:
             # Decimation can tear closed parts; torn faces render as black patches.
@@ -574,7 +607,8 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
                 mesh = reduced
         mesh.visual = trimesh.visual.TextureVisuals(material=materials[finish])
         scene.add_geometry(mesh, node_name=name, geom_name=name)
-        parts[name] = {'label': labels.get(name, ''), 'b19': name in b19_names,
+        parts[name] = {'label': (B25.LABELS.get(name) if illustration else None) or labels.get(name, '') or name,
+                       'b19': name in b19_names,
                        'center': mesh.bounds.mean(axis=0).round(2).tolist(),
                        'size': float(np.linalg.norm(mesh.extents).round(2))}
     for name, mesh in tools.items():
@@ -595,11 +629,15 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     model = trimesh.exchange.gltf.export_glb(scene, include_normals=True)
     (output/'model.glb').write_bytes(model)
     (output/'steps.json').write_text(json.dumps({
-        'source': report.name, 'revision': revision, 'cadSha256': layout['source_sha256'],
+        'source': assembly_cad.name if illustration else report.name, 'revision': revision,
+        'cadSha256': layout['source_sha256'],
         'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
         **({'stops': stop_locations} if stop_locations else {}),
-        **({'assemblyViews': B24_ASSEMBLY_VIEWS} if revision in ('B24', 'B25') else {}),
+        **({'illustration': True,
+            'assemblyViews': [{'id': k, 'label': label, 'stage': step} for k,label,step in B25.VIEWS],
+            'inspectionParts': [name for name in B25.LABELS if name in review['fixed']]}
+           if illustration else {'assemblyViews': B24_ASSEMBLY_VIEWS} if revision in ('B24', 'B25') else {}),
         **({'finalView': review} if review else {}),
         **({'guardSha256': guard_hash} if guard_hash else {}),
         **({'wireStates': states, 'wireStatesSha256': sha256(wire_states.read_bytes()).hexdigest()} if states else {}),
@@ -612,7 +650,7 @@ if __name__ == '__main__':
     parser.add_argument('cad', type=Path, help='mechanical/physics/export_cad.py --world output')
     parser.add_argument('hardware', type=Path, help='web/assembly/steps.js hardware as JSON')
     parser.add_argument('spec', type=Path, help='hardware-spec.json from build_b19_review_fixes.py')
-    parser.add_argument('report', type=Path, help='assembly-check.json from check_b19_assembly.py')
+    parser.add_argument('report', type=Path, nargs='?', help='Assembly check report, or omit for B25 --preview')
     parser.add_argument('--output', type=Path, default=HERE)
     parser.add_argument('--revision', choices=[key.upper() for key in C.PLANS], default='B19')
     parser.add_argument('--assembly-cad', type=Path, help='Matching FCStd for internal cable paths')

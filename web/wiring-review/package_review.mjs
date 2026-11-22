@@ -1,70 +1,49 @@
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
+import { partGroups } from "./catalog.js";
 
-const [cadDir, resultDir, bundle, output, beforeDir, beforeCadDir, cadFile] = process.argv.slice(2);
-if (!output || Boolean(beforeDir) !== Boolean(beforeCadDir)) {
-  throw new Error("Usage: package_review.mjs CAD_DATA RESULT_DIR BUNDLED_JS OUTPUT_HTML [BEFORE_RESULT_DIR BEFORE_CAD_DATA [CAD_FILE]]");
+const here = dirname(fileURLToPath(import.meta.url));
+const root = resolve(here, "../..");
+const [cadDir, posesFile, output, revision, three = join(root, "web/node_modules/three")] = process.argv.slice(2);
+if (!output || !/^[0-9a-f]{40}$/.test(revision ?? "")) {
+  throw new Error("Usage: package_review.mjs CAD_DIR POSE_DATA_JSON HOST_DIRECTORY SOURCE_GIT_SHA [THREE_DIRECTORY]");
 }
-const root = fileURLToPath(new URL("../../", import.meta.url));
-const here = fileURLToPath(new URL("./", import.meta.url));
-const read = path => readFile(path);
-const string = async path => (await read(path)).toString("utf8");
-const json = async path => JSON.parse(await string(path));
-const base64 = async path => (await read(path)).toString("base64");
-const optionalJson = async (path, fallback) => {
-  try { return await json(path); }
-  catch (error) { if (error.code === "ENOENT") return fallback; throw error; }
+const digest = bytes => createHash("sha256").update(bytes).digest("hex");
+const readJson = async path => JSON.parse(await readFile(path, "utf8"));
+const layout = await readJson(join(cadDir, "cad_parts.json"));
+const poses = await readJson(posesFile);
+const assembly = await readFile(join(root, "mechanical/revisions/b25/R5-B25-Assembly.FCStd"));
+if (poses.cad !== layout.source_sha256 || poses.cad !== digest(assembly)) {
+  throw new Error("The pose data, exported mesh index and current B25 assembly must match.");
+}
+const partIds = [...new Set(Object.values(partGroups).flat())];
+const vendor = {
+  "three.module.min.js": "build/three.module.min.js",
+  "three.core.min.js": "build/three.core.min.js",
+  "controls/OrbitControls.js": "examples/jsm/controls/OrbitControls.js",
+  "loaders/STLLoader.js": "examples/jsm/loaders/STLLoader.js",
+  "LICENSE.txt": "LICENSE",
 };
-const report = await json(join(resultDir, "wiring-check.json"));
-const cad = await read(cadFile ?? join(root, "mechanical", "R5-B16-Wiring.FCStd"));
-if (report.cad_sha256 !== createHash("sha256").update(cad).digest("hex")) {
-  throw new Error("The check results and B16 CAD file have different revisions.");
+await Promise.all(["assets", "vendor/controls", "vendor/loaders"].map(dir => mkdir(join(output, dir), { recursive: true })));
+await Promise.all(Object.entries(vendor).map(([to, from]) => copyFile(join(three, from), join(output, "vendor", to))));
+for (const id of partIds) {
+  const bytes = await readFile(join(cadDir, "world", id + ".stl"));
+  if (digest(bytes) !== layout.world_sha256[id]) throw new Error(`${id} does not match the CAD export.`);
+  await writeFile(join(output, "assets", id + ".stlz"), gzipSync(bytes));
 }
-const ids = ["Part000", "Part007", "CableSaddle"];
-const wiring = await json(join(root, "web/assets/wiring.json"));
-const data = {
-  report,
-  frames: await json(join(resultDir, "wiring-frames.json")),
-  hardware: await json(join(cadDir, "hardware.json")),
-  assembly: await json(join(root, "web/assets/assembly.json")),
-  wiring: { blocks: await optionalJson(join(cadDir, "wiring-blocks.json"), wiring.blocks) },
-  model: await base64(join(root, "web/assets/assembly.glb")),
-  meshes: Object.fromEntries(await Promise.all(ids.map(async id => [
-    id, await base64(join(cadDir, "world", id + ".stl")),
-  ]))),
-};
-if (beforeDir) {
-  const before = await json(join(beforeDir, "wiring-check.json"));
-  const beforeLayout = await json(join(beforeCadDir, "cad_parts.json"));
-  if (before.cad_sha256 !== beforeLayout.source_sha256) {
-    throw new Error("The original check results and CAD export have different revisions.");
-  }
-  const frames = await json(join(beforeDir, "wiring-frames.json"));
-  const keys = new Set(frames.map(frame => frame.pose.join(",")));
-  if (keys.size !== data.frames.length || !data.frames.every(frame => keys.has(frame.pose.join(",")))) {
-    throw new Error("The comparison requires the same checked poses in both models.");
-  }
-  const beforeMeshes = await Promise.all(ids.map(async id => [
-    id, await base64(join(beforeCadDir, "world", id + ".stl")),
-  ]));
-  data.before = {
-    report: before,
-    frames,
-    meshes: Object.fromEntries(beforeMeshes.filter(([id, value]) => value !== data.meshes[id])),
-    blocks: await optionalJson(join(beforeCadDir, "wiring-blocks.json"), wiring.blocks),
-  };
-}
-const css = await string(join(here, "review.css"));
-const js = (await string(bundle)).replaceAll("</script", "<\\/script");
-const payload = gzipSync(JSON.stringify(data)).toString("base64");
-const html = (await string(join(here, "index.html")))
-  .replace('  <link rel="stylesheet" href="./review.css">', () => "<style>" + css + "</style>")
-  .replace(/ *<script type="importmap">.*<\/script>\r?\n/, "")
-  .replace('  <script type="module" src="./review.js"></script>', () =>
-    '<script id="review-payload" type="application/octet-stream" data-encoding="gzip-base64">' + payload + "</script>\n" +
-    "<script>" + js + "</script>");
-await writeFile(output, html, "utf8");
-console.log("Wrote " + output + " with " + data.frames.length + " checked poses.");
+const docs = `https://github.com/ckh7488/head/blob/${revision}/`;
+const html = (await readFile(join(here, "index.html"), "utf8"))
+  .replace(/data-doc="([^"]+)"/g, (_, path) => `href="${docs}${path}"`);
+await Promise.all([
+  writeFile(join(output, "index.html"), html),
+  copyFile(join(here, "catalog.js"), join(output, "catalog.js")),
+  copyFile(join(here, "review.js"), join(output, "review.js")),
+  copyFile(join(here, "review.css"), join(output, "review.css")),
+  writeFile(join(output, "assets", "poses.json"), JSON.stringify({
+    ...poses, revision, motion: Object.fromEntries(partIds.map(id => [id, layout.world_motion[id]])),
+  })),
+]);
+console.log(`Wrote ${partIds.length} B25 CAD meshes and ${poses.service.length} service poses to ${output}.`);
