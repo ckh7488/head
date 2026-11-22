@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
-  "p2s_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
+  "cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
+  "p2s_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -145,6 +145,11 @@
     "camera_eaton_R18": {
       "evidence": "camera-r18-recheck.json",
       "active_mm": 550.0
+    },
+    "jaw_final_relief": {
+      "source_trial": "stay_corners_trial_5",
+      "evidence": "jaw-final-relief-verification.json",
+      "pitch_clearance": "below_required"
     }
   },
   "print_inputs_sha256": {

@@ -1,8 +1,8 @@
 # B25 뒤 외장 장착 후 턱 모듈 이탈 검사
 
-62틱 조건에서 최신 세 점 후보의 강도와 조립 경로를 검증했습니다. 제작 조립본에는 오른쪽 열림 스토퍼 보정이 들어 있으며, 세 점 후보는 공차 조립 단계의 간섭 때문에 별도 검토 CAD로 남깁니다. [판정](frozen-fixes-check.md) · [세 점 검토 CAD](R5-B25-Jaw-Keeper-Review.FCStd)
+이 문서는 세 점 고정을 적용하기 전의 이탈 경로와 이전 후보를 기록합니다. 현재 B25의 고정 형상과 결과는 최신 판정을 따릅니다. [최종 판정](frozen-fixes-check.md) · [최신 조립](assembly.md#턱-모듈-세-점-고정)
 
-**이탈 방지 미충족.** B25 조립본의 뒤 외장 29와 왼쪽 M3×18과 오른쪽 M3×16 나사를 장착한 상태에서 턱 모듈 전체가 아래로 76 mm 내려가는 경로가 확인됐습니다. 중립에서 턱, 받침 36·37, 팔 38·39, XL330, 모듈의 핀과 체결품을 함께 이동시켰습니다. 모터 케이스용 M2 나사 네 개는 B25 자리별 검사 자료의 머리와 몸통 치수로 포함했습니다. 정비용 하네스는 구조 고정에서 제외했습니다. [CAD 검사 결과](jaw-retention-witness.json)
+**이탈 방지 미충족.** 세 점 고정 적용 전 B25 조립본의 뒤 외장 29와 왼쪽 M3×18과 오른쪽 M3×16 나사를 장착한 상태에서 턱 모듈 전체가 아래로 76 mm 내려가는 경로가 확인됐습니다. 중립에서 턱, 받침 36·37, 팔 38·39, XL330, 모듈의 핀과 체결품을 함께 이동시켰습니다. 모터 케이스용 M2 나사 네 개는 B25 자리별 검사 자료의 머리와 몸통 치수로 포함했습니다. 정비용 하네스는 구조 고정에서 제외했습니다. [CAD 검사 결과](jaw-retention-witness.json)
 
 0.10 mm 간격으로 확인한 최소 메시 간극은 머리 프레임 09에서 0.101 mm, 목 요크 07에서 0.166 mm, 앞 외장 28에서 0.280 mm입니다. 인접 표본까지의 최대 이동인 0.05 mm를 빼면 이 경로의 메시 간극 하한은 0.051 mm입니다. 뒤 외장과 좌우 나사·너트는 턱 모듈과 Y 방향 경계 상자가 분리돼 있어 이 수직 경로에 닿지 않습니다.
 
@@ -26,6 +26,8 @@ FreeCAD Python 및 [기구 검사 의존성](../../physics/requirements.txt)이 
 ```sh
 export PYTHONPATH="mechanical:mechanical/physics:/usr/lib/freecad-python3/lib${PYTHONPATH:+:$PYTHONPATH}"
 export QT_QPA_PLATFORM=offscreen
+mkdir -p build
+git show d71340d:mechanical/revisions/b25/R5-B25-Assembly.FCStd > build/B25-before.FCStd
 python mechanical/physics/check_b25_installed_jaw_release.py \
-  mechanical/revisions/b25/R5-B25-Assembly.FCStd build/b25/jaw-retention-witness.json
+  build/B25-before.FCStd build/b25/jaw-retention-witness.json
 ```

@@ -1,0 +1,105 @@
+{
+  "scope": "One largest-diameter representative (minimum bore wall) per rebuilt family; modeled geometry checks covered all 20 files. Physical gauge choice remains a bench task.",
+  "slicer": "Bambu Studio 02.09.01.70 / P2S / PETG HF",
+  "sample_cases": {
+    "P8": {
+      "tested_nominal_diameter_mm": 8.3,
+      "return_code": 0,
+      "covered_object_names": [
+        "P8-max"
+      ],
+      "plate_warning": "",
+      "plate_number": 1,
+      "sample_project_sha256": "8cca288ab27e55bd7e1bb0e9da69a24d46a3737c82c91dd1c2a747d07392ad21",
+      "raw_result_sha256": "6b8a757c05866e7c621455c0d2e8a8cd34ed39d211ef13f9f3202900bd4768e2"
+    },
+    "B10": {
+      "tested_nominal_diameter_mm": 10.25,
+      "return_code": 0,
+      "covered_object_names": [
+        "B10-max"
+      ],
+      "plate_warning": "",
+      "plate_number": 1,
+      "sample_project_sha256": "ce50241385ed5a25776a185455af4009e1e39843694a52906730974ce0a58fba",
+      "raw_result_sha256": "0666fcbb644e077e770ccd8fe1ae68f6c3d7dadeb6b2cb4d8c4d140fb97ca38b",
+      "effective_detect_thin_wall": "1"
+    },
+    "M2 ID6": {
+      "tested_nominal_diameter_mm": 2.35,
+      "return_code": 0,
+      "covered_object_names": [
+        "M2-ID6-max"
+      ],
+      "plate_warning": "",
+      "plate_number": 1,
+      "sample_project_sha256": "ddd4457bf37e2bf209b97c57eb98cd65fc315a394b2edea6521e3c593968f8bc",
+      "raw_result_sha256": "33e77e67069113fb6a4bc9a06ce5e86506a4bfb40ef732d1c6a5c71b84ad9c2a"
+    },
+    "H4": {
+      "tested_nominal_diameter_mm": 4.25,
+      "return_code": 0,
+      "covered_object_names": [
+        "30_38_39_jaw_one_piece-D4.25"
+      ],
+      "plate_warning": "",
+      "plate_number": 1,
+      "sample_project_sha256": "4ad9fa46a686a9b265b3c20b2dd1f6767eb964511699246000f352fe71b97560",
+      "raw_result_sha256": "e505c0b5c22969a0037b4921642cac388a07255b15ca5597f3c8b97fab8a3ecd"
+    }
+  },
+  "source_p2s_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+  "archives": {
+    "B10": {
+      "file": "R5-B25-Bearing-Fit-STLs.zip",
+      "sha256": "ac7c6977bb276fd0f9548793275ec3b9a21e4d1bf69ca54826585e860b61e6a4",
+      "sizes_mm": [
+        10.05,
+        10.1,
+        10.15,
+        10.2,
+        10.25
+      ]
+    },
+    "P8": {
+      "file": "R5-B25-Shaft-Fit-Parts.zip",
+      "sha256": "c5f930db523a5f3eafe8f24d675d9953775f2a93df7d4c5258afaf353e2544dc",
+      "sizes_mm": [
+        8.1,
+        8.15,
+        8.2,
+        8.25,
+        8.3
+      ]
+    },
+    "M2 ID6": {
+      "file": "fit-m2-mounts.zip",
+      "sha256": "e6fc9a0e73e8444d5289bf297f3529769c919c7b571a93eae031951ee8908d84",
+      "sizes_mm": [
+        2.15,
+        2.2,
+        2.25,
+        2.3,
+        2.35
+      ]
+    },
+    "H4": {
+      "file": "fit-c-variants.zip",
+      "sha256": "cfc4c95f4a6ff2fc912d287bc7e8ae5fed1ab64396bb090591916d0d2883881e",
+      "sizes_mm": [
+        4.05,
+        4.1,
+        4.15,
+        4.2,
+        4.25
+      ],
+      "minimum_sampled_ligaments_mm": {
+        "4.05": 1.5741,
+        "4.1": 1.5492,
+        "4.15": 1.5241,
+        "4.2": 1.4991,
+        "4.25": 1.4741
+      }
+    }
+  }
+}

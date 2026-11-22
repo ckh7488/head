@@ -1,16 +1,16 @@
 {
-  "project_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
+  "project_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
   "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
   "plate_sha256": {
     "1": "f6a81e6db6a9d636f38fc99e95fe763136fc42a972d0184b937ed8956fc48d14",
     "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
     "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
-    "4": "e2afed85ce9b94517aadc58401624b8848bed6c0afafbe287d5b1e68158deed5",
-    "5": "7c1b326bac561aec2359065f1133b09814f57fc8f2e5090d3082c730d1f4060c",
-    "6": "dab2fd69b7c6d6ccd1e7b299c0264a65753f2d934a1bc119434e132151781094",
+    "4": "e7fdaed84d92a967ea377b81d40e8d111a6894961511be762599e248e6a6a43a",
+    "5": "ee94486896ac8408e007f119ccf021b78f03529ac8b64057fa8907ab25fe43af",
+    "6": "e248f0c129406ad697d199ca59a731cdd5e711b3f380506b2103de9da66a8f70",
     "7": "cfb5fa71bc38daba82a25d971bec2c239ac01ed5381ff87a8a5f20a908d2b84e",
     "8": "e2db12baf0f791986c16b4b5fc200cfbdf15c28201a32d6c6372748954388820",
-    "9": "e5869cd0335534707603b67d9f957613fd1a9eb0a1ea8c176539f8a0f713696c",
+    "9": "ddd32b6e3c1b9f4828a77c6328295b8d7c4c8787c0e2715c2287304b358863a0",
     "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
     "11": "b7f2090a36655e13e0dc17b87cc772fb8f35b346b512ebb23b3691cb46e85fae",
     "12": "c287e38c9b020de5df351623e2a5ab503a979c09cbcb1ac06da9313bfc47565d"
@@ -19,115 +19,83 @@
     "4": [
       "28_skull_front_with_camera_tray-B25.stl"
     ],
-    "11": [
-      "42-rear-cable-cover-service.stl"
+    "5": [
+      "30_38_39_jaw_one_piece-B20.3mf"
     ],
-    "12": [
-      "40-rear-cable-guide-service.stl"
+    "6": [
+      "09_head_frame-B25.stl"
+    ],
+    "9": [
+      "36_left_cheek_servo_stay.stl",
+      "37_right_cheek_bearing_stay-B22.stl"
     ]
   },
-  "identical_to_b25_plates": [
+  "identical_to_current_plates": [
     1,
     2,
     3,
-    5,
-    6,
     7,
     8,
-    9,
-    10
+    10,
+    11,
+    12
   ],
+  "preserved_parts_on_changed_plates": {
+    "9": [
+      "86",
+      "88",
+      "90",
+      "92",
+      "94"
+    ],
+    "4": [],
+    "5": [
+      "16"
+    ],
+    "6": [
+      "20",
+      "24",
+      "26",
+      "28",
+      "30",
+      "32",
+      "124",
+      "126"
+    ]
+  },
+  "source_3mf_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
+  "source_cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
   "mesh_deltas": {
-    "40-rear-cable-guide-service.stl": {
-      "source_file": "40-rear-cable-guide-service.stl",
-      "plate": 12,
-      "object_id": 102,
-      "object_path": "3D/Objects/object_51.model",
-      "source_mesh_sha256": "143c40cb6ba5f0fb52c1959680aaecd190c3b3d009d0c693d6c370d58ab02135",
-      "operations": [
-        {
-          "actor": "CableSaddle",
-          "mode": "subtract",
-          "net_delta_mm3": -2912.2321224064
-        },
-        {
-          "actor": "CableSaddle",
-          "mode": "add",
-          "net_delta_mm3": 3256.7380120750095
-        },
-        {
-          "actor": "CableSaddle",
-          "mode": "add",
-          "net_delta_mm3": 3324.9660797957767
-        },
-        {
-          "actor": "CableSaddle",
-          "mode": "add",
-          "net_delta_mm3": 20978.644848930446
-        }
-      ],
-      "bounds_mm": [
-        [
-          -52.25,
-          -74.2694168,
-          -11.950000000000003
-        ],
-        [
-          64.30000305175781,
-          97.26942140000003,
-          48.55
-        ]
-      ],
-      "size_mm": [
-        116.55000305175781,
-        171.53883820000004,
-        60.5
-      ],
-      "indexed_dimensions_preserved": false
-    },
-    "42-rear-cable-cover-service.stl": {
-      "source_file": "42-rear-cable-cover-service.stl",
-      "plate": 11,
-      "object_id": 104,
-      "object_path": "3D/Objects/object_52.model",
-      "source_mesh_sha256": "9561a8e8f663befe3624be3f9cdb108e4c6a9ea116841c2dfd2c0f41aedd0fae",
-      "operations": [
-        {
-          "actor": "CableGate",
-          "mode": "add",
-          "net_delta_mm3": 1590.284482974439
-        }
-      ],
-      "bounds_mm": [
-        [
-          -50.5,
-          -13.0,
-          -4.200000760000002
-        ],
-        [
-          50.5,
-          66.19999999999999,
-          4.20000077
-        ]
-      ],
-      "size_mm": [
-        101.0,
-        79.19999999999999,
-        8.40000153
-      ],
-      "indexed_dimensions_preserved": false
-    },
     "28_skull_front_with_camera_tray-B25.stl": {
       "source_file": "28_skull_front_with_camera_tray-B25.stl",
       "plate": 4,
       "object_id": 14,
       "object_path": "3D/Objects/object_7.model",
-      "source_mesh_sha256": "e3342f966bc701bb72e3211e47b38f245b8659b6ad2404222ffbb08d3815e2cc",
+      "source_mesh_sha256": "9eca9baf8e1a1d0cedfed451c32fdc18bdc37c1d6fc3892fb49bb22cc336dea4",
       "operations": [
         {
-          "actor": "Part065",
+          "actor": "Part073",
           "mode": "add",
-          "net_delta_mm3": 94.7374357105
+          "net_delta_mm3": 0.00010214370558969676,
+          "tool": "Part073-add.npz"
+        },
+        {
+          "actor": "Part073",
+          "mode": "subtract",
+          "net_delta_mm3": -6073.527570636157,
+          "tool": "Part073-subtract.npz"
+        },
+        {
+          "actor": "Part073",
+          "mode": "subtract",
+          "net_delta_mm3": -4.953724244987825,
+          "tool": "front-shell-left-tool.npz"
+        },
+        {
+          "actor": "Part073",
+          "mode": "subtract",
+          "net_delta_mm3": -6.762210258137202,
+          "tool": "front-shell-right-tool.npz"
         }
       ],
       "bounds_mm": [
@@ -147,21 +115,265 @@
         166.874454498292,
         104.627639770508
       ],
-      "indexed_dimensions_preserved": true
+      "detached_boolean_roundoff_mm3": 2.707622227570952e-05,
+      "detached_boolean_roundoff_count": 51,
+      "indexed_dimensions_preserved": true,
+      "print_mesh_sha256": "00545dd0fddd4a78d5e305e9caf67902a150d96cb4a19cb733fae709357843ff",
+      "raw_archive_bounds_mm": [
+        [
+          -80.203956604004,
+          -83.437227249146,
+          -52.3138199
+        ],
+        [
+          80.203956604004,
+          83.437227249146,
+          52.313819870508
+        ]
+      ],
+      "archive_mesh_sha256": "feee1d1bfb4421b570783d604c9c8911b50875b3a63c49f9af73130067db8793",
+      "recenter_from_world_transform_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support_before": null,
+      "support_after": null
+    },
+    "30_38_39_jaw_one_piece-B20.3mf": {
+      "source_file": "30_38_39_jaw_one_piece-B20.3mf",
+      "plate": 5,
+      "object_id": 18,
+      "object_path": "3D/Objects/object_9.model",
+      "source_mesh_sha256": "c5c332cfc0f7940cf64a69260f9ee1aeef9dd0ff8232d43cc554c1a619a85cad",
+      "operations": [
+        {
+          "actor": "Jaw_39_right_jaw_pivot_arm",
+          "mode": "subtract",
+          "net_delta_mm3": -0.6453321483131731,
+          "tool": "Jaw_39_right_jaw_pivot_arm-subtract.npz"
+        }
+      ],
+      "bounds_mm": [
+        [
+          -70.83682,
+          -34.28214,
+          -48.9524078
+        ],
+        [
+          70.83682,
+          34.28214,
+          54.6177422
+        ]
+      ],
+      "size_mm": [
+        141.67364,
+        68.56428,
+        103.57015000000001
+      ],
+      "detached_boolean_roundoff_mm3": 0,
+      "detached_boolean_roundoff_count": 0,
+      "indexed_dimensions_preserved": true,
+      "print_mesh_sha256": "f1bc85f38260df747f066db4f46b1946a39c1b296c18eff45fa3e3eedbe5eee5",
+      "raw_archive_bounds_mm": [
+        [
+          -70.83682,
+          -34.28214,
+          -48.9524078
+        ],
+        [
+          70.83682,
+          34.28214,
+          54.6177422
+        ]
+      ],
+      "archive_mesh_sha256": "c0c4e97a57f9e1c4ffb79ec7484f28f4e2788511c6a721a147ac9da3f3c40957",
+      "recenter_from_world_transform_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support_before": null,
+      "support_after": null
+    },
+    "37_right_cheek_bearing_stay-B22.stl": {
+      "source_file": "37_right_cheek_bearing_stay-B22.stl",
+      "plate": 9,
+      "object_id": 96,
+      "object_path": "3D/Objects/object_48.model",
+      "source_mesh_sha256": "91bb267903c2ac79573d0fe24ec0b798deabecda60996ceecbf941012958bf9a",
+      "operations": [
+        {
+          "actor": "Jaw_37_right_jaw_bearing_stay",
+          "mode": "subtract",
+          "net_delta_mm3": -651.3002396500578,
+          "tool": "Jaw_37_right_jaw_bearing_stay-subtract.npz"
+        },
+        {
+          "actor": "Jaw_37_right_jaw_bearing_stay",
+          "mode": "subtract",
+          "net_delta_mm3": -2.6777551971481444,
+          "tool": "right-stay-yoke-face-tool.npz"
+        }
+      ],
+      "bounds_mm": [
+        [
+          -18.75,
+          -12.4993839,
+          -15.2998562
+        ],
+        [
+          18.75,
+          12.4993839,
+          15.2998562
+        ]
+      ],
+      "size_mm": [
+        37.5,
+        24.9987678,
+        30.5997124
+      ],
+      "detached_boolean_roundoff_mm3": 3.963780598264098e-05,
+      "detached_boolean_roundoff_count": 161,
+      "indexed_dimensions_preserved": true,
+      "print_mesh_sha256": "d4ea2022204cd505235e8dbb9ccc36857ba9511f38d0709dd57e9f989c603f3c",
+      "raw_archive_bounds_mm": [
+        [
+          -18.75,
+          -12.4993839,
+          -15.2998562
+        ],
+        [
+          18.75,
+          12.4993839,
+          15.2998562
+        ]
+      ],
+      "archive_mesh_sha256": "5d2e4dc6ddf4e9c78a85b275b73d2b881bb4da05b8c7b97a3aaea3359c807fbb",
+      "recenter_from_world_transform_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "support_before": null,
+      "support_after": null
+    },
+    "09_head_frame-B25.stl": {
+      "source_file": "09_head_frame-B25.stl",
+      "plate": 6,
+      "object_id": 22,
+      "object_path": "3D/Objects/object_11.model",
+      "source_mesh_sha256": "96fab3651f864a9bcbcff3cb533e51ca306bc880474f17d3eeed2d73caaec954",
+      "operations": [
+        {
+          "actor": "Part019",
+          "mode": "exact native replacement",
+          "net_delta_mm3": 6481.095788381681
+        }
+      ],
+      "bounds_mm": [
+        [
+          -74.85500340175781,
+          -27.450000799999998,
+          -49.75181676
+        ],
+        [
+          75.74500270175781,
+          38.100002251757815,
+          30.24818324
+        ]
+      ],
+      "size_mm": [
+        150.60000610351562,
+        65.55000305175781,
+        80.0
+      ],
+      "indexed_dimensions_preserved": false,
+      "print_mesh_sha256": "d2d27cbef9bb2d6a1f930ab91b5463fa727605f0ff1235edc75a4bb4304fa820",
+      "raw_archive_bounds_mm": [
+        [
+          -75.3000031,
+          -32.7750015,
+          -19.6490059
+        ],
+        [
+          75.3000031,
+          32.7750015,
+          60.3509941
+        ]
+      ],
+      "archive_mesh_sha256": "3b80ede393c8b32da660147f6801f1f5eafa62a3e829fb7002b11dec0768dfa8",
+      "recenter_from_world_transform_mm": [
+        -0.4449996982421851,
+        -5.325000700000004,
+        30.102810859999998
+      ],
+      "support_before": null,
+      "support_after": "1"
+    },
+    "36_left_cheek_servo_stay.stl": {
+      "source_file": "36_left_cheek_servo_stay.stl",
+      "plate": 9,
+      "object_id": 84,
+      "object_path": "3D/Objects/object_42.model",
+      "source_mesh_sha256": "8ef82ad47fa9b0288aa85eda9d82b839225fdd7837ecd494c1240023dda44ade",
+      "operations": [
+        {
+          "actor": "Jaw_36_left_jaw_servo_stay",
+          "mode": "exact native replacement",
+          "net_delta_mm3": -136.37863143864615
+        }
+      ],
+      "bounds_mm": [
+        [
+          -19.5,
+          -18.8500004,
+          -16.5
+        ],
+        [
+          19.5,
+          18.419999580926515,
+          13.25
+        ]
+      ],
+      "size_mm": [
+        39.0,
+        37.269999980926514,
+        29.75
+      ],
+      "indexed_dimensions_preserved": false,
+      "print_mesh_sha256": "cedae885edab79f4dc8cf288920f9c7cc04cdf3526f53b27a45c0a13269ee0f8",
+      "raw_archive_bounds_mm": [
+        [
+          -19.5,
+          -18.635,
+          -13.25
+        ],
+        [
+          19.5,
+          18.635,
+          16.5
+        ]
+      ],
+      "archive_mesh_sha256": "13c0bbac124491e49229714b730459a5403ba9a5e66ae5f7e441f437fcac37ee",
+      "recenter_from_world_transform_mm": [
+        0.0,
+        0.21500039999999743,
+        3.25
+      ],
+      "support_before": null,
+      "support_after": "1"
     }
   },
-  "moved_on_plate": {
-    "40-rear-cable-guide-service.stl": [
-      88,
-      95
-    ],
-    "42-rear-cable-cover-service.stl": [
-      188.9,
-      70
-    ]
-  },
-  "repacked_plates": [
-    11,
-    12
-  ]
+  "right_locator_thin_wall_override": {
+    "source_3mf_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
+    "output_3mf_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+    "part": "37_right_cheek_bearing_stay-B22.stl",
+    "setting": {
+      "detect_thin_wall": "1"
+    },
+    "changed_plate": 9,
+    "object_id": 96,
+    "identical_global_settings": true
+  }
 }

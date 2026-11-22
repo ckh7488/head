@@ -333,8 +333,8 @@
       "variants": [
         {
           "file": "p9-37-bearing-pocket-D10.05.stl",
-          "sha256": "b500ef2684658d366cd19ad5b12a28ae9d16ccfc3bd2676f1923f5e35e8bf07b",
-          "facets": 13116,
+          "sha256": "4facab27f95d66e90b638ff9582a2e00ff760d8d4585aff692aaabf45de82c56",
+          "facets": 11486,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -364,12 +364,18 @@
                 7.100007
               ]
             }
-          }
+          },
+          "final_fit_change_mm3": 3.179865605716259,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ]
         },
         {
           "file": "p9-37-bearing-pocket-D10.10.stl",
-          "sha256": "602486415fc8997eaf035c591eedd4ee1dbe4543f36e5844222786204b04052a",
-          "facets": 13116,
+          "sha256": "c865fbebbd1e06fc419684462fd0e8b52c86004065cb4d82c663ad3791bdbc4d",
+          "facets": 11486,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -399,12 +405,18 @@
                 7.100007
               ]
             }
-          }
+          },
+          "final_fit_change_mm3": 0.0,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ]
         },
         {
           "file": "p9-37-bearing-pocket-D10.15.stl",
-          "sha256": "11e5594edab4beafe9bc70e5407e4f32506f6ad67def23d499bb00aa94b031b7",
-          "facets": 13996,
+          "sha256": "3313ffc028c2e96a81bf6856ea2b886386bf05e0765e2950d9c2587f38fa854a",
+          "facets": 10040,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -416,30 +428,36 @@
             "pocket": {
               "nominal_diameter_mm": 10.15,
               "mesh_diameter_mm": [
-                10.148641,
+                10.147968,
                 10.150001
               ]
             },
             "lead_in": {
               "nominal_diameter_mm": 10.25,
               "mesh_diameter_mm": [
-                10.248627,
+                10.247947,
                 10.250001
               ]
             },
             "shoulder": {
               "nominal_diameter_mm": 7.1,
               "mesh_diameter_mm": [
-                7.098135,
+                7.0978,
                 7.100007
               ]
             }
-          }
+          },
+          "final_fit_change_mm3": -3.3597556128579527,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ]
         },
         {
           "file": "p9-37-bearing-pocket-D10.20.stl",
-          "sha256": "d5f3f340d9238ac2799b5ab8a0cbe8c281313097cf28e0bb7b5f1547a0603d62",
-          "facets": 14764,
+          "sha256": "d020a3ed448c6e258b3ab8611e01b31ee5d79840f3a36920f48158bcf0916285",
+          "facets": 10318,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -465,16 +483,22 @@
             "shoulder": {
               "nominal_diameter_mm": 7.1,
               "mesh_diameter_mm": [
-                7.098135,
+                7.0978,
                 7.100007
               ]
             }
-          }
+          },
+          "final_fit_change_mm3": -6.7436139243909565,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ]
         },
         {
           "file": "p9-37-bearing-pocket-D10.25.stl",
-          "sha256": "8965430de3219bb9aaabaea3561617fe2e7b2891f0fed1061a02d4910d4d1c6a",
-          "facets": 13608,
+          "sha256": "03b10c6c3a786f7bd1e1dc16729ca02efe2eee2f6ad3f2dc7e58ef63d185d5b8",
+          "facets": 10326,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -486,25 +510,31 @@
             "pocket": {
               "nominal_diameter_mm": 10.25,
               "mesh_diameter_mm": [
-                10.248627,
+                10.248641,
                 10.250001
               ]
             },
             "lead_in": {
               "nominal_diameter_mm": 10.35,
               "mesh_diameter_mm": [
-                10.348614,
+                10.348628,
                 10.350001
               ]
             },
             "shoulder": {
               "nominal_diameter_mm": 7.1,
               "mesh_diameter_mm": [
-                7.098135,
+                7.0978,
                 7.100007
               ]
             }
-          }
+          },
+          "final_fit_change_mm3": -10.114600447866906,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ]
         }
       ]
     },
@@ -554,5 +584,8 @@
         }
       }
     }
-  ]
+  ],
+  "baseline_fit_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "geometry_after_final_project_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
+  "rebuilt_family": "B10"
 }

@@ -1,0 +1,458 @@
+{
+  "candidate_cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
+  "source_v5_cad_sha256": "a7c3f5e1eaf81deb489ed4edbfabbc0ed9886f78ae231738e3342bb0b4f90dc1",
+  "reliefs": [
+    {
+      "actor": "Part073",
+      "label": "front-shell-left",
+      "original_face_y_mm": -18.219999313354492,
+      "new_face_y_mm": -18.019999313354493,
+      "depth_mm": 0.2,
+      "direction_world": [
+        0,
+        1,
+        0
+      ],
+      "window_xz_mm": [
+        -64.5,
+        104.5,
+        -56.9,
+        114.0
+      ],
+      "old_planar_face_area_inside_window_mm2": 24.22778970202654,
+      "outside_lead_mm": 0.01,
+      "tool_world_bounds_mm": [
+        [
+          -64.5,
+          -18.229999313354494,
+          104.5
+        ],
+        [
+          -56.9,
+          -18.019999313354493,
+          114.0
+        ]
+      ],
+      "removed_world_bounds_mm": [
+        [
+          -63.58501542822471,
+          -18.229999313354494,
+          104.5
+        ],
+        [
+          -57.12477493286133,
+          -18.019999313354493,
+          114.0
+        ]
+      ],
+      "removed_volume_mm3": 4.953723347901742,
+      "new_face_measured_world_mm": [
+        -61.063,
+        -18.019999313354493,
+        108.4026
+      ]
+    },
+    {
+      "actor": "Part073",
+      "label": "front-shell-right",
+      "original_face_y_mm": -5.71999979019165,
+      "new_face_y_mm": -5.51999979019165,
+      "depth_mm": 0.2,
+      "direction_world": [
+        0,
+        1,
+        0
+      ],
+      "window_xz_mm": [
+        60.2,
+        98.4,
+        67.2,
+        106.4
+      ],
+      "old_planar_face_area_inside_window_mm2": 33.35007507300575,
+      "outside_lead_mm": 0.01,
+      "tool_world_bounds_mm": [
+        [
+          60.2,
+          -5.72999979019165,
+          98.4
+        ],
+        [
+          67.2,
+          -5.51999979019165,
+          106.4
+        ]
+      ],
+      "removed_world_bounds_mm": [
+        [
+          60.2,
+          -5.71999979019165,
+          98.4
+        ],
+        [
+          67.2,
+          -5.51999979019165,
+          106.4
+        ]
+      ],
+      "removed_volume_mm3": 6.762210113485043,
+      "new_face_measured_world_mm": [
+        63.285,
+        -5.51999979019165,
+        101.9794
+      ]
+    },
+    {
+      "actor": "Jaw_37_right_jaw_bearing_stay",
+      "label": "right-stay-yoke-face",
+      "original_face_y_mm": -10.119999885559082,
+      "new_face_y_mm": -10.169999885559083,
+      "depth_mm": 0.05,
+      "direction_world": [
+        0,
+        -1,
+        0
+      ],
+      "window_xz_mm": [
+        47.6,
+        98.25,
+        57.2,
+        110.25
+      ],
+      "old_planar_face_area_inside_window_mm2": 53.374574531806886,
+      "outside_lead_mm": 0.01,
+      "tool_world_bounds_mm": [
+        [
+          47.6,
+          -10.169999885559083,
+          98.25
+        ],
+        [
+          57.2,
+          -10.109999885559082,
+          110.25
+        ]
+      ],
+      "removed_world_bounds_mm": [
+        [
+          47.6,
+          -10.169999885559083,
+          98.25
+        ],
+        [
+          57.2,
+          -10.119999885559082,
+          109.5
+        ]
+      ],
+      "removed_volume_mm3": 2.677755266114083,
+      "new_face_measured_world_mm": [
+        51.56,
+        -10.169999885559083,
+        106.1
+      ]
+    }
+  ],
+  "stationary_replay": {
+    "original_95_percent_size_witnesses": {
+      "stationary_limit_mm": 0.1,
+      "scope": "Replay of the same seated V5 size, warp and fit inputs against the supplied CAD. Directed depth witnesses measure Euclidean inward distance from a physical surface point of the intruding solid to the receiving solid boundary. Each reported depth is a lower bound of the maximum within the allowed input envelope.",
+      "dimensions_applied_fraction": 0.95,
+      "maximum_fitted_receiver_diametral_clearance_mm": 0.06,
+      "warp_slope_mm_per_mm": 0.002,
+      "cases": {
+        "Jaw_36_left_jaw_servo_stay": {
+          "full_warp_height_mm": 0.08,
+          "play_enabled": true,
+          "global_overlap_volume_mm3": 0.0,
+          "original_witness_neighborhood_overlap_mm3": 0.0,
+          "surface_distance_mm": 0.07322896953987658
+        },
+        "Jaw_37_right_jaw_bearing_stay": {
+          "full_warp_height_mm": 0.08,
+          "play_enabled": true,
+          "global_overlap_volume_mm3": 0.0,
+          "original_witness_neighborhood_overlap_mm3": 0.0,
+          "surface_distance_mm": 0.08294273121803872
+        }
+      },
+      "candidate_cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52"
+    },
+    "100_percent_size_same_witnesses": {
+      "stationary_limit_mm": 0.1,
+      "scope": "Replay of the same seated V5 size, warp and fit inputs against the supplied CAD. Directed depth witnesses measure Euclidean inward distance from a physical surface point of the intruding solid to the receiving solid boundary. Each reported depth is a lower bound of the maximum within the allowed input envelope.",
+      "dimensions_applied_fraction": 1.0,
+      "maximum_fitted_receiver_diametral_clearance_mm": 0.06,
+      "warp_slope_mm_per_mm": 0.002,
+      "cases": {
+        "Jaw_36_left_jaw_servo_stay": {
+          "full_warp_height_mm": 0.08,
+          "play_enabled": true,
+          "global_overlap_volume_mm3": 0.0,
+          "original_witness_neighborhood_overlap_mm3": 0.0,
+          "surface_distance_mm": 0.058232494376344056
+        },
+        "Jaw_37_right_jaw_bearing_stay": {
+          "full_warp_height_mm": 0.08,
+          "play_enabled": true,
+          "global_overlap_volume_mm3": 0.0,
+          "original_witness_neighborhood_overlap_mm3": 0.0,
+          "surface_distance_mm": 0.06793040224755213
+        }
+      },
+      "candidate_cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52"
+    },
+    "scope": "Existing seated warp and locating-play cases at each shell site. Positive distance and zero overlap in these cases."
+  },
+  "right_yoke_replay": {
+    "operating_clearance_mm": 0.3,
+    "trial_shortfall_limit_mm": 0.05,
+    "neutral_95_percent_sizes": {
+      "angle_deg": 0.0,
+      "native_point_pair_mm": [
+        [
+          52.51395477423411,
+          -9.736119600204473,
+          106.51388700511846
+        ],
+        [
+          52.51395477423411,
+          -9.980000076293946,
+          106.37929290771484
+        ]
+      ],
+      "native_point_gap_upper_bound_mm": 0.2785556635100483,
+      "tessellated_min_mm": 0.28338876175698857,
+      "native_yoke_refinement_mm": 0.004833107413345115,
+      "extent_change_yoke_stay_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "directions": {
+        "yoke": [
+          -0.19,
+          -0.095,
+          -0.19
+        ],
+        "stay_in_part_frame": [
+          0.095,
+          0.19,
+          0.19
+        ]
+      }
+    },
+    "operating_feedback_endpoint_95_percent_sizes": {
+      "angle_deg": 3.69140625,
+      "native_point_pair_mm": [
+        [
+          51.891994365504736,
+          -9.36820446987789,
+          105.89327127038625
+        ],
+        [
+          51.891994365504736,
+          -9.59741852211022,
+          105.74841560470087
+        ]
+      ],
+      "native_point_gap_upper_bound_mm": 0.27114985823695487,
+      "tessellated_min_mm": 0.275903766970745,
+      "native_yoke_refinement_mm": 0.004753952574500576,
+      "extent_change_yoke_stay_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "directions": {
+        "yoke": [
+          -0.19,
+          -0.095,
+          -0.19
+        ],
+        "stay_in_part_frame": [
+          0.095,
+          0.19,
+          0.19
+        ]
+      }
+    },
+    "operating_feedback_endpoint_100_percent_sizes": {
+      "angle_deg": 3.69140625,
+      "native_point_pair_mm": [
+        [
+          51.971426746221056,
+          -9.378460024170007,
+          105.89151630450932
+        ],
+        [
+          51.971426746221056,
+          -9.588083095557531,
+          105.75903868387215
+        ]
+      ],
+      "native_point_gap_upper_bound_mm": 0.2479761118084286,
+      "tessellated_min_mm": 0.25276730308730777,
+      "native_yoke_refinement_mm": 0.004791218988291315,
+      "extent_change_yoke_stay_mm": [
+        [
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0
+        ]
+      ],
+      "directions": {
+        "yoke": [
+          -0.2,
+          -0.1,
+          -0.2
+        ],
+        "stay_in_part_frame": [
+          0.1,
+          0.19999999999999998,
+          0.2
+        ]
+      }
+    },
+    "scope": "Witness distances are upper bounds on the minimum. Yoke nearest point refined against native BREP. Sizes applied locally in original part frames without changing the external overall dimensions.",
+    "full_size_shortfall_lower_bound_mm": 0.05202388819157139,
+    "full_size_excess_over_trial_shortfall_lower_bound_mm": 0.002023888191571399
+  },
+  "opening": {
+    "cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
+    "firmware_sha256": "0c7ea76720243aa7b73a08d12c9e523f261d9db66dcc0504bb39482659c6405d",
+    "pair": [
+      "Jaw_37_right_jaw_bearing_stay",
+      "Jaw_39_right_jaw_pivot_arm"
+    ],
+    "pivot_mm": [
+      0.0,
+      -9.0,
+      92.0
+    ],
+    "tolerance_model": {
+      "fixed_warp_span_mm": 22.05651798923227,
+      "moving_warp_span_mm": 25.815693677573847,
+      "projected_through_jaw_deg": 6.89,
+      "radial_fit_terms_mm": {
+        "glued_pin": 0.04800000000000004,
+        "bearing_pocket": 0.025,
+        "bearing_internal": 0.01
+      },
+      "relative_world_half_box_mm": [
+        0.34411303597846454,
+        0.5024548564286592,
+        0.4614221814229265
+      ]
+    },
+    "wire_goal_max_deg": 5.5,
+    "goal_span_max_ticks": 62,
+    "goal_span_max_encoder_deg": 5.44921875,
+    "closed_front_tip_point_mm": [
+      10.226388931274414,
+      -67.02407761767874,
+      38.2396903195566
+    ],
+    "jaw_tip_drop_at_goal_mm": 5.267213239577387,
+    "feedback_opening_allowance_ticks": 5,
+    "accepted_feedback_max_encoder_deg": 5.888671875,
+    "contact_free_through_deg_in_relative_envelope": 6.89,
+    "required_stop_reserve_deg": 1.0,
+    "continuous_lower_gap_mm": 0.0007353185452853572,
+    "verified_cells": 83,
+    "reserve_from_goal_at_least_deg": 1.4407812499999997,
+    "reserve_from_accepted_feedback_at_least_deg": 1.0013281249999997,
+    "earliest_sampled_contact_deg": 7.111236572265625,
+    "sampled_contact_shift_mm": [
+      -0.34411303597846454,
+      -0.5024548564286592,
+      -0.4614221814229265
+    ],
+    "powered_clearance": {
+      "end_deg": 5.888671875,
+      "minimum_mm": 0.3070255601330377,
+      "required_mm": 0.3,
+      "verified_cells": 593
+    },
+    "scope": "Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.",
+    "references": {
+      "conditions": "../spec/conditions.md",
+      "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",
+      "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
+      "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
+    }
+  },
+  "protected_part_comparison": {
+    "Part011": true,
+    "Part012": true,
+    "Part013": true,
+    "Part014": true,
+    "Part015": true,
+    "Jaw_MR104ZZ_jaw_right": true,
+    "Jaw_Pin_jaw_4x10": true,
+    "Jaw_39_right_jaw_pivot_arm": true,
+    "Jaw_30_moving_jaw": true,
+    "JawExteriorScrewLeft": true,
+    "JawExteriorScrewRight": true,
+    "JawAntiRockScrew": true,
+    "JawExteriorInsertLeft": true,
+    "JawExteriorInsertRight": true,
+    "JawAntiRockInsert": true,
+    "Part019": true,
+    "Part073": false,
+    "Jaw_36_left_jaw_servo_stay": true,
+    "Jaw_37_right_jaw_bearing_stay": false
+  },
+  "insertion_related_stationary_contacts_mm": {
+    "seated_right": 0.08118,
+    "left_26p25_mm_below_seat": 0.028286,
+    "right_0p125_mm_below_seat": 0.025434
+  },
+  "routing_replay_on_final_cad": {
+    "eaton_camera": {
+      "head_poses": 289,
+      "lower_span_yaw_poses": 513,
+      "rear_return_poses": 73,
+      "head_jaw_continuous_cells": 17,
+      "head_jaw_unresolved": [],
+      "jaw_gap_minimum_at_prior_pose_mm": 1.0812042236328125,
+      "length_reserve_percent": 11.147603099907277,
+      "head_radius_minimum_mm": 18.2,
+      "lower_span_contacts": []
+    },
+    "a4_service_w8_w9": {
+      "poses": 39,
+      "bend_minimum_mm": 12.000000000000014,
+      "reserved_pair_gap_mm": 2.4430000000000014,
+      "lowering_sweep": {
+        "A4W8": {
+          "panels": 346,
+          "max_intersection_mm3": {}
+        },
+        "A4W9": {
+          "panels": 346,
+          "max_intersection_mm3": {}
+        }
+      }
+    }
+  }
+}

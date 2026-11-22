@@ -13,12 +13,14 @@
 
 고정점 세 곳에는 일반 M3 원통머리 완전나사 볼트와 열압입 인서트를 사용했습니다. 독립 단면 계산의 최대 층간 응력은 왼쪽 **3.404 MPa**, 오른쪽 **2.598 MPa**였습니다. 이 계산의 범위는 5 N 압력에 따른 공칭 축력·굽힘 응력입니다. 위치 결정용 홀에는 실물 볼트에 맞춘 동축 마감이 필요하고, 완성품 시험에서 비틀림과 인서트 빠짐을 확인합니다. [검사 근거](jaw-relief-witnesses.json) · [5 N 조건](../../../spec/conditions.md#9-강도)
 
-후보를 다시 생성할 때는 저장소 루트에서 FreeCAD 파이썬으로 다음을 실행합니다. 마지막 인수는 [수정 좌표 파일](b25-jaw-relief-trials.json)의 후보 이름입니다.
+후보를 다시 생성할 때는 저장소 루트에서 FreeCAD 파이썬으로 다음을 실행합니다. 재현에는 세 점 고정을 합치기 전 조립본을 사용합니다. 마지막 인수는 [수정 좌표 파일](b25-jaw-relief-trials.json)의 후보 이름입니다.
 
 ```sh
 export PYTHONPATH="mechanical:mechanical/physics:/usr/lib/freecad-python3/lib"
+mkdir -p build
+git show d71340d:mechanical/revisions/b25/R5-B25-Assembly.FCStd > build/B25-before.FCStd
 python mechanical/build_b25_jaw_relief_trials.py \
-  mechanical/revisions/b25/R5-B25-Assembly.FCStd \
+  build/B25-before.FCStd \
   mechanical/revisions/b25/R5-B25-Jaw-Keeper-Review.FCStd \
   build/B25-jaw-trial.FCStd mechanical/revisions/b25/b25-jaw-relief-trials.json stay_corners_trial_5
 ```
@@ -33,11 +35,30 @@ python mechanical/build_b25_jaw_relief_trials.py \
 | 왼쪽 받침 36 | 0.12647 mm | 0.12653 mm | 초과 |
 | 오른쪽 받침 37 | 0.11777 mm | 0.11734 mm | 초과 |
 
-목 상하 피드백 끝점 **+3.6914°**에서 움직이는 오른쪽 요크와 받침의 최악 간극은 **0.26617 mm 이하**입니다. 이 자세의 허용 공차만으로 §2의 0.30 mm를 충족하지 못했습니다. 세 점 고정은 제작 전 막음으로 남습니다. [간극을 재현한 두 점](jaw-relief-depth.json) · [P08 고정 부품 맞춤](../../../spec/bench.md#b25-실물-시험)
+목 상하 피드백 끝점 **+3.6914°**에서 움직이는 오른쪽 요크와 받침의 최악 간극은 **0.26617 mm 이하**입니다. 이 자세의 허용 공차만으로 §2의 0.30 mm를 충족하지 못했습니다. 이 수치는 마지막 국부 보정 전의 판정입니다. [간극을 재현한 두 점](jaw-relief-depth.json) · [P08 고정 부품 맞춤](../../../spec/bench.md#b25-실물-시험)
 
 위 재현 명령으로 만든 CAD에서 깊이를 다시 계산합니다.
 
 ```sh
 python mechanical/physics/check_b25_jaw_static_depth.py \
   build/B25-jaw-trial.FCStd build/B25-jaw-depth.json
+```
+
+## B25 마지막 국부 수정
+
+②에서 마지막으로 검토했던 받침 형상을 기준으로 앞 외장 28 안쪽 양쪽에 0.20 mm, 오른쪽 받침 37의 요크 방향 면에 0.05 mm를 덜었습니다. 688 시트가 들어 있는 요크 07과 오른쪽 받침의 MR104 자리는 유지했습니다. [CAD와 공차 수치](jaw-final-relief-verification.json)
+
+| 검사 | 최종 B25 결과 |
+| --- | --- |
+| 앞 외장과 양쪽 받침 | 앞서 겹쳤던 두 사례에 치수 허용치 100%, 휨 0.080 mm 및 맞춤 유격을 넣어 재현했습니다. 겹침은 0 mm³, 간극은 각각 0.05823 mm와 0.06793 mm입니다. 별도의 사례에서 오른쪽 안착 시 0.08118 mm, 삽입 중 좌우 0.02829·0.02543 mm의 국부 겹침을 재현했습니다. 이 세 위치는 P08에서 확인합니다. |
+| 오른쪽 받침과 목 요크 | 목 상하 피드백 +3.6914°에서 허용 공차 한 사례의 간극은 **0.24798 mm 이하**입니다. 0.30 mm 기준보다 **0.05202 mm 이상** 부족해 이번 시험판 이관 허용 차이 0.05 mm를 **0.00202 mm** 넘습니다. |
+| 턱 열림과 스토퍼 | 62틱, 턱 끝 5.27 mm 하강, 오른쪽 받침과 피벗 팔 간극 하한 0.30703 mm, 피드백 끝점 이후 스토퍼 여유 하한 1.00133°. [연속 기구 검사](../../../control/jaw-opening-check.json) |
+
+요크 쪽은 그물망에서 읽은 0.25277 mm를 FreeCAD의 원통 면에 투영하여 정밀 계산했습니다. 받침 쪽 점은 새 절삭면 위에 있습니다. 오른쪽 간극을 합격이나 0.05 mm 이내로 처리하지 않았습니다. 출력 시편에서는 P08에 따라 실제 간극과 고정 상태를 확인할 수 있습니다. [P08 국부 조립 절차](../../../spec/bench.md#b25-실물-시험)
+
+앞 절의 명령으로 ② 마지막 후보를 재현한 뒤 다음을 실행합니다.
+
+```sh
+python mechanical/build_b25_jaw_final_relief.py build/B25-jaw-trial.FCStd build/B25-jaw-final.FCStd
+python control/verification/check_b25_jaw_opening.py --cad build/B25-jaw-final.FCStd --powered-minimum 0.30
 ```

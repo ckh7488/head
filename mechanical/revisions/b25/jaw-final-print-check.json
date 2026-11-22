@@ -1,0 +1,83 @@
+{
+  "project_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "slicer_version": "Bambu Studio 2.9.1.70",
+  "slices": {
+    "4": {
+      "plate_geometry_settings_sha256": "e7fdaed84d92a967ea377b81d40e8d111a6894961511be762599e248e6a6a43a",
+      "sliced_source_3mf_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
+      "report_sha256": "f565c046e9e7d29efc31387316c3be3fc09b5a91769b0a7798605d6dff80debd",
+      "return_code": 0,
+      "slicer_warning_message": "",
+      "estimated_print_time": "14:21:22",
+      "estimated_print_seconds": 51682,
+      "elapsed_slice_seconds": 165.224,
+      "object_count": 1
+    },
+    "5": {
+      "plate_geometry_settings_sha256": "ee94486896ac8408e007f119ccf021b78f03529ac8b64057fa8907ab25fe43af",
+      "sliced_source_3mf_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
+      "report_sha256": "4dbd88cd24e8e96b512f63b1d234ff5e2310e49c4f2e5836f31b981e3baf7de7",
+      "return_code": 0,
+      "slicer_warning_message": "",
+      "estimated_print_time": "13:53:37",
+      "estimated_print_seconds": 50017,
+      "elapsed_slice_seconds": 155.641,
+      "object_count": 2
+    },
+    "6": {
+      "plate_geometry_settings_sha256": "e248f0c129406ad697d199ca59a731cdd5e711b3f380506b2103de9da66a8f70",
+      "sliced_source_3mf_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
+      "report_sha256": "9487f334d0bb08f94d7f47fad87e6504164cf849c69dc8a110bc72c86dd5d361",
+      "return_code": 0,
+      "slicer_warning_message": "",
+      "estimated_print_time": "9:04:18",
+      "estimated_print_seconds": 32658,
+      "elapsed_slice_seconds": 64.661,
+      "object_count": 9
+    },
+    "9": {
+      "plate_geometry_settings_sha256": "ddd32b6e3c1b9f4828a77c6328295b8d7c4c8787c0e2715c2287304b358863a0",
+      "sliced_source_3mf_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
+      "report_sha256": "512e38196d83c3652a0d91230f3781d577d028725e8e6174b4f21a5cc9ce96db",
+      "return_code": 0,
+      "slicer_warning_message": "",
+      "estimated_print_time": "1:58:09",
+      "estimated_print_seconds": 7089,
+      "elapsed_slice_seconds": 14.857,
+      "object_count": 7
+    }
+  },
+  "estimated_changed_plate_print_total": "1 day, 15:17:26",
+  "P9_locator_ligament_toolpath": {
+    "width_mm": 0.3901700973511,
+    "bed_xy_mm": [
+      11.522731781005735,
+      193.76385548369748
+    ],
+    "sliced_z_mm": [
+      23.6,
+      23.8,
+      24.0,
+      24.2,
+      24.4,
+      24.6
+    ],
+    "classic_stock_path_distance_mm": [
+      0.2616902131382102,
+      0.29564168607273794
+    ],
+    "classic_thin_wall_path_distance_mm": [
+      0.0005722623159683741,
+      0.0037662176759043152
+    ],
+    "corrected_extrudate_width_estimate_mm": [
+      0.4259041661864393,
+      0.43707884955580184
+    ],
+    "gcode_sha256": "2472f21df7d206b16255adb0220431a7cbd73c9a1b722d8032999b028790832b",
+    "scope": "Toolpath restored at the six checked narrow sections. P08 physical locator fit remains open."
+  },
+  "scope": "Trial fabrication only. Native kinematic clearance and physical fit have independent gates.",
+  "settings": "P2S 0.4 mm, PETG HF, 0.20 mm"
+}
