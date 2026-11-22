@@ -1,6 +1,6 @@
 # B25 턱 받침 국부 수정 검사
 
-[고정 검사 조건](../../../spec/conditions.md)의 2절은 동작 간극 0.3 mm 이상, 13절은 조립 중 겹침 0을 요구합니다. B25 제작 조립본에 세 점 고정 검토본을 합친 별도 CAD에서 고정 안내면 수정과 턱 받침 모서리 수정을 차례로 평가했습니다. [수정 좌표](b25-jaw-relief-trials.json) · [공차 결과](jaw-relief-witnesses.json)
+[고정 검사 조건](../../../spec/conditions.md)의 2절은 동작 간극 0.3 mm 이상, 13절은 고정 부품끼리의 최악 공차 겹침 깊이 0.10 mm까지 예외로 허용합니다. B25 제작 조립본에 세 점 고정 검토본을 합친 별도 CAD에서 고정 안내면 수정과 턱 받침 모서리 수정을 차례로 평가했습니다. ①은 이전 시험 기록으로 보관합니다. [수정 좌표](b25-jaw-relief-trials.json) · [공차 결과](jaw-relief-witnesses.json)
 
 | 수정 | 공차 검증 결과 |
 | --- | --- |
@@ -21,4 +21,23 @@ python mechanical/build_b25_jaw_relief_trials.py \
   mechanical/revisions/b25/R5-B25-Assembly.FCStd \
   mechanical/revisions/b25/R5-B25-Jaw-Keeper-Review.FCStd \
   build/B25-jaw-trial.FCStd mechanical/revisions/b25/b25-jaw-relief-trials.json stay_corners_trial_5
+```
+
+
+## 13절 예외 재판정
+
+② 마지막 후보를 현재 B25 조립본에 재구성했습니다. 출력 방향별 치수 오차 허용치의 95%, Ø0.06 mm 이하 맞춤 유격에서 가능한 위치 편차, 40 mm에 걸쳐 0.080 mm로 변하는 앞 외장 휨을 조합했습니다. 교차부의 점에서 상대 부품 표면까지 들어간 거리를 양방향으로 측정했습니다. 표 수치는 허용 공차 사례에서 확인한 깊이 하한입니다. [CAD 입력과 계측값](jaw-relief-depth.json)
+
+| 앞 외장 접촉 위치 | 받침이 외장에 파고든 깊이 | 외장이 받침에 파고든 깊이 | 0.10 mm 예외 |
+| --- | ---: | ---: | --- |
+| 왼쪽 받침 36 | 0.12647 mm | 0.12653 mm | 초과 |
+| 오른쪽 받침 37 | 0.11777 mm | 0.11734 mm | 초과 |
+
+목 상하 피드백 끝점 **+3.6914°**에서 움직이는 오른쪽 요크와 받침의 최악 간극은 **0.26617 mm 이하**입니다. 이 자세의 허용 공차만으로 §2의 0.30 mm를 충족하지 못했습니다. 세 점 고정은 제작 전 막음으로 남습니다. [간극을 재현한 두 점](jaw-relief-depth.json) · [P08 고정 부품 맞춤](../../../spec/bench.md#b25-실물-시험)
+
+위 재현 명령으로 만든 CAD에서 깊이를 다시 계산합니다.
+
+```sh
+python mechanical/physics/check_b25_jaw_static_depth.py \
+  build/B25-jaw-trial.FCStd build/B25-jaw-depth.json
 ```
