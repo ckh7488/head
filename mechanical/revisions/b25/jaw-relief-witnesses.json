@@ -1,0 +1,926 @@
+{
+  "source_cad_sha256": "f9d54bb599dcbabf79a78a1aaeb39814ae4a9a3696410677d312dfd4103fac11",
+  "source_print_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "review_fragment_sha256": "ae5add573ef9245f048a2669f79292edc5d2eceb03ae2251c8729c0e66c1442b",
+  "settings": {
+    "motion_minimum_mm": 0.3,
+    "assembly_allowed_overlap_mm3": 0.0,
+    "yoke_pitch_deg": [
+      -17.21,
+      7.13
+    ],
+    "screened_jaw_drop_span_mm": [
+      0,
+      76
+    ],
+    "exact_witnesses_omit_plate_warp": true
+  },
+  "attempts": {
+    "fixed_guides": {
+      "result": "fails assembly and touches right pitch bearing seat",
+      "fixed_right_688_land_change": {
+        "diameter_mm": 16.26,
+        "approximate_removed_arc_deg": 47,
+        "modified_total_seat_width_mm": 1.59,
+        "modified_actual_bearing_width_mm": 0.09
+      },
+      "witnesses": {
+        "source_cad_sha256": "9569822b87012f9ea3473b0e12c311cf5e668a4d57dfaf54b228d8608ce5a734",
+        "scope": "95% of permitted directional print sizes in each part frame. Overlaps come from original plus displaced local pieces; the untouched part and its locating features are not moved. No plate warp included in witness.",
+        "cases": {
+          "Part019 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2650030517578159,
+            "local_contact_point_mm": [
+              -66.2275015258789,
+              -34.60657129178397,
+              101.58857273733156
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part019 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2650030517578159,
+            "local_contact_point_mm": [
+              69.2275015258789,
+              -9.051278648376465,
+              105.12841552734375
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 8.5,
+            "nearness_mm": 0.014999952316284038,
+            "local_contact_point_mm": [
+              -43.405,
+              2.397500023841858,
+              71.31
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              -0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_36_left_jaw_servo_stay / pitch": {
+            "stage_deg": -17.21,
+            "nearness_mm": 2.2150000000000034,
+            "local_contact_point_mm": [
+              -44.7025,
+              -10.895000190734864,
+              119.81
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19000000000000003
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0008475718590664678,
+            "local_contact_point_mm": [
+              49.3297557850306,
+              -7.979719904465988,
+              104.13935280041146
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_37_right_jaw_bearing_stay / pitch": {
+            "stage_deg": 2.059166666666666,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              49.330000457763674,
+              -7.5100643348693845,
+              103.68492370605469
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19000000000000003,
+              0.19000000000000003
+            ],
+            "exact_local_overlap_mm3": 9.833544100916373e-08,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "Part073 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              -57.60807174682617,
+              -18.31499931335449,
+              100.92109161376953
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.009866220027491027,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "Part073 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              57.236738739013674,
+              -5.81499979019165,
+              97.20214324951172
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.004294731104388622,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "stay_corners_trial_3": {
+      "result": "fails assembly and running clearance",
+      "removed_mm3": {
+        "left_stay": 119.82384421997358,
+        "right_stay": 386.6091896173775
+      },
+      "witnesses": {
+        "source_cad_sha256": "4ffe5b04ad48524831f5092d6bb32ef512093ff8ee8ca700fd0fd9bc90674dce",
+        "scope": "95% of permitted directional print sizes in each part frame. Overlaps come from original plus displaced local pieces; the untouched part and its locating features are not moved. No plate warp included in witness.",
+        "cases": {
+          "Part019 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2650030517578159,
+            "local_contact_point_mm": [
+              -66.2275015258789,
+              -34.56954627266851,
+              101.64310349200653
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part019 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2650030517578159,
+            "local_contact_point_mm": [
+              69.2275015258789,
+              -10.825603101027799,
+              101.43038116009004
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 5.0,
+            "nearness_mm": 0.4450000190734862,
+            "local_contact_point_mm": [
+              -43.405,
+              2.1824999904632567,
+              74.81
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              -0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_36_left_jaw_servo_stay / pitch": {
+            "stage_deg": -17.21,
+            "nearness_mm": 2.2150000000000034,
+            "local_contact_point_mm": [
+              -44.7025,
+              -10.895000190734864,
+              119.81
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19000000000000003
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.11771129899899571,
+            "local_contact_point_mm": [
+              51.98767651306376,
+              -8.021092507861223,
+              104.09798029209068
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_37_right_jaw_bearing_stay / pitch": {
+            "stage_deg": 6.115833333333331,
+            "nearness_mm": 0.11067405725293741,
+            "local_contact_point_mm": [
+              52.418709977392986,
+              -7.049219988075583,
+              103.21585360833863
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19000000000000003,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part073 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              -60.338414611816404,
+              -18.31499931335449,
+              105.97950225830078
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.02304393570328593,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "Part073 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              57.52173873901367,
+              -5.81,
+              97.69
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.004932915943421118,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "stay_corners_trial_5": {
+      "result": "fails assembly and running clearance",
+      "removed_mm3": {
+        "left_stay": 132.1694793910683,
+        "right_stay": 591.4660963992856
+      },
+      "witnesses": {
+        "source_cad_sha256": "b363d36ee42b7b229634a0f549556768147866b4e6a54ee53de6b7845aa660f6",
+        "scope": "95% of permitted directional print sizes in each part frame. Overlaps come from original plus displaced local pieces; the untouched part and its locating features are not moved. No plate warp included in witness.",
+        "cases": {
+          "Part019 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2650030517578159,
+            "local_contact_point_mm": [
+              -66.2275015258789,
+              -34.169939338788566,
+              101.57198773031635
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part019 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2650030517578159,
+            "local_contact_point_mm": [
+              69.2275015258789,
+              -9.221398352060701,
+              101.48576847659837
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 5.0,
+            "nearness_mm": 0.4450000190734862,
+            "local_contact_point_mm": [
+              -43.405,
+              2.1824999904632567,
+              74.81
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              -0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_36_left_jaw_servo_stay / pitch": {
+            "stage_deg": -17.21,
+            "nearness_mm": 2.2150000000000034,
+            "local_contact_point_mm": [
+              -44.7025,
+              -10.895000190734864,
+              119.81
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              -0.095,
+              0.19,
+              0.19000000000000003
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.2780735968549678,
+            "local_contact_point_mm": [
+              51.65512173121787,
+              -9.808268425847949,
+              106.36686431173544
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part011 / Jaw_37_right_jaw_bearing_stay / pitch": {
+            "stage_deg": 7.13,
+            "nearness_mm": 0.2637635879941089,
+            "local_contact_point_mm": [
+              50.245001525878905,
+              -9.038584900535117,
+              105.18820518439925
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19000000000000003,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.0,
+            "fixed_extent_change_mm": null,
+            "stay_extent_change_mm": null
+          },
+          "Part073 / Jaw_36_left_jaw_servo_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              -61.2531103515625,
+              -18.31499931335449,
+              108.21255737304688
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              -1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              -0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              0.19
+            ],
+            "exact_local_overlap_mm3": 0.009666987642024265,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          "Part073 / Jaw_37_right_jaw_bearing_stay / jaw insertion": {
+            "stage_down_mm": 0.0,
+            "nearness_mm": 0.0,
+            "local_contact_point_mm": [
+              63.095,
+              -5.81,
+              102.16938262939453
+            ],
+            "factor": 0.95,
+            "axis_signs": [
+              -1,
+              -1,
+              1
+            ],
+            "fixed_local_size_shift_mm": [
+              -0.19,
+              -0.095,
+              0.19
+            ],
+            "stay_local_size_shift_mm": [
+              0.095,
+              0.19,
+              -0.19
+            ],
+            "exact_local_overlap_mm3": 0.004683347959509905,
+            "fixed_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "stay_extent_change_mm": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    }
+  },
+  "opening": {
+    "fixed_guides_initial_trial": {
+      "cad_sha256": "29b3ebae1cf2c1a8066bc040287698724005acbf2949def3dc6fba8d840984cc",
+      "firmware_sha256": "0c7ea76720243aa7b73a08d12c9e523f261d9db66dcc0504bb39482659c6405d",
+      "pair": [
+        "Jaw_37_right_jaw_bearing_stay",
+        "Jaw_39_right_jaw_pivot_arm"
+      ],
+      "pivot_mm": [
+        0.0,
+        -9.0,
+        92.0
+      ],
+      "tolerance_model": {
+        "fixed_warp_span_mm": 22.05651798923227,
+        "moving_warp_span_mm": 25.815693677573847,
+        "projected_through_jaw_deg": 6.89,
+        "radial_fit_terms_mm": {
+          "glued_pin": 0.04800000000000004,
+          "bearing_pocket": 0.025,
+          "bearing_internal": 0.01
+        },
+        "relative_world_half_box_mm": [
+          0.34411303597846454,
+          0.5024548564286592,
+          0.4614221814229265
+        ]
+      },
+      "wire_goal_max_deg": 5.5,
+      "goal_span_max_ticks": 62,
+      "goal_span_max_encoder_deg": 5.44921875,
+      "closed_front_tip_point_mm": [
+        10.226388931274414,
+        -67.02407761767874,
+        38.2396903195566
+      ],
+      "jaw_tip_drop_at_goal_mm": 5.267213239577387,
+      "feedback_opening_allowance_ticks": 5,
+      "accepted_feedback_max_encoder_deg": 5.888671875,
+      "contact_free_through_deg_in_relative_envelope": 6.89,
+      "required_stop_reserve_deg": 1.0,
+      "continuous_lower_gap_mm": 0.0007353185452853572,
+      "verified_cells": 83,
+      "reserve_from_goal_at_least_deg": 1.4407812499999997,
+      "reserve_from_accepted_feedback_at_least_deg": 1.0013281249999997,
+      "earliest_sampled_contact_deg": 7.111236572265625,
+      "sampled_contact_shift_mm": [
+        -0.34411303597846454,
+        -0.5024548564286592,
+        -0.4614221814229265
+      ],
+      "powered_clearance": {
+        "end_deg": 5.888671875,
+        "minimum_mm": 0.3070255601330377,
+        "required_mm": 0.3,
+        "verified_cells": 593
+      },
+      "scope": "Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.",
+      "references": {
+        "conditions": "../spec/conditions.md",
+        "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",
+        "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
+        "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
+      }
+    },
+    "stay_corners_trial_5": {
+      "cad_sha256": "b363d36ee42b7b229634a0f549556768147866b4e6a54ee53de6b7845aa660f6",
+      "firmware_sha256": "0c7ea76720243aa7b73a08d12c9e523f261d9db66dcc0504bb39482659c6405d",
+      "pair": [
+        "Jaw_37_right_jaw_bearing_stay",
+        "Jaw_39_right_jaw_pivot_arm"
+      ],
+      "pivot_mm": [
+        0.0,
+        -9.0,
+        92.0
+      ],
+      "tolerance_model": {
+        "fixed_warp_span_mm": 22.05651798923227,
+        "moving_warp_span_mm": 25.815693677573847,
+        "projected_through_jaw_deg": 6.89,
+        "radial_fit_terms_mm": {
+          "glued_pin": 0.04800000000000004,
+          "bearing_pocket": 0.025,
+          "bearing_internal": 0.01
+        },
+        "relative_world_half_box_mm": [
+          0.34411303597846454,
+          0.5024548564286592,
+          0.4614221814229265
+        ]
+      },
+      "wire_goal_max_deg": 5.5,
+      "goal_span_max_ticks": 62,
+      "goal_span_max_encoder_deg": 5.44921875,
+      "closed_front_tip_point_mm": [
+        10.226388931274414,
+        -67.02407761767874,
+        38.2396903195566
+      ],
+      "jaw_tip_drop_at_goal_mm": 5.267213239577387,
+      "feedback_opening_allowance_ticks": 5,
+      "accepted_feedback_max_encoder_deg": 5.888671875,
+      "contact_free_through_deg_in_relative_envelope": 6.89,
+      "required_stop_reserve_deg": 1.0,
+      "continuous_lower_gap_mm": 0.0007353185452853572,
+      "verified_cells": 83,
+      "reserve_from_goal_at_least_deg": 1.4407812499999997,
+      "reserve_from_accepted_feedback_at_least_deg": 1.0013281249999997,
+      "earliest_sampled_contact_deg": 7.111236572265625,
+      "sampled_contact_shift_mm": [
+        -0.34411303597846454,
+        -0.5024548564286592,
+        -0.4614221814229265
+      ],
+      "powered_clearance": {
+        "end_deg": 5.888671875,
+        "minimum_mm": 0.3070255601330377,
+        "required_mm": 0.3,
+        "verified_cells": 593
+      },
+      "scope": "Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.",
+      "references": {
+        "conditions": "../spec/conditions.md",
+        "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",
+        "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
+        "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
+      }
+    }
+  },
+  "independent_nominal_frame_section_screen": {
+    "external_press_N": 5.0,
+    "left_normal_stress_MPa": 3.404,
+    "right_normal_stress_MPa": 2.598,
+    "axis": "world Y, transverse to frame print layers",
+    "model_scope": "Axial and bending section stress using three locating reactions. Excludes insert pullout, screw flex and durable bench retention."
+  }
+}
