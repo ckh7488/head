@@ -39,7 +39,7 @@ def test_nominal_check_flags_31_degrees_when_57_9_was_expected():
     ]
 
 @pytest.mark.parametrize(('axis', 'row', 'name', 'ticks'), [
-    (0, (1828, 2048, 2267), 'eye-yaw', 219), (1, (2131, 2048, 1964), 'eye-pitch', 83),
+    (0, (1885, 2048, 2210), 'eye-yaw', 162), (1, (2131, 2048, 1964), 'eye-pitch', 83),
     (3, (1389, 2048, 2708), 'neck-yaw', 659),
     (3, (2707, 2048, 1388), 'neck-yaw', 659),
     (3, (1374, 2048, 2722), 'neck-yaw', 659),

@@ -17,7 +17,7 @@ HARNESS = ROOT / 'tests' / 'firmware'
 sys.path.insert(0, str(ROOT / 'control' / 'pc'))
 
 CALIBRATED = (
-    (1829, 2048, 2267),
+    (1886, 2048, 2210),
     (2131, 2048, 1965),
     (2000, 2000, 3024),
     (1389, 2048, 2707),

@@ -36,7 +36,7 @@ XL330 네 상자의 케이스용 동봉 나사를 사용합니다. B25 범위에
 | R4–R6 | 61.9 kΩ, 0603, 0.1%, 25 ppm/°C 이하 | 3 |
 | U1–U3 | TPS2557, VSON-8 3 × 3 mm, 피치 0.65 mm. 핀 배열·전류 제한 특성이 일치하는 동급만 허용 | 3 |
 
-Gerber·드릴 ZIP으로 제작합니다. 스텐실과 실장 좌표는 밑면 SMD용입니다. 표의 XT30PW-M 2개는 B25 BOM의 J6-P와 동일합니다. [A4 Gerber·드릴](../../../electronics/fabrication/R5_Servo_Hub_A4-Gerbers.zip) · [A4 스텐실](../../../electronics/fabrication/R5_Servo_Hub_A4-Stencil.zip) · [밑면 좌표](../../../electronics/fabrication/R5-hub-back-positions-mm.csv) · [A4 BOM](../../../electronics/servo-hub/BOM.csv) · [전원과 실장 안내](../../../electronics/README.md)
+**권장 발주**: Gerber·드릴 ZIP과 밑면 좌표 CSV로 **JLCPCB PCBA(밑면 SMD 9개: `U1–U3, R4–R6, C3–C5` 공장 실장)**를 선택하면 스텐실·열풍기 없이 VSON-8 불량을 피할 수 있고, 집에서는 윗면 관통홀 부품(`C1–C2, D1–D2, F1–F2, J1–J8, R1–R3`)만 일반 인두로 납땜하면 됩니다(3D 미리보기에서 `U1–U3` 1번 핀 방향 확인 필수). 직접 리플로우할 때만 스텐실 ZIP을 함께 발주합니다. 표의 XT30PW-M 2개는 B25 BOM의 J6-P와 동일합니다. [A4 Gerber·드릴](../../../electronics/fabrication/R5_Servo_Hub_A4-Gerbers.zip) · [A4 스텐실](../../../electronics/fabrication/R5_Servo_Hub_A4-Stencil.zip) · [밑면 좌표](../../../electronics/fabrication/R5-hub-back-positions-mm.csv) · [A4 BOM](../../../electronics/servo-hub/BOM.csv) · [전원과 실장 안내](../../../electronics/README.md)
 
 ## 하네스와 전선
 
@@ -55,6 +55,25 @@ Gerber·드릴 ZIP으로 제작합니다. 스텐실과 실장 좌표는 밑면 S
 | 5 V 배선 | 18 AWG 동 연선 적·흑, 피복 외경 약 2.0 mm | 색상별 1 m |
 | 5 V 외부 꼬리 | 16 AWG 동 연선 적·흑 | 색상별 0.30 m |
 | 모터·데이터 배선 | 24 AWG 동 연선 적·흑·백, 피복 외경 1.04–1.14 mm | 색상별 3 m |
-| 공급선 고정 소모품 | 0.05·0.10·0.20 mm 절연 시임 / 폭 2.5 mm 나일론 타이 / 열수축 튜브 | 시임 1세트 / 1개 / 1세트 |
+| 공급선·하네스 고정 소모품 | 0.05·0.10·0.20 mm 절연 시임 / 폭 2.5 mm 나일론 타이 / 접착식 타이 마운트(≤14×14 mm) / 재사용 타이(폭 2.5–5 mm) / 열수축 튜브 | 시임 1세트 / 타이 20개(사용 12) / 마운트 1 / 재사용 1 / 열수축 1세트 |
 
 PH·EH 수량은 예비분을 포함한 기존 BOM 발주 수량입니다. 가동 W8·W9의 노출 경로는 각 **170.578 mm**이며 양쪽 단자 삽입분을 더합니다. 고정 W6·W7·W35·W36은 A4 노출 경로, 레버 단자 탈피 11 mm, XT60 컵 매입 실측을 합산합니다. [A4 공급선 실측·재단](j2-supply-delta.md) · [하네스 재단표](../../WIRING-CUT-LIST.csv) · [공통 기구 BOM](../../BOM.csv) · [B25 변경 BOM](BOM.csv)
+
+## 1대 전체 조립 부품 대조표
+
+R5 B25 한 대 완성(ESP32-C3 RF 제외)에 필요한 모든 출력물·가공품·체결품·전장·하네스가 `01`–`03` 목록과 [B25 BOM](BOM.csv) 안에 빠짐없이 들어가 있는지 대조한 표입니다.
+
+| 구분 | 항목 | 1대 필요 수량 | 반영 위치 | 비고 |
+| --- | --- | ---: | --- | --- |
+| 출력물 | B25 전체 57개 출력 부품 (13판 1회 출력용 3MF: 37 B10·32 L2·45 S4·13번 판 턱 H4 기본 탑재, Arachne·브림·서포트 반영, C3 3개 제외) | 1세트 (PETG HF 2롤, 65 °C 건조) | [01](01-seoul-print.md) · [02](02-order-before.md) | 02 베어링 자리·ID5 가드·41 눌림턱 벽 ≥1.2 mm 보강 반영 |
+| 베어링 | 6816-2RS (1), 688-2RS (2), MR104ZZ (3), MR63ZZ (2) | 8개 | [02](02-order-before.md) | 02 목록 반영 완료 |
+| 가공 금속품 | G1 목 상하 제한판 ([STEP](../b22/pitch-strap.step)), C1 왼쪽 목 축 Ø8×21.5, C2 오른쪽 목 축 **B25** ([도면](pitch-drive-shaft-B25.svg)·[STEP](pitch-drive-shaft-B25.step)), C3 눈꺼풀 공용축 Ø4×112 | 4종 각 1개 | [02](02-order-before.md) | **구 `mechanical/BOM.csv` C2 옛 규격 사용 금지** |
+| 평행핀·고정제 | Ø3×13 (2), Ø2×8 (4), Ø4×10 (1), Ø2×24 (2), Ø2×6 (10), Ø2×5 (1), Ø3×12 (2), Ø4×20 (2), 외장 Ø3 맞춤 핀(1세트), 록타이트 638급·2액형 에폭시 | 24개+1세트 | [02](02-order-before.md) | 02 목록 반영 완료 (눈 상하 핀은 시판 Ø3 h6 / ISO 8734) |
+| 인서트 | CNC Kitchen TC-M3×3.0 (기본 27 + XT60 덮개 2 + 턱 3점 3) | 32개 | [02](02-order-before.md) · [BOM](BOM.csv) | 50–100개입 1팩으로 게이지 시험분 포함 |
+| M2·M2.5 나사·너트 | ISO 4762 M2×5(5), M2×6(4), M2×8(14), M2.5×8(6), M2.5×10(2), M2 너트(6), XL330 동봉 PHS M2×8 TAP(11)·M2×6 TAP(5) | 53개 (동봉 16) | [02](02-order-before.md) · [BOM](BOM.csv) | 02 목록 반영 완료 |
+| M3 나사·무두나사 | M3×6(4), **M3×8(32)**, M3×10(2), M3×12(6, 턱 2 전나사), **M3×16(24)**, M3×18 전나사(1), M3×30(2), M3×40 전나사(1), 평끝 M3×3(7), M3×5(2) | 81개 | [02](02-order-before.md) · [BOM](BOM.csv) | 공통 BOM 잔량(M3×8 20개·M3×16 16개·오른쪽 목 축 클램프 1개) 포함 |
+| M3 너트·와셔 | **M3 일반 육각너트(52)**, **M3 평와셔(8)** | 60개 | [02](02-order-before.md) · [BOM](BOM.csv) | 공통 BOM 잔량(너트 41개·와셔 2개) 포함, C3 6개 제외 |
+| 모터·제어·카메라·전원 | XL330-M077-T(3), XL330-M288-T(1), XL430-W250-T(2), OpenRB-150(1), U20CAM-1080P-S1(1), DC 5 V/8 A(1), DC 12 V/5 A(1) | 10종 | [03](03-order-after.md) · [BOM](BOM.csv) | 03 목록 반영 완료 |
+| A4 서보 허브 | 70×35 mm 2 oz PCB + 실장 부품 12종(C1–C5, D1–D2, F1–F2 홀더/퓨즈, J1–J8, R1–R6, U1–U3) | 1세트 | [03](03-order-after.md) · [허브 BOM](../../../electronics/servo-hub/BOM.csv) | 03 목록 반영 완료 |
+| 하네스·커넥터·전선 | XT30U-F(3)/M(1), XT60U-F(1)/M(2), XT60E-F(1), WAGO 221-412(2)/413(3), PH·EH 하우징/단자, 턱 2 A 인라인 퓨즈, USB 데이터선(3)·고유연 카메라선(1팩), 12/16/18/24 AWG 전선, 시임·타이·열수축 | 1세트 | [02](02-order-before.md) · [03](03-order-after.md) · [BOM](BOM.csv) | 02·03 목록 반영 완료 |
+

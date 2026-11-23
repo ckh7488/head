@@ -79,7 +79,7 @@ def test_goal_limits_cover_reversed_and_one_sided_axes(firmware):
     arm(firmware, 63)
     firmware.command('GO -1e9 1e9 1e9 1e9 -1e9 5.5')
     assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [
-        (1, 1829), (2, 1965), (3, 3024), (4, 2707), (5, 2203), (6, 1978),
+        (1, 1886), (2, 1965), (3, 3024), (4, 2707), (5, 2203), (6, 1978),
     ]
     firmware.command('GO 0 0 0 0 0 0')
     firmware.tick(60)
@@ -117,7 +117,7 @@ def test_jaw_commands_the_62_tick_endpoint(firmware_build, opening_tick):
         simulator.close()
 
 @pytest.mark.parametrize(('axis', 'row', 'name'), [
-    (0, (1828, 2048, 2267), 'EYE'), (1, (2131, 2048, 1964), 'EYE'),
+    (0, (1885, 2048, 2210), 'EYE'), (1, (2131, 2048, 1964), 'EYE'),
     (2, (2000, 2000, 3025), 'BLINK'), (2, (2000, 2000, 975), 'BLINK'),
     (3, (1389, 2048, 2708), 'YAW'), (3, (2707, 2048, 1388), 'YAW'),
     (3, (1374, 2048, 2722), 'YAW'),

@@ -9,7 +9,7 @@ from track import LIMITS, RATES, ZERO, Planner, select_face
 FPS = 20
 FIRST_MISSING = FPS + 1
 HOLD_FRAMES = int(2.5 * FPS)
-DISPLACED_FEEDBACK = (-18., 6., 0., -42., 4.)
+DISPLACED_FEEDBACK = (-14., 6., 0., -42., 4.)
 
 
 def frame(planner, index, error=None, feedback=ZERO):

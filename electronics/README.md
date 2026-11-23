@@ -10,7 +10,7 @@
 
 A4의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**입니다. J1과 J2의 XT30은 각각 **5.00 mm 피치, Ø1.90 mm 단자홀 2개, Ø1.00 mm 고정홀 2개**이며, 도금 고정홀의 동박 패드는 Ø1.60 mm입니다. 전체 도금 부품홀 51개의 최소 설계 링은 0.300 mm로 JLCPCB의 2층 2 oz 기준 **0.254 mm**를 충족합니다. 비아 25개는 Ø0.70 또는 Ø0.90 mm 패드에 Ø0.35 mm 드릴을 사용합니다. KiCad 9.0.2에서 ERC, DRC, 미연결과 회로도 대조 각 0건입니다. [AMASS XT30PW-M 제조사 도면](https://www.tme.eu/Document/6eb2005a51a52592b3f19e8a450c54c8/XT30PW-M.pdf) · [JLCPCB 제작 한계](https://jlcpcb.com/capabilities/pcb-capabilities/)
 
-허브 U1–U3, R4–R6, C3–C5를 밑면에 먼저 리플로우합니다. VSON 접지 패드의 접합을 검사한 뒤 윗면 관통홀 부품을 납땜합니다. [허브 BOM](servo-hub/BOM.csv) · [허브 밑면 스텐실](fabrication/R5_Servo_Hub_A4-Stencil.zip) · [허브 밑면 실장 좌표](fabrication/R5-hub-back-positions-mm.csv) · [KiCad 라이브러리 라이선스](https://www.kicad.org/libraries/license/)
+**권장 제작 방식 (실패 방지·비용 절감)**: 밑면 SMD 9개(`U1–U3` TPS2557 VSON-8 0.65 mm 피치·하단 방열패드, `R4–R6`, `C3–C5`)만 **JLCPCB PCBA(밑면 SMD 공장 실장)**로 주문하고, 윗면 관통홀 부품(`C1–C2, D1–D2, F1–F2, J1–J8, R1–R3`)만 집에서 일반 인두로 납땜하는 방식을 권장합니다. 스텐실·솔더페이스트·열풍기 비용과 VSON-8 하단 패드 납땜 불량을 없앨 수 있습니다(발주 시 JLCPCB 3D 미리보기에서 `U1–U3` 1번 핀 방향을 반드시 확인). 직접 실장할 경우 밑면 SMD를 스텐실로 먼저 리플로우하고 VSON 접지 패드 접합을 검사한 뒤 윗면 관통홀 부품을 납땜합니다. [허브 BOM](servo-hub/BOM.csv) · [허브 밑면 스텐실](fabrication/R5_Servo_Hub_A4-Stencil.zip) · [허브 밑면 실장 좌표](fabrication/R5-hub-back-positions-mm.csv) · [KiCad 라이브러리 라이선스](https://www.kicad.org/libraries/license/)
 
 ## 전원과 배선
 
@@ -40,7 +40,7 @@ A4의 JST PH 11개 패드(J3–J6)는 **1.35 × 1.75 mm / Ø0.75 mm**입니다. 
 
 ### 전원 실물 검수
 
-1. 실내 15–30 °C에서 받침을 수평으로 놓습니다. 모터를 뺀 채 5 V와 12 V 어댑터를 각각 켜 허브 TP1과 TP2의 전압과 극성을 TP3 기준으로 확인합니다.
+1. 실내 0–35 °C에서 받침을 수평으로 놓습니다. 모터를 뺀 채 5 V와 12 V 어댑터를 각각 켜 허브 TP1과 TP2의 전압과 극성을 TP3 기준으로 확인합니다.
 2. 전원을 끄고 모터를 연결합니다. 보정 후 추적·깜빡임·턱 동작에서 어댑터 출력과 모터 단자의 최저 전압을 각각 측정하고, 전원 강하·통신 끊김과 구동 결과를 기록합니다. [B25 검사 조건](../spec/conditions.md#14-전원과-환경) · [실물 동작 검사](../spec/bench.md)
 
 ## 재현

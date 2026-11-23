@@ -1,6 +1,6 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_project_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
+  "source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
   "units": "mm",
   "stl_origin": "Source orientation with lowest Z at the build plate",
   "parts": {
@@ -39,28 +39,28 @@
       "shoulder_id_mm": 97.2,
       "shoulder_depth_mm": 1.0,
       "cable_slot_width_mm": 24.0,
-      "key_pocket_inner_radius_mm": 50.61,
+      "key_pocket_inner_radius_mm": 51.61,
       "variants": [
         {
           "nominal_bore_diameter_mm": 100.1,
-          "key_pocket_min_radial_ligament_mm": 0.56,
+          "key_pocket_min_radial_ligament_mm": 1.56,
           "file": "02_outer-bearing-seat_6816_ID100.10mm.stl",
-          "bytes": 327184,
-          "sha256": "1559c00089a02a3f24e6b702cbfa740677eb20bfadbff4b34a8b792b6c8dbd26"
+          "bytes": 342984,
+          "sha256": "bc45915a842d7986767a393dba7fe60eb5d9d2fb0a73f9b9306d30a571dd48a7"
         },
         {
           "nominal_bore_diameter_mm": 100.2,
-          "key_pocket_min_radial_ligament_mm": 0.51,
+          "key_pocket_min_radial_ligament_mm": 1.51,
           "file": "02_outer-bearing-seat_6816_ID100.20mm.stl",
-          "bytes": 327184,
-          "sha256": "3c9e0eb1a0fc60be50117f729840f4e207fde87b7d9cc06aa03ed36794c0edb2"
+          "bytes": 343184,
+          "sha256": "b7cece8288d9d2e6d2620f8a10b72c3fe6fddcbd7cfcbab1f7ed28180e4d199b"
         },
         {
           "nominal_bore_diameter_mm": 100.3,
-          "key_pocket_min_radial_ligament_mm": 0.46,
+          "key_pocket_min_radial_ligament_mm": 1.46,
           "file": "02_outer-bearing-seat_6816_ID100.30mm.stl",
-          "bytes": 327184,
-          "sha256": "f375c73f93f3036fe98134c895abb8aa9d1dbaac688dcda19a447b99f52dc6e7"
+          "bytes": 342484,
+          "sha256": "2d14bc7edba104a82770488d4c642f9b340207b7db9670419363207f5f57c0a8"
         },
         {
           "nominal_bore_diameter_mm": 100.4,
