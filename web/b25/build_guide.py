@@ -91,7 +91,7 @@ def sheet(title, body, prefix, ref, current=""):
   <a class="brand" href="{prefix}">R5 <span>B25</span></a>
   <nav aria-label="보기 선택">
     <a href="{prefix}demo/">구동</a><a href="{prefix}assembly/">조립</a>
-    <a href="{prefix}wiring/">배선</a><a href="{prefix}guide/" aria-current="page">문서</a>
+    <a href="{prefix}wiring/diagram/">배선도</a><a href="{prefix}guide/" aria-current="page">문서</a>
   </nav>
 </header>
 <main class="container guide">

@@ -1,6 +1,6 @@
 # B25 서보 허브 A4
 
-받침 뒤의 **XT30은 5 V**, **XT60은 12 V**입니다. 내부 J1과 J2는 모두 XT30PW-M이므로 작업대에서 두 입력을 확인한 뒤 J2를 잠급니다. [B25 조립](../mechanical/revisions/b25/assembly.md#전원-커넥터와-배선) · [3D 배선·정비](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/)
+받침 뒤의 **XT30은 5 V**, **XT60은 12 V**입니다. 내부 J1과 J2는 모두 XT30PW-M이므로 작업대에서 두 입력을 확인한 뒤 J2를 잠급니다. [B25 조립](../mechanical/revisions/b25/assembly.md#전원-커넥터와-배선) · [핀별 배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/) · [3D 배선·정비](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/)
 
 | 작업 | 확인할 항목 |
 | --- | --- |
@@ -57,6 +57,8 @@
 
 ### 허브 단자와 배선
 
+새로 재단하는 선의 색은 **+5 V·+12 V 빨강, GND 검정, 모터 DATA 흰색**으로 고정합니다. 두 전압의 양극 색이 같으므로 선 양끝의 J1·J2 및 전압 라벨로 구분합니다. 카메라 USB의 접합부 표식은 **VBUS 빨강, D− 흰색, D+ 초록, GND 검정**입니다. 순정 플러그와 선재의 도체는 절단 전 도통으로 식별합니다. [핀과 선의 색·길이](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/) · [하네스 재단표](../mechanical/WIRING-CUT-LIST.csv)
+
 | 단자 | 연결 |
 | --- | --- |
 | J1 5 V 입력 | 패드 2는 +, 1은 GND. W3/W4의 XT30U-F 연결 |
@@ -79,6 +81,8 @@ OpenRB는 USB를 뽑은 상태에서 점퍼를 **USB(VIN)** 쪽에 놓습니다.
 ### 구동 중 전원 확인
 
 검사 조건 14절의 실내 환경에서 받침을 수평으로 놓습니다. 목을 받치고 보정한 뒤 한 축씩 처음 구동합니다. 추적·깜빡임·별도 턱 시험에서 어댑터의 DC 출력과 각 모터 단자 전압을 기록합니다. 기동·급감속의 순간 전압을 보려면 오실로스코프로 최저·최고를 기록합니다. XL430의 제조사 작동 범위 상한은 12.0 V입니다. P07에서 OpenRB를 재시작한 뒤 토크 해제도 확인합니다. [OpenRB와 모터 보정](../control/README.md#openrb와-모터) · [검사 조건 14절](../spec/conditions.md#14-전원과-환경) · [P07 실물 시험](../spec/bench.md#b25-실물-시험)
+
+모터 GND는 TTL DATA의 기준이자 전원 전류의 귀환 경로입니다. 전류가 급변하면 같은 GND 선의 전압 강하가 순간적으로 변해, 모터가 보는 DATA 전압이 흔들릴 수 있습니다. DATA와 해당 GND를 가까이 묶고 긴 공급선과 나란히 가는 구간을 줄입니다. 구동 중 통신 오류나 리셋이 보이면 해당 모터에서 **3번 DATA와 2번 전원**을 각각 **1번 GND** 기준으로 봅니다. 허브와 모터 간 GND 전위차를 직접 비교할 때는 차동 프로브를 사용합니다. [ROBOTIS 핀 배치](https://emanual.robotis.com/docs/en/parts/controller/openrb-150/#dynamixel-ports) · [배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/#ground)
 
 U1–U3의 61.9 kΩ 설정에서 TI 특성표의 출력 제한은 **1.590 / 1.785 / 1.960 A**(최소 / 대표 / 최대)입니다. 저항값에 따른 근사식의 하한은 약 **1.54 A**이고 XL330의 5.0 V 공칭 정지 전류는 **1.47 A**입니다. 과전류 시 출력 전압이 내려가고, 과부하가 계속되면 온도에 따라 차단과 재시동을 반복할 수 있습니다. **FAULT 8번은 미연결**이라 LED와 OpenRB에 채널별 경보가 없습니다. 눈·눈꺼풀 기동에서 출력이 떨어지거나 모터가 리셋되면 TP1과 해당 J4–J6의 2번 핀을 비교하고 해당 채널의 전류와 온도를 확인합니다. TI는 출력의 과도 전류가 클 때 개별 출력 커패시터를 권장하며, A4의 개별 커패시터 C3–C5는 입력에 있습니다. J7·J8의 12 V는 공통 F2 4 A로 보호되므로 P08에서 두 분기 배선의 피복과 눌림을 확인합니다. [TPS2557 특성표·과전류 동작·설정식](https://www.ti.com/lit/ds/symlink/tps2557.pdf) · [XL330 사양](https://emanual.robotis.com/docs/en/dxl/x/xl330-m077/#specifications) · [A4 회로도](servo-hub/R5_Servo_Hub.kicad_sch)
 

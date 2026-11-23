@@ -4,6 +4,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { gzipSync } from "node:zlib";
 import { partGroups } from "./catalog.js";
+import { packageDiagram } from "./package_diagram.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, "../..");
@@ -38,6 +39,7 @@ const docs = `https://github.com/ckh7488/head/blob/${revision}/`;
 const html = (await readFile(join(here, "index.html"), "utf8"))
   .replace(/data-doc="([^"]+)"/g, (_, path) => `href="${docs}${path}"`);
 await Promise.all([
+  packageDiagram(join(output, "diagram"), revision),
   writeFile(join(output, "index.html"), html),
   copyFile(join(here, "catalog.js"), join(output, "catalog.js")),
   copyFile(join(here, "review.js"), join(output, "review.js")),

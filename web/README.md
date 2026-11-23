@@ -6,6 +6,7 @@
 | --- | --- |
 | 구동 | 눈과 목을 직접 움직이고 깜빡임과 턱 동작을 확인합니다. |
 | 조립 | 171단계에서 부품을 끼우는 순서를 봅니다. 완성 상태에서 외장을 숨기면 체결품과 선이 보입니다. |
+| 배선도 | 핀이나 선을 눌러 양끝 커넥터, 색, 굵기와 재단 길이를 확인합니다. |
 | 배선 | A4와 뒤쪽 전원 연결을 보고, XT60 정비 플러그를 뺀 뒤 하부 덮개를 30 mm 내립니다. |
 | 문서 | 출력·발주·조립·첫 통전·실물 시험을 작업 순서로 찾아봅니다. |
 
@@ -43,6 +44,8 @@ python -m http.server 8000 --bind 127.0.0.1 --directory "$out/site"
 ```
 
 이 주소에서 개요를 엽니다. [로컬 B25 웹 화면](http://127.0.0.1:8000/)
+
+핀별 배선도만 만들 때는 `node web/wiring-review/package_diagram.mjs build/wiring-diagram "$(git rev-parse HEAD)"`를 실행합니다. 결과에 원본 CSV를 함께 넣습니다. [B25 핀별 배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/)
 
 ## B24 조립 순서
 
