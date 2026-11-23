@@ -4,7 +4,7 @@ R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 �
 
 ![B25 조립 CAD에서 본 해골 로봇](web/assets/b25-motion/assembly-poster.webp)
 
-현재 제작 자료는 **B25 기구와 A4 서보 허브**를 기준으로 합니다. P2S 프로젝트는 14판·57개 전부 슬라이스 완료(경고 0건)되었고, 완성품 조립과 구동에 필요한 P01–P08 실물 시험이 남아 있습니다. [B25 제작 자료](mechanical/revisions/b25/) · [검증 결과와 범위](mechanical/revisions/b25/alignment.md)
+현재 제작 자료는 **B25 기구와 A4 서보 허브**를 기준으로 합니다. Bambu PETG-CF 프로젝트는 14판·57개 전 판을 슬라이스했습니다(판별 경고 0건). 완성품 조립과 구동에 필요한 P01–P08 실물 시험이 남아 있습니다. [B25 제작 자료](mechanical/revisions/b25/) · [검증 결과와 범위](mechanical/revisions/b25/alignment.md)
 
 ## 제작 순서
 
@@ -29,6 +29,6 @@ R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 �
 
 ## 파일과 기준
 
-- [FreeCAD 조립본](mechanical/revisions/b25/R5-B25-Assembly.FCStd) · [P2S 출력 프로젝트](mechanical/revisions/b25/R5-B25-P2S.3mf) · [웹 제작 안내](https://r5-b1-review.ckh.chatgpt.site/b25/guide/) · [3D 조립·구동·배선 화면 만들기](web/README.md#b25-웹-화면)
+- [FreeCAD 조립본](mechanical/revisions/b25/R5-B25-Assembly.FCStd) · [P2S PETG-CF 출력 프로젝트](mechanical/revisions/b25/R5-B25-P2S-CF.3mf) · [웹 제작 안내](https://r5-b1-review.ckh.chatgpt.site/b25/guide/) · [3D 조립·구동·배선 화면 만들기](web/README.md#b25-웹-화면)
 - [1층 사람 요구사항](spec/user-spec.md) · [2층 수치 기준](spec/conditions.md) · [FDM 실수 모음집](spec/fdm-pitfalls.md) · [동작 인수 기준](spec/requirements.md)
 - [기구 자료](mechanical/README.md) · [전장 자료](electronics/README.md) · [하드웨어 없이 테스트](control/README.md#하드웨어-없이-실행) · [이전 리비전](mechanical/revisions/)

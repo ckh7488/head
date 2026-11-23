@@ -1,12 +1,12 @@
 # R5 B25 제작 자료
 
-B25 기구는 A4 서보 허브와 OpenRB-150을 사용합니다. P2S 일괄 출력은 **14판·57개**, 표준 재질은 **Bambu PETG-CF 2롤**(65 °C 8시간 건조, Bambu Studio에서 `Bambu PETG-CF @BBL P2S` 프리셋 선택 후 재슬라이스; 기준 PETG HF 기록 약 `67시간 51분·1.285 kg`)입니다. **13번 턱 판부터** 출력합니다. [전 판 슬라이스 기록](print-build.json)
+B25 기구는 A4 서보 허브와 OpenRB-150을 사용합니다. Bambu PETG-CF가 적용된 P2S 프로젝트는 **14판·57개**, 예상 **69시간 9분·1.248 kg**입니다. **13번 턱 판부터** 출력합니다. [PETG-CF 전 판 검사](print-cf.json)
 
 ## 출력에서 첫 구동까지
 
 | 할 일 | 파일과 절차 |
 | --- | --- |
-| 출력 | [P2S 3MF](R5-B25-P2S.3mf) · [01 서울 출력과 후가공](01-seoul-print.md) · [02 먼저 살 부품](02-order-before.md) |
+| 출력 | [P2S PETG-CF 3MF](R5-B25-P2S-CF.3mf) · [01 서울 출력과 후가공](01-seoul-print.md) · [02 먼저 살 부품](02-order-before.md) |
 | 건식 맞춤 | [맞춤 게이지와 치수별 파일](fit-gauge.md)에서 끼움, 공구 접근과 턱 받침 간극을 확인합니다. |
 | 모터·전장 구매 | 건식 맞춤 후 [03 시험 뒤 살 부품](03-order-after.md) · [A4 PCBA 발주](../../../electronics/README.md#jlcpcb-밑면-실장) |
 | 허브 첫 통전 | 조립 전에 작업대에서 모터와 OpenRB를 분리하고 [퓨즈를 뺀 첫 통전](../../../electronics/README.md#전원-실물-검수)부터 진행합니다. |
@@ -28,7 +28,7 @@ B25 기구는 A4 서보 허브와 OpenRB-150을 사용합니다. P2S 일괄 출�
 
 - [조립과 구동](alignment-checks.json) · [타이바 삽입](eye-yaw-clearance.json) · [턱 받침–요크](yoke-jaw-cut.json) · [목 핀 자리](pitch-pin-ligament.json) · [시선 광선](sightlines.json)
 - [XT60 체결·삽입](xt60-collar-clearance.json) · [정비 덮개](cover-service.json) · [A4 전원과 정비](a4-supply-recheck.json)
-- [형상 파일과 해시](design.json) · [전 판 슬라이스](print-build.json) · [베어링 시편](bearing-fit.json) · [대형 베어링 자리](fit-large-bearings.json) · [Ø8 축 맞춤](shaft-fit.json) · [핀 치수별 검사](pin-fit-options-check.json)
+- [형상 파일과 해시](design.json) · [PETG-CF 전 판 슬라이스](print-cf.json) · [이전 PETG HF 출력 기록](print-build.json) · [베어링 시편](bearing-fit.json) · [대형 베어링 자리](fit-large-bearings.json) · [Ø8 축 맞춤](shaft-fit.json) · [핀 치수별 검사](pin-fit-options-check.json)
 - [초기 장공](eye-yaw-slot.json) · [뒤 외장 왼쪽 나사](rear-left-screw-fit.json) · [초기 정밀 슬라이스](print-precision-check.json) · [눈꺼풀 형상](blink-fit.json) · [초기 판정](frozen-fixes-check.md) · [이전 Eaton 경로](camera-r18-recheck.json) · [이전 목 스토퍼](neck-load-study.md)
 
 </details>
