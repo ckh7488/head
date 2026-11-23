@@ -16,19 +16,21 @@
 
 | 기판 원본 | 제작 파일 | JLCPCB 발주 옵션 |
 | --- | --- | --- |
-| [KiCad 프로젝트](servo-hub/R5_Servo_Hub.kicad_pro) · [회로도](servo-hub/R5_Servo_Hub.kicad_sch) · [PCB](servo-hub/R5_Servo_Hub.kicad_pcb) | [Gerber·드릴·밑면 페이스트 ZIP](fabrication/R5_Servo_Hub_A4-Gerbers.zip) | **70 × 35 mm, 2층 FR-4 1.6 mm, 양면 완성 동박 2 oz**, ENIG, 녹색 솔더마스크 |
+| [KiCad 프로젝트](servo-hub/R5_Servo_Hub.kicad_pro) · [회로도](servo-hub/R5_Servo_Hub.kicad_sch) · [PCB](servo-hub/R5_Servo_Hub.kicad_pcb) | [Gerber·드릴·밑면 페이스트 ZIP](fabrication/R5_Servo_Hub_A4-Gerbers.zip) | **70 × 35 mm, 2층 FR-4 1.6 mm, 양면 완성 동박 2 oz**, 무연 HASL, 녹색 솔더마스크 |
 
 ### JLCPCB 밑면 실장
 
-1. A4 Gerber ZIP을 기판 파일로 올립니다. ZIP에 B.Paste가 포함돼 있습니다. Economic PCBA에서 **밑면(Bottom)만 실장**을 선택하고, 견적에서 70 × 35 mm 기판과 **양면 완성 동박 2 oz**, ENIG를 지원하는지 확인합니다. JLCPCB의 공개 최소 주문 수량은 2장입니다. Standard PCBA 견적이 필요한 경우 최소 70 × 70 mm와 레일·피듀셜 조건을 업체와 확인합니다. [JLCPCB 기판·실장 조건](https://jlcpcb.com/capabilities/pcb-assembly-capabilities)
+1. B.Paste가 포함된 A4 Gerber ZIP을 올립니다. Economic PCBA에서 **밑면(Bottom)만 실장**을 선택하고, **양면 완성 동박 2 oz와 무연 HASL**을 함께 살 수 있는지 견적에서 확인합니다. U1–U3의 VSON(0.65 mm 피치, 노출 방열 패드)에 대해 업체가 ENIG를 요구하면 표면처리만 ENIG로 견적을 다시 냅니다. 주문 수량은 공개 최소인 2장부터 비교합니다. Standard PCBA는 최소 70 × 70 mm와 레일·피듀셜 조건을 업체와 확인합니다. [JLCPCB 실장 조건](https://jlcpcb.com/capabilities/pcb-assembly-capabilities) · [TI VSON 도면](https://www.ti.com/lit/ds/symlink/tps2557.pdf)
 2. 전용 CSV를 BOM과 CPL 칸에 각각 올립니다. 아래 **9개 모두 밑면**에 매칭되는지 확인합니다. 재고와 견적은 바뀔 수 있습니다. R4–R6을 대체할 때는 **61.9 kΩ, 0.1%, 25 ppm/°C 이하, 0603**을 유지합니다. [업로드용 BOM](fabrication/R5_Servo_Hub_A4-JLCPCB-BOM.csv) · [업로드용 CPL](fabrication/R5_Servo_Hub_A4-JLCPCB-CPL.csv) · [JLCPCB 파일 형식](https://jlcpcb.com/help/article/How-to-generate-the-BOM-and-Centroid-file-from-KiCAD)
 3. 배치 미리보기에서 U1–U3의 몸체 점을 **기판의 1번 패드 옆 실크 점**에 맞춥니다. 같은 위쪽 모서리를 유지해 밑면에서 보면 몸체의 **오른쪽 위**입니다. Gerber X/Y 축에서 1번 패드는 몸체 중심보다 **X −0.975 mm, Y +1.400 mm**에 있습니다. 업로드 좌표는 KiCad의 mm 좌표와 각도를 그대로 변환한 값입니다. 공급사 미리보기에서 방향이 다르면 해당 부품을 회전시킨 뒤 다시 확인합니다. [KiCad 원본 좌표](fabrication/R5-hub-back-positions-mm.csv) · [TI 1번 핀 도면](https://www.ti.com/lit/ds/symlink/tps2557.pdf)
 
 | 위치 | 부품 | JLCPCB 품번 |
 | --- | --- | --- |
 | U1–U3 | TPS2557DRBR | [C130056](https://jlcpcb.com/partdetail/TexasInstruments-TPS2557DRBR/C130056) |
-| C3–C5 | GRM188R71C104KA01D | [C45000](https://jlcpcb.com/partdetail/MurataElectronics-GRM188R71C104KA01D/C45000) |
+| C3–C5 | CC0603KRX7R9BB104, 100 nF, 50 V, X7R, ±10%, 0603 | [C14663 (Basic)](https://jlcpcb.com/partdetail/C14663) |
 | R4–R6 | RT0603BRD0761K9L | [C861498](https://jlcpcb.com/partdetail/YAGEO-RT0603BRD0761K9L/C861498) |
+
+Economic 실장에서 C3–C5는 같은 Basic 품번으로 넣습니다. 이전 Extended 커패시터 대비 피더 교체비가 품번 한 종류분 줄어듭니다. 공개 단가는 주문당 **US$3.07**이며, 실제 금액과 부품 재고는 견적에서 확인합니다. [JLCPCB 실장 가격표](https://jlcpcb.com/help/article/pcb-assembly-price)
 
 ![A4 밑면에서 U1–U3의 1번 핀은 각 몸체의 오른쪽 위에 있습니다.](fabrication/R5_Servo_Hub_A4-bottom-placement.png)
 

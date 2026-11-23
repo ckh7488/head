@@ -11,7 +11,7 @@
 <main>
   <header class="mast">
     <div><p class="product">R5 B25 <span>서보 허브 A4</span></p><h1>회로와 기판</h1></div>
-    <div class="board-badge"><b>70 × 35 mm</b><span>FR-4 · 2층 · 1.6 mm</span></div>
+    <div class="board-badge"><b>70 × 35 mm</b><span>FR-4 · 2층 · 1.6 mm · 무연 HASL</span></div>
   </header>
 
   <nav class="modes" aria-label="A4 보기">
@@ -52,14 +52,14 @@
     <div class="order-grid">
       <section class="paper">
         <h2>권장 발주 구성</h2>
-        <p>시제품 2장으로 견적을 시작합니다. 2층 FR-4, 1.6 mm, 양쪽 완성 동박 2 oz, 녹색 솔더마스크, ENIG를 선택합니다. 기존 A4의 전류 경로와 밑면 VSON 실장 기준을 유지하는 구성입니다.</p>
+        <p>시제품 2장으로 견적을 시작합니다. 2층 FR-4, 1.6 mm, 양쪽 완성 동박 2 oz, 녹색 솔더마스크, <b>무연 HASL</b>을 선택합니다. 2 oz는 모터 전류가 흐르는 동박 두께입니다.</p>
         <ol>
-          <li>Gerber ZIP을 올리고 <b>Economic · Bottom</b>으로 밑면 SMD 9개를 견적 냅니다. <b>2 oz와 ENIG가 함께 유지되는지</b> 확인합니다.</li>
+          <li>Gerber ZIP으로 <b>2 oz · 무연 HASL · Economic · Bottom</b> 조합을 견적 냅니다. TPS2557 VSON(0.65 mm 피치, 노출 방열 패드) 실장에 업체가 ENIG를 요구하면 표면처리만 ENIG로 비교합니다.</li>
           <li>BOM·CPL을 각각 올립니다. JLCPCB 미리보기에서 U1–U3 몸체의 1번 점과 PCB의 1번 패드를 맞춥니다. 같은 위쪽 모서리를 유지한 밑면 시점에서 1번은 오른쪽 위입니다.</li>
-          <li>윗면 17개는 수납땜합니다. Economic의 조합이 제한되면 같은 2 oz·ENIG 생기판과 밑면 스텐실로 견적을 비교합니다. Standard PCBA는 70 × 70 mm 최소 치수에 맞는 패널·레일 견적이 필요합니다.</li>
+          <li>윗면 17개는 수납땜합니다. Standard PCBA는 70 × 70 mm 최소 치수에 맞는 패널·레일 견적이 필요합니다.</li>
         </ol>
-        <p>가격과 재고는 견적에서 확정합니다. TPS2557과 Murata 커패시터는 JLCPCB의 Extended 부품입니다. 61.9 kΩ 저항의 C861498 매칭과 품번별 준비 비용도 견적에서 확인합니다.</p>
-        <div class="source-links"><a href="https://jlcpcb.com/capabilities/pcb-capabilities">기판 규격</a><a href="https://jlcpcb.com/capabilities/pcb-assembly-capabilities">실장 규격</a><a href="https://jlcpcb.com/help/article/jlcpcb-copper-weight">완성 동박</a></div>
+        <p>C3–C5는 Basic 커패시터 <b>C14663</b>을 사용합니다. 기존 Extended 품번 한 종류의 피더 준비 비용을 줄입니다. JLCPCB 공개 단가는 주문당 US$3.07입니다. 표면처리 할인 폭, 실제 부품 재고 및 61.9 kΩ 저항 C861498의 매칭은 견적에서 확인합니다.</p>
+        <div class="source-links"><a href="https://jlcpcb.com/capabilities/pcb-capabilities">기판 규격</a><a href="https://jlcpcb.com/capabilities/pcb-assembly-capabilities">실장 규격</a><a href="https://jlcpcb.com/help/article/jlcpcb-surface-finish">표면처리</a><a href="https://jlcpcb.com/help/article/pcb-assembly-price">실장 비용</a></div>
       </section>
       <section class="paper">
         <h2>발주 파일</h2>

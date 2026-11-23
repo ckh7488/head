@@ -1,9 +1,9 @@
 ﻿Ref,Value,Footprint,Populate,Part or buying specification,Notes
 C1,470uF / 10V,Capacitor_THT:CP_Radial_D8.0mm_P3.50mm,YES,Panasonic EEU-FR1A471,"470 µF / 10 V, Ø8 × 11.5 mm, P3.5 mm. Match polarity."
 C2,220uF / 25V,Capacitor_THT:CP_Radial_D8.0mm_P3.50mm,YES,Panasonic EEU-FR1E221,"220 µF / 25 V, Ø8 × 11.5 mm, P3.5 mm. Match polarity."
-C3,100n,Capacitor_SMD:C_0603_1608Metric,YES,Murata GRM188R71C104KA01D,16 V X7R local input bypass
-C4,100n,Capacitor_SMD:C_0603_1608Metric,YES,Murata GRM188R71C104KA01D,16 V X7R local input bypass
-C5,100n,Capacitor_SMD:C_0603_1608Metric,YES,Murata GRM188R71C104KA01D,16 V X7R local input bypass
+C3,100n,Capacitor_SMD:C_0603_1608Metric,YES,Yageo CC0603KRX7R9BB104,"50 V, X7R, ±10% local input bypass"
+C4,100n,Capacitor_SMD:C_0603_1608Metric,YES,Yageo CC0603KRX7R9BB104,"50 V, X7R, ±10% local input bypass"
+C5,100n,Capacitor_SMD:C_0603_1608Metric,YES,Yageo CC0603KRX7R9BB104,"50 V, X7R, ±10% local input bypass"
 D1,Green 5V,LED_THT:LED_D3.0mm,YES,3 mm diffused through-hole LED Green,"P2.54 mm, cathode pin 1"
 D2,Amber 12V,LED_THT:LED_D3.0mm,YES,3 mm diffused through-hole LED Amber,"P2.54 mm, cathode pin 1"
 F1,7.5A MINI,Fuse:Fuseholder_Blade_Mini_Keystone_3568,YES,Keystone 3568 + Littelfuse 029707.5L (7.5 A),Common 5 V feed

@@ -33,6 +33,7 @@ const limits = [
   ["외형", `${width} × ${height} mm`, "Economic 10 × 10 ~ 470 × 500 mm"],
   ["기판 두께", "1.60 mm", "1.6 mm 공칭 허용 범위 1.44–1.76 mm"],
   ["2층 완성 동박", "양면 2 oz · 설계 70 µm", "2층 생기판에 2 oz 제공"],
+  ["표면처리", "무연 HASL", "2 oz·Economic 밑면 실장과 함께 견적 확인"],
   ["최소 배선 폭", `${data.minTrack.toFixed(3)} mm`, "2층 2 oz 최소 0.16 mm"],
   ["동박 간격 규칙", `${data.clearance.toFixed(3)} mm`, "2층 2 oz 최소 0.16 mm"],
   ["도금 부품홀 최소 동박 링", `${data.minRing.toFixed(3)} mm · ${data.pthCount}홀`, "2 oz 최소 0.254 mm"],

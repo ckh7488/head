@@ -15,7 +15,7 @@ PROJECTS = {"servo-hub": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
 REVISIONS = {"servo-hub": "A4", "c3-rf": "A1"}
 COMMON_LAYERS = ["F.Cu", "B.Cu", "F.Mask", "B.Mask", "F.Silkscreen", "B.Silkscreen", "Edge.Cuts"]
 HUB_JLCPCB_PARTS = {
-    "Murata GRM188R71C104KA01D": ("100 nF, X7R, 16 V", "C45000"),
+    "Yageo CC0603KRX7R9BB104": ("100 nF, X7R, 50 V, ±10%", "C14663"),
     "Yageo RT0603BRD0761K9L": ("61.9 kOhm, 0.1%, 25 ppm/C", "C861498"),
     "Texas Instruments TPS2557DRBR": ("TPS2557DRBR", "C130056"),
 }

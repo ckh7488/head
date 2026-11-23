@@ -20,13 +20,13 @@ XL330 네 상자의 PHS M2×8 TAP 11개와 M2×6 TAP 5개를 케이스에 사용
 
 ## A4 허브 1대분 실장 부품
 
-**R5 서보 허브 A4**를 1대분 실장합니다. 발주 옵션은 **70 × 35 mm, 2층 FR-4 1.6 mm, 양면 완성 동박 2 oz, ENIG, 녹색 솔더마스크**입니다. 최소 주문 수량과 실장 옵션은 업체 견적에서 확인합니다. [공장에 올릴 A4 Gerber ZIP](../../../electronics/fabrication/R5_Servo_Hub_A4-Gerbers.zip) · [PCB 발주 규격](../../../electronics/README.md)
+**R5 서보 허브 A4**를 1대분 실장합니다. 발주 옵션은 **70 × 35 mm, 2층 FR-4 1.6 mm, 양면 완성 동박 2 oz, 무연 HASL, 녹색 솔더마스크**입니다. 2 oz·무연 HASL·Economic 밑면 실장은 조합 견적에서 확인합니다. U1–U3 실장에 ENIG가 필요하다는 업체 판정이 나오면 표면처리만 ENIG로 비교합니다. [공장에 올릴 A4 Gerber ZIP](../../../electronics/fabrication/R5_Servo_Hub_A4-Gerbers.zip) · [PCB 발주 규격](../../../electronics/README.md)
 
 공장에는 **밑면 SMD 9개**를 맡깁니다. Gerber ZIP의 밑면 페이스트를 사용하고 BOM·CPL을 각각 올린 뒤 C3–C5, R4–R6, U1–U3의 밑면 배치와 **U1–U3의 1번 핀 방향**을 확인합니다. 직접 리플로우할 경우에는 밑면 스텐실을 사용합니다. [업로드용 BOM](../../../electronics/fabrication/R5_Servo_Hub_A4-JLCPCB-BOM.csv) · [업로드용 CPL](../../../electronics/fabrication/R5_Servo_Hub_A4-JLCPCB-CPL.csv) · [실장 확인 순서](../../../electronics/README.md#jlcpcb-밑면-실장) · [밑면 스텐실](../../../electronics/fabrication/R5_Servo_Hub_A4-Stencil.zip)
 
 | 위치 | 실장 | 필요 | 품번 또는 구매 규격 |
 | --- | --- | ---: | --- |
-| C3–C5 | 밑면 SMD | 3 | GRM188R71C104KA01D, 100 nF, 16 V 이상, X7R, 0603. |
+| C3–C5 | 밑면 SMD | 3 | Yageo CC0603KRX7R9BB104, C14663 (Basic), 100 nF, 50 V, X7R, ±10%, 0603. |
 | R4–R6 | 밑면 SMD | 3 | RT0603BRD0761K9L, 61.9 kΩ, 0603, 0.1%, 25 ppm/°C 이하. |
 | U1–U3 | 밑면 SMD | 3 | TPS2557DRBR, VSON-8 3 × 3 mm, 피치 0.65 mm. 호환품은 핀 배열과 전류 제한 특성이 같아야 합니다. |
 | C1 · C2 | 윗면 직접 납땜 | 각 1 | 저ESR 방사형 전해 470 µF/10 V 및 220 µF/25 V, 각 Ø8 × 11.5 mm 이하, 피치 3.5 mm. |
