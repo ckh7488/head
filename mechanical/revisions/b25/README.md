@@ -1,6 +1,6 @@
 # R5 B25 제작 자료
 
-B25 기구는 A4 서보 허브와 OpenRB-150을 사용합니다. P2S 일괄 출력은 **14판·57개**, 예상 **67시간 51분·PETG HF 1.285 kg**입니다. **13번 턱 판부터** 출력합니다. [전 판 슬라이스 기록](print-build.json)
+B25 기구는 A4 서보 허브와 OpenRB-150을 사용합니다. P2S 일괄 출력은 **14판·57개**, 표준 재질은 **Bambu PETG-CF 2롤**(65 °C 8시간 건조, Bambu Studio에서 `Bambu PETG-CF @BBL P2S` 프리셋 선택 후 재슬라이스; 기준 PETG HF 기록 약 `67시간 51분·1.285 kg`)입니다. **13번 턱 판부터** 출력합니다. [전 판 슬라이스 기록](print-build.json)
 
 ## 출력에서 첫 구동까지
 
@@ -21,7 +21,7 @@ B25 기구는 A4 서보 허브와 OpenRB-150을 사용합니다. P2S 일괄 출�
 
 ## 판정과 기록
 
-완성품 조립, 유격, 5 N 강건성, 실제 전원·USB와 구동은 P01–P08에 기록합니다. 설계 배경과 이전 시안은 검증 기록에서 볼 수 있습니다. [1층 사람 요구사항](../../../spec/user-spec.md) · [2층 검사 조건](../../../spec/conditions.md) · [1회 출력 감사](audit-loop.md) · [항목별 이전 판정](review-disposition.md) · [이전 리비전](../)
+완성품 조립, 유격, 5 N 강건성, 실제 전원·USB와 구동은 P01–P08에 기록합니다. 설계 배경과 이전 시안은 검증 기록에서 볼 수 있습니다. [1층 사람 요구사항](../../../spec/user-spec.md) · [2층 검사 조건](../../../spec/conditions.md) · [FDM 실수 모음집](../../../spec/fdm-pitfalls.md) · [1회 출력 감사](audit-loop.md) · [항목별 이전 판정](review-disposition.md) · [이전 리비전](../)
 
 <details>
 <summary>형상과 검사 기록</summary>

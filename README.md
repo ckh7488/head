@@ -21,8 +21,8 @@ R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 �
 
 | 항목 | B25 적용값 |
 | --- | --- |
-| 머리 외형과 환경 | 약 `160 × 166 × 167 mm`, 한국 실내 `0–35 °C` |
-| 3D 프린팅 | **Bambu Lab P2S**, **Bambu PETG HF** (65 °C 건조), 14판·57개, 약 `67시간 51분` · `1.285 kg` (2롤) |
+| 머리 외형과 환경 | 약 `160 × 166 × 167 mm`, 한국 실내 `−5–35 °C` |
+| 3D 프린팅 | **Bambu Lab P2S** (0.4 mm 경화 노즐), **Bambu PETG-CF** (65 °C 8시간 건조 · 2롤, 대안 PETG HF), 14판·57개 |
 | 눈과 턱 (5 V) | ID1–ID3 `XL330-M077-T` × 3, ID6 `XL330-M288-T` × 1 |
 | 목 (12 V) | ID4·ID5 `XL430-W250-T` × 2 |
 | 카메라와 제어 | `U20CAM-1080P-S1`, `OpenRB-150` (USB 전원), `A4 서보 허브` |
@@ -30,5 +30,5 @@ R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 �
 ## 파일과 기준
 
 - [FreeCAD 조립본](mechanical/revisions/b25/R5-B25-Assembly.FCStd) · [P2S 출력 프로젝트](mechanical/revisions/b25/R5-B25-P2S.3mf) · [웹 제작 안내](https://r5-b1-review.ckh.chatgpt.site/b25/guide/) · [3D 조립·구동·배선 화면 만들기](web/README.md#b25-웹-화면)
-- [1층 사람 요구사항](spec/user-spec.md) · [2층 수치 기준](spec/conditions.md) · [동작 인수 기준](spec/requirements.md)
+- [1층 사람 요구사항](spec/user-spec.md) · [2층 수치 기준](spec/conditions.md) · [FDM 실수 모음집](spec/fdm-pitfalls.md) · [동작 인수 기준](spec/requirements.md)
 - [기구 자료](mechanical/README.md) · [전장 자료](electronics/README.md) · [하드웨어 없이 테스트](control/README.md#하드웨어-없이-실행) · [이전 리비전](mechanical/revisions/)
