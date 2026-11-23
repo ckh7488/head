@@ -62,6 +62,7 @@ def setup(layout, world):
     def read(name):
         return json.loads((B25 / name).read_text())
 
+    world.apply_b25_heat_set_screws()
     catalog = read('xl330-case-screws.json')['seats']
     for name, site in catalog.items():
         world.screws[name] = 2, site['oem_tapping_screw_length_mm'], site['seat_mm'], site['axis']

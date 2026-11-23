@@ -1,12 +1,12 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+  "source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
   "units": "mm",
   "stl_origin": "Source orientation with lowest Z at the build plate",
   "parts": {
     "02": {
       "source_part": "02_outer_bearing_seat-B23.stl",
-      "source_mesh_sha256": "4e40a44af71a8ea0116d90587fb17504aa6b431d3f099bdec63368685aff961d",
+      "source_mesh_sha256": "0e27c072f621f27d4c535f2f8c06291994e12e7dbeafa1c3acd4f6277a9c106e",
       "p2s_plate": 6,
       "p2s_settings": {
         "layer_height": "0.2",
@@ -16,7 +16,7 @@
         "filament_settings_id": [
           "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
         ],
-        "wall_generator": "classic",
+        "wall_generator": "arachne",
         "detect_thin_wall": "0",
         "outer_wall_line_width": "0.42",
         "wall_loops": "4",
@@ -45,38 +45,28 @@
           "nominal_bore_diameter_mm": 100.1,
           "key_pocket_min_radial_ligament_mm": 1.56,
           "file": "02_outer-bearing-seat_6816_ID100.10mm.stl",
-          "bytes": 342984,
-          "sha256": "bc45915a842d7986767a393dba7fe60eb5d9d2fb0a73f9b9306d30a571dd48a7"
+          "bytes": 342484,
+          "sha256": "24bac99b28c30f30e78bebf71ad5fc0f814731d306b7dce04782de66143d96e5"
         },
         {
           "nominal_bore_diameter_mm": 100.2,
           "key_pocket_min_radial_ligament_mm": 1.51,
           "file": "02_outer-bearing-seat_6816_ID100.20mm.stl",
-          "bytes": 343184,
-          "sha256": "b7cece8288d9d2e6d2620f8a10b72c3fe6fddcbd7cfcbab1f7ed28180e4d199b"
+          "bytes": 342484,
+          "sha256": "37ba15b7685d3ca113d35d515a2b7f9a45445bee4a87fdfc23af9d639b384555"
         },
         {
           "nominal_bore_diameter_mm": 100.3,
           "key_pocket_min_radial_ligament_mm": 1.46,
           "file": "02_outer-bearing-seat_6816_ID100.30mm.stl",
           "bytes": 342484,
-          "sha256": "2d14bc7edba104a82770488d4c642f9b340207b7db9670419363207f5f57c0a8"
-        },
-        {
-          "nominal_bore_diameter_mm": 100.4,
-          "key_pocket_min_radial_ligament_mm": 0.41,
-          "omission": "Key pocket ligament is thinner than the 0.42 mm classic outer wall."
-        },
-        {
-          "nominal_bore_diameter_mm": 100.5,
-          "key_pocket_min_radial_ligament_mm": 0.36,
-          "omission": "Key pocket ligament is thinner than the 0.42 mm classic outer wall."
+          "sha256": "f5dfa767d29eeb67766072023c5072adf494e84634e063fb87e592b7829d41aa"
         }
       ]
     },
     "07": {
       "source_part": "07_yoke-B22.stl",
-      "source_mesh_sha256": "71d43480cfa7b75572ffa4885775b3f6104d8565510d22c13146ac93563a6287",
+      "source_mesh_sha256": "42768efdad75d87c5ac6963a61197fde8cf1e5e724f8c4eca9432c727bc2ed80",
       "p2s_plate": 7,
       "p2s_settings": {
         "layer_height": "0.2",
@@ -86,7 +76,7 @@
         "filament_settings_id": [
           "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
         ],
-        "wall_generator": "classic",
+        "wall_generator": "arachne",
         "detect_thin_wall": "0",
         "outer_wall_line_width": "0.42",
         "wall_loops": "6",
@@ -158,8 +148,8 @@
             621
           ],
           "file": "07_pitch-yoke_688_ID16.10mm.stl",
-          "bytes": 553984,
-          "sha256": "23eba19663dd8398a3983aedbe3e84797288a348291a98de5abcb839d721e9a8"
+          "bytes": 568484,
+          "sha256": "4ee1c24d1216f7dbd9472468b5db31d7d772495efcc6fe49549ce4745822e4fb"
         },
         {
           "nominal_bore_diameter_mm": 16.2,
@@ -174,8 +164,8 @@
             621
           ],
           "file": "07_pitch-yoke_688_ID16.20mm.stl",
-          "bytes": 553984,
-          "sha256": "0d01ef40ffe733286e27066c228ef2f01c44997b6a83ec57c5c688bdc320bdce"
+          "bytes": 568484,
+          "sha256": "4d5a72d44922271604e3d3b8d5cb764d827328457160efa50b3d5a860a7f200e"
         },
         {
           "nominal_bore_diameter_mm": 16.3,
@@ -190,8 +180,8 @@
             621
           ],
           "file": "07_pitch-yoke_688_ID16.30mm.stl",
-          "bytes": 553984,
-          "sha256": "e053b07e367b6daa4977adcfd6a824d3537d95b0a2599475fb698f008a94ae4f"
+          "bytes": 568484,
+          "sha256": "e6b6c515e4cdc79468ce2dec18f6b67f963152bf7ca09534f31380d9b9968443"
         },
         {
           "nominal_bore_diameter_mm": 16.4,
@@ -206,8 +196,8 @@
             621
           ],
           "file": "07_pitch-yoke_688_ID16.40mm.stl",
-          "bytes": 553984,
-          "sha256": "42172af5526dae045dc1096146c463195f4474fe3358677220af317c173ad4b2"
+          "bytes": 568484,
+          "sha256": "4af3f8dfe1a715c919c803a544243e5b6b2174f696a980d869cad5cd965af4b7"
         },
         {
           "nominal_bore_diameter_mm": 16.5,
@@ -222,8 +212,8 @@
             621
           ],
           "file": "07_pitch-yoke_688_ID16.50mm.stl",
-          "bytes": 553984,
-          "sha256": "ded2057ea63f22c349c420b19123e417e10e1a01846877c2765a60dfeab0c1e3"
+          "bytes": 568484,
+          "sha256": "30875a47278fe2a5f26ae78b94cf5b28e11c454d7d04b7456d978c8a0e070e6b"
         }
       ]
     }

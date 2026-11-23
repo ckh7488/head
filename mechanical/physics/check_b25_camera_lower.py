@@ -9,7 +9,7 @@ import numpy as np
 import trimesh
 from scipy.optimize import brentq
 
-from check_b25_camera_upper import PITCH_RANGE, YAW_LIMIT, upper_at
+from check_b25_camera_upper import PITCH_RANGE, TICK_DEG, YAW_LIMIT, upper_at
 from wiring_check import Cable, Scene
 from wiring_motion import matrices, transform
 
@@ -82,13 +82,13 @@ def scene(cad, layout):
     return result
 
 
-def check(cad, controls):
+def check(cad, controls, yaw_limit=YAW_LIMIT):
     layout = json.loads((cad/'cad_parts.json').read_text())
     shells = scene(cad, layout)
     fixed = set(shells.groups['fixed']) | set(shells.groups.get('hatch', {}))
     pan = set(shells.groups['pan'])
     fixed_path = np.asarray(controls['fixed']['curve_mm'])
-    angles = np.linspace(-YAW_LIMIT, YAW_LIMIT, POSE_COUNT)
+    angles = np.linspace(-yaw_limit, yaw_limit, POSE_COUNT)
     anchor = np.array(controls['anchor_mm'])
     heading = np.radians(controls['fixed']['heading_deg'])
     rotate = np.array(((np.cos(heading), np.sin(heading), 0.),
@@ -139,8 +139,9 @@ if __name__=='__main__':
     parser.add_argument('exported_cad', type=Path)
     parser.add_argument('output', type=Path)
     parser.add_argument('--controls',type=Path,default=DATA)
+    parser.add_argument('--yaw-feedback-ticks', type=int, default=round(YAW_LIMIT/TICK_DEG))
     args=parser.parse_args()
-    report=check(args.exported_cad,json.loads(args.controls.read_text()))
+    report=check(args.exported_cad,json.loads(args.controls.read_text()),args.yaw_feedback_ticks*TICK_DEG)
     args.output.write_text(json.dumps(report,indent=2)+'\n')
     raise SystemExit(bool(report['moving_contacts'] or report['rear_contacts'] or report['fixed_contacts']
                           or report['reserve_percent'] < 10))

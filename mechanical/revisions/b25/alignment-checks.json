@@ -1,0 +1,53 @@
+{
+  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "motion": {
+    "poses": 26196,
+    "interfaces": 572,
+    "eye_yaw_angles": 801,
+    "eye_yaw_contact_pairs": [],
+    "native_seated_check": {
+      "parts": [
+        "Part041",
+        "Part064"
+      ],
+      "common_volume_mm3": 0.0,
+      "distance_mm": 0.0
+    }
+  },
+  "camera_route": {
+    "upper_samples": 289,
+    "lower_samples": 513,
+    "rear_samples": 73,
+    "minimum_upper_bend_radius_mm": 18.2,
+    "minimum_lower_bend_radius_mm": 18.25,
+    "length_reserve_percent": 11.380243994903939,
+    "jaw_continuous_cells": 17,
+    "unexpected_contacts": []
+  },
+  "a4_service_leads": {
+    "samples": 39,
+    "minimum_radius_mm": 12.0,
+    "minimum_pair_gap_mm": 2.443,
+    "rigid_plug_sweeps": {
+      "withdraw": {},
+      "park": {},
+      "hatch": {}
+    },
+    "continuous_lowering": {
+      "A4W8": {
+        "panels": 346,
+        "max_intersection_mm3": {}
+      },
+      "A4W9": {
+        "panels": 346,
+        "max_intersection_mm3": {}
+      }
+    }
+  },
+  "assembly": {
+    "checked_steps": 146,
+    "blocking_steps": 0,
+    "plan_sha256": "1f7daf3de0687030aa55cbad0db238bfb2b72616564be1acd13f64f59056a173",
+    "scope": "CAD assembly screen plus separate rear cover, J2 hatch and eye insertion evidence"
+  }
+}

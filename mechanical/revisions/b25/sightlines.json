@@ -1,0 +1,38 @@
+{
+  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "firmware_sha256": "fbc2e8f99787b2e06938a330469643ceafd3e6e7e09657ca3fe3002a63764833",
+  "status": "pass",
+  "scene": {
+    "head_height_m": 1.4,
+    "base_tilt_deg": 0.0,
+    "person_eye_height_m": 1.6,
+    "distance_m": 1.0
+  },
+  "camera_hfov_deg": 106.0,
+  "neck_pitch_deg": -13.095703125,
+  "eye_pitch_limit_deg": 7.294921875,
+  "target_mm": [
+    0.0,
+    -1039.0,
+    319.00000000000017
+  ],
+  "camera_in_frame": true,
+  "camera_opaque_contacts": [],
+  "pupils": [
+    {
+      "part": "Part031",
+      "required_elevation_deg": 10.739478346864264,
+      "max_elevation_deg": 15.072864794270998,
+      "eye_pitch_solution_deg": -2.9965283117178396,
+      "opaque_contacts": []
+    },
+    {
+      "part": "Part035",
+      "required_elevation_deg": 10.739478346865859,
+      "max_elevation_deg": 15.07286479407064,
+      "eye_pitch_solution_deg": -2.9965283118679524,
+      "opaque_contacts": []
+    }
+  ],
+  "scope": "Direct sightlines and vertical optical alignment. Installation remains P05."
+}

@@ -2,7 +2,7 @@
   "source_project": "R5-B25-P2S.3mf",
   "source_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
   "archive": "R5-B25-Bearing-Fit-STLs.zip",
-  "archive_sha256": "dfa66295a3704313977368b3d16c73a788952a2bf17d7de42f2c8b14a455eb99",
+  "archive_sha256": "bc39441d13a30ccf40718420fa23f05fc1ff4a197830f7a90016240304b5f2b9",
   "parts": [
     {
       "source_file": "13_left_eye_cradle_mount-B24.stl",
@@ -333,14 +333,14 @@
       "variants": [
         {
           "file": "p9-37-bearing-pocket-D10.05.stl",
-          "sha256": "a07a9a418ad4406c6edc1d5d5a6725b078333bbc27e2c84ff7824b0c8f5ae864",
-          "facets": 11486,
+          "sha256": "b8cfeabac1f6ec9be1983184b42e76c091e868694e6ed8f836bb0ea1934d152b",
+          "facets": 10732,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
-          "min_triangle_area_mm2": 1.2774216884281486e-07,
+          "min_triangle_area_mm2": 8.904899004846811e-07,
           "volume_delta_mm3": 3.179862,
           "sections": {
             "pocket": {
@@ -371,18 +371,19 @@
             24.998767614364624,
             30.599712371826172
           ],
-          "right_locator_wall_mm": 1.4395511876206561
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.59785253361315
         },
         {
           "file": "p9-37-bearing-pocket-D10.10.stl",
-          "sha256": "3d7ba28e07a76538fa755934f967cb6267a05b5cbe19578cb7e95c8446a0ac09",
-          "facets": 11486,
+          "sha256": "0ef0149b3a2623fe75aff85c50fd1d5a2d2fe7ca4609a3cfe5980d9184056306",
+          "facets": 10732,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
-          "min_triangle_area_mm2": 1.2774216884281486e-07,
+          "min_triangle_area_mm2": 8.904899004846811e-07,
           "volume_delta_mm3": -4e-06,
           "sections": {
             "pocket": {
@@ -413,18 +414,19 @@
             24.998767614364624,
             30.599712371826172
           ],
-          "right_locator_wall_mm": 1.4395511876206561
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.59785253361315
         },
         {
           "file": "p9-37-bearing-pocket-D10.15.stl",
-          "sha256": "5167b078666d7abf74d7a8ed639c28d7c46e7821674adb6133ad3cc2c321245d",
-          "facets": 10040,
+          "sha256": "ae6898801d12d573e0dbebe5a332b61c2fb68418105ba46c6fa1bb1cd49932ae",
+          "facets": 10282,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
-          "min_triangle_area_mm2": 1.2774216884281486e-07,
+          "min_triangle_area_mm2": 8.904899004846811e-07,
           "volume_delta_mm3": -3.392777,
           "sections": {
             "pocket": {
@@ -455,18 +457,19 @@
             24.998767614364624,
             30.599712371826172
           ],
-          "right_locator_wall_mm": 1.4395511876206561
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.6013201653177
         },
         {
           "file": "p9-37-bearing-pocket-D10.20.stl",
-          "sha256": "878c43cdc3b63011b5e783629bc8d9000e9dc92d9030bde1d2d8a5f0e35ae67f",
-          "facets": 10318,
+          "sha256": "03f28db45534df577dc9ed7e1ff6e95dfaef153aae7a1d79e2a1c933e0a9dae8",
+          "facets": 10560,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
-          "min_triangle_area_mm2": 1.2774216884281486e-07,
+          "min_triangle_area_mm2": 8.904899004846811e-07,
           "volume_delta_mm3": -6.746611,
           "sections": {
             "pocket": {
@@ -497,18 +500,19 @@
             24.998767614364624,
             30.599712371826172
           ],
-          "right_locator_wall_mm": 1.4395511876206561
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.6013201653177
         },
         {
           "file": "p9-37-bearing-pocket-D10.25.stl",
-          "sha256": "b4c015e0b658365076bf6dc8bcdbc4837f549b9bc358c872cf05b035386e16b1",
-          "facets": 10326,
+          "sha256": "3cc1aac03a1851332dc74d0dc0002dd8e19fdb7fc34b60940373965f4ffe9ff4",
+          "facets": 10570,
           "print_dimensions_mm": [
             37.5,
             24.998768,
             30.599712
           ],
-          "min_triangle_area_mm2": 1.2774216884281486e-07,
+          "min_triangle_area_mm2": 8.904899004846811e-07,
           "volume_delta_mm3": -10.116934,
           "sections": {
             "pocket": {
@@ -539,9 +543,11 @@
             24.998767614364624,
             30.599712371826172
           ],
-          "right_locator_wall_mm": 1.4395511876206561
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.6013201653177
         }
-      ]
+      ],
+      "yoke_facing_relief_depth_added_mm": 0.7
     },
     {
       "source_file": "24_blink_rail_with_bearing_shoulders.stl",

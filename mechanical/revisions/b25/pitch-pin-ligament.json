@@ -1,0 +1,14 @@
+{
+  "original_pin_end_ligament_mm": [
+    0.6771057451317657,
+    0.6771057451317657
+  ],
+  "reinforced_pin_end_and_band_boundary_ligament_mm": {
+    "106.0": 1.6499999999996349,
+    "106.3001": 1.3605222881807233,
+    "117.6999": 1.3605222881813486,
+    "118.0": 1.6499999999996349
+  },
+  "reinforcement_volume_mm3": 9.092388303819462,
+  "internal_shell_relief_volume_mm3": 31.37577108835103
+}

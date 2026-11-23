@@ -17,7 +17,9 @@ from build_b20_print import CORE, MODEL, MODEL_SETTINGS, PRODUCTION, REVISIONS, 
 PROJECT = REVISIONS / 'b25/R5-B25-P2S.3mf'
 SEAT_SOURCE = '02_outer_bearing_seat-B23.stl'
 YOKE_SOURCE = '07_yoke-B22.stl'
-KEY_POCKET_INNER_RADIUS_MM = 53.20 - 2.59
+KEY_POCKET_INNER_RADIUS_MM = 51.61
+YAW_FIT_DIAMETERS_MM = (100.10, 100.20, 100.30)
+MINIMUM_LOAD_WALL_MM = 1.20
 YOKE_FULL_SUPPORT_X = (-53.99, -52., -50., -49.55, 49.55, 52., 53.99)
 YOKE_CROWN_X = (-49.50, -49.25, -49.01)
 
@@ -122,8 +124,8 @@ def checked_stl(vertices, points, faces):
     return mesh, stl
 
 
-def variant_rows(vertices, faces, report, yaw):
-    sizes = [round((100. if yaw else 16.) + step/10., 2) for step in range(1, 6)]
+def variant_rows(vertices, faces, yaw):
+    sizes = YAW_FIT_DIAMETERS_MM if yaw else [round(16. + step/10., 2) for step in range(1, 6)]
     source = trimesh.Trimesh(vertices, faces, process=False)
     original_crown = [yoke_radial_support(source, x, 8.13)[0] for x in YOKE_CROWN_X] if not yaw else []
     for diameter in sizes:
@@ -132,14 +134,8 @@ def variant_rows(vertices, faces, report, yaw):
         if yaw:
             ligament = round(KEY_POCKET_INNER_RADIUS_MM - radius, 2)
             row['key_pocket_min_radial_ligament_mm'] = ligament
-            settings = report['p2s_settings']
-            if (settings['wall_generator'] != 'classic' or settings['detect_thin_wall'] != '0'
-                    or settings['outer_wall_line_width'] != '0.42'):
-                raise ValueError('Check the yaw pocket wall against the changed print profile')
-            if ligament < float(settings['outer_wall_line_width']):
-                row['omission'] = 'Key pocket ligament is thinner than the 0.42 mm classic outer wall.'
-                yield row, None
-                continue
+            if ligament < MINIMUM_LOAD_WALL_MM:
+                raise ValueError('The yaw key pocket does not meet the load-bearing wall minimum')
             points = resize_bore(vertices, (0, 1), (0., 0.), 50.16, diameter, 236)
             stem = '02_outer-bearing-seat_6816'
         else:
@@ -193,10 +189,9 @@ def build(output, project):
                             crown_note='The left inboard 0.52 mm meets the existing partial crown. '
                                        'The right inboard 0.52 mm extends past the boss.')
             part['variants'] = []
-            for row, stl in variant_rows(vertices, faces, part, yaw):
+            for row, stl in variant_rows(vertices, faces, yaw):
                 part['variants'].append(row)
-                if stl is not None:
-                    write_entry(destination, row['file'], stl)
+                write_entry(destination, row['file'], stl)
             report['parts']['02' if yaw else '07'] = part
         data = json.dumps(report, ensure_ascii=False, indent=2)+'\n'
         write_entry(destination, 'fit-large-bearings.json', data)

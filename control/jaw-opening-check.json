@@ -1,6 +1,6 @@
 {
-  "cad_sha256": "80cf1252056745fde192cb4aa4d6f84680bcee6f3eb0e661612dbb7fe58ffd52",
-  "firmware_sha256": "0c7ea76720243aa7b73a08d12c9e523f261d9db66dcc0504bb39482659c6405d",
+  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "firmware_sha256": "fbc2e8f99787b2e06938a330469643ceafd3e6e7e09657ca3fe3002a63764833",
   "pair": [
     "Jaw_37_right_jaw_bearing_stay",
     "Jaw_39_right_jaw_pivot_arm"

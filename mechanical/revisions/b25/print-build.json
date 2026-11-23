@@ -1,31 +1,56 @@
 {
-  "source_3mf_sha256": "0cd87691c848980af062b3633dbcad786b8393292451d6ec9c2eb312b34a4481",
-  "project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
-  "source_cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
-  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "source_3mf_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+  "project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "source_cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
   "plate_sha256": {
-    "1": "f6a81e6db6a9d636f38fc99e95fe763136fc42a972d0184b937ed8956fc48d14",
-    "2": "918b7f5ba05b6065bd2636a3e6db4578b6393e34f294dc7fef64ea8329f42723",
-    "3": "998015c135b81ad4748c74987433b70f273fc63d8191baa3dc4f171ba43351da",
-    "4": "e7fdaed84d92a967ea377b81d40e8d111a6894961511be762599e248e6a6a43a",
-    "5": "ee94486896ac8408e007f119ccf021b78f03529ac8b64057fa8907ab25fe43af",
-    "6": "490a23e1a606caea2f160512127647e079adb8324ae04fec7c7933b3235f71b0",
-    "7": "cfb5fa71bc38daba82a25d971bec2c239ac01ed5381ff87a8a5f20a908d2b84e",
-    "8": "89cbc5ad37012f8b7bd595a43f999e2ff5e4ce038f81d7c4d2db967abc75c8a9",
-    "9": "d00a4be37bb78b8ba3265d915a2f0d9334c19b21171eeebbb8d42ad32b823027",
-    "10": "183a1c682fc913aadcb356d2909cb3bc35838f548d7fb8eb36c292d6b3136870",
-    "11": "b7f2090a36655e13e0dc17b87cc772fb8f35b346b512ebb23b3691cb46e85fae",
-    "12": "c287e38c9b020de5df351623e2a5ab503a979c09cbcb1ac06da9313bfc47565d"
+    "1": "33ebc8dfc898d2b84f0f8d26a7a4cf1522a330688db1807d638f55816f08a47d",
+    "2": "8eab9fedd158b0f2df8e8c0e06681d2dd3bdd7b7956117f9637981db1266c71a",
+    "3": "a0dafb23c1f45d2169d3cb847610f929c0fb295f412ce200028a8c7903060593",
+    "4": "5d4f2bb96a1a2b099cd1d6e53040fa0eefcd7daaf70c6a1d52017ce430e841bf",
+    "5": "5b1c482cf6bfa68b26e432c3afecdb5620258c4b4e2b2a16c22de6b32081f278",
+    "6": "0293b280e0269e44f082924bc5d697b58fb430b43993dbc24118d66028602b31",
+    "7": "a1fa54be0feaafff491e803b2eba920acf05bdcf959b8b19e4092a5d7e2e3c26",
+    "8": "a0671a2e7e5789ba7187055c5948a4364d4f4cb17db5251dc149afce56c4149a",
+    "9": "d15de48e045c94b55a9b15c9752a689f26180083cbaed35a4546bb8fc834c7ee",
+    "10": "2c86ae967ddd7b1d67eaee6a5784894c4c3e89dc410adeb3bc8e9a11f9ae3642",
+    "11": "c74ce8c7744eb66ee8a62ca90b4e782784de31ed2f6b2783550b147ea304aaf6",
+    "12": "8527ae73f624a18d63efa13361c09ce58150c422f686217a7cdae37a98b04e1d",
+    "13": "54fb5be35642bf6c54f4a7c9324c8ff9ae91abe6125f6f3f3de7eb772332f29b",
+    "14": "c0c0fa4113ed88b7264d78476c7b17484ac8abba2f7428bc589380c94ec95181"
   },
   "changed_plates": {
+    "4": [
+      "28 앞 외장"
+    ],
     "6": [
-      "09_head_frame-B25.stl"
+      "09 프레임",
+      "정지 블록 브림"
+    ],
+    "7": [
+      "12 크래들을 14번 판으로 이동",
+      "브림"
     ],
     "8": [
-      "15_eye_yaw_offset_tie_bar-B21.stl"
+      "15 타이바",
+      "ID5 가드 메쉬",
+      "브림"
     ],
     "9": [
-      "37_right_cheek_bearing_stay-B22.stl"
+      "37 오른쪽 턱 받침"
+    ],
+    "11": [
+      "42 뒤 배선 덮개",
+      "A4 고정편 브림"
+    ],
+    "12": [
+      "40 뒤 케이블 가이드"
+    ],
+    "13": [
+      "일체형 턱 메쉬와 래프트"
+    ],
+    "14": [
+      "12 크래들"
     ]
   },
   "right_locator_reinforcement": {
@@ -148,5 +173,112 @@
   "eye_yaw_drive_slot": {
     "source_3mf_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
     "evidence": "eye-yaw-slot.json"
-  }
+  },
+  "integrated_geometry": {
+    "incoming_cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
+    "parts": 57,
+    "plates": 14
+  },
+  "verified_plate_slices": {
+    "1": {
+      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 31950,
+      "estimated_petg_g": 239.818
+    },
+    "2": {
+      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 6012,
+      "estimated_petg_g": 55.676
+    },
+    "3": {
+      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 2942,
+      "estimated_petg_g": 14.252
+    },
+    "4": {
+      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 49502,
+      "estimated_petg_g": 217.31
+    },
+    "5": {
+      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 37842,
+      "estimated_petg_g": 161.416
+    },
+    "6": {
+      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "print_objects": 9,
+      "warning_count": 0,
+      "estimated_seconds": 32415,
+      "estimated_petg_g": 200.387
+    },
+    "7": {
+      "slice_source_project_sha256": "25aa2205c6efa66c4aaeb1d0fdf760c646764cb1847fe428de02ad72bb2b00e3",
+      "print_objects": 8,
+      "warning_count": 0,
+      "estimated_seconds": 22905,
+      "estimated_petg_g": 119.071
+    },
+    "8": {
+      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "print_objects": 15,
+      "warning_count": 0,
+      "estimated_seconds": 11592,
+      "estimated_petg_g": 46.701
+    },
+    "9": {
+      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "print_objects": 7,
+      "warning_count": 0,
+      "estimated_seconds": 6838,
+      "estimated_petg_g": 28.9
+    },
+    "10": {
+      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "print_objects": 2,
+      "warning_count": 0,
+      "estimated_seconds": 2048,
+      "estimated_petg_g": 7.499
+    },
+    "11": {
+      "slice_source_project_sha256": "a8419b4ecca4a399eb595de0b8b7926fe1a8473375460f213d178b95fec7cd9a",
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 5936,
+      "estimated_petg_g": 33.649
+    },
+    "12": {
+      "slice_source_project_sha256": "9ec0c7e7a6b4b05d0c648ba0d51ea5abb452e02ebfdd69be0217563619651acc",
+      "print_objects": 4,
+      "warning_count": 0,
+      "estimated_seconds": 19737,
+      "estimated_petg_g": 97.145
+    },
+    "13": {
+      "slice_source_project_sha256": "a6dcd29c3aba64f3a556f9059907486a316f344d44f0228cb630b2dacd3a21dc",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 10543,
+      "estimated_petg_g": 52.158
+    },
+    "14": {
+      "slice_source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 3962,
+      "estimated_petg_g": 11.655
+    }
+  },
+  "estimated_seconds_total": 244224,
+  "estimated_petg_g_total": 1285.637
 }

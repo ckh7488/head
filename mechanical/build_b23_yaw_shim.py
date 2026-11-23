@@ -59,8 +59,10 @@ def verify_access(doc, original_cup, cup):
     seat = world_shape(doc.Part001)
     bearing = world_shape(doc.Part006)
     motor = world_shape(doc.Part017)
-    fixed = {n: world_shape(doc.getObject(n))
-             for n in ('Part001', 'Part002', 'Part006', 'Part069', 'Part070', 'Part071', 'Part072')}
+    fixed = {n: world_shape(doc.getObject(n)) for n in ('Part001', 'Part002', 'Part006', 'Part069', 'Part072')}
+    for name in ('Part070', 'Part071'):
+        if (rf_part := doc.getObject(name)) is not None:
+            fixed[name] = world_shape(rf_part)
     positions = (-SLOT_HALF_TRAVEL, 0., SLOT_HALF_TRAVEL)
     pylon_gauge = cylinder(75., 44., (0., 0., -83.))
     pylon_volume = original_cup.common(pylon_gauge).Volume - cup.common(pylon_gauge).Volume

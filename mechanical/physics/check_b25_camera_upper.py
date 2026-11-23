@@ -12,7 +12,7 @@ from scipy.special import comb
 import trimesh
 
 from wiring_check import Cable, Scene
-from wiring_motion import matrices, rotation, transform
+from wiring_motion import arc_lengths, matrices, rotation, transform
 
 
 TICK_DEG = 360. / 4096.
@@ -25,6 +25,10 @@ SPLICE_DIRECTION = np.array((-.024480298769616667, -.3396116383167135, .94024712
 PITCH_PIVOT = (0., 0., 112.)
 JAW_CAPSULE = 1.50 + 1.00 + .40
 WITNESS_PAN_Z = -9.17
+# The printed saddle bore begins 5.5 mm before the datum. The rounded
+# clearance capsule can still reach into that fixed contact zone from outside it.
+HEAD_ANCHOR_CONTACT_MM = 5.5 + JAW_CAPSULE
+HEAD_ANCHOR_PARTS = {'Part065', 'CameraEatonHeadTie', 'CameraEatonHeadFixedLeg'}
 
 
 def bezier(controls, samples):
@@ -75,7 +79,7 @@ def create_scene(cad, layout):
     scene = Scene.__new__(Scene)
     scene.groups = {}
     for name, mode in layout['world_motion'].items():
-        if name.startswith(('Harness', 'HubRearClearance')) or name == 'RearLead3_1':
+        if name.startswith(('Harness', 'HubRearClearance')) or name in ('RearLead3_1', 'EatonCableNeutral'):
             continue
         path = cad / 'world' / f'{name}.stl'
         if path.stat().st_size <= 84:
@@ -92,6 +96,19 @@ def create_scene(cad, layout):
 def hits(scene, points, motion, radius, only):
     cable = Cable('USB-Camera', points, 3., 0., 0.)
     return scene.hits(cable, motion, radius - 1.5, only=only)
+
+
+def moving_contacts(scene, points, motion, parts):
+    free = hits(scene, points, motion, JAW_CAPSULE, parts - HEAD_ANCHOR_PARTS)
+    # The cable, saddle and tie meet where the active span enters the fixed anchor.
+    # Check these parts along the rest of the cable as ordinary solid obstacles.
+    arc = arc_lengths(points)
+    last = arc[-1] - HEAD_ANCHOR_CONTACT_MM
+    index = np.searchsorted(arc, last, side='left')
+    fraction = (last - arc[index-1]) / (arc[index] - arc[index-1])
+    endpoint = points[index-1] + fraction * (points[index] - points[index-1])
+    before_anchor = np.vstack((points[:index], endpoint))
+    return free + hits(scene, before_anchor, motion, JAW_CAPSULE, parts & HEAD_ANCHOR_PARTS)
 
 
 def continuous_jaw(scene, layout):
@@ -140,10 +157,10 @@ def historic_witness(scene, layout):
             'centerline_y_at_pan_z_minus_9p17_mm': y}
 
 
-def check(cad, report, paths):
+def check(cad, report, paths, yaw_limit=YAW_LIMIT):
     layout = json.loads((cad / 'cad_parts.json').read_text())
     scene = create_scene(cad, layout)
-    yaw_angles = np.linspace(-YAW_LIMIT, YAW_LIMIT, 17)
+    yaw_angles = np.linspace(-yaw_limit, yaw_limit, 17)
     pitch_angles = np.linspace(*PITCH_RANGE, 17)
     static = set(scene.groups.get('fixed', {})) | set(scene.groups.get('hatch', {}))
     co_rotating = set(name for mode, meshes in scene.groups.items() if mode not in ('fixed', 'hatch', 'jaw') for name in meshes)
@@ -153,12 +170,13 @@ def check(cad, report, paths):
         points, radius = upper_at(pitch, yaw)
         motion = matrices(layout, yaw, pitch, 0., 0., JAW_LIMIT, 90.)
         fixed_contacts = hits(scene, points, motion, JAW_CAPSULE, static)
-        moving_contacts = hits(scene, points, motion, JAW_CAPSULE, co_rotating) if yaw == 0. else []
+        co_rotating_contacts = moving_contacts(scene, points, motion, co_rotating) if yaw == 0. else []
         replay.append({'pose_deg': [yaw, pitch], 'minimum_radius_mm': radius, 'fixed_contacts': fixed_contacts,
-                       'co_rotating_contacts': moving_contacts,
+                       'co_rotating_contacts': co_rotating_contacts,
                        'length_mm': float(np.linalg.norm(np.diff(points, axis=0), axis=1).sum())})
         centers[f'case{index:03d}'] = points
     result = {'source_cad_sha256': layout['source_sha256'], 'od_mm': 3.0, 'sample_capsule_mm': JAW_CAPSULE,
+              'head_anchor_contact_mm': HEAD_ANCHOR_CONTACT_MM,
               'rotor_datum_mm': ENTRY.tolist(), 'head_datum_mm': SPLICE.tolist(),
               'head_tangent_in_local_coordinates': SPLICE_DIRECTION.tolist(),
               'historical_jaw_witness': historic_witness(scene, layout),
@@ -174,5 +192,6 @@ if __name__ == '__main__':
     parser.add_argument('cad', type=Path)
     parser.add_argument('report', type=Path)
     parser.add_argument('--paths', type=Path)
+    parser.add_argument('--yaw-feedback-ticks', type=int, default=round(YAW_LIMIT/TICK_DEG))
     args = parser.parse_args()
-    check(args.cad, args.report, args.paths)
+    check(args.cad, args.report, args.paths, args.yaw_feedback_ticks*TICK_DEG)

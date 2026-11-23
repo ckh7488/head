@@ -1,7 +1,7 @@
 {
   "option_archive": "R5-B25-Pin-Fit-Parts.zip",
-  "option_archive_sha256": "63e56518f29492c5147e8b113fe7bcf5c60cc5b8fe9d43dca384d0052a8ef54b",
-  "source_project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "option_archive_sha256": "764cb3ae6c26328fa3a457651f1445dc71f216a23006199d6d05c448a2e1b319",
+  "source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
   "full_part_stl_count": 30,
   "byte_identical_rebuild": true,
   "all_stls": {
@@ -10,7 +10,8 @@
     "single_closed_body_after_stl_round_trip": true,
     "degenerate_or_reversed_facets": 0
   },
-  "endpoint_slice": {
+  "physical_gauge_and_fit_test": "pending",
+  "historical_endpoint_slice": {
     "slicer": "Bambu Studio 02.09.01.70",
     "printer_and_filament": "P2S 0.4 mm · Bambu PETG HF · 0.20 mm",
     "selection": "Smallest and largest options for each of the six parts with the B25 object settings and build orientation",
@@ -20,8 +21,11 @@
     "estimate_seconds": 8509.76,
     "return_code": 0,
     "plate_warning_message": "",
-    "cli_diagnostics": ["P2S T65535 estimator", "Headless GLFW preview"],
-    "released_as_printable_gcode": false
-  },
-  "physical_gauge_and_fit_test": "pending"
+    "cli_diagnostics": [
+      "P2S T65535 estimator",
+      "Headless GLFW preview"
+    ],
+    "released_as_printable_gcode": false,
+    "source_project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73"
+  }
 }

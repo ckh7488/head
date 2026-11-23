@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
-  "p2s_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "p2s_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -159,7 +159,20 @@
     },
     "eye_yaw_drive_slot": {
       "part": "Part037",
-      "evidence": "eye-yaw-slot.json"
+      "cradle": "Part024",
+      "evidence": "eye-yaw-clearance.json"
+    },
+    "pitch_pin_reinforcement": {
+      "part": "Part019",
+      "evidence": "pitch-pin-ligament.json"
+    },
+    "right_cheek_yoke_relief": {
+      "part": "Jaw_37_right_jaw_bearing_stay",
+      "evidence": "yoke-jaw-cut.json"
+    },
+    "service_covers": {
+      "board": "A4",
+      "evidence": "cover-service.json"
     }
   },
   "print_inputs_sha256": {

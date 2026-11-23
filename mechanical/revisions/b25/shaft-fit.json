@@ -1,6 +1,6 @@
 {
   "source_project": "R5-B25-P2S.3mf",
-  "source_project_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+  "source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
   "units": "mm",
   "stl_origin": "Source orientation with lowest Z at the build plate",
   "parts": {
@@ -87,7 +87,7 @@
     },
     "09": {
       "source_part": "09_head_frame-B25.stl",
-      "source_mesh_sha256": "17fccb218126107c7c7bcc9fc749be6ecfac0b1006e753cec4df38f46cb59e37",
+      "source_mesh_sha256": "0036fa0b141ba1218ab8fea5919831cce961873837f694801fed71e515697d3b",
       "p2s_plate": 6,
       "p2s_settings": {
         "layer_height": "0.2",
@@ -138,7 +138,7 @@
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.10mm.stl",
           "bore_diameter_mm": 8.1,
-          "sha256": "54315ec36a4155e7e8192cd8ca0889a451b3ff71858e24c8b45dadb06cb6a29f",
+          "sha256": "a20b2a749ab404479d2248219a024c64e3c9129c5473750a43519d65696ffeb1",
           "min_sampled_boss_wall_mm": 2.349047165378458,
           "cleared_local_pocket_intrusion_mm3": 3.4218069377562887,
           "shafts_checked_gauge_diameter_mm": 8.076,
@@ -208,13 +208,12 @@
                 3.0999941999509786
               ]
             ]
-          ],
-          "right_locator_wall_mm": 1.7493819533421435
+          ]
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.15mm.stl",
           "bore_diameter_mm": 8.15,
-          "sha256": "14b063b994f55696b809a23db612d2af33942981b3c28cd3033aba58095a15b3",
+          "sha256": "943dfd85c425c2880d5b9776cc3fbbfb4b81cd69a7701c40b756a2b49812e724",
           "min_sampled_boss_wall_mm": 2.3240423604452456,
           "cleared_local_pocket_intrusion_mm3": 3.4233970650253625,
           "shafts_checked_gauge_diameter_mm": 8.126000000000001,
@@ -284,13 +283,12 @@
                 3.099994759370171
               ]
             ]
-          ],
-          "right_locator_wall_mm": 1.7493819533421435
+          ]
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.20mm.stl",
           "bore_diameter_mm": 8.2,
-          "sha256": "0a720fe2633b6b959cc442e5401809d5530ea8644a70daf9df505467e1abf19b",
+          "sha256": "7069f39305d9349231e4a4180154fdeefde8709662b7f37d883cd393480dce9e",
           "min_sampled_boss_wall_mm": 2.2990469882428126,
           "cleared_local_pocket_intrusion_mm3": 3.4251598328085384,
           "shafts_checked_gauge_diameter_mm": 8.176,
@@ -360,13 +358,12 @@
                 3.09999533026545
               ]
             ]
-          ],
-          "right_locator_wall_mm": 1.7493819533421435
+          ]
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.25mm.stl",
           "bore_diameter_mm": 8.25,
-          "sha256": "3c427c41fd2dec5ba419fa290b0353d0457bc53719625ac9a421d17c12b0fe9c",
+          "sha256": "6982a1141bb4327079e7134a1a45bcbc0425ac27da86bf4232beeb4c88030c31",
           "min_sampled_boss_wall_mm": 2.2740434788277755,
           "cleared_local_pocket_intrusion_mm3": 3.4270067779263487,
           "shafts_checked_gauge_diameter_mm": 8.226,
@@ -436,13 +433,12 @@
                 3.0999959130360075
               ]
             ]
-          ],
-          "right_locator_wall_mm": 1.7493819533421435
+          ]
         },
         {
           "file": "P8/09_head-frame_shaft-bore_ID8.30mm.stl",
           "bore_diameter_mm": 8.3,
-          "sha256": "3416ca55318133de612ab799e8166cac1d90dad3bcb98818f23df741f885546b",
+          "sha256": "0b6bd2dab2e6833ec2feeb15ae290fcbe7072c2c9bb411c6196d1f132f860110",
           "min_sampled_boss_wall_mm": 2.249045031482276,
           "cleared_local_pocket_intrusion_mm3": 3.4293209256093067,
           "shafts_checked_gauge_diameter_mm": 8.276000000000002,
@@ -512,13 +508,15 @@
                 3.099996508012465
               ]
             ]
-          ],
-          "right_locator_wall_mm": 1.7493819533421435
+          ]
         }
-      ]
+      ],
+      "production_frame_mesh_sha256": "3352dd5de47bb2073fc00859233a1d3d68ed7d5d63be4a60710f71e281526434",
+      "pin_cheek_reinforcement_outer_radius_mm": 6.8,
+      "pin_cheek_minimum_design_ligament_mm": 1.2
     }
   },
   "baseline_fit_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
-  "geometry_after_final_project_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+  "geometry_after_final_project_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
   "rebuilt_family": "P8"
 }

@@ -1,5 +1,5 @@
 {
-  "project_sha256": "03348b6a4b84046e3c12d6a01a418f5dc46e25b78141a92f9c8163630448a193",
+  "project_sha256": "79563f6718f23cdb46a7db11c45667b73e811899b995b3fb617cc0ca3ff12b9b",
   "slicer": "Bambu Studio 02.09.01.70",
   "profile": "P2S, Bambu PETG HF, 0.4 mm nozzle, 0.20 mm layer, Textured PEI",
   "return_code": 0,
@@ -11,8 +11,8 @@
     228.4,
     22.0
   ],
-  "estimated_seconds": 12620,
-  "estimated_filament_g": 62.71,
+  "estimated_seconds": 11735,
+  "estimated_filament_g": 62.43,
   "slice_warning": "",
   "insert_gauge": {
     "part_number": "CNC Kitchen TC-M3x3.0",
@@ -28,5 +28,6 @@
       "parallel",
       "perpendicular"
     ]
-  }
+  },
+  "wall_generator": "arachne"
 }

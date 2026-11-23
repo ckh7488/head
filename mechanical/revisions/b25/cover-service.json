@@ -1,0 +1,202 @@
+{
+  "baseline_cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
+  "cover_head_recess_removed_mm3": 32.11258873966108,
+  "delta_intersections": {},
+  "volume_added_mm3": 687.0452322610522,
+  "volume_removed_mm3": 262.9528547685342,
+  "rear_stations": [
+    {
+      "xyz": [
+        -47.0,
+        121.6,
+        -52.1
+      ],
+      "baseline_screw_overlap_nominal_mm3": {},
+      "baseline_head_overlap_mm3": {},
+      "updated_head_overlap_mm3": {},
+      "updated_L_key_shaft_overlap_mm3": {},
+      "head_seat_annulus_missing_mm3": 0.0,
+      "annulus_missing_mm3": 0.0,
+      "full_thread_margin_beyond_insert_mm": 0.20000000000000284,
+      "screw_worst_shank_collisions_mm3": {},
+      "insert_against_other_parts_mm3": {},
+      "heat_tool_worst_collisions_mm3": {}
+    },
+    {
+      "xyz": [
+        -28.3,
+        121.6,
+        -52.1
+      ],
+      "baseline_screw_overlap_nominal_mm3": {
+        "CableSaddle": 24.43841694148507
+      },
+      "baseline_head_overlap_mm3": {
+        "CableGate": 27.14677624102615
+      },
+      "updated_head_overlap_mm3": {},
+      "updated_L_key_shaft_overlap_mm3": {},
+      "head_seat_annulus_missing_mm3": 0.0,
+      "annulus_missing_mm3": 0.0,
+      "full_thread_margin_beyond_insert_mm": 0.20000000000000284,
+      "screw_worst_shank_collisions_mm3": {},
+      "insert_against_other_parts_mm3": {},
+      "heat_tool_worst_collisions_mm3": {}
+    },
+    {
+      "xyz": [
+        -3.0,
+        121.6,
+        -52.1
+      ],
+      "baseline_screw_overlap_nominal_mm3": {
+        "CableSaddle": 0.22049966843118424
+      },
+      "baseline_head_overlap_mm3": {},
+      "updated_head_overlap_mm3": {},
+      "updated_L_key_shaft_overlap_mm3": {},
+      "head_seat_annulus_missing_mm3": 0.0,
+      "annulus_missing_mm3": 0.0,
+      "full_thread_margin_beyond_insert_mm": 0.20000000000000284,
+      "screw_worst_shank_collisions_mm3": {},
+      "insert_against_other_parts_mm3": {},
+      "heat_tool_worst_collisions_mm3": {}
+    },
+    {
+      "xyz": [
+        22.0,
+        121.6,
+        -52.1
+      ],
+      "baseline_screw_overlap_nominal_mm3": {
+        "CableSaddle": 0.22049966843123586
+      },
+      "baseline_head_overlap_mm3": {},
+      "updated_head_overlap_mm3": {},
+      "updated_L_key_shaft_overlap_mm3": {},
+      "head_seat_annulus_missing_mm3": 0.0,
+      "annulus_missing_mm3": 0.0,
+      "full_thread_margin_beyond_insert_mm": 0.20000000000000284,
+      "screw_worst_shank_collisions_mm3": {},
+      "insert_against_other_parts_mm3": {},
+      "heat_tool_worst_collisions_mm3": {}
+    },
+    {
+      "xyz": [
+        47.0,
+        121.6,
+        -52.1
+      ],
+      "baseline_screw_overlap_nominal_mm3": {},
+      "baseline_head_overlap_mm3": {},
+      "updated_head_overlap_mm3": {},
+      "updated_L_key_shaft_overlap_mm3": {},
+      "head_seat_annulus_missing_mm3": 0.0,
+      "annulus_missing_mm3": 0.0,
+      "full_thread_margin_beyond_insert_mm": 0.20000000000000284,
+      "screw_worst_shank_collisions_mm3": {},
+      "insert_against_other_parts_mm3": {},
+      "heat_tool_worst_collisions_mm3": {}
+    }
+  ],
+  "cover_lift_contacts": {},
+  "bottom_stations": [
+    {
+      "name": "hatchBolt0",
+      "seat": [
+        -41.2,
+        51,
+        -79.65
+      ],
+      "longest_shank_mm": 10.45,
+      "shank_overlap_mm3": {},
+      "nearest_stack_at_tip_mm": [
+        [
+          "ServiceHatchNutKeeperLeft",
+          0.4140048308892929
+        ],
+        [
+          "Part000",
+          2.6441255643406927
+        ],
+        [
+          "HubPCB",
+          5.368891878218447
+        ]
+      ]
+    },
+    {
+      "name": "hatchBolt1",
+      "seat": [
+        -41.2,
+        71,
+        -79.65
+      ],
+      "longest_shank_mm": 10.45,
+      "shank_overlap_mm3": {},
+      "nearest_stack_at_tip_mm": [
+        [
+          "ServiceHatchNutKeeperLeft",
+          0.4140048308892929
+        ],
+        [
+          "Part000",
+          2.6441255643406882
+        ],
+        [
+          "HarnessWire012",
+          3.3260443332128133
+        ]
+      ]
+    },
+    {
+      "name": "hatchBolt2",
+      "seat": [
+        41.2,
+        51,
+        -79.65
+      ],
+      "longest_shank_mm": 10.45,
+      "shank_overlap_mm3": {},
+      "nearest_stack_at_tip_mm": [
+        [
+          "ServiceHatchNutKeeperRight",
+          0.4140048308895847
+        ],
+        [
+          "Part000",
+          2.6441255643406927
+        ],
+        [
+          "A4J2LeverKeeper",
+          5.300000000000004
+        ]
+      ]
+    },
+    {
+      "name": "hatchBolt3",
+      "seat": [
+        41.2,
+        71,
+        -79.65
+      ],
+      "longest_shank_mm": 10.45,
+      "shank_overlap_mm3": {},
+      "nearest_stack_at_tip_mm": [
+        [
+          "ServiceHatchNutKeeperRight",
+          0.4140048308895847
+        ],
+        [
+          "Part000",
+          2.6441255643406882
+        ],
+        [
+          "A4J2LeverKeeper",
+          5.300000000000004
+        ]
+      ]
+    }
+  ],
+  "cad_sha256": "e7e86bedd71b8a2491e019d163b16e4f2ec5a78ae86a258d452e8d8c3b0c39ba"
+}
