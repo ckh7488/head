@@ -16,6 +16,10 @@ const pcb = $("#pcb");
 const initialBoard = [-1.6, -1.4, width + 3.2, height + 2.8];
 const schMarks = new Map();
 const refs = Object.keys(data.parts);
+const fourLayer = data.layers.length === 4;
+const copperWeight = fourLayer ? "외층 1 oz · 내층 0.5 oz" : "양면 2 oz";
+const publishedTraceMinimum = fourLayer ? "다층 1 oz 최소 0.09 mm" : "2층 2 oz 최소 0.16 mm";
+const layerLabels = { F: "윗면", In1: "L2 · GND", In2: "L3 · 전원", B: "밑면" };
 let side = "F";
 let view = "sch";
 let selected = "";
@@ -32,14 +36,14 @@ const descriptions = {
 const limits = [
   ["외형", `${width} × ${height} mm`, "Economic 10 × 10 ~ 470 × 500 mm"],
   ["기판 두께", "1.60 mm", "1.6 mm 공칭 허용 범위 1.44–1.76 mm"],
-  ["2층 완성 동박", "양면 2 oz · 설계 70 µm", "2층 생기판에 2 oz 제공"],
-  ["표면처리", "무연 HASL", "2 oz·Economic 밑면 실장과 함께 견적 확인"],
-  ["최소 배선 폭", `${data.minTrack.toFixed(3)} mm`, "2층 2 oz 최소 0.16 mm"],
-  ["동박 간격 규칙", `${data.clearance.toFixed(3)} mm`, "2층 2 oz 최소 0.16 mm"],
-  ["도금 부품홀 최소 동박 링", `${data.minRing.toFixed(3)} mm · ${data.pthCount}홀`, "2 oz 최소 0.254 mm"],
-  ["관통 비아", `Ø0.35 드릴 / Ø0.70·0.90 패드 · ${data.vias.length}개`, "최소 Ø0.15 드릴 / Ø0.25 패드"],
+  [`${data.layers.length}층 완성 동박`, copperWeight, "표준 적층"],
+  ["표면처리", "무연 HASL", "Economic 밑면 실장과 함께 견적 확인"],
+  ["최소 배선 폭", `${data.minTrack.toFixed(3)} mm`, publishedTraceMinimum],
+  ["동박 간격 규칙", `${data.clearance.toFixed(3)} mm`, publishedTraceMinimum],
+  ["도금 부품홀 최소 동박 링", `${data.minRing.toFixed(3)} mm · ${data.pthCount}홀`, fourLayer ? "다층 1 oz 권장 0.20 mm" : "2 oz 최소 0.254 mm"],
+  ["관통 비아", `Ø${[...new Set(data.vias.map(via => via[3]))].sort().join("·")} 드릴 · ${data.vias.length}개`, "최소 Ø0.15 드릴 / Ø0.25 패드"],
   ["홀 공차", "홀은 PCB 탭에서 선택", "직경 +0.13/−0.08 mm · 위치 ±0.075 mm"],
-  ["마스크 댐 기준", "TPS2557 최소 패드 간격 0.275 mm", "2 oz 최소 패드 간격 0.20 mm"],
+  ["마스크 댐 기준", "TPS2557 최소 패드 간격 0.275 mm", fourLayer ? "1 oz 녹색 최소 0.10 mm" : "2 oz 최소 0.20 mm"],
   ["밑면 실장", `${data.pcbaCount}개 · IC 피치 0.65 mm`, "Economic IC 최소 피치 0.40 mm · 0402 이상"],
 ];
 
@@ -149,18 +153,18 @@ function zoomSvg(root, factor, point) {
   setBox(root, [cx + (x - cx) * factor, cy + (y - cy) * factor, width * factor, height * factor]);
 }
 
-const px = x => side === "F" ? x + .025 : width - x + .025;
+const px = x => side === "B" ? width - x + .025 : x + .025;
 const py = y => y + .025;
 
 function showBoard() {
   pcb.replaceChildren();
-  const real = svg("g", { transform: side === "F" ? "" : `translate(${width + .05} 0) scale(-1 1)` });
+  const real = svg("g", { transform: side === "B" ? `translate(${width + .05} 0) scale(-1 1)` : "" });
   if ($("#copper-toggle").checked) {
     const copper = svg("g", { opacity: .68, "data-layer": side + ".Cu" });
     putInside(data.drawings[side + "-copper"], copper);
     real.append(copper);
   }
-  if ($("#silk-toggle").checked) putInside(data.drawings[side + "-silk"], real);
+  if ($("#silk-toggle").checked && data.drawings[side + "-silk"]) putInside(data.drawings[side + "-silk"], real);
   putInside(data.drawings["F-edge"], real);
   pcb.append(real);
 
@@ -286,7 +290,7 @@ function setView(next) {
     pcb: "KiCad의 동박·실크 도면입니다. 패드를 누르면 같은 넷의 배선과 패드가 강조됩니다.",
     model: "드래그로 회전하고 휠로 확대합니다. 부품을 누르면 핀 정보를 확인합니다.",
   }[view] || "";
-  if (view === "pcb") setSide(selected && data.parts[selected].side === "B" ? "B" : side);
+  if (view === "pcb") setSide(side);
   if (view === "model") {
     if (!three) start3d();
     else resize3d();
@@ -404,7 +408,11 @@ $("#part").addEventListener("change", event => {
 });
 for (const button of all("[data-view]")) button.addEventListener("click", () => setView(button.dataset.view));
 for (const button of all("[data-sheet]")) button.addEventListener("click", () => frame(button.dataset.sheet));
-for (const button of all("[data-side]")) button.addEventListener("click", () => setSide(button.dataset.side));
+for (const layer of data.layers) {
+  const button = element("button", layerLabels[layer], { type: "button", "data-side": layer });
+  button.addEventListener("click", () => setSide(layer));
+  $("#layer-buttons").append(button);
+}
 for (const button of all("[data-camera]")) button.addEventListener("click", () => orient3d(button.dataset.camera));
 for (const checkbox of [$("#copper-toggle"), $("#silk-toggle"), $("#ref-toggle")]) checkbox.addEventListener("change", showBoard);
 function zoom(factor) {
@@ -427,7 +435,12 @@ $("#inspect-fuse").addEventListener("click", () => {
   const [x, y] = data.parts.F1.xy;
   setBox(pcb, [px(x) - 14, py(y) - 12, 29, 22]);
 });
-$("#limits").append(table(["항목", "A4", "JLCPCB 공개 조건"], limits));
+$("#limits").append(table(["항목", data.hubRevision, "JLCPCB 공개 조건"], limits));
+$("#order-stack").textContent = `시제품 2장 · ${data.layers.length}층 FR-4 · 1.6 mm · ${copperWeight} · 녹색 · 무연 HASL`;
+$("#order-hand").textContent = `밑면 ${data.pcbaCount}개를 공장에서 실장하고 윗면 ${refs.filter(ref => data.parts[ref].populate === "YES" && !data.parts[ref].jlc).length}개는 직접 납땜합니다.`;
+$("#solder-access").textContent = fourLayer
+  ? "손납땜 패드와 밑면 실장 부품 사이를 2 mm 이상 띄웠습니다. 평팁으로 패드와 다리를 함께 가열하고 납이 옆 핀에 붙었는지 확인합니다."
+  : "F1과 밑면 U1·U2 사이의 동박 간격은 0.26–0.27 mm입니다. 열린 쪽에서 작은 평팁을 댑니다.";
 $("#bom").append(table(["위치", "규격", "조달·실장", "비고"], refs.map(ref => {
   const part = data.parts[ref];
   const supplier = part.jlc
@@ -443,7 +456,7 @@ for (const [index, [name, bytes]] of Object.entries(data.downloads).entries()) {
   const url = "data:application/octet-stream;base64," + bytes;
   $("#downloads").append(element("a", downloadNames[index], { href: url, download: name }));
 }
-$("#placement-image").src = "data:image/png;base64," + data.placementImage;
+$("#placement-image").src = "data:image/svg+xml;base64," + data.placementImage;
 $("#provenance").textContent = `KiCad ${data.toolVersion} · ERC·DRC·회로도 대조 통과 · PCB ${Object.values(data.sha)[0].slice(0, 12)}`;
 choose("J1");
 setView("sch");

@@ -11,13 +11,16 @@ from tempfile import TemporaryDirectory
 from zipfile import ZIP_DEFLATED, ZipFile
 
 HERE = Path(__file__).resolve().parent
-PROJECTS = {"servo-hub": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
-REVISIONS = {"servo-hub": "A4", "c3-rf": "A1"}
+PROJECTS = {"servo-hub": "R5_Servo_Hub", "servo-hub-a5": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
+REVISIONS = {"servo-hub": "A4", "servo-hub-a5": "A5", "c3-rf": "A1"}
 COMMON_LAYERS = ["F.Cu", "B.Cu", "F.Mask", "B.Mask", "F.Silkscreen", "B.Silkscreen", "Edge.Cuts"]
 HUB_JLCPCB_PARTS = {
     "Yageo CC0603KRX7R9BB104": ("100 nF, X7R, 50 V, ±10%", "C14663"),
     "Yageo RT0603BRD0761K9L": ("61.9 kOhm, 0.1%, 25 ppm/C", "C861498"),
     "Texas Instruments TPS2557DRBR": ("TPS2557DRBR", "C130056"),
+    "Uniroyal 1206W4F0000T5E": ("0 Ohm", "C17888"),
+    "Uniroyal 1206W4F1001T5E": ("1 kOhm, 1%", "C4410"),
+    "Uniroyal 0805W8F3301T5E": ("3.3 kOhm, 1%", "C26010"),
 }
 
 
@@ -131,17 +134,17 @@ def align_copper_layer_numbers(job_file, layers):
     job_file.write_text(json.dumps(job, indent=2) + "\n")
 
 
-def check_hub_annular_rings(board):
+def check_hub_annular_rings(board, minimum):
     import pcbnew
 
-    minimum_ring = pcbnew.FromMM(.254)
+    minimum_ring = pcbnew.FromMM(minimum)
     for footprint in board.GetFootprints():
         for pad in footprint.Pads():
             if pad.GetAttribute() != pcbnew.PAD_ATTRIB_PTH:
                 continue
             size, drill = pad.GetSize(), pad.GetDrillSize()
             if min(size.x-drill.x, size.y-drill.y) < 2*minimum_ring:
-                raise ValueError(f'{footprint.GetReference()} pin {pad.GetNumber()} lacks the 2 oz annular ring')
+                raise ValueError(f'{footprint.GetReference()} pin {pad.GetNumber()} needs a {minimum} mm annular ring')
 
 
 def archive(source, output):
@@ -162,15 +165,18 @@ def export(project, output_root):
     with TemporaryDirectory() as tmp:
         work = Path(tmp)
         layers = COMMON_LAYERS.copy()
-        if project == "c3-rf":
+        multilayer = project in {"c3-rf", "servo-hub-a5"}
+        if multilayer:
             layers += ["In1.Cu", "In2.Cu"]
+        if project == "c3-rf":
             side, paste, positions = "front", "F.Paste", "C3-front-positions-mm.csv"
         else:
             hub, _, _, _ = bom_rows(board)
-            check_hub_annular_rings(hub)
-            side, paste, positions = "back", "B.Paste", "R5-hub-back-positions-mm.csv"
+            check_hub_annular_rings(hub, .20 if multilayer else .254)
+            positions = "R5-hub-A5-back-positions-mm.csv" if multilayer else "R5-hub-back-positions-mm.csv"
+            side, paste = "back", "B.Paste"
         stencil_board, placement_rows, bom = prepare_assembly(board, work, output, side, positions)
-        if project == "servo-hub":
+        if project != "c3-rf":
             write_hub_pcba(output, prefix, placement_rows, bom)
             layers.append(paste)
         stencil = work / "stencil"
@@ -180,7 +186,7 @@ def export(project, output_root):
         archive(stencil, output / f"{prefix}-Stencil.zip")
         plots = work / "gerbers"
         plot(board, layers, plots)
-        if project == "c3-rf":
+        if multilayer:
             align_copper_layer_numbers(plots / f"{name}-job.gbrjob", 4)
         kicad("pcb", "export", "drill", "--excellon-separate-th", "--excellon-units", "mm",
               "--excellon-zeros-format", "decimal", "-o", plots, board)

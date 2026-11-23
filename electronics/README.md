@@ -1,5 +1,7 @@
 # B25 서보 허브 A4
 
+손납땜을 쉽게 만든 4층 시안을 별도로 볼 수 있습니다. [A5 서보 허브](servo-hub-a5/) · [A5 회로·PCB·3D HTML](../web/b25/R5-B25-A5.html)
+
 받침 뒤의 **XT30은 5 V**, **XT60은 12 V**입니다. 내부 J1과 J2는 모두 XT30PW-M이므로 작업대에서 두 입력을 확인한 뒤 J2를 잠급니다. [B25 조립](../mechanical/revisions/b25/assembly.md#전원-커넥터와-배선) · [핀별 배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/) · [3D 배선·정비](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/)
 
 | 작업 | 확인할 항목 |

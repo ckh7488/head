@@ -17,6 +17,11 @@ HOT_COPPER_OHM_MM = 2.06e-5
 HUB_COPPER_MM = .060
 HUB_THICKNESS_MM = 1.6
 VIA_PLATING_MM = .020
+# Thicknesses in the hot-resistance estimate, below the nominal A5 stackup.
+A5_COPPER_MM = {pcbnew.F_Cu: .030, pcbnew.In1_Cu: .015,
+                pcbnew.In2_Cu: .015, pcbnew.B_Cu: .030}
+A5_COPPER_DEPTH = {pcbnew.F_Cu: 0., pcbnew.In1_Cu: .24,
+                   pcbnew.In2_Cu: 1.33, pcbnew.B_Cu: 1.57}
 XL330_NOMINAL_STALL_A = 1.47
 XL330_STALL_A = 1.55
 XL430_STALL_A = 1.40
@@ -65,35 +70,45 @@ def node(vector):
 
 
 def copper_path(board, parts, net, start, end):
+    """Bound path resistance using routed traces and barrels, omitting pours."""
     graph = {}
+    layers = list(board.GetEnabledLayers().CuStack())
+    four_layer = len(layers) == 4
+    thickness = A5_COPPER_MM if four_layer else dict.fromkeys(layers, HUB_COPPER_MM)
+    depth = A5_COPPER_DEPTH if four_layer else {pcbnew.F_Cu: 0., pcbnew.B_Cu: HUB_THICKNESS_MM}
+    plating = .015 if four_layer else VIA_PLATING_MM
 
     def edge(a, b, ohms):
         graph.setdefault(a, []).append((b, ohms))
         graph.setdefault(b, []).append((a, ohms))
 
+    def barrel(position, drill, touched_layers):
+        area = pi * plating * (pcbnew.ToMM(drill) + plating)
+        for top, bottom in zip(touched_layers, touched_layers[1:]):
+            ohms = HOT_COPPER_OHM_MM * (depth[bottom] - depth[top]) / area
+            edge((*position, top), (*position, bottom), ohms)
+
     for item in board.GetTracks():
         if item.GetNetname() != f'/{net}':
             continue
         if isinstance(item, pcbnew.PCB_VIA):
-            a = node(item.GetPosition())
-            area = pi * VIA_PLATING_MM * (pcbnew.ToMM(item.GetDrillValue()) + VIA_PLATING_MM)
-            edge((*a, pcbnew.F_Cu), (*a, pcbnew.B_Cu), HOT_COPPER_OHM_MM * HUB_THICKNESS_MM / area)
+            barrel(node(item.GetPosition()), item.GetDrillValue(),
+                   [layer for layer in layers if item.IsOnLayer(layer)])
         else:
             a, b, layer = node(item.GetStart()), node(item.GetEnd()), item.GetLayer()
-            ohms = HOT_COPPER_OHM_MM * item.GetLength() / item.GetWidth() / HUB_COPPER_MM
+            ohms = HOT_COPPER_OHM_MM * item.GetLength() / item.GetWidth() / thickness[layer]
             edge((*a, layer), (*b, layer), ohms)
 
     def at(part, pin):
         return {(*node(pad.GetPosition()), layer) for pad in parts[part].Pads()
-                if pad.GetNumber() == str(pin) for layer in (pcbnew.F_Cu, pcbnew.B_Cu)
+                if pad.GetNumber() == str(pin) for layer in layers
                 if pad.IsOnLayer(layer)}
 
     for part in parts:
         for pad in parts[part].Pads():
             if pad.GetNetname() == f'/{net}' and pad.GetAttribute() == pcbnew.PAD_ATTRIB_PTH:
-                a = node(pad.GetPosition())
-                area = pi * VIA_PLATING_MM * (pcbnew.ToMM(pad.GetDrillSize().x) + VIA_PLATING_MM)
-                edge((*a, pcbnew.F_Cu), (*a, pcbnew.B_Cu), HOT_COPPER_OHM_MM * HUB_THICKNESS_MM / area)
+                barrel(node(pad.GetPosition()), pad.GetDrillSize().x,
+                       [layer for layer in layers if pad.IsOnLayer(layer)])
 
     targets = at(*end)
     queue = [(0., a) for a in at(*start)]
@@ -165,8 +180,9 @@ def a4_neck_trunk():
     return stock_wire + NECK_INPUT_CONTACT_OHM + HUB_XT30_CONTACT_OHM + A4_SERVICE_CONTACT_OHM
 
 
-def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False):
-    board, parts = load('servo-hub', 'R5_Servo_Hub')
+def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False, hub_revision='A4'):
+    project = 'servo-hub-a5' if hub_revision == 'A5' else 'servo-hub'
+    board, parts = load(project, 'R5_Servo_Hub')
     check_net(parts, 'J1', {1: 'GND', 2: '5V_IN'})
     check_net(parts, 'J3', {1: 'GND', 2: 'DXL_CTL'})
     check_net(parts, 'F1', {1: '5V_IN', 2: '5V_EYES'})
@@ -176,7 +192,7 @@ def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False):
     total_hub_a = hub_5v_current(ph_fault, servo_a=xl330_a)
     total_source_a = total_hub_a + xl330_a
     if nominal:
-        print(f'B25 A4 model at nominal 5.000 V and 12.000 V. Motor catalogue currents: '
+        print(f'B25 {hub_revision} model at nominal 5.000 V and 12.000 V. Motor catalogue currents: '
               f'{total_source_a:.2f} A on 5 V ({total_hub_a:.2f} A at the hub), '
               f'{NECK_NORMAL_A:.2f} A on 12 V.')
     else:
@@ -271,6 +287,8 @@ if __name__ == '__main__':
     source.add_argument('--radio', action='store_true', help='Check the separate C3 board connections')
     parser.add_argument('--ph-fault', action='store_true',
                         help='Check each healthy motor while another PH branch is in current limit')
+    parser.add_argument('--hub-revision', choices=('A4', 'A5'), default='A4',
+                        help='Select the A4 reference or the 4-layer A5 hub')
     parser.add_argument('--tail-mm', type=float,
                         help='Length of each 16 AWG 5 V pigtail, overriding W33 and W34 in the cut list')
     options = parser.parse_args()
@@ -288,6 +306,7 @@ if __name__ == '__main__':
     input_5v = options.input_5v
     if input_5v is None:
         input_5v = INPUT_5V_LOADED if bench else 5.
-    failed = check_hub(input_5v, ph_fault=options.ph_fault, tail_mm=options.tail_mm, nominal=not bench)
+    failed = check_hub(input_5v, ph_fault=options.ph_fault, tail_mm=options.tail_mm, nominal=not bench,
+                       hub_revision=options.hub_revision)
     if failed:
         raise SystemExit('Insufficient modeled voltage at ' + ', '.join(failed))

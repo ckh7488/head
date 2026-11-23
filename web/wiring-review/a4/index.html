@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="R5 B25 A4 서보 허브의 KiCad 회로도, PCB, 3D 모델과 JLCPCB 발주 자료">
-  <title>R5 B25 · A4 서보 허브</title>
+  <meta name="description" content="R5 B25 __REVISION__ 서보 허브의 KiCad 회로도, PCB, 3D 모델과 JLCPCB 발주 자료">
+  <title>R5 B25 · __REVISION__ 서보 허브</title>
   <style>__CSS__</style>
 </head>
 <body>
 <main>
   <header class="mast">
-    <div><p class="product">R5 B25 <span>서보 허브 A4</span></p><h1>회로와 기판</h1></div>
+    <div><p class="product">R5 B25 <span>서보 허브 __REVISION__</span></p><h1>회로와 기판</h1></div>
     <div class="board-badge"><b>70 × 35 mm</b><span>FR-4 · 2층 · 1.6 mm · 무연 HASL</span></div>
   </header>
 
-  <nav class="modes" aria-label="A4 보기">
+  <nav class="modes" aria-label="서보 허브 보기">
     <button type="button" data-view="sch" aria-pressed="true">회로도</button>
     <button type="button" data-view="pcb" aria-pressed="false">PCB</button>
     <button type="button" data-view="model" aria-pressed="false">3D</button>
@@ -24,7 +24,7 @@
     <section class="stage" aria-label="회로도·PCB·3D">
       <div class="subnav">
         <div id="sheet-actions"><button type="button" data-sheet="all">전체 회로</button><button type="button" data-sheet="J1">전원 입력</button><button type="button" data-sheet="U2">5 V 전류 제한</button><button type="button" data-sheet="J3">TTL 통신</button></div>
-        <div id="board-actions" hidden><button type="button" data-side="F" aria-pressed="true">윗면</button><button type="button" data-side="B" aria-pressed="false">밑면</button><label><input type="checkbox" id="copper-toggle" checked> 동박</label><label><input type="checkbox" id="silk-toggle" checked> 실크</label><label><input type="checkbox" id="ref-toggle" checked> 부품 번호</label></div>
+        <div id="board-actions" hidden><span id="layer-buttons" role="group" aria-label="동박 층"></span><label><input type="checkbox" id="copper-toggle" checked> 동박</label><label><input type="checkbox" id="silk-toggle" checked> 실크</label><label><input type="checkbox" id="ref-toggle" checked> 부품 번호</label></div>
         <div id="model-actions" hidden><button type="button" data-camera="top">윗면</button><button type="button" data-camera="bottom">밑면</button><button type="button" data-camera="iso">사선</button></div>
         <div class="zoom"><button type="button" id="zoom-in" aria-label="확대">+</button><button type="button" id="zoom-out" aria-label="축소">−</button><button type="button" id="fit">맞춤</button></div>
       </div>
@@ -52,37 +52,37 @@
     <div class="order-grid">
       <section class="paper">
         <h2>권장 발주 구성</h2>
-        <p>시제품 2장으로 견적을 시작합니다. 2층 FR-4, 1.6 mm, 양쪽 완성 동박 2 oz, 녹색 솔더마스크, <b>무연 HASL</b>을 선택합니다. 2 oz는 모터 전류가 흐르는 동박 두께입니다.</p>
+        <p id="order-stack"></p>
         <ol>
-          <li>Gerber ZIP으로 <b>2 oz · 무연 HASL · Economic · Bottom</b> 조합을 견적 냅니다. TPS2557 VSON(0.65 mm 피치, 노출 방열 패드) 실장에 업체가 ENIG를 요구하면 표면처리만 ENIG로 비교합니다.</li>
-          <li>BOM·CPL을 각각 올립니다. JLCPCB 미리보기에서 U1–U3 몸체의 1번 점과 PCB의 1번 패드를 맞춥니다. 같은 위쪽 모서리를 유지한 밑면 시점에서 1번은 오른쪽 위입니다.</li>
-          <li>윗면 17개는 수납땜합니다. Standard PCBA는 70 × 70 mm 최소 치수에 맞는 패널·레일 견적이 필요합니다.</li>
+          <li>Gerber ZIP으로 무연 HASL · Economic · Bottom 조합을 견적 냅니다. TPS2557 실장에 업체가 ENIG를 요구하면 표면처리를 비교합니다.</li>
+          <li>BOM과 CPL을 올립니다. 밑면 방향 그림대로 JLCPCB 미리보기의 U1–U3 몸체 점과 PCB의 1번 패드를 맞춥니다.</li>
+          <li id="order-hand"></li>
         </ol>
-        <p>C3–C5는 Basic 커패시터 <b>C14663</b>을 사용합니다. 기존 Extended 품번 한 종류의 피더 준비 비용을 줄입니다. JLCPCB 공개 단가는 주문당 US$3.07입니다. 표면처리 할인 폭, 실제 부품 재고 및 61.9 kΩ 저항 C861498의 매칭은 견적에서 확인합니다.</p>
+        <p>실제 단가, 부품 재고와 C861498 저항 매칭은 견적에서 확인합니다.</p>
         <div class="source-links"><a href="https://jlcpcb.com/capabilities/pcb-capabilities">기판 규격</a><a href="https://jlcpcb.com/capabilities/pcb-assembly-capabilities">실장 규격</a><a href="https://jlcpcb.com/help/article/jlcpcb-surface-finish">표면처리</a><a href="https://jlcpcb.com/help/article/pcb-assembly-price">실장 비용</a></div>
       </section>
       <section class="paper">
         <h2>발주 파일</h2>
         <div id="downloads"></div>
-        <details class="placement"><summary>밑면 U1–U3 방향 대조</summary><img id="placement-image" alt="A4 밑면에서 U1–U3의 1번 위치"></details>
+        <details class="placement"><summary>밑면 U1–U3 방향 대조</summary><img id="placement-image" alt="밑면에서 본 U1–U3의 1번 핀 위치"></details>
         <h3>수납땜 확대 검사</h3>
-        <p>F1–U1 0.263 mm, F1–U2 0.271 mm, C1.2–C5 0.810 mm, J4–J6.3–R4–R6 1.130 mm. 열린 쪽에서 폭이 작은 평팁으로 납땜한 뒤 확대경으로 브리지와 SMD 위치를 확인합니다.</p>
+        <p id="solder-access"></p>
         <button type="button" class="action" id="inspect-fuse">PCB 밑면에서 F1 보기</button>
       </section>
     </div>
     <section class="paper">
-      <h2>JLCPCB 공개 한계와 A4 치수</h2>
+      <h2>JLCPCB 공개 한계와 기판 치수</h2>
       <div id="limits"></div>
     </section>
     <section class="paper">
       <h2>구매 BOM</h2>
-      <p>밑면은 JLCPCB 품번 3종, 각 3개입니다. 윗면은 제조사 규격품을 수납땜합니다. H1–H4와 TP1–TP4는 기판에 포함됩니다.</p>
+      <p>H1–H4와 TP1–TP4는 기판에 포함됩니다.</p>
       <div class="table-scroll" id="bom"></div>
     </section>
   </section>
   <footer>
     <span id="provenance"></span>
-    <a href="https://github.com/ckh7488/head/pull/1">A4 소스 PR</a>
+    <a href="https://github.com/ckh7488/head/pull/1">KiCad 소스 PR</a>
   </footer>
 </main>
 <script type="application/json" id="board-data">__DATA__</script>
