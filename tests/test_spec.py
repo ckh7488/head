@@ -56,19 +56,29 @@ def test_records_reject_partial_stale_and_contradictory_evidence(tmp_path):
     assert all(rows[item][0] == 'UNVERIFIED' for item in ('P01', 'P03', 'P04', 'M01'))
 
 
+B25_JAW = {'jaw_command_ticks': 62, 'jaw_tip_drop_mm': 5.27, 'jaw_visible_drop': True,
+           'jaw_goal_pwm_verified': True, 'jaw_stop_reserve_deg': 1., 'jaw_last_clear_ticks': [-28, 79]}
+B25_CAMERA = {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
+              'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8],
+              'camera_yaw_calibration_ticks': [1408, 2048, 2688]}
+
+
 @pytest.mark.parametrize('item,measurement,failed_field,failed_value', [
-    ('P06', {'jaw_tip_drop_mm': 5.27, 'jaw_visible_drop': True, 'jaw_goal_pwm_verified': True,
-             'jaw_stop_reserve_deg': 1.}, 'jaw_visible_drop', False),
-    ('P06', {'jaw_tip_drop_mm': 5.27, 'jaw_visible_drop': True, 'jaw_goal_pwm_verified': True,
-             'jaw_stop_reserve_deg': 1.}, 'jaw_stop_reserve_deg', .99),
-    ('P06', {'jaw_tip_drop_mm': 5.27, 'jaw_visible_drop': True, 'jaw_goal_pwm_verified': True,
-             'jaw_stop_reserve_deg': 1.}, 'jaw_goal_pwm_verified', False),
-    ('P07', {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
-             'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8]}, 'camera_yaw_cycles', 99),
-    ('P07', {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
-             'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8]}, 'camera_usb_reenumerations', 1),
-    ('P07', {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
-             'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8]}, 'camera_yaw_endpoints_deg', None),
+    ('P06', B25_JAW, 'jaw_last_clear_ticks', [-27, 79]),
+    ('P06', B25_JAW, 'jaw_last_clear_ticks', [-28, 78]),
+    ('P06', B25_JAW, 'jaw_command_ticks', None),
+    ('P06', B25_JAW, 'jaw_command_ticks', 4),
+    ('P06', B25_JAW, 'jaw_visible_drop', False),
+    ('P06', B25_JAW, 'jaw_stop_reserve_deg', .99),
+    ('P06', B25_JAW, 'jaw_goal_pwm_verified', False),
+    ('P07', B25_CAMERA, 'camera_yaw_cycles', 99),
+    ('P07', B25_CAMERA, 'camera_usb_reenumerations', 1),
+    ('P07', B25_CAMERA, 'camera_yaw_endpoints_deg', None),
+    ('P07', B25_CAMERA, 'camera_yaw_endpoints_deg', [-.001, .001]),
+    ('P07', B25_CAMERA, 'camera_yaw_calibration_ticks', None),
+    ('P07', B25_CAMERA, 'camera_yaw_calibration_ticks', [1407, 2048, 2688]),
+    ('P07', {**B25_CAMERA, 'camera_yaw_calibration_ticks': [2408, 2048, 1788],
+             'camera_yaw_endpoints_deg': [-31.5, 22.9]}, 'camera_yaw_endpoints_deg', [-22.9, 31.5]),
 ])
 def test_b25_records_require_actual_jaw_and_camera_thresholds(tmp_path, item, measurement, failed_field, failed_value):
     records = tmp_path / 'spec/records'
@@ -84,6 +94,29 @@ def test_b25_records_require_actual_jaw_and_camera_thresholds(tmp_path, item, me
     observed['status'] = 'FAIL'
     path.write_text(json.dumps(observed))
     assert check_records(tmp_path, 'B25', CAD_HASH)[item][0] == 'FAIL'
+
+
+def test_b25_neck_stop_requires_both_directions_and_feedback_reserve(tmp_path):
+    records = tmp_path / 'spec/records'
+    records.mkdir(parents=True)
+    path = records / 'P04.json'
+    observed = dict(revision='B25', cad_sha256=CAD_HASH, status='PASS', tester='Bench operator',
+                    date='2026-01-01', measurement='Unpowered stops', result='Angles measured from neutral')
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)['P04'][0] == 'UNVERIFIED'
+
+    yaw = {'endpoints': [-56.25, 56.25], 'first_contacts': [-58.953125, 58.953125]}
+    pitch = {'endpoints': [-13.095703125, 2.63671875], 'first_contacts': [-15.953, 5.436]}
+    observed['neck_stop_angles_deg'] = {'yaw': yaw, 'pitch': pitch}
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)['P04'][0] == 'PASS'
+
+    yaw['first_contacts'][1] = 58.95
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)['P04'][0] == 'UNVERIFIED'
+    observed['status'] = 'FAIL'
+    path.write_text(json.dumps(observed))
+    assert check_records(tmp_path, 'B25', CAD_HASH)['P04'][0] == 'FAIL'
 
 
 def test_empty_cad_result_has_no_coverage(tmp_path):

@@ -28,6 +28,8 @@
 
 시험한 사람이 `tester`에 이름, `date`에 시험일(`YYYY-MM-DD`), `measurement`에 시험 방법과 조건, `result`에 직접 확인한 결과를 적습니다. P03은 구동·걸림 횟수를, P08은 전체 조립 완료 여부와 두 덮개의 너트 유지 결과를 함께 적습니다. [실물 시험과 필드](../bench.md)
 
-B25의 P06은 62틱에서 실측한 `jaw_tip_drop_mm`, 눈에 보이는 움직임 `jaw_visible_drop`, 스토퍼 여유 `jaw_stop_reserve_deg`, Goal PWM 출력 제한 확인 `jaw_goal_pwm_verified`를 기록합니다. P07은 `camera_yaw_cycles`, `camera_usb_disconnects`, `camera_usb_reenumerations`, `camera_recognized_after`와 실제 보정 끝점 `camera_yaw_endpoints_deg`를 기록합니다. 끝점은 중립 기준 `[왼쪽 음수, 오른쪽 양수]` 순입니다. [B25 실물 시험](../bench.md#b25-실물-시험)
+B25 P04의 `neck_stop_angles_deg`에는 `yaw`(목 좌우)와 `pitch`(목 상하)를 기록합니다. 각 축의 `endpoints`와 `first_contacts`는 같은 중립 기준의 `[음수 쪽 각도, 양수 쪽 각도]`입니다. 검사기는 각 방향의 여유에서 피드백 허용 8틱을 뺍니다.
+
+B25 P06에는 닫힘에서 명령한 `jaw_command_ticks`(62), 실측한 `jaw_tip_drop_mm`, 눈에 보이는 움직임 `jaw_visible_drop`, 열림 스토퍼 여유 `jaw_stop_reserve_deg`, Goal PWM 출력 제한 확인 `jaw_goal_pwm_verified`를 기록합니다. `jaw_last_clear_ticks`에는 보정한 동일 영점에서 접촉 없이 움직인 마지막 틱을 `[닫힘 쪽 음수, 열림 쪽 양수]` 순으로 적습니다. 검사기가 5틱 피드백 여유를 빼고 두 방향을 판정합니다. P07에는 `camera_yaw_cycles`, `camera_usb_disconnects`, `camera_usb_reenumerations`, `camera_recognized_after`를 기록합니다. `camera_yaw_endpoints_deg`는 실제 도달한 `[왼쪽 음수, 오른쪽 양수]` 각도입니다. `camera_yaw_calibration_ticks`는 시험한 펌웨어 `Calibration.h`의 ID4 `[왼쪽, 중립, 오른쪽]` 틱입니다. 각 실측 끝점과 해당 보정 끝점의 차이는 위치 피드백 허용 8틱(0.703125°) 이내여야 합니다. [B25 실물 시험](../bench.md#b25-실물-시험)
 
 두 기록은 저장소에서 `python spec/verify.py --b25-physical`로 검사합니다.

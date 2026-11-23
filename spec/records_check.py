@@ -12,6 +12,11 @@ MECHANISMS = ('neck_yaw', 'neck_pitch', 'jaw', 'blink', 'eye_yaw', 'eye_pitch', 
 RECORD_IDS = tuple(f'P{i:02d}' for i in range(1, 9)) + tuple(f'M{i:02d}' for i in range(1, 10))
 VERDICTS = {'PASS', 'FAIL'}
 SERVICE_COVERS = {'rear-cable', 'bottom-board'}
+TICK_DEGREES = 360 / 4096
+B25_NECK_FEEDBACK_DEG = 8 * TICK_DEGREES
+B25_YAW_MAX_TICKS = 640
+B25_JAW_FEEDBACK_TICKS = 5
+B25_JAW_COMMAND_TICKS = 62
 PLACEHOLDERS = {'-', 'n/a', 'todo', 'tbd', '미측정', '해당 없음', '해당없음'}
 REQUIRED_CASES = {
     'M02': {'neck_pitch', 'jaw', 'blink', 'eye_yaw', 'eye_pitch'},
@@ -144,6 +149,40 @@ def mechanical_record(root, item, record, physical):
     return status, detail
 
 
+def signed_angles(angles, label):
+    if (not isinstance(angles, list) or len(angles) != 2
+            or any(type(angle) not in (int, float) or not math.isfinite(angle) for angle in angles)
+            or not angles[0] < 0 < angles[1]):
+        raise ValueError(f'{label}은 같은 중립을 기준으로 음수 쪽과 양수 쪽 각도를 기록해야 합니다.')
+    return angles
+
+
+def check_b25_neck_stops(record):
+    measurements = record['neck_stop_angles_deg']
+    for axis, label in (('yaw', '목 좌우'), ('pitch', '목 상하')):
+        values = measurements[axis]
+        endpoints = signed_angles(values['endpoints'], f'{label} 설정 끝점')
+        contacts = signed_angles(values['first_contacts'], f'{label} 첫 접촉각')
+        if any(abs(contact) - abs(endpoint) - B25_NECK_FEEDBACK_DEG < 2
+               for endpoint, contact in zip(endpoints, contacts)):
+            raise ValueError(f'{label} 양쪽의 첫 접촉 여유는 피드백 허용치를 빼고 2° 이상이어야 합니다.')
+
+
+def check_b25_camera_endpoints(record):
+    endpoints = signed_angles(record.get('camera_yaw_endpoints_deg'), 'P07 실측 왕복 끝점')
+    row = record.get('camera_yaw_calibration_ticks')
+    if (not isinstance(row, list) or len(row) != 3
+            or any(type(tick) is not int or not 0 <= tick <= 4095 for tick in row)
+            or not min(row[0], row[2]) < row[1] < max(row[0], row[2])):
+        raise ValueError('P07에는 시험한 펌웨어의 ID4 왼쪽, 중립, 오른쪽 보정 틱이 필요합니다.')
+    spans = (abs(row[0] - row[1]), abs(row[2] - row[1]))
+    if any(span > B25_YAW_MAX_TICKS for span in spans):
+        raise ValueError('P07의 ID4 보정 끝점은 중립에서 각각 640틱 이내여야 합니다.')
+    if any(abs(abs(endpoint) - span * TICK_DEGREES) > B25_NECK_FEEDBACK_DEG
+           for endpoint, span in zip(endpoints, spans)):
+        raise ValueError('P07 실측 왕복 끝점과 ID4 보정 끝점의 차이는 8틱(0.703125°) 이내여야 합니다.')
+
+
 def physical_record(item, record):
     tester = required_text(record['tester'], '시험자')
     when = required_text(record['date'], '시험 날짜')
@@ -158,6 +197,8 @@ def physical_record(item, record):
             raise ValueError('실제 깜빡임 횟수와 걸린 횟수를 기록해야 합니다.')
         if record['status'] == 'PASS' and (cycles < 50 or binds):
             raise ValueError('P03 합격에는 50회 이상 구동과 걸림 0회가 필요합니다.')
+    if record.get('revision') == 'B25' and item == 'P04' and record['status'] == 'PASS':
+        check_b25_neck_stops(record)
     if record.get('revision') == 'B25' and item == 'P06':
         drop, reserve = (record[key] for key in ('jaw_tip_drop_mm', 'jaw_stop_reserve_deg'))
         visible, limited = (record[key] for key in ('jaw_visible_drop', 'jaw_goal_pwm_verified'))
@@ -166,8 +207,21 @@ def physical_record(item, record):
         if type(visible) is not bool or type(limited) is not bool:
             raise ValueError('턱 끝이 눈에 보이게 내려갔는지와 Goal PWM 제한 확인 여부를 기록해야 합니다.')
         minimum_reserve = 1 if limited else 2
-        if record['status'] == 'PASS' and (not visible or drop <= 0 or reserve < minimum_reserve):
-            raise ValueError(f'P06 합격에는 눈에 보이는 턱 끝 하강과 스토퍼 여유 {minimum_reserve}° 이상이 필요합니다.')
+        if record['status'] == 'PASS':
+            command = record.get('jaw_command_ticks')
+            if type(command) is not int or command != B25_JAW_COMMAND_TICKS:
+                raise ValueError('P06 합격에는 62틱 턱 열림 명령에서 잰 하강량이 필요합니다.')
+            clear_ticks = record.get('jaw_last_clear_ticks')
+            if (not isinstance(clear_ticks, list) or len(clear_ticks) != 2
+                    or any(type(tick) is not int for tick in clear_ticks)
+                    or not -4095 <= clear_ticks[0] < 0 < clear_ticks[1] <= 4095):
+                raise ValueError('P06에는 같은 턱 영점에서 닫힘·열림 방향에서 닿지 않은 마지막 틱을 부호와 함께 기록해야 합니다.')
+            closed_reserve = (-clear_ticks[0] - B25_JAW_FEEDBACK_TICKS) * TICK_DEGREES
+            open_reserve = (clear_ticks[1] - command - B25_JAW_FEEDBACK_TICKS) * TICK_DEGREES
+            if closed_reserve < 2 or open_reserve < minimum_reserve:
+                raise ValueError('P06의 공통 영점에서 피드백을 빼고도 양쪽 스토퍼 여유를 확보해야 합니다.')
+            if not visible or drop <= 0 or reserve < minimum_reserve:
+                raise ValueError(f'P06 합격에는 눈에 보이는 턱 끝 하강과 스토퍼 여유 {minimum_reserve}° 이상이 필요합니다.')
     if record.get('revision') == 'B25' and item == 'P07':
         cycles, disconnects, reenumerations = (record[key] for key in (
             'camera_yaw_cycles', 'camera_usb_disconnects', 'camera_usb_reenumerations'))
@@ -176,11 +230,7 @@ def physical_record(item, record):
                 or type(recognized) is not bool):
             raise ValueError('왕복·끊김·재인식 횟수와 시험 후 USB 인식을 기록해야 합니다.')
         if record['status'] == 'PASS':
-            endpoints = record.get('camera_yaw_endpoints_deg')
-            if (not isinstance(endpoints, list) or len(endpoints) != 2
-                    or any(type(angle) not in (int, float) or not math.isfinite(angle) for angle in endpoints)
-                    or not endpoints[0] < 0 < endpoints[1]):
-                raise ValueError('P07에는 중립을 기준으로 좌우의 실제 끝 각도가 필요합니다.')
+            check_b25_camera_endpoints(record)
             if cycles < 100 or disconnects or reenumerations or not recognized:
                 raise ValueError('P07 합격에는 100회 이상 왕복, USB 연속 인식과 시험 후 인식이 필요합니다.')
     if item == 'P08' and record['status'] == 'PASS':
