@@ -48,7 +48,8 @@ LABELS = {
     'CableGate': '42 뒤 케이블 덮개', 'HubHolder': '35 허브 바닥 덮개', 'HubPCB': 'A4 허브 기판',
     'HubBodyJ1': 'J1 · 5 V XT30', 'HubBodyJ2': 'J2 · 12 V XT30', 'A4J2LeverKeeper': 'J2 플러그 고정편',
     'HubBodyF1': 'F1 · 7.5 A MINI', 'HubBodyF2': 'F2 · 4 A MINI',
-    'HubBolt3': 'H3 M3×12 원통머리', 'HubBolt4': 'H4 M3×12 원통머리',
+    'HubBolt1': 'J1 쪽 M3×8 (KiCad H3)', 'HubBolt2': 'J1 쪽 M3×8 (KiCad H1)',
+    'HubBolt3': 'J2 쪽 M3×12 (KiCad H4)', 'HubBolt4': 'J2 쪽 M3×12 (KiCad H2)',
     'JawExteriorScrewLeft': '왼쪽 M3×12 원통머리', 'JawExteriorScrewRight': '오른쪽 M3×12 원통머리',
     'JawAntiRockScrew': '뒤쪽 M3×40 원통머리', 'RearSkullScrewLeft': '뒤 외장 왼쪽 M3×18',
     'RearSkullScrewRight': '뒤 외장 오른쪽 M3×16', 'A4WagoPositive': 'WAGO 221-412 · 12 V +',
@@ -126,10 +127,10 @@ def plan(layout, heat_screws, heat_retainers, world):
         elif sid == 'hub-board-place':
             row['text'] = 'A4 허브 기판과 부품을 35번 바닥 덮개 위에 얹습니다. 기판의 J1은 5 V, J2는 12 V입니다.'
         elif sid == 'hub-bolts':
-            row.update(text='입력과 무부하 출력을 확인한 뒤 전원을 분리합니다. H1·H2에는 M3×8, J2 고정편을 통과하는 H3·H4에는 M3×12를 씁니다. 아래에는 일반 M3 육각너트를 씁니다.',
+            row.update(text='입력과 무부하 출력을 확인한 뒤 전원을 분리합니다. J1 쪽 두 곳에는 M3×8, J2 고정편을 지나는 두 곳에는 M3×12를 씁니다. 아래에는 일반 M3 육각너트를 씁니다.',
                        bolts=[f'HubBolt{n}' for n in range(1,5)])
             result.extend([
-                step('a4-hub-plugs', ctx, '어댑터·USB·모터·OpenRB를 분리하고 F1·F2를 뺍니다. 극성을 확인한 J1·J2 플러그를 꽂고 제작 문서의 첫 통전 순서대로 입력과 무부하 출력을 확인합니다.',
+                step('a4-hub-plugs', ctx, '어댑터·USB·모터·OpenRB를 분리하고 F1·F2를 뺍니다. J1·J2는 모두 패드 2가 +, 패드 1이 GND입니다. 극성을 확인한 플러그를 꽂고 제작 문서의 첫 통전 순서대로 입력과 무부하 출력을 확인합니다.',
                      place=(HUB_J1 + HUB_J2, (0,12,0))),
                 step('a4-hub-inlet-keeper', ctx, '첫 통전을 마치고 어댑터를 모두 뽑은 뒤, J2 플러그의 뒤턱을 고정편이 잡는 위치에 맞춥니다.',
                      place=(('A4J2LeverKeeper',), (0,0,15))),

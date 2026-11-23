@@ -28,7 +28,7 @@ export const partGroups = {
 };
 
 export const fastenerViews = {
-  keeper: { target: [19, 63, -70], eye: [69, 117, 35], parts: ["A4J2LeverKeeper", "HubBolt3", "HubBolt4", "A4J2FemaleEnvelope", "HubBodyJ2", "HubPCB", "HubHolder"] },
+  keeper: { target: [0, 63, -70], eye: [69, 117, 35], parts: ["A4J2LeverKeeper", ...sequence("HubBolt", 4), "A4J2FemaleEnvelope", "HubBodyJ1", "HubBodyJ2", "HubPCB", "HubHolder"] },
   inlet: { target: [-13, 172, -57], eye: [40, 94, 43], parts: ["InputXT60Mate", "CableSaddle", "CableGate", ...inletBolts] },
   socket: { target: [12, 186, -75], eye: [64, 100, 21], parts: ["A4XT60ExternalSocket", "CableSaddle", ...stationBolts] },
   hatch: { target: [0, 65, -78], eye: [68, 100, -38], parts: ["Part000", "HubHolder", "ServiceHatchNutKeeperLeft", "ServiceHatchNutKeeperRight",

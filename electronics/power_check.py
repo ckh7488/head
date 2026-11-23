@@ -8,7 +8,7 @@ from pathlib import Path
 import pcbnew
 
 from harness import (
-    INPUT_5V_LOADED, INPUT_5V_MAX, MOTOR_WIRE, POWER_WIRE, SUPPLY_CURRENT, SUPPLY_TAIL,
+    INPUT_5V_LOADED, INPUT_5V_MAX, J2_SERVICE_WIRE, MOTOR_WIRE, POWER_WIRE, SUPPLY_CURRENT, SUPPLY_TAIL,
     XT60_TAIL, check_wire_sizes, wire_resistance,
 )
 
@@ -27,8 +27,6 @@ PH_LIMIT_TOLERANCE = .003
 PH_SWITCH_HOT_OHM = .035
 XL330_MIN_V = 4.27
 XL330_MAX_V = 5.25
-XL430_MIN_V = 10.50
-NECK_SOURCE_MIN_V = 11.10
 NECK_NORMAL_A = 2 * XL430_STALL_A
 # Fuse and contact limits include installation and ageing allowances. Verify them hot on the bench.
 SOURCE_CONTACT_OHM = .012
@@ -38,6 +36,16 @@ JAW_FUSE_OHM = .110
 JAW_HOLDER_LEAD_M = .127
 PH_EH_CONTACT_OHM = .090
 JAW_EH_CONTACT_OHM = .045
+# A4 adds two WAGO terminals and a service XT60 pair to the input XT60 and J2.
+# This added contact allowance is an estimate. Measure the completed harness hot.
+NECK_INPUT_CONTACT_OHM = .012
+A4_SERVICE_CONTACT_OHM = .012
+NECK_FUSE_OHM = .038
+NECK_RETURN_OHM = .015
+NECK_BRANCH_CONTACT_OHM = .090
+# Preserve the A3 pre-service reference for the archived protection study.
+LEGACY_NECK_TRUNK_OHM = (.212 * XT60_TAIL.hot_ohms_per_m + .210 * POWER_WIRE.hot_ohms_per_m
+                         + NECK_INPUT_CONTACT_OHM + HUB_XT30_CONTACT_OHM)
 
 
 def load(project, board):
@@ -132,17 +140,32 @@ def neck_paths(board, parts):
         yield output, wires, lead + branch
 
 
-def neck_voltages(board, parts, *, trunk_a=NECK_NORMAL_A):
-    """Calculate each loaded motor at the source floor and stated trunk current."""
-    trunk = (wire_resistance('W6', 'W7', wire=XT60_TAIL)
-             + wire_resistance('W8', 'W9', wire=POWER_WIRE) + .012 + HUB_XT30_CONTACT_OHM)
+def neck_voltages(board, parts, *, source_v, trunk_ohm, trunk_a=NECK_NORMAL_A):
     for output, wires, positive in neck_paths(board, parts):
-        voltage = (NECK_SOURCE_MIN_V - trunk_a * (trunk + positive + .038 + .015)
-                   - XL430_STALL_A * (wire_resistance(*wires, wire=MOTOR_WIRE) + .090))
+        voltage = (source_v - trunk_a * (trunk_ohm + positive + NECK_FUSE_OHM + NECK_RETURN_OHM)
+                   - XL430_STALL_A * (wire_resistance(*wires, wire=MOTOR_WIRE) + NECK_BRANCH_CONTACT_OHM))
         yield output, positive, voltage
 
 
-def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None, nominal=False):
+def a4_neck_trunk():
+    # W6/W7/W35/W36 have four 11 mm WAGO insertions. Cups and final lengths
+    # are fitted on the bench. Bound the wire estimate with the stock lengths
+    # in the B25 list: 0.30 m per colour of 12 AWG and 0.25 m of 18 AWG.
+    fixed = wire_resistance('W6', 'W7', 'W35', 'W36', wire=XT60_TAIL,
+                            column='모델 중심선 mm', terminal_mm=4 * 11)
+    service = wire_resistance('W8', 'W9', wire=J2_SERVICE_WIRE, column='모델 중심선 mm')
+    fixed_stock = .60 * XT60_TAIL.hot_ohms_per_m
+    service_stock = .50 * J2_SERVICE_WIRE.hot_ohms_per_m
+    if fixed > fixed_stock or service > service_stock:
+        raise ValueError('A4 neck routes exceed the modeled stock wire lengths')
+    stock_wire = fixed_stock + service_stock
+    print(f'A4 12 V trunk wire: {1000*(fixed + service):.2f} mΩ before cup lengths, '
+          f'{1000*stock_wire:.2f} mΩ using all listed stock wire; '
+          f'{1000*A4_SERVICE_CONTACT_OHM:.0f} mΩ assumed for added service contacts')
+    return stock_wire + NECK_INPUT_CONTACT_OHM + HUB_XT30_CONTACT_OHM + A4_SERVICE_CONTACT_OHM
+
+
+def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False):
     board, parts = load('servo-hub', 'R5_Servo_Hub')
     check_net(parts, 'J1', {1: 'GND', 2: '5V_IN'})
     check_net(parts, 'J3', {1: 'GND', 2: 'DXL_CTL'})
@@ -153,7 +176,7 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None, nominal
     total_hub_a = hub_5v_current(ph_fault, servo_a=xl330_a)
     total_source_a = total_hub_a + xl330_a
     if nominal:
-        print(f'Nominal 5.000 V and 12.000 V sources. Motor catalogue currents for copper sizing: '
+        print(f'B25 A4 model at nominal 5.000 V and 12.000 V. Motor catalogue currents: '
               f'{total_source_a:.2f} A on 5 V ({total_hub_a:.2f} A at the hub), '
               f'{NECK_NORMAL_A:.2f} A on 12 V.')
     else:
@@ -163,19 +186,19 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None, nominal
         if hub_5v_current(ph_fault=True) + XL330_STALL_A >= SUPPLY_CURRENT:
             raise ValueError('The 5 V source cannot supply simultaneous stalls plus one limited PH fault')
         load_case = ' with one PH branch in current limit' if ph_fault else ''
-        print(f'5 V source: {input_5v:.3f} V loaded floor, {INPUT_5V_MAX:.3f} V ceiling, '
+        print(f'Bench stress model: {input_5v:.3f} V loaded 5 V source, {INPUT_5V_MAX:.3f} V bench ceiling, '
               f'{total_source_a:.2f} A concurrent load{load_case}')
         print(f'PH current estimate: {lo_limit:.3f}–{hi_limit:.3f} A per channel')
         if curve_min < XL330_STALL_A:
             print(f'PH current qualification required: fitted lower limit {curve_min:.3f} A '
                   f'is below modeled {XL330_STALL_A:.2f} A load')
-        if tail_mm is None:
-            tail_ohms = wire_resistance('W33', 'W34', wire=SUPPLY_TAIL)
-        else:
-            tail_ohms = 2 * tail_mm / 1000 * SUPPLY_TAIL.hot_ohms_per_m
-        source_loop = wire_resistance('W1', 'W2', wire=POWER_WIRE) + tail_ohms
-        junction_v = input_5v - total_source_a * (source_loop + SOURCE_CONTACT_OHM)
-        hub_loop = wire_resistance('W3', 'W4', wire=POWER_WIRE) + HUB_XT30_CONTACT_OHM + HUB_FUSE_OHM
+    if tail_mm is None:
+        tail_ohms = wire_resistance('W33', 'W34', wire=SUPPLY_TAIL)
+    else:
+        tail_ohms = 2 * tail_mm / 1000 * SUPPLY_TAIL.hot_ohms_per_m
+    source_loop = wire_resistance('W1', 'W2', wire=POWER_WIRE) + tail_ohms
+    junction_v = input_5v - total_source_a * (source_loop + SOURCE_CONTACT_OHM)
+    hub_loop = wire_resistance('W3', 'W4', wire=POWER_WIRE) + HUB_XT30_CONTACT_OHM + HUB_FUSE_OHM
     lead = copper_path(board, parts, '5V_IN', ('J1', 2), ('F1', 1))
     voltages = {}
     for i, wires in enumerate((('W13', 'W14'), ('W16', 'W17'), ('W19', 'W20')), 1):
@@ -191,27 +214,16 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None, nominal
         feed = max(copper_path(board, parts, '5V_EYES', ('F1', 2), (switch, pin)) for pin in (2, 3))
         branch = max(copper_path(board, parts, rail, (switch, pin), (output, 2)) for pin in (6, 7))
         ground = copper_path(board, parts, 'GND', (output, 1), ('J1', 1))
-        if nominal:
-            drop = total_hub_a * (lead + feed) + xl330_a * branch
-            print(f'{output}: {1000*(lead+feed+branch):.2f} mΩ positive copper path, '
-                  f'{1000*drop:.2f} mV sizing drop, {1000*ground:.2f} mΩ explicit ground traces')
-            continue
         branch_loop = branch + PH_SWITCH_HOT_OHM + wire_resistance(*wires, wire=MOTOR_WIRE) + PH_EH_CONTACT_OHM
         # Charge the whole hub current to the entire positive feed and both rails
         # to the explicit ground return. With one fault, place it on a different
         # branch from the healthy branch whose motor voltage is being checked.
         voltage = (junction_v - total_hub_a * (hub_loop + lead + feed)
                    - (total_hub_a + NECK_NORMAL_A) * ground - xl330_a * branch_loop)
-        print(f'{output}: {1000*(lead+feed+branch):.2f} mΩ positive PCB path, '
+        copper_drop = total_hub_a * (lead + feed) + xl330_a * branch
+        print(f'{output}: {1000*(lead+feed+branch):.2f} mΩ positive PCB path ({1000*copper_drop:.2f} mV), '
               f'{1000*ground:.2f} mΩ return, {voltage:.3f} V at the motor')
         voltages[output] = voltage
-
-    if nominal:
-        for output, _, positive in neck_paths(board, parts):
-            print(f'{output}: {1000*positive:.2f} mΩ positive copper path, '
-                  f'{1000*NECK_NORMAL_A*positive:.2f} mV sizing drop')
-        print('Motor-terminal voltage during normal B25 motion requires bench measurement.')
-        return []
 
     # Only W1–W2 and the supply leads carry the combined current. W5 and
     # the two holder pigtails carry only ID6 current before the motor cable.
@@ -220,16 +232,19 @@ def check_hub(input_5v=INPUT_5V_LOADED, *, ph_fault=False, tail_mm=None, nominal
     voltages['ID6'] = junction_v - xl330_a * jaw_loop
     print(f'ID6 fused branch: {voltages["ID6"]:.3f} V at the motor')
 
+    if nominal:
+        for output, positive, voltage in neck_voltages(board, parts, source_v=12., trunk_ohm=a4_neck_trunk()):
+            print(f'{output}: {1000*positive:.2f} mΩ positive PCB path ({1000*NECK_NORMAL_A*positive:.2f} mV), '
+                  f'{voltage:.3f} V at the motor')
+        print('Model estimates at catalogue stall currents. Measure adapter and motor terminals during B25 motion.')
+        return []
+
     required_5v = input_5v - min(voltages.values()) + XL330_MIN_V
-    print(f'Minimum 5 V source terminal voltage for this load: {required_5v:.4f} V')
+    print(f'Minimum 5 V source terminal voltage for the {XL330_MIN_V:.2f} V bench reference: {required_5v:.4f} V')
     failures = [output for output, voltage in voltages.items() if voltage < XL330_MIN_V]
     if INPUT_5V_MAX > XL330_MAX_V:
         failures.append('5 V source ceiling')
 
-    for output, positive_ohm, voltage in neck_voltages(board, parts):
-        print(f'{output}: {1000*positive_ohm:.2f} mΩ positive PCB path, {voltage:.3f} V at the motor')
-        if voltage < XL430_MIN_V:
-            failures.append(output)
     return failures
 
 
@@ -248,24 +263,31 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     source = parser.add_mutually_exclusive_group()
     source.add_argument('--nominal', action='store_true',
-                        help='B25 copper sizing at nominal 5 V and 12 V using motor catalogue currents')
-    source.add_argument('--input-5v', type=float, default=INPUT_5V_LOADED,
-                        help='Loaded voltage before the modeled 5 V harness, in volts')
+                        help='B25 sizing and voltage estimate at nominal 5 V and 12 V (default)')
+    source.add_argument('--bench', action='store_true',
+                        help='Legacy SPD1168X 5 V stress screen at a loaded 5.17 V')
+    source.add_argument('--input-5v', type=float,
+                        help='Run the 5 V stress screen at this loaded source voltage')
+    source.add_argument('--radio', action='store_true', help='Check the separate C3 board connections')
     parser.add_argument('--ph-fault', action='store_true',
                         help='Check each healthy motor while another PH branch is in current limit')
     parser.add_argument('--tail-mm', type=float,
                         help='Length of each 16 AWG 5 V pigtail, overriding W33 and W34 in the cut list')
     options = parser.parse_args()
-    if not 0 < options.input_5v <= INPUT_5V_MAX:
+    if options.input_5v is not None and not 0 < options.input_5v <= INPUT_5V_MAX:
         parser.error(f'--input-5v must be greater than 0 and at most {INPUT_5V_MAX} V')
     if options.tail_mm is not None and (not isfinite(options.tail_mm) or options.tail_mm <= 0):
         parser.error('--tail-mm must be a finite positive length')
-    if options.nominal and (options.ph_fault or options.tail_mm is not None):
-        parser.error('--nominal uses the B25 wiring and catalogue load references')
-    check_wire_sizes()
-    failed = check_hub(5.0 if options.nominal else options.input_5v, ph_fault=options.ph_fault,
-                       tail_mm=options.tail_mm, nominal=options.nominal)
-    if not options.nominal:
+    bench = options.bench or options.input_5v is not None
+    if not bench and (options.ph_fault or options.tail_mm is not None):
+        parser.error('--ph-fault and --tail-mm require --bench or --input-5v')
+    if options.radio:
         check_radio()
+        raise SystemExit(0)
+    check_wire_sizes()
+    input_5v = options.input_5v
+    if input_5v is None:
+        input_5v = INPUT_5V_LOADED if bench else 5.
+    failed = check_hub(input_5v, ph_fault=options.ph_fault, tail_mm=options.tail_mm, nominal=not bench)
     if failed:
         raise SystemExit('Insufficient modeled voltage at ' + ', '.join(failed))

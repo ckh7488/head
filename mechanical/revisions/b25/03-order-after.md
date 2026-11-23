@@ -11,8 +11,10 @@
 | DYNAMIXEL XL430-W250-T | 2 | 902-0135-000, 12 V 계통 TTL. ID4 목 좌우, ID5 목 상하. [XL430](https://www.robotis.com/shop/item.php?it_id=902-0135-000) |
 | OpenRB-150 | 1 | USB 전원, DYNAMIXEL TTL. [OpenRB-150](https://www.robotis.com/shop/item.php?it_id=902-0183-000) |
 | U20CAM-1080P-S1 | 1 | 32 × 32 mm USB UVC. 동봉 1 m 케이블의 카메라 키 플러그와 USB-A 꼬리를 재사용합니다. [U20CAM](https://github.com/INNO-MAKER/U20CAM-1080P-S1) · [카메라 접합](assembly.md#카메라-usb-선재) |
-| 정전압 DC 5.0 V / 8 A 어댑터 | 1 | 국내 AC 220 V 입력, 절연형 DC 출력. 눈·눈꺼풀·턱을 공급하는 외부 XT30. |
-| 정전압 DC 12 V / 5 A 어댑터 | 1 | 국내 AC 220 V 입력, 절연형 DC 출력. 두 XL430을 공급하는 외부 XT60. |
+| 정전압 DC 5.0 V / 8 A 어댑터 | 1 | 국내 AC 220 V 입력, 절연형 DC 출력. 눈·눈꺼풀·턱을 공급하는 외부 XT30. 부하 변동 사양이 있는 제품을 고릅니다. |
+| 정전압 DC 12 V / 5 A 어댑터 | 1 | 국내 AC 220 V 입력, 절연형 DC 출력. 두 XL430을 공급하는 외부 XT60. 모터 단자에서 무부하·가감속 전압을 확인합니다. |
+
+정격 전류는 구매 조건입니다. 실제 전압은 어댑터 리드, 하네스와 퓨즈의 강하에 따라 달라집니다. 조립 후 P07에서 어댑터 출력과 모터 단자를 함께 측정합니다. [공칭 전원 계산과 실물 검수](../../../electronics/README.md#구동-중-전원-확인)
 
 XL330 네 상자의 PHS M2×8 TAP 11개와 M2×6 TAP 5개를 케이스에 사용합니다. 전원·전선·수동소자는 표의 규격과 치수에 맞는 국내 유통 동급품을 쓸 수 있습니다. 커넥터는 키 방향, 핀 배치, 고정턱과 풋프린트를 대조합니다. ESP32-C3 A1은 별도 RF 실험에 사용합니다. [XL330 나사 배정](xl330-case-screws.md) · [B25 변경 BOM](BOM.csv) · [공통 기구 BOM](../../BOM.csv)
 

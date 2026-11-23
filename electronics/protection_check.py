@@ -4,12 +4,14 @@ from argparse import ArgumentParser
 from math import isfinite
 
 from power_check import (
-    NECK_NORMAL_A, NECK_SOURCE_MIN_V, SUPPLY_CURRENT, XL330_STALL_A, XL430_MIN_V,
-    XL430_STALL_A, check_net, hub_5v_current, load, neck_voltages,
+    LEGACY_NECK_TRUNK_OHM, NECK_NORMAL_A, SUPPLY_CURRENT, XL330_STALL_A, XL430_STALL_A,
+    check_net, hub_5v_current, load, neck_voltages,
 )
 
 COMPACT_5V_FLOOR = 5.14
 NECK_SOURCE_LIMIT = 5.00
+NECK_SOURCE_MIN_V = 11.10
+XL430_MIN_V = 10.50
 EH_22_AWG_CATALOG_A = 3.00
 F2_NOMINAL_A = 4.00
 
@@ -83,14 +85,16 @@ def check_protection(service_loop_ohm):
     )
     motor_voltages = []
     branch_drop = XL430_STALL_A * EFUSE_HOT_OHM
-    for output, _, baseline in neck_voltages(board, parts):
+    for output, _, baseline in neck_voltages(board, parts, source_v=NECK_SOURCE_MIN_V,
+                                             trunk_ohm=LEGACY_NECK_TRUNK_OHM):
         allowed_ohm = (baseline - XL430_MIN_V - branch_drop) / NECK_NORMAL_A
         voltage = baseline - branch_drop - NECK_NORMAL_A * service_loop_ohm
         motor_voltages.append(voltage)
         print(f'{output}: {voltage:.4f} V at the motor; '
               f'{1000 * allowed_ohm:.2f} mΩ maximum additional service loop resistance')
     fault_trunk_a = XL430_STALL_A + eh_max
-    for output, _, baseline in neck_voltages(board, parts, trunk_a=fault_trunk_a):
+    for output, _, baseline in neck_voltages(board, parts, source_v=NECK_SOURCE_MIN_V,
+                                             trunk_ohm=LEGACY_NECK_TRUNK_OHM, trunk_a=fault_trunk_a):
         voltage = baseline - branch_drop - fault_trunk_a * service_loop_ohm
         source_floor = NECK_SOURCE_MIN_V + XL430_MIN_V - voltage
         print(f'{output} while the other neck branch limits: {voltage:.4f} V; '
@@ -102,7 +106,7 @@ def check_protection(service_loop_ohm):
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('--neck-service-loop-mohm', required=True, type=float,
-                        help='Additional hot supply-and-return resistance beyond the existing harness model')
+                        help='Additional hot loop resistance above the historical A3-length baseline')
     args = parser.parse_args()
     if not isfinite(args.neck_service_loop_mohm) or args.neck_service_loop_mohm < 0:
         parser.error('--neck-service-loop-mohm must be finite and nonnegative')

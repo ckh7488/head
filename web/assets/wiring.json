@@ -1,5 +1,6 @@
 {
   "cad_sha256": "20d9409445e56fc15a898c89d17b5652789857935c2dcc1140762f435dd5850f",
+  "scope": "Legacy B15 viewer, pre-A4 harness with Phoenix J2",
   "blocks": [
     {"id": "W5p", "label": "5 V 분기 · WAGO 221-413", "kind": "splice", "center": [-42, 46, -60.25], "size": [19, 19, 8.5], "motion": "fixed", "baseOnly": true, "levers": true},
     {"id": "W5g", "label": "5 V GND · WAGO 221-413", "kind": "splice", "center": [-54.5, 48.0, -69.5], "size": [19, 19, 8.5], "motion": "fixed", "baseOnly": true, "levers": true},
@@ -69,7 +70,7 @@
       [47, 65, -68],
       [49.0, 62.5, -70.95]
     ]},
-    {"id": "J2+", "label": "목 + WAGO → 허브 J2 1번 · 18 AWG", "kind": "power", "diameter": 2.057, "baseOnly": true, "fillet": 7, "points": [
+    {"id": "J2+", "label": "목 + WAGO → 구형 Phoenix J2 1번 · 18 AWG", "kind": "power", "diameter": 2.057, "baseOnly": true, "fillet": 7, "points": [
       [42.5, 41.1, -61.7],
       [39.5, 41.0, -61.5],
       [40.0, 60.0, -54.0],
@@ -77,7 +78,7 @@
       [15.3, 77.0, -67.4],
       [15.3, 74.15, -67.4, "hatch"]
     ]},
-    {"id": "J2-", "label": "목 GND WAGO → 허브 J2 2번 · 18 AWG", "kind": "return", "diameter": 2.057, "baseOnly": true, "fillet": 7, "points": [
+    {"id": "J2-", "label": "목 GND WAGO → 구형 Phoenix J2 2번 · 18 AWG", "kind": "return", "diameter": 2.057, "baseOnly": true, "fillet": 7, "points": [
       [55.0, 62.5, -70.95],
       [52, 67, -67.5],
       [43.0, 78.0, -69.0],

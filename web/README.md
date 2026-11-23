@@ -90,7 +90,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory build/b23-review
 
 ## 이전 뷰어의 로컬 실행
 
-저장소 루트에서 실행합니다. 터미널에 표시된 주소를 브라우저에 입력하면 이전 구동 뷰어가 열립니다. 주소 끝에 `?view=wiring`을 붙이면 **배선·체결** 화면으로 시작합니다. 단계별 조립은 `/assembly/`, 조립 완료 모습은 `/assembly/#complete`에서 확인합니다.
+저장소 루트에서 실행합니다. 기본 주소는 B25 구동 화면을 열고, `?view=wiring`은 **배선·체결** 화면을 엽니다. `/assembly/`와 `/assembly/#complete`는 각각 이전 B15의 단계별 조립과 조립 완료 화면입니다. B15의 배선 자료는 Phoenix J2의 기록입니다. B25 A4의 XT30 J2는 **패드 2가 +, 패드 1이 GND**입니다. [A4 배선과 첫 통전](../electronics/README.md#전원과-배선)
 
 ```sh
 npm ci --prefix web

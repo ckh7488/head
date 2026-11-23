@@ -38,15 +38,15 @@ INPUT_5V_MAX = SUPPLY_SETPOINT + SUPPLY_ALLOWANCE
 CUT_LIST = Path(__file__).resolve().parents[1] / 'mechanical/WIRING-CUT-LIST.csv'
 
 
-def wire_resistance(*numbers, wire):
+def wire_resistance(*numbers, wire, column='재단 mm', terminal_mm=0.):
     with CUT_LIST.open(newline='', encoding='utf-8-sig') as stream:
         cuts = {row['번호']: row for row in csv.DictReader(stream)}
-    length_mm = 0
+    length_mm = terminal_mm
     for number in numbers:
         cut = cuts[number]
         if cut['전선'] != f'{wire.awg} AWG':
             raise ValueError(f'{number} wire gauge differs from {wire.part}')
-        length_mm += float(cut['재단 mm'])
+        length_mm += float(cut[column])
     return length_mm / 1000 * wire.hot_ohms_per_m
 
 

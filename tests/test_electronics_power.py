@@ -21,18 +21,36 @@ def power_checker():
     return [SYSTEM_PYTHON, CHECKER]
 
 
-def test_hub_model_load_and_branch_limits(power_checker):
+def motor_voltages(output):
+    return [float(value) for value in re.findall(r'([\d.]+) V at the motor', output)]
+
+
+def test_default_uses_b25_nominal_voltage_and_the_a4_service_wires(power_checker):
     result = subprocess.run(power_checker, capture_output=True, text=True, check=True)
+    nominal = subprocess.run([*power_checker, '--nominal'], capture_output=True, text=True, check=True)
+    assert result.stdout == nominal.stdout
+    assert '5.89 A on 5 V (4.42 A at the hub), 2.80 A on 12 V' in result.stdout
+    assert '12.77 mΩ before cup lengths, 17.86 mΩ using all listed stock wire' in result.stdout
+    assert motor_voltages(result.stdout) == pytest.approx(
+        [4.205, 4.197, 4.213, 4.480, 11.553, 11.472], abs=.001)
+    assert 'Measure adapter and motor terminals' in result.stdout
+
+
+def test_bench_model_load_and_branch_limits(power_checker):
+    result = subprocess.run([*power_checker, '--bench'], capture_output=True, text=True, check=True)
     limits = re.search(r'PH current estimate: ([\d.]+)–([\d.]+) A', result.stdout)
     assert limits is not None
     lower, upper = map(float, limits.groups())
     assert 1.55 < lower <= upper < 2.0
     assert 'PH current qualification required: fitted lower limit 1.539 A' in result.stdout
-    voltages = [float(value) for value in re.findall(r'([\d.]+) V at the motor', result.stdout)]
-    assert len(voltages) == 6
-    eye_yaw, eye_pitch, blink, jaw, neck_yaw, neck_pitch = voltages
-    assert 4.30 <= min(eye_yaw, eye_pitch, blink, jaw) <= max(eye_yaw, eye_pitch, blink, jaw) <= 5.25
-    assert min(neck_yaw, neck_pitch) >= 10.50
+    assert motor_voltages(result.stdout) == pytest.approx([4.334, 4.325, 4.341, 4.621], abs=.001)
+
+
+def test_nominal_5v_input_fails_the_historical_stress_screen(power_checker):
+    result = subprocess.run([*power_checker, '--input-5v', '5.0'], capture_output=True, text=True)
+    assert result.returncode == 1
+    assert '5.1148 V' in result.stdout
+    assert 'Insufficient modeled voltage at J4, J5, J6' in result.stderr
 
 
 def test_former_adapter_floor_fails_5v_branches(power_checker):

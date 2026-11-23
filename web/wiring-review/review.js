@@ -10,7 +10,7 @@ const captions = {
   camera: "Eaton 경로 · 목 중립", fasteners: "B25 체결품",
 };
 const fastenerDetails = {
-  keeper: "기판 J2의 XT30U-F를 작업대에서 결합합니다. H3·H4에는 M3×12를 쓰고 기존 일반 M3 너트를 재사용합니다.",
+  keeper: "기판 J2의 XT30U-F를 작업대에서 결합합니다. J1 쪽 두 곳은 M3×8, J2 잠금쇠를 지나는 두 곳은 M3×12로 체결합니다. 일반 M3 너트를 재사용합니다.",
   inlet: "외부 공급 XT60U-M의 성형 홈 양쪽을 가이드와 덮개에 걸고, 두 M3×12와 M3 인서트로 덮개를 고정합니다.",
   socket: "뒤쪽 XT60E-F는 M3×30 두 개, 평와셔 네 개, 일반 M3 너트 두 개로 고정합니다. 너트에는 5.5 mm 스패너를 씁니다.",
   hatch: "하부 덮개를 정비할 때는 받침을 지지합니다. 덮개 나사를 끝까지 빼도 양쪽 포획부에 너트가 남습니다.",
@@ -29,6 +29,7 @@ const sceneLabels = {
   ],
   hub: [["HubBodyJ1", "J1 · 5 V", [0, -27]], ["HubBodyJ2", "J2 · 12 V", [30, 12]]],
   camera: [["CameraEatonHeadTie", "코 고정점", [42, -19]], ["EatonRearStationarySplice", "후면 고정 구간", [30, 13]]],
+  fasteners: [["HubBolt2", "J1 쪽 · M3×8", [0, -18]], ["HubBolt4", "J2 쪽 · M3×12", [0, -18]]],
 };
 const posColor = 0xff805c;
 const gndColor = 0x8babfa;

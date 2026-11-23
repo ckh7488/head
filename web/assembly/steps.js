@@ -243,7 +243,7 @@ const definitions = [
     check: "빨강은 2번 전원, 검정은 1번 GND, 흰색은 3번 DATA입니다. J3은 1번 GND·2번 DATA입니다. 모터별 전압과 ID를 대조합니다.",
     stock: "Alpha Wire 6712 · 24 AWG · 피복 Ø1.04–1.14 mm · JST PHR-2/3, EHR-3",
     ports: ids(hubPlugs),
-    note: "전원 J1은 XT30U-F를 꽂습니다. J2는 18 AWG 연선을 7 mm 벗겨 연결합니다. 허브를 30 mm 내려도 선이 당겨지지 않게 둡니다.", checked: true,
+    note: "전원 J1은 XT30U-F를 꽂습니다. B15의 Phoenix J2에는 18 AWG 연선을 7 mm 벗겨 연결합니다. 허브를 30 mm 내려도 선이 당겨지지 않게 둡니다.", checked: true,
   },
   {
     id: "hatch-fit", group: "받침", title: "아래에서 허브와 덮개 올리기", base: "Part000",
