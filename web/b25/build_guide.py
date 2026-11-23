@@ -13,21 +13,32 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 B25 = ROOT / "mechanical/revisions/b25"
 DOCS = {
-    "assembly": ("조립 절차", B25 / "assembly.md"),
-    "print": ("서울 시험 출력", B25 / "01-seoul-print.md"),
+    "start": ("제작 순서", B25 / "README.md"),
+    "print": ("서울 출력", B25 / "01-seoul-print.md"),
     "before": ("먼저 살 부품", B25 / "02-order-before.md"),
-    "after": ("시험 뒤 살 부품", B25 / "03-order-after.md"),
     "gauge": ("맞춤 게이지", B25 / "fit-gauge.md"),
-    "electronics": ("전원과 배선", ROOT / "electronics/README.md"),
+    "after": ("시험 뒤 살 부품", B25 / "03-order-after.md"),
+    "assembly": ("조립 절차", B25 / "assembly.md"),
+    "electronics": ("A4 발주·첫 통전", ROOT / "electronics/README.md"),
     "control": ("구동과 보정", ROOT / "control/README.md"),
     "bench": ("실물 시험", ROOT / "spec/bench.md"),
-    "status": ("B25 판정", B25 / "frozen-fixes-check.md"),
+    "status": ("검사 결과와 범위", B25 / "alignment.md"),
+    "intent": ("사람 요구사항", ROOT / "spec/user-spec.md"),
+    "conditions": ("검사 조건", ROOT / "spec/conditions.md"),
+    "requirements": ("동작 인수 기준", ROOT / "spec/requirements.md"),
 }
+NAV_GROUPS = (
+    ("제작", ("start", "print", "before", "gauge", "after", "assembly")),
+    ("통전·구동", ("electronics", "control", "bench")),
+    ("판정과 기준", ("status", "intent", "conditions", "requirements")),
+)
 ROUTE = {path: name for name, (_, path) in DOCS.items()}
+ROUTE[B25] = "start"
 LINK = re.compile(r'\b(href|src)="([^"]+)"')
+MEDIA = {".svg", ".png", ".jpg", ".jpeg", ".webp"}
 
 
-def local_links(body, document, hosted_path, ref):
+def local_links(body, document, hosted_path, ref, output):
     def rewrite(match):
         attribute, url = match.groups()
         parts = urlsplit(unescape(url))
@@ -36,13 +47,19 @@ def local_links(body, document, hosted_path, ref):
         path = (document.parent / parts.path).resolve()
         relative = path.relative_to(ROOT).as_posix()
         slug = ROUTE.get(path)
-        if slug:
+        if attribute == "src" and path.suffix.lower() in MEDIA and path.is_file():
+            media = output / "guide" / "media" / relative
+            media.parent.mkdir(parents=True, exist_ok=True)
+            copyfile(path, media)
+            location = f"{hosted_path}guide/media/{quote(relative)}"
+        elif slug:
             location = f"{hosted_path}guide/{slug}/"
         else:
-            route = "tree" if path.is_dir() else "blob"
             if path.suffix in (".3mf", ".FCStd", ".zip", ".step", ".svg", ".png", ".jpg", ".webp"):
-                route = "raw"
-            location = f"https://github.com/ckh7488/head/{route}/{ref}/{quote(relative)}"
+                location = f"https://raw.githubusercontent.com/ckh7488/head/{ref}/{quote(relative)}"
+            else:
+                route = "tree" if path.is_dir() else "blob"
+                location = f"https://github.com/ckh7488/head/{route}/{ref}/{quote(relative)}"
         if parts.fragment:
             location += "#" + parts.fragment
         return f'{attribute}="{escape(location, quote=True)}"'
@@ -50,13 +67,17 @@ def local_links(body, document, hosted_path, ref):
     return LINK.sub(rewrite, body)
 
 
-def sheet(title, body, prefix, current=""):
-    nav = "".join(
-        f'<a href="{prefix}guide/{slug}/"'
-        + (' aria-current="page"' if slug == current else "")
-        + f">{escape(name)}</a>"
-        for slug, (name, _) in DOCS.items()
-    )
+def sheet(title, body, prefix, ref, current=""):
+    groups = []
+    for label, slugs in NAV_GROUPS:
+        links = "".join(
+            f'<a href="{prefix}guide/{slug}/"'
+            + (' aria-current="page"' if slug == current else "")
+            + f">{escape(DOCS[slug][0])}</a>"
+            for slug in slugs
+        )
+        groups.append(f'<nav class="guide-nav" aria-label="{label}">{links}</nav>')
+    nav = "".join(groups)
     return f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -74,8 +95,9 @@ def sheet(title, body, prefix, current=""):
   </nav>
 </header>
 <main class="container guide">
-  <div class="guide-header"><nav class="guide-nav" aria-label="문서 선택">{nav}</nav></div>
+  <div class="guide-header">{nav}</div>
   <article>{body}</article>
+  <footer class="guide-footer"><a href="https://github.com/ckh7488/head/tree/{quote(ref)}">이 안내의 저장소 버전</a></footer>
 </main>
 </body>
 </html>
@@ -93,14 +115,16 @@ def build(output, poster, ref, offline=None):
     guide = output / "guide"
     guide.mkdir(exist_ok=True)
     intro = """<h1>B25 제작 문서</h1>
-<p>서울 시험 출력과 맞춤 게이지부터 시작합니다. 건식 조립에서 위치와 간극을 확인한 다음 모터와 전장을 준비하세요.</p>
-<div class="document-links">
-<a href="print/">서울 시험 출력</a><a href="before/">먼저 살 부품</a>
-<a href="after/">시험 뒤 살 부품</a><a href="assembly/">조립 절차</a>
-</div>"""
+<p>P2S 출력은 14판·57개입니다. 13번 턱 판부터 출력합니다. 완성품 조립, 통전과 구동은 실물에서 확인합니다.</p>
+<ol>
+<li><a href="before/">먼저 살 부품</a>을 준비하고 <a href="print/">서울 출력과 후가공</a>을 진행합니다.</li>
+<li><a href="gauge/">끼움</a>과 공구 접근을 건식으로 확인한 뒤 <a href="after/">모터와 전장</a>을 준비합니다.</li>
+<li>허브를 받침에 넣기 전에 모터와 OpenRB를 분리하고 작업대에서 <a href="electronics/#전원-실물-검수">퓨즈를 뺀 첫 통전</a>을 시작합니다.</li>
+<li>전원을 뽑고 J2를 잠근 뒤 <a href="assembly/">조립과 배선</a>을 마칩니다. <a href="control/">축별 보정</a> 후 <a href="bench/">P01–P08 실물 결과</a>를 기록합니다.</li>
+</ol>"""
     if offline:
         intro += '<p><a href="../assembly-offline.zip" download>오프라인 조립 HTML 내려받기</a></p>'
-    (guide / "index.html").write_text(sheet("제작 문서", intro, "../"), encoding="utf-8")
+    (guide / "index.html").write_text(sheet("제작 문서", intro, "../", ref), encoding="utf-8")
     for slug, (title, path) in DOCS.items():
         page = guide / slug
         page.mkdir(exist_ok=True)
@@ -110,9 +134,9 @@ def build(output, poster, ref, offline=None):
         )
         fragment = fragment.replace("<table>", '<div class="guide-table" tabindex="0"><table>')
         fragment = fragment.replace("</table>", "</table></div>")
-        fragment = local_links(fragment, path, "../../", ref)
+        fragment = local_links(fragment, path, "../../", ref, output)
         (page / "index.html").write_text(
-            sheet(title, fragment, "../../", slug), encoding="utf-8"
+            sheet(title, fragment, "../../", ref, slug), encoding="utf-8"
         )
 
 

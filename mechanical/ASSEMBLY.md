@@ -1,6 +1,6 @@
 # R5 조립 절차 (B21)
 
-이 문서의 Phoenix J2 배선은 B21 조립 기록입니다. B25와 A4의 J2는 해당 리비전의 연결 안내를 따릅니다. [B25 조립 변경](revisions/b25/assembly.md) · [A4 배선과 극성](../electronics/README.md#전원과-배선)
+현재 B25 기구와 A4 허브를 조립하는 경우 B25 조립서를 엽니다. 아래 절차는 Phoenix J2를 사용한 B21 기록입니다. [현재 B25 조립 절차](revisions/b25/assembly.md) · [A4 배선과 극성](../electronics/README.md#전원과-배선)
 
 [FreeCAD 조립본과 P2S 출력판](revisions/b21/) · [부품표](BOM.csv) · [전선 재단표](WIRING-CUT-LIST.csv) · [3D 조립 순서](../web/README.md#b21-조립-순서)
 

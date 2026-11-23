@@ -47,6 +47,7 @@ LABELS = {
     'Jaw_36_left_jaw_servo_stay': '36 왼쪽 턱 모터 받침', 'CableSaddle': '40 뒤 케이블 가이드',
     'CableGate': '42 뒤 케이블 덮개', 'HubHolder': '35 허브 바닥 덮개', 'HubPCB': 'A4 허브 기판',
     'HubBodyJ1': 'J1 · 5 V XT30', 'HubBodyJ2': 'J2 · 12 V XT30', 'A4J2LeverKeeper': 'J2 플러그 고정편',
+    'HubBodyF1': 'F1 · 7.5 A MINI', 'HubBodyF2': 'F2 · 4 A MINI',
     'HubBolt3': 'H3 M3×12 원통머리', 'HubBolt4': 'H4 M3×12 원통머리',
     'JawExteriorScrewLeft': '왼쪽 M3×12 원통머리', 'JawExteriorScrewRight': '오른쪽 M3×12 원통머리',
     'JawAntiRockScrew': '뒤쪽 M3×40 원통머리', 'RearSkullScrewLeft': '뒤 외장 왼쪽 M3×18',
@@ -125,16 +126,34 @@ def plan(layout, heat_screws, heat_retainers, world):
         elif sid == 'hub-board-place':
             row['text'] = 'A4 허브 기판과 부품을 35번 바닥 덮개 위에 얹습니다. 기판의 J1은 5 V, J2는 12 V입니다.'
         elif sid == 'hub-bolts':
-            row.update(text='H1·H2의 M3×8, J2 고정편을 통과하는 H3·H4의 M3×12를 조입니다. 아래에는 일반 M3 육각너트를 씁니다.',
+            row.update(text='입력과 무부하 출력을 확인한 뒤 전원을 분리합니다. H1·H2에는 M3×8, J2 고정편을 통과하는 H3·H4에는 M3×12를 씁니다. 아래에는 일반 M3 육각너트를 씁니다.',
                        bolts=[f'HubBolt{n}' for n in range(1,5)])
             result.extend([
-                step('a4-hub-plugs', ctx, '작업대에서 전원을 분리한 뒤 J1과 J2의 XT30U-F를 꽂습니다. J2 적색은 패드 2, 흑색은 패드 1입니다.',
+                step('a4-hub-plugs', ctx, '어댑터·USB·모터·OpenRB를 분리하고 F1·F2를 뺍니다. 극성을 확인한 J1·J2 플러그를 꽂고 제작 문서의 첫 통전 순서대로 입력과 무부하 출력을 확인합니다.',
                      place=(HUB_J1 + HUB_J2, (0,12,0))),
-                step('a4-hub-inlet-keeper', ctx, 'J2 플러그의 뒤턱을 고정편이 잡는 위치에 맞춥니다.',
+                step('a4-hub-inlet-keeper', ctx, '첫 통전을 마치고 어댑터를 모두 뽑은 뒤, J2 플러그의 뒤턱을 고정편이 잡는 위치에 맞춥니다.',
                      place=(('A4J2LeverKeeper',), (0,0,15))),
             ])
         elif sid == 'hatch-fit':
             row['text'] = '정비 XT60 플러그를 바깥 대기 위치에 둔 상태에서 A4 허브가 달린 덮개를 받침 아래에서 올립니다.'
+        elif sid == 'yaw-bracket-feet':
+            row['text'] = '위에서 M3×8 네 개를 받침의 인서트에 조입니다. 모터 고정 나사 머리가 이 길을 막으므로 모터보다 먼저 합니다.'
+        elif sid == 'id5-keeper-screws':
+            row['text'] = 'ID5 가드를 요크의 M3 인서트 두 곳에 M3×8로 고정합니다. 모터 본체에 닿는 두 곳은 M2.5×10으로 조입니다.'
+        elif sid == 'eye-pitch-stay-screws':
+            row['text'] = '뒤에서 M3×8 두 개로 지지대를 프레임의 인서트에 조입니다.'
+        elif sid == 'blink-bearings':
+            row['text'] = '레일 24의 두 보어를 가공한 뒤 폭 1.20 mm 금속 위치 맞춤 띠를 댑니다. MR104ZZ 두 개를 레일 가운데에서 바깥쪽으로 외륜을 눌러 넣습니다.'
+        elif sid == 'eye-pitch-plate-screws':
+            row['text'] = '모터판 위에서 M3×8 두 개를 지지대의 인서트에 조입니다.'
+        elif sid == 'blink-spacers':
+            row['text'] = row['text'].removeprefix('B19 ')
+        elif sid == 'eye-yaw-case-screws':
+            row['preview_text'] = '동봉 십자머리 M2×8을 eyeYawHead0·2·3에, M2×6을 eyeYawHead1에 조입니다.'
+        elif sid == 'eye-yaw-horn-screws':
+            row['preview_text'] = 'M2×5 세 개로 혼 16을 조입니다. 눈틀에 닿는 (-11.8, -35.5) 구멍은 비웁니다.'
+        elif sid == 'lid-right-pins':
+            row['preview_text'] = 'Ø2×8 핀 두 개를 양쪽에서 넣습니다. 고정제는 오른쪽 눈틀 쪽에만 바릅니다.'
         elif sid == 'camera-bracket-bench':
             row['text'] = '작업대에 코 카메라 브래킷 26을 놓습니다. 코 트레이용 타이는 폭 2.10 mm, 두께 0.47 mm 이하로 준비합니다.'
         elif sid == 'camera':
@@ -146,7 +165,7 @@ def plan(layout, heat_screws, heat_retainers, world):
                        place=(CAMERA_END,(0,8,8)))
         elif sid == 'camera-route-set':
             row.pop('camera_tail_mount', None)
-            row.update(text='Eaton 고정점 사이 550 mm를 배치합니다. 표시된 3D 선은 목이 정면일 때의 경로입니다. 움직이는 외피는 Ø3.00 mm 이하로 재고 가이드에서 R18 이상을 유지합니다.',
+            row.update(text='Eaton 외피를 뒤 가이드의 타이로 잡아 양쪽 고정점 사이 550 mm를 맞춥니다. Ø3.00 mm 이하 선재에 R18 이상을 남기고 순정 USB-A 꼬리는 뒤 타이 바깥에서 접합합니다. 화면은 목 정면의 선 배치입니다.',
                        place=(('EatonCableNeutral','EatonRearStationarySplice'),(0,0,0)))
         elif sid == 'jaw-stay-bench':
             row['text'] = '보강된 37번 오른쪽 턱 받침을 작업대에 둡니다. 위치결정 보스가 손상되지 않았는지 살핍니다.'

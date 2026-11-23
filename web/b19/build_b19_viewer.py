@@ -544,7 +544,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             'id': st['id'], 'label': label,
             'section': '뒤 케이블 가이드' if guide_bench else SECTIONS[st['ctx']],
             'bench': guide_bench or st['ctx'] in BENCH,
-            'text': row['text'] or last_text, 'continued': not row['text'],
+            'text': st.get('preview_text') or row['text'] or last_text, 'continued': not row['text'],
             'notes': notes,
             'issues': row['issues'], 'fixed': fixed, 'moves': moves,
             'closedLids': bool(st.get('closed_lids')),

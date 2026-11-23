@@ -2,13 +2,18 @@
 
 ## B25 웹 화면
 
-B25 구동 데모, 단계별 조립, A4 배선·정비 화면과 제작 문서를 현재 조립본에서 생성합니다. 조립 화면의 **완성 상태**에서 외장을 숨기면 체결품과 선을 볼 수 있습니다. 배선에서는 뒤쪽 12 V 정비 플러그를 분리하고 하부 덮개를 30 mm 내리는 자세를 살펴봅니다. [B25 제작 자료](../mechanical/revisions/b25/) · [이전에 배포된 B25 웹 화면](https://r5-b1-review.ckh.chatgpt.site/b25/)
+| 화면 | 사용할 때 |
+| --- | --- |
+| 구동 | 눈과 목을 직접 움직이고 깜빡임과 턱 동작을 확인합니다. |
+| 조립 | 171단계에서 부품을 끼우는 순서를 봅니다. 완성 상태에서 외장을 숨기면 체결품과 선이 보입니다. |
+| 배선 | A4와 뒤쪽 전원 연결을 보고, XT60 정비 플러그를 뺀 뒤 하부 덮개를 30 mm 내립니다. |
+| 문서 | 출력·발주·조립·첫 통전·실물 시험을 작업 순서로 찾아봅니다. |
 
-3D 화면은 CAD를 설명하기 위한 시각화입니다. 실물 조립, 간극과 구동 확인은 P01–P08을 따릅니다. [B25 실물 시험](../spec/bench.md#b25-실물-시험)
+화면은 CAD의 조립과 움직임을 보여 줍니다. 검사 범위와 실물에서 측정할 항목은 아래에서 확인합니다. [B25 웹 안내](https://r5-b1-review.ckh.chatgpt.site/b25/) · [검사 결과와 범위](../mechanical/revisions/b25/alignment.md) · [실물 시험](../spec/bench.md#b25-실물-시험)
 
 ### 오프라인 조립 HTML 만들기
 
-저장소 루트에서 FreeCAD Python 모듈과 [기구 검사 의존성](../mechanical/physics/requirements.txt)을 준비합니다. 아래 FreeCAD 모듈 경로는 Linux 예시입니다.
+저장소 루트에서 FreeCAD Python 모듈, Node.js와 기구 검사 의존성을 준비합니다. 아래 FreeCAD 모듈 경로는 Linux 예시입니다. [기구 검사 의존성](../mechanical/physics/requirements.txt)
 
 ```sh
 export PYTHONPATH="$PWD/mechanical:$PWD/mechanical/physics:/usr/lib/freecad-python3/lib"
@@ -21,18 +26,19 @@ python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardwar
 python web/b19/pack_standalone.py "$out/assembly-assets" "$out/R5-B25-assembly.html" --revision B25 --preview
 ```
 
-생성한 `build/b25/R5-B25-assembly.html`에는 현재 B25 모델, 조립 단계와 공구 위치 예시가 함께 들어 있습니다. Eaton 접합, A4·J2 체결 및 턱 세 점 고정은 항목별 검토 근거를 확인합니다. [B25 조립 절차](../mechanical/revisions/b25/assembly.md) · [조립 검사 범위](../mechanical/revisions/b25/alignment.md)
+생성한 `build/b25/R5-B25-assembly.html`을 브라우저에서 바로 엽니다. 세부 체결과 카메라 선 접합은 조립서를 함께 봅니다. [조립 절차](../mechanical/revisions/b25/assembly.md)
 
 ### 웹 화면 묶음 만들기
 
-위 명령을 실행한 뒤 아래 순서로 조립, 구동, 배선과 문서를 한 디렉터리에 모읍니다. 문서 변환에는 Pandoc이 필요합니다.
+위 명령을 실행한 뒤 조립, 구동, 배선과 문서를 한 디렉터리에 모읍니다. 문서 HTML 변환에는 Pandoc이 필요합니다.
 
 ```sh
+ref=$(git rev-parse HEAD)
 python web/b19/pack_standalone.py "$out/assembly-assets" "$out/site/assembly" --revision B25 --preview --hosted
 node web/b25/package_demo.mjs "$out/site/demo"
 python web/wiring-review/export_pose_data.py "$out/cad/cad_parts.json" "$out/pose-data.json"
-node web/wiring-review/package_review.mjs "$out/cad" "$out/pose-data.json" "$out/site/wiring" "$(git rev-parse HEAD)"
-python web/b25/build_guide.py "$out/site" --offline "$out/R5-B25-assembly.html" --ref "$(git rev-parse HEAD)"
+node web/wiring-review/package_review.mjs "$out/cad" "$out/pose-data.json" "$out/site/wiring" "$ref"
+python web/b25/build_guide.py "$out/site" --offline "$out/R5-B25-assembly.html" --ref "$ref"
 python -m http.server 8000 --bind 127.0.0.1 --directory "$out/site"
 ```
 

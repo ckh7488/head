@@ -1,8 +1,15 @@
 # R5 기구 설계와 조립
 
-현재 기구는 **B25**입니다. P2S 0.4 mm 노즐, PETG HF, 0.20 mm 층으로 게이지와 시험 부품부터 출력합니다. [B25 FreeCAD와 P2S](revisions/b25/) · [서울 출력 목록](revisions/b25/01-seoul-print.md) · [B25 조립 절차](revisions/b25/assembly.md)
+## 현재 제작본 B25
 
-아래 설정과 시간은 B15에서 사용한 값입니다. [이전 CAD 개정](revisions/)
+- **형상과 조립** · [FreeCAD 조립본](revisions/b25/R5-B25-Assembly.FCStd) · [B25 조립서](revisions/b25/assembly.md) · [3D 조립과 구동](../web/README.md#b25-웹-화면)
+- **출력** · Bambu Lab P2S, 0.4 mm, PETG HF, 0.20 mm, Textured PEI. 14판·57개를 맡기고 13번 턱부터 출력합니다. [P2S 3MF](revisions/b25/R5-B25-P2S.3mf) · [서울 출력 목록](revisions/b25/01-seoul-print.md) · [맞춤 게이지](revisions/b25/fit-gauge.md)
+- **구매와 제작** · [먼저 살 부품](revisions/b25/02-order-before.md) · [시험 뒤 살 부품](revisions/b25/03-order-after.md) · [목 상하축 가공](revisions/b25/pitch-drive-shaft.md)
+- **판정** · [B25 검사 결과](revisions/b25/alignment.md) · [실물 조립·구동 시험](../spec/bench.md#b25-실물-시험)
+
+## B15 기록
+
+아래 조립, 출력 시간, 치수와 재현 명령은 B15 기록입니다. [이전 CAD 개정](revisions/)
 
 ## B15 조립
 
