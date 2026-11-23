@@ -1,6 +1,6 @@
-# R5 인수 기준
+# R5 인수 기준 (2층 동작·검증 스펙)
 
-B25 판정에는 [고정 검사 조건](conditions.md)과 [B25 실물 시험](bench.md#b25-실물-시험)을 적용합니다.
+사람 요구사항은 **[1층 스펙(user-spec.md)](user-spec.md)**에 있습니다. B25 판정에는 [2층 고정 검사 조건](conditions.md)과 [B25 실물 시험](bench.md#b25-실물-시험)을 적용합니다.
 
 사용 장면을 먼저 정하고 구동, 조립, 실물 결과를 각각 확인합니다. 수치 기준은 [criteria.toml](criteria.toml)에 있습니다.
 

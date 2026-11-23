@@ -18,7 +18,7 @@ B25 기구와 A4 서보 허브를 사용합니다. 웹에서 완성 상태를 �
 - [control/](control/README.md) · PC 얼굴 추적, OpenRB 펌웨어, 카메라와 모터 보정
 - [web/](web/README.md) · 3D 조립·구동·배선 뷰어, CAD 내보내기
 - [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
-- [spec/](spec/conditions.md) · B25 검사 조건과 실물 인수 검사
+- [spec/](spec/user-spec.md) · **1층 사람 요구사항([user-spec.md](spec/user-spec.md))**과 **2층 엔지니어링 검사 조건([conditions.md](spec/conditions.md))**, 실물 인수 검사
 
 ## 이전 CAD
 - **B24 제작 검증** · 눈 상하 베어링과 목 상하축의 M3 체결을 추가하고, 깜빡임과 추적 복귀를 수정했습니다. [FreeCAD·P2S·조립·검증](mechanical/revisions/b24/) · [3D 조립 재현](web/README.md#b24-조립-순서)
