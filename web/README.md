@@ -12,6 +12,8 @@
 
 화면은 CAD의 조립과 움직임을 보여 줍니다. 검사 범위와 실물에서 측정할 항목은 아래에서 확인합니다. [B25 웹 안내](https://r5-b1-review.ckh.chatgpt.site/b25/) · [검사 결과와 범위](../mechanical/revisions/b25/alignment.md) · [실물 시험](../spec/bench.md#b25-실물-시험)
 
+**A4 오프라인 뷰어**는 GitHub 파일 화면에서 **Download raw file**로 저장한 뒤 브라우저에서 엽니다. 단일 파일에 회로도, PCB, 3D, BOM·발주 자료가 들어 있습니다. [완성 HTML](b25/R5-B25-A4.html) · [생성 방법](../electronics/README.md#재현)
+
 ### 오프라인 조립 HTML 만들기
 
 저장소 루트에서 FreeCAD Python 모듈, Node.js와 기구 검사 의존성을 준비합니다. 아래 FreeCAD 모듈 경로는 Linux 예시입니다. [기구 검사 의존성](../mechanical/physics/requirements.txt)

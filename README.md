@@ -29,6 +29,7 @@ R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 �
 
 ## 파일과 기준
 
+- [A4 회로도·PCB·3D 단일 HTML](web/b25/R5-B25-A4.html)
 - [FreeCAD 조립본](mechanical/revisions/b25/R5-B25-Assembly.FCStd) · [P2S PETG-CF 출력 프로젝트](mechanical/revisions/b25/R5-B25-P2S-CF.3mf) · [웹 제작 안내](https://r5-b1-review.ckh.chatgpt.site/b25/guide/) · [핀별 배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/) · [3D 조립·구동·배선 화면 만들기](web/README.md#b25-웹-화면)
 - [1층 사람 요구사항](spec/user-spec.md) · [2층 수치 기준](spec/conditions.md) · [FDM 실수 모음집](spec/fdm-pitfalls.md) · [동작 인수 기준](spec/requirements.md)
 - [기구 자료](mechanical/README.md) · [전장 자료](electronics/README.md) · [하드웨어 없이 테스트](control/README.md#하드웨어-없이-실행) · [이전 리비전](mechanical/revisions/)
