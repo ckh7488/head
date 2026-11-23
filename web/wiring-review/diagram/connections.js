@@ -48,7 +48,7 @@ export const harnesses = [
   unit("12v-in", "power12", "받침 12 V IN ↔ 분기", "2가닥", [
     row("W6", "+12 V", point("받침 12 V IN", "xt60u-m", "+"), pos12),
     row("W7", "GND", point("받침 12 V IN", "xt60u-m", "−"), gnd12),
-  ], "12 V 어댑터의 XT60U-F와 짝을 이룹니다. +12 V와 GND에는 WAGO 221-412를 하나씩 따로 씁니다."),
+  ], "12 V 어댑터 출력 리드에는 XT60U-F 한 개를 사용합니다. 멀티미터로 출력 극성을 확인하고 AC에서 분리한 뒤 +를 빨간 표식, −를 검정 표식으로 구분합니다. XT60U-F의 몰드 표시대로 납땜하고 컵을 각각 절연합니다. 이 플러그는 받침의 12 V IN XT60U-M에 결합합니다. W6·W7은 받침 쪽 재단선입니다. +12 V와 GND에는 WAGO 221-412를 하나씩 따로 씁니다."),
   unit("12v-service", "power12", "12 V 분기 ↔ 뒤 고정 소켓", "2가닥", [
     row("W35", "+12 V", pos12, point("12 V SERVICE 고정", "xt60e-f", "+")),
     row("W36", "GND", gnd12, point("12 V SERVICE 고정", "xt60e-f", "−")),

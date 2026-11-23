@@ -72,6 +72,8 @@ OpenRB는 USB를 뽑은 상태에서 점퍼를 **USB(VIN)** 쪽에 놓습니다.
 
 5 V 배선에는 XT30U-F 두 개와 XT30U-M 한 개를 씁니다. F 한 개는 5 V 전원 꼬리, 다른 한 개는 J1 쪽 W3/W4에 씁니다. 외부 5 V XT30과 12 V XT60은 서로 다른 외형과 단자 간격(각각 5.0 mm와 7.2 mm)으로 구분합니다. [AMASS XT30U](https://www.china-amass.com/biao/268.html) · [AMASS XT60U](https://www.china-amass.com/biao/288.html)
 
+12 V 어댑터의 DC 출력 리드에는 **XT60U-F 한 개**를 납땜합니다. 어댑터의 출력 극성을 멀티미터로 확인하고, AC에서 분리한 뒤 XT60U-F 몸체의 +·− 표기에 맞춥니다. 두 컵을 각각 절연하고 **12 V IN** 라벨을 붙입니다. 받침의 XT60U-M에서 W6·W7이 시작됩니다. [12 V 고정선 조립](../mechanical/revisions/b25/j2-supply-delta.md) · [하네스 재단표](../mechanical/WIRING-CUT-LIST.csv)
+
 ### 하부 덮개 정비
 
 두 어댑터와 USB를 뽑고 받침을 지지합니다. 뒤쪽 **`12 V SERVICE` XT60** 플러그를 똑바로 빼서 아래 대기 위치로 내린 뒤, 허브와 하부 덮개를 함께 내립니다. 내부 J2는 작업대에서 J2 쪽 M3×12 두 개를 풀어 분리합니다. 다시 닫을 때 선의 눌림, 커넥터 체결과 극성을 무전원에서 확인합니다. 내부 J1 또는 J2를 분리했다면 위의 [전원 실물 검수](#전원-실물-검수)를 다시 수행합니다. [B25 덮개·배선 절차](../mechanical/revisions/b25/assembly.md#전원-커넥터와-배선) · [3D 배선·정비](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/)
@@ -112,6 +114,12 @@ IPC-2221 외층 단일 트랙에 동박 두께 60 µm를 적용하면 온도 상
 ```sh
 /usr/bin/python3 electronics/power_check.py
 /usr/bin/python3 electronics/export.py servo-hub
+```
+
+회로도, PCB, 3D와 발주 자료는 단일 HTML로 생성할 수 있습니다. KiCad 9의 3D 라이브러리와 `npm ci --prefix web`이 필요합니다. 기판 원점 `100x80mm`로 이미 내보낸 A4 GLB가 있으면 `--glb`로 넘길 수 있습니다.
+
+```sh
+/usr/bin/python3 web/wiring-review/a4/build.py build/R5-B25-A4-KiCad.html
 ```
 
 ## 이전 전장 검토 기록
