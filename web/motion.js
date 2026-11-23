@@ -2,9 +2,9 @@ import { Matrix4 } from "three";
 
 export const tickDeg = 360 / 4096;
 export const axes = {
-  neckYaw:   { label: "좌우", lower: -659 * tickDeg, upper: 659 * tickDeg, rate: 42 },
-  neckPitch: { label: "상하", lower: -155 * tickDeg, upper: 34 * tickDeg, rate: 24 },
-  eyeYaw:    { label: "좌우", lower: -219 * tickDeg, upper: 219 * tickDeg, rate: 128 },
+  neckYaw:   { label: "좌우", lower: -640 * tickDeg, upper: 640 * tickDeg, rate: 42 },
+  neckPitch: { label: "상하", lower: -149 * tickDeg, upper: 30 * tickDeg, rate: 24 },
+  eyeYaw:    { label: "좌우", lower: -162 * tickDeg, upper: 162 * tickDeg, rate: 128 },
   eyePitch:  { label: "상하", lower: -83 * tickDeg, upper: 83 * tickDeg, rate: 90 },
   blink:     { label: "눈꺼풀", lower: 0, upper: 90, rate: 900 },
   jaw:       { label: "턱 열림", lower: 0, upper: 62 * tickDeg, rate: 190 }

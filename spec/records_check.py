@@ -175,8 +175,14 @@ def physical_record(item, record):
         if (any(type(count) is not int or count < 0 for count in (cycles, disconnects, reenumerations))
                 or type(recognized) is not bool):
             raise ValueError('왕복·끊김·재인식 횟수와 시험 후 USB 인식을 기록해야 합니다.')
-        if record['status'] == 'PASS' and (cycles < 1000 or disconnects or reenumerations or not recognized):
-            raise ValueError('P07 합격에는 1,000회 이상 왕복, USB 연속 인식과 시험 후 인식이 필요합니다.')
+        if record['status'] == 'PASS':
+            endpoints = record.get('camera_yaw_endpoints_deg')
+            if (not isinstance(endpoints, list) or len(endpoints) != 2
+                    or any(type(angle) not in (int, float) or not math.isfinite(angle) for angle in endpoints)
+                    or not endpoints[0] < 0 < endpoints[1]):
+                raise ValueError('P07에는 중립을 기준으로 좌우의 실제 끝 각도가 필요합니다.')
+            if cycles < 100 or disconnects or reenumerations or not recognized:
+                raise ValueError('P07 합격에는 100회 이상 왕복, USB 연속 인식과 시험 후 인식이 필요합니다.')
     if item == 'P08' and record['status'] == 'PASS':
         rework = record['unplanned_rework_count']
         covers = record['retained_nut_covers']

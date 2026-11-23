@@ -1,14 +1,14 @@
 # R5 인수 기준
 
-B25 판정에는 [고정 검사 조건](conditions.md)과 [B25 실물 시험](bench.md#b25-실물-시험)을 적용합니다. 아래 자동 검사는 B22 기록을 읽습니다.
+B25 판정에는 [고정 검사 조건](conditions.md)과 [B25 실물 시험](bench.md#b25-실물-시험)을 적용합니다.
 
 사용 장면을 먼저 정하고 구동, 조립, 실물 결과를 각각 확인합니다. 수치 기준은 [criteria.toml](criteria.toml)에 있습니다.
 
 ```sh
-python spec/verify.py
+python spec/verify.py --revision B25
 ```
 
-Python 3.11 이상에서 실행합니다. 종료값은 전부 통과하면 0, 미달 항목이 있으면 1, 미달 없이 검증이 남으면 2입니다. 위 명령은 B22 기록에 연결됩니다. B24 CAD·출력판·펌웨어의 디지털 결과는 B24 검증 명령으로 확인하고, 실물 기록에는 해당 CAD 리비전을 씁니다. [B24 검증](../mechanical/revisions/b24/#파일과-검사-재현)
+Python 3.11 이상에서 실행합니다. 종료값은 전부 통과하면 0, 미달 항목이 있으면 1, 미달 없이 검증이 남으면 2입니다. B22 기록은 `python spec/verify.py --revision B22`로 확인합니다. B25 판정에는 해당 CAD와 펌웨어로 검증한 근거만 사용합니다. B24 CAD·출력판·펌웨어의 디지털 결과는 B24 검증 명령으로 확인하고, 실물 기록에는 해당 CAD 리비전을 씁니다. [B24 검증](../mechanical/revisions/b24/#파일과-검사-재현)
 
 ## 동작 장면
 

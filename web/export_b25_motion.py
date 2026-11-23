@@ -33,7 +33,7 @@ COLORS = {
     'camera_wire': (54, 167, 191), 'control_wire': (92, 124, 170),
 }
 TICK_DEG = 360. / 4096.
-AXIS_LIMITS = {'yaw': 659*TICK_DEG, 'pitch': [-155*TICK_DEG, 34*TICK_DEG]}
+AXIS_LIMITS = {'yaw': 640*TICK_DEG, 'pitch': [-149*TICK_DEG, 30*TICK_DEG]}
 MOTORS = {'Part017', 'Part018', 'Part038', 'Part041', 'Part045', 'Jaw_XL330_M288_Jaw'}
 OMIT = {'Part070', 'Part071', 'EatonCableNeutral', *LEADS}
 WIRE_COLORS = {

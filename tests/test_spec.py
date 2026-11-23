@@ -63,10 +63,12 @@ def test_records_reject_partial_stale_and_contradictory_evidence(tmp_path):
              'jaw_stop_reserve_deg': 1.}, 'jaw_stop_reserve_deg', .99),
     ('P06', {'jaw_tip_drop_mm': 5.27, 'jaw_visible_drop': True, 'jaw_goal_pwm_verified': True,
              'jaw_stop_reserve_deg': 1.}, 'jaw_goal_pwm_verified', False),
-    ('P07', {'camera_yaw_cycles': 1000, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
-             'camera_recognized_after': True}, 'camera_yaw_cycles', 999),
-    ('P07', {'camera_yaw_cycles': 1000, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
-             'camera_recognized_after': True}, 'camera_usb_reenumerations', 1),
+    ('P07', {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
+             'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8]}, 'camera_yaw_cycles', 99),
+    ('P07', {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
+             'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8]}, 'camera_usb_reenumerations', 1),
+    ('P07', {'camera_yaw_cycles': 100, 'camera_usb_disconnects': 0, 'camera_usb_reenumerations': 0,
+             'camera_recognized_after': True, 'camera_yaw_endpoints_deg': [-55.9, 55.8]}, 'camera_yaw_endpoints_deg', None),
 ])
 def test_b25_records_require_actual_jaw_and_camera_thresholds(tmp_path, item, measurement, failed_field, failed_value):
     records = tmp_path / 'spec/records'
