@@ -1,10 +1,26 @@
 {
-  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
   "firmware_sha256": "fbc2e8f99787b2e06938a330469643ceafd3e6e7e09657ca3fe3002a63764833",
   "pair": [
     "Jaw_37_right_jaw_bearing_stay",
     "Jaw_39_right_jaw_pivot_arm"
   ],
+  "closed_reference_from_cad_ticks": 11,
+  "closing": {
+    "pair": [
+      "Part073",
+      "Jaw_30_moving_jaw"
+    ],
+    "relative_translation_half_box_mm": [
+      0.4,
+      0.4,
+      0.4
+    ],
+    "clear_through_cad_angle_deg": -1.47265625,
+    "reserve_from_accepted_feedback_at_least_deg": 2.0,
+    "continuous_lower_gap_mm": 1.7994016727848616e-05,
+    "verified_cells": 95
+  },
   "pivot_mm": [
     0.0,
     -9.0,
@@ -13,7 +29,7 @@
   "tolerance_model": {
     "fixed_warp_span_mm": 22.05651798923227,
     "moving_warp_span_mm": 25.815693677573847,
-    "projected_through_jaw_deg": 6.89,
+    "projected_through_jaw_deg": 7.86,
     "radial_fit_terms_mm": {
       "glued_pin": 0.04800000000000004,
       "bearing_pocket": 0.025,
@@ -21,8 +37,8 @@
     },
     "relative_world_half_box_mm": [
       0.34411303597846454,
-      0.5024548564286592,
-      0.4614221814229265
+      0.5044850959583044,
+      0.46438481774284696
     ]
   },
   "wire_goal_max_deg": 5.5,
@@ -33,28 +49,28 @@
     -67.02407761767874,
     38.2396903195566
   ],
-  "jaw_tip_drop_at_goal_mm": 5.267213239577387,
+  "jaw_tip_drop_at_goal_mm": 5.175897778070841,
   "feedback_opening_allowance_ticks": 5,
   "accepted_feedback_max_encoder_deg": 5.888671875,
-  "contact_free_through_deg_in_relative_envelope": 6.89,
+  "contact_free_through_deg_in_relative_envelope": 6.893203125,
   "required_stop_reserve_deg": 1.0,
-  "continuous_lower_gap_mm": 0.0007353185452853572,
-  "verified_cells": 83,
-  "reserve_from_goal_at_least_deg": 1.4407812499999997,
-  "reserve_from_accepted_feedback_at_least_deg": 1.0013281249999997,
-  "earliest_sampled_contact_deg": 7.111236572265625,
+  "continuous_lower_gap_mm": 0.003092885223600822,
+  "verified_cells": 267,
+  "reserve_from_goal_at_least_deg": 1.4439843750000003,
+  "reserve_from_accepted_feedback_at_least_deg": 1.0045312500000003,
+  "earliest_sampled_contact_deg": 6.990216064453126,
   "sampled_contact_shift_mm": [
     -0.34411303597846454,
-    -0.5024548564286592,
-    -0.4614221814229265
+    -0.5044850959583044,
+    -0.46438481774284696
   ],
   "powered_clearance": {
     "end_deg": 5.888671875,
-    "minimum_mm": 0.3070255601330377,
+    "minimum_mm": 0.30715525738016736,
     "required_mm": 0.3,
-    "verified_cells": 593
+    "verified_cells": 623
   },
-  "scope": "Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.",
+  "scope": "Rigid installed CAD, with the same closed reference for both stop checks. Measure first contacts, mounted fit and real closed reference on each assembly.",
   "references": {
     "conditions": "../spec/conditions.md",
     "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",

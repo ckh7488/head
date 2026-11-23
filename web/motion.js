@@ -116,7 +116,7 @@ export function motionMatrix(kind, pose, drop = 0, rig = {}) {
     const angle = Math.atan2(y0 * z1 - z0 * y1, y0 * y1 + z0 * z1) / rad;
     return pan.multiply(pivot("x", angle, ...a));
   }
-  if (kind === "jaw") result.premultiply(pivot("x", rig.jaw_pivot_mm ? toPose("jaw", pose.jaw) : clamp(pose.jaw, 0, 13), ...(rig.jaw_pivot_mm ?? jawPivot)));
+  if (kind === "jaw") result.premultiply(pivot("x", rig.jaw_pivot_mm ? (rig.jaw_closed_deg ?? 0) + toPose("jaw", pose.jaw) : clamp(pose.jaw, 0, 13), ...(rig.jaw_pivot_mm ?? jawPivot)));
   const yaw = -pose.eyeYaw;
   const pitch = pose.eyePitch;
   const blink = pose.blink;

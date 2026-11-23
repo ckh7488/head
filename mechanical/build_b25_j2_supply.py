@@ -24,6 +24,10 @@ Y_WAGO = 230.
 Z_WAGO_PORT = -74.6
 TRAY_TRANSLATION = 23.
 COLLAR_BOLTS = ((-25.5, 174.7), (-1.5, 172.))
+# Diameter 3.60 mm, starting inside the original bore below the insert.
+COLLAR_TIP_RELIEF_RADIUS = 1.80
+COLLAR_TIP_RELIEF_BOTTOM_Z = -62.75
+COLLAR_TIP_RELIEF_DEPTH = .85
 WAGO_PITCH = 5.6
 WIRE_RAD = .119 * 25.4 / 2.
 RESERVE = .25
@@ -121,7 +125,10 @@ def collar_hardware():
         hardware[f'A4InletBolt{index}'] = socket_screw(3, 12., (*center, -50.), (0., 0., -1.))
         insert = cylinder(1.99, 3., (*center, -60.5)).cut(cylinder(1.52, 3., (*center, -60.5)))
         hardware[f'A4InletInsert{index}'] = insert
-        lower_bores.append(cylinder(2.075, 4.51, (*center, -62.)))
+        lower_bores.extend((
+            cylinder(2.075, 4.51, (*center, -62.)),
+            cylinder(COLLAR_TIP_RELIEF_RADIUS, COLLAR_TIP_RELIEF_DEPTH, (*center, COLLAR_TIP_RELIEF_BOTTOM_Z)),
+        ))
         upper_bores.append(cylinder(1.725, 7.51, (*center, -57.51)))
     return hardware, lower_bores, upper_bores
 

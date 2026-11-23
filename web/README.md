@@ -21,7 +21,7 @@ python web/b19/build_b19_viewer.py "$out/cad" "$b24/hardware.json" "$b24/hardwar
 python web/b19/pack_standalone.py "$out/assembly-assets" "$out/R5-B25-assembly.html" --revision B25 --preview
 ```
 
-생성한 `build/b25/R5-B25-assembly.html`에는 모델과 조립 단계가 함께 들어 있습니다.
+생성한 `build/b25/R5-B25-assembly.html`에는 현재 B25 모델, 조립 단계와 공구 위치 예시가 함께 들어 있습니다. Eaton 접합, A4·J2 체결 및 턱 세 점 고정은 항목별 검토 근거를 확인합니다. [B25 조립 절차](../mechanical/revisions/b25/assembly.md) · [조립 검사 범위](../mechanical/revisions/b25/alignment.md)
 
 ### 웹 화면 묶음 만들기
 

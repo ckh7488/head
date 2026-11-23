@@ -16,9 +16,9 @@ from wiring_motion import arc_lengths, matrices, rotation, transform
 
 
 TICK_DEG = 360. / 4096.
-YAW_LIMIT = 667 * TICK_DEG
-PITCH_RANGE = (-163 * TICK_DEG, 42 * TICK_DEG)
-JAW_LIMIT = 67 * TICK_DEG
+YAW_LIMIT = 648 * TICK_DEG
+PITCH_RANGE = (-157 * TICK_DEG, 38 * TICK_DEG)
+JAW_LIMIT = 78 * TICK_DEG
 ENTRY = np.array((0., -36.75, -49.))
 SPLICE = np.array((8.079443669120934, -23.7902088750033, 71.57523500099146))
 SPLICE_DIRECTION = np.array((-.024480298769616667, -.3396116383167135, .940247121820635))
@@ -62,9 +62,10 @@ def upper_at(pitch, yaw, samples=401):
     head = pan @ rotation(pitch, (1., 0., 0.), PITCH_PIVOT)
     fixed = crossing()
     v = np.array((0., np.sin(radians(20.)), np.cos(radians(20.))))
+    # Move the free span below and behind the jaw, keeping both fixed tangents.
     controls = np.array((fixed[-1], fixed[-1] + 24.173551855119346 * v,
-                         (-1.3548701091919026, -6.578198991121784, 11.406740080636677),
-                         (18.031151637023566, -22.399956698043063, 47.88767295367745)))
+                         (-1.3548701091919026, -2.828198991121784, 9.656740080636677),
+                         (18.031151637023566, -18.649956698043063, 46.13767295367745)))
     terminal_controls = np.array((SPLICE - 28.06823152062983 * SPLICE_DIRECTION, SPLICE))
     controls = np.vstack((transform(controls, pan), transform(terminal_controls, head)))
     sample = np.linspace(0., 1., samples)
@@ -140,7 +141,7 @@ def continuous_jaw(scene, layout):
             'cells': certified, 'unresolved': unresolved, 'pending': len(stack)}
 
 
-def historic_witness(scene, layout):
+def jaw_endpoint_witness(scene, layout):
     pitch, yaw = PITCH_RANGE[-1], 0.
     motion = matrices(layout, yaw, pitch, 0., 0., JAW_LIMIT, 90.)
     points, _ = upper_at(pitch, yaw)
@@ -152,7 +153,7 @@ def historic_witness(scene, layout):
         else:
             lo = mid
     y = float(np.interp(WITNESS_PAN_Z, points[:, 2], points[:, 1]))
-    return {'head_pitch_deg': pitch, 'jaw_feedback_ticks': 67, 'centerline_gap_bracket_mm': [lo, hi],
+    return {'head_pitch_deg': pitch, 'jaw_from_cad_zero_ticks': round(JAW_LIMIT / TICK_DEG), 'centerline_gap_bracket_mm': [lo, hi],
             'worst_surface_gap_lower_mm': lo - 1.5 - .4 - .05,
             'centerline_y_at_pan_z_minus_9p17_mm': y}
 
@@ -179,7 +180,7 @@ def check(cad, report, paths, yaw_limit=YAW_LIMIT):
               'head_anchor_contact_mm': HEAD_ANCHOR_CONTACT_MM,
               'rotor_datum_mm': ENTRY.tolist(), 'head_datum_mm': SPLICE.tolist(),
               'head_tangent_in_local_coordinates': SPLICE_DIRECTION.tolist(),
-              'historical_jaw_witness': historic_witness(scene, layout),
+              'jaw_endpoint_witness': jaw_endpoint_witness(scene, layout),
               'jaw_continuous': continuous_jaw(scene, layout), 'neck_cases': replay}
     report.write_text(json.dumps(result, indent=2) + '\n')
     if paths:

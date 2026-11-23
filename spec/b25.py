@@ -71,6 +71,17 @@ def jaw_opening(root, cad_hash):
     require(all(valid_number(value) for value in (drop, reserve, endpoint, proof_end, contact)), '턱 수치 근거 누락')
     if drop <= 0 or contact < endpoint + JAW_STOP_RESERVE:
         raise Blocked(f'턱 하강 {drop:.3f} mm · 피드백 끝점에서 실제 모형 접촉까지 {contact-endpoint:.3f}°')
+    closing = report['closing']
+    close_angle = closing['clear_through_cad_angle_deg']
+    zero_ticks, feedback_ticks = report['closed_reference_from_cad_ticks'], report['feedback_opening_allowance_ticks']
+    close_margin = closing['reserve_from_accepted_feedback_at_least_deg']
+    require(closing['pair'] == ['Part073', 'Jaw_30_moving_jaw']
+            and type(zero_ticks) is int and type(feedback_ticks) is int and feedback_ticks >= 0
+            and valid_number(close_angle) and valid_number(close_margin) and close_margin >= 2
+            and isclose((zero_ticks - feedback_ticks) * 360 / 4096 - close_angle, close_margin, abs_tol=1e-9)
+            and valid_number(closing['continuous_lower_gap_mm']) and closing['continuous_lower_gap_mm'] > 0
+            and type(closing['verified_cells']) is int and closing['verified_cells'] > 0,
+            '같은 턱 보정 영점에서 닫힘 방향 2° 여유를 증명한 기록이 필요합니다.')
     powered = report['powered_clearance']
     require(isclose(reserve, proof_end - endpoint, abs_tol=1e-9) and reserve >= JAW_STOP_RESERVE and
             type(report['verified_cells']) is int and report['verified_cells'] > 0 and
@@ -80,7 +91,7 @@ def jaw_opening(root, cad_hash):
             type(powered['verified_cells']) is int and powered['verified_cells'] > 0,
             '턱 가동 간극과 스토퍼 여유의 연속 증거 불완전')
     return ('PASS', f'62틱 CAD 하강 {drop:.3f} mm · 해당 스토퍼 쌍 가동 틈 하한 {powered["minimum_mm"]:.3f} mm · '
-            f'피드백을 포함한 열림 여유 하한 {reserve:.3f}°')
+            f'피드백을 포함한 여유 하한 닫힘 {close_margin:.3f}°, 열림 {reserve:.3f}°')
 
 
 def assembly_checks():

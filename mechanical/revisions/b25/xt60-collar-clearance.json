@@ -1,0 +1,64 @@
+{
+  "source_cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
+  "source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "changed_plate": 12,
+  "tip_relief_diameter_mm": 3.6,
+  "tip_relief_floor_z_mm": -62.75,
+  "screw_nominal_length_mm": 12.0,
+  "screw_max_length_mm": 12.35,
+  "stack_axial_reserve_mm": 0.2,
+  "fasteners": {
+    "A4InletBolt1": {
+      "seat_xyz_mm": [
+        -25.5,
+        174.7,
+        -50.0
+      ],
+      "original_max_screw_overlap_mm3": 2.474004214701966,
+      "max_screw_tip_clearance_mm": 0.3000000000000007,
+      "reserved_screw_tip_clearance_mm": 0.14999999999998653,
+      "max_screw_overlap_mm3": 0.0,
+      "removed_volume_mm3": 7.634070148223194,
+      "loaded_floor_nominal_mm": 1.2000000000000028,
+      "missing_floor_stock_mm3": 0.0,
+      "insert_to_relief_gap_mm": 1.3999999999999986,
+      "cover_change_overlap_mm3": 0.0,
+      "worst_axial_tip_to_floor_mm": 0.20000000000000034
+    },
+    "A4InletBolt2": {
+      "seat_xyz_mm": [
+        -1.5,
+        172.0,
+        -50.0
+      ],
+      "original_max_screw_overlap_mm3": 2.4740042147019663,
+      "max_screw_tip_clearance_mm": 0.2999999999999998,
+      "reserved_screw_tip_clearance_mm": 0.1499999999999879,
+      "max_screw_overlap_mm3": 0.0,
+      "removed_volume_mm3": 7.634070148223194,
+      "loaded_floor_nominal_mm": 1.2000000000000028,
+      "missing_floor_stock_mm3": 0.0,
+      "insert_to_relief_gap_mm": 1.3999999999999986,
+      "cover_change_overlap_mm3": 0.0,
+      "worst_axial_tip_to_floor_mm": 0.20000000000000034
+    }
+  },
+  "housing_installation": {
+    "actor": "InputXT60Mate",
+    "approach_offset_mm": [
+      0,
+      0,
+      18
+    ],
+    "swept_native_overlap_mm3": {
+      "CableSaddle": 0.0,
+      "A4XT60ExternalSocket": 0.0,
+      "A4InletInsert1": 0.0,
+      "A4InletInsert2": 0.0
+    },
+    "volume_check_positions": 73,
+    "stationary_overlap_mm3": {}
+  }
+}

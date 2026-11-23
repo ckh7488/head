@@ -1,4 +1,4 @@
-"""Bound the opening-stop reserve of the frozen B25 jaw under the fit conditions."""
+"""Check both B25 jaw stop reserves from one closed reference."""
 
 from argparse import ArgumentParser
 from hashlib import sha256
@@ -22,6 +22,9 @@ SKETCH = CONTROL / 'openrb/R5B1/R5B1.ino'
 STAY = 'Jaw_37_right_jaw_bearing_stay'
 ARM = 'Jaw_39_right_jaw_pivot_arm'
 JAW = 'Jaw_30_moving_jaw'
+SHELL = 'Part073'
+CLOSED_REFERENCE_TICKS = 11
+CLOSED_RESERVE = 2.
 TICK_DEGREES = 360 / 4096
 RESERVE = 1.  # Section 6's Goal PWM-limited direct-drive jaw exception.
 
@@ -98,7 +101,7 @@ def contact(fixed, moving, pivot, shift):
 
 
 def verify_continuous_clearance(fixed, moving, pivot, rotation_radius, box, angle, minimum=0.):
-    stack = [(np.array([0., *-box]), np.array([angle, *box]))]
+    stack = [(np.array([min(0., angle), *-box]), np.array([max(0., angle), *box]))]
     scale = np.array([rotation_radius*radians(1.), 1., 1., 1.])
     request = fcl.DistanceRequest()
     lower_gap = float('inf')
@@ -131,25 +134,38 @@ def check(cad=CAD, powered_minimum=None):
     tolerance = int(re.search(r'jawPositionTolerance = (\d+);', firmware)[1])
     span = floor(wire_limit / TICK_DEGREES)
     accepted = (span + tolerance) * TICK_DEGREES
-    proof_angle = ceil((accepted + RESERVE) * 100) / 100
+    zero = CLOSED_REFERENCE_TICKS * TICK_DEGREES
+    open_feedback = zero + accepted
+    open_proof = ceil((open_feedback + RESERVE) * 100) / 100
+    close_proof = zero - tolerance * TICK_DEGREES - CLOSED_RESERVE
     doc = App.openDocument(str(cad.resolve()))
     try:
         pivot = np.array(tuple(doc.JawMotion.Placement.Base))
         phase = doc.getObject(JAW).getGlobalPlacement().Rotation.Angle
         stay, arm = (installed_mesh(doc, name) for name in (STAY, ARM))
-        jaw_vertices = installed_mesh(doc, JAW).vertices
+        jaw, shell = (installed_mesh(doc, name) for name in (JAW, SHELL))
     finally:
         App.closeDocument(doc.Name)
-    box, inputs = relative_bounds(stay, arm, pivot, phase, proof_angle)
-    tip = jaw_vertices[jaw_vertices[:, 1].argmin()]
-    opening_transform = trimesh.transformations.rotation_matrix(radians(span*TICK_DEGREES), (1., 0., 0.), pivot)
-    jaw_tip_drop = tip[2] - trimesh.transform_points([tip], opening_transform)[0, 2]
+    box, inputs = relative_bounds(stay, arm, pivot, phase, open_proof)
+    tip = jaw.vertices[jaw.vertices[:, 1].argmin()]
+    axis = (1., 0., 0.)
+    at_zero = trimesh.transformations.rotation_matrix(radians(zero), axis, pivot)
+    at_goal = trimesh.transformations.rotation_matrix(radians(zero + span*TICK_DEGREES), axis, pivot)
+    jaw_tip_drop = trimesh.transform_points([tip], at_zero)[0, 2] - trimesh.transform_points([tip], at_goal)[0, 2]
+    closing_box = np.full(3, .40)
+    closing_pair = [fcl.CollisionObject(mesh_to_BVH(mesh)) for mesh in (shell, jaw)]
+    jaw_radius = np.linalg.norm(jaw.vertices[:, 1:] - pivot[1:], axis=1).max()
+    closing_gap, closing_cells = verify_continuous_clearance(
+        *closing_pair, pivot, jaw_radius, closing_box, close_proof)
+    closing = {'pair': [SHELL, JAW], 'relative_translation_half_box_mm': closing_box.tolist(),
+               'clear_through_cad_angle_deg': close_proof, 'reserve_from_accepted_feedback_at_least_deg': CLOSED_RESERVE,
+               'continuous_lower_gap_mm': closing_gap, 'verified_cells': closing_cells}
     fixed, moving = (fcl.CollisionObject(mesh_to_BVH(mesh)) for mesh in (stay, arm))
     radius = np.linalg.norm(arm.vertices[:, 1:] - pivot[1:], axis=1).max()
-    clearance, cells = verify_continuous_clearance(fixed, moving, pivot, radius, box, proof_angle)
+    clearance, cells = verify_continuous_clearance(fixed, moving, pivot, radius, box, open_proof)
     powered = None
     if powered_minimum is not None:
-        gap, count = verify_continuous_clearance(fixed, moving, pivot, radius, box, accepted, powered_minimum)
+        gap, count = verify_continuous_clearance(fixed, moving, pivot, radius, box, open_feedback, powered_minimum)
         powered = {'end_deg': accepted, 'minimum_mm': gap, 'required_mm': powered_minimum, 'verified_cells': count}
     witnesses = [(contact(fixed, moving, pivot, shift), shift) for shift in product(*[(-b, 0., b) for b in box])]
     contacts = [(angle, shift) for angle, shift in witnesses if angle is not None]
@@ -160,6 +176,8 @@ def check(cad=CAD, powered_minimum=None):
         'cad_sha256': sha256(cad.read_bytes()).hexdigest(),
         'firmware_sha256': sha256(SKETCH.read_bytes()).hexdigest(),
         'pair': [STAY, ARM],
+        'closed_reference_from_cad_ticks': CLOSED_REFERENCE_TICKS,
+        'closing': closing,
         'pivot_mm': pivot.tolist(),
         'tolerance_model': inputs,
         'wire_goal_max_deg': wire_limit,
@@ -169,16 +187,16 @@ def check(cad=CAD, powered_minimum=None):
         'jaw_tip_drop_at_goal_mm': float(jaw_tip_drop),
         'feedback_opening_allowance_ticks': tolerance,
         'accepted_feedback_max_encoder_deg': accepted,
-        'contact_free_through_deg_in_relative_envelope': proof_angle,
+        'contact_free_through_deg_in_relative_envelope': open_proof - zero,
         'required_stop_reserve_deg': RESERVE,
         'continuous_lower_gap_mm': clearance,
         'verified_cells': cells,
-        'reserve_from_goal_at_least_deg': proof_angle - span * TICK_DEGREES,
-        'reserve_from_accepted_feedback_at_least_deg': proof_angle - accepted,
-        'earliest_sampled_contact_deg': first,
+        'reserve_from_goal_at_least_deg': open_proof - zero - span * TICK_DEGREES,
+        'reserve_from_accepted_feedback_at_least_deg': open_proof - open_feedback,
+        'earliest_sampled_contact_deg': first - zero,
         'sampled_contact_shift_mm': list(shift),
         'powered_clearance': powered,
-        'scope': 'Rigid installed meshes of the opening-stop pair. Bench calibration, mounted fit, load deflection, and actual first contact remain physical measurements.',
+        'scope': 'Rigid installed CAD, with the same closed reference for both stop checks. Measure first contacts, mounted fit and real closed reference on each assembly.',
         'references': {
             'conditions': '../spec/conditions.md',
             'pin_m6': 'https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins',

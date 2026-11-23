@@ -24,6 +24,8 @@ A4_WAGOS = ('A4WagoPositive', 'A4WagoGround')
 A4_FIXED_LEADS = ('A4W6', 'A4W6SupplyCup', 'A4W7', 'A4W7SupplyCup',
                   'A4W35', 'A4W35SocketCup', 'A4W36', 'A4W36SocketCup')
 A4_INLET_SCREWS = ('A4InletBolt1', 'A4InletBolt2')
+A4_INLET_INSERTS = ('A4InletInsert1', 'A4InletInsert2')
+CABLE_GUIDE_BENCH = 'cable-guide-bench'
 CAMERA_END = ('CameraEatonHeadTie', 'CameraEatonHeadSplice', 'CameraEatonHeadFixedLeg', 'CameraOEMHeadTail')
 VIEWS = (
     ('start', '첫 단계', 'base-cup'),
@@ -92,6 +94,7 @@ def plan(layout, heat_screws, heat_retainers, world):
         inserts.setdefault(site['host'], []).append((name + 'Insert', (-12*np.asarray(axis)).tolist()))
     step = C.step
     result = []
+    rear_inserts = layout['motion_geometry']['rear_cable_service_nuts']['insert_names']
     for old in C.assembly_plan('b25', layout):
         sid,ctx = old['id'],old['ctx']
         if sid.startswith('c3-'):
@@ -104,7 +107,19 @@ def plan(layout, heat_screws, heat_retainers, world):
             row.pop('camera_feed')
             row['text'] = '회전판을 내리기 전에 Eaton 선의 맨 끝을 앞쪽 구멍 아래에서 위로 통과시킵니다. 피복을 열린 곡면에 얹습니다.'
         elif sid == 'rear-guide':
-            row['text'] = 'OpenRB USB와 5 V 꼬리를 뒤로 빼고, 40번 케이블 가이드를 받침 뒤에서 밀어 넣습니다.'
+            guide, offset = row.pop('place')
+            result.extend([
+                step('rear-guide-bench', CABLE_GUIDE_BENCH, '빈 케이블 가이드 40을 작업대에 놓습니다.',
+                     place=(guide, (0, 0, 0))),
+                step('rear-cover-service-nuts', CABLE_GUIDE_BENCH,
+                     '40번 가이드 위에서 뒤 배선 덮개용 M3 인서트 다섯 개를 수직으로 열압입합니다.',
+                     place=(rear_inserts, (0, 0, 15))),
+                step('a4-inlet-inserts', CABLE_GUIDE_BENCH,
+                     '40번 가이드의 12 V 입력 단자 받침에 M3 인서트 두 개를 위에서 열압입합니다.',
+                     place=(A4_INLET_INSERTS, (0, 0, 12))),
+            ])
+            row.update(text='인서트를 식힌 뒤 OpenRB USB와 5 V 꼬리를 뒤로 빼고, 40번 가이드를 받침 뒤에서 밀어 넣습니다.',
+                       merge=(CABLE_GUIDE_BENCH, offset))
         elif sid == 'rear-cover':
             row['text'] = '정비용 XT60E-F를 달고, 외부 입력 XT60U-M의 두 턱을 홈에 걸어 둡니다. USB와 5 V 전원선을 홈에 놓고 42번 덮개를 위에서 닫습니다.'
         elif sid == 'hub-board-place':
@@ -120,12 +135,14 @@ def plan(layout, heat_screws, heat_retainers, world):
             ])
         elif sid == 'hatch-fit':
             row['text'] = '정비 XT60 플러그를 바깥 대기 위치에 둔 상태에서 A4 허브가 달린 덮개를 받침 아래에서 올립니다.'
+        elif sid == 'camera-bracket-bench':
+            row['text'] = '작업대에 코 카메라 브래킷 26을 놓습니다. 코 트레이용 타이는 폭 2.10 mm, 두께 0.47 mm 이하로 준비합니다.'
         elif sid == 'camera':
             row['text'] = '순정 키 플러그를 카메라 기판에 꽂습니다. 카메라 모듈을 뒤 위에서 비스듬히 내려 코받침에 댑니다.'
         elif sid == 'camera-tray-bolts':
             row['text'] = 'M3×8 두 개로 코 트레이의 인서트에 카메라 브래킷을 고정합니다. 위에서 2.5 mm 육각렌치를 사용합니다.'
         elif sid == 'camera-nose-guide':
-            row.update(text='코 트레이 슬롯에 2.5 mm 타이를 걸고 외피를 받칩니다. 접합부는 가동 구간 바깥에 놓습니다.',
+            row.update(text='코 트레이 슬롯의 작은 타이로 Eaton 외피를 고정한 뒤 가동 선재와 순정 꼬리선을 접합합니다. 접합부는 가동 구간 바깥에 놓습니다.',
                        place=(CAMERA_END,(0,8,8)))
         elif sid == 'camera-route-set':
             row.pop('camera_tail_mount', None)
@@ -145,9 +162,9 @@ def plan(layout, heat_screws, heat_retainers, world):
             result.append(step('a4-socket-fix', 'base', '정비 소켓 양쪽에 평와셔와 M3 너트를 댑니다. 뒤쪽 너트를 5.5 mm 스패너로 잡고 M3×30 두 개를 조입니다.',
                                place=(A4_STATION_WASHERS + A4_STATION_NUTS,(0,10,0)),
                                bolts=['A4StationFastener1','A4StationFastener5']))
-            result.append(step('a4-inlet-body', 'base', '42번 덮개의 M3 인서트 두 개를 준비하고, 기존 외부 XT60U-M의 두 턱을 아래 홈에 맞춥니다.',
-                               place=(('InputXT60Mate','InputXT60'),(0,18,0)),
-                               place2=(('A4InletInsert1','A4InletInsert2'),(0,0,-12))))
+            result.append(step('a4-inlet-body', 'base', '외부 12 V 입력 XT60U-M 몸체를 위에서 내리고 두 턱을 40번 가이드의 아래 홈에 맞춥니다.',
+                               place=(('InputXT60Mate',),(0,0,18))))
+            continue
         result.append(row)
         hosts = [name for role in ('place','place2') if role in old for name in old[role][0] if name in inserts]
         if hosts:
@@ -174,6 +191,9 @@ def plan(layout, heat_screws, heat_retainers, world):
         if sid == 'mast-nuts':
             result.append(step('internal-connectors',ctx,'눈 좌우와 턱 모터의 JST, 턱 데이터 분기 커넥터를 배선도에 맞춰 연결합니다.',
                                place=(('HarnessID1EH','HarnessID6EH','HarnessWdata'),(0,0,0))))
+        if sid == 'rear-skull-lock':
+            result.append(step('a4-input-plug',ctx,'조립과 무전원 극성 확인을 마친 뒤 외부 12 V 어댑터의 XT60을 입력 단자에 연결합니다.',
+                               place=(('InputXT60',),(0,18,0))))
     if inserts:
         raise ValueError(f'Unshown B25 inserts: {sorted(inserts)}')
     return result

@@ -14,11 +14,12 @@ import trimesh
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-sys.path[:0] = [str(ROOT / 'mechanical/physics'), str(ROOT / 'mechanical')]
+sys.path[:0] = [str(ROOT / 'mechanical/physics'), str(ROOT / 'mechanical'), str(ROOT / 'control/verification')]
 from check_b25_camera_lower import CUT_LENGTH, DATA, REAR_RADIUS, lower_bight
 from check_b25_camera_upper import upper_at
 from check_b25_j2_a4_service import LEADS, service_route
 from check_b25_j2_disconnect import DROP, PARK, WITHDRAW, WIRE_RADIUS
+from check_b25_jaw_opening import CLOSED_REFERENCE_TICKS
 from export_cad import world_shape
 from wiring_motion import rotation, transform
 
@@ -207,6 +208,7 @@ def build(assembly, cad, output):
         (output/'assembly.glb').write_bytes(trimesh.exchange.gltf.export_glb(scene, include_normals=True))
         rig = {kind: layout['motion_geometry'][kind] for kind in ('eye_pitch','eye_yaw','blink','pitch_stop')}
         rig['jaw_pivot_mm'] = layout['jaw_pivot_mm']
+        rig['jaw_closed_deg'] = CLOSED_REFERENCE_TICKS * TICK_DEG
         document = {'revision':'B25','board':'A4','cad_sha256':digest,'parts':parts,'rig':rig,
                     'wiring': {'routes':wires, 'blocks':[], 'eaton':eaton(), 'service':service_leads()}}
         (output/'assembly.json').write_text(json.dumps(document,ensure_ascii=False,separators=(',',':'))+'\n')

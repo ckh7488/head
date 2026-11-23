@@ -1,7 +1,7 @@
-"""Build the assembly walkthrough (model.glb + steps.json) from the checked assembly plan.
+"""Build the checked assembly walkthrough or the illustrated B25 preview.
 
-Every step, part, offset and note comes from mechanical/physics/check_b19_assembly.py and its report,
-so the viewer shows exactly the order that was checked and written into mechanical/ASSEMBLY.md.
+Checked walkthroughs use the assembly checker and its report. The B25 preview
+uses its illustration plan and shows indicative tool positions.
 
     python web/b19/build_b19_viewer.py build/b19-cad build/hardware.json \
         mechanical/revisions/b19/print/hardware-spec.json mechanical/revisions/b19/assembly-check.json
@@ -539,8 +539,11 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             pose = np.eye(4)
             pose[:3, 3] = offset
             poses[name] = pose.tolist()
+        guide_bench = illustration and st['ctx'] == B25.CABLE_GUIDE_BENCH
         steps.append({
-            'id': st['id'], 'label': label, 'section': SECTIONS[st['ctx']], 'bench': st['ctx'] in BENCH,
+            'id': st['id'], 'label': label,
+            'section': '뒤 케이블 가이드' if guide_bench else SECTIONS[st['ctx']],
+            'bench': guide_bench or st['ctx'] in BENCH,
             'text': row['text'] or last_text, 'continued': not row['text'],
             'notes': notes,
             'issues': row['issues'], 'fixed': fixed, 'moves': moves,

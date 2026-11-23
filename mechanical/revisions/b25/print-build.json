@@ -1,7 +1,7 @@
 {
   "source_3mf_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
-  "project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
-  "source_cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "source_cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
   "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
   "plate_sha256": {
     "1": "33ebc8dfc898d2b84f0f8d26a7a4cf1522a330688db1807d638f55816f08a47d",
@@ -12,10 +12,10 @@
     "6": "0293b280e0269e44f082924bc5d697b58fb430b43993dbc24118d66028602b31",
     "7": "a1fa54be0feaafff491e803b2eba920acf05bdcf959b8b19e4092a5d7e2e3c26",
     "8": "a0671a2e7e5789ba7187055c5948a4364d4f4cb17db5251dc149afce56c4149a",
-    "9": "d15de48e045c94b55a9b15c9752a689f26180083cbaed35a4546bb8fc834c7ee",
+    "9": "4ee51ac69bb51410bc59dceaf0b4543f8b7fbe0007ad527460ad294a0a0ca3c8",
     "10": "2c86ae967ddd7b1d67eaee6a5784894c4c3e89dc410adeb3bc8e9a11f9ae3642",
     "11": "c74ce8c7744eb66ee8a62ca90b4e782784de31ed2f6b2783550b147ea304aaf6",
-    "12": "8527ae73f624a18d63efa13361c09ce58150c422f686217a7cdae37a98b04e1d",
+    "12": "b7e9ab7c56e7dd84917b215e0b9149129617b4decd2d59d4841abae9944971c7",
     "13": "54fb5be35642bf6c54f4a7c9324c8ff9ae91abe6125f6f3f3de7eb772332f29b",
     "14": "c0c0fa4113ed88b7264d78476c7b17484ac8abba2f7428bc589380c94ec95181"
   },
@@ -37,14 +37,16 @@
       "브림"
     ],
     "9": [
-      "37 오른쪽 턱 받침"
+      "37 오른쪽 턱 받침",
+      "37 턱 열림 스토퍼 벽"
     ],
     "11": [
       "42 뒤 배선 덮개",
       "A4 고정편 브림"
     ],
     "12": [
-      "40 뒤 케이블 가이드"
+      "40 뒤 케이블 가이드",
+      "40 XT60 가이드 나사 끝 여유"
     ],
     "13": [
       "일체형 턱 메쉬와 래프트"
@@ -181,104 +183,105 @@
   },
   "verified_plate_slices": {
     "1": {
-      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 1,
       "warning_count": 0,
       "estimated_seconds": 31950,
       "estimated_petg_g": 239.818
     },
     "2": {
-      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 1,
       "warning_count": 0,
       "estimated_seconds": 6012,
       "estimated_petg_g": 55.676
     },
     "3": {
-      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 3,
       "warning_count": 0,
-      "estimated_seconds": 2942,
+      "estimated_seconds": 2941,
       "estimated_petg_g": 14.252
     },
     "4": {
-      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 1,
       "warning_count": 0,
-      "estimated_seconds": 49502,
-      "estimated_petg_g": 217.31
+      "estimated_seconds": 49570,
+      "estimated_petg_g": 216.939
     },
     "5": {
-      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 1,
       "warning_count": 0,
-      "estimated_seconds": 37842,
-      "estimated_petg_g": 161.416
+      "estimated_seconds": 37820,
+      "estimated_petg_g": 161.316
     },
     "6": {
-      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 9,
       "warning_count": 0,
-      "estimated_seconds": 32415,
-      "estimated_petg_g": 200.387
+      "estimated_seconds": 32423,
+      "estimated_petg_g": 200.389
     },
     "7": {
-      "slice_source_project_sha256": "25aa2205c6efa66c4aaeb1d0fdf760c646764cb1847fe428de02ad72bb2b00e3",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 8,
       "warning_count": 0,
-      "estimated_seconds": 22905,
+      "estimated_seconds": 22908,
       "estimated_petg_g": 119.071
     },
     "8": {
-      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 15,
       "warning_count": 0,
-      "estimated_seconds": 11592,
-      "estimated_petg_g": 46.701
+      "estimated_seconds": 11638,
+      "estimated_petg_g": 46.777
     },
     "9": {
-      "slice_source_project_sha256": "7380d1063ae766b3b42151ef4f2af5b34f231f6804f6a80698b762db17beb841",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 7,
       "warning_count": 0,
-      "estimated_seconds": 6838,
-      "estimated_petg_g": 28.9
+      "estimated_seconds": 6836,
+      "estimated_petg_g": 28.88
     },
     "10": {
-      "slice_source_project_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 2,
       "warning_count": 0,
       "estimated_seconds": 2048,
       "estimated_petg_g": 7.499
     },
     "11": {
-      "slice_source_project_sha256": "a8419b4ecca4a399eb595de0b8b7926fe1a8473375460f213d178b95fec7cd9a",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 3,
       "warning_count": 0,
-      "estimated_seconds": 5936,
-      "estimated_petg_g": 33.649
+      "estimated_seconds": 5938,
+      "estimated_petg_g": 33.642
     },
     "12": {
-      "slice_source_project_sha256": "9ec0c7e7a6b4b05d0c648ba0d51ea5abb452e02ebfdd69be0217563619651acc",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 4,
       "warning_count": 0,
-      "estimated_seconds": 19737,
-      "estimated_petg_g": 97.145
+      "estimated_seconds": 19691,
+      "estimated_petg_g": 96.946
     },
     "13": {
-      "slice_source_project_sha256": "a6dcd29c3aba64f3a556f9059907486a316f344d44f0228cb630b2dacd3a21dc",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 1,
       "warning_count": 0,
-      "estimated_seconds": 10543,
+      "estimated_seconds": 10544,
       "estimated_petg_g": 52.158
     },
     "14": {
-      "slice_source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
       "print_objects": 1,
       "warning_count": 0,
-      "estimated_seconds": 3962,
+      "estimated_seconds": 3964,
       "estimated_petg_g": 11.655
     }
   },
-  "estimated_seconds_total": 244224,
-  "estimated_petg_g_total": 1285.637
+  "estimated_seconds_total": 244283,
+  "estimated_petg_g_total": 1285.015,
+  "previous_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13"
 }

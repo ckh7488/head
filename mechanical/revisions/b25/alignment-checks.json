@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
   "motion": {
     "poses": 26196,
     "interfaces": 572,
@@ -12,7 +12,11 @@
       ],
       "common_volume_mm3": 0.0,
       "distance_mm": 0.0
-    }
+    },
+    "jaw_range_from_cad_zero_deg": [
+      0.0,
+      6.85546875
+    ]
   },
   "camera_route": {
     "upper_samples": 289,
@@ -20,14 +24,25 @@
     "rear_samples": 73,
     "minimum_upper_bend_radius_mm": 18.2,
     "minimum_lower_bend_radius_mm": 18.25,
-    "length_reserve_percent": 11.380243994903939,
-    "jaw_continuous_cells": 17,
-    "unexpected_contacts": []
+    "length_reserve_percent": 11.123461951701419,
+    "jaw_continuous_cells": 18,
+    "unexpected_contacts": [],
+    "longest_reference_mm": 494.94498312071255,
+    "jaw_endpoint_witness": {
+      "head_pitch_deg": 3.33984375,
+      "jaw_from_cad_zero_ticks": 78,
+      "centerline_gap_bracket_mm": [
+        3.0106964111328125,
+        3.01080322265625
+      ],
+      "worst_surface_gap_lower_mm": 1.0606964111328125,
+      "centerline_y_at_pan_z_minus_9p17_mm": -25.774984456446763
+    }
   },
   "a4_service_leads": {
     "samples": 39,
-    "minimum_radius_mm": 12.0,
-    "minimum_pair_gap_mm": 2.443,
+    "minimum_radius_mm": 12.000000000000014,
+    "minimum_pair_gap_mm": 2.4430000000000014,
     "rigid_plug_sweeps": {
       "withdraw": {},
       "park": {},
@@ -48,6 +63,12 @@
     "checked_steps": 146,
     "blocking_steps": 0,
     "plan_sha256": "1f7daf3de0687030aa55cbad0db238bfb2b72616564be1acd13f64f59056a173",
-    "scope": "CAD assembly screen plus separate rear cover, J2 hatch and eye insertion evidence"
-  }
+    "scope": "Archived 146-stage assembly screen. The revised A4 inlet direction, screw seats and cover lift were checked separately.",
+    "source_cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e"
+  },
+  "changed_world_meshes": [
+    "CableSaddle",
+    "EatonCableNeutral",
+    "Jaw_37_right_jaw_bearing_stay"
+  ]
 }

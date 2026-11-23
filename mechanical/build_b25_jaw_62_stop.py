@@ -18,14 +18,16 @@ from build_b25_jaw_side_clearance import STAY, STAY_ROTATION, print_cutter, trim
 from check_b25_jaw_retention import geometry
 
 
+STOP_WALL_Y_AT_Z69 = -10.525
+
+
 def stop_relief():
     x_min, x_max = 45.9, 54.
     z_min, z_max = 69., 82.
     width = 12.
-    end_wall_y_at_bottom = -10.825
     return md.Manifold.cube((x_max-x_min, width, z_max-z_min)).transform((
         (1., 0., 0., x_min),
-        (0., 1., .06, end_wall_y_at_bottom-width),
+        (0., 1., .06, STOP_WALL_Y_AT_Z69-width),
         (0., 0., 1., z_min),
     ))
 
@@ -47,7 +49,7 @@ def apply(doc, project):
         'plate': 9,
         'native_removed_mm3': volume_removed,
         'print_removed_mm3': print_removed,
-        'cutter_world_axes_mm': {'x': [45.9, 54.], 'z': [69., 82.], 'y_at_z69': -10.825,
+        'cutter_world_axes_mm': {'x': [45.9, 54.], 'z': [69., 82.], 'y_at_z69': STOP_WALL_Y_AT_Z69,
                                   'y_increase_per_z': .06}
     }
 

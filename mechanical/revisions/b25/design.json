@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
-  "p2s_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
+  "p2s_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -173,6 +173,26 @@
     "service_covers": {
       "board": "A4",
       "evidence": "cover-service.json"
+    },
+    "a4_collar_tip_clearance": {
+      "tip_relief_diameter_mm": 3.6,
+      "tip_relief_floor_z_mm": -62.75
+    },
+    "jaw_opening_stop_wall": {
+      "part": "Jaw_37_right_jaw_bearing_stay",
+      "y_at_z69_mm": -10.525,
+      "y_change_mm": 0.3,
+      "native_removed_mm3": 5.301017882537249,
+      "print_removed_mm3": 5.301019269545119
+    },
+    "camera_neutral": {
+      "part": "EatonCableNeutral",
+      "from_upper_route_check": true,
+      "free_span_control_offset_yz_mm": [
+        3.75,
+        -1.75
+      ],
+      "cut_mm": 550
     }
   },
   "print_inputs_sha256": {

@@ -2,7 +2,7 @@
   "source_project": "R5-B25-P2S.3mf",
   "source_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
   "archive": "R5-B25-Bearing-Fit-STLs.zip",
-  "archive_sha256": "bc39441d13a30ccf40718420fa23f05fc1ff4a197830f7a90016240304b5f2b9",
+  "archive_sha256": "48e2eb9a14bee25dad731ef7bc4a12da9269bb875cf3e2978e19aa2666ff042c",
   "parts": [
     {
       "source_file": "13_left_eye_cradle_mount-B24.stl",
@@ -321,20 +321,20 @@
       "plate": 9,
       "object_id": 96,
       "object_path": "3D/Objects/object_48.model",
-      "source_mesh_sha256": "709b38d4aae619cef052cf60b5475049a882a88d54a5a943bd4749f2ec90bfc6",
+      "source_mesh_sha256": "2b0358ee47dacb6d9e4b02e62450cc690e381d0766d3e0bc78b626a06d740db3",
       "part": "37",
       "cad_id": "Jaw_37_right_jaw_bearing_stay",
       "print_axis": "Z",
       "bearing": "MR104ZZ",
-      "source_pocket_mm": 10.1,
+      "source_pocket_mm": 10.15,
       "source_depth_mm": 4.02,
-      "source_lead_in_mm": 10.2,
+      "source_lead_in_mm": 10.25,
       "shoulder_mm": 7.1,
       "variants": [
         {
           "file": "p9-37-bearing-pocket-D10.05.stl",
-          "sha256": "b8cfeabac1f6ec9be1983184b42e76c091e868694e6ed8f836bb0ea1934d152b",
-          "facets": 10732,
+          "sha256": "05c730015273552c6f02bd8ad586f3455ec7cb6cde50bf3a48f4cfdd729a83df",
+          "facets": 10728,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -372,12 +372,15 @@
             30.599712371826172
           ],
           "right_locator_wall_mm": 1.4395511876206561,
-          "relief_removed_mm3": 39.59785253361315
+          "relief_removed_mm3": 39.59785253361315,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
         },
         {
           "file": "p9-37-bearing-pocket-D10.10.stl",
-          "sha256": "0ef0149b3a2623fe75aff85c50fd1d5a2d2fe7ca4609a3cfe5980d9184056306",
-          "facets": 10732,
+          "sha256": "b4e7d79748e4b4b6d8fb3abfa363f8c97f21c37165cb28b491e798eea7dc8404",
+          "facets": 10728,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -415,12 +418,15 @@
             30.599712371826172
           ],
           "right_locator_wall_mm": 1.4395511876206561,
-          "relief_removed_mm3": 39.59785253361315
+          "relief_removed_mm3": 39.59785253361315,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
         },
         {
           "file": "p9-37-bearing-pocket-D10.15.stl",
-          "sha256": "ae6898801d12d573e0dbebe5a332b61c2fb68418105ba46c6fa1bb1cd49932ae",
-          "facets": 10282,
+          "sha256": "7c0e0106d80e3d07876802bd66fa92771f4e2d7b9822c3364fcc3d3eb09a29a3",
+          "facets": 10278,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -458,12 +464,15 @@
             30.599712371826172
           ],
           "right_locator_wall_mm": 1.4395511876206561,
-          "relief_removed_mm3": 39.6013201653177
+          "relief_removed_mm3": 39.6013201653177,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
         },
         {
           "file": "p9-37-bearing-pocket-D10.20.stl",
-          "sha256": "03f28db45534df577dc9ed7e1ff6e95dfaef153aae7a1d79e2a1c933e0a9dae8",
-          "facets": 10560,
+          "sha256": "ddff5188d8b8c1fcf5094d78910d212d91ed4b8ae464862e7235f87f96846c6b",
+          "facets": 10556,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -501,12 +510,15 @@
             30.599712371826172
           ],
           "right_locator_wall_mm": 1.4395511876206561,
-          "relief_removed_mm3": 39.6013201653177
+          "relief_removed_mm3": 39.6013201653177,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
         },
         {
           "file": "p9-37-bearing-pocket-D10.25.stl",
-          "sha256": "3cc1aac03a1851332dc74d0dc0002dd8e19fdb7fc34b60940373965f4ffe9ff4",
-          "facets": 10570,
+          "sha256": "a20405bd6ce81dfb77eed1d1ade31267e358b189befec1718b8b57bcfa0d44ea",
+          "facets": 10566,
           "print_dimensions_mm": [
             37.5,
             24.998768,
@@ -544,10 +556,49 @@
             30.599712371826172
           ],
           "right_locator_wall_mm": 1.4395511876206561,
-          "relief_removed_mm3": 39.6013201653177
+          "relief_removed_mm3": 39.6013201653177,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
         }
       ],
-      "yoke_facing_relief_depth_added_mm": 0.7
+      "yoke_facing_relief_depth_added_mm": 0.7,
+      "source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "opening_stop_relief_cutter_world_axes_mm": {
+        "x": [
+          45.9,
+          54.0
+        ],
+        "z": [
+          69.0,
+          82.0
+        ],
+        "y_at_z69": -10.525,
+        "y_increase_per_z": 0.06
+      },
+      "source_sections": {
+        "pocket": {
+          "nominal_diameter_mm": 10.15,
+          "mesh_diameter_mm": [
+            10.147967,
+            10.150002
+          ]
+        },
+        "lead_in": {
+          "nominal_diameter_mm": 10.25,
+          "mesh_diameter_mm": [
+            10.247947,
+            10.250001
+          ]
+        },
+        "shoulder": {
+          "nominal_diameter_mm": 7.1,
+          "mesh_diameter_mm": [
+            7.0978,
+            7.100008
+          ]
+        }
+      }
     },
     {
       "source_file": "24_blink_rail_with_bearing_shoulders.stl",
@@ -597,6 +648,30 @@
     }
   ],
   "baseline_fit_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
-  "geometry_after_final_project_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
-  "rebuilt_family": "B10"
+  "geometry_after_final_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "rebuilt_family": "B10",
+  "b10_variant_endpoint_slices": {
+    "10.05": {
+      "source_project_sha256": "495265bd4231684b0d0ae6178e5ab7d521744f72f4036029922a17d2e0f78a7e",
+      "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
+      "plate_sha256": "98f3804623db528a7e1b55cf607908cd2d7eee2ff09176dba40f880e7865dfc7",
+      "gcode_sha256": "1308b7c27c28c16d249e61cf696951dbf1177d8eba8ce4fa01146d43cc806ab4",
+      "return_code": 0,
+      "warning": "",
+      "print_objects": 7,
+      "seconds": 6876.617,
+      "grams": 28.968704
+    },
+    "10.25": {
+      "source_project_sha256": "194de06acbfbcd10bbb1aa6e01eeb6c5cf38203e5b39147d470763dceb7528a8",
+      "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
+      "plate_sha256": "baa15a3639f295925e773b7c098704991ae2b7020a72024fd8be52a8609e3b2f",
+      "gcode_sha256": "e4fb6d6de3cac8348571786670d6f9955b0b38c78f876174e7ba9eca55ce6a39",
+      "return_code": 0,
+      "warning": "",
+      "print_objects": 7,
+      "seconds": 6859.296,
+      "grams": 28.959356
+    }
+  }
 }
