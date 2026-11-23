@@ -36,7 +36,7 @@ XL330 네 상자의 케이스용 동봉 나사를 사용합니다. B25 범위에
 | R4–R6 | 61.9 kΩ, 0603, 0.1%, 25 ppm/°C 이하 | 3 |
 | U1–U3 | TPS2557, VSON-8 3 × 3 mm, 피치 0.65 mm. 핀 배열·전류 제한 특성이 일치하는 동급만 허용 | 3 |
 
-**권장 발주**: Gerber·드릴 ZIP과 밑면 좌표 CSV로 **JLCPCB PCBA(밑면 SMD 9개: `U1–U3, R4–R6, C3–C5` 공장 실장)**를 선택하면 스텐실·열풍기 없이 VSON-8 불량을 피할 수 있고, 집에서는 윗면 관통홀 부품(`C1–C2, D1–D2, F1–F2, J1–J8, R1–R3`)만 일반 인두로 납땜하면 됩니다(3D 미리보기에서 `U1–U3` 1번 핀 방향 확인 필수). 직접 리플로우할 때만 스텐실 ZIP을 함께 발주합니다. 표의 XT30PW-M 2개는 B25 BOM의 J6-P와 동일합니다. [A4 Gerber·드릴](../../../electronics/fabrication/R5_Servo_Hub_A4-Gerbers.zip) · [A4 스텐실](../../../electronics/fabrication/R5_Servo_Hub_A4-Stencil.zip) · [밑면 좌표](../../../electronics/fabrication/R5-hub-back-positions-mm.csv) · [A4 BOM](../../../electronics/servo-hub/BOM.csv) · [전원과 실장 안내](../../../electronics/README.md)
+밑면 SMD 9개만 공장 실장을 선택합니다. Gerber ZIP에는 밑면 페이스트가 포함돼 있습니다. 업로드용 BOM과 CPL을 각각 올리고, **밑면 9개와 U1–U3의 1번 핀 방향**을 미리보기에서 확인합니다. 직접 리플로우할 경우에는 별도 스텐실 파일을 씁니다. [A4 Gerber ZIP](../../../electronics/fabrication/R5_Servo_Hub_A4-Gerbers.zip) · [업로드용 BOM](../../../electronics/fabrication/R5_Servo_Hub_A4-JLCPCB-BOM.csv) · [업로드용 CPL](../../../electronics/fabrication/R5_Servo_Hub_A4-JLCPCB-CPL.csv) · [실장 확인 순서](../../../electronics/README.md#jlcpcb-밑면-실장)
 
 ## 하네스와 전선
 
