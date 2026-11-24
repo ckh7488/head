@@ -20,6 +20,12 @@ const initialBoard = [-1.6, -1.4, width + 3.2, height + 2.8];
 const schMarks = new Map();
 const refs = Object.keys(data.parts);
 const fourLayer = data.layers.length === 4;
+const handAssembled = data.hubRevision === "A6";
+const handCount = side => refs.filter(ref => {
+  const part = data.parts[ref];
+  return part.side === side && part.populate === "YES" && !part.jlc;
+}).length;
+const sideLabel = part => part.side === "B" ? "밑면" : "윗면";
 const copperWeight = fourLayer ? "외층 1 oz · 내층 0.5 oz" : "양면 2 oz";
 const publishedTraceMinimum = fourLayer ? "다층 1 oz 최소 0.09 mm" : "2층 2 oz 최소 0.16 mm";
 const layerLabels = { F: "윗면", In1: "L2 · GND", In2: "L3 · 전원", B: "밑면" };
@@ -37,17 +43,18 @@ const descriptions = {
   H4: "H2와 함께 J2 잠금쇠를 받치는 구멍입니다.",
 };
 const limits = [
-  ["외형", `${width} × ${height} mm`, "Economic 10 × 10 ~ 470 × 500 mm"],
+  ["외형", `${width} × ${height} mm`, handAssembled ? "표준 생기판" : "Economic 10 × 10 ~ 470 × 500 mm"],
   ["기판 두께", "1.60 mm", "1.6 mm 공칭 허용 범위 1.44–1.76 mm"],
   [`${data.layers.length}층 완성 동박`, copperWeight, "표준 적층"],
-  ["표면처리", "무연 HASL", "Economic 밑면 실장과 함께 견적 확인"],
+  ["표면처리", "무연 HASL", handAssembled ? "생기판 옵션" : "Economic 밑면 실장과 함께 견적 확인"],
   ["최소 배선 폭", `${data.minTrack.toFixed(3)} mm`, publishedTraceMinimum],
   ["동박 간격 규칙", `${data.clearance.toFixed(3)} mm`, publishedTraceMinimum],
   ["도금 부품홀 최소 동박 링", `${data.minRing.toFixed(3)} mm · ${data.pthCount}홀`, fourLayer ? "다층 1 oz 권장 0.20 mm" : "2 oz 최소 0.254 mm"],
   ["관통 비아", `Ø${[...new Set(data.vias.map(via => via[3]))].sort().join("·")} 드릴 · ${data.vias.length}개`, "최소 Ø0.15 드릴 / Ø0.25 패드"],
   ["홀 공차", "홀은 PCB 탭에서 선택", "직경 +0.13/−0.08 mm · 위치 ±0.075 mm"],
-  ["마스크 댐 기준", "TPS2557 최소 패드 간격 0.275 mm", fourLayer ? "1 oz 녹색 최소 0.10 mm" : "2 oz 최소 0.20 mm"],
-  ["밑면 실장", `${data.pcbaCount}개 · IC 피치 0.65 mm`, "Economic IC 최소 피치 0.40 mm · 0402 이상"],
+  ["마스크 댐 기준", handAssembled ? "TPS25221 다리 사이 패드 간격 0.350 mm" : "TPS2557 최소 패드 간격 0.275 mm", fourLayer ? "1 oz 녹색 최소 0.10 mm" : "2 oz 최소 0.20 mm"],
+  ["밑면 실장", handAssembled ? `${handCount("B")}개 수납땜 · IC 피치 0.95 mm` : `${data.pcbaCount}개 · IC 피치 0.65 mm`,
+    handAssembled ? "SOT-23-6 · 0805 · 1206" : "Economic IC 최소 피치 0.40 mm · 0402 이상"],
 ];
 
 function element(tag, text, attributes = {}) {
@@ -227,7 +234,7 @@ function partRow(ref) {
   const summary = element("dl");
   for (const [label, value] of [
     ["부품", part.mpn],
-    ["실장", part.jlc ? "밑면 · JLCPCB " + part.jlc : part.populate === "NATIVE" ? "기판 형상" : "윗면 · 수납땜"],
+    ["실장", part.jlc ? "밑면 · JLCPCB " + part.jlc : part.populate === "NATIVE" ? "기판 형상" : sideLabel(part) + " · 수납땜"],
     ["풋프린트", part.footprint.split(":").pop()],
     ["좌표", part.xy.map((p, i) => (data.origin[i] + p).toFixed(3)).join(" / ") + " mm"],
     ...(part.placement ? [["CPL 회전", part.placement.Rotation + "°"]] : []),
@@ -310,12 +317,14 @@ function limiterBody(ref) {
   const body = new Group();
   body.name = ref;
   body.position.set(x / 1000, 0, z / 1000);
-  const caseMesh = new Mesh(new BoxGeometry(.003, .001, .003),
+  const bodyHeight = handAssembled ? .00145 : .001;
+  const size = handAssembled ? [.0016, bodyHeight, .0029] : [.003, bodyHeight, .003];
+  const caseMesh = new Mesh(new BoxGeometry(...size),
     new MeshStandardMaterial({ color: "#252725", roughness: .8 }));
-  caseMesh.position.y = -.0005;
+  caseMesh.position.y = -bodyHeight / 2;
   const dot = new Mesh(new CylinderGeometry(.00014, .00014, .000025, 16),
     new MeshBasicMaterial({ color: "#aeb4ac" }));
-  dot.position.set((pin.xy[0] - x) * .0007, -.00101, (pin.xy[1] - z) * .0007);
+  dot.position.set((pin.xy[0] - x) * .0007, -bodyHeight - .00001, (pin.xy[1] - z) * .0007);
   body.add(caseMesh, dot);
   return body;
 }
@@ -394,7 +403,7 @@ function resize3d() {
 function orient3d(preset) {
   if (!three) return;
   const offset = {
-    top: new Vector3(0, .127, .00001), bottom: new Vector3(0, -.127, .00001),
+    top: new Vector3(0, .127, .00001), bottom: new Vector3(0, -.127, handAssembled ? -.00001 : .00001),
     iso: new Vector3(.057, .087, .095),
   }[preset];
   three.camera.position.copy(boardCenter).add(offset);
@@ -467,27 +476,43 @@ $("#inspect-fuse").addEventListener("click", () => {
   setBox(pcb, [px(x) - 14, py(y) - 12, 29, 22]);
 });
 $("#limits").append(table(["항목", data.hubRevision, "JLCPCB 공개 조건"], limits));
-$("#order-stack").textContent = `시제품 2장 · ${data.layers.length}층 FR-4 · 1.6 mm · ${copperWeight} · 녹색 · 무연 HASL`;
-$("#order-hand").textContent = `밑면 ${data.pcbaCount}개를 공장에서 실장하고 윗면 ${refs.filter(ref => data.parts[ref].populate === "YES" && !data.parts[ref].jlc).length}개는 직접 납땜합니다.`;
-$("#order-orientation").textContent = "BOM과 CPL을 올리고, JLCPCB 밑면 미리보기에서 각 칩의 몸체 점을 오른쪽 그림의 1번 핀에 맞춥니다."
-  + (fourLayer ? " U2의 방향은 U1·U3와 따로 확인합니다." : "");
-$("#solder-access").textContent = fourLayer
-  ? "손납땜 패드와 밑면 실장 부품 사이는 최소 2.05 mm입니다. JST PH에는 1.2–1.6 mm 평팁, XT30 전원 핀·퓨즈 홀더·C1 음극에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다."
-  : "F1과 밑면 U1·U2 사이의 동박 간격은 0.26–0.27 mm입니다. 열린 쪽에서 작은 평팁을 댑니다.";
+$("#order-stack").textContent = `${handAssembled ? "시제품" : "시제품 2장"} · ${data.layers.length}층 FR-4 · 1.6 mm · ${copperWeight} · 녹색 · 무연 HASL`;
+$("#order-process").textContent = handAssembled
+  ? "Gerber ZIP으로 무연 HASL 생기판을 견적 냅니다. 조립 옵션은 선택하지 않습니다."
+  : "Gerber ZIP으로 무연 HASL · Economic · Bottom 조합을 견적 냅니다. TPS2557 실장에 업체가 ENIG를 요구하면 표면처리를 비교합니다.";
+$("#order-quote").textContent = handAssembled
+  ? "기판 단가와 배송비는 JLCPCB 견적에서 확인합니다."
+  : "실제 단가, 부품 재고와 C861498 저항 매칭은 견적에서 확인합니다.";
+$("#order-hand").textContent = handAssembled
+  ? `밑면 ${handCount("B")}개를 먼저 붙이고 윗면 관통홀 부품 ${handCount("F")}개를 나중에 끼워 납땜합니다.`
+  : `밑면 ${data.pcbaCount}개를 공장에서 실장하고 윗면 ${handCount("F")}개는 직접 납땜합니다.`;
+$("#order-orientation").textContent = handAssembled
+  ? "밑면 U1–U3의 방향은 모두 같습니다. 몸체의 1번 핀을 아래 그림의 금색 점과 맞춥니다."
+  : "BOM과 CPL을 올리고, JLCPCB 밑면 미리보기에서 각 칩의 몸체 점을 오른쪽 그림의 1번 핀에 맞춥니다."
+    + (fourLayer ? " U2의 방향은 U1·U3와 따로 확인합니다." : "");
+$("#solder-access").textContent = handAssembled
+  ? "U1–U3은 다리가 보이는 SOT-23-6(0.95 mm 피치), 옆 저항과 커패시터는 0805입니다. 작은 평팁으로 SMD를 먼저 붙이고, XT30과 퓨즈 홀더에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다."
+  : fourLayer
+    ? "손납땜 패드와 밑면 실장 부품 사이는 최소 2.05 mm입니다. JST PH에는 1.2–1.6 mm 평팁, XT30 전원 핀·퓨즈 홀더·C1 음극에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다."
+    : "F1과 밑면 U1·U2 사이의 동박 간격은 0.26–0.27 mm입니다. 열린 쪽에서 작은 평팁을 댑니다.";
 $("#bom").append(table(["위치", "규격", "조달·실장", "비고"], refs.map(ref => {
   const part = data.parts[ref];
   const supplier = part.jlc
     ? element("a", part.jlc + " · 밑면", { href: part.jlc === "C861498"
       ? "https://www.lcsc.com/product-detail/C861498.html" : `https://jlcpcb.com/partdetail/${part.jlc}` })
-    : part.populate === "NATIVE" ? "기판 형상" : "윗면 수납땜";
+    : part.populate === "NATIVE" ? "기판 형상" : sideLabel(part) + " 수납땜";
   const jump = element("button", ref, { type: "button" });
   jump.addEventListener("click", () => { choose(ref); setView("pcb"); setSide(part.side); });
   return [jump, part.mpn, supplier, part.notes];
 })));
-const downloadNames = ["Gerber·드릴", "JLCPCB BOM", "JLCPCB CPL", "밑면 스텐실", "전체 BOM", "KiCad 프로젝트"];
-for (const [index, [name, bytes]] of Object.entries(data.downloads).entries()) {
+const downloadNames = {
+  "Gerbers.zip": "Gerber·드릴", "JLCPCB-BOM.csv": "JLCPCB BOM", "JLCPCB-CPL.csv": "JLCPCB CPL",
+  "Stencil.zip": "밑면 스텐실", "BOM.csv": "전체 BOM", "KiCad.zip": "KiCad 프로젝트",
+};
+for (const [name, bytes] of Object.entries(data.downloads)) {
+  const suffix = name.slice(`R5_Servo_Hub_${data.hubRevision}-`.length);
   const url = "data:application/octet-stream;base64," + bytes;
-  $("#downloads").append(element("a", downloadNames[index], { href: url, download: name }));
+  $("#downloads").append(element("a", downloadNames[suffix], { href: url, download: name }));
 }
 $("#placement-image").src = "data:image/svg+xml;base64," + data.placementImage;
 $("#provenance").textContent = `KiCad ${data.toolVersion} · ERC·DRC·회로도 대조 통과 · PCB ${Object.values(data.sha)[0].slice(0, 12)}`;

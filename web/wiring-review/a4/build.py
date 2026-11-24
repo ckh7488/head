@@ -67,10 +67,14 @@ def inspect_board(board_path, prefix):
     origin = pcbnew.VECTOR2I(edge.GetLeft() + pcbnew.FromMM(PLOT_OFFSET),
                             edge.GetTop() + pcbnew.FromMM(PLOT_OFFSET))
     bom = {row["Ref"]: row for row in read_csv(hub / "BOM.csv")}
-    pcba = {ref: row["JLCPCB Part #"]
-            for row in read_csv(FAB / (prefix + "-JLCPCB-BOM.csv"))
-            for ref in row["Designator"].split(",")}
-    placements = {row["Designator"]: row for row in read_csv(FAB / (prefix + "-JLCPCB-CPL.csv"))}
+    hand_assembled = board.GetTitleBlock().GetRevision() == "A6"
+    pcba = {}
+    placements = {}
+    if not hand_assembled:
+        pcba = {ref: row["JLCPCB Part #"]
+                for row in read_csv(FAB / (prefix + "-JLCPCB-BOM.csv"))
+                for ref in row["Designator"].split(",")}
+        placements = {row["Designator"]: row for row in read_csv(FAB / (prefix + "-JLCPCB-CPL.csv"))}
     if set(pcba) != set(placements) or any(row["Layer"] != "Bottom" for row in placements.values()):
         raise ValueError("The order BOM and bottom CPL differ.")
 
@@ -206,11 +210,16 @@ def placement_diagram(parts):
     """Show the real bottom footprint orientations from the board pad coordinates."""
     elements = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 190">',
                 '<rect width="510" height="190" rx="10" fill="#102b20"/>']
-    for index, ref in enumerate(("U1", "U2", "U3")):
+    refs = ("U1", "U2", "U3")
+    hand_assembled = parts["U1"]["value"] == "TPS25221"
+    if hand_assembled:
+        refs = refs[::-1]
+    for index, ref in enumerate(refs):
         part = parts[ref]
         cx, cy = part["xy"]
         x0, y0 = 85 + index * 170, 70
-        elements.append(f'<rect x="{x0 - 39}" y="{y0 - 39}" width="78" height="78" rx="4" '
+        half_width = 20 if hand_assembled else 39
+        elements.append(f'<rect x="{x0 - half_width}" y="{y0 - 37}" width="{half_width * 2}" height="74" rx="4" '
                         'fill="#1e2c25" stroke="#7b9185"/>')
         for pad in part["pads"]:
             if pad["id"] not in {"1", "2", "3", "4", "5", "6", "7", "8"}:
@@ -219,21 +228,23 @@ def placement_diagram(parts):
             px, py = x0 - (x - cx) * 25, y0 + (y - cy) * 25
             color = "#f6c165" if pad["id"] == "1" else "#bacfc2"
             elements.append(f'<circle cx="{px:.2f}" cy="{py:.2f}" r="6" fill="{color}"/>')
-        rotation = float(part["placement"]["Rotation"])
+        label = ref
+        if part["placement"]:
+            label += f' · CPL {float(part["placement"]["Rotation"]):g}°'
         pin_x, pin_y = next(pad["xy"] for pad in part["pads"] if pad["id"] == "1")
         horizontal = "오른쪽" if pin_x < cx else "왼쪽"
         vertical = "아래" if pin_y > cy else "위"
         elements.append(f'<text x="{x0}" y="133" fill="white" text-anchor="middle" font-size="17">'
-                        f'{ref} · CPL {rotation:g}°</text>')
+                        f'{label}</text>')
         elements.append(f'<text x="{x0}" y="153" fill="#f6c165" text-anchor="middle" font-size="14">'
                         f'1번 핀 {horizontal} {vertical}</text>')
     elements.append('<text x="255" y="177" fill="#bacfc2" font-size="13" text-anchor="middle">'
-                    '밑면 기준 · 미리보기와 기판 방향을 맞춘 뒤 금색 점을 대조</text></svg>')
+                    '밑면 기준 · 금색 점은 1번 핀</text></svg>')
     return b64("".join(elements).encode())
 
 
 def build(args):
-    hub = FAB.parent / ("servo-hub-a5" if args.hub_revision == "A5" else "servo-hub")
+    hub = FAB.parent / ("servo-hub" if args.hub_revision == "A4" else f"servo-hub-{args.hub_revision.lower()}")
     board = hub / "R5_Servo_Hub.kicad_pcb"
     schematic = board.with_suffix(".kicad_sch")
     prefix = f"R5_Servo_Hub_{args.hub_revision}"
@@ -260,7 +271,7 @@ def build(args):
             export_model(board, model, args)
         glb = model.read_bytes()
         document = model_document(glb)
-        if args.hub_revision == "A5":
+        if args.hub_revision in {"A5", "A6"}:
             check_xt30_registration(document, details["parts"])
         details["modeled"] = sorted({node.get("name") for node in document["nodes"] if "mesh" in node}
                                     & details["parts"].keys())
@@ -268,11 +279,11 @@ def build(args):
         details["model"] = b64(glb)
         details["toolVersion"] = version
         details["placementImage"] = placement_diagram(details["parts"])
-        details["downloads"] = {
-            name: b64((FAB / name).read_bytes()) for name in (
-                prefix + "-Gerbers.zip", prefix + "-JLCPCB-BOM.csv", prefix + "-JLCPCB-CPL.csv", prefix + "-Stencil.zip",
-            )
-        }
+        order_files = ["Gerbers.zip"]
+        if args.hub_revision != "A6":
+            order_files += ["JLCPCB-BOM.csv", "JLCPCB-CPL.csv", "Stencil.zip"]
+        details["downloads"] = {f"{prefix}-{name}": b64((FAB / f"{prefix}-{name}").read_bytes())
+                                for name in order_files}
         details["downloads"][prefix + "-BOM.csv"] = b64((hub / "BOM.csv").read_bytes())
         details["downloads"][prefix + "-KiCad.zip"] = b64(source_zip(hub))
         bundle = run("npx", "--yes", "esbuild@0.25.12", HERE / "viewer.js", "--bundle", "--minify", "--format=iife").stdout
@@ -292,7 +303,7 @@ def build(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--hub-revision", choices=("A4", "A5"), default="A4")
+    parser.add_argument("--hub-revision", choices=("A4", "A5", "A6"), default="A4")
     parser.add_argument("--glb", type=Path, help="Optional KiCad GLB exported with origin 100x80mm")
     parser.add_argument("--models", type=Path, help="Override KICAD9_3DMODEL_DIR for export")
     parser.add_argument("--xt30-step", type=Path,

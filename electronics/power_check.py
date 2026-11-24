@@ -30,6 +30,7 @@ PH_RATING_A = 2.0
 PH_LIMIT_OHMS = 61.9
 PH_LIMIT_TOLERANCE = .003
 PH_SWITCH_HOT_OHM = .035
+TPS25221_HOT_OHM = .110
 XL330_MIN_V = 4.27
 XL330_MAX_V = 5.25
 NECK_NORMAL_A = 2 * XL430_STALL_A
@@ -126,7 +127,11 @@ def copper_path(board, parts, net, start, end):
     raise ValueError(f'{net} copper path is missing from {start} to {end}')
 
 
-def ph_current_limits():
+def ph_current_limits(hub_revision='A4'):
+    if hub_revision == 'A6':
+        # TPS25221 Table 3 includes ±1% at 30.9 kΩ. This bounds the
+        # 0.1% / 25 ppm/°C A6 resistor across the operating range.
+        return 1.626, 1.626, 1.907
     # TPS2557 §7.5 specifies 1.590–1.960 A at exactly 61.9 kΩ. Apply the
     # local resistor sensitivity from §10.2.1.2.2, including temperature drift
     # of the 0.1% / 25 ppm/°C resistor. Check the broader fitted upper curve too.
@@ -138,8 +143,8 @@ def ph_current_limits():
     return nominal_anchored_min, curve_min, max(1.960 * (PH_LIMIT_OHMS / lo_r)**.947, curve_max)
 
 
-def hub_5v_current(ph_fault=False, *, servo_a=XL330_STALL_A):
-    branch_a = ph_current_limits()[2] if ph_fault else servo_a
+def hub_5v_current(ph_fault=False, *, servo_a=XL330_STALL_A, hub_revision='A4'):
+    branch_a = ph_current_limits(hub_revision)[2] if ph_fault else servo_a
     return 2 * servo_a + branch_a + HUB_IDLE_A
 
 
@@ -181,7 +186,8 @@ def a4_neck_trunk():
 
 
 def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False, hub_revision='A4'):
-    project = 'servo-hub-a5' if hub_revision == 'A5' else 'servo-hub'
+    hand_assembled = hub_revision == 'A6'
+    project = {'A4': 'servo-hub', 'A5': 'servo-hub-a5', 'A6': 'servo-hub-a6'}[hub_revision]
     board, parts = load(project, 'R5_Servo_Hub')
     check_net(parts, 'J1', {1: 'GND', 2: '5V_IN'})
     check_net(parts, 'J3', {1: 'GND', 2: 'DXL_CTL'})
@@ -189,17 +195,17 @@ def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False, hub_revi
     if parts['F1'].GetValue() != '7.5A MINI':
         raise ValueError('5 V hub fuse must match the 7.5 A thermal and resistance budget')
     xl330_a = XL330_NOMINAL_STALL_A if nominal else XL330_STALL_A
-    total_hub_a = hub_5v_current(ph_fault, servo_a=xl330_a)
+    total_hub_a = hub_5v_current(ph_fault, servo_a=xl330_a, hub_revision=hub_revision)
     total_source_a = total_hub_a + xl330_a
     if nominal:
         print(f'B25 {hub_revision} model at nominal 5.000 V and 12.000 V. Motor catalogue currents: '
               f'{total_source_a:.2f} A on 5 V ({total_hub_a:.2f} A at the hub), '
               f'{NECK_NORMAL_A:.2f} A on 12 V.')
     else:
-        lo_limit, curve_min, hi_limit = ph_current_limits()
+        lo_limit, curve_min, hi_limit = ph_current_limits(hub_revision)
         if not XL330_STALL_A < lo_limit <= hi_limit < PH_RATING_A:
             raise ValueError('PH branch current limit must pass a normal stall and protect the 2 A contact')
-        if hub_5v_current(ph_fault=True) + XL330_STALL_A >= SUPPLY_CURRENT:
+        if hub_5v_current(ph_fault=True, hub_revision=hub_revision) + XL330_STALL_A >= SUPPLY_CURRENT:
             raise ValueError('The 5 V source cannot supply simultaneous stalls plus one limited PH fault')
         load_case = ' with one PH branch in current limit' if ph_fault else ''
         print(f'Bench stress model: {input_5v:.3f} V loaded 5 V source, {INPUT_5V_MAX:.3f} V bench ceiling, '
@@ -220,17 +226,24 @@ def check_hub(input_5v, *, ph_fault=False, tail_mm=None, nominal=False, hub_revi
     for i, wires in enumerate((('W13', 'W14'), ('W16', 'W17'), ('W19', 'W20')), 1):
         switch, resistor, cap, output = f'U{i}', f'R{i+3}', f'C{i+2}', f'J{i+3}'
         ilim, rail = f'ILIM{i}', f'5V_ID{i}'
-        check_net(parts, switch, {1: 'GND', 2: '5V_EYES', 3: '5V_EYES', 4: '5V_EYES',
-                                  5: ilim, 6: rail, 7: rail, 9: 'GND'})
+        if hand_assembled:
+            check_net(parts, switch, {1: '5V_EYES', 2: 'GND', 3: '5V_EYES', 5: ilim, 6: rail})
+            limiter, setting, switch_ohm = 'TPS25221', '30.9k 0.1%', TPS25221_HOT_OHM
+            inputs, outputs = (1,), (6,)
+        else:
+            check_net(parts, switch, {1: 'GND', 2: '5V_EYES', 3: '5V_EYES', 4: '5V_EYES',
+                                      5: ilim, 6: rail, 7: rail, 9: 'GND'})
+            limiter, setting, switch_ohm = 'TPS2557', '61.9k 0.1%', PH_SWITCH_HOT_OHM
+            inputs, outputs = (2, 3), (6, 7)
         check_net(parts, resistor, {1: ilim, 2: 'GND'})
         check_net(parts, cap, {1: '5V_EYES', 2: 'GND'})
-        if parts[switch].GetValue() != 'TPS2557' or parts[resistor].GetValue() != '61.9k 0.1%':
+        if parts[switch].GetValue() != limiter or parts[resistor].GetValue() != setting:
             raise ValueError(f'{output} limiter does not match the modeled part and tolerance')
         check_net(parts, output, {1: 'GND', 2: rail, 3: 'DXL_BUS'})
-        feed = max(copper_path(board, parts, '5V_EYES', ('F1', 2), (switch, pin)) for pin in (2, 3))
-        branch = max(copper_path(board, parts, rail, (switch, pin), (output, 2)) for pin in (6, 7))
+        feed = max(copper_path(board, parts, '5V_EYES', ('F1', 2), (switch, pin)) for pin in inputs)
+        branch = max(copper_path(board, parts, rail, (switch, pin), (output, 2)) for pin in outputs)
         ground = copper_path(board, parts, 'GND', (output, 1), ('J1', 1))
-        branch_loop = branch + PH_SWITCH_HOT_OHM + wire_resistance(*wires, wire=MOTOR_WIRE) + PH_EH_CONTACT_OHM
+        branch_loop = branch + switch_ohm + wire_resistance(*wires, wire=MOTOR_WIRE) + PH_EH_CONTACT_OHM
         # Charge the whole hub current to the entire positive feed and both rails
         # to the explicit ground return. With one fault, place it on a different
         # branch from the healthy branch whose motor voltage is being checked.
@@ -287,8 +300,8 @@ if __name__ == '__main__':
     source.add_argument('--radio', action='store_true', help='Check the separate C3 board connections')
     parser.add_argument('--ph-fault', action='store_true',
                         help='Check each healthy motor while another PH branch is in current limit')
-    parser.add_argument('--hub-revision', choices=('A4', 'A5'), default='A4',
-                        help='Select the A4 reference or the 4-layer A5 hub')
+    parser.add_argument('--hub-revision', choices=('A4', 'A5', 'A6'), default='A4',
+                        help='Select the hub board')
     parser.add_argument('--tail-mm', type=float,
                         help='Length of each 16 AWG 5 V pigtail, overriding W33 and W34 in the cut list')
     options = parser.parse_args()

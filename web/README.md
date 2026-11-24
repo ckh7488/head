@@ -16,6 +16,8 @@
 
 **A5 오프라인 뷰어**에는 손납땜용 4층 시안의 동박 네 층과 새 실장 자료가 들어 있습니다. [A5 HTML](b25/R5-B25-A5.html) · [A5 검토 결과](../electronics/servo-hub-a5/)
 
+**A6 오프라인 뷰어**는 전 부품 손납땜용 70 × 37 mm 시안입니다. 회로도, PCB 네 층, 3D와 BOM을 한 파일에 넣었습니다. [A6 HTML](b25/R5-B25-A6.html) · [A6 검토 결과](../electronics/servo-hub-a6/)
+
 ### 오프라인 조립 HTML 만들기
 
 저장소 루트에서 FreeCAD Python 모듈, Node.js와 기구 검사 의존성을 준비합니다. 아래 FreeCAD 모듈 경로는 Linux 예시입니다. [기구 검사 의존성](../mechanical/physics/requirements.txt)

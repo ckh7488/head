@@ -11,8 +11,9 @@ from tempfile import TemporaryDirectory
 from zipfile import ZIP_DEFLATED, ZipFile
 
 HERE = Path(__file__).resolve().parent
-PROJECTS = {"servo-hub": "R5_Servo_Hub", "servo-hub-a5": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
-REVISIONS = {"servo-hub": "A4", "servo-hub-a5": "A5", "c3-rf": "A1"}
+PROJECTS = {"servo-hub": "R5_Servo_Hub", "servo-hub-a5": "R5_Servo_Hub",
+            "servo-hub-a6": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
+REVISIONS = {"servo-hub": "A4", "servo-hub-a5": "A5", "servo-hub-a6": "A6", "c3-rf": "A1"}
 COMMON_LAYERS = ["F.Cu", "B.Cu", "F.Mask", "B.Mask", "F.Silkscreen", "B.Silkscreen", "Edge.Cuts"]
 HUB_JLCPCB_PARTS = {
     "Yageo CC0603KRX7R9BB104": ("100 nF, X7R, 50 V, ±10%", "C14663"),
@@ -165,7 +166,7 @@ def export(project, output_root):
     with TemporaryDirectory() as tmp:
         work = Path(tmp)
         layers = COMMON_LAYERS.copy()
-        multilayer = project in {"c3-rf", "servo-hub-a5"}
+        multilayer = project in {"c3-rf", "servo-hub-a5", "servo-hub-a6"}
         if multilayer:
             layers += ["In1.Cu", "In2.Cu"]
         if project == "c3-rf":
@@ -175,15 +176,16 @@ def export(project, output_root):
             check_hub_annular_rings(hub, .20 if multilayer else .254)
             positions = "R5-hub-A5-back-positions-mm.csv" if multilayer else "R5-hub-back-positions-mm.csv"
             side, paste = "back", "B.Paste"
-        stencil_board, placement_rows, bom = prepare_assembly(board, work, output, side, positions)
-        if project != "c3-rf":
-            write_hub_pcba(output, prefix, placement_rows, bom)
-            layers.append(paste)
-        stencil = work / "stencil"
-        plot(stencil_board, [paste, "Edge.Cuts"], stencil)
-        for job in stencil.glob("*.gbrjob"):
-            job.unlink()
-        archive(stencil, output / f"{prefix}-Stencil.zip")
+        if project != "servo-hub-a6":
+            stencil_board, placement_rows, bom = prepare_assembly(board, work, output, side, positions)
+            if project != "c3-rf":
+                write_hub_pcba(output, prefix, placement_rows, bom)
+                layers.append(paste)
+            stencil = work / "stencil"
+            plot(stencil_board, [paste, "Edge.Cuts"], stencil)
+            for job in stencil.glob("*.gbrjob"):
+                job.unlink()
+            archive(stencil, output / f"{prefix}-Stencil.zip")
         plots = work / "gerbers"
         plot(board, layers, plots)
         if multilayer:
