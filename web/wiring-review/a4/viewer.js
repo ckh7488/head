@@ -1,5 +1,6 @@
 import {
-  AmbientLight, Box3, Box3Helper, Color, DirectionalLight, HemisphereLight, Mesh, MeshBasicMaterial,
+  AmbientLight, Box3, Box3Helper, BoxGeometry, Color, CylinderGeometry, DirectionalLight, Group,
+  HemisphereLight, Mesh, MeshBasicMaterial, MeshStandardMaterial,
   PerspectiveCamera, Raycaster, RingGeometry, Scene, Vector2, Vector3, WebGLRenderer,
 } from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -11,6 +12,8 @@ const all = selector => [...document.querySelectorAll(selector)];
 const ns = "http://www.w3.org/2000/svg";
 const width = data.dim[0];
 const height = data.dim[1];
+$("#board-size").textContent = `${width} × ${height} mm`;
+$("#board-stack").textContent = `FR-4 · ${data.layers.length}층 · 1.6 mm · 무연 HASL`;
 const sch = $("#schematic");
 const pcb = $("#pcb");
 const initialBoard = [-1.6, -1.4, width + 3.2, height + 2.8];
@@ -300,6 +303,23 @@ function setView(next) {
 const boardCenter = new Vector3(width / 2000, 0, height / 2000);
 const status = $("#model-status");
 
+function limiterBody(ref) {
+  const part = data.parts[ref];
+  const [x, z] = part.xy;
+  const pin = part.pads.find(pad => pad.id === "1");
+  const body = new Group();
+  body.name = ref;
+  body.position.set(x / 1000, 0, z / 1000);
+  const caseMesh = new Mesh(new BoxGeometry(.003, .001, .003),
+    new MeshStandardMaterial({ color: "#252725", roughness: .8 }));
+  caseMesh.position.y = -.0005;
+  const dot = new Mesh(new CylinderGeometry(.00014, .00014, .000025, 16),
+    new MeshBasicMaterial({ color: "#aeb4ac" }));
+  dot.position.set((pin.xy[0] - x) * .0007, -.00101, (pin.xy[1] - z) * .0007);
+  body.add(caseMesh, dot);
+  return body;
+}
+
 function start3d() {
   if (three) return;
   const target = $("#model-canvas");
@@ -316,7 +336,9 @@ function start3d() {
   scene.add(new AmbientLight("#ffffff", .72), new HemisphereLight("#ffffff", "#2a3b2c", 1.6));
   const light = new DirectionalLight("#fff4de", 2.3);
   light.position.set(.12, .20, .14);
-  scene.add(light);
+  const underside = new DirectionalLight("#eef4ff", 1.55);
+  underside.position.set(-.06, -.18, .10);
+  scene.add(light, underside);
   three = { renderer, scene, camera, controls, target, bodies: new Map(), marker: null };
   controls.addEventListener("change", draw3d);
   new ResizeObserver(resize3d).observe(target);
@@ -326,8 +348,17 @@ function start3d() {
   new GLTFLoader().parse(binary.buffer, "", result => {
     scene.add(result.scene);
     result.scene.traverse(item => { if (data.parts[item.name]) three.bodies.set(item.name, item); });
+    const outlines = ["U1", "U2", "U3"].filter(ref => data.parts[ref] && !three.bodies.has(ref));
+    for (const ref of outlines) {
+      const body = limiterBody(ref);
+      scene.add(body);
+      three.bodies.set(ref, body);
+    }
     const missing = refs.filter(ref => data.parts[ref].populate === "YES" && !three.bodies.has(ref));
-    status.textContent = `${three.bodies.size}개 부품 모델 · ${missing.length ? missing.join("·") + "의 패드와 위치는 PCB 탭에서 확인" : "KiCad 배치"}`;
+    const notes = [`${three.bodies.size}개 부품`, "KiCad 배치"];
+    if (outlines.length) notes.push(`${outlines.join("·")}는 TI 치수의 외형과 1번 핀 표시`);
+    if (missing.length) notes.push(`${missing.join("·")}는 PCB 탭에서 패드 확인`);
+    status.textContent = notes.join(" · ");
     highlight3d();
   }, () => { status.textContent = "3D 파일을 읽지 못했습니다. PCB 탭을 사용하세요."; });
   let down;
@@ -439,7 +470,7 @@ $("#limits").append(table(["항목", data.hubRevision, "JLCPCB 공개 조건"], 
 $("#order-stack").textContent = `시제품 2장 · ${data.layers.length}층 FR-4 · 1.6 mm · ${copperWeight} · 녹색 · 무연 HASL`;
 $("#order-hand").textContent = `밑면 ${data.pcbaCount}개를 공장에서 실장하고 윗면 ${refs.filter(ref => data.parts[ref].populate === "YES" && !data.parts[ref].jlc).length}개는 직접 납땜합니다.`;
 $("#solder-access").textContent = fourLayer
-  ? "손납땜 패드와 밑면 실장 부품 사이를 2 mm 이상 띄웠습니다. 평팁으로 패드와 다리를 함께 가열하고 납이 옆 핀에 붙었는지 확인합니다."
+  ? "손납땜 패드와 밑면 실장 부품 사이는 최소 2.05 mm입니다. JST PH에는 1.2–1.6 mm 평팁, 큰 전원 핀과 퓨즈 홀더에는 열 회복이 빠른 인두와 2.4 mm 평팁을 사용합니다."
   : "F1과 밑면 U1·U2 사이의 동박 간격은 0.26–0.27 mm입니다. 열린 쪽에서 작은 평팁을 댑니다.";
 $("#bom").append(table(["위치", "규격", "조달·실장", "비고"], refs.map(ref => {
   const part = data.parts[ref];

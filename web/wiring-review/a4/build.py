@@ -6,6 +6,7 @@ import csv
 import hashlib
 import io
 import json
+from math import atan2, cos, hypot, sin
 from pathlib import Path
 import re
 import subprocess
@@ -18,6 +19,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[2]
 FAB = ROOT / "electronics/fabrication"
 PLOT_OFFSET = 0.025
+XT30_MODEL = "AMASS_XT30PW-M_1x02_P2.50mm_Horizontal.step"
 
 
 def run(*args):
@@ -125,10 +127,79 @@ def inspect_board(board_path, prefix):
     )
 
 
-def model_references(glb):
+def model_document(glb):
     length = int.from_bytes(glb[12:16], "little")
-    document = json.loads(glb[20:20 + length])
-    return sorted({node["name"] for node in document.get("nodes", ()) if "mesh" in node and "name" in node})
+    return json.loads(glb[20:20 + length])
+
+
+def check_xt30_registration(document, parts):
+    """Match the exported XT30 pin cylinders to the four drilled holes at each connector."""
+    components = {node.get("name"): node for node in document["nodes"] if "mesh" in node}
+    for ref in ("J1", "J2"):
+        node = components.get(ref)
+        if node is None:
+            raise ValueError(f"{ref}: XT30 model missing from the GLB")
+        x, top, z = node["translation"]
+        qx, qy, qz, qw = node.get("rotation", [0, 0, 0, 1])
+        if abs(qx) + abs(qz) > 1e-6 or not .0014 <= top <= .0018:
+            raise ValueError(f"{ref}: unexpected connector axis or seating plane in the GLB")
+        angle = 2 * atan2(qy, qw)
+        c, s = cos(angle), sin(angle)
+        pads = parts[ref]["pads"]
+        pin_bounds = [[] for _ in pads]
+        for face in document["meshes"][node["mesh"]]["primitives"]:
+            accessor = document["accessors"][face["attributes"]["POSITION"]]
+            u0, y0, v0 = accessor["min"]
+            u1, y1, v1 = accessor["max"]
+            if not y0 < -top / 2 < y1:
+                continue
+            # Each pin cylinder is exported as two half faces. Combine their
+            # projected bounds after applying the KiCad node's placement.
+            bounds = [(1000 * (x + c*u + s*v), 1000 * (z - s*u + c*v))
+                      for u in (u0, u1) for v in (v0, v1)]
+            center = (sum(a for a, _ in bounds) / 4, sum(b for _, b in bounds) / 4)
+            nearest = min(range(len(pads)), key=lambda i: hypot(center[0] - pads[i]["xy"][0],
+                                                                center[1] - pads[i]["xy"][1]))
+            pad = pads[nearest]
+            px, py = pad["xy"]
+            radius = pad["drill"][0] / 2
+            if any(max(abs(a-px), abs(b-py)) > radius + .01 for a, b in bounds):
+                raise ValueError(f"{ref}: model pin lies outside the hole at {px:.3f}, {py:.3f} mm")
+            pin_bounds[nearest].extend(bounds)
+        for pad, bounds in zip(pads, pin_bounds):
+            if not bounds:
+                raise ValueError(f"{ref}: no model pin at board hole {pad['xy']}")
+            u, v = zip(*bounds)
+            center = ((min(u) + max(u)) / 2, (min(v) + max(v)) / 2)
+            if hypot(center[0] - pad["xy"][0], center[1] - pad["xy"][1]) > .05:
+                raise ValueError(f"{ref}: model pin is off-center at board hole {pad['xy']}")
+
+
+def export_model(board, output, args):
+    render_board = board
+    if args.models or args.xt30_step:
+        contents = board.read_text()
+        if args.models:
+            contents = contents.replace("${KICAD9_3DMODEL_DIR}", args.models.resolve().as_posix())
+        if args.xt30_step:
+            model_path = args.xt30_step.resolve()
+            if not model_path.is_file():
+                raise ValueError(f"Missing XT30PW-M STEP: {model_path}")
+            pattern = (rf'\(model "[^"]*/{re.escape(XT30_MODEL)}"'
+                       r'(\s+\(offset\s+\(xyz )0 0 0'
+                       r'(\s*\)\s*\)\s*\(scale\s*\(xyz 1 1 1\)\s*\)\s*\(rotate\s*\(xyz )0 0 0')
+            def register(match):
+                return f'(model "{model_path.as_posix()}"{match[1]}-2.5 8.5 0{match[2]}0 0 180'
+
+            contents, count = re.subn(pattern, register, contents)
+            if count != 2:
+                raise ValueError("Expected two XT30PW-M model placements")
+        # The render board is a temporary copy. The routing, drills and
+        # published fabrication files stay tied to the native board.
+        render_board = output.with_suffix(".kicad_pcb")
+        render_board.write_text(contents)
+    run("kicad-cli", "pcb", "export", "glb", "-o", output,
+        "--user-origin", "100x80mm", "--include-pads", "--include-silkscreen", "--include-soldermask", render_board)
 
 
 def placement_diagram(parts):
@@ -178,11 +249,13 @@ def build(args):
         model = args.glb
         if model is None:
             model = work / "board.glb"
-            run("kicad-cli", "pcb", "export", "glb", "-o", model,
-                "--user-origin", "100x80mm", "--include-pads", "--include-silkscreen", "--include-soldermask", board)
+            export_model(board, model, args)
         glb = model.read_bytes()
-        details["modeled"] = list(set(model_references(glb)) & details["parts"].keys())
-        details["modeled"].sort()
+        document = model_document(glb)
+        if args.hub_revision == "A5":
+            check_xt30_registration(document, details["parts"])
+        details["modeled"] = sorted({node.get("name") for node in document["nodes"] if "mesh" in node}
+                                    & details["parts"].keys())
         details["drawings"] = drawings
         details["model"] = b64(glb)
         details["toolVersion"] = version
@@ -213,4 +286,7 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     parser.add_argument("--hub-revision", choices=("A4", "A5"), default="A4")
     parser.add_argument("--glb", type=Path, help="Optional KiCad GLB exported with origin 100x80mm")
+    parser.add_argument("--models", type=Path, help="Override KICAD9_3DMODEL_DIR for export")
+    parser.add_argument("--xt30-step", type=Path,
+                        help="Unaligned XT30PW-M STEP with contact pins at x ±2.5, y 8.5 mm")
     build(parser.parse_args())
