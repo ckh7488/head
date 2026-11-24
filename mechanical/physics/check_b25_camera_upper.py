@@ -77,10 +77,13 @@ def upper_at(pitch, yaw, samples=401):
 
 
 def create_scene(cad, layout):
+    integrated_tray = any(row['name'] == 'Part065' and not row['printed'] for row in layout['parts'])
     scene = Scene.__new__(Scene)
     scene.groups = {}
     for name, mode in layout['world_motion'].items():
         if name.startswith(('Harness', 'HubRearClearance')) or name in ('RearLead3_1', 'EatonCableNeutral'):
+            continue
+        if integrated_tray and name == 'Part065':
             continue
         path = cad / 'world' / f'{name}.stl'
         if path.stat().st_size <= 84:
@@ -91,6 +94,7 @@ def create_scene(cad, layout):
         if mesh.bounds[0, 2] > 97. or mesh.bounds[1, 2] < -60.:
             continue
         scene.add(name, mode, mesh)
+    scene.head_anchor_parts = (HEAD_ANCHOR_PARTS - {'Part065'}) | {'Part073'} if integrated_tray else HEAD_ANCHOR_PARTS
     return scene
 
 
@@ -100,7 +104,7 @@ def hits(scene, points, motion, radius, only):
 
 
 def moving_contacts(scene, points, motion, parts):
-    free = hits(scene, points, motion, JAW_CAPSULE, parts - HEAD_ANCHOR_PARTS)
+    free = hits(scene, points, motion, JAW_CAPSULE, parts - scene.head_anchor_parts)
     # The cable, saddle and tie meet where the active span enters the fixed anchor.
     # Check these parts along the rest of the cable as ordinary solid obstacles.
     arc = arc_lengths(points)
@@ -109,7 +113,7 @@ def moving_contacts(scene, points, motion, parts):
     fraction = (last - arc[index-1]) / (arc[index] - arc[index-1])
     endpoint = points[index-1] + fraction * (points[index] - points[index-1])
     before_anchor = np.vstack((points[:index], endpoint))
-    return free + hits(scene, before_anchor, motion, JAW_CAPSULE, parts & HEAD_ANCHOR_PARTS)
+    return free + hits(scene, before_anchor, motion, JAW_CAPSULE, parts & scene.head_anchor_parts)
 
 
 def continuous_jaw(scene, layout):

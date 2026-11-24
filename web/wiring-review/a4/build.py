@@ -58,6 +58,33 @@ def source_zip(hub):
     return stream.getvalue()
 
 
+def pad_to_bottom_body(board, parts):
+    def edges(polygon):
+        for index in range(polygon.OutlineCount()):
+            loop = polygon.COutline(index)
+            for i in range(loop.PointCount()):
+                yield pcbnew.SEG(loop.CPoint(i), loop.CPoint((i + 1) % loop.PointCount()))
+
+    pads = []
+    bodies = []
+    for footprint in board.GetFootprints():
+        if parts[footprint.GetReference()]["populate"] != "YES":
+            continue
+        if footprint.IsFlipped():
+            for shape in footprint.GraphicalItems():
+                if not isinstance(shape, pcbnew.PCB_SHAPE) or shape.GetLayer() != pcbnew.B_Fab:
+                    continue
+                outline = shape.GetPolyShape()
+                bodies.extend(edges(outline) if outline.OutlineCount()
+                              else [pcbnew.SEG(shape.GetStart(), shape.GetEnd())])
+        else:
+            for pad in footprint.Pads():
+                polygon = pcbnew.SHAPE_POLY_SET()
+                pad.TransformShapeToPolygon(polygon, pcbnew.B_Cu, 0, pcbnew.FromMM(.002), pcbnew.ERROR_OUTSIDE)
+                pads.extend(edges(polygon))
+    return mm(min(pad.Distance(body) for pad in pads for body in bodies))
+
+
 def inspect_board(board_path, prefix):
     board = pcbnew.LoadBoard(str(board_path))
     copper_layers = {layer: board.GetLayerName(layer).removesuffix(".Cu")
@@ -124,10 +151,10 @@ def inspect_board(board_path, prefix):
         minTrack=min(t[-1] for t in tracks), pthCount=len(rings), minRing=min(rings), mountingHoles=no_plating,
         pcbaCount=len(pcba), layers=list(copper_layers.values()), stack=job["MaterialStackup"],
         hubRevision=board.GetTitleBlock().GetRevision(),
+        solderGap=pad_to_bottom_body(board, parts) if board.GetTitleBlock().GetRevision() == "A5" else None,
         clearance=json.loads(board_path.with_suffix(".kicad_pro").read_text())["board"]["design_settings"]["rules"]["min_clearance"],
         sha={path.name: hashlib.sha256(path.read_bytes()).hexdigest()
              for path in (board_path, board_path.with_suffix(".kicad_sch"))},
-        revision=run("git", "rev-parse", "HEAD").stdout.strip(),
     )
 
 

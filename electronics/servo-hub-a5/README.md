@@ -27,7 +27,7 @@ CPL에서 **U1·U2·U3 세 칩 모두 0°로 방향이 통일**되어 있습니�
 - [Gerber·드릴](../fabrication/R5_Servo_Hub_A5-Gerbers.zip) · [JLCPCB BOM](../fabrication/R5_Servo_Hub_A5-JLCPCB-BOM.csv) · [JLCPCB CPL](../fabrication/R5_Servo_Hub_A5-JLCPCB-CPL.csv)
 - [스텐실](../fabrication/R5_Servo_Hub_A5-Stencil.zip) · [리플로우 후 납땜·첫 통전](../README.md#전원-실물-검수)
 
-첫 통전은 F1·F2 퓨즈, 모터, OpenRB를 뺀 상태에서 진행합니다. 어댑터를 하나씩 켜 F1 입력에 +5 V, F2 입력에 +12 V가 들어오는지 확인합니다. 출력 검수 뒤에는 전원을 분리하고 J2 잠금쇠를 고정합니다. [전원 실물 검수](../README.md#전원-실물-검수)
+첫 통전은 F1·F2 퓨즈, 모터, OpenRB를 뺀 상태에서 진행합니다. 어댑터를 하나씩 켜 F1 입력에 +5 V, F2 입력에 +12 V가 들어오는지 확인합니다. 통전 전에 J2 잠금쇠를 고정하고 입력 도통을 확인합니다. [전원 실물 검수](../README.md#전원-실물-검수)
 
 ## 검증
 

@@ -30,7 +30,7 @@ CAMERA_END = ('CameraEatonHeadTie', 'CameraEatonHeadSplice', 'CameraEatonHeadFix
 VIEWS = (
     ('start', '첫 단계', 'base-cup'),
     ('rear-power', '뒤 12 V 소켓과 WAGO', 'a4-wago-wires'),
-    ('hub-lock', 'A4 허브와 J2 고정편', 'hub-bolts'),
+    ('hub-lock', 'A5 허브와 J2 고정편', 'hub-bolts'),
     ('hatch', '바닥 덮개와 정비 플러그', 'a4-hatch-leads'),
     ('eye-pitch-bearings', '눈 상하 베어링 정렬', 'eye-bearing-align'),
     ('neck-pitch-coupling', '목 상하 축 체결', 'pitch-drive-lock'),
@@ -45,7 +45,7 @@ LABELS = {
     'Part019': '09 머리 프레임', 'Part073': '28 앞 외장', 'Part074': '29 뒤 외장',
     'Jaw_37_right_jaw_bearing_stay': '37 오른쪽 턱 받침 · 보강부 포함',
     'Jaw_36_left_jaw_servo_stay': '36 왼쪽 턱 모터 받침', 'CableSaddle': '40 뒤 케이블 가이드',
-    'CableGate': '42 뒤 케이블 덮개', 'HubHolder': '35 허브 바닥 덮개', 'HubPCB': 'A4 허브 기판',
+    'CableGate': '42 뒤 케이블 덮개', 'HubHolder': '35 허브 바닥 덮개', 'HubPCB': 'A5 허브 기판',
     'HubBodyJ1': 'J1 · 5 V XT30', 'HubBodyJ2': 'J2 · 12 V XT30', 'A4J2LeverKeeper': 'J2 플러그 고정편',
     'HubBodyF1': 'F1 · 7.5 A MINI', 'HubBodyF2': 'F2 · 4 A MINI',
     'HubBolt1': 'J1 쪽 M3×8 (KiCad H3)', 'HubBolt2': 'J1 쪽 M3×8 (KiCad H1)',
@@ -124,19 +124,21 @@ def plan(layout, heat_screws, heat_retainers, world):
                        merge=(CABLE_GUIDE_BENCH, offset))
         elif sid == 'rear-cover':
             row['text'] = '정비용 XT60E-F를 달고, 외부 입력 XT60U-M의 두 턱을 홈에 걸어 둡니다. USB와 5 V 전원선을 홈에 놓고 42번 덮개를 위에서 닫습니다.'
+        elif sid == 'front-skull':
+            row['place'] = (['Part073'], row['place'][1])
         elif sid == 'hub-board-place':
-            row['text'] = 'A4 허브 기판과 부품을 35번 바닥 덮개 위에 얹습니다. 기판의 J1은 5 V, J2는 12 V입니다.'
+            row['text'] = 'A5 허브 기판과 부품을 35번 바닥 덮개 위에 얹습니다. 기판의 J1은 5 V, J2는 12 V입니다.'
         elif sid == 'hub-bolts':
-            row.update(text='입력과 무부하 출력을 확인한 뒤 전원을 분리합니다. J1 쪽 두 곳에는 M3×8, J2 고정편을 지나는 두 곳에는 M3×12를 씁니다. 아래에는 일반 M3 육각너트를 씁니다.',
+            row.update(text='J1 쪽에 M3×8 두 개, J2 고정편을 지나 M3×12 두 개를 조입니다. 아래에는 일반 M3 너트를 씁니다. 뒤턱이 잠기면 뒤 서비스 XT60을 연결해 퓨즈를 뺀 첫 통전을 합니다. 검사를 마치면 두 어댑터와 뒤 서비스 XT60을 분리합니다.',
                        bolts=[f'HubBolt{n}' for n in range(1,5)])
             result.extend([
-                step('a4-hub-plugs', ctx, '어댑터·USB·모터·OpenRB를 분리하고 F1·F2를 뺍니다. J1·J2는 모두 패드 2가 +, 패드 1이 GND입니다. 극성을 확인한 플러그를 꽂고 제작 문서의 첫 통전 순서대로 입력과 무부하 출력을 확인합니다.',
+                step('a4-hub-plugs', ctx, '어댑터·USB·모터·OpenRB를 분리하고 F1·F2를 뺍니다. J1·J2는 모두 패드 2가 +, 패드 1이 GND입니다. 두 플러그를 꽂은 뒤 5 V는 F1 입력에만, 12 V는 F2 입력에만 도통되는지 확인합니다.',
                      place=(HUB_J1 + HUB_J2, (0,12,0))),
-                step('a4-hub-inlet-keeper', ctx, '첫 통전을 마치고 어댑터를 모두 뽑은 뒤, J2 플러그의 뒤턱을 고정편이 잡는 위치에 맞춥니다.',
+                step('a4-hub-inlet-keeper', ctx, '전원을 뺀 상태에서 J2 플러그의 뒤턱을 고정편이 잡게 맞춥니다.',
                      place=(('A4J2LeverKeeper',), (0,0,15))),
             ])
         elif sid == 'hatch-fit':
-            row['text'] = '정비 XT60 플러그를 바깥 대기 위치에 둔 상태에서 A4 허브가 달린 덮개를 받침 아래에서 올립니다.'
+            row['text'] = '정비 XT60 플러그를 바깥 대기 위치에 둔 상태에서 A5 허브가 달린 덮개를 받침 아래에서 올립니다.'
         elif sid == 'yaw-bracket-feet':
             row['text'] = '위에서 M3×8 네 개를 받침의 인서트에 조입니다. 모터 고정 나사 머리가 이 길을 막으므로 모터보다 먼저 합니다.'
         elif sid == 'id5-keeper-screws':

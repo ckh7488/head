@@ -6,7 +6,7 @@ import { cameraViews, fastenerViews, partColor, partGroups } from "./catalog.js"
 const byId = id => document.getElementById(id);
 const tabButtons = [...document.querySelectorAll("[data-tab]")];
 const captions = {
-  power: "12 V 공급과 정비 플러그", hub: "A4 허브와 5 V 정비 루프",
+  power: "12 V 공급과 정비 플러그", hub: "A5 허브와 5 V 정비 루프",
   camera: "Eaton 경로 · 목 중립", fasteners: "B25 체결품",
 };
 const fastenerDetails = {

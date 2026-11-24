@@ -1,6 +1,6 @@
 # 제어와 보정
 
-B25 기구와 A4 허브는 카메라 미리보기, 모터를 뺀 첫 통전, 보정과 한 축 구동, 실물 인수 시험 순서로 확인합니다. 웹 데모에서는 B25의 눈·목·눈꺼풀·턱을 조작할 수 있습니다. [구동 데모](https://r5-b1-review.ckh.chatgpt.site/b25/demo/) · [B25 실물 시험](../spec/bench.md#b25-실물-시험)
+B25 기구와 A5 허브는 카메라 미리보기, 모터를 뺀 첫 통전, 보정과 한 축 구동, 실물 인수 시험 순서로 확인합니다. 웹 데모에서는 B25의 눈·목·눈꺼풀·턱을 조작할 수 있습니다. [구동 데모](https://r5-b1-review.ckh.chatgpt.site/b25/demo/) · [B25 실물 시험](../spec/bench.md#b25-실물-시험)
 
 ## 하드웨어 없이 실행
 
@@ -29,13 +29,13 @@ python control/pc/track.py --source path/to/video.mp4 --headless
 
 ### 모터를 뺀 첫 통전
 
-1. 조립품을 건식으로 맞춘 뒤, 작업대에서 모터·OpenRB·USB를 분리하고 A4의 J1 5 V와 J2 12 V 하네스 및 어댑터 극성을 확인합니다. 두 퓨즈를 뺀 상태에서 어댑터를 한 개씩 연결해 해당 퓨즈 입력을 잽니다. 전원을 빼고 퓨즈를 장착한 뒤 각 레일과 모터 출력 핀 전압을 다시 잽니다. 전원을 분리한 상태에서 J2 잠금쇠를 고정합니다. [A4 전원 실물 검수](../electronics/README.md#전원-실물-검수) · [B25 조립과 배선](../mechanical/revisions/b25/assembly.md#전원-커넥터와-배선)
+1. 작업대에서 모터·OpenRB·USB와 두 어댑터를 분리하고, 두 퓨즈를 뺍니다. J1 5 V와 J2 12 V 배선의 극성과 도통을 잰 뒤 **첫 통전 전에 J2 잠금쇠를 고정**합니다. 잠금쇠를 확인한 뒤 퓨즈를 뺀 첫 통전과 퓨즈를 넣은 무부하 출력을 순서대로 잽니다. [A5 전원 실물 검수](../electronics/README.md#전원-실물-검수) · [B25 조립과 배선](../mechanical/revisions/b25/assembly.md#전원-커넥터와-배선)
 2. 어댑터를 뺀 채 OpenRB 점퍼를 **USB(VIN)** 쪽에 두고 나사식 VIN 단자를 비워 둡니다. 허브 J3와 연결할 W10·W11은 GND·DATA만 이어지며 OpenRB EH 2(VDD)는 비워 둡니다. 도통과 단락 여부를 확인한 뒤 J3를 연결합니다. [허브 단자와 배선](../electronics/README.md#허브-단자와-배선)
-3. Arduino IDE에 ROBOTIS 보드 인덱스를 추가합니다. OpenRB-150 코어 **0.2.1**, Dynamixel2Arduino **0.8.2**로 [R5B1.ino](openrb/R5B1/R5B1.ino)를 빌드하고 USB로 올립니다. 모터를 연결하기 전에 시리얼 모니터를 **115200 bps**, 줄바꿈 사용으로 열어 `PING`에 `R5B1 1`이 오는지 확인합니다. 여기까지는 A4 출력 전압과 OpenRB USB 응답을 확인합니다. [보드 인덱스](https://raw.githubusercontent.com/ROBOTIS-GIT/OpenRB-150/master/package_openrb_index.json) · [라이브러리](https://github.com/ROBOTIS-GIT/Dynamixel2Arduino)
+3. Arduino IDE에 ROBOTIS 보드 인덱스를 추가합니다. OpenRB-150 코어 **0.2.1**, Dynamixel2Arduino **0.8.2**로 [R5B1.ino](openrb/R5B1/R5B1.ino)를 빌드하고 USB로 올립니다. 모터를 연결하기 전에 시리얼 모니터를 **115200 bps**, 줄바꿈 사용으로 열어 `PING`에 `R5B1 1`이 오는지 확인합니다. 여기까지는 A5 출력 전압과 OpenRB USB 응답을 확인합니다. [보드 인덱스](https://raw.githubusercontent.com/ROBOTIS-GIT/OpenRB-150/master/package_openrb_index.json) · [라이브러리](https://github.com/ROBOTIS-GIT/Dynamixel2Arduino)
 
 ### 보정과 한 축 구동
 
-1. OpenRB로 Wizard를 사용할 때는 보드 매니저 예제 `usb_to_dynamixel`을 먼저 올립니다. 어댑터와 USB를 뺀 상태에서 해당 전압의 A4 출력에 모터를 한 개씩 연결합니다. OpenRB는 위와 같이 USB(VIN)으로 공급하고, A4와는 GND·DATA만 잇습니다. 전원을 넣고 Wizard에서 ID, Protocol 2.0, **57,600 bps**, 위치 모드 3, 속도 기반 프로파일, Status Return Level 2를 설정합니다. Drive Mode의 Goal Update 자동 토크 활성화는 끄고 Startup Configuration은 0으로 둡니다. 모터를 바꿀 때마다 어댑터와 USB를 뺍니다. 설정이 끝나면 Wizard를 닫고 모터 전원을 분리한 뒤 `R5B1.ino`를 다시 올립니다. 시리얼 모니터에서 `PING` → `R5B1 1`을 확인한 뒤 포트를 닫습니다. [Wizard 연결](https://emanual.robotis.com/docs/en/parts/controller/openrb-150/#dynamixel-wizard-20) · [Drive Mode](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#drive-mode10) · [Startup Configuration](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#startup-configuration60)
+1. OpenRB로 Wizard를 사용할 때는 보드 매니저 예제 `usb_to_dynamixel`을 먼저 올립니다. 어댑터와 USB를 뺀 상태에서 해당 전압의 A5 출력에 모터를 한 개씩 연결합니다. OpenRB는 위와 같이 USB(VIN)으로 공급하고, A5와는 GND·DATA만 잇습니다. 전원을 넣고 Wizard에서 ID, Protocol 2.0, **57,600 bps**, 위치 모드 3, 속도 기반 프로파일, Status Return Level 2를 설정합니다. Drive Mode의 Goal Update 자동 토크 활성화는 끄고 Startup Configuration은 0으로 둡니다. 모터를 바꿀 때마다 어댑터와 USB를 뺍니다. 설정이 끝나면 Wizard를 닫고 모터 전원을 분리한 뒤 `R5B1.ino`를 다시 올립니다. 시리얼 모니터에서 `PING` → `R5B1 1`을 확인한 뒤 포트를 닫습니다. [Wizard 연결](https://emanual.robotis.com/docs/en/parts/controller/openrb-150/#dynamixel-wizard-20) · [Drive Mode](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#drive-mode10) · [Startup Configuration](https://emanual.robotis.com/docs/en/dxl/x/xl330-m288/#startup-configuration60)
 2. 무전원에서 모터를 연결한 뒤 목과 턱을 받치고 전원을 넣습니다. `--release`로 `RELEASED`를 받고 `--check`의 전 축 `torque=0`을 확인한 뒤 손으로 움직입니다. 초기 보정표가 비어 있으면 `--check`가 `CHECK`와 함께 종료값 1을 낼 수 있으므로 각 행의 `torque=`를 직접 확인합니다. 토크 해제를 확인할 수 없으면 서보 전원을 분리합니다. 중립과 접촉 없이 쓸 수 있는 위치를 잽니다. 목·턱의 첫 접촉과 보정 끝점은 같은 중립을 기준으로 기록하고, 모터 전원은 켜고 토크는 끈 상태에서 `commission.py --read ID`로 각 위치의 엔코더를 읽습니다. [P04·P06 측정](../spec/bench.md#b25-실물-시험)
 3. 실측한 `low, zero, high`를 [Calibration.h](openrb/R5B1/Calibration.h)에 넣고 파일 검사 후 펌웨어를 다시 올립니다. 저장소에 포함된 기본 보정표의 여섯 행은 모두 `-1`입니다. 파일 검사가 통과해도 비어 있는 행은 잠겨 있습니다. 여섯 모터를 연결한 상태에서 `--check`를 실행해 각 ID의 `OK`, `torque=0`, `calibrated=1`을 확인합니다. `--check`는 연결된 상태만 읽으며, 보정·시작 설정·현재 위치를 포함한 구동 준비 상태를 확인합니다.
 4. 목을 받치고 `--axes eye-yaw`부터 한 축씩 보정 방향과 간섭을 확인합니다. 나머지 추적 축은 `eye-pitch`, `blink`, `neck-yaw`, `neck-pitch`입니다. 추적 프로그램을 닫으면 `HOLD`가 전송됩니다. 축을 바꾸기 전에는 목을 다시 받치고 `--release`의 `RELEASED`를 확인합니다. ID6은 목 양축을 중립에 두는 턱 시험 모드에서 확인합니다.

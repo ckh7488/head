@@ -80,10 +80,10 @@ def load_print_mesh(project, model, config, bore):
     part = native.find(f'.//{CORE}object[@id="{component.get("objectid")}"]/{CORE}mesh')
     vertices = np.array([[float(v.get(axis)) for axis in 'xyz'] for v in part.find(CORE + 'vertices')])
     faces = np.array([[int(f.get(key)) for key in ('v1', 'v2', 'v3')] for f in part.find(CORE + 'triangles')])
-    default_transform = '1 0 0 0 1 0 0 0 1 0 0 0'
-    for item in (component, model.find(f'.//{CORE}item[@objectid="{bore.object_id}"]')):
-        transform = np.array(item.get('transform', default_transform).split(), dtype=float).reshape(4, 3)
-        vertices = vertices @ transform[:3] + transform[3]
+    # Bambu Studio retains the print instance's rotation when replacing an STL.
+    # Keep bore coordinates and alternate meshes in the local object frame.
+    transform = np.fromstring(component.get('transform', '1 0 0 0 1 0 0 0 1 0 0 0'), sep=' ').reshape(4, 3)
+    vertices = vertices @ transform[:3] + transform[3]
     low, high = vertices.min(axis=0), vertices.max(axis=0)
     origin = (low + high) / 2
     origin[2] = low[2]

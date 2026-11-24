@@ -12,7 +12,7 @@ H1,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hol
 H2,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hole,No part
 H3,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hole,No part
 H4,M3,MountingHole:MountingHole_3.2mm_M3,NATIVE,Bare pad or drilled mounting hole,No part
-J1,5V IN - XT30,R5_Hub:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal,YES,Amass XT30PW-M,"Pad 2 positive, pad 1 GND"
+J1,5V IN - XT30,R5_Hub:AMASS_XT30PW-M_1x02_P5.00mm_Horizontal_J1,YES,Amass XT30PW-M,"Pad 2 positive, pad 1 GND"
 J2,12V IN - XT30,R5_Hub:AMASS_XT30PW-M_1x02_P5.00mm_Horizontal,YES,AMASS XT30PW-M,"Pad 2 positive, pad 1 GND. Mate with captive labeled 12 V XT30U-F."
 J3,OpenRB TTL - GND / DATA,R5_Hub:JST_PH_B2B-PH-K_1x02_P2.00mm_Vertical,YES,JST B2B-PH-K-S,"EH1 to PH1, EH3 to PH2, no wire on EH2"
 J4,ID1 Eye yaw,R5_Hub:JST_PH_B3B-PH-K_1x03_P2.00mm_Vertical,YES,JST B3B-PH-K-S,"5 V output, fit PH-to-EH lead"

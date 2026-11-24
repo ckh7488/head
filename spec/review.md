@@ -4,8 +4,8 @@ B25의 합격 조건은 [고정 검사 조건](conditions.md)에 있습니다. �
 
 ## B25 검토 순서
 
-1. 저장소의 B25 CAD·P2S 출력본, A4 배선과 펌웨어를 맞춘 뒤 하드웨어 없이 모형과 가상 USB를 확인합니다. [B25 파일](../mechanical/revisions/b25/README.md) · [하드웨어 없이 실행](../control/README.md#하드웨어-없이-실행)
-2. 시험 출력물의 건식 맞춤과 모터를 뺀 첫 통전에서 끼움, A4 입력·출력 극성과 OpenRB 응답을 확인합니다. [건식 맞춤](../mechanical/revisions/b25/01-seoul-print.md) · [첫 통전](../control/README.md#모터를-뺀-첫-통전)
+1. 저장소의 B25 CAD·P2S 출력본, A5 배선과 펌웨어를 맞춘 뒤 하드웨어 없이 모형과 가상 USB를 확인합니다. [B25 파일](../mechanical/revisions/b25/README.md) · [하드웨어 없이 실행](../control/README.md#하드웨어-없이-실행)
+2. 시험 출력물의 건식 맞춤과 모터를 뺀 첫 통전에서 끼움, A5 입력·출력 극성과 OpenRB 응답을 확인합니다. [건식 맞춤](../mechanical/revisions/b25/01-seoul-print.md) · [첫 통전](../control/README.md#모터를-뺀-첫-통전)
 3. 조립품에서 실제 중립과 스토퍼 여유를 재고, 먼저 한 축씩 방향·간극을 확인합니다. P01–P08의 최종 결과는 해당 CAD와 보정값으로 조립한 기구에서 기록합니다. [보정과 한 축 구동](../control/README.md#보정과-한-축-구동) · [실물 시험](bench.md#b25-실물-시험)
 
 ## 근거를 맞추기

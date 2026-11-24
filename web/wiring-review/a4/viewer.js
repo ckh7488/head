@@ -486,14 +486,15 @@ $("#order-quote").textContent = handAssembled
 $("#order-hand").textContent = handAssembled
   ? `밑면 ${handCount("B")}개를 먼저 붙이고 윗면 관통홀 부품 ${handCount("F")}개를 나중에 끼워 납땜합니다.`
   : `밑면 ${data.pcbaCount}개를 공장에서 실장하고 윗면 ${handCount("F")}개는 직접 납땜합니다.`;
+const chipRotations = new Set(["U1", "U2", "U3"].map(ref => Number(data.parts[ref].placement?.Rotation)));
 $("#order-orientation").textContent = handAssembled
   ? "밑면 U1–U3의 방향은 모두 같습니다. 몸체의 1번 핀을 아래 그림의 금색 점과 맞춥니다."
   : "BOM과 CPL을 올리고, JLCPCB 밑면 미리보기에서 각 칩의 몸체 점을 오른쪽 그림의 1번 핀에 맞춥니다."
-    + (fourLayer ? " U2의 방향은 U1·U3와 따로 확인합니다." : "");
+    + (chipRotations.size === 1 ? " U1–U3의 CPL 방향은 같습니다." : " 각 칩의 CPL 방향을 따로 확인합니다.");
 $("#solder-access").textContent = handAssembled
   ? "U1–U3은 다리가 보이는 SOT-23-6(0.95 mm 피치), 옆 저항과 커패시터는 0805입니다. 작은 평팁으로 SMD를 먼저 붙이고, XT30과 퓨즈 홀더에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다."
   : fourLayer
-    ? "손납땜 패드와 밑면 실장 부품 사이는 최소 2.05 mm입니다. JST PH에는 1.2–1.6 mm 평팁, XT30 전원 핀·퓨즈 홀더·C1 음극에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다."
+    ? `손납땜 패드와 밑면 부품 몸체 사이는 최소 ${data.solderGap.toFixed(2)} mm입니다. JST PH에는 1.2–1.6 mm 평팁, XT30 전원 핀·퓨즈 홀더·C1 음극에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다.`
     : "F1과 밑면 U1·U2 사이의 동박 간격은 0.26–0.27 mm입니다. 열린 쪽에서 작은 평팁을 댑니다.";
 $("#bom").append(table(["위치", "규격", "조달·실장", "비고"], refs.map(ref => {
   const part = data.parts[ref];

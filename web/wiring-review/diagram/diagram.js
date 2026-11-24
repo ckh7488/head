@@ -31,9 +31,9 @@ const parts = {
   "u20cam-board": "U20CAM-1080P-S1 기판 · 키 플러그는 사진 밖",
 };
 const joinParts = {
-  "A4 J1 패드": "xt30pw-m", "A4 J2 패드": "xt30pw-m", "A4 J3": "b2b-ph-k-s",
-  "A4 J4": "b3b-ph-k-s", "A4 J5": "b3b-ph-k-s", "A4 J6": "b3b-ph-k-s",
-  "A4 J7": "b3b-eh-a", "A4 J8": "b3b-eh-a", "OpenRB EH": "openrb-eh",
+  "A5 J1 패드": "xt30pw-m", "A5 J2 패드": "xt30pw-m", "A5 J3": "b2b-ph-k-s",
+  "A5 J4": "b3b-ph-k-s", "A5 J5": "b3b-ph-k-s", "A5 J6": "b3b-ph-k-s",
+  "A5 J7": "b3b-eh-a", "A5 J8": "b3b-eh-a", "OpenRB EH": "openrb-eh",
   "받침 5 V IN": "xt30u-f", "5 V 어댑터 플러그": "xt30u-m", "받침 12 V IN": "xt60u-f",
   "12 V SERVICE 고정": "xt60u-m", "12 V SERVICE 가동": "xt60e-f",
 };
@@ -77,7 +77,7 @@ function action(name, label, description, callback) {
   return button;
 }
 
-const endpoint = end => end.part === "xt30u-f" && /^A4 J[12]/.test(end.label)
+const endpoint = end => end.part === "xt30u-f" && /^A5 J[12]/.test(end.label)
   ? `XT30U-F ${end.pin === "2" ? "+" : "−"} 컵 → ${end.label} ${end.pin}`
   : `${end.label} · ${end.pin}`;
 const wireColor = row => row.color ?? wires[row.wire]?.color;

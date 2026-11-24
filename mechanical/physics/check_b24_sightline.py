@@ -63,7 +63,7 @@ def check(cad):
         hits = []
         for name in OPAQUE:
             points, _, _ = shapes[name].ray.intersects_location([origin], [direction])
-            if any(0.01 < t < length for t in (points-origin)@direction):
+            if len(points) and any(0.01 < t < length for t in (points-origin)@direction):
                 hits.append(name)
         return hits
 

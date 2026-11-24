@@ -1,6 +1,6 @@
 # R5 인수 기준 (2층 동작·검증 스펙)
 
-[1층 사용자 요구사항](user-spec.md), [2층 고정 검사 조건](conditions.md)과 [장면 수치 기준](criteria.toml)을 B25의 CAD, 펌웨어와 실물에 적용합니다. 하드웨어 없이 모형을 확인하고, A4 첫 통전과 한 축 구동을 거쳐 P01–P08을 기록합니다. [제어 설정](../control/README.md) · [실물 시험](bench.md#b25-실물-시험)
+[1층 사용자 요구사항](user-spec.md), [2층 고정 검사 조건](conditions.md)과 [장면 수치 기준](criteria.toml)을 B25의 CAD, 펌웨어와 실물에 적용합니다. 하드웨어 없이 모형을 확인하고, A5 첫 통전과 한 축 구동을 거쳐 P01–P08을 기록합니다. [제어 설정](../control/README.md) · [실물 시험](bench.md#b25-실물-시험)
 
 ## B25 인수 검사
 

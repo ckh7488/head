@@ -1364,7 +1364,7 @@
 (symbol (lib_id "Connector_Generic:Conn_01x02") (at 31.75 48.26 180) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "7684a766-bdfc-5fd9-9394-261d8cac43d0")
 (property "Reference" "J1" (at 31.75 42.96 0) (effects (font (size 1.02 1.02))))
 (property "Value" "5V IN - XT30" (at 31.75 53.66 0) (effects (font (size 1.02 1.02))))
-(property "Footprint" "R5_Hub:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal" (at 31.75 48.26 0) (effects (font (size 1.02 1.02)) (hide yes)))
+(property "Footprint" "R5_Hub:AMASS_XT30PW-M_1x02_P5.00mm_Horizontal_J1" (at 31.75 48.26 0) (effects (font (size 1.02 1.02)) (hide yes)))
 (pin "1" (uuid "e959708e-e52e-588d-a022-1dbf96a49ad1")) (pin "2" (uuid "75cfa3fe-553c-5449-b37e-60873b81ceed"))
 (instances (project "R5_Servo_Hub" (path "/51abc865-a09e-522c-884d-f375bbf8790b" (reference "J1") (unit 1)))))
 (symbol (lib_id "Connector_Generic:Conn_01x02") (at 31.75 104.14 180) (unit 1) (in_bom yes) (on_board yes) (dnp no) (uuid "7d69ba3b-d4e5-5c96-a0a6-e3bfb4e1e05b")

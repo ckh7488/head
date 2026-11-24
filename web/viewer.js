@@ -25,7 +25,7 @@ const closeups = {
   camera: { view: "assembled", position: [52, -260, 114], center: [0, -40, 103], anchor: [0, -67, 91], motion: "head", title: "코 카메라", subtitle: "U20CAM-1080P-S1 · 렌즈 약 2 mm 안쪽" },
   neck: { view: "mechanism", position: [146, 253, 138], center: [0, 27, 110], anchor: [21, 39, 122], motion: "pan", title: "목 구동부", subtitle: "XL430 두 축 · 상하 스트로크 제한판" },
   jaw: { view: "mechanism", position: [-170, -224, 132], center: [0, -24, 75], anchor: [-47, ...jawPivot.slice(1)], motion: "head", title: "턱 힌지", subtitle: "XL330 직결 · 62틱(5.45°) 열림" },
-  hub: { view: "electronics", position: [113, 189, 110], center: [0, 70, -68], anchor: [0, 65, -69], motion: "hatch", title: "서보 허브 A4", subtitle: "5 V 눈·턱 · 12 V 목 · 뒤쪽 정비 분리" }
+  hub: { view: "electronics", position: [113, 189, 110], center: [0, 70, -68], anchor: [0, 65, -69], motion: "hatch", title: "서보 허브 A5", subtitle: "5 V 눈·턱 · 12 V 목 · 뒤쪽 정비 분리" }
 };
 const blinkParts = new Map();
 const partLabel = (ids, title, detail) => {
@@ -164,7 +164,7 @@ export class AssemblyViewer {
       if (!response.ok) throw Error("Assembly metadata");
       return response.json();
     });
-    if (data.revision !== "B25" || data.board !== "A4") throw Error("B25 A4 metadata is required");
+    if (data.revision !== "B25" || data.board !== "A5") throw Error("B25 A5 metadata is required");
     this.rig = data.rig;
     this.service = data.wiring.service;
     const model = embedded?.glb

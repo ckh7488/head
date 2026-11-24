@@ -1,5 +1,5 @@
 {
-  "cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
   "motion": {
     "poses": 26196,
     "interfaces": 572,
@@ -16,6 +16,17 @@
     "jaw_range_from_cad_zero_deg": [
       0.0,
       6.85546875
+    ],
+    "front_shell_clearance_mm": {
+      "Part057 / Part073": 0.95,
+      "Part060 / Part073": 0.95,
+      "Part073 / Part078": 0.842,
+      "Part073 / Part079": 0.741
+    },
+    "front_shell_mesh_contacts": [],
+    "pitch_feedback_range_deg": [
+      -13.798828125,
+      3.33984375
     ]
   },
   "camera_route": {
@@ -37,7 +48,8 @@
       ],
       "worst_surface_gap_lower_mm": 1.0606964111328125,
       "centerline_y_at_pan_z_minus_9p17_mm": -25.774984456446763
-    }
+    },
+    "upper_anchor_body": "Part073"
   },
   "a4_service_leads": {
     "samples": 39,
@@ -69,6 +81,7 @@
   "changed_world_meshes": [
     "CableSaddle",
     "EatonCableNeutral",
-    "Jaw_37_right_jaw_bearing_stay"
+    "Jaw_37_right_jaw_bearing_stay",
+    "Part073"
   ]
 }

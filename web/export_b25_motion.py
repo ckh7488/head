@@ -36,7 +36,7 @@ COLORS = {
 TICK_DEG = 360. / 4096.
 AXIS_LIMITS = {'yaw': 640*TICK_DEG, 'pitch': [-149*TICK_DEG, 30*TICK_DEG]}
 MOTORS = {'Part017', 'Part018', 'Part038', 'Part041', 'Part045', 'Jaw_XL330_M288_Jaw'}
-OMIT = {'Part070', 'Part071', 'EatonCableNeutral', *LEADS}
+OMIT = {'Part065', 'Part070', 'Part071', 'EatonCableNeutral', *LEADS}
 WIRE_COLORS = {
     'RearLead1_1': 'red_wire', 'RearLead1_2': 'black_wire', 'RearLead3_1': 'camera_wire',
     'RearLead4_1': 'control_wire', 'A4W6': 'red_wire', 'A4W35': 'red_wire',
@@ -209,7 +209,7 @@ def build(assembly, cad, output):
         rig = {kind: layout['motion_geometry'][kind] for kind in ('eye_pitch','eye_yaw','blink','pitch_stop')}
         rig['jaw_pivot_mm'] = layout['jaw_pivot_mm']
         rig['jaw_closed_deg'] = CLOSED_REFERENCE_TICKS * TICK_DEG
-        document = {'revision':'B25','board':'A4','cad_sha256':digest,'parts':parts,'rig':rig,
+        document = {'revision':'B25','board':'A5','cad_sha256':digest,'parts':parts,'rig':rig,
                     'wiring': {'routes':wires, 'blocks':[], 'eaton':eaton(), 'service':service_leads()}}
         (output/'assembly.json').write_text(json.dumps(document,ensure_ascii=False,separators=(',',':'))+'\n')
         print(f'{len(parts)} B25 solids, {len(wires)} native wire centers · {digest[:12]}', flush=True)

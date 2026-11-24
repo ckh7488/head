@@ -19,7 +19,7 @@ DOCS = {
     "gauge": ("맞춤 게이지", B25 / "fit-gauge.md"),
     "after": ("시험 뒤 살 부품", B25 / "03-order-after.md"),
     "assembly": ("조립 절차", B25 / "assembly.md"),
-    "electronics": ("A4 발주·첫 통전", ROOT / "electronics/README.md"),
+    "electronics": ("A5 발주·첫 통전", ROOT / "electronics/README.md"),
     "control": ("구동과 보정", ROOT / "control/README.md"),
     "bench": ("실물 시험", ROOT / "spec/bench.md"),
     "status": ("검사 결과와 범위", B25 / "alignment.md"),
@@ -115,12 +115,12 @@ def build(output, poster, ref, offline=None):
     guide = output / "guide"
     guide.mkdir(exist_ok=True)
     intro = """<h1>B25 제작 문서</h1>
-<p>P2S 출력은 14판·57개입니다. 13번 턱 판부터 출력합니다. 완성품 조립, 통전과 구동은 실물에서 확인합니다.</p>
+<p>P2S PETG HF 출력은 18판·57개입니다. 15번 링크와 13번 턱을 먼저 확인합니다. 완성품 조립, 통전과 구동은 실물에서 확인합니다.</p>
 <ol>
 <li><a href="before/">먼저 살 부품</a>을 준비하고 <a href="print/">서울 출력과 후가공</a>을 진행합니다.</li>
 <li><a href="gauge/">끼움</a>과 공구 접근을 건식으로 확인한 뒤 <a href="after/">모터와 전장</a>을 준비합니다.</li>
-<li>허브를 받침에 넣기 전에 모터와 OpenRB를 분리하고 작업대에서 <a href="electronics/#전원-실물-검수">퓨즈를 뺀 첫 통전</a>을 시작합니다.</li>
-<li>전원을 뽑고 J2를 잠근 뒤 <a href="assembly/">조립과 배선</a>을 마칩니다. <a href="control/">축별 보정</a> 후 <a href="bench/">P01–P08 실물 결과</a>를 기록합니다.</li>
+<li>작업대에서 모터와 OpenRB를 분리하고 무전원 배선을 확인합니다. J2를 잠근 뒤 <a href="electronics/#전원-실물-검수">퓨즈를 뺀 첫 통전과 무부하 출력 검사</a>를 진행합니다.</li>
+<li>전원을 뽑고 <a href="assembly/">조립과 배선</a>을 마칩니다. <a href="control/">축별 보정</a> 후 <a href="bench/">P01–P08 실물 결과</a>를 기록합니다.</li>
 </ol>"""
     if offline:
         intro += '<p><a href="../assembly-offline.zip" download>오프라인 조립 HTML 내려받기</a></p>'

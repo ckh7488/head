@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
-  "cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
-  "p2s_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
+  "p2s_sha256": "9d643f376a4946927d7fa368ced98c634b1a25edcf732555859aec52cccaea56",
   "geometry": {
     "rear_skull_retention": {
       "parts": [
@@ -193,6 +193,11 @@
         -1.75
       ],
       "cut_mm": 550
+    },
+    "front_skull_sync": {
+      "part": "Part073",
+      "integrated_tray_reference": "Part065",
+      "evidence": "front-shell-sync.json"
     }
   },
   "print_inputs_sha256": {

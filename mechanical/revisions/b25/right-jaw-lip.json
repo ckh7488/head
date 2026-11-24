@@ -1,0 +1,123 @@
+{
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
+  "part": "Jaw_37_right_jaw_bearing_stay",
+  "relief_lip": {
+    "purpose": "Residual edge of the yoke-clearance recess",
+    "world_sections": [
+      {
+        "axis": "X",
+        "center_world_mm": [
+          47.29999923706055,
+          -8.0,
+          104.0
+        ],
+        "surface_coordinates_mm": [
+          47.0,
+          47.599998474121094
+        ],
+        "thickness_mm": 0.5999984741210938
+      },
+      {
+        "axis": "X",
+        "center_world_mm": [
+          47.375,
+          -11.5,
+          105.0
+        ],
+        "surface_coordinates_mm": [
+          47.0,
+          47.75
+        ],
+        "thickness_mm": 0.75
+      },
+      {
+        "axis": "Z",
+        "center_world_mm": [
+          48.5,
+          -7.25,
+          97.875
+        ],
+        "surface_coordinates_mm": [
+          97.5,
+          98.25
+        ],
+        "thickness_mm": 0.75
+      }
+    ],
+    "plate_9_arachne": {
+      "gcode_sha256": "35fab260260d048db2c6339a632f2ceafb1ce731040cd3fa0b0aaae4d3547421",
+      "witnesses": [
+        {
+          "layer_top_mm": 9.0,
+          "extrusion_feature": "Internal solid infill",
+          "xy_path_distance_mm": 0.0021606354805808517,
+          "xy_mm": [
+            10.999996199999998,
+            192.7989406
+          ]
+        },
+        {
+          "layer_top_mm": 9.2,
+          "extrusion_feature": "Inner wall",
+          "xy_path_distance_mm": 0.023940600000003087,
+          "xy_mm": [
+            9.999996199999998,
+            189.2989406
+          ]
+        },
+        {
+          "layer_top_mm": 10.0,
+          "extrusion_feature": "Outer wall",
+          "xy_path_distance_mm": 0.17699619999999783,
+          "xy_mm": [
+            17.1249962,
+            193.5489406
+          ]
+        }
+      ]
+    }
+  },
+  "mounting_through_hole": {
+    "axis_center_yz_mm": [
+      -8.75,
+      103.5
+    ],
+    "x_station_range_mm": [
+      62.56,
+      68.99
+    ],
+    "station_count": 20,
+    "rays_per_station": 1440,
+    "minimum_sampled_wall_mm": 1.4396560302966075,
+    "wall_with_0p20_mm_outline_loss_mm": 1.2396560302966075,
+    "insert_diameter_mm": null
+  },
+  "frame_insert": {
+    "axis_center_yz_mm": [
+      -8.75,
+      103.5
+    ],
+    "x_station_range_mm": [
+      71.56,
+      74.54
+    ],
+    "station_count": 20,
+    "rays_per_station": 1440,
+    "minimum_sampled_wall_mm": 1.7482330322265627,
+    "wall_with_0p20_mm_outline_loss_mm": 1.5482330322265627,
+    "insert_diameter_mm": 4.6
+  },
+  "bearing": {
+    "center_yz_mm": [
+      -9.0,
+      92.0
+    ],
+    "axial_seat_x_mm": [
+      40.0,
+      44.0
+    ],
+    "part": "Jaw_MR104ZZ_jaw_right",
+    "diameter_mm": 10.15,
+    "separate_from_clearance_lip": true
+  }
+}

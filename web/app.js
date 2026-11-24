@@ -146,7 +146,7 @@ function defaultCaption() {
   const names = {
     assembled: ["조립 상태", "아이보리 외장 · 차콜 받침"],
     mechanism: ["내부 기구", "안구와 눈꺼풀 링크 · 목 구동부"],
-    electronics: ["전장 배치", "서보 허브 A4 · OpenRB-150 · J2 정비 커넥터"],
+    electronics: ["전장 배치", "서보 허브 A5 · OpenRB-150 · J2 정비 커넥터"],
     wiring: ["배선·체결", "전원·신호·USB · 체결품과 함께 구동 검토"],
   };
   const message = names[mount];

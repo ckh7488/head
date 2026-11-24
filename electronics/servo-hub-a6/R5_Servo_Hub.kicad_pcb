@@ -7879,7 +7879,7 @@
 			)
 		)
 	)
-	(footprint "R5_Hub:AMASS_XT30PW-M_1x02_P2.50mm_Horizontal"
+	(footprint "R5_Hub:AMASS_XT30PW-M_1x02_P5.00mm_Horizontal_J1"
 		(layer "F.Cu")
 		(uuid "dfc48f15-af67-4f12-ad49-7c8ab0967523")
 		(at 130 95)
@@ -12184,8 +12184,30 @@
 			)
 		)
 	)
+	(gr_text "12V"
+		(at 152.6 104.5 0)
+		(layer "F.SilkS")
+		(uuid "0dc343bb-429e-5d4c-bbb0-936aceda68cd")
+		(effects
+			(font
+				(size 0.82 0.82)
+				(thickness 0.13)
+			)
+		)
+	)
 	(gr_text "5V"
-		(at 106 102.9 0)
+		(at 126.05 98.8 0)
+		(layer "F.SilkS")
+		(uuid "d015b780-2f23-5caa-8f2c-88de1d6f984a")
+		(effects
+			(font
+				(size 0.82 0.82)
+				(thickness 0.13)
+			)
+		)
+	)
+	(gr_text "GND"
+		(at 106.4 103.65 0)
 		(layer "F.SilkS")
 		(uuid "ccede882-dca0-47ae-9273-04092607d0b6")
 		(effects

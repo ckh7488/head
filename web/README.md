@@ -7,16 +7,14 @@
 | 구동 | 눈과 목을 직접 움직이고 깜빡임과 턱 동작을 확인합니다. |
 | 조립 | 171단계에서 부품을 끼우는 순서를 봅니다. 완성 상태에서 외장을 숨기면 체결품과 선이 보입니다. |
 | 배선도 | 핀이나 선을 눌러 양끝 커넥터, 색, 굵기와 재단 길이를 확인합니다. |
-| 배선 | A4와 뒤쪽 전원 연결을 보고, XT60 정비 플러그를 뺀 뒤 하부 덮개를 30 mm 내립니다. |
+| 배선 | A5와 뒤쪽 전원 연결을 보고, XT60 정비 플러그를 뺀 뒤 하부 덮개를 30 mm 내립니다. |
 | 문서 | 출력·발주·조립·첫 통전·실물 시험을 작업 순서로 찾아봅니다. |
 
 화면은 CAD의 조립과 움직임을 보여 줍니다. 검사 범위와 실물에서 측정할 항목은 아래에서 확인합니다. [B25 웹 안내](https://r5-b1-review.ckh.chatgpt.site/b25/) · [검사 결과와 범위](../mechanical/revisions/b25/alignment.md) · [실물 시험](../spec/bench.md#b25-실물-시험)
 
-**A4 오프라인 뷰어**는 GitHub 파일 화면에서 **Download raw file**로 저장한 뒤 브라우저에서 엽니다. 단일 파일에 회로도, PCB, 3D, BOM·발주 자료가 들어 있습니다. [완성 HTML](b25/R5-B25-A4.html) · [생성 방법](../electronics/README.md#재현)
+**A5 오프라인 뷰어**는 회로도, 동박 네 층, 3D, BOM과 발주 파일을 한 HTML에 담았습니다. GitHub의 **Download raw file**로 저장해 브라우저에서 엽니다. [A5 HTML](b25/R5-B25-A5.html) · [A5 검토 결과](../electronics/servo-hub-a5/)
 
-**A5 오프라인 뷰어**에는 손납땜용 4층 시안의 동박 네 층과 새 실장 자료가 들어 있습니다. [A5 HTML](b25/R5-B25-A5.html) · [A5 검토 결과](../electronics/servo-hub-a5/)
-
-**A6 오프라인 뷰어**는 전 부품 손납땜용 70 × 37 mm 시안입니다. 회로도, PCB 네 층, 3D와 BOM을 한 파일에 넣었습니다. [A6 HTML](b25/R5-B25-A6.html) · [A6 검토 결과](../electronics/servo-hub-a6/)
+[A4 2층 뷰어](b25/R5-B25-A4.html)와 [A6 전량 손납땜 시안](b25/R5-B25-A6.html)도 열 수 있습니다.
 
 ### 오프라인 조립 HTML 만들기
 
@@ -99,7 +97,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory build/b23-review
 
 ## 이전 뷰어의 로컬 실행
 
-저장소 루트에서 실행합니다. 기본 주소는 B25 구동 화면을 열고, `?view=wiring`은 **배선·체결** 화면을 엽니다. `/assembly/`와 `/assembly/#complete`는 각각 이전 B15의 단계별 조립과 조립 완료 화면입니다. B15의 배선 자료는 Phoenix J2의 기록입니다. B25 A4의 XT30 J2는 **패드 2가 +, 패드 1이 GND**입니다. [A4 배선과 첫 통전](../electronics/README.md#전원과-배선)
+저장소 루트에서 실행합니다. 기본 주소는 B25 구동 화면을 열고, `?view=wiring`은 **배선·체결** 화면을 엽니다. `/assembly/`와 `/assembly/#complete`는 각각 이전 B15의 단계별 조립과 조립 완료 화면입니다. B15의 배선 자료는 Phoenix J2의 기록입니다. B25 A5의 XT30 J2는 **패드 2가 +, 패드 1이 GND**입니다. [A5 배선과 첫 통전](../electronics/README.md#전원과-배선)
 
 ```sh
 npm ci --prefix web
