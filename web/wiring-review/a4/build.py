@@ -204,8 +204,8 @@ def export_model(board, output, args):
 
 def placement_diagram(parts):
     """Show the real bottom footprint orientations from the board pad coordinates."""
-    elements = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 170">',
-                '<rect width="510" height="170" rx="10" fill="#102b20"/>']
+    elements = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 190">',
+                '<rect width="510" height="190" rx="10" fill="#102b20"/>']
     for index, ref in enumerate(("U1", "U2", "U3")):
         part = parts[ref]
         cx, cy = part["xy"]
@@ -219,8 +219,16 @@ def placement_diagram(parts):
             px, py = x0 - (x - cx) * 25, y0 + (y - cy) * 25
             color = "#f6c165" if pad["id"] == "1" else "#bacfc2"
             elements.append(f'<circle cx="{px:.2f}" cy="{py:.2f}" r="6" fill="{color}"/>')
-        elements.append(f'<text x="{x0}" y="134" fill="white" text-anchor="middle" font-size="18">{ref}</text>')
-    elements.append('<text x="255" y="157" fill="#f6c165" font-size="13" text-anchor="middle">밑면에서 본 방향 · 금색 점 = 1번 핀</text></svg>')
+        rotation = float(part["placement"]["Rotation"])
+        pin_x, pin_y = next(pad["xy"] for pad in part["pads"] if pad["id"] == "1")
+        horizontal = "오른쪽" if pin_x < cx else "왼쪽"
+        vertical = "아래" if pin_y > cy else "위"
+        elements.append(f'<text x="{x0}" y="133" fill="white" text-anchor="middle" font-size="17">'
+                        f'{ref} · CPL {rotation:g}°</text>')
+        elements.append(f'<text x="{x0}" y="153" fill="#f6c165" text-anchor="middle" font-size="14">'
+                        f'1번 핀 {horizontal} {vertical}</text>')
+    elements.append('<text x="255" y="177" fill="#bacfc2" font-size="13" text-anchor="middle">'
+                    '밑면 기준 · 미리보기와 기판 방향을 맞춘 뒤 금색 점을 대조</text></svg>')
     return b64("".join(elements).encode())
 
 

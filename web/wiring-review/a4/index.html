@@ -55,16 +55,19 @@
         <p id="order-stack"></p>
         <ol>
           <li>Gerber ZIP으로 무연 HASL · Economic · Bottom 조합을 견적 냅니다. TPS2557 실장에 업체가 ENIG를 요구하면 표면처리를 비교합니다.</li>
-          <li>BOM과 CPL을 올립니다. 밑면 방향 그림대로 JLCPCB 미리보기의 U1–U3 몸체 점과 PCB의 1번 패드를 맞춥니다.</li>
+          <li id="order-orientation"></li>
           <li id="order-hand"></li>
         </ol>
         <p>실제 단가, 부품 재고와 C861498 저항 매칭은 견적에서 확인합니다.</p>
         <div class="source-links"><a href="https://jlcpcb.com/capabilities/pcb-capabilities">기판 규격</a><a href="https://jlcpcb.com/capabilities/pcb-assembly-capabilities">실장 규격</a><a href="https://jlcpcb.com/help/article/jlcpcb-surface-finish">표면처리</a><a href="https://jlcpcb.com/help/article/pcb-assembly-price">실장 비용</a></div>
+        <h3>첫 통전</h3>
+        <p>F1·F2 퓨즈와 모터·OpenRB를 빼고, 어댑터를 하나씩 켜서 F1 입력에 +5 V, F2 입력에 +12 V가 들어오는지 잽니다. 출력 검수까지 마친 뒤 무전원에서 J2 잠금쇠를 고정합니다.</p>
+        <a href="https://github.com/ckh7488/head/blob/fix/r5-b24-final-validation/electronics/README.md#전원-실물-검수">전원 검수 순서</a>
       </section>
       <section class="paper">
         <h2>발주 파일</h2>
         <div id="downloads"></div>
-        <details class="placement"><summary>밑면 U1–U3 방향 대조</summary><img id="placement-image" alt="밑면에서 본 U1–U3의 1번 핀 위치"></details>
+        <details class="placement" open><summary>밑면 U1–U3 방향 대조</summary><img id="placement-image" alt="밑면에서 본 U1–U3의 CPL 각도와 1번 핀 위치"></details>
         <h3>수납땜 확대 검사</h3>
         <p id="solder-access"></p>
         <button type="button" class="action" id="inspect-fuse">PCB 밑면에서 F1 보기</button>

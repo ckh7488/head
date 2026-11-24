@@ -469,8 +469,10 @@ $("#inspect-fuse").addEventListener("click", () => {
 $("#limits").append(table(["항목", data.hubRevision, "JLCPCB 공개 조건"], limits));
 $("#order-stack").textContent = `시제품 2장 · ${data.layers.length}층 FR-4 · 1.6 mm · ${copperWeight} · 녹색 · 무연 HASL`;
 $("#order-hand").textContent = `밑면 ${data.pcbaCount}개를 공장에서 실장하고 윗면 ${refs.filter(ref => data.parts[ref].populate === "YES" && !data.parts[ref].jlc).length}개는 직접 납땜합니다.`;
+$("#order-orientation").textContent = "BOM과 CPL을 올리고, JLCPCB 밑면 미리보기에서 각 칩의 몸체 점을 오른쪽 그림의 1번 핀에 맞춥니다."
+  + (fourLayer ? " U2의 방향은 U1·U3와 따로 확인합니다." : "");
 $("#solder-access").textContent = fourLayer
-  ? "손납땜 패드와 밑면 실장 부품 사이는 최소 2.05 mm입니다. JST PH에는 1.2–1.6 mm 평팁, 큰 전원 핀과 퓨즈 홀더에는 열 회복이 빠른 인두와 2.4 mm 평팁을 사용합니다."
+  ? "손납땜 패드와 밑면 실장 부품 사이는 최소 2.05 mm입니다. JST PH에는 1.2–1.6 mm 평팁, XT30 전원 핀·퓨즈 홀더·C1 음극에는 열 회복이 빠른 인두와 2.4 mm 안팎의 평팁을 사용합니다."
   : "F1과 밑면 U1·U2 사이의 동박 간격은 0.26–0.27 mm입니다. 열린 쪽에서 작은 평팁을 댑니다.";
 $("#bom").append(table(["위치", "규격", "조달·실장", "비고"], refs.map(ref => {
   const part = data.parts[ref];
