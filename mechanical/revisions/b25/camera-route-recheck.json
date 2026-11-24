@@ -1,0 +1,15 @@
+{
+  "cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "actor": "HarnessWire015",
+  "cable": "USB-Camera",
+  "method": "Minimum circumradius of three consecutive centerline vertices, from the saved B25 native wire polygon, with no applied motion.",
+  "centerline_vertices": 643,
+  "diameter_mm": 4.0,
+  "minimum_radius_mm": 12.694598322041195,
+  "minimum_radius_point_mm": [
+    1.56,
+    -35.77,
+    -49.07
+  ],
+  "required_radius_mm": 40.0
+}

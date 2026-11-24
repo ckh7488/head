@@ -31,6 +31,7 @@ export function routePoints(route, matrixFor) {
     const transformed = point.clone().applyMatrix4(matrixFor(motion));
     return next ? transformed.lerp(point.applyMatrix4(matrixFor(next)), blend) : transformed;
   });
+  if (route.sampled) return points;
   const samples = [points[0]];
   const line = (from, to) => {
     const count = Math.max(1, Math.ceil(from.distanceTo(to) / 4));
@@ -123,6 +124,16 @@ export class WiringModel {
       return { ...block, node, material, base: base.makeTranslation(...block.center) };
     });
     this.entries = [...this.routes, ...this.blocks];
+    const tube = kind => {
+      const node = new THREE.Mesh(new THREE.BufferGeometry(), this.material(kind));
+      scene.add(node);
+      return node;
+    };
+    this.eaton = data.eaton && { data: data.eaton, node: tube("camera") };
+    this.service = data.service && {
+      data: data.service,
+      nodes: new Map(Object.keys(data.service.paths).map(id => [id, tube(id === "A4W8" ? "power" : "return")])),
+    };
     this.visible = false;
   }
 
@@ -130,12 +141,27 @@ export class WiringModel {
     return new THREE.MeshStandardMaterial({ color: palette[kind], emissive: palette[kind], emissiveIntensity: .16, roughness: .76 });
   }
 
-  show(visible, baseOnly = false) {
+  show(visible, baseOnly = false, openView = true) {
     this.visible = visible;
+    this.baseOnly = baseOnly;
     for (const entry of this.entries) entry.node.visible = visible && (!baseOnly || entry.baseOnly);
+    if (this.eaton) this.eaton.node.visible = visible || openView;
+    if (this.service) for (const node of this.service.nodes.values()) node.visible = visible || openView;
   }
 
-  draw(matrixFor) {
+  draw(matrixFor, pose, serviceProgress = 0) {
+    if (pose && this.eaton?.node.visible) {
+      const { node, data } = this.eaton;
+      const points = eatonPoints(data, pose, matrixFor("pan"));
+      const top = this.baseOnly ? points.findIndex((point, index) => index > 1 && point.z > -24) : -1;
+      updateTube(node, top > 1 ? points.slice(0, top) : points, 1.4);
+    }
+    if (this.service) {
+      const { nodes, data } = this.service;
+      for (const [id, node] of nodes) {
+        if (node.visible) updateTube(node, interpolatePath(data.paths[id], serviceProgress), data.diameter / 2);
+      }
+    }
     if (!this.visible) return;
     for (const route of this.routes) {
       if (!route.node.visible || (route.ready && !route.moving)) continue;
@@ -148,4 +174,32 @@ export class WiringModel {
       block.node.matrixWorldNeedsUpdate = true;
     }
   }
+}
+
+function interpolatePath(paths, progress) {
+  const interval = Math.max(0, Math.min(1, progress)) * (paths.length - 1);
+  const low = Math.floor(interval);
+  const high = Math.min(paths.length - 1, low + 1);
+  return paths[low].map((xyz, index) => new THREE.Vector3(...xyz)
+    .lerp(new THREE.Vector3(...paths[high][index]), interval - low));
+}
+
+export function eatonPoints(data, pose, pan) {
+  const blend = (value, [low, high]) => (value - low) / (high - low);
+  const lower = interpolatePath(data.lower_yaw, blend(pose.neckYaw, data.yaw_range));
+  const upper = interpolatePath(data.upper_pitch, blend(pose.neckPitch, data.pitch_range))
+    .map(point => point.applyMatrix4(pan));
+  lower[lower.length - 1].copy(upper[0]);
+  const fixed = data.fixed.map(xyz => new THREE.Vector3(...xyz));
+  const route = [...fixed, ...lower.slice(1), ...upper.slice(1)];
+  const length = route.slice(1).reduce((sum, point, index) => sum + point.distanceTo(route[index]), 0);
+  const radius = data.return_radius_mm;
+  const anchor = fixed[0];
+  const top = anchor.clone().add(new THREE.Vector3(0, 0, 2 * radius));
+  const tangentY = anchor.y + (data.cut_mm - length - Math.PI * radius) / 2;
+  const back = Array.from({ length: 49 }, (_, index) => {
+    const angle = Math.PI * index / 48;
+    return new THREE.Vector3(top.x, tangentY + radius * Math.sin(angle), top.z + radius * (Math.cos(angle) - 1));
+  });
+  return [top, ...back, ...route];
 }

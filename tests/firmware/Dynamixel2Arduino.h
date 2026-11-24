@@ -16,10 +16,18 @@ inline uint32_t millis() { return clockMs; }
 struct MockSerial {
     std::deque<uint8_t> input;
     std::ostringstream output;
+    uint32_t readWait = 0;
 
     void begin(uint32_t) {}
     int available() const { return static_cast<int>(input.size()); }
     int read() {
+        if (input.empty()) {
+            if (readWait) {
+                --readWait;
+                ++clockMs;
+            }
+            return -1;
+        }
         const int value = input.front();
         input.pop_front();
         return value;
@@ -35,22 +43,67 @@ struct MockSerial {
 
 extern MockSerial Serial, Serial1;
 
-enum {
+enum DXLLibErrorCode_t {
     DXL_LIB_OK,
     DXL_LIB_ERROR_TIMEOUT,
     DXL_LIB_ERROR_CRC,
     DXL_LIB_ERROR_WRONG_PACKET,
     DXL_LIB_ERROR_PORT_WRITE,
-    DXL2_0_ERR_CRC_ERROR = 3,
-    DXL_INST_READ = 2,
-    DXL_INST_REBOOT = 8,
+    DXL_LIB_ERROR_BUFFER_OVERFLOW,
+    DXL_LIB_ERROR_LENGTH,
+    DXL_LIB_ERROR_INVAILD_ID,
+    DXL_LIB_PROCEEDING,
 };
 
-struct InfoToParseDXLPacket {
+enum {
+    DXL2_0_ERR_CRC_ERROR = 3,
+    DXL_INST_READ = 2,
+    DXL_INST_WRITE = 3,
+    DXL_INST_REBOOT = 8,
+    DXL_INST_STATUS = 0x55,
+};
+
+struct InfoToParseDXLPacket_t {
+    uint8_t header[4];
+    uint8_t header_cnt;
+    uint8_t reserved;
+    uint8_t inst_idx;
     uint8_t id;
     uint8_t err_idx;
     uint16_t recv_param_len;
+    uint16_t packet_len;
+    uint8_t* parameters;
+    uint16_t capacity;
+    uint8_t field;
+    uint8_t length;
 };
+
+inline DXLLibErrorCode_t begin_parse_dxl_packet(InfoToParseDXLPacket_t* packet, uint8_t,
+                                               uint8_t* parameters, uint16_t capacity) {
+    packet->parameters = parameters;
+    packet->capacity = capacity;
+    return DXL_LIB_OK;
+}
+
+inline DXLLibErrorCode_t parse_dxl_packet(InfoToParseDXLPacket_t* packet, uint8_t byte) {
+    // The simulator frames decoded fields. The board build uses the vendor wire parser.
+    switch (packet->field) {
+        case 0: packet->id = byte; break;
+        case 1: packet->err_idx = byte; break;
+        case 2: packet->length = byte; break;
+        case 3: packet->packet_len = byte; break;
+        default:
+            if (packet->recv_param_len == packet->length) {
+                packet->inst_idx = byte;
+                return byte == DXL_INST_STATUS ? DXL_LIB_OK : DXL_LIB_ERROR_CRC;
+            }
+            if (packet->recv_param_len > packet->capacity) return DXL_LIB_ERROR_BUFFER_OVERFLOW;
+            packet->parameters[packet->recv_param_len++] = byte;
+            break;
+    }
+    ++packet->field;
+    return DXL_LIB_PROCEEDING;
+}
 
 struct Motor {
     std::map<uint16_t, int32_t> registers;
@@ -78,16 +131,15 @@ struct Dynamixel2Arduino {
     std::array<Motor, 6> motors;
     std::vector<Failure> failures;
     std::vector<Exchange> events;
-    int libError = DXL_LIB_OK;
+    DXLLibErrorCode_t libError = DXL_LIB_OK;
     uint8_t status = 0;
 
-    Dynamixel2Arduino(MockSerial&, int) {}
+    Dynamixel2Arduino(MockSerial& serial, int) : serial(serial) {}
     void begin(uint32_t) {}
     void setPortProtocolVersion(float) {}
-    int getLastLibErrCode() const { return libError; }
-    uint8_t getLastStatusPacketError() const { return status; }
+    DXLLibErrorCode_t getLastLibErrCode() const { return libError; }
 
-    std::string exchange(char direction, uint8_t id, uint16_t address, int32_t value, uint32_t timeout) {
+    std::string exchange(char direction, uint8_t id, uint16_t address, int32_t value) {
         libError = DXL_LIB_OK;
         status = 0;
         std::string result = "ok";
@@ -103,77 +155,76 @@ struct Dynamixel2Arduino {
         if (result == "crc") libError = DXL_LIB_ERROR_CRC;
         if (result == "instruction_crc") status = DXL2_0_ERR_CRC_ERROR;
         if (result == "alert") status = 0x80;
-        if (result == "alert_denied") status = 0x87;
-        if (result == "denied") status = 7;
+        if (result == "alert_denied" || result == "wrong_id_alert") status = 0x87;
+        if (result == "denied" || result == "wrong_id_denied") status = 7;
         events.push_back({direction, id, address, value, result, clockMs});
-        if (libError == DXL_LIB_ERROR_TIMEOUT) clockMs += timeout;
         return result;
     }
 
-    int32_t read(uint8_t id, uint16_t address, uint16_t size, uint8_t* response,
-                 uint16_t capacity, uint32_t timeout) {
-        if (size != registerSize(address) || capacity < size) return -1;
-        const int32_t value = motors.at(id-1).registers.at(address);
-        const auto result = exchange('r', id, address, value, timeout);
-        if (libError != DXL_LIB_OK) return -1;
-        if (result == "short") return 0;
-        for (uint16_t n = 0; n < size; ++n) response[n] = uint32_t(value) >> (8*n);
-        return size;
-    }
-
-    bool write(uint8_t id, uint16_t address, const uint8_t* request,
-               uint16_t size, uint32_t timeout) {
-        if (size != registerSize(address)) return false;
-        uint32_t decoded = 0;
-        for (uint16_t n = 0; n < size; ++n) decoded |= uint32_t(request[n]) << (8*n);
-        const auto value = static_cast<int32_t>(decoded);
-        const auto result = exchange('w', id, address, value, timeout);
-        if (result == "ok" || result == "lost" || result == "alert") {
-            auto& servo = motors.at(id-1);
-            servo.registers.at(address) = value;
-            if (address == 116 && servo.registers.at(64) != 0 && servo.follows) {
-                servo.registers.at(132) = value;
-            }
-        }
-        return libError == DXL_LIB_OK && (status == 0 || status == 0x80);
-    }
-
 protected:
+    void setLastLibErrCode(DXLLibErrorCode_t error) { libError = error; }
+
     bool txInstPacket(uint8_t id, uint8_t instruction, uint8_t* parameters, uint16_t size) {
-        instructionId = id;
-        instructionType = instruction;
-        if (instruction == DXL_INST_REBOOT) return size == 0;
-        if (instruction != DXL_INST_READ || size != 4) return false;
-        instructionAddress = parameters[0] | (uint16_t(parameters[1]) << 8);
-        instructionLength = parameters[2] | (uint16_t(parameters[3]) << 8);
+        if (instruction == DXL_INST_REBOOT && size == 0) {
+            frame(id, reboot(id), 0, 0);
+            return true;
+        }
+        if (size < 2) return false;
+        const uint16_t address = parameters[0] | (uint16_t(parameters[1]) << 8);
+        auto& servo = motors.at(id-1);
+        if (instruction == DXL_INST_READ && size == 4) {
+            const uint16_t width = parameters[2] | (uint16_t(parameters[3]) << 8);
+            if (width != registerSize(address)) return false;
+            const int32_t value = servo.registers.at(address);
+            const auto result = exchange('r', id, address, value);
+            const bool noData = result == "short" || (status & 0x7f);
+            frame(id, result, noData ? 0 : width, value);
+            return true;
+        }
+        if (instruction != DXL_INST_WRITE || size != registerSize(address) + 2) return false;
+        uint32_t decoded = 0;
+        for (uint16_t n = 2; n < size; ++n) decoded |= uint32_t(parameters[n]) << (8*(n-2));
+        const int32_t value = static_cast<int32_t>(decoded);
+        const auto result = exchange('w', id, address, value);
+        if (result == "ok" || result == "lost" || result == "alert") {
+            servo.registers.at(address) = value;
+            if (address == 116 && servo.registers.at(64) != 0 && servo.follows) servo.registers.at(132) = value;
+        }
+        frame(id, result, result == "extra" ? 1 : 0, 0);
         return true;
     }
 
-    const InfoToParseDXLPacket* rxStatusPacket(uint8_t* response, uint16_t capacity, uint32_t timeout) {
-        const auto id = instructionId;
-        const auto length = instructionType == DXL_INST_READ
-            ? read(id, instructionAddress, instructionLength, response, capacity, timeout)
-            : reboot(id, timeout);
-        if (length < 0) return nullptr;
-        const auto replyId = events.back().result == "wrong_id" ? uint8_t(id % 6 + 1) : id;
-        reply = {replyId, status, static_cast<uint16_t>(length)};
-        return &reply;
+private:
+    MockSerial& serial;
+
+    void frame(uint8_t id, const std::string& result, uint8_t length, int32_t value) {
+        serial.readWait = 0;
+        if (result == "timeout" || result == "lost") {
+            serial.readWait = 14;
+            return;
+        }
+        serial.input.push_back(result.rfind("wrong_id", 0) == 0 ? id % 6 + 1 : id);
+        serial.input.push_back(status);
+        serial.input.push_back(length);
+        uint8_t wireLength = 4 + length;
+        uint16_t previous = (DXL_INST_STATUS << 8) | status;
+        for (uint8_t n = 0; n < length; ++n) {
+            const uint8_t byte = uint32_t(value) >> (8*n);
+            if (previous == 0xffff && byte == 0xfd) ++wireLength;
+            previous = static_cast<uint16_t>((previous << 8) | byte);
+        }
+        serial.input.push_back(wireLength + (result == "wrong_wire_length" ? 1 : 0));
+        for (uint8_t n = 0; n < length; ++n) serial.input.push_back(uint32_t(value) >> (8*n));
+        if (result == "truncated") serial.readWait = 14;
+        else serial.input.push_back(result == "crc" ? 0xfe : DXL_INST_STATUS);
     }
 
-private:
-    uint8_t instructionId = 0;
-    uint8_t instructionType = 0;
-    uint16_t instructionAddress = 0;
-    uint16_t instructionLength = 0;
-    InfoToParseDXLPacket reply = {};
-
-    int32_t reboot(uint8_t id, uint32_t timeout) {
-        const auto result = exchange('b', id, 0, 0, timeout);
-        if (result != "ok" && result != "lost" && result != "alert") {
-            return libError == DXL_LIB_OK ? 0 : -1;
-        }
+    std::string reboot(uint8_t id) {
+        const auto result = exchange('b', id, 0, 0);
+        if (result != "ok" && result != "lost" && result != "alert") return result;
         auto& registers = motors.at(id-1).registers;
         registers.at(64) = 0;
+        registers.at(84) = 400;
         registers.at(100) = 885;
         registers.at(108) = 0;
         registers.at(112) = 0;
@@ -181,12 +232,12 @@ private:
         for (auto& failure : failures) {
             if (failure.id == id && failure.kind == "alert") failure.remaining = 0;
         }
-        return libError == DXL_LIB_OK ? 0 : -1;
+        return result;
     }
 
     static uint16_t registerSize(uint16_t address) {
         switch (address) {
-            case 0: case 100: return 2;
+            case 0: case 84: case 100: return 2;
             case 10: case 11: case 60: case 64: case 68: return 1;
             case 108: case 112: case 116: case 132: return 4;
             default: return 0;

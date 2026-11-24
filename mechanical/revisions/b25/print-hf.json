@@ -1,0 +1,411 @@
+{
+  "project": "R5-B25-P2S.3mf",
+  "project_sha256": "9d643f376a4946927d7fa368ced98c634b1a25edcf732555859aec52cccaea56",
+  "source_project_git_revision": "b19aada",
+  "source_hf_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
+  "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
+  "slicer": "Bambu Studio 02.09.01.70",
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "filament": "R5 B15 Bambu PETG HF 14 mm3/s @ P2S",
+  "process": "R5 B15 0.20 mm PETG HF @ P2S",
+  "bed": "Textured PEI Plate",
+  "layer_height_mm": 0.2,
+  "plates": 18,
+  "parts": 57,
+  "plate_sha256": {
+    "1": "33ebc8dfc898d2b84f0f8d26a7a4cf1522a330688db1807d638f55816f08a47d",
+    "2": "8eab9fedd158b0f2df8e8c0e06681d2dd3bdd7b7956117f9637981db1266c71a",
+    "3": "a0dafb23c1f45d2169d3cb847610f929c0fb295f412ce200028a8c7903060593",
+    "4": "946f5243cf75da384bdc092cccd2c7dc2fea08131194a1a8a7da08566947cc79",
+    "5": "19e7e11a01d9a2fba5322cb6b11fedcd625397480595d3cf59fb72e46bb515f0",
+    "6": "dd536e3df0db489dc2bf65352f8821cf4cc8eb53e119cd61dc75ae65d7bd173b",
+    "7": "7cc8f609ccfb4830c312c6d012ae60ccb327bb975f820f3bd7f24d4ac8e512a3",
+    "8": "9fe907f0dd31769a7a43c4eabf1072e25cc66a84dac6a669963e7e63497c6b14",
+    "9": "b91930bba537574da73a0f57949fdc094b4eeac749694f1551a707ac0ff0ad6b",
+    "10": "e44cbb38ba01ec907aec8e343cd1815b12bee8dfa7f7b3cafa04612755c9cb4f",
+    "11": "65fd87adc7adfcfb826b057d65ecea67970eca82718b6347e283dbc7ed49e72e",
+    "12": "84874f5e05c9579531b5520b49e3bd67d1657e43ccb6a2be97ed3a16b9e0557f",
+    "13": "2dbd3e56c448b2ab84d7354fcf91a3dac1de940d07751fe49e7f680d968be313",
+    "14": "66def781bd53d6dfca2b3b12723aeb6d58cf43d0ae48d2f09412bb0414e2d05d",
+    "15": "788090436b43d8a3dc12ac97744794a033cfd4a6a91a1baa449e0018f3a95dc3",
+    "16": "dbdc5d9276f289437a1e4d3e96f9e5fefb2a18cd5c64ec19385ce36395010ab5",
+    "17": "3509e3b492aab8581d1a9bde8d43db9718aed3a8c8d03f4cec015682243f6e41",
+    "18": "3abe1abf08edb1d5873abd4e697fd7ce80ac3dc03e07c1c6d855e3548b14b016"
+  },
+  "changed_archive_members": [
+    "3D/3dmodel.model",
+    "3D/Objects/object_7.model",
+    "Metadata/model_settings.config",
+    "Metadata/filament_sequence.json"
+  ],
+  "object_settings_changes": {
+    "14": "Front skull mesh statistics reflect the repaired triangle count.",
+    "90": "Left eyelid receives a two-layer raft with 6 mm first-layer expansion.",
+    "92": "Right eyelid receives a two-layer raft with 6 mm first-layer expansion."
+  },
+  "changed_placement": [
+    {
+      "plate": 7,
+      "part": "24_blink_rail_with_bearing_shoulders_1",
+      "first_layer_mm2": [
+        24.93,
+        1026.43
+      ]
+    },
+    {
+      "plate": 8,
+      "part": "ID5-keeper-B21",
+      "first_layer_mm2": [
+        7.17,
+        50.25
+      ]
+    },
+    {
+      "plate": 8,
+      "part": "23_right_short_lid_link-B21",
+      "first_layer_mm2": [
+        31.82,
+        236.77
+      ]
+    },
+    {
+      "plate": 8,
+      "part": "45_blink_shaft_spacer_right-B19",
+      "first_layer_mm2": [
+        18.12,
+        23.32
+      ]
+    },
+    {
+      "plate": 14,
+      "part": "12_eye_tilt_cradle-B23",
+      "first_layer_mm2": [
+        5.86,
+        103.4
+      ]
+    }
+  ],
+  "layout_checks": {
+    "section_height_above_model_lowest_z_mm": 0.1,
+    "lowest_z_mm": 0.0,
+    "model_bounds_violations": 0,
+    "parts_below_100_mm2_with_configured_outer_brim_at_least_6_mm": 19,
+    "co_plated_parts_below_10_mm2": 0,
+    "standalone_parts_below_10_mm2": [
+      {
+        "plate": 10,
+        "previous_plate": 10,
+        "part": "14_eyeball_1_1",
+        "first_layer_mm2": 8.67,
+        "outer_brim_mm": 6
+      },
+      {
+        "plate": 13,
+        "previous_plate": 13,
+        "part": "30_38_39_jaw_one_piece-H4-D4.15",
+        "first_layer_mm2": 0.74,
+        "outer_brim_mm": 8
+      },
+      {
+        "plate": 15,
+        "previous_plate": 8,
+        "part": "22_blink_drive_link-B21",
+        "first_layer_mm2": 9.69,
+        "outer_brim_mm": 6
+      },
+      {
+        "plate": 16,
+        "previous_plate": 9,
+        "part": "32_left_eyelid-B25",
+        "first_layer_mm2": 3.89,
+        "outer_brim_mm": 6
+      },
+      {
+        "plate": 17,
+        "previous_plate": 9,
+        "part": "32_right_eyelid-B21",
+        "first_layer_mm2": 3.89,
+        "outer_brim_mm": 6
+      },
+      {
+        "plate": 18,
+        "previous_plate": 10,
+        "part": "14_eyeball_2_1",
+        "first_layer_mm2": 8.67,
+        "outer_brim_mm": 6
+      }
+    ]
+  },
+  "verified_plate_slices": {
+    "1": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 31925,
+      "estimated_filament_g": 239.818,
+      "gcode_sha256": "57387c81c733f2adab8828b91b5cdcadbe62cda3387fe0fb8f4bf8237a19bad1"
+    },
+    "2": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 6006,
+      "estimated_filament_g": 55.676,
+      "gcode_sha256": "9b9627bee03a537450424fab348bbf06abdb83c10f6d477b64d2a83e293fefa4"
+    },
+    "3": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 2937,
+      "estimated_filament_g": 14.25,
+      "gcode_sha256": "842a2b8b3898887f44ada70a7bab057383bfa1af17fe08adfcc0eea83264ae64"
+    },
+    "4": {
+      "slice_source_project_sha256": "8d24df8cb6c5820a4a94a6f895247db9efd04508ffadc5740f90e906ae22b7bb",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 49366,
+      "estimated_filament_g": 215.883,
+      "gcode_sha256": "5b510e74041ade07e9193e8753530178f71933c20aa07adf004aaa60e73b0057"
+    },
+    "5": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 37794,
+      "estimated_filament_g": 161.308,
+      "gcode_sha256": "9a235efa8d8a5866d6bc80d016a8c0824f8672f76014c3c9156471678679c145"
+    },
+    "6": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 9,
+      "warning_count": 0,
+      "estimated_seconds": 32410,
+      "estimated_filament_g": 200.388,
+      "gcode_sha256": "729e132ada29cd10c70bb0a4bc6bcbd01fccea862d75af332f0a5a3c1e4ea675"
+    },
+    "7": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 8,
+      "warning_count": 0,
+      "estimated_seconds": 21830,
+      "estimated_filament_g": 115.927,
+      "gcode_sha256": "36208d93a624a840afc2aa2a5f596fdf0157f56612b12fd9bbe115037a6166cf"
+    },
+    "8": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 14,
+      "warning_count": 0,
+      "estimated_seconds": 10897,
+      "estimated_filament_g": 45.153,
+      "gcode_sha256": "25f15a7d0a16ad26544125c258e6fc5655f52ff7d66e381b1d7acac325c71b1d"
+    },
+    "9": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 5,
+      "warning_count": 0,
+      "estimated_seconds": 4562,
+      "estimated_filament_g": 20.702,
+      "gcode_sha256": "fa7036481a7296114a381fa9100c56d2819ba0d08784fe238342a0e8624e8481"
+    },
+    "10": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 1703,
+      "estimated_filament_g": 3.749,
+      "gcode_sha256": "483b8a4490f2d698576cd3074fdf587c98dcff070b97c2fac152845701885592",
+      "first_layer_brim_toolpath_present": true
+    },
+    "11": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 5934,
+      "estimated_filament_g": 33.64,
+      "gcode_sha256": "968fff266d654f13f0e9234b321304429c6dd45b89be4c7625c488e11d862f74"
+    },
+    "12": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 4,
+      "warning_count": 0,
+      "estimated_seconds": 19685,
+      "estimated_filament_g": 96.944,
+      "gcode_sha256": "ee3179b32d3147bfbf3c02f17ca2389a480f0576b6bce615b3eddc46cc933bd3"
+    },
+    "13": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 10538,
+      "estimated_filament_g": 52.155,
+      "gcode_sha256": "d5ba5f6af06c779346ae6338aaa22e1e3fa41213240df9785bef3642eb0967ed"
+    },
+    "14": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 3428,
+      "estimated_filament_g": 9.478,
+      "gcode_sha256": "6b56ece4b971dbfaa106360772a61a0b96fdea0379f05460b5a8fa21dc2178a0"
+    },
+    "15": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 805,
+      "estimated_filament_g": 0.783,
+      "gcode_sha256": "e5b72f1ecad34d34ea9109ddfcdf85e343d907205eba4b31786c532bf803013f",
+      "first_layer_brim_toolpath_present": true
+    },
+    "16": {
+      "slice_source_project_sha256": "9d643f376a4946927d7fa368ced98c634b1a25edcf732555859aec52cccaea56",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 2201,
+      "estimated_filament_g": 4.314,
+      "gcode_sha256": "f2b07234a48166f0d850eda51e485946e8becdf70bc7bac0bfd270d06f331c17",
+      "raft_layer_z_mm": [
+        0.2,
+        0.5
+      ],
+      "first_model_wall_z_mm": 0.8
+    },
+    "17": {
+      "slice_source_project_sha256": "9d643f376a4946927d7fa368ced98c634b1a25edcf732555859aec52cccaea56",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 2272,
+      "estimated_filament_g": 4.362,
+      "gcode_sha256": "4be75d7ecc01ac9505a8f1f3985466f58b2a7db73396d5b529bdf218ee00e8b9",
+      "raft_layer_z_mm": [
+        0.2,
+        0.5
+      ],
+      "first_model_wall_z_mm": 0.8
+    },
+    "18": {
+      "slice_source_project_sha256": "17f2411512356191a84c6d965166d277cfab30b9165608e20c8f998d3b01c1ed",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 1703,
+      "estimated_filament_g": 3.75,
+      "gcode_sha256": "40ae1dd9a069fc17e6dc711489635e4f50bddd357c627796da9e9d383bb8a56c",
+      "first_layer_brim_toolpath_present": true
+    }
+  },
+  "estimated_seconds_total": 245996,
+  "estimated_filament_g_total": 1278.28,
+  "reproduction": {
+    "input": "git show b19aada:mechanical/revisions/b25/R5-B25-P2S.3mf > baseline.3mf",
+    "layout": "python mechanical/prepare_b25_print.py --isolate --front-model object_7.model baseline.3mf R5-B25-P2S.3mf",
+    "slice_all": "bambu-studio --debug 1 --slice 0 --outputdir sliced R5-B25-P2S.3mf"
+  },
+  "slice_input_match": "The all-plate baseline and focused runs match the final archive by per-plate signature and embedded profile. The focused runs cover the final front skull and both eyelid rafts.",
+  "slicer_log_note": "All returned plate warning fields were empty. CLI logs included the stock AMS unload T65535 sentinel and internal FillFloatingConcentric messages.",
+  "physical_checks": "First-layer adhesion, support removal, drilled fit and blink operation remain bench checks P01, P03 and P08.",
+  "front_skull_mesh_reproduction": "mechanical/build_b25_front_shell.py",
+  "front_skull_mesh_evidence": "front-shell-sync.json",
+  "toolpath_witness": {
+    "raster_pitch_mm": 0.2,
+    "method": "Screen connected model extrusion regions against the layer below and nearby support, with the existing 5-by-5 elliptical raster dilation. Inspect the G-code features at the flagged coordinates.",
+    "plate_4": {
+      "model_layers": 523,
+      "thin_non_gap_extrusion_path_mm_below_0_3_mm_width": 106.157,
+      "new_candidates_after_mesh_repair": 0,
+      "same_before_and_after_candidates": [
+        {
+          "position_xyz_mm": [
+            151.0,
+            85.4,
+            17.6
+          ],
+          "raster_area_mm2": 0.2
+        },
+        {
+          "position_xyz_mm": [
+            163.2,
+            112.9,
+            24.6
+          ],
+          "raster_area_mm2": 0.32
+        },
+        {
+          "position_xyz_mm": [
+            27.6,
+            108.9,
+            28.4
+          ],
+          "raster_area_mm2": 0.32
+        },
+        {
+          "position_xyz_mm": [
+            163.1,
+            131.0,
+            31.8
+          ],
+          "raster_area_mm2": 0.32
+        },
+        {
+          "position_xyz_mm": [
+            142.2,
+            133.6,
+            76.2
+          ],
+          "raster_area_mm2": 0.44
+        },
+        {
+          "position_xyz_mm": [
+            136.2,
+            133.6,
+            79.2
+          ],
+          "raster_area_mm2": 0.44
+        }
+      ]
+    },
+    "eyelids": {
+      "16": {
+        "candidate_xy_mm": [
+          130.7,
+          115.8
+        ],
+        "candidate_area_mm2": 0.32,
+        "candidate_z_without_raft_mm": 22.6,
+        "candidate_z_with_raft_mm": 23.2,
+        "local_overhang_wall_move_mm": 0.1042
+      },
+      "17": {
+        "candidate_xy_mm": [
+          128.9,
+          115.8
+        ],
+        "candidate_area_mm2": 0.32,
+        "candidate_z_without_raft_mm": 22.6,
+        "candidate_z_with_raft_mm": 23.2,
+        "local_overhang_wall_move_mm": 0.1042
+      }
+    },
+    "other_standalone_plate_candidates": {
+      "10": 0,
+      "15": 0,
+      "18": 0
+    },
+    "interpretation": "The retained candidates are short outer-wall or overhang-wall paths in the prior toolpaths. Bed adhesion and the condition of the printed shell and eyelids remain physical checks."
+  },
+  "mesh_checks": {
+    "method": "Attached audit mesh checker with coordinate-merged vertices, supplemented by unrounded and float32 area checks on the inherited near-zero facets.",
+    "watertight_single_body_meshes": 57,
+    "open_edges": 0,
+    "nonmanifold_edges": 0,
+    "face_areas_below_1e_10_mm2": 4,
+    "inherited_small_facets": {
+      "part": "09_head_frame-B25",
+      "mesh_payload_sha256": "3352dd5de47bb2073fc00859233a1d3d68ed7d5d63be4a60710f71e281526434",
+      "minimum_double_precision_face_area_mm2": 2.3852973385493247e-12,
+      "true_zero_area_faces_in_double_and_float32_import": 0
+    }
+  }
+}

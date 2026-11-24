@@ -1,0 +1,542 @@
+{
+  "stationary_limit_mm": 0.1,
+  "scope": "Seated V5 trial. Directed depth witnesses measure Euclidean inward distance from a physical surface point of the intruding solid to the receiving solid boundary. Each reported depth is a lower bound of the maximum within the allowed input envelope.",
+  "dimensions_applied_fraction": 0.95,
+  "maximum_fitted_receiver_diametral_clearance_mm": 0.06,
+  "warp_slope_mm_per_mm": 0.002,
+  "cases": {
+    "Jaw_36_left_jaw_servo_stay": {
+      "full_warp_height_mm": 0.08,
+      "warp_footprint_radius_mm": 40.0,
+      "play_enabled": true,
+      "play_endpoint_errors_mm": [
+        0.028594188044923453,
+        0.028594138583308195,
+        0.028525232752182775,
+        0.02679636249171759,
+        0.014370329557272313,
+        0.028508768147759437
+      ],
+      "witness_solid_overlap_mm3": 0.18462608608137693,
+      "directed_sdf_depth_lower_mm": {
+        "stay_into_shell": 0.12647453857085966,
+        "shell_into_stay": 0.12653144884158773
+      },
+      "depth_world_points": {
+        "stay_into_shell": [
+          -61.8497177810743,
+          -18.264201321909894,
+          110.2618517929257
+        ],
+        "shell_into_stay": [
+          -61.54027253576222,
+          -18.39062026017009,
+          110.31255737304687
+        ]
+      },
+      "source_surface_residual_mm": {
+        "stay_into_shell": 3.552713678800501e-15,
+        "shell_into_stay": 3.552713678800501e-15
+      },
+      "warp_center_world_xz_mm": [
+        -61.0631103515625,
+        108.40255737304688
+      ],
+      "applied_shell_size_offset_world_mm": [
+        -0.19,
+        -0.095,
+        -0.19
+      ],
+      "applied_stay_size_offset_world_mm": [
+        0.095,
+        0.19,
+        0.19
+      ],
+      "play_transform_stay_matrix_3x4": [
+        [
+          0.9999999611861329,
+          8.933444788164298e-05,
+          -0.00026390734964081697,
+          0.02904905151435954
+        ],
+        [
+          -8.860210426483599e-05,
+          0.9999961493274967,
+          0.0027737122861167815,
+          -0.26566970235980936
+        ],
+        [
+          0.00026415412147570504,
+          -0.0027736887957117724,
+          0.999996118428999,
+          -0.06407298394186967
+        ]
+      ],
+      "shell_extent_changes_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions_only_stay_extent_changes_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vertex_count_of_intersection": 59
+    },
+    "Jaw_37_right_jaw_bearing_stay": {
+      "full_warp_height_mm": 0.08,
+      "warp_footprint_radius_mm": 40.0,
+      "play_enabled": true,
+      "play_endpoint_errors_mm": [
+        0.0254511898531017,
+        0.028597008033755093,
+        0.028096012090139427,
+        0.02862658606224603,
+        0.009343423631607442,
+        0.028484971896294974
+      ],
+      "witness_solid_overlap_mm3": 0.06550521297729647,
+      "directed_sdf_depth_lower_mm": {
+        "stay_into_shell": 0.11776942811843066,
+        "shell_into_stay": 0.1173353542573867
+      },
+      "depth_world_points": {
+        "stay_into_shell": [
+          64.24240090120074,
+          -5.774141853317868,
+          101.43837269661428
+        ],
+        "shell_into_stay": [
+          64.55502421079055,
+          -5.89146364809915,
+          101.44388631441886
+        ]
+      },
+      "source_surface_residual_mm": {
+        "stay_into_shell": 0.0,
+        "shell_into_stay": 8.881784197001252e-16
+      },
+      "warp_center_world_xz_mm": [
+        63.285,
+        101.97938262939454
+      ],
+      "applied_shell_size_offset_world_mm": [
+        -0.19,
+        -0.095,
+        0.19
+      ],
+      "applied_stay_size_offset_world_mm": [
+        0.095,
+        0.19,
+        -0.19
+      ],
+      "play_transform_stay_matrix_3x4": [
+        [
+          0.9999998688848126,
+          -0.00011227686165530129,
+          0.0004996241225172542,
+          -0.05391878714125907
+        ],
+        [
+          0.0001141529319931464,
+          0.9999929377361749,
+          -0.0037565205819614493,
+          0.4094875631805659
+        ],
+        [
+          -0.0004991988236982015,
+          0.0037565771229830292,
+          0.9999928194386465,
+          0.06823637307161334
+        ]
+      ],
+      "shell_extent_changes_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "dimensions_only_stay_extent_changes_mm": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "vertex_count_of_intersection": 42
+    }
+  },
+  "candidate_cad_sha256": "a7c3f5e1eaf81deb489ed4edbfabbc0ed9886f78ae231738e3342bb0b4f90dc1",
+  "source_cad_sha256": "43f705130effe1ed6099c4919f6264a4c6df4b730f0e39361a65af3431d0544d",
+  "review_fragment_sha256": "ae5add573ef9245f048a2669f79292edc5d2eceb03ae2251c8729c0e66c1442b",
+  "source_commit": "1e1ca3eed0108011502fed1bab915d2fa4fd881a",
+  "trial_key": "stay_corners_trial_5",
+  "moving_yoke_witness": {
+    "required_mm": 0.3,
+    "angle_deg": 3.69140625,
+    "native_point_pair_mm": [
+      [
+        51.033423856427646,
+        -9.31738108317721,
+        105.81436098846378
+      ],
+      [
+        51.033423856427646,
+        -9.542396881524239,
+        105.67219480379322
+      ]
+    ],
+    "native_point_gap_upper_bound_mm": 0.26616411022061864,
+    "tessellated_min_mm": 0.2701179652779817,
+    "native_yoke_refinement_mm": 0.003954183293902606,
+    "extent_change_yoke_stay_mm": [
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "directions": {
+      "yoke": [
+        -0.19,
+        -0.095,
+        -0.19
+      ],
+      "stay_in_part_frame": [
+        0.095,
+        0.19,
+        0.19
+      ]
+    }
+  },
+  "shell_mating_surface_check": {
+    "Jaw_36_left_jaw_servo_stay": {
+      "Part019": {
+        "nominal_gap_mm": 0.1583104148893258,
+        "warped_gap_mm": 0.1583104148893258,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          58.1893675153769,
+          -1.8371870121991485e-05,
+          105.44168806029779
+        ]
+      },
+      "Part024": {
+        "nominal_gap_mm": 0.5716048137509586,
+        "warped_gap_mm": 0.5716048137509586,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          61.01987546990196,
+          -41.09703177554776,
+          115.04700477847366
+        ]
+      },
+      "Part025": {
+        "nominal_gap_mm": 0.279998779296875,
+        "warped_gap_mm": 0.279998779296875,
+        "warp_at_shell_nominal_closest_mm": 0.06701713207574835,
+        "shell_nominal_closest_world_mm": [
+          -64.52000427246094,
+          -41.051605224609375,
+          113.89697265625
+        ]
+      },
+      "Part027": {
+        "nominal_gap_mm": 0.279998779296875,
+        "warped_gap_mm": 0.279998779296875,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          64.52000427246094,
+          -42.69182614334609,
+          114.93994903564453
+        ]
+      },
+      "Part065": {
+        "nominal_gap_mm": 0.0,
+        "warped_gap_mm": 0.0,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -11.265488278950043,
+          -55.50000000379745,
+          69.11778037859285
+        ]
+      },
+      "Part066": {
+        "nominal_gap_mm": 0.5302099259504123,
+        "warped_gap_mm": 0.5302099259504123,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          19.313810384500027,
+          -57.336355210262624,
+          70.53635407928594
+        ]
+      },
+      "Part074": {
+        "nominal_gap_mm": 0.5594729353325195,
+        "warped_gap_mm": 0.5594729353325195,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          67.82306671142578,
+          21.523714065551758,
+          166.26089477539062
+        ]
+      },
+      "Part080": {
+        "nominal_gap_mm": 0.5245591173051946,
+        "warped_gap_mm": 0.5245591173051946,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -11.239821909854005,
+          -68.27625515645647,
+          96.70722812412495
+        ]
+      },
+      "JawExteriorScrewLeft": {
+        "nominal_gap_mm": 1.9231822812854478,
+        "warped_gap_mm": 1.8981636397357475,
+        "warp_at_shell_nominal_closest_mm": 0.05137374148416027,
+        "shell_nominal_closest_world_mm": [
+          -72.19999694824219,
+          -30.177175521850586,
+          99.41170501708984
+        ]
+      },
+      "JawExteriorScrewRight": {
+        "nominal_gap_mm": 1.5333014282007795,
+        "warped_gap_mm": 1.5333014282007795,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          62.466579365793855,
+          -5.71999979019165,
+          103.42617991390009
+        ]
+      },
+      "JawAntiRockScrew": {
+        "nominal_gap_mm": 1.200164794921875,
+        "warped_gap_mm": 1.200164794921875,
+        "warp_at_shell_nominal_closest_mm": 0.06619404532203887,
+        "shell_nominal_closest_world_mm": [
+          -65.9000015258789,
+          -5.756797068472482,
+          103.4775619506836
+        ]
+      },
+      "JawExteriorInsertLeft": {
+        "nominal_gap_mm": 2.4886182089865394,
+        "warped_gap_mm": 2.464199746996094,
+        "warp_at_shell_nominal_closest_mm": 0.05137374148416027,
+        "shell_nominal_closest_world_mm": [
+          -72.19999694824219,
+          -30.177175521850586,
+          99.41170501708984
+        ]
+      },
+      "JawExteriorInsertRight": {
+        "nominal_gap_mm": 2.2987047947726498,
+        "warped_gap_mm": 2.2987047947726498,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          70.60748291015625,
+          -10.050003051757812,
+          99.30000305175781
+        ]
+      },
+      "JawAntiRockInsert": {
+        "nominal_gap_mm": 3.1753268017037914,
+        "warped_gap_mm": 3.239666150921703,
+        "warp_at_shell_nominal_closest_mm": 0.06617695417812301,
+        "shell_nominal_closest_world_mm": [
+          -65.9000015258789,
+          7.050000190734863,
+          103.46559143066406
+        ]
+      },
+      "RearSkullScrewLeft": {
+        "nominal_gap_mm": 3.402226396504831,
+        "warped_gap_mm": 3.442528853076825,
+        "warp_at_shell_nominal_closest_mm": 0.040309435723670024,
+        "shell_nominal_closest_world_mm": [
+          -78.59265093057212,
+          21.51808557600148,
+          117.70580574295647
+        ]
+      },
+      "RearSkullScrewRight": {
+        "nominal_gap_mm": 3.4079544569619373,
+        "warped_gap_mm": 3.4079544569619373,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          77.43692210196441,
+          21.512376729142503,
+          117.77985059699728
+        ]
+      }
+    },
+    "Jaw_37_right_jaw_bearing_stay": {
+      "Part019": {
+        "nominal_gap_mm": 0.1583104148893258,
+        "warped_gap_mm": 0.15831321091352726,
+        "warp_at_shell_nominal_closest_mm": 0.06767879400136362,
+        "shell_nominal_closest_world_mm": [
+          58.1893675153769,
+          -1.8371870121991485e-05,
+          105.44168806029779
+        ]
+      },
+      "Part024": {
+        "nominal_gap_mm": 0.5716048137509586,
+        "warped_gap_mm": 0.5823432628089344,
+        "warp_at_shell_nominal_closest_mm": 0.05347502778376911,
+        "shell_nominal_closest_world_mm": [
+          61.01987546990196,
+          -41.09703177554776,
+          115.04700477847366
+        ]
+      },
+      "Part025": {
+        "nominal_gap_mm": 0.279998779296875,
+        "warped_gap_mm": 0.279998779296875,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -64.52000427246094,
+          -41.051605224609375,
+          113.89697265625
+        ]
+      },
+      "Part027": {
+        "nominal_gap_mm": 0.279998779296875,
+        "warped_gap_mm": 0.279998779296875,
+        "warp_at_shell_nominal_closest_mm": 0.053961450338099654,
+        "shell_nominal_closest_world_mm": [
+          64.52000427246094,
+          -42.69182614334609,
+          114.93994903564453
+        ]
+      },
+      "Part065": {
+        "nominal_gap_mm": 0.0,
+        "warped_gap_mm": 0.0,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -11.265488278950043,
+          -55.50000000379745,
+          69.11778037859285
+        ]
+      },
+      "Part066": {
+        "nominal_gap_mm": 0.5302099259504123,
+        "warped_gap_mm": 0.5302099259504123,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          19.313810384500027,
+          -57.336355210262624,
+          70.53635407928594
+        ]
+      },
+      "Part074": {
+        "nominal_gap_mm": 0.5594729353325195,
+        "warped_gap_mm": 0.5594729353325195,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          67.82306671142578,
+          21.523714065551758,
+          166.26089477539062
+        ]
+      },
+      "Part080": {
+        "nominal_gap_mm": 0.5245591173051946,
+        "warped_gap_mm": 0.5245591173051946,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -11.239821909854005,
+          -68.27625515645647,
+          96.70722812412495
+        ]
+      },
+      "JawExteriorScrewLeft": {
+        "nominal_gap_mm": 1.9231822812854478,
+        "warped_gap_mm": 1.9231822812854478,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -72.19999694824219,
+          -30.177175521850586,
+          99.41170501708984
+        ]
+      },
+      "JawExteriorScrewRight": {
+        "nominal_gap_mm": 1.5333014282007795,
+        "warped_gap_mm": 1.3673726042930587,
+        "warp_at_shell_nominal_closest_mm": 0.07667552427174028,
+        "shell_nominal_closest_world_mm": [
+          62.466579365793855,
+          -5.71999979019165,
+          103.42617991390009
+        ]
+      },
+      "JawAntiRockScrew": {
+        "nominal_gap_mm": 1.200164794921875,
+        "warped_gap_mm": 1.200164794921875,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -65.9000015258789,
+          -5.756797068472482,
+          103.4775619506836
+        ]
+      },
+      "JawExteriorInsertLeft": {
+        "nominal_gap_mm": 2.4886182089865394,
+        "warped_gap_mm": 2.4886182089865394,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -72.19999694824219,
+          -30.177175521850586,
+          99.41170501708984
+        ]
+      },
+      "JawExteriorInsertRight": {
+        "nominal_gap_mm": 2.2987047947726498,
+        "warped_gap_mm": 2.3169619670833006,
+        "warp_at_shell_nominal_closest_mm": 0.06440540723319943,
+        "shell_nominal_closest_world_mm": [
+          70.60748291015625,
+          -10.050003051757812,
+          99.30000305175781
+        ]
+      },
+      "JawAntiRockInsert": {
+        "nominal_gap_mm": 3.1753268017037914,
+        "warped_gap_mm": 3.1753268017037914,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -65.9000015258789,
+          7.050000190734863,
+          103.46559143066406
+        ]
+      },
+      "RearSkullScrewLeft": {
+        "nominal_gap_mm": 3.402226396504831,
+        "warped_gap_mm": 3.402226396504831,
+        "warp_at_shell_nominal_closest_mm": 0.0,
+        "shell_nominal_closest_world_mm": [
+          -78.59265093057212,
+          21.51808557600148,
+          117.70580574295647
+        ]
+      },
+      "RearSkullScrewRight": {
+        "nominal_gap_mm": 3.4079544569619373,
+        "warped_gap_mm": 3.445521262626787,
+        "warp_at_shell_nominal_closest_mm": 0.03757681354847049,
+        "shell_nominal_closest_world_mm": [
+          77.43692210196441,
+          21.512376729142503,
+          117.77985059699728
+        ]
+      }
+    }
+  },
+  "verdict": "blocked"
+}

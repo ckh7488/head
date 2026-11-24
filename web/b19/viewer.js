@@ -18,11 +18,15 @@ const stops = data.stops ?? [];
 const assemblyViews = data.assemblyViews ?? [];
 const wireStates = data.wireStates ?? [];
 const revision = data.revision ?? "B19";
+const illustration = data.illustration === true;
 const mainSteps = data.steps.filter(step => !step.continued).length;
 const blockedSteps = data.steps.filter(step => step.issues.length).length;
 document.title = `R5 ${revision} 조립 순서`;
 el("revision").textContent = revision;
-el("step-count").textContent = `CAD 조립 검사 ${data.steps.length}단계` + (blockedSteps ? ` · 확인 필요 ${blockedSteps}단계` : "");
+const statusText = `${illustration ? "CAD 조립 미리보기" : "CAD 조립 검사"} ${data.steps.length}단계`;
+el("step-count").textContent = statusText + (blockedSteps ? ` · 확인 필요 ${blockedSteps}단계` : "");
+if (illustration) el("tool-legend-label").textContent = "공구 위치 예시";
+el("overview-link").hidden = document.documentElement.dataset.hosted !== "b25";
 
 const renderer = new THREE.WebGLRenderer({ canvas: el("view"), antialias: true });
 renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -84,14 +88,14 @@ for (const step of steps) {
   for (const tool of (step.toolPaths ?? []).flat()) {
     if (toolNodes.has(tool.id)) continue;
     const node = gltf.scene.getObjectByName(tool.id);
-    if (!node) throw new Error(`Missing qualified tool model: ${tool.id}`);
+    if (!node) throw new Error(`Missing tool model: ${tool.id}`);
     node.visible = false;
     toolNodes.set(tool.id, { node, position: node.position.clone(), bounds: new THREE.Box3().setFromObject(node) });
   }
 }
 const hinge = new THREE.Vector3(0, -39, 119);
 const closed = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), Math.PI / 2);
-const state = { index: 0, t: 1, playing: true, last: 0, stop: null, wirePose: null };
+const state = { index: 0, t: 1, playing: true, last: 0, stop: null, wirePose: null, part: null };
 const MOVE_SECONDS = 1.3;
 const HOLD_SECONDS = .9;
 const exterior = new Set(["Part073", "Part074", ...Object.keys(data.parts).filter(name => data.parts[name].guardPanel)]);
@@ -126,6 +130,7 @@ function stopPoint(step) {
 }
 
 function toolLabel(tool) {
+  if (tool.kind === "illustration") return tool.nut;
   if (tool.kind === "driver-axis") return `육각렌치 접근 범위 · ${tool.nut}`;
   const name = tool.kind === "socket" ? "소켓" : "스패너";
   return `${name} ${tool.size === 3 ? "5.5" : "4"} mm · ${tool.nut}`;
@@ -220,6 +225,7 @@ function show(step) {
       tint(entry, 0x1e6bff, .5);
     }
   }
+  if (state.part) tint(nodes.get(state.part), 0xe99036, .7);
   for (const id of lids) {
     const entry = nodes.get(id);
     if (!entry) continue;
@@ -285,6 +291,13 @@ function place(step, t) {
 }
 
 function frame(step) {
+  if (state.part) {
+    const center = partCenter(step, state.part);
+    const radius = Math.max(data.parts[state.part].size * .55, 10);
+    const dir = new THREE.Vector3(Math.sign(center.x || 1) * .7, center.y > 25 ? 1 : -1, .55);
+    moveCamera(center, center.clone().add(dir.setLength(radius * 3.8)));
+    return;
+  }
   if (state.stop) {
     const center = stopPoint(step);
     const side = Math.sign(center.x || 1);
@@ -363,7 +376,7 @@ function updateNotes(step) {
     const { slide, lower } = step.insertionClearance;
     notes.push(`CAD 계산상 최소 여유 · 옆으로 밀 때 ${slide.continuous_lower_bound_mm} mm · 자리 맞출 때 ${lower.continuous_lower_bound_mm} mm`);
   }
-  if (step.blinkDegrees !== undefined) notes.push(`검사한 눈꺼풀 위치 · ${step.blinkDegrees}°`);
+  if (step.blinkDegrees !== undefined) notes.push(`${illustration ? "눈꺼풀 조립 자세" : "검사한 눈꺼풀 위치"} · ${step.blinkDegrees}°`);
   if (state.stop?.firstContactDegrees !== undefined)
     notes.push(`CAD에서 처음 닿는 각도 · ${state.stop.firstContactDegrees.toFixed(3)}°`);
   if (state.wirePose) {
@@ -386,6 +399,7 @@ function go(index, stop = null) {
   state.index = Math.max(0, Math.min(steps.length - 1, index));
   state.stop = stop;
   state.wirePose = null;
+  state.part = null;
   const step = steps[state.index];
   const complete = step.id === "final-view";
   if (complete) el("hide-exterior").checked = false;
@@ -407,7 +421,7 @@ function go(index, stop = null) {
     const rowBox = active.getBoundingClientRect();
     list.scrollTop += rowBox.top < listBox.top ? rowBox.top - listBox.top : Math.max(0, rowBox.bottom - listBox.bottom);
   }
-  el("meta").innerHTML = (complete ? `CAD 조립 검사 ${data.steps.length}단계` : `<b>${step.label}</b> / ${mainSteps} · ${step.section}`) +
+  el("meta").innerHTML = (complete ? statusText : `<b>${step.label}</b> / ${mainSteps} · ${step.section}`) +
     (step.bench ? '<span class="bench">작업대</span>' : "");
   el("title").textContent = complete ? step.section : step.continued ? `${step.label} 이어서` : `${step.label}단계`;
   el("text").textContent = step.text;
@@ -417,8 +431,11 @@ function go(index, stop = null) {
     Object.assign(document.createElement("li"), { textContent: issue })));
   const choices = step.toolPaths ?? [];
   el("tool-view").hidden = !choices.length;
-  el("tool-select").replaceChildren(new Option("공구 경로 숨기기", ""), ...choices.map((tools, i) =>
+  el("tool-select").replaceChildren(new Option(illustration ? "공구 숨기기" : "공구 경로 숨기기", ""), ...choices.map((tools, i) =>
     new Option(tools.map(toolLabel).join(" → "), String(i))));
+  const parts = complete ? data.inspectionParts ?? [] : [...new Set(step.moves.flatMap(move => move.ids))];
+  el("part-view").hidden = !illustration || !parts.length;
+  el("part-select").replaceChildren(new Option("단계 전체 보기", ""), ...parts.map(id => new Option(data.parts[id].label, id)));
   if (!step.moves.length && choices.length) el("tool-select").selectedIndex = 1;
   show(step);
   state.t = state.playing ? 0 : 1;
@@ -495,7 +512,7 @@ el("tool-select").onchange = () => {
 };
 const inspectionViews = [...assemblyViews, ...stops];
 el("stop-view").hidden = !inspectionViews.length;
-if (assemblyViews.length) el("inspection-label").textContent = "검사 위치";
+if (assemblyViews.length) el("inspection-label").textContent = illustration ? "주요 조립 위치" : "검사 위치";
 el("stop-select").append(...inspectionViews.map(view => new Option(view.label, view.id)));
 el("stop-select").onchange = event => {
   const view = inspectionViews.find(location => location.id === event.target.value);
@@ -522,6 +539,20 @@ el("wire-select").onchange = event => {
   updateNotes(step);
   show(step);
   place(step, 1);
+};
+el("part-select").onchange = event => {
+  const step = steps[state.index];
+  state.part = event.target.value || null;
+  if (state.part) {
+    el("tool-select").value = "";
+    if (step.id === "final-view") el("hide-exterior").checked = !exterior.has(state.part) && !baseCovers.has(state.part);
+    state.playing = false;
+    el("play").textContent = "▶︎";
+    state.t = 1;
+  }
+  show(step);
+  place(step, Math.min(state.t, 1));
+  frame(step);
 };
 addEventListener("keydown", event => {
   if (event.target instanceof Element && event.target.closest("button, input, select")) return;

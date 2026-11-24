@@ -1,0 +1,160 @@
+{
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "source_project_sha256": "6ca6f4a28ea8b819e6a7613d409aba8aef61327c4c31ecac80649872b135fd73",
+  "scratch_method": "Original left frame bore extended only on the same axis; original left fastener replaced; shell entered without both screws.",
+  "seating": {
+    "screw_head_seat_abs_x_mm": 77.65,
+    "nut_outer_face_abs_x_mm": 64.61,
+    "nut_height_range_mm": [
+      2.15,
+      2.4
+    ],
+    "nut_pitch_mm": 0.5,
+    "print_XY_axial_allowance_mm": 0.4,
+    "max_underhead_to_nut_exit_mm": 15.84,
+    "max_allowed_incomplete_tip_mm": 1.0,
+    "stock_lengths": [
+      {
+        "nominal_mm": 16.0,
+        "supplier_length_range_mm": [
+          15.65,
+          16.35
+        ],
+        "worst_full_thread_outside_nut_mm": -1.19
+      },
+      {
+        "nominal_mm": 17.0,
+        "supplier_length_range_mm": [
+          16.65,
+          17.35
+        ],
+        "worst_full_thread_outside_nut_mm": -0.19
+      },
+      {
+        "nominal_mm": 18.0,
+        "supplier_length_range_mm": [
+          17.65,
+          18.35
+        ],
+        "worst_full_thread_outside_nut_mm": 0.81
+      }
+    ],
+    "left_selected_stock": "Bossard BN 3 item 1301683 M3 x 18",
+    "min_full_threads_past_nut_pitch_count": 1.62
+  },
+  "left_frame": {
+    "old_bore_floor_abs_x_mm": 61.3,
+    "new_bore_floor_abs_x_mm": 58.8,
+    "bore_diameter_mm": 3.52,
+    "removed_volume_mm3": 24.328493,
+    "verified_surrounding_stock_floor_and_radial_mm": 3.0,
+    "max_tip_including_axial_XY_variation_abs_x_mm": 58.9,
+    "min_floor_clearance_including_axial_XY_variation_mm": 0.1,
+    "old_to_worst_case_shank_collision_mm3": 19.301945,
+    "new_to_worst_case_shank_collision_mm3": 0.0
+  },
+  "left_screw_and_tool_sweep": {
+    "status": "pass",
+    "nut_entry_obstructions_mm3": {},
+    "tool_intersections_mm3": {
+      "screw_to_shell_mm3": 7.409140561058298e-06,
+      "driver_to_shell_mm3": 0.0
+    },
+    "nut_antirotation_overlap_mm3_at_15_deg": [
+      0.6351854798088264,
+      0.635185479809192
+    ],
+    "overlap_if_withdrawn_0.75_mm_with_screw_mm3": 12.094954330785841,
+    "screw_through_nut_mm": 5.709999999999994
+  },
+  "all_actors_min_x_mm": -95.0,
+  "L_key": {
+    "part": "Wera 950 05021015001",
+    "AF_mm": 2.5,
+    "legs_mm": [
+      56.0,
+      18.0
+    ]
+  },
+  "nearest_modeled_wire_to_worst_shank": {
+    "clearance_mm": 49.938244,
+    "actor": "HarnessWire014",
+    "label": "motor6-data  \u00b7  416.0 mm"
+  },
+  "rear_shell_sweep_mm": 68.0,
+  "rear_shell_removal_tool_free_intersections": [],
+  "qualification": "In-memory scratch CAD. Checked axial dimensional stack and the modeled screw/nut/tool path. Printed flatness, coaxial fit and actual parts were not measured.",
+  "left_head_seat_inner_relief": {
+    "stock_collar_max_diameter_mm": 3.6,
+    "stock_collar_max_length_mm": 0.51,
+    "coaxial_relief_diameter_mm": 3.9,
+    "coaxial_relief_depth_mm": 0.75,
+    "relief_with_hole_bias_and_axial_variation_mm": [
+      3.75,
+      0.55
+    ],
+    "annular_head_bearing_diameter_min_mm": 5.07,
+    "annular_head_seating_width_nominal_min_mm": 0.585,
+    "collar_intersection_mm3": 0.0,
+    "removed_volume_mm3": 1.658218
+  },
+  "final_cad_assembly_check": {
+    "status": "pass",
+    "cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
+    "bolt_radial_reserve_mm": 0.1,
+    "hex_driver_reach_mm": 37.0,
+    "rear_insertion_travel_mm": [
+      0.0,
+      68.0,
+      0.0
+    ],
+    "rear_insertion_sample_mm": 0.5,
+    "radial_face_relief_mm": 0.3499999999999943,
+    "stations": {
+      "left": {
+        "status": "pass",
+        "nut_entry_obstructions_mm3": {},
+        "tool_intersections_mm3": {
+          "screw_to_shell_mm3": 7.409138710683631e-06,
+          "driver_to_shell_mm3": 0.0
+        },
+        "nut_antirotation_overlap_mm3_at_15_deg": [
+          0.6351854798088264,
+          0.635185479809192
+        ],
+        "overlap_if_withdrawn_0.75_mm_with_screw_mm3": 12.09495769832471,
+        "screw_through_nut_mm": 4.959999999999994
+      },
+      "right": {
+        "status": "pass",
+        "nut_entry_obstructions_mm3": {},
+        "tool_intersections_mm3": {
+          "screw_to_shell_mm3": 3.344368272075183e-05,
+          "driver_to_shell_mm3": 0.0
+        },
+        "nut_antirotation_overlap_mm3_at_15_deg": [
+          0.6351854798092119,
+          0.6351854798093294
+        ],
+        "overlap_if_withdrawn_0.75_mm_with_screw_mm3": 9.639459177467797,
+        "screw_through_nut_mm": 5.310000000000002
+      }
+    },
+    "rear_insertion_collisions": []
+  },
+  "final_project_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
+  "changed_p2s_plates": [
+    {
+      "plate": 5,
+      "layers": 518,
+      "return_code": 0,
+      "slicer_warning": ""
+    },
+    {
+      "plate": 6,
+      "layers": 500,
+      "return_code": 0,
+      "slicer_warning": ""
+    }
+  ]
+}

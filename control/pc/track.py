@@ -13,7 +13,7 @@ MODEL_URL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/fac
 MODEL_HASH = '64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff'
 AXES = ('eye-yaw', 'eye-pitch', 'blink', 'neck-yaw', 'neck-pitch')
 JAW_MAX_DEGREES = 5.5
-LIMITS = ((-20., 20.), (-8., 8.), (0., 90.), (-60., 60.), (-15., 4.5))
+LIMITS = ((-15., 15.), (-8., 8.), (0., 90.), (-60., 60.), (-15., 4.5))
 RATES = (160., 105., 950., 36., 22.)
 ZERO = (0.,) * 5
 LOSS_HOLD_S = 2.5
@@ -90,7 +90,7 @@ class Planner:
         if self.neutral_feedback_at != feedback_at:
             sample_dt = clamp(feedback_at - self.neutral_feedback_at, 0., .15) if self.neutral_feedback_at is not None else 0.
             self.neutral_feedback_at = feedback_at
-            inside = all(abs(angle) <= NEUTRAL_TOLERANCE for angle in feedback)
+            inside = all(abs(angle) <= NEUTRAL_TOLERANCE for angle in feedback[3:5])
             if self.parked and not inside:
                 self.neutral_since = seconds - NEUTRAL_SETTLE_S
             self.neutral_reports = self.neutral_reports + 1 if inside else 0
@@ -201,7 +201,9 @@ class CameraAngles:
         self.hfov = hfov
         self.calibration = json.loads(calibration.read_text()) if calibration else None
 
-    def error(self,point,width,height):
+    def error(self, point, width, height, *, rotate_180=False):
+        if rotate_180:
+            point = (width-1-point[0], height-1-point[1])
         if self.calibration:
             import cv2
             import numpy as np
@@ -216,7 +218,8 @@ class CameraAngles:
         else:
             focal=(width/2)/math.tan(math.radians(self.hfov/2))
             x,y=(point[0]-(width-1)/2)/focal,(point[1]-(height-1)/2)/focal
-        return math.degrees(math.atan(x)),math.degrees(math.atan2(y,math.hypot(1,x)))
+        sign = -1 if rotate_180 else 1
+        return sign*math.degrees(math.atan(x)), sign*math.degrees(math.atan2(y,math.hypot(1,x)))
 
 
 class UsbController:
@@ -424,6 +427,8 @@ def run(args):
             while True:
                 ok,frame=capture.read()
                 if not ok:
+                    if is_live:
+                        raise RuntimeError('USB camera stopped delivering frames.')
                     break
                 if args.rotate_180:
                     frame=cv2.rotate(frame,cv2.ROTATE_180)
@@ -447,7 +452,7 @@ def run(args):
                     feedback=controller.pose
                 else:
                     feedback=logical_pose
-                err=None if point is None else camera.error(point,width,height)
+                err = None if point is None else camera.error(point, width, height, rotate_180=args.rotate_180)
                 decision=planner.step(err,feedback,elapsed,not args.no_blink,
                                       fixed_camera=not controller,target_changed=changed,
                                       feedback_at=controller.last_state if controller else None)

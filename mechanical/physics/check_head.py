@@ -51,15 +51,19 @@ MEASURE_GAP = {
 }
 
 
-def sweep_angles(layout):
+def sweep_angles(layout, jaw_limit=None, pitch_range=None):
     geometry = layout['motion_geometry']
     angles = list(ANGLES)
     stop = geometry.get('jaw_stop')
-    if stop is not None:
-        angles[-1] = tuple(np.linspace(0., float(stop['verified_clear_deg']), len(ANGLES[-1])))
+    if jaw_limit is None and stop is not None:
+        jaw_limit = float(stop['verified_clear_deg'])
+    if jaw_limit is not None:
+        angles[-1] = tuple(np.linspace(0., jaw_limit, len(ANGLES[-1])))
     pitch_stop = geometry.get('pitch_stop')
-    if pitch_stop is not None:
-        low, high = pitch_stop['powered_deg']
+    if pitch_range is None and pitch_stop is not None:
+        pitch_range = pitch_stop['powered_deg']
+    if pitch_range is not None:
+        low, high = pitch_range
         angles[0] = (low, *ANGLES[0][1:-1], high)
     return angles
 
@@ -133,9 +137,9 @@ def pose(kind, angles, layout):
     return np.eye(4)
 
 
-def sweep(directory):
+def sweep(directory, *, jaw_limit=None, pitch_range=None):
     layout = json.loads((directory/'cad_parts.json').read_text())
-    sampled_angles = sweep_angles(layout)
+    sampled_angles = sweep_angles(layout, jaw_limit, pitch_range)
     kinds = layout['world_motion']
     pairs = dict(PAIRS_BY_INTERFACE)
     if 'BallastTray' in kinds:
@@ -194,8 +198,10 @@ if __name__ == '__main__':
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('cad', type=Path)
     parser.add_argument('report', type=Path)
+    parser.add_argument('--jaw-limit', type=float)
+    parser.add_argument('--pitch-range', type=float, nargs=2, metavar=('LOW', 'HIGH'))
     args = parser.parse_args()
-    result = sweep(args.cad)
+    result = sweep(args.cad, jaw_limit=args.jaw_limit, pitch_range=args.pitch_range)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(result, indent=2))
     print(f"{result['pose_samples']} pose samples, {len(result['collisions'])} colliding pairs")

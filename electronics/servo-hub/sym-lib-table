@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "R5_Hub")(type "KiCad")(uri "${KIPRJMOD}/R5_Hub.kicad_sym")(options "")(descr "R5 servo hub symbols"))
+)

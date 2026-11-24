@@ -1,38 +1,35 @@
 # R5 로봇 헤드
 
-R5는 코에 달린 USB 카메라로 얼굴을 검출해 사람의 두 눈 사이를 따라보는 해골 로봇 헤드입니다. PC가 카메라 영상을 처리하고, OpenRB-150이 눈 좌우·상하, 눈꺼풀, 목 좌우·상하, 턱의 여섯 축을 구동합니다. ESP32-C3 기판은 2.4 GHz 안테나 실험용입니다.
+R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 움직인 뒤 목이 천천히 따라가는 **6축 해골 로봇**입니다. PC가 얼굴을 찾고 OpenRB-150이 모터 여섯 축을 제어합니다. 전시 모드에서는 눈을 깜빡이며, 턱은 별도 시연 모드에서 움직입니다.
 
-![목 배선 가림막을 끼운 R5 B18 시안의 정면](mechanical/revisions/b18/study/neck-cover-preview.jpg)
+![B25 조립 CAD에서 본 해골 로봇](web/assets/b25-motion/assembly-poster.webp)
 
-B18 목 가림막 시안입니다. [CAD 개정 이력](mechanical/revisions/) · [모델과 자료 출처](web/README.md#모델과-자료-출처)
+현재 제작 자료는 **B25 기구와 A5 서보 허브**를 기준으로 합니다. P2S 출력은 PETG HF **18판·57개**입니다. 완성품 조립과 구동에 필요한 P01–P08 실물 시험이 남아 있습니다. [B25 제작 자료](mechanical/revisions/b25/) · [검증 결과와 범위](mechanical/revisions/b25/alignment.md)
 
-## 디렉터리 구성
+## 제작 순서
 
-- [mechanical/](mechanical/README.md) · FreeCAD 조립본, P1S·P2S 출력판, 부품표, 기구 검증과 조립 순서
-- [electronics/](electronics/README.md) · KiCad 회로와 PCB, 발주 파일, 전원과 배선
-- [control/](control/README.md) · PC 얼굴 추적, OpenRB 펌웨어, 카메라와 모터 보정
-- [web/](web/README.md) · 3D 조립·구동·배선 뷰어, CAD 내보내기
-- [tests/](tests/) · 모터 보정, 펌웨어와 가상 USB 통신 시험. [실행법](control/README.md#하드웨어-없이-실행)
-- [spec/](spec/requirements.md) · B22 동작 장면, 조립과 실물 인수 검사
+| 순서 | 할 일 |
+| --- | --- |
+| 1. 출력 준비 | 핀·베어링·나사를 준비합니다. 한 번에 맡길 때는 **15번 링크 판**으로 바닥 접지를 확인한 뒤 **13번 턱 판**으로 큰 부품의 출력 상태를 확인합니다. [출력과 후가공](mechanical/revisions/b25/01-seoul-print.md) · [먼저 살 부품](mechanical/revisions/b25/02-order-before.md) |
+| 2. 건식 맞춤 | 전원과 접착제 없이 끼움과 공구 접근을 봅니다. 턱을 연 채 오른쪽 받침과 요크 사이에 0.30 mm 틈새 게이지가 통과하는지 확인합니다. [건식 맞춤](mechanical/revisions/b25/01-seoul-print.md#출력물-후가공과-건식-맞춤) · [치수 선택용 게이지](mechanical/revisions/b25/fit-gauge.md) |
+| 3. 모터·전장 구매 | 건식 맞춤을 마친 뒤 모터·카메라·A5 허브를 준비합니다. [시험 뒤 구매](mechanical/revisions/b25/03-order-after.md) · [A5 PCBA 발주](electronics/README.md#jlcpcb-밑면-실장) |
+| 4. 허브 첫 통전 | 허브를 받침에 넣기 전에 작업대에서 확인합니다. 모터·OpenRB·퓨즈를 뺍니다. 무전원 도통 확인과 J2 잠금을 마친 뒤 입력 전압부터 확인합니다. [전원 실물 검수](electronics/README.md#전원-실물-검수) |
+| 5. 조립과 보정 | 허브의 전원을 뽑고 조립·배선합니다. 무전원에서 배선을 확인하고, 전원을 켜서 한 축씩 보정합니다. [조립 절차](mechanical/revisions/b25/assembly.md) · [구동과 보정](control/README.md) |
+| 6. 실물 인수 | 완성품의 조립 상태, 움직임, 전압과 전원 복구를 확인합니다. [실물 시험 P01–P08](spec/bench.md#b25-실물-시험) |
 
-## 최근 CAD
+## 주요 사양
 
-- **B24 제작 검증** · 눈 상하 베어링과 목 상하축의 M3 체결을 추가하고, 깜빡임과 추적 복귀를 수정했습니다. [FreeCAD·P2S·조립·검증](mechanical/revisions/b24/) · [3D 조립 재현](web/README.md#b24-조립-순서)
-- **B23 기구 검증** · 앞 해골 삽입, 눈 상하 링크, 목 좌우축 하중과 스토퍼, 두 정비 덮개를 수정했습니다. [FreeCAD·P2S·조립과 검사](mechanical/revisions/b23/) · [3D 조립 재현](web/README.md#b23-조립-순서)
-- **B22 제작·조립** · 목 양방향 제한판, 카메라 고정·배선 및 투명 보호 케이스를 추가했습니다. [FreeCAD·P2S·조립 순서](mechanical/revisions/b22/) · [3D 조립 재현](web/README.md#b22-조립-순서)
-- **B21 제작·조립** · 눈·눈꺼풀 평행핀, M3 체결과 공구 접근, 턱 개방 스토퍼를 추가했습니다. [FreeCAD와 P2S 출력판](mechanical/revisions/b21/) · [조립 순서](mechanical/ASSEMBLY.md) · [3D 조립](web/README.md#b21-조립-순서)
-- **B20 제작·조립** · 눈 타이바를 왼쪽에서 곧게 넣도록 크래들을 바꿨습니다. B19 목 상하축, 체결품, 턱 수정도 포함합니다. [FreeCAD와 P2S 출력판](mechanical/revisions/b20/) · [3D 조립 재현](web/README.md#b20-조립-순서)
-- **B18 후면 연결부** · 외부에서 USB 두 개와 5 V·12 V 전원 플러그를 잡고 뺄 수 있는 배치입니다. [조립본과 뒤쪽 3D 보기](mechanical/revisions/b18/)
-- **B18 개선 시안** · 고정 허브, 30 mm 내려가는 덮개, 목 12 V 경로와 가림막을 비교합니다. 제작 전에 남은 확인 사항을 함께 기록했습니다. [FreeCAD와 전후 비교](mechanical/revisions/b18/study/)
+| 항목 | B25 적용값 |
+| --- | --- |
+| 머리 외형과 환경 | 약 `160 × 166 × 167 mm`, 한국 실내 `−5–35 °C` |
+| 3D 프린팅 | **Bambu Lab P2S** (0.4 mm 경화 노즐), **Bambu PETG HF** (65 °C 4–6시간 건조 · 2롤), 18판·57개 |
+| 눈과 턱 (5 V) | ID1–ID3 `XL330-M077-T` × 3, ID6 `XL330-M288-T` × 1 |
+| 목 (12 V) | ID4·ID5 `XL430-W250-T` × 2 |
+| 카메라와 제어 | `U20CAM-1080P-S1`, `OpenRB-150` (USB 전원), `A5 서보 허브` |
 
-## B15 제작과 조립
+## 파일과 기준
 
-![B15 조립 외형과 외장 안쪽의 배선·체결품](mechanical/assembly/b15-readme.jpg)
-
-- [FreeCAD 조립본](mechanical/R5-B15-Assembly.FCStd) · [기구 부품표](mechanical/BOM.csv)
-- [P2S 전체판 12장과 선택 1장](mechanical/R5-B15-P2S.3mf) · [P2S 시험판](mechanical/R5-B15-Fit-P2S.3mf) · [출력 설정](mechanical/README.md#p2s-출력-설정)
-- [B15 기구 검증과 출력 설정](mechanical/README.md)
-
-P2S 출력판은 **0.4 mm 노즐과 Bambu PETG HF** 기준입니다.
-앞 해골의 출력 경사, 눈꺼풀 축 홈, 목 볼트와 JST 통로를 수정한 형상이 들어 있습니다.
-시험판 2번은 케이블, 3번은 바닥 덮개와 허브, 4번은 보드 캐리어를 확인하는 데 씁니다. [출력 경로 검사](mechanical/README.md#출력-경로-검사)
+- [A5 회로도·PCB·3D 단일 HTML](web/b25/R5-B25-A5.html)
+- [FreeCAD 조립본](mechanical/revisions/b25/R5-B25-Assembly.FCStd) · [P2S PETG HF 출력 프로젝트](mechanical/revisions/b25/R5-B25-P2S.3mf) · [웹 제작 안내](https://r5-b1-review.ckh.chatgpt.site/b25/guide/) · [핀별 배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/) · [3D 조립·구동·배선 화면 만들기](web/README.md#b25-웹-화면)
+- [1층 사람 요구사항](spec/user-spec.md) · [2층 수치 기준](spec/conditions.md) · [FDM 실수 모음집](spec/fdm-pitfalls.md) · [동작 인수 기준](spec/requirements.md)
+- [기구 자료](mechanical/README.md) · [전장 자료](electronics/README.md) · [하드웨어 없이 테스트](control/README.md#하드웨어-없이-실행) · [이전 리비전](mechanical/revisions/)

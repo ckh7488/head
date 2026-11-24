@@ -33,7 +33,7 @@ def main():
     try:
         controller.start(jaw_demo=True)
         ready = True
-        for angle in (0, 4, 0, JAW_MAX_DEGREES, 0):
+        for angle in (0, JAW_MAX_DEGREES / 2, 0, JAW_MAX_DEGREES, 0):
             move(controller, angle)
     except RuntimeError as error:
         parser.exit(1, f'{error}\n')

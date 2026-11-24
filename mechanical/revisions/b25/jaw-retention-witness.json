@@ -1,0 +1,1006 @@
+{
+  "source_cad_sha256": "89e11381367a19668bbe5bad41bf6509dd49fa574aff6668734f3aadb7349c61",
+  "case_seats_sha256": "fb6aa2c8154c70ef80e2111fd1f946c3841f200ed5c5365902440aea13ff1faa",
+  "module_parts": [
+    "Jaw_30_moving_jaw",
+    "Jaw_36_left_jaw_servo_stay",
+    "Jaw_37_right_jaw_bearing_stay",
+    "Jaw_38_left_jaw_drive_arm",
+    "Jaw_39_right_jaw_pivot_arm",
+    "Jaw_XL330_M288_Jaw",
+    "Jaw_MR104ZZ_jaw_right",
+    "Jaw_Pin_jaw_4x10",
+    "JawHornScrew0",
+    "JawHornScrew1",
+    "jawMotorHead0",
+    "jawMotorHead1",
+    "jawMotorHead2",
+    "jawMotorHead3"
+  ],
+  "case_screw_envelopes": [
+    "jawMotorHead0",
+    "jawMotorHead1",
+    "jawMotorHead2",
+    "jawMotorHead3"
+  ],
+  "nominal_head_pose_deg": 0.0,
+  "direction": [
+    0,
+    0,
+    -1
+  ],
+  "travel_mm": 76.0,
+  "sample_step_mm": 0.1,
+  "neighboring_parts": {
+    "Part010": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 6.992279795745024
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 12.981236787586354
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 14.346551954922953
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 17.89169005346209
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 21.281238944314985
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 6.5
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 16.875585155035175
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 18.538283233569405
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 24.468272194643752
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 19.69400289541078
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 23.88011967461019
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 23.830287265268073
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 10.191928945979898
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 10.503115781618526
+      }
+    },
+    "Part011": {
+      "Jaw_30_moving_jaw": {
+        "minimum_sampled_mesh_gap_mm": 1.9248390197753906,
+        "mesh_path_lower_bound_mm": 1.8748390197753906
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.2999999523162842,
+        "mesh_path_lower_bound_mm": 0.2499999523162842
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.165679931640625,
+        "mesh_path_lower_bound_mm": 0.115679931640625
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "minimum_sampled_mesh_gap_mm": 0.5999984741210938,
+        "mesh_path_lower_bound_mm": 0.5499984741210937
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "minimum_sampled_mesh_gap_mm": 1.600343014753217,
+        "mesh_path_lower_bound_mm": 1.550343014753217
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "minimum_sampled_mesh_gap_mm": 1.5,
+        "mesh_path_lower_bound_mm": 1.45
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "minimum_sampled_mesh_gap_mm": 3.535613050495855,
+        "mesh_path_lower_bound_mm": 3.4856130504958553
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "minimum_sampled_mesh_gap_mm": 3.500531673431396,
+        "mesh_path_lower_bound_mm": 3.450531673431396
+      },
+      "JawHornScrew0": {
+        "minimum_sampled_mesh_gap_mm": 9.570216178894043,
+        "mesh_path_lower_bound_mm": 9.520216178894042
+      },
+      "JawHornScrew1": {
+        "minimum_sampled_mesh_gap_mm": 3.5702161788940425,
+        "mesh_path_lower_bound_mm": 3.5202161788940427
+      },
+      "jawMotorHead0": {
+        "minimum_sampled_mesh_gap_mm": 12.127557169959735,
+        "mesh_path_lower_bound_mm": 12.077557169959734
+      },
+      "jawMotorHead1": {
+        "minimum_sampled_mesh_gap_mm": 5.65550880049915,
+        "mesh_path_lower_bound_mm": 5.60550880049915
+      },
+      "jawMotorHead2": {
+        "minimum_sampled_mesh_gap_mm": 1.5002238154411316,
+        "mesh_path_lower_bound_mm": 1.4502238154411315
+      },
+      "jawMotorHead3": {
+        "minimum_sampled_mesh_gap_mm": 1.5002238154411316,
+        "mesh_path_lower_bound_mm": 1.4502238154411315
+      }
+    },
+    "Part012": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 8.769764452212755
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 5.5,
+        "mesh_path_lower_bound_mm": 5.45
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 87.40028762817383
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 3.2042770019821063
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 94.14939715374025
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 5.200000762939453
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 89.27513711783314
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 88.7655404713154
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 11.2784369414405
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 4.074805080768074
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 19.5962599022251
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 7.82723892364424
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 17.8500770114486
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 5.099998474121094
+      }
+    },
+    "Part013": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 12.766186266177598
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 1.0,
+        "mesh_path_lower_bound_mm": 0.95
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 82.90028762817383
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 7.20069881594695
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 90.12276803260968
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 0.7000007629394531
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 85.21296850253329
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 84.91589514712868
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 16.740425060306098
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 8.634458325513513
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 24.16582863487428
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 11.000671625137329
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 21.5
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 0.5999984741210938
+      }
+    },
+    "Part014": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 8.769764452212755
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 88.5
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.5081298748071491,
+        "mesh_path_lower_bound_mm": 0.4581298748071491
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 92.8553027538216
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 8.103649026219912
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 63.80000019073486
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 8.605237208113875
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 10.004051208496094
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 90.60465448584996
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 89.99224583876355
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 86.72377803586372
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 84.78953749825394
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 86.29383088792991
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 84.9000015258789
+      }
+    },
+    "Part015": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 12.766186266177598
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 78.20000076293945
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 2.500434103659508,
+        "mesh_path_lower_bound_mm": 2.450434103659508
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 82.81364660149907
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 12.15002444719353
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 53.500000953674316
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 11.000000032324188
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 14.31845450101593
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 81.34125170231233
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 80.06692969345069
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 78.17406231062357
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 75.01100779897692
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 77.25212044481508
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 74.60000228881836
+      }
+    },
+    "Part016": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 5.167484789126817
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 75.5
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.5287612673600114,
+        "mesh_path_lower_bound_mm": 0.4787612673600114
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 79.79999923706055
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 4.501369363133975
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 50.80000019073486
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 3.4012985229492188
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 6.401771545410156
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 77.18581132432652
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 76.9014457386222
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 73.06524714739709
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 71.58080414068858
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 72.8388364859307
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 71.9000015258789
+      }
+    },
+    "Part018": {
+      "Jaw_30_moving_jaw": {
+        "minimum_sampled_mesh_gap_mm": 15.522419601877491,
+        "mesh_path_lower_bound_mm": 15.47241960187749
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 36.5
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 0.5002861022949219
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 40.79999923706055
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 6.899997711181641
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 11.800000190734863
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 2.0999984741210938
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 1.2999992370605469
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 37.900001525878906
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 37.900001525878906
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 32.658619625763706
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 32.50865786556596
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 32.5
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 32.900001525878906
+      }
+    },
+    "Part019": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 10.366184740298692
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 12.102810859680176,
+        "mesh_path_lower_bound_mm": 12.052810859680175
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.1014930742488958,
+        "mesh_path_lower_bound_mm": 0.05149307424889579
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 4.800697290068044
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 9.70006931430585
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "minimum_sampled_mesh_gap_mm": 14.65728286211359,
+        "mesh_path_lower_bound_mm": 14.607282862113589
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 8.599998474121094
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 11.616150875194142
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 13.44314498622735
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 5.7098025036331315
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 20.94808230985777
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 8.603034973144531
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 19.099998474121094
+      },
+      "jawMotorHead3": {
+        "minimum_sampled_mesh_gap_mm": 12.349998474121094,
+        "mesh_path_lower_bound_mm": 12.299998474121093
+      }
+    },
+    "Part024": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 12.766186266177598
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.2999992370605469,
+        "mesh_path_lower_bound_mm": 0.24999923706054689
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 6.372574545697686,
+        "mesh_path_lower_bound_mm": 6.3225745456976865
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 7.20069881594695
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 12.100070840184756
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "minimum_sampled_mesh_gap_mm": 1.5,
+        "mesh_path_lower_bound_mm": 1.45
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 11.029093177124356
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 14.507019040890462
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 14.069999694824219
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 8.950054179847546
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 21.5
+      },
+      "jawMotorHead1": {
+        "minimum_sampled_mesh_gap_mm": 2.500112533569336,
+        "mesh_path_lower_bound_mm": 2.450112533569336
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 24.525400873433824
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 11.80022406578064
+      }
+    },
+    "Part025": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 18.268131761783067
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 1.8412705166528351,
+        "mesh_path_lower_bound_mm": 1.791270516652835
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 103.27785611723445
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 13.258853483585362
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 111.00446603985992
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 21.000003814697266
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 106.09125715528297
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 105.81278335584442
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 25.21648443102518
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 20.904730200961193
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 34.299090732734136
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 19.300003051757812
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 33.19028740980574
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 20.900001525878906
+      }
+    },
+    "Part027": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 18.268131761783067
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 104.30000305175781
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 4.001945495605469
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 109.3403752949347
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 18.007526267613624
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 79.60000324249268
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 26.55097610433688
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 24.97407454671659
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 107.49675346841693
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 106.56776559525142
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 104.01590493859526
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 100.30000305175781
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 103.87105310301939
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 100.70000457763672
+      }
+    },
+    "Part073": {
+      "Jaw_30_moving_jaw": {
+        "minimum_sampled_mesh_gap_mm": 1.8844862302651504,
+        "mesh_path_lower_bound_mm": 1.8344862302651503
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.279998779296875,
+        "mesh_path_lower_bound_mm": 0.229998779296875
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "minimum_sampled_mesh_gap_mm": 0.279998779296875,
+        "mesh_path_lower_bound_mm": 0.229998779296875
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "minimum_sampled_mesh_gap_mm": 7.466188503626772,
+        "mesh_path_lower_bound_mm": 7.416188503626772
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "minimum_sampled_mesh_gap_mm": 8.573146140723232,
+        "mesh_path_lower_bound_mm": 8.523146140723231
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "minimum_sampled_mesh_gap_mm": 5.836605072021484,
+        "mesh_path_lower_bound_mm": 5.7866050720214846
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "minimum_sampled_mesh_gap_mm": 10.392152703718718,
+        "mesh_path_lower_bound_mm": 10.342152703718718
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "minimum_sampled_mesh_gap_mm": 9.288433778703116,
+        "mesh_path_lower_bound_mm": 9.238433778703115
+      },
+      "JawHornScrew0": {
+        "minimum_sampled_mesh_gap_mm": 8.52008345013227,
+        "mesh_path_lower_bound_mm": 8.47008345013227
+      },
+      "JawHornScrew1": {
+        "minimum_sampled_mesh_gap_mm": 8.524898827410599,
+        "mesh_path_lower_bound_mm": 8.474898827410598
+      },
+      "jawMotorHead0": {
+        "minimum_sampled_mesh_gap_mm": 9.040846946710987,
+        "mesh_path_lower_bound_mm": 8.990846946710986
+      },
+      "jawMotorHead1": {
+        "minimum_sampled_mesh_gap_mm": 8.945401494324917,
+        "mesh_path_lower_bound_mm": 8.895401494324917
+      },
+      "jawMotorHead2": {
+        "minimum_sampled_mesh_gap_mm": 12.024285460532637,
+        "mesh_path_lower_bound_mm": 11.974285460532636
+      },
+      "jawMotorHead3": {
+        "minimum_sampled_mesh_gap_mm": 13.523646852100846,
+        "mesh_path_lower_bound_mm": 13.473646852100845
+      }
+    },
+    "Part074": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 21.574257639983305
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 19.881977796554565
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 24.082233667373657
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 22.28198338258864
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 27.1823208589915
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 21.08197784423828
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 26.082537174224854
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 29.082509517669678
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 35.152194023132324
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 29.152194023132324
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 37.08220195770264
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 37.08220195770264
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 21.082201659679413
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 21.082201659679413
+      }
+    },
+    "PitchLimitLink": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 17.238997248747953
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 15.546717405319214
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 83.27544351061587
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 17.946722991353287
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 90.24011324687086
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 16.74671745300293
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 85.31819294544367
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 85.36578040403609
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 30.816933631896973
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 24.816933631896973
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 32.746941566467285
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 32.746941566467285
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 16.74694126844406
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 16.74694126844406
+      }
+    },
+    "PitchLimitUpperPin": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 37.924998630136585
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 32.800225019454956
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 81.32089051869659
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 36.64847187828257
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 89.69675345089023
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 34.00022506713867
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 84.81191651879497
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 86.08902230518302
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 51.01129493719584
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 43.502493260493694
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 55.68029200948991
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 50.00044918060303
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 41.90800071844185
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 34.0004488825798
+      }
+    },
+    "PitchLimitLowerPin": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 23.492502955535063
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 21.800223112106323
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 76.92741095333865
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 24.200228698140396
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 84.00168350360434
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 23.00022315979004
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 79.12043869974293
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 79.49394261152128
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 37.07043933868408
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 31.070439338684082
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 39.000447273254395
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 39.000447273254395
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 23.00044697523117
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 23.00044697523117
+      }
+    },
+    "RearSkullScrewLeft": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 31.392541862905265
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 22.720310926437378
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 101.82581712529192
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 28.841619947836847
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 110.33906821115185
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 28.695014369297766
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 105.30650733514409
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 105.97180727822098
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 44.73839840550142
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 36.94804399514083
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 51.577030654991944
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 42.35412217082909
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 39.78637326155614
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 28.640085276036746
+      }
+    },
+    "RearSkullScrewRight": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 31.393323711630565
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 101.37875703438642
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 27.470919833134683
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 107.05832042977583
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 35.56620230816652
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 77.86521169494075
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 37.32924263756671
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 39.50649457286476
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 109.20647543370997
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 106.25287298108832
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 106.86329373412953
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 102.86247603973871
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 101.83242912309832
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 98.15921826238394
+      }
+    },
+    "RearSkullNutLeft": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 31.10484526877667
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 22.32457423210144
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 104.19331266635939
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 28.53819881893417
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 112.66582521591387
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 29.871954897978192
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 107.63162713767376
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 108.25359228025998
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 45.10509053068911
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 37.44985594017178
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 52.1433907355671
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 42.91193024591292
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 40.557245897918655
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 29.810604422199685
+      }
+    },
+    "RearSkullNutRight": {
+      "Jaw_30_moving_jaw": {
+        "bounds_lower_bound_mm": 31.10484526877667
+      },
+      "Jaw_36_left_jaw_servo_stay": {
+        "bounds_lower_bound_mm": 104.1312178379185
+      },
+      "Jaw_37_right_jaw_bearing_stay": {
+        "bounds_lower_bound_mm": 27.089049669355312
+      },
+      "Jaw_38_left_jaw_drive_arm": {
+        "bounds_lower_bound_mm": 109.77743136991347
+      },
+      "Jaw_39_right_jaw_pivot_arm": {
+        "bounds_lower_bound_mm": 35.2691441431847
+      },
+      "Jaw_XL330_M288_Jaw": {
+        "bounds_lower_bound_mm": 80.52295066260669
+      },
+      "Jaw_MR104ZZ_jaw_right": {
+        "bounds_lower_bound_mm": 38.331283752462866
+      },
+      "Jaw_Pin_jaw_4x10": {
+        "bounds_lower_bound_mm": 40.05136987488613
+      },
+      "JawHornScrew0": {
+        "bounds_lower_bound_mm": 111.7541291525221
+      },
+      "JawHornScrew1": {
+        "bounds_lower_bound_mm": 108.88988888228579
+      },
+      "jawMotorHead0": {
+        "bounds_lower_bound_mm": 109.32080958118188
+      },
+      "jawMotorHead1": {
+        "bounds_lower_bound_mm": 105.40139282340944
+      },
+      "jawMotorHead2": {
+        "bounds_lower_bound_mm": 104.46487470202034
+      },
+      "jawMotorHead3": {
+        "bounds_lower_bound_mm": 100.89097256536061
+      }
+    }
+  },
+  "witness_mesh_lower_bound_mm": 0.05149307424889579,
+  "status": "release path found",
+  "scope": "Rigid module at the nominal CAD pose and the installed rigid neighbors of its service path. The jaw harness is omitted as a structural retainer. The continuous lower bound uses mesh distances and the maximum travel from a sample to its nearest neighbor."
+}

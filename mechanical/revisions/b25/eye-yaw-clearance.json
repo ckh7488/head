@@ -1,0 +1,183 @@
+{
+  "part": "Part037",
+  "cradle": {
+    "rib_profile_yz_mm": [
+      [
+        -20.59,
+        111.8
+      ],
+      [
+        -20.42,
+        113.5
+      ],
+      [
+        -20.15,
+        114.3
+      ],
+      [
+        -19.87,
+        114.9
+      ],
+      [
+        -19.67,
+        115.8
+      ],
+      [
+        -19.4,
+        116.6
+      ],
+      [
+        -19.4,
+        119.5
+      ],
+      [
+        -19.35,
+        120.75
+      ],
+      [
+        -20.720000000000002,
+        120.75
+      ],
+      [
+        -20.77,
+        119.5
+      ],
+      [
+        -20.77,
+        116.6
+      ],
+      [
+        -21.040000000000003,
+        115.8
+      ],
+      [
+        -21.240000000000002,
+        114.9
+      ],
+      [
+        -21.52,
+        114.3
+      ],
+      [
+        -21.790000000000003,
+        113.5
+      ],
+      [
+        -21.96,
+        111.8
+      ]
+    ],
+    "rib_span_x_mm": [
+      -39.2,
+      -28.8
+    ],
+    "rib_width_y_mm": 1.37,
+    "added_mm3": 70.28064907630538,
+    "removed_mm3": 38.41363809523817
+  },
+  "insertion_offsets_mm": [
+    [
+      -110.0,
+      -3.15,
+      0.69
+    ],
+    [
+      0.0,
+      -3.15,
+      0.69
+    ],
+    [
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "centreline_xy_mm": [
+    [
+      -34.0,
+      -25.5
+    ],
+    [
+      -27.0,
+      -25.5
+    ],
+    [
+      -19.0,
+      -22.0
+    ],
+    [
+      19.0,
+      -22.0
+    ],
+    [
+      27.0,
+      -25.5
+    ],
+    [
+      34.0,
+      -25.5
+    ]
+  ],
+  "eye_bores_xy_mm": [
+    [
+      -34.0,
+      -25.5
+    ],
+    [
+      34.0,
+      -25.5
+    ]
+  ],
+  "eye_bore_diameter_mm": 2.09,
+  "eye_print_pilot_diameter_mm": 1.92,
+  "drive_slot_center_xy_mm": [
+    -5.8,
+    -22.0
+  ],
+  "drive_slot_finished_xy_mm": [
+    2.09,
+    2.69
+  ],
+  "drive_slot_print_xy_mm": [
+    2.24,
+    2.8400000000000003
+  ],
+  "drive_pin_stop_z_mm": 117.05,
+  "drive_boss_print_wall_mm": 2.05,
+  "bar_thickness_mm": 2.9000000000000057,
+  "drive_stop_roof_thickness_mm": 1.2999999999999972,
+  "eye_bore_finished_radial_wall_mm": 1.255,
+  "eye_bore_span_z_mm": [
+    114.55,
+    117.45
+  ],
+  "mesh_bounds_mm": [
+    [
+      -36.29949378967285,
+      -4.659195899963379,
+      0.0
+    ],
+    [
+      36.29949378967285,
+      4.659195899963379,
+      3.7999954223632812
+    ]
+  ],
+  "base_volume_mm3": 967.9100148904088,
+  "revised_volume_mm3": 1010.5836421723061,
+  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "p2s_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "verified_motion": {
+    "eye_yaw_range_deg": [
+      -24,
+      24
+    ],
+    "ocular_rim_sampled_min_mm": 0.768334,
+    "cradle_tie_conservative_min_mm": 0.9084,
+    "cradle_motor_continuous_min_mm_through_eye_pitch_pm8_deg": 0.5291
+  },
+  "insertion_continuous_mm": {
+    "slide": 0.463,
+    "lower": 0.313
+  }
+}

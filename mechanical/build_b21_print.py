@@ -181,7 +181,7 @@ def remove_ballast_plate(base, model, config, changes):
 
 
 def build(output, replacements, report, clips=(), support=(), *, source=BASE, revision='B21', without_ballast=False,
-          normal_support=(), extra_parts=(), indexed_parts=()):
+          normal_support=(), extra_parts=(), indexed_parts=(), placement_filters=None):
     if output.resolve() == source.resolve():
         raise ValueError(f'Choose a separate {revision} project output')
     if clips and extra_parts:
@@ -200,8 +200,13 @@ def build(output, replacements, report, clips=(), support=(), *, source=BASE, re
             object_id = obj.get('id')
             component = model.find(f".//{CORE}object[@id='{object_id}']//{CORE}component")
             path = component.get(PRODUCTION + 'path').lstrip('/')
-            changes[path] = replace_mesh(base.read(path), mesh, indexed=old_name in indexed_parts)
-            name_part(obj, part, new_name, len(mesh.faces))
+            filter_placement = (placement_filters or {}).get(old_name)
+            data = replace_mesh(base.read(path), mesh, indexed=old_name in indexed_parts,
+                                filter_placement=filter_placement)
+            changes[path] = data
+            face_count = (len(mesh.faces) if filter_placement is None else
+                          len(etree.fromstring(data).find('.//' + CORE + 'triangles')))
+            name_part(obj, part, new_name, face_count)
             if old_name in support:
                 setting = obj.find("metadata[@key='enable_support']")
                 if setting is None:

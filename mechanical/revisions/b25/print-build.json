@@ -1,0 +1,287 @@
+{
+  "source_3mf_sha256": "7ca295e8ccf6615786c30ce1b2038acbd896a3c98cc3ecb83bec5b2d7b15ee89",
+  "project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "source_cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
+  "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
+  "plate_sha256": {
+    "1": "33ebc8dfc898d2b84f0f8d26a7a4cf1522a330688db1807d638f55816f08a47d",
+    "2": "8eab9fedd158b0f2df8e8c0e06681d2dd3bdd7b7956117f9637981db1266c71a",
+    "3": "a0dafb23c1f45d2169d3cb847610f929c0fb295f412ce200028a8c7903060593",
+    "4": "5d4f2bb96a1a2b099cd1d6e53040fa0eefcd7daaf70c6a1d52017ce430e841bf",
+    "5": "5b1c482cf6bfa68b26e432c3afecdb5620258c4b4e2b2a16c22de6b32081f278",
+    "6": "0293b280e0269e44f082924bc5d697b58fb430b43993dbc24118d66028602b31",
+    "7": "a1fa54be0feaafff491e803b2eba920acf05bdcf959b8b19e4092a5d7e2e3c26",
+    "8": "a0671a2e7e5789ba7187055c5948a4364d4f4cb17db5251dc149afce56c4149a",
+    "9": "4ee51ac69bb51410bc59dceaf0b4543f8b7fbe0007ad527460ad294a0a0ca3c8",
+    "10": "2c86ae967ddd7b1d67eaee6a5784894c4c3e89dc410adeb3bc8e9a11f9ae3642",
+    "11": "c74ce8c7744eb66ee8a62ca90b4e782784de31ed2f6b2783550b147ea304aaf6",
+    "12": "b7e9ab7c56e7dd84917b215e0b9149129617b4decd2d59d4841abae9944971c7",
+    "13": "54fb5be35642bf6c54f4a7c9324c8ff9ae91abe6125f6f3f3de7eb772332f29b",
+    "14": "c0c0fa4113ed88b7264d78476c7b17484ac8abba2f7428bc589380c94ec95181"
+  },
+  "changed_plates": {
+    "4": [
+      "28 앞 외장"
+    ],
+    "6": [
+      "09 프레임",
+      "정지 블록 브림"
+    ],
+    "7": [
+      "12 크래들을 14번 판으로 이동",
+      "브림"
+    ],
+    "8": [
+      "15 타이바",
+      "ID5 가드 메쉬",
+      "브림"
+    ],
+    "9": [
+      "37 오른쪽 턱 받침",
+      "37 턱 열림 스토퍼 벽"
+    ],
+    "11": [
+      "42 뒤 배선 덮개",
+      "A4 고정편 브림"
+    ],
+    "12": [
+      "40 뒤 케이블 가이드",
+      "40 XT60 가이드 나사 끝 여유"
+    ],
+    "13": [
+      "일체형 턱 메쉬와 래프트"
+    ],
+    "14": [
+      "12 크래들"
+    ]
+  },
+  "right_locator_reinforcement": {
+    "geometry": [
+      {
+        "part": "Jaw_37_right_jaw_bearing_stay",
+        "print_name": "37_right_cheek_bearing_stay-B22.stl",
+        "insert_outer_diameter_mm": null,
+        "axis_world_mm": {
+          "y": -8.75,
+          "z": 103.5,
+          "x_start": 62.55,
+          "x_end": 69.0
+        },
+        "outer_radius_mm": 2.96,
+        "minimum_added_radius_mm": 1.53,
+        "minimum_nominal_wall_mm": 1.439551170056222,
+        "added_volume_mm3": 3.510726532712319,
+        "conservative_wall_after_0p20_mm_outline_loss_mm": 1.239551170056222
+      },
+      {
+        "part": "Part019",
+        "print_name": "09_head_frame-B25.stl",
+        "insert_outer_diameter_mm": 4.6,
+        "axis_world_mm": {
+          "y": -8.75,
+          "z": 103.5,
+          "x_start": 71.4,
+          "x_end": 74.55
+        },
+        "outer_radius_mm": 4.05,
+        "minimum_added_radius_mm": 2.32,
+        "minimum_nominal_wall_mm": 1.7493831653833762,
+        "added_volume_mm3": 8.415226745657819,
+        "conservative_wall_after_0p20_mm_outline_loss_mm": 1.5493831653833763
+      }
+    ],
+    "fit": {
+      "B10": [
+        {
+          "file": "p9-37-bearing-pocket-D10.05.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.5108965076005916,
+          "sha256": "a07a9a418ad4406c6edc1d5d5a6725b078333bbc27e2c84ff7824b0c8f5ae864"
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.10.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.510896507601501,
+          "sha256": "3d7ba28e07a76538fa755934f967cb6267a05b5cbe19578cb7e95c8446a0ac09"
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.15.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.510732745454334,
+          "sha256": "5167b078666d7abf74d7a8ed639c28d7c46e7821674adb6133ad3cc2c321245d"
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.20.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.510732745454334,
+          "sha256": "878c43cdc3b63011b5e783629bc8d9000e9dc92d9030bde1d2d8a5f0e35ae67f"
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.25.stl",
+          "minimum_wall_mm": 1.4395511876206561,
+          "volume_delta_mm3": 3.5107327454534243,
+          "sha256": "b4c015e0b658365076bf6dc8bcdbc4837f549b9bc358c872cf05b035386e16b1"
+        }
+      ],
+      "P8": [
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.10mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232884675788,
+          "sha256": "54315ec36a4155e7e8192cd8ca0889a451b3ff71858e24c8b45dadb06cb6a29f"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.15mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232903018477,
+          "sha256": "14b063b994f55696b809a23db612d2af33942981b3c28cd3033aba58095a15b3"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.20mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232765466499,
+          "sha256": "0a720fe2633b6b959cc442e5401809d5530ea8644a70daf9df505467e1abf19b"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.25mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232899387775,
+          "sha256": "3c427c41fd2dec5ba419fa290b0353d0457bc53719625ac9a421d17c12b0fe9c"
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.30mm.stl",
+          "minimum_wall_mm": 1.7493819533421435,
+          "volume_delta_mm3": 8.415232908650069,
+          "sha256": "3416ca55318133de612ab799e8166cac1d90dad3bcb98818f23df741f885546b"
+        }
+      ]
+    },
+    "plates": {
+      "6": {
+        "slice_return_code": 0,
+        "plate_warning": "",
+        "estimated_time_s": 32677.41015625,
+        "material_g": 200.98516845703125
+      },
+      "9": {
+        "slice_return_code": 0,
+        "plate_warning": "",
+        "estimated_time_s": 7119.61865234375,
+        "material_g": 29.153274536132812
+      }
+    },
+    "base_thin_wall_setting": false
+  },
+  "eye_yaw_drive_slot": {
+    "source_3mf_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+    "evidence": "eye-yaw-slot.json"
+  },
+  "integrated_geometry": {
+    "incoming_cad_sha256": "1ef9301be382bffc0d51d118d89675e7a98d8f71eead233ecab8566316405550",
+    "parts": 57,
+    "plates": 14
+  },
+  "verified_plate_slices": {
+    "1": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 31950,
+      "estimated_petg_g": 239.818
+    },
+    "2": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 6012,
+      "estimated_petg_g": 55.676
+    },
+    "3": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 2941,
+      "estimated_petg_g": 14.252
+    },
+    "4": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 49570,
+      "estimated_petg_g": 216.939
+    },
+    "5": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 37820,
+      "estimated_petg_g": 161.316
+    },
+    "6": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 9,
+      "warning_count": 0,
+      "estimated_seconds": 32423,
+      "estimated_petg_g": 200.389
+    },
+    "7": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 8,
+      "warning_count": 0,
+      "estimated_seconds": 22908,
+      "estimated_petg_g": 119.071
+    },
+    "8": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 15,
+      "warning_count": 0,
+      "estimated_seconds": 11638,
+      "estimated_petg_g": 46.777
+    },
+    "9": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 7,
+      "warning_count": 0,
+      "estimated_seconds": 6836,
+      "estimated_petg_g": 28.88
+    },
+    "10": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 2,
+      "warning_count": 0,
+      "estimated_seconds": 2048,
+      "estimated_petg_g": 7.499
+    },
+    "11": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 5938,
+      "estimated_petg_g": 33.642
+    },
+    "12": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 4,
+      "warning_count": 0,
+      "estimated_seconds": 19691,
+      "estimated_petg_g": 96.946
+    },
+    "13": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 10544,
+      "estimated_petg_g": 52.158
+    },
+    "14": {
+      "slice_source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 3964,
+      "estimated_petg_g": 11.655
+    }
+  },
+  "estimated_seconds_total": 244283,
+  "estimated_petg_g_total": 1285.015,
+  "previous_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13"
+}

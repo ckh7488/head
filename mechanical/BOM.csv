@@ -41,12 +41,13 @@ H3,전선,12 AWG 연선 빨강·검정,Alpha Wire 6718 또는 동급,각 0.11 m,
 H4,전선,24 AWG 연선 빨강,Alpha Wire 6712 또는 동급 · 피복 Ø1.04–1.14 mm,2.1 m,3 m,모터 전원,
 H5,전선,24 AWG 연선 검정,Alpha Wire 6712 또는 동급,2.3 m,3 m,모터·OpenRB GND,
 H6,전선,24 AWG 연선 흰색,Alpha Wire 6712 또는 동급,2.4 m,3 m,DATA,
+H7,전선,16 AWG 연선 빨강·검정,Alpha Wire 6716,각 0.25 m 이하,각 0.30 m,5 V 기준 전원 꼬리 W33·W34,
 J1,커넥터,JST PH 하우징 3핀,PHR-3,3,5,허브 J4–J6 쪽,
 J2,커넥터,JST PH 하우징 2핀,PHR-2,1,2,허브 J3 쪽,
 J3,커넥터,JST PH 압착 단자,SPH-002T-P0.5S,11,30,PH 하우징,
 J4,커넥터,JST EH 하우징 3핀,EHR-3,9,12,모터 6 · 허브 J7·J8 2 · OpenRB 1,
 J5,커넥터,JST EH 압착 단자,SEH-001T-P0.6,26,50,EH 하우징,OpenRB 하우징은 2번 핀을 비움
-J6,커넥터,AMASS XT30U-F / XT30U-M,,1 / 1,2 / 2,5 V · 어댑터 쪽 F · 로봇 쪽 M,허브 J1은 기판 실장 XT30PW-M (허브 BOM)
+J6,커넥터,AMASS XT30U-F / XT30U-M,,2 / 1,2 / 1,5 V · 전원과 허브 J1 각 F · 외부 로봇 쪽 M,허브 J1은 기판 실장 XT30PW-M (허브 BOM)
 J7,커넥터,AMASS XT60U-F / XT60U-M,,1 / 1,2 / 2,목 12 V · 어댑터 쪽 F · 로봇 쪽 M,5 V와 다른 커넥터라 바꿔 꽂을 수 없음
 J8,커넥터,WAGO 221-413,3구 레버 단자,3,4,"5 V 분기 · GND 분기 · J6 DATA 분기",피복 11 mm 탈피
 J9,커넥터,WAGO 221-412,2구 레버 단자,2,3,12 AWG → 18 AWG 변환 (목 + · −),

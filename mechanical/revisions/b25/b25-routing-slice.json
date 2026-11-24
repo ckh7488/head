@@ -1,0 +1,42 @@
+{
+  "project_sha256": "73ae4bbd1983203d9d6deba6b6372ee2c13c3800009f2dc1d6f8cc6c0bf28260",
+  "profile_sha256": "0d18a112c3f242696c1398aae8b311468e8f1ecdb9ded8d08dc59bc554913db4",
+  "settings": "Bambu Studio P2S 0.4 mm, PETG HF, 0.20 mm",
+  "plates": {
+    "4": {
+      "return_code": 0,
+      "warning": "",
+      "verified_plate_signature": "e2afed85ce9b94517aadc58401624b8848bed6c0afafbe287d5b1e68158deed5",
+      "g": 221.6610107421875,
+      "s": 52093.44140625,
+      "objects": [
+        "28_skull_front_with_camera_tray-B25"
+      ]
+    },
+    "11": {
+      "return_code": 0,
+      "warning": "",
+      "verified_plate_signature": "b7f2090a36655e13e0dc17b87cc772fb8f35b346b512ebb23b3691cb46e85fae",
+      "g": 33.981082916259766,
+      "s": 5932.8955078125,
+      "objects": [
+        "42-rear-cable-cover-service",
+        "35_hub_service_hatch_B8_1",
+        "A4_J2_XT30_keeper"
+      ]
+    },
+    "12": {
+      "return_code": 0,
+      "warning": "",
+      "verified_plate_signature": "c287e38c9b020de5df351623e2a5ab503a979c09cbcb1ac06da9313bfc47565d",
+      "g": 97.33296966552734,
+      "s": 19297.005859375,
+      "objects": [
+        "40-rear-cable-guide-service",
+        "26_u20cam_slotted_bracket-B23",
+        "35_hatch_nut_keeper_left-B23",
+        "35_hatch_nut_keeper_right-B23"
+      ]
+    }
+  }
+}

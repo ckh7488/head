@@ -1,0 +1,221 @@
+{
+  "source_project": "R5-B25-P2S.3mf",
+  "source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "units": "mm",
+  "stl_origin": "Source orientation with lowest Z at the build plate",
+  "parts": {
+    "02": {
+      "source_part": "02_outer_bearing_seat-B23.stl",
+      "source_mesh_sha256": "0e27c072f621f27d4c535f2f8c06291994e12e7dbeafa1c3acd4f6277a9c106e",
+      "p2s_plate": 6,
+      "p2s_settings": {
+        "layer_height": "0.2",
+        "nozzle_diameter": [
+          "0.4"
+        ],
+        "filament_settings_id": [
+          "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+        ],
+        "wall_generator": "arachne",
+        "detect_thin_wall": "0",
+        "outer_wall_line_width": "0.42",
+        "wall_loops": "4",
+        "sparse_infill_density": "20%",
+        "enable_support": "1",
+        "support_type": "tree(auto)",
+        "xy_hole_compensation": "0"
+      },
+      "bearing": "6816-2RS",
+      "bearing_od_mm": 100.0,
+      "bearing_width_mm": 10.0,
+      "bore_print_axis": "Z (vertical)",
+      "source_bore_mm": 100.32,
+      "bore_xy_center_mm": [
+        0.0,
+        0.0
+      ],
+      "bore_depth_mm": 11.0,
+      "outer_body_diameter_mm": 138.0,
+      "shoulder_id_mm": 97.2,
+      "shoulder_depth_mm": 1.0,
+      "cable_slot_width_mm": 24.0,
+      "key_pocket_inner_radius_mm": 51.61,
+      "variants": [
+        {
+          "nominal_bore_diameter_mm": 100.1,
+          "key_pocket_min_radial_ligament_mm": 1.56,
+          "file": "02_outer-bearing-seat_6816_ID100.10mm.stl",
+          "bytes": 342484,
+          "sha256": "24bac99b28c30f30e78bebf71ad5fc0f814731d306b7dce04782de66143d96e5"
+        },
+        {
+          "nominal_bore_diameter_mm": 100.2,
+          "key_pocket_min_radial_ligament_mm": 1.51,
+          "file": "02_outer-bearing-seat_6816_ID100.20mm.stl",
+          "bytes": 342484,
+          "sha256": "37ba15b7685d3ca113d35d515a2b7f9a45445bee4a87fdfc23af9d639b384555"
+        },
+        {
+          "nominal_bore_diameter_mm": 100.3,
+          "key_pocket_min_radial_ligament_mm": 1.46,
+          "file": "02_outer-bearing-seat_6816_ID100.30mm.stl",
+          "bytes": 342484,
+          "sha256": "f5dfa767d29eeb67766072023c5072adf494e84634e063fb87e592b7829d41aa"
+        }
+      ]
+    },
+    "07": {
+      "source_part": "07_yoke-B22.stl",
+      "source_mesh_sha256": "42768efdad75d87c5ac6963a61197fde8cf1e5e724f8c4eca9432c727bc2ed80",
+      "p2s_plate": 7,
+      "p2s_settings": {
+        "layer_height": "0.2",
+        "nozzle_diameter": [
+          "0.4"
+        ],
+        "filament_settings_id": [
+          "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+        ],
+        "wall_generator": "arachne",
+        "detect_thin_wall": "0",
+        "outer_wall_line_width": "0.42",
+        "wall_loops": "6",
+        "sparse_infill_density": "35%",
+        "enable_support": "1",
+        "support_type": "tree(auto)",
+        "xy_hole_compensation": "0"
+      },
+      "bearing": "688-2RS, both sides",
+      "bearing_od_mm": 16.0,
+      "bearing_width_mm": 5.0,
+      "bore_print_axis": "X (horizontal)",
+      "source_bore_mm": 16.26,
+      "bore_yz_center_from_print_base_mm": [
+        -14.0,
+        18.61
+      ],
+      "boss_od_mm": 22.0,
+      "bore_span_x_mm": [
+        [
+          -55.5,
+          -46.0
+        ],
+        [
+          49.52,
+          55.5
+        ]
+      ],
+      "bore_depth_mm": [
+        9.5,
+        5.98
+      ],
+      "installed_bearing_x_mm": [
+        [
+          -54.0,
+          -49.0
+        ],
+        [
+          49.0,
+          54.0
+        ]
+      ],
+      "sampled_full_boss_x_mm": [
+        -53.99,
+        -52.0,
+        -50.0,
+        -49.55,
+        49.55,
+        52.0,
+        53.99
+      ],
+      "sampled_crown_x_mm": [
+        -49.5,
+        -49.25,
+        -49.01
+      ],
+      "crown_note": "The left inboard 0.52 mm meets the existing partial crown. The right inboard 0.52 mm extends past the boss.",
+      "variants": [
+        {
+          "nominal_bore_diameter_mm": 16.1,
+          "sampled_full_boss_min_wall_mm": 2.947,
+          "sampled_full_boss_bore_range_mm": [
+            16.0908,
+            16.1
+          ],
+          "crown_supported_directions_out_of_720": [
+            621,
+            621,
+            621
+          ],
+          "file": "07_pitch-yoke_688_ID16.10mm.stl",
+          "bytes": 568484,
+          "sha256": "4ee1c24d1216f7dbd9472468b5db31d7d772495efcc6fe49549ce4745822e4fb"
+        },
+        {
+          "nominal_bore_diameter_mm": 16.2,
+          "sampled_full_boss_min_wall_mm": 2.897,
+          "sampled_full_boss_bore_range_mm": [
+            16.1907,
+            16.2
+          ],
+          "crown_supported_directions_out_of_720": [
+            621,
+            621,
+            621
+          ],
+          "file": "07_pitch-yoke_688_ID16.20mm.stl",
+          "bytes": 568484,
+          "sha256": "4d5a72d44922271604e3d3b8d5cb764d827328457160efa50b3d5a860a7f200e"
+        },
+        {
+          "nominal_bore_diameter_mm": 16.3,
+          "sampled_full_boss_min_wall_mm": 2.847,
+          "sampled_full_boss_bore_range_mm": [
+            16.2907,
+            16.3
+          ],
+          "crown_supported_directions_out_of_720": [
+            621,
+            621,
+            621
+          ],
+          "file": "07_pitch-yoke_688_ID16.30mm.stl",
+          "bytes": 568484,
+          "sha256": "e6b6c515e4cdc79468ce2dec18f6b67f963152bf7ca09534f31380d9b9968443"
+        },
+        {
+          "nominal_bore_diameter_mm": 16.4,
+          "sampled_full_boss_min_wall_mm": 2.797,
+          "sampled_full_boss_bore_range_mm": [
+            16.3906,
+            16.4
+          ],
+          "crown_supported_directions_out_of_720": [
+            621,
+            621,
+            621
+          ],
+          "file": "07_pitch-yoke_688_ID16.40mm.stl",
+          "bytes": 568484,
+          "sha256": "4af3f8dfe1a715c919c803a544243e5b6b2174f696a980d869cad5cd965af4b7"
+        },
+        {
+          "nominal_bore_diameter_mm": 16.5,
+          "sampled_full_boss_min_wall_mm": 2.747,
+          "sampled_full_boss_bore_range_mm": [
+            16.4906,
+            16.5
+          ],
+          "crown_supported_directions_out_of_720": [
+            621,
+            621,
+            621
+          ],
+          "file": "07_pitch-yoke_688_ID16.50mm.stl",
+          "bytes": 568484,
+          "sha256": "30875a47278fe2a5f26ae78b94cf5b28e11c454d7d04b7456d978c8a0e070e6b"
+        }
+      ]
+    }
+  }
+}

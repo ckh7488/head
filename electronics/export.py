@@ -2,6 +2,8 @@
 
 from argparse import ArgumentParser
 import csv
+import json
+import re
 from pathlib import Path
 from shutil import copyfile
 import subprocess
@@ -9,9 +11,18 @@ from tempfile import TemporaryDirectory
 from zipfile import ZIP_DEFLATED, ZipFile
 
 HERE = Path(__file__).resolve().parent
-PROJECTS = {"servo-hub": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
-REVISION = "A1"
+PROJECTS = {"servo-hub": "R5_Servo_Hub", "servo-hub-a5": "R5_Servo_Hub",
+            "servo-hub-a6": "R5_Servo_Hub", "c3-rf": "C3_Antenna"}
+REVISIONS = {"servo-hub": "A4", "servo-hub-a5": "A5", "servo-hub-a6": "A6", "c3-rf": "A1"}
 COMMON_LAYERS = ["F.Cu", "B.Cu", "F.Mask", "B.Mask", "F.Silkscreen", "B.Silkscreen", "Edge.Cuts"]
+HUB_JLCPCB_PARTS = {
+    "Yageo CC0603KRX7R9BB104": ("100 nF, X7R, 50 V, ±10%", "C14663"),
+    "Yageo RT0603BRD0761K9L": ("61.9 kOhm, 0.1%, 25 ppm/C", "C861498"),
+    "Texas Instruments TPS2557DRBR": ("TPS2557DRBR", "C130056"),
+    "Uniroyal 1206W4F0000T5E": ("0 Ohm", "C17888"),
+    "Uniroyal 1206W4F1001T5E": ("1 kOhm, 1%", "C4410"),
+    "Uniroyal 0805W8F3301T5E": ("3.3 kOhm, 1%", "C26010"),
+}
 
 
 def kicad(*args):
@@ -40,11 +51,45 @@ def bom_rows(board_file):
     return board, bom, footprints, omitted
 
 
-def prepare_c3(board_file, work, output):
+def write_csv(path, fields, rows):
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.writer(stream, lineterminator="\n")
+        writer.writerow(fields)
+        writer.writerows(rows)
+
+
+def write_hub_pcba(output, prefix, positions, bom):
+    placements = {row["Ref"] for row in positions}
+    groups = {}
+    for row in bom:
+        ref = row["Ref"]
+        if ref in placements:
+            comment, part = HUB_JLCPCB_PARTS[row["Part or buying specification"]]
+            footprint = row["Footprint"].split(":", 1)[1]
+            groups.setdefault((comment, footprint, part), []).append(ref)
+
+    if any(row["Side"] != "bottom" for row in positions) or {
+        ref for refs in groups.values() for ref in refs
+    } != placements:
+        raise ValueError("The JLCPCB BOM and bottom placements differ")
+
+    write_csv(output / f"{prefix}-JLCPCB-BOM.csv", ("Comment", "Designator", "Footprint", "JLCPCB Part #"),
+              ((comment, ",".join(refs), footprint, part) for (comment, footprint, part), refs in groups.items()))
+    write_csv(output / f"{prefix}-JLCPCB-CPL.csv", ("Designator", "Mid X", "Mid Y", "Rotation", "Layer"),
+              ((row["Ref"], row["PosX"], row["PosY"], row["Rot"], "Bottom") for row in positions))
+
+
+def prepare_assembly(board_file, work, output, side, positions_name):
     import pcbnew
 
     board, bom, footprints, omitted = bom_rows(board_file)
-    placements = {row["Ref"] for row in bom if row["Populate"] == "YES"} - {"J2"}
+    pcb_side = pcbnew.F_Cu if side == "front" else pcbnew.B_Cu
+    placements = {
+        row["Ref"] for row in bom
+        if row["Populate"] == "YES"
+        and footprints[row["Ref"]].GetLayer() == pcb_side
+        and footprints[row["Ref"]].GetAttributes() & pcbnew.FP_SMD
+    }
     for ref in omitted:
         for pad in footprints[ref].Pads():
             layers = pad.GetLayerSet()
@@ -55,25 +100,52 @@ def prepare_c3(board_file, work, output):
     pcbnew.SaveBoard(str(stencil_board), board)
 
     candidate = work / "positions.csv"
-    kicad("pcb", "export", "pos", "--side", "front", "--format", "csv", "--units", "mm", "--exclude-dnp",
+    kicad("pcb", "export", "pos", "--side", side, "--format", "csv", "--units", "mm", "--exclude-dnp",
           "-o", candidate, board_file)
     with candidate.open(newline="") as stream:
         reader = csv.DictReader(stream)
         rows = [row for row in reader if row["Ref"] in placements]
         fields = reader.fieldnames
     if len(rows) != len(placements) or {row["Ref"] for row in rows} != placements:
-        raise ValueError("C3 positions do not match the assembly BOM")
-    with (output / "C3-front-positions-mm.csv").open("w", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
-        writer.writeheader()
-        writer.writerows(rows)
-    return stencil_board
+        raise ValueError(f"{side} positions do not match the assembly BOM")
+    write_csv(output / positions_name, fields, ((row[field] for field in fields) for row in rows))
+    return stencil_board, rows, bom
 
 
 def plot(board, layers, output):
     output.mkdir()
     kicad("pcb", "export", "gerbers", "--no-protel-ext", "--subtract-soldermask",
           "-l", ",".join(layers), "-o", output, board)
+
+
+def align_copper_layer_numbers(job_file, layers):
+    job = json.loads(job_file.read_text())
+    copper = []
+    for entry in job["FilesAttributes"]:
+        if not entry["FileFunction"].startswith("Copper,"):
+            continue
+        gerber = (job_file.parent / entry["Path"]).read_text()
+        header = re.search(r"^%TF\.FileFunction,(Copper,L\d+,(?:Top|Inr|Bot))\*%$", gerber, re.MULTILINE)
+        if header is None:
+            raise ValueError(f'Missing copper layer header in {entry["Path"]}')
+        entry["FileFunction"] = header[1]
+        copper.append(int(header[1].split(",")[1][1:]))
+    if job["GeneralSpecs"]["LayerNumber"] != layers or copper != list(range(1, layers+1)):
+        raise ValueError(f'{job_file.name} has an invalid copper stack: {copper}')
+    job_file.write_text(json.dumps(job, indent=2) + "\n")
+
+
+def check_hub_annular_rings(board, minimum):
+    import pcbnew
+
+    minimum_ring = pcbnew.FromMM(minimum)
+    for footprint in board.GetFootprints():
+        for pad in footprint.Pads():
+            if pad.GetAttribute() != pcbnew.PAD_ATTRIB_PTH:
+                continue
+            size, drill = pad.GetSize(), pad.GetDrillSize()
+            if min(size.x-drill.x, size.y-drill.y) < 2*minimum_ring:
+                raise ValueError(f'{footprint.GetReference()} pin {pad.GetNumber()} needs a {minimum} mm annular ring')
 
 
 def archive(source, output):
@@ -90,21 +162,34 @@ def export(project, output_root):
     kicad("sch", "erc", "--exit-code-violations", "-o", output / "erc.rpt", board.with_suffix(".kicad_sch"))
     kicad("pcb", "drc", "--schematic-parity", "--all-track-errors", "--exit-code-violations",
           "-o", output / "drc.rpt", board)
-    prefix = f"{name}_{REVISION}"
+    prefix = f"{name}_{REVISIONS[project]}"
     with TemporaryDirectory() as tmp:
         work = Path(tmp)
         layers = COMMON_LAYERS.copy()
-        if project == "c3-rf":
+        multilayer = project in {"c3-rf", "servo-hub-a5", "servo-hub-a6"}
+        if multilayer:
             layers += ["In1.Cu", "In2.Cu"]
+        if project == "c3-rf":
+            side, paste, positions = "front", "F.Paste", "C3-front-positions-mm.csv"
+        else:
+            hub, _, _, _ = bom_rows(board)
+            check_hub_annular_rings(hub, .20 if multilayer else .254)
+            positions = "R5-hub-A5-back-positions-mm.csv" if multilayer else "R5-hub-back-positions-mm.csv"
+            side, paste = "back", "B.Paste"
+        if project != "servo-hub-a6":
+            stencil_board, placement_rows, bom = prepare_assembly(board, work, output, side, positions)
+            if project != "c3-rf":
+                write_hub_pcba(output, prefix, placement_rows, bom)
+                layers.append(paste)
             stencil = work / "stencil"
-            plot(prepare_c3(board, work, output), ["F.Paste", "Edge.Cuts"], stencil)
+            plot(stencil_board, [paste, "Edge.Cuts"], stencil)
             for job in stencil.glob("*.gbrjob"):
                 job.unlink()
             archive(stencil, output / f"{prefix}-Stencil.zip")
-        else:
-            bom_rows(board)
         plots = work / "gerbers"
         plot(board, layers, plots)
+        if multilayer:
+            align_copper_layer_numbers(plots / f"{name}-job.gbrjob", 4)
         kicad("pcb", "export", "drill", "--excellon-separate-th", "--excellon-units", "mm",
               "--excellon-zeros-format", "decimal", "-o", plots, board)
         archive(plots, output / f"{prefix}-Gerbers.zip")

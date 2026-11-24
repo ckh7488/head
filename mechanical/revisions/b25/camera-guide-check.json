@@ -1,0 +1,81 @@
+{
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "native_route_vertices": 643,
+  "wire_label": "USB-Camera  \u00b7  337.3 mm",
+  "native_route_length_mm": 337.29000158905797,
+  "native_route_witnesses": {
+    "inlet": {
+      "point_index_zero_based": 241,
+      "xyz_mm": [
+        1.563489404413837,
+        -35.77161729703723,
+        -49.07225786527849
+      ],
+      "minimum_radius_mm": 12.694598322041195
+    },
+    "retained_saddle": {
+      "point_index_zero_based": 287,
+      "xyz_mm": [
+        0.0,
+        -34.759645872896236,
+        -31.638798979528474
+      ],
+      "minimum_radius_mm": 13.999999999961947
+    },
+    "saddle_outlet": {
+      "point_index_zero_based": 312,
+      "xyz_mm": [
+        1.001218431666361,
+        -28.99523870466869,
+        -24.515726819184223
+      ],
+      "minimum_radius_mm": 12.711177118161729
+    },
+    "downstream": {
+      "point_index_zero_based": 392,
+      "xyz_mm": [
+        19.998108919196643,
+        -6.703592664695517,
+        -14.513697812989447
+      ],
+      "minimum_radius_mm": 12.74238237544081
+    }
+  },
+  "section": {
+    "angle_deg": 6,
+    "section_origin_mm": [
+      0.0,
+      -35.923306535155824,
+      -35.93660151425285
+    ],
+    "section_width_offsets_mm": [
+      -6,
+      6
+    ],
+    "section_radial_offsets_mm": [
+      -4,
+      4
+    ],
+    "obstacles": [
+      "Part002",
+      "Part006",
+      "Part007"
+    ],
+    "boundary_signed_clearance_upper_bound_mm": {
+      "X\u2212": -0.3202189536827298,
+      "X+": -0.3202189536827298,
+      "radial\u2212": -0.3202189536827298,
+      "radial+": -0.1763941166289129
+    },
+    "nominal_center_radius_clearance_mm": 2.3299997854126944,
+    "grid_points_tested": 752,
+    "sampled_best_center_radius_clearance_mm": 2.9857987765831515,
+    "sampled_best_center_offsets_mm": [
+      -0.0078125,
+      0.6796875
+    ],
+    "clearance_upper_bound_mm_in_tested_window": 2.9968473200391914,
+    "cable_center_radius_clearance_required_mm_before_tolerance": 3.0,
+    "method": "BRep signed point distance to retained solids. Maximum for each rectangle bounded by its center distance plus its half diagonal. The window is the existing saddle neighborhood at six degrees into its curved section. Each bounding edge lies inside native material, so the window contains the connected guide aperture. Other rotor crossings are outside scope."
+  }
+}

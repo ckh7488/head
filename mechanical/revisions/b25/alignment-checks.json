@@ -1,0 +1,87 @@
+{
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
+  "motion": {
+    "poses": 26196,
+    "interfaces": 572,
+    "eye_yaw_angles": 801,
+    "eye_yaw_contact_pairs": [],
+    "native_seated_check": {
+      "parts": [
+        "Part041",
+        "Part064"
+      ],
+      "common_volume_mm3": 0.0,
+      "distance_mm": 0.0
+    },
+    "jaw_range_from_cad_zero_deg": [
+      0.0,
+      6.85546875
+    ],
+    "front_shell_clearance_mm": {
+      "Part057 / Part073": 0.95,
+      "Part060 / Part073": 0.95,
+      "Part073 / Part078": 0.842,
+      "Part073 / Part079": 0.741
+    },
+    "front_shell_mesh_contacts": [],
+    "pitch_feedback_range_deg": [
+      -13.798828125,
+      3.33984375
+    ]
+  },
+  "camera_route": {
+    "upper_samples": 289,
+    "lower_samples": 513,
+    "rear_samples": 73,
+    "minimum_upper_bend_radius_mm": 18.2,
+    "minimum_lower_bend_radius_mm": 18.25,
+    "length_reserve_percent": 11.123461951701419,
+    "jaw_continuous_cells": 18,
+    "unexpected_contacts": [],
+    "longest_reference_mm": 494.94498312071255,
+    "jaw_endpoint_witness": {
+      "head_pitch_deg": 3.33984375,
+      "jaw_from_cad_zero_ticks": 78,
+      "centerline_gap_bracket_mm": [
+        3.0106964111328125,
+        3.01080322265625
+      ],
+      "worst_surface_gap_lower_mm": 1.0606964111328125,
+      "centerline_y_at_pan_z_minus_9p17_mm": -25.774984456446763
+    },
+    "upper_anchor_body": "Part073"
+  },
+  "a4_service_leads": {
+    "samples": 39,
+    "minimum_radius_mm": 12.000000000000014,
+    "minimum_pair_gap_mm": 2.4430000000000014,
+    "rigid_plug_sweeps": {
+      "withdraw": {},
+      "park": {},
+      "hatch": {}
+    },
+    "continuous_lowering": {
+      "A4W8": {
+        "panels": 346,
+        "max_intersection_mm3": {}
+      },
+      "A4W9": {
+        "panels": 346,
+        "max_intersection_mm3": {}
+      }
+    }
+  },
+  "assembly": {
+    "checked_steps": 146,
+    "blocking_steps": 0,
+    "plan_sha256": "1f7daf3de0687030aa55cbad0db238bfb2b72616564be1acd13f64f59056a173",
+    "scope": "Archived 146-stage assembly screen. The revised A4 inlet direction, screw seats and cover lift were checked separately.",
+    "source_cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e"
+  },
+  "changed_world_meshes": [
+    "CableSaddle",
+    "EatonCableNeutral",
+    "Jaw_37_right_jaw_bearing_stay",
+    "Part073"
+  ]
+}

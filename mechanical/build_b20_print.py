@@ -78,7 +78,7 @@ def has_one_printed_body(mesh):
     return all(outer.contains(shell.vertices).all() for shell in shells if shell.volume < 0.)
 
 
-def replace_mesh(data, replacement, *, indexed=False):
+def replace_mesh(data, replacement, *, indexed=False, filter_placement=None):
     if (not replacement.is_volume or not has_one_printed_body(replacement)
             or (not indexed and not replacement.nondegenerate_faces().all())):
         raise ValueError("The replacement must be one closed solid with nondegenerate faces")
@@ -92,12 +92,16 @@ def replace_mesh(data, replacement, *, indexed=False):
         raise ValueError("The indexed replacement changed the original print bounds")
     offset = (old_min + old_max) / 2 - replacement.bounds.mean(axis=0)
     offset[2] = old_min[2] - replacement.bounds[0, 2]
+    precision = 14 if indexed else 9
+    points, faces = replacement.vertices + offset, replacement.faces
+    if filter_placement is not None:
+        points = np.array([[float(f'{value:.{precision}g}') for value in point] for point in points])
+        points, faces = filter_placement(points, faces)
     vertices.clear()
     triangles.clear()
-    precision = 14 if indexed else 9
-    for x, y, z in replacement.vertices + offset:
+    for x, y, z in points:
         etree.SubElement(vertices, CORE + "vertex", x=f"{x:.{precision}g}", y=f"{y:.{precision}g}", z=f"{z:.{precision}g}")
-    for a, b, c in replacement.faces:
+    for a, b, c in faces:
         etree.SubElement(triangles, CORE + "triangle", v1=str(a), v2=str(b), v3=str(c))
     return serialize(model)
 

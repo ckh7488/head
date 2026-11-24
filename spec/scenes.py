@@ -25,9 +25,10 @@ class RateModel:
     report_period: float
     exhibit_neck_speed: tuple[float, float] | None = None
     return_neck_speed: tuple[float, float] | None = None
+    encoder_scale: tuple[tuple[float, float], ...] | None = None
 
     @classmethod
-    def read(cls, root):
+    def read(cls, root, logical_limits=None):
         source = (root / 'control/openrb/R5B1/R5B1.ino').read_text(encoding='utf-8')
         speeds = re.search(r'\bvelocity\[count\]\s*=\s*\{([^}]+)\}', source)
         goal = re.search(r'\bgoalPeriodMs\s*=\s*(\d+)', source)
@@ -43,8 +44,44 @@ class RateModel:
             match = re.search(rf'\b{name}\s*=\s*(\d+)\b', source)
             profiles.append(int(match[1]) * VELOCITY_UNIT_DEG_S if match else 0.)
         yaw, pitch, returning = profiles
+        scale = _encoder_scale(source, logical_limits) if logical_limits is not None else None
         return cls(speed[:5], int(goal[1]) / 1000, int(report[1]) / 1000,
-                   (yaw, pitch) if yaw and pitch else None, (returning, returning) if returning else None)
+                   (yaw, pitch) if yaw and pitch else None, (returning, returning) if returning else None,
+                   scale)
+
+
+def _encoder_scale(source, logical_limits):
+    """Translate the wire angles into the largest allowed commissioned encoder spans."""
+    def ticks(name):
+        match = re.search(rf'\b{name}\s*=\s*(\d+)u?\s*;', source)
+        if match is None:
+            raise ValueError(f'Missing firmware calibration setting {name}')
+        return int(match[1])
+
+    guards = re.search(r'\beyeCalibrationTicks\[\]\s*=\s*\{([^}]+)\}', source)
+    if guards is None:
+        raise ValueError('Missing firmware eye calibration limits')
+    eye = []
+    for expression in guards[1].split(','):
+        endpoint = re.fullmatch(r'\s*4096u\*(\d+)u/360u-positionTolerance\s*', expression)
+        if endpoint is None:
+            raise ValueError('Missing eye calibration and feedback tolerance relation')
+        eye.append(4096 * int(endpoint[1]) // 360 - ticks('positionTolerance'))
+    eye_yaw, eye_pitch = eye
+    neck_yaw = ticks('neckYawCalibrationTicks')
+    encoder = ((eye_yaw, eye_yaw), (eye_pitch, eye_pitch), (0, ticks('blinkTravelTicks')),
+               (neck_yaw, neck_yaw), (ticks('neckPitchMaxNegativeTicks'), ticks('neckPitchMaxPositiveTicks')))
+    return tuple(tuple(span * POSITION_TICK_DEG / abs(limit) if limit else 1.
+                       for span, limit in zip(axis, bounds, strict=True))
+                 for axis, bounds in zip(encoder, logical_limits, strict=True))
+
+
+def _encode_angles(angles, scale, *, to_motor):
+    if scale is None:
+        return tuple(angles)
+    scales = (axis[0] if angle < 0 else axis[1] for angle, axis in zip(angles, scale, strict=True))
+    return tuple(angle * factor if to_motor else angle / factor
+                 for angle, factor in zip(angles, scales, strict=True))
 
 
 @dataclass(frozen=True)
@@ -73,7 +110,7 @@ def _camera_error(yaw, pitch, camera_pitch, hfov):
 
 
 def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
-              blink=False, target_pitch=0., hide_at=None):
+              blink=False, target_pitch=0., hide_at=None, show_at=None):
     """Use ideal detections in the angular window and acceleration-free joints.
 
     A 30 Hz capture arrives after a fixed delay. Firmware goals are sampled every
@@ -82,7 +119,8 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
     """
     position = list(start)
     joint_speed = model.speed
-    goal = feedback = tuple(start)
+    goal = tuple(start)
+    feedback = _encode_angles(start, model.encoder_scale, to_motor=False)
     feedback_at = 0.
     pending = None
     frame_index = 0
@@ -94,7 +132,7 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
         t = min(tick * STEP_S, duration)
         history.append(tuple(position[3:5]))
         if t + 1e-9 >= next_report:
-            feedback = tuple(position)
+            feedback = _encode_angles(position, model.encoder_scale, to_motor=False)
             feedback_at = t
             next_report += model.report_period
         capture = frame_index / CAMERA_FPS
@@ -106,7 +144,7 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
             capture_yaw, capture_pitch = (a + (sample - lower) * (b - a)
                                           for a, b in zip(history[lower], history[upper], strict=True))
             error = _camera_error(bearing(capture) - capture_yaw, target_pitch, capture_pitch, hfov)
-            if hide_at is not None and capture >= hide_at:
+            if hide_at is not None and capture >= hide_at and (show_at is None or capture < show_at):
                 error = None
             decision = planner.step(error, feedback, t, blink_enabled=blink, feedback_at=feedback_at)
             trace.frames.append(Frame(capture, t, error is not None, decision.phase))
@@ -117,7 +155,8 @@ def _simulate(model, planner, bearing, duration, latency, hfov, start, *,
             active = decision.active or decision.keep_neutral
         if t + 1e-9 >= next_goal:
             if pending is not None:
-                goal, phase = pending
+                requested, phase = pending
+                goal = _encode_angles(requested, model.encoder_scale, to_motor=True)
                 pending = None
                 neck_speed = model.return_neck_speed if phase == 'RETURN' else model.exhibit_neck_speed
                 joint_speed = model.speed[:3] + neck_speed
@@ -207,12 +246,40 @@ def _loss_case(model, track, c, yaw, pitch):
     return passed, f'{label}: 유지 {delay:.2f}초, 복귀 최고 {peak:.2f}°/s, 중립 {"도달" if home and parked else "미도달"}'
 
 
+def _reacquire_case(model, track, c, direction, returning):
+    hide_at = 6.
+    show_at = hide_at + (c['loss_hold_max_s'] + .25 if returning else c['loss_hold_min_s'] / 2)
+    initial = direction * 32.
+    target = direction * (47. if returning else -14.)
+    run = _simulate(model, track['Planner'](exhibit=True), lambda t: initial if t < show_at else target,
+                    show_at + 4., c['camera_latency_s'], c['camera_hfov_deg'], track['ZERO'],
+                    hide_at=hide_at, show_at=show_at)
+    found = next((frame for frame in run.frames if frame.captured_at >= show_at and frame.detected
+                  and frame.phase == 'TRACK'), None)
+    label = f'새 얼굴 {target:+g}° ({"복귀 중" if returning else "응시 유지 중"})'
+    if found is None:
+        return False, f'{label}: 재포착 없음'
+    poses = [(t, pose) for t, pose in run.poses if t >= found.arrived_at]
+    baseline = poses[0][1]
+    sign = math.copysign(1., target - baseline[3] - baseline[0])
+    eye, neck = (next((t for t, pose in poses if sign * (pose[axis] - baseline[axis]) >= POSITION_TICK_DEG),
+                      None) for axis in (0, 3))
+    if eye is None or neck is None:
+        return False, f'{label}: 눈 및 목의 새 목표 방향 운동 미확인'
+    return eye < neck, f'{label}: 눈 {eye-found.arrived_at:.3f}초 / 목 {neck-found.arrived_at:.3f}초'
+
+
 def _walk(model, track, c):
     if model.exhibit_neck_speed is None or model.return_neck_speed is None:
         return 'UNVERIFIED', '전시 추적과 복귀에 각각 적용되는 펌웨어 속도 설정이 필요합니다.'
     walk = [_walk_case(model, track, c, direction) for direction in (1, -1)]
     losses = [_loss_case(model, track, c, yaw, pitch) for yaw, pitch in ((-35., -10.), (35., 8.))]
-    measured = [case[1] for case in (*walk, *losses)]
+    reacquired = []
+    if model.encoder_scale is not None:
+        reacquired = [_reacquire_case(model, track, c, direction, returning)
+                      for direction in (-1, 1) for returning in (False, True)]
+    checks = (*walk, *losses, *reacquired)
+    measured = [case[1] for case in checks]
     context = (f'정면 대기, 거리 {c["distance_m"]:g} m, 보행 {c["walk_speed_mps"]:g} m/s, '
                f'±{c["scoring_range_deg"]:g}°, 영상 {CAMERA_FPS} fps·지연 {c["camera_latency_s"]:g}초·'
                f'수평 화각 {c["camera_hfov_deg"]:g}°를 가정한 속도 제한 모델. 포착은 첫 가시 프레임의 '
@@ -220,7 +287,10 @@ def _walk(model, track, c):
                f'{c["scoring_range_deg"]:g}°까지 미검출 중에도 시선 오차를 계산합니다. '
                '소실 대기는 첫 미검출 도착부터 실제 목 이동까지 잽니다. '
                '목 속도는 좌우·상하 각속도의 합성값이고, 중립 허용은 엔코더 한 틱입니다.')
-    return ('PASS' if all(case[0] for case in (*walk, *losses)) else 'FAIL', ' / '.join(measured) + '. ' + context)
+    if model.encoder_scale is not None:
+        eye, _, _, neck, _ = _encode_angles([hi for _, hi in track['LIMITS']], model.encoder_scale, to_motor=True)
+        context += f' 현재 펌웨어의 최대 보정 폭은 눈 좌우 ±{eye:.2f}°, 목 좌우 ±{neck:.2f}°입니다.'
+    return ('PASS' if all(case[0] for case in checks) else 'FAIL', ' / '.join(measured) + '. ' + context)
 
 
 def _turn(model, track, c, camera):
@@ -344,11 +414,11 @@ def _blink(model, track, c):
             f'닫기−열기 시간 차 최대 {delta:+.3f}초. ' + context)
 
 
-def check_scenes(root: Path, criteria: dict) -> dict[str, tuple[str, str]]:
+def check_scenes(root: Path, criteria: dict, *, look_up=_look_up, calibrated=False) -> dict[str, tuple[str, str]]:
     track = runpy.run_path(str(root / 'control/pc/track.py'))
-    model = RateModel.read(root)
+    model = RateModel.read(root, track['LIMITS'] if calibrated else None)
     walk = criteria['S01_walk_by']
     return {'S01': _walk(model, track, walk),
             'S01b': _turn(model, track, criteria['S01b_no_whip'], walk),
-            'S02': _look_up(root, track, criteria['S02_look_up']),
+            'S02': look_up(root, track, criteria['S02_look_up']),
             'S03': _blink(model, track, criteria['S03_blink'])}

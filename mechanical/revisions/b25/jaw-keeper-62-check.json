@@ -1,0 +1,499 @@
+{
+  "source_sha256": "51ffd25b975ce01e541812e0fac97c98199579a22c98b474205d9e11fcf27246",
+  "cases": {
+    "Part019 / Jaw_37_right_jaw_bearing_stay": {
+      "stock_nominal_gap_mm": 0.1014930742488958,
+      "modified_nominal_gap_mm": 0.1014930742488958,
+      "jaw_stage_z_mm": -0.0,
+      "fixed_nearest_world_mm": [
+        56.25,
+        -5.907118995608563,
+        109.540914094683
+      ],
+      "stay_nearest_seated_mm": [
+        56.25,
+        -6.0,
+        109.5
+      ],
+      "direction_fixed_to_stay": [
+        0.0,
+        -0.9151462311966303,
+        -0.4031220355259727
+      ],
+      "allowed_local_size_realizations": [
+        {
+          "factor": 0.95,
+          "on_fixed_mm": [
+            0.0,
+            -0.095,
+            -0.19
+          ],
+          "on_stay_mm": [
+            -0.0,
+            0.19,
+            0.19
+          ],
+          "overlap_volume_mm3": 0.4125352200097938,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.18999999999999773
+          ]
+        },
+        {
+          "factor": 0.8,
+          "on_fixed_mm": [
+            0.0,
+            -0.08000000000000002,
+            -0.16000000000000003
+          ],
+          "on_stay_mm": [
+            -0.0,
+            0.16000000000000003,
+            0.16000000000000003
+          ],
+          "overlap_volume_mm3": 0.2591275086023327,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.1599999999999966
+          ]
+        },
+        {
+          "factor": 0.65,
+          "on_fixed_mm": [
+            0.0,
+            -0.065,
+            -0.13
+          ],
+          "on_stay_mm": [
+            -0.0,
+            0.13,
+            0.13
+          ],
+          "overlap_volume_mm3": 0.140281822935727,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.12999999999999545
+          ]
+        },
+        {
+          "factor": 0.5,
+          "on_fixed_mm": [
+            0.0,
+            -0.05,
+            -0.1
+          ],
+          "on_stay_mm": [
+            -0.0,
+            0.1,
+            0.1
+          ],
+          "overlap_volume_mm3": 0.05754066693065472,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.09999999999999432
+          ]
+        }
+      ]
+    },
+    "Part011 / Jaw_37_right_jaw_bearing_stay": {
+      "stock_nominal_gap_mm": 0.165679931640625,
+      "modified_nominal_gap_mm": 0.165679931640625,
+      "jaw_stage_z_mm": -1.2,
+      "fixed_nearest_world_mm": [
+        55.5,
+        -6.0,
+        106.46000366210937
+      ],
+      "stay_nearest_seated_mm": [
+        55.665679931640625,
+        -6.0,
+        107.66000366210938
+      ],
+      "direction_fixed_to_stay": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "allowed_local_size_realizations": [
+        {
+          "factor": 0.95,
+          "on_fixed_mm": [
+            0.19,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.095,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0004871069531197079,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.8,
+          "on_fixed_mm": [
+            0.16000000000000003,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.08000000000000002,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.00011770696171507951,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.65,
+          "on_fixed_mm": [
+            0.13,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.065,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 7.227344958689276e-06,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.5,
+          "on_fixed_mm": [
+            0.1,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.05,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "Part073 / Jaw_36_left_jaw_servo_stay": {
+      "stock_nominal_gap_mm": 0.279998779296875,
+      "modified_nominal_gap_mm": 0.279998779296875,
+      "jaw_stage_z_mm": -0.0,
+      "fixed_nearest_world_mm": [
+        -65.280163410537,
+        -35.779998779296875,
+        94.08129641032025
+      ],
+      "stay_nearest_seated_mm": [
+        -65.280163410537,
+        -35.5,
+        94.08129641032025
+      ],
+      "direction_fixed_to_stay": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "allowed_local_size_realizations": [
+        {
+          "factor": 0.95,
+          "on_fixed_mm": [
+            0.0,
+            0.095,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.0,
+            -0.19,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.003926789184689391,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.18999999999999773,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.8,
+          "on_fixed_mm": [
+            0.0,
+            0.08000000000000002,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.0,
+            -0.16000000000000003,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.1599999999999966,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.65,
+          "on_fixed_mm": [
+            0.0,
+            0.065,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.0,
+            -0.13,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.13000000000000256,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.5,
+          "on_fixed_mm": [
+            0.0,
+            0.05,
+            0.0
+          ],
+          "on_stay_mm": [
+            -0.0,
+            -0.1,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0,
+            0.10000000000000142,
+            0.0
+          ]
+        }
+      ]
+    },
+    "Part073 / Jaw_37_right_jaw_bearing_stay": {
+      "stock_nominal_gap_mm": 0.279998779296875,
+      "modified_nominal_gap_mm": 0.279998779296875,
+      "jaw_stage_z_mm": -0.0,
+      "fixed_nearest_world_mm": [
+        69.27999877929688,
+        -18.27635439162106,
+        97.68066245996876
+      ],
+      "stay_nearest_seated_mm": [
+        69.0,
+        -18.27635439162106,
+        97.68066245996876
+      ],
+      "direction_fixed_to_stay": [
+        -1.0,
+        0.0,
+        0.0
+      ],
+      "allowed_local_size_realizations": [
+        {
+          "factor": 0.95,
+          "on_fixed_mm": [
+            -0.19,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            0.095,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.01375361496038743,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.09499999999999886,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.8,
+          "on_fixed_mm": [
+            -0.16000000000000003,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            0.08000000000000002,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.0799999999999983,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.65,
+          "on_fixed_mm": [
+            -0.13,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            0.065,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.06499999999999773,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "factor": 0.5,
+          "on_fixed_mm": [
+            -0.1,
+            0.0,
+            0.0
+          ],
+          "on_stay_mm": [
+            0.05,
+            -0.0,
+            -0.0
+          ],
+          "overlap_volume_mm3": 0.0,
+          "fixed_outer_dimension_change_mm": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "stay_outer_dimension_change_mm": [
+            0.04999999999999716,
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  },
+  "review_fragment_sha256": "ae5add573ef9245f048a2669f79292edc5d2eceb03ae2251c8729c0e66c1442b",
+  "review_fragment_source_full_cad_sha256": "b42d9d03b61958e34b2644a0e8f1bba36c1dc710d45b0801c99d8f6122bb392d",
+  "screen": {
+    "retention_points": 3,
+    "input_force_N": 5.0,
+    "maximum_sampled_axial_normal_stress_MPa": 4.136292826029032,
+    "stress_limit_across_print_layers_MPa": 5.0,
+    "structural_scope": "Linear section calculation under 5 N at sampled jaw surface points, not full torsion, pull-out, permanent set or printed assembly validation.",
+    "matched_finished_receiver_max_diametral_clearance_mm": 0.06,
+    "local_outer_arm_removed_mm3": 0.6453281181115926,
+    "matched_powered_sample_minimum_mm": 0.45915675078083495,
+    "frame_drop_new_material_min_mm": 5.95,
+    "pitch_shaft_insertion_minima_mm": [
+      0.7478856,
+      0.9
+    ],
+    "front_and_rear_cover_approach_minima_mm": [
+      0.5999969,
+      5.8819771
+    ],
+    "install_hard_stop": "A permitted print tolerance causes positive overlap on the assembly path. Public print project keeps the 62-tick right stop, while the three-point model remains a separate native review fragment."
+  }
+}

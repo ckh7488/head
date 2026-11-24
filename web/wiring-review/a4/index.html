@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="R5 B25 __REVISION__ 서보 허브의 KiCad 회로도, PCB, 3D 모델과 JLCPCB 발주 자료">
+  <title>R5 B25 · __REVISION__ 서보 허브</title>
+  <style>__CSS__</style>
+</head>
+<body>
+<main>
+  <header class="mast">
+    <div><p class="product">R5 B25 <span>서보 허브 __REVISION__</span></p><h1>회로와 기판</h1></div>
+    <div class="board-badge"><b id="board-size"></b><span id="board-stack"></span></div>
+  </header>
+
+  <nav class="modes" aria-label="서보 허브 보기">
+    <button type="button" data-view="sch" aria-pressed="true">회로도</button>
+    <button type="button" data-view="pcb" aria-pressed="false">PCB</button>
+    <button type="button" data-view="model" aria-pressed="false">3D</button>
+    <button type="button" data-view="order" aria-pressed="false">BOM · 발주</button>
+  </nav>
+  <div class="workbench" id="workbench">
+    <section class="stage" aria-label="회로도·PCB·3D">
+      <div class="subnav">
+        <div id="sheet-actions"><button type="button" data-sheet="all">전체 회로</button><button type="button" data-sheet="J1">전원 입력</button><button type="button" data-sheet="U2">5 V 전류 제한</button><button type="button" data-sheet="J3">TTL 통신</button></div>
+        <div id="board-actions" hidden><span id="layer-buttons" role="group" aria-label="동박 층"></span><label><input type="checkbox" id="copper-toggle" checked> 동박</label><label><input type="checkbox" id="silk-toggle" checked> 실크</label><label><input type="checkbox" id="ref-toggle" checked> 부품 번호</label></div>
+        <div id="model-actions" hidden><button type="button" data-camera="top">윗면</button><button type="button" data-camera="bottom">밑면</button><button type="button" data-camera="iso">사선</button></div>
+        <div class="zoom"><button type="button" id="zoom-in" aria-label="확대">+</button><button type="button" id="zoom-out" aria-label="축소">−</button><button type="button" id="fit">맞춤</button></div>
+      </div>
+      <div class="viewport" id="sch-view" data-pane="sch">
+        __SCHEMATIC__
+      </div>
+      <div class="viewport" id="pcb-view" data-pane="pcb" hidden>
+        <svg id="pcb" viewBox="-1.6 -1.4 73.2 37.8" aria-label="KiCad 원본 PCB 도면"></svg>
+      </div>
+      <div class="viewport" id="model-view" data-pane="model" hidden>
+        <div id="model-canvas" aria-label="3D 기판"></div><p id="model-status" role="status"></p>
+      </div>
+      <p id="caption">부품 번호를 누르면 핀과 연결 회로를 확인합니다. 드래그로 이동하고 휠로 확대합니다.</p>
+    </section>
+
+    <aside class="inspector" aria-label="부품 검사">
+      <div class="selector"><label for="part">부품 찾기</label><select id="part"></select></div>
+      <div id="selection" aria-live="polite"></div>
+      <div id="pins"></div>
+      <div id="net-info"></div>
+    </aside>
+  </div>
+
+  <section id="order" hidden>
+    <div class="order-grid">
+      <section class="paper">
+        <h2>권장 발주 구성</h2>
+        <p id="order-stack"></p>
+        <ol>
+          <li id="order-process"></li>
+          <li id="order-orientation"></li>
+          <li id="order-hand"></li>
+        </ol>
+        <p id="order-quote"></p>
+        <div class="source-links"><a href="https://jlcpcb.com/capabilities/pcb-capabilities">기판 규격</a><a href="https://jlcpcb.com/capabilities/pcb-assembly-capabilities">실장 규격</a><a href="https://jlcpcb.com/help/article/jlcpcb-surface-finish">표면처리</a><a href="https://jlcpcb.com/help/article/pcb-assembly-price">실장 비용</a></div>
+        <h3>첫 통전</h3>
+        <p>F1·F2 퓨즈와 모터·OpenRB를 뺀 채 입력 도통을 확인하고 J2 잠금쇠를 먼저 고정합니다. 어댑터를 하나씩 켜서 TP3(GND) 기준 F1 입력에 +5 V, F2 입력에 +12 V가 들어오는지 잽니다.</p>
+        <a href="https://github.com/ckh7488/head/blob/fix/r5-b24-final-validation/electronics/README.md#전원-실물-검수">전원 검수 순서</a>
+      </section>
+      <section class="paper">
+        <h2>발주 파일</h2>
+        <div id="downloads"></div>
+        <details class="placement" open><summary>밑면 U1–U3 방향 대조</summary><img id="placement-image" alt="밑면에서 본 U1–U3의 1번 핀 위치"></details>
+        <h3>수납땜 확대 검사</h3>
+        <p id="solder-access"></p>
+        <button type="button" class="action" id="inspect-fuse">PCB 밑면에서 F1 보기</button>
+      </section>
+    </div>
+    <section class="paper">
+      <h2>JLCPCB 공개 한계와 기판 치수</h2>
+      <div id="limits"></div>
+    </section>
+    <section class="paper">
+      <h2>구매 BOM</h2>
+      <p>H1–H4와 TP1–TP4는 기판에 포함됩니다.</p>
+      <div class="table-scroll" id="bom"></div>
+    </section>
+  </section>
+  <footer>
+    <span id="provenance"></span>
+    <a href="https://github.com/ckh7488/head/pull/1">KiCad 소스 PR</a>
+  </footer>
+</main>
+<script type="application/json" id="board-data">__DATA__</script>
+<script>__SCRIPT__</script>
+</body>
+</html>

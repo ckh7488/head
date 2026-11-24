@@ -1,0 +1,677 @@
+{
+  "source_project": "R5-B25-P2S.3mf",
+  "source_sha256": "f3dfbbbf4494ea4cfe5ff7a07aa87b7ba0edf1dd143e32ef115f476beec45dd9",
+  "archive": "R5-B25-Bearing-Fit-STLs.zip",
+  "archive_sha256": "48e2eb9a14bee25dad731ef7bc4a12da9269bb875cf3e2978e19aa2666ff042c",
+  "parts": [
+    {
+      "source_file": "13_left_eye_cradle_mount-B24.stl",
+      "plate": 7,
+      "object_id": 38,
+      "object_path": "3D/Objects/object_19.model",
+      "source_mesh_sha256": "453989aff747ad8e60c3ca28e51140a3c2609ef0bbfdb21118412137d36a7030",
+      "part": "13L",
+      "cad_id": "Part025",
+      "print_axis": "Z",
+      "bearing": "NSK MR63ZZMC3P6",
+      "source_pocket_mm": 6.24,
+      "source_depth_mm": 2.53,
+      "shoulder_mm": 5.2,
+      "variants": [
+        {
+          "file": "p7-13L-bearing-pocket-D6.05.stl",
+          "sha256": "5ab2586dd03c5425152d12d687a957b3c540659d6520ebe2225c9e29d8e9c22f",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 4.63805,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.05,
+              "mesh_diameter_mm": [
+                6.048108,
+                6.050014
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13L-bearing-pocket-D6.10.stl",
+          "sha256": "80cafc3b0a057e728179709d05e1ace07f53bd4c04b018c00edf98cbaa809cbd",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 3.431419,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.1,
+              "mesh_diameter_mm": [
+                6.098092,
+                6.100014
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13L-bearing-pocket-D6.15.stl",
+          "sha256": "21e3acf79b401b510622f42823349999dc52539902c3a64f55197a144c8e8c5a",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 2.21485,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.15,
+              "mesh_diameter_mm": [
+                6.148077,
+                6.150013
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13L-bearing-pocket-D6.20.stl",
+          "sha256": "6576154e4f603a265920b52af4c538e1b225a61be830b16d6b2c0b9e3b87ced7",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 0.988342,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.2,
+              "mesh_diameter_mm": [
+                6.198062,
+                6.200013
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13L-bearing-pocket-D6.25.stl",
+          "sha256": "2625a05457c5943a5f9c24baa31ca3f6b6da8348ead14e4c9358d4993a49313e",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": -0.248075,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.25,
+              "mesh_diameter_mm": [
+                6.248045,
+                6.250014
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source_file": "13_right_eye_cradle_mount-B24.stl",
+      "plate": 7,
+      "object_id": 40,
+      "object_path": "3D/Objects/object_20.model",
+      "source_mesh_sha256": "98b871122ab8ee7425358cc7aabe463dd9e961e3912a8166ba8922667c81ba49",
+      "part": "13R",
+      "cad_id": "Part027",
+      "print_axis": "Z",
+      "bearing": "NSK MR63ZZMC3P6",
+      "source_pocket_mm": 6.24,
+      "source_depth_mm": 2.53,
+      "shoulder_mm": 5.2,
+      "variants": [
+        {
+          "file": "p7-13R-bearing-pocket-D6.05.stl",
+          "sha256": "6f2768ea69ca8ed021976f5099b475a024ec2cf6f770351d9fd6db155acb4e6a",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 4.63805,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.05,
+              "mesh_diameter_mm": [
+                6.048108,
+                6.050014
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13R-bearing-pocket-D6.10.stl",
+          "sha256": "b41e15104505b0374ad8acd239a4e6895d1c60d7a2d71a27ab7f4e283e2b8c2d",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 3.431419,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.1,
+              "mesh_diameter_mm": [
+                6.098092,
+                6.100014
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13R-bearing-pocket-D6.15.stl",
+          "sha256": "6ddbd0a683ee907bc0181a689d94303d9d0efaa54604fc1fb78ccec176f2eb20",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 2.21485,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.15,
+              "mesh_diameter_mm": [
+                6.148077,
+                6.150013
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13R-bearing-pocket-D6.20.stl",
+          "sha256": "5f9d9bae0e442f219b06f36b8fe0de986b86111915e4c0efc66db92a9d70dac9",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": 0.988342,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.2,
+              "mesh_diameter_mm": [
+                6.198062,
+                6.200013
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        },
+        {
+          "file": "p7-13R-bearing-pocket-D6.25.stl",
+          "sha256": "b8e0df03646d6cfe59e3970aab946a848420d3c04791a05668451ab8e47f5da7",
+          "facets": 2028,
+          "print_dimensions_mm": [
+            37.999382,
+            76.998871,
+            4.399994
+          ],
+          "min_triangle_area_mm2": 0.01781240990385413,
+          "volume_delta_mm3": -0.248075,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 6.25,
+              "mesh_diameter_mm": [
+                6.248045,
+                6.250014
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 5.2,
+              "mesh_diameter_mm": [
+                5.198372,
+                5.200014
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "source_file": "37_right_cheek_bearing_stay-B22.stl",
+      "plate": 9,
+      "object_id": 96,
+      "object_path": "3D/Objects/object_48.model",
+      "source_mesh_sha256": "2b0358ee47dacb6d9e4b02e62450cc690e381d0766d3e0bc78b626a06d740db3",
+      "part": "37",
+      "cad_id": "Jaw_37_right_jaw_bearing_stay",
+      "print_axis": "Z",
+      "bearing": "MR104ZZ",
+      "source_pocket_mm": 10.15,
+      "source_depth_mm": 4.02,
+      "source_lead_in_mm": 10.25,
+      "shoulder_mm": 7.1,
+      "variants": [
+        {
+          "file": "p9-37-bearing-pocket-D10.05.stl",
+          "sha256": "05c730015273552c6f02bd8ad586f3455ec7cb6cde50bf3a48f4cfdd729a83df",
+          "facets": 10728,
+          "print_dimensions_mm": [
+            37.5,
+            24.998768,
+            30.599712
+          ],
+          "min_triangle_area_mm2": 8.904899004846811e-07,
+          "volume_delta_mm3": 3.179862,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 10.05,
+              "mesh_diameter_mm": [
+                10.047352,
+                10.050007
+              ]
+            },
+            "lead_in": {
+              "nominal_diameter_mm": 10.2,
+              "mesh_diameter_mm": [
+                10.198629,
+                10.200006
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 7.1,
+              "mesh_diameter_mm": [
+                7.098135,
+                7.100007
+              ]
+            }
+          },
+          "final_fit_change_mm3": 3.179865605716259,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ],
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.59785253361315,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.10.stl",
+          "sha256": "b4e7d79748e4b4b6d8fb3abfa363f8c97f21c37165cb28b491e798eea7dc8404",
+          "facets": 10728,
+          "print_dimensions_mm": [
+            37.5,
+            24.998768,
+            30.599712
+          ],
+          "min_triangle_area_mm2": 8.904899004846811e-07,
+          "volume_delta_mm3": -4e-06,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 10.1,
+              "mesh_diameter_mm": [
+                10.097339,
+                10.100007
+              ]
+            },
+            "lead_in": {
+              "nominal_diameter_mm": 10.2,
+              "mesh_diameter_mm": [
+                10.198629,
+                10.200006
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 7.1,
+              "mesh_diameter_mm": [
+                7.098135,
+                7.100007
+              ]
+            }
+          },
+          "final_fit_change_mm3": 0.0,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ],
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.59785253361315,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.15.stl",
+          "sha256": "7c0e0106d80e3d07876802bd66fa92771f4e2d7b9822c3364fcc3d3eb09a29a3",
+          "facets": 10278,
+          "print_dimensions_mm": [
+            37.5,
+            24.998768,
+            30.599712
+          ],
+          "min_triangle_area_mm2": 8.904899004846811e-07,
+          "volume_delta_mm3": -3.392777,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 10.15,
+              "mesh_diameter_mm": [
+                10.147968,
+                10.150001
+              ]
+            },
+            "lead_in": {
+              "nominal_diameter_mm": 10.25,
+              "mesh_diameter_mm": [
+                10.247947,
+                10.250001
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 7.1,
+              "mesh_diameter_mm": [
+                7.0978,
+                7.100007
+              ]
+            }
+          },
+          "final_fit_change_mm3": -3.3597556128579527,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ],
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.6013201653177,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.20.stl",
+          "sha256": "ddff5188d8b8c1fcf5094d78910d212d91ed4b8ae464862e7235f87f96846c6b",
+          "facets": 10556,
+          "print_dimensions_mm": [
+            37.5,
+            24.998768,
+            30.599712
+          ],
+          "min_triangle_area_mm2": 8.904899004846811e-07,
+          "volume_delta_mm3": -6.746611,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 10.2,
+              "mesh_diameter_mm": [
+                10.198634,
+                10.200001
+              ]
+            },
+            "lead_in": {
+              "nominal_diameter_mm": 10.3,
+              "mesh_diameter_mm": [
+                10.298621,
+                10.300001
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 7.1,
+              "mesh_diameter_mm": [
+                7.0978,
+                7.100007
+              ]
+            }
+          },
+          "final_fit_change_mm3": -6.7436139243909565,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ],
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.6013201653177,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
+        },
+        {
+          "file": "p9-37-bearing-pocket-D10.25.stl",
+          "sha256": "a20405bd6ce81dfb77eed1d1ade31267e358b189befec1718b8b57bcfa0d44ea",
+          "facets": 10566,
+          "print_dimensions_mm": [
+            37.5,
+            24.998768,
+            30.599712
+          ],
+          "min_triangle_area_mm2": 8.904899004846811e-07,
+          "volume_delta_mm3": -10.116934,
+          "sections": {
+            "pocket": {
+              "nominal_diameter_mm": 10.25,
+              "mesh_diameter_mm": [
+                10.248641,
+                10.250001
+              ]
+            },
+            "lead_in": {
+              "nominal_diameter_mm": 10.35,
+              "mesh_diameter_mm": [
+                10.348628,
+                10.350001
+              ]
+            },
+            "shoulder": {
+              "nominal_diameter_mm": 7.1,
+              "mesh_diameter_mm": [
+                7.0978,
+                7.100007
+              ]
+            }
+          },
+          "final_fit_change_mm3": -10.114600447866906,
+          "final_dimensions_mm": [
+            37.5,
+            24.998767614364624,
+            30.599712371826172
+          ],
+          "right_locator_wall_mm": 1.4395511876206561,
+          "relief_removed_mm3": 39.6013201653177,
+          "opening_stop_relief_removed_mm3": 5.301017882537253,
+          "opening_stop_cutter_residual_mm3": 1.0337350349798564e-06,
+          "opening_stop_wall_area_mm2": 17.701777502314457
+        }
+      ],
+      "yoke_facing_relief_depth_added_mm": 0.7,
+      "source_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+      "opening_stop_relief_cutter_world_axes_mm": {
+        "x": [
+          45.9,
+          54.0
+        ],
+        "z": [
+          69.0,
+          82.0
+        ],
+        "y_at_z69": -10.525,
+        "y_increase_per_z": 0.06
+      },
+      "source_sections": {
+        "pocket": {
+          "nominal_diameter_mm": 10.15,
+          "mesh_diameter_mm": [
+            10.147967,
+            10.150002
+          ]
+        },
+        "lead_in": {
+          "nominal_diameter_mm": 10.25,
+          "mesh_diameter_mm": [
+            10.247947,
+            10.250001
+          ]
+        },
+        "shoulder": {
+          "nominal_diameter_mm": 7.1,
+          "mesh_diameter_mm": [
+            7.0978,
+            7.100008
+          ]
+        }
+      }
+    },
+    {
+      "source_file": "24_blink_rail_with_bearing_shoulders.stl",
+      "plate": 7,
+      "object_id": 36,
+      "object_path": "3D/Objects/object_18.model",
+      "source_mesh_sha256": "b3305f3496bcddde0292efd31ce9b0f26c9dd32df89a9163a570cd141e9971c9",
+      "part": "24",
+      "cad_id": "Part063",
+      "print_axis": "X",
+      "bearing": "MR104ZZ",
+      "source_pocket_mm": 10.24,
+      "source_depth_mm": 5.0,
+      "shoulder_mm": 9.36,
+      "variants": [],
+      "use": "Use the source rail, finish to Ø10.24 and fit the B25 locating-band shims.",
+      "source_sections": {
+        "left_pocket": {
+          "nominal_diameter_mm": 10.24,
+          "mesh_diameter_mm": [
+            10.236809,
+            10.240017
+          ]
+        },
+        "left_shoulder": {
+          "nominal_diameter_mm": 9.36,
+          "mesh_diameter_mm": [
+            9.357104,
+            9.359997
+          ]
+        },
+        "right_pocket": {
+          "nominal_diameter_mm": 10.24,
+          "mesh_diameter_mm": [
+            10.236803,
+            10.24001
+          ]
+        },
+        "right_shoulder": {
+          "nominal_diameter_mm": 9.36,
+          "mesh_diameter_mm": [
+            9.357104,
+            9.359997
+          ]
+        }
+      }
+    }
+  ],
+  "baseline_fit_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "geometry_after_final_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "rebuilt_family": "B10",
+  "b10_variant_endpoint_slices": {
+    "10.05": {
+      "source_project_sha256": "495265bd4231684b0d0ae6178e5ab7d521744f72f4036029922a17d2e0f78a7e",
+      "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
+      "plate_sha256": "98f3804623db528a7e1b55cf607908cd2d7eee2ff09176dba40f880e7865dfc7",
+      "gcode_sha256": "1308b7c27c28c16d249e61cf696951dbf1177d8eba8ce4fa01146d43cc806ab4",
+      "return_code": 0,
+      "warning": "",
+      "print_objects": 7,
+      "seconds": 6876.617,
+      "grams": 28.968704
+    },
+    "10.25": {
+      "source_project_sha256": "194de06acbfbcd10bbb1aa6e01eeb6c5cf38203e5b39147d470763dceb7528a8",
+      "profile_sha256": "048d554720bf7224d30d37bdb0113987ae8e9481bad728f65385ced0c4809bda",
+      "plate_sha256": "baa15a3639f295925e773b7c098704991ae2b7020a72024fd8be52a8609e3b2f",
+      "gcode_sha256": "e4fb6d6de3cac8348571786670d6f9955b0b38c78f876174e7ba9eca55ce6a39",
+      "return_code": 0,
+      "warning": "",
+      "print_objects": 7,
+      "seconds": 6859.296,
+      "grams": 28.959356
+    }
+  }
+}

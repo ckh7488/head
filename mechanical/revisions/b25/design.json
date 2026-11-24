@@ -1,0 +1,209 @@
+{
+  "source_cad_sha256": "8c1b2700daa8e3b3d4c99ddfbf6d0c149cbc0952d44f5add68c199aa5101a3e2",
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
+  "p2s_sha256": "9d643f376a4946927d7fa368ced98c634b1a25edcf732555859aec52cccaea56",
+  "geometry": {
+    "rear_skull_retention": {
+      "parts": [
+        "Part019",
+        "Part074"
+      ],
+      "stations": {
+        "left": {
+          "screw": "RearSkullScrewLeft",
+          "nut": "RearSkullNutLeft",
+          "axis": [
+            1,
+            0,
+            0
+          ],
+          "seat_mm": [
+            -77.65,
+            27.7,
+            117.75
+          ],
+          "nut_axis": [
+            -1,
+            0,
+            0
+          ],
+          "nut_seat_mm": [
+            -62.21,
+            27.7,
+            117.75
+          ],
+          "length_mm": 18.0,
+          "thread_past_nut_mm": 2.559999999999995,
+          "blind_bore_floor_abs_x_mm": 58.8
+        },
+        "right": {
+          "screw": "RearSkullScrewRight",
+          "nut": "RearSkullNutRight",
+          "axis": [
+            -1,
+            0,
+            0
+          ],
+          "seat_mm": [
+            75.3,
+            27.7,
+            117.75
+          ],
+          "nut_axis": [
+            1,
+            0,
+            0
+          ],
+          "nut_seat_mm": [
+            62.21,
+            27.7,
+            117.75
+          ],
+          "length_mm": 16.0,
+          "thread_past_nut_mm": 2.9100000000000037,
+          "blind_bore_floor_abs_x_mm": 58.949999999999996
+        }
+      },
+      "shell_removal_offset_mm": [
+        0.0,
+        68.0,
+        0.0
+      ],
+      "radial_face_relief_mm": 0.3499999999999943
+    },
+    "blink_fit": {
+      "shell": {
+        "part": "Part073",
+        "source_cad_sha256": "eb7fb3ff1ab57e6850a2d00384eb7eeb5a5158f1cb3f249a5ebac270888f460e",
+        "reinstated_mm3": 0.9755646232806612,
+        "restored_bounds_mm": [
+          [
+            -55.2,
+            -30.96,
+            127.95
+          ],
+          [
+            -54.14,
+            -28.97,
+            129.58
+          ]
+        ]
+      },
+      "left_lid": {
+        "part": "Part078",
+        "relief_bounds_mm": [
+          [
+            -55.1,
+            -35.0,
+            106.0
+          ],
+          [
+            -54.2,
+            -27.0,
+            111.5
+          ]
+        ],
+        "removed_mm3": 4.09696358083238,
+        "retained_pin_cap_radius_mm": 1.35,
+        "bearing_bore_and_axial_pin_stop_unchanged": true
+      },
+      "maximum_radial_bearing_center_deviation_mm": 0.025,
+      "bearing_fit": {
+        "finished_relieved_pocket_diameter_mm": 10.24,
+        "retained_outboard_shoulder_diameter_mm": 9.36,
+        "centred_locating_band_width_mm": 1.2,
+        "nominal_band_ID_minus_measured_bearing_OD_mm": 0.03,
+        "inboard_axial_end_float_per_bearing_mm": 0.1
+      },
+      "prints": {
+        "28_skull_front_with_camera_tray-B24.stl": "28_skull_front_with_camera_tray-B25.npz",
+        "32_left_eyelid-B21.stl": "32_left_eyelid-B25.stl"
+      }
+    },
+    "hatch_terminal": {
+      "part": "HubBodyJ2",
+      "installed_height_mm": 13.8,
+      "datasheet": "https://www.phoenixcontact.com/en-pc/products/pcb-terminal-block-mkds-15-2-508-1715721"
+    },
+    "heat_set_inserts": {
+      "report": "heat-set-checks.json",
+      "socket_head": 18,
+      "pin_retainers": 9
+    },
+    "right_jaw_and_local_rotor_reliefs": {
+      "report": "local-geometry-checks.json"
+    },
+    "jaw_stop_at_62_ticks": {
+      "report": "jaw-62-stop.json"
+    },
+    "A4_station": {
+      "revision": "A4",
+      "evidence": "a4-supply-recheck.json",
+      "historical": "a4-assembly.json",
+      "upstream_W6_W7_model_complete": true
+    },
+    "camera_eaton_R18": {
+      "evidence": "camera-r18-recheck.json",
+      "active_mm": 550.0
+    },
+    "jaw_final_relief": {
+      "source_trial": "stay_corners_trial_5",
+      "evidence": "jaw-final-relief-verification.json",
+      "pitch_clearance": "below_required"
+    },
+    "right_locator_reinforcement": {
+      "evidence": "print-build.json",
+      "right_stay_nominal_wall_mm": 1.43955,
+      "frame_minimum_nominal_wall_outside_insert_mm": 1.74938,
+      "yoke_clearance_disposition": "trial_print"
+    },
+    "eye_yaw_drive_slot": {
+      "part": "Part037",
+      "cradle": "Part024",
+      "evidence": "eye-yaw-clearance.json"
+    },
+    "pitch_pin_reinforcement": {
+      "part": "Part019",
+      "evidence": "pitch-pin-ligament.json"
+    },
+    "right_cheek_yoke_relief": {
+      "part": "Jaw_37_right_jaw_bearing_stay",
+      "evidence": "yoke-jaw-cut.json"
+    },
+    "service_covers": {
+      "board": "A4",
+      "evidence": "cover-service.json"
+    },
+    "a4_collar_tip_clearance": {
+      "tip_relief_diameter_mm": 3.6,
+      "tip_relief_floor_z_mm": -62.75
+    },
+    "jaw_opening_stop_wall": {
+      "part": "Jaw_37_right_jaw_bearing_stay",
+      "y_at_z69_mm": -10.525,
+      "y_change_mm": 0.3,
+      "native_removed_mm3": 5.301017882537249,
+      "print_removed_mm3": 5.301019269545119
+    },
+    "camera_neutral": {
+      "part": "EatonCableNeutral",
+      "from_upper_route_check": true,
+      "free_span_control_offset_yz_mm": [
+        3.75,
+        -1.75
+      ],
+      "cut_mm": 550
+    },
+    "front_skull_sync": {
+      "part": "Part073",
+      "integrated_tray_reference": "Part065",
+      "evidence": "front-shell-sync.json"
+    }
+  },
+  "print_inputs_sha256": {
+    "09_head_frame-B25.stl": "7b3128f2e279c71e2172a2080526c769209d681411434aaf983a8f9b1d6ad8aa",
+    "28_skull_front_with_camera_tray-B25.npz": "0b00f02930b7211f390b0932b4b02b0dd85adc6a09f94806826f0fe200e5252c",
+    "29_skull_rear-B25.npz": "ccd57a6205737d27de22190c8cf4ca5feff33a0f4996c5ea23990d54f6f5beae",
+    "32_left_eyelid-B25.stl": "9090f380cfe0179207112a924e41ff6d916f62cbf4ed89f865cfec132e33c181"
+  }
+}

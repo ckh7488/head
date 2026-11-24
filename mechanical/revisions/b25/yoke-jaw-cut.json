@@ -1,0 +1,105 @@
+{
+  "baseline_sha256": "dc86adb5b9f74b2334828c7620f4b4aaf9331f7023391d360b8d3a9d6546c8c4",
+  "cad_sha256": "d7af97a3ecfc9dcbfbb5744c71e5b9703f423d56229e8ba493b08f207fd9b00e",
+  "print_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "cut": {
+    "depth_added_mm": 0.7,
+    "world_cut_x_mm": [
+      47.6,
+      57.2
+    ],
+    "world_cut_z_mm": [
+      98.25,
+      109.5
+    ],
+    "new_y_face_mm": -10.869999885559082
+  },
+  "world_to_print": [
+    [
+      0.0,
+      0.0,
+      -1.0,
+      90.75
+    ],
+    [
+      0.0,
+      1.0,
+      0.0,
+      14.499639630317688
+    ],
+    [
+      1.0,
+      0.0,
+      0.0,
+      -53.700143814086914
+    ]
+  ],
+  "removed_mm3": {
+    "cad": 39.59785951694175,
+    "p2s": 39.60129600092296
+  },
+  "p2s_print_setup": {
+    "source_part": "37_right_cheek_bearing_stay-B22.stl",
+    "source_mesh_sha256": "add6f729f2a5d10c898667a5892845f73b21ee0d567a4ca4e850e1bf9e0c6e72",
+    "p2s_plate": 9,
+    "p2s_settings": {
+      "layer_height": "0.2",
+      "nozzle_diameter": [
+        "0.4"
+      ],
+      "filament_settings_id": [
+        "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+      ],
+      "wall_generator": "arachne",
+      "detect_thin_wall": "0",
+      "outer_wall_line_width": "0.42",
+      "wall_loops": "4",
+      "sparse_infill_density": "20%",
+      "enable_support": "1",
+      "support_type": "normal(auto)",
+      "xy_hole_compensation": "0"
+    }
+  },
+  "retained_bearing_sections": {
+    "pocket": {
+      "nominal_diameter_mm": 10.15,
+      "mesh_diameter_mm": [
+        10.147967,
+        10.150002
+      ]
+    },
+    "shoulder": {
+      "nominal_diameter_mm": 7.1,
+      "mesh_diameter_mm": [
+        7.0978,
+        7.100008
+      ]
+    }
+  },
+  "integrated_clearance_witness": {
+    "depth_mm": 0.7,
+    "rotation_degrees": [
+      -14.326171874999998,
+      3.69140625
+    ],
+    "relative_error_box_mm": [
+      0.3,
+      0.34326888478884043,
+      0.4432688847888404
+    ],
+    "evaluations": 49482,
+    "unresolved_boxes": 0,
+    "certified_minimum_mm_for_finished_boxes": 0.30001696817267876,
+    "smallest_sample": [
+      0.32061175689785265,
+      [
+        0.051119710019207266,
+        0.290625,
+        0.30030961319722016,
+        0.40359081663588503
+      ]
+    ],
+    "elapsed_s": 81.13585247900119,
+    "mesh_and_extra_reserve_mm": 0.003
+  }
+}

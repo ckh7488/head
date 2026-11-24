@@ -1,4 +1,4 @@
-import { axes, neutral, clamp, blinkAt, blinkDuration, clackAt, clackDuration, advancePose, demonstration, TargetFollower } from "./motion.js";
+import { axes, neutral, clamp, tickDeg, blinkAt, blinkDuration, scheduledBlink, clackAt, clackDuration, advancePose, demonstration, TargetFollower } from "./motion.js";
 import { AssemblyViewer } from "./viewer.js";
 
 const at = id => document.getElementById(id);
@@ -22,9 +22,10 @@ let mode = "manual";
 let mount = "assembled";
 let demoStart = null;
 let target = null;
+let trackingSince = null;
 let autoStart = null;
 let hatchOpen = false;
-let hatchDrop = 0;
+let serviceProgress = 0;
 let found = false;
 let scene;
 const tracker = new TargetFollower();
@@ -33,7 +34,7 @@ const gestures = [
   { key: "blink", input: at("axis-blink"), output: at("value-blink"), button: at("blink-once"),
     sample: blinkAt, duration: blinkDuration, scale: .9, unit: "%", started: null },
   { key: "jaw", input: at("axis-jaw"), output: at("value-jaw"), button: at("jaw-clack"),
-    sample: clackAt, duration: clackDuration, scale: 1, unit: "°", started: null },
+    sample: clackAt, duration: clackDuration, scale: tickDeg, started: null, centering: false, readyAt: null },
 ];
 
 function makeAxis(key, group, container) {
@@ -42,12 +43,13 @@ function makeAxis(key, group, container) {
   row.className = "axis";
   const axisId = "axis-" + key;
   row.innerHTML = `<div class="axis-title"><label for="${axisId}">${axis.label}</label><output for="${axisId}">0°</output></div>
-    <div class="axis-line"><input id="${axisId}" type="range" min="${axis.lower}" max="${axis.upper}" value="0" aria-label="${group} ${axis.label}"></div>`;
+    <div class="axis-line"><input id="${axisId}" type="range" min="${Math.round(axis.lower / tickDeg)}" max="${Math.round(axis.upper / tickDeg)}" value="0" aria-label="${group} ${axis.label}"></div>`;
   const input = row.querySelector("input");
   ranges.set(key, { input, output: row.querySelector("output") });
   input.addEventListener("input", () => {
     stopDemo();
-    desired[key] = Number(input.value);
+    stopGestures();
+    desired[key] = Number(input.value) * tickDeg;
     updateReadouts(desired, false);
   });
   container.append(row);
@@ -65,21 +67,23 @@ for (const [label, keys] of [["목", ["neckYaw", "neckPitch"]], ["눈", ["eyeYaw
 }
 
 function degree(v) {
-  const n = Math.round(v);
+  const n = Number(v.toFixed(2));
   return (n > 0 ? "+" : "") + n + "°";
 }
 
 function updateReadouts(value, setInputs) {
   for (const [key, { input, output }] of ranges) {
-    if (setInputs) input.value = Math.round(value[key]);
+    if (setInputs) input.value = Math.round(value[key] / tickDeg);
     const axis = axes[key];
-    input.style.setProperty("--range-percent", `${100 * (Number(input.value) - axis.lower) / (axis.upper - axis.lower)}%`);
+    input.style.setProperty("--range-percent", `${100 * (Number(input.value) * tickDeg - axis.lower) / (axis.upper - axis.lower)}%`);
     output.value = degree(value[key]);
+    input.setAttribute("aria-valuetext", output.value);
   }
   for (const { key, input, output, scale, unit } of gestures) {
     const rounded = Math.round(clamp(value[key] / scale, 0, Number(input.max)));
     if (setInputs) input.value = rounded;
-    output.value = rounded + unit;
+    output.value = key === "jaw" ? `${(rounded * tickDeg).toFixed(2)}° · ${rounded}틱` : rounded + unit;
+    input.setAttribute("aria-valuetext", output.value);
     input.style.setProperty("--range-percent", `${100 * Number(input.value) / Number(input.max)}%`);
   }
 }
@@ -97,18 +101,29 @@ function stopDemo() {
 for (const gesture of gestures) {
   gesture.input.addEventListener("input", () => {
     stopDemo();
-    gesture.started = null;
+    stopGestures();
     desired[gesture.key] = Number(gesture.input.value) * gesture.scale;
     updateReadouts(desired, false);
   });
   gesture.button.addEventListener("click", () => {
+    if (mode !== "manual") changeMode("manual");
     stopDemo();
-    gesture.started = performance.now();
+    stopGestures();
+    if (gesture.key === "jaw") {
+      desired = { ...desired, neckYaw: 0, neckPitch: 0, jaw: 0 };
+      gesture.centering = true;
+    } else {
+      gesture.started = performance.now();
+    }
   });
 }
 
 function stopGestures() {
-  for (const gesture of gestures) gesture.started = null;
+  for (const gesture of gestures) {
+    gesture.started = null;
+    gesture.centering = false;
+    gesture.readyAt = null;
+  }
 }
 
 demo.addEventListener("click", () => {
@@ -131,11 +146,11 @@ function defaultCaption() {
   const names = {
     assembled: ["조립 상태", "아이보리 외장 · 차콜 받침"],
     mechanism: ["내부 기구", "안구와 눈꺼풀 링크 · 목 구동부"],
-    electronics: ["전장 배치", "서보 허브 · OpenRB-150 · ESP32-C3"],
+    electronics: ["전장 배치", "서보 허브 A5 · OpenRB-150 · J2 정비 커넥터"],
     wiring: ["배선·체결", "전원·신호·USB · 체결품과 함께 구동 검토"],
   };
   const message = names[mount];
-  setCaption(message[0], hatchOpen ? "서비스 덮개 · 약 30 mm 열림" : message[1]);
+  setCaption(message[0], hatchOpen ? "J2 분리 · 덮개 30 mm 하강" : message[1]);
 }
 
 function setCaption(title, detail) {
@@ -169,7 +184,7 @@ at("show-yaw-studs").addEventListener("click", () => {
   desired = { ...neutral, neckYaw: 36 };
   updateReadouts(desired, true);
   scene?.inspectYawStuds();
-  setCaption("회전판 아래 볼트", "목 좌우 ±60° · CAD 최소 간격 0.70 mm");
+  setCaption("회전판 아래 볼트", "B25 받침과 목 좌우축 체결");
   upright.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
 });
 
@@ -239,7 +254,10 @@ function stopAuto() {
 
 function placeTarget(x, y) {
   const u = clamp(x, .04, .96), v = clamp(y, .04, .96);
-  if (!target) tracker.reset();
+  if (!target) {
+    tracker.reset();
+    trackingSince = performance.now();
+  }
   target = { x: u, y: v, yaw: (u - .5) * 106, pitch: (v - .5) * 32 };
   const dot = at("target-dot");
   dot.hidden = false;
@@ -256,6 +274,7 @@ function placeTarget(x, y) {
 function hideTarget() {
   stopAuto();
   target = null;
+  trackingSince = null;
   tracker.reset();
   at("target-dot").hidden = true;
   const label = at("track-state");
@@ -335,12 +354,21 @@ function animate(now) {
       const t = (now - autoStart) / 1000;
       placeTarget(.5 + .37 * Math.sin(t * .87), .5 + .24 * Math.sin(t * 1.06 + .6));
     }
-    command = target ? tracker.goals(target, pose, dt) : { ...pose };
+    command = target ? tracker.goals(target, pose, dt) : { ...pose, blink: 0 };
+    if (trackingSince !== null) command.blink = scheduledBlink((now - trackingSince) / 1000, 2.4);
   } else if (animated) {
     desired = demonstration((now - demoStart) / 1000);
     command = desired;
   }
   for (const gesture of gestures) {
+    if (gesture.centering) {
+      animated = true;
+      if (Math.abs(pose.neckYaw) > .5 || Math.abs(pose.neckPitch) > .5) continue;
+      gesture.readyAt ??= now + 240;
+      if (now < gesture.readyAt) continue;
+      gesture.centering = false;
+      gesture.started = now;
+    }
     if (gesture.started === null) continue;
     const time = (now - gesture.started) / 1000;
     command[gesture.key] = gesture.sample(time);
@@ -349,10 +377,9 @@ function animate(now) {
   }
   if (mode === "manual" && animated) updateReadouts(command, true);
   pose = advancePose(pose, command, dt);
-  const goal = hatchOpen ? 30 : 0;
-  hatchDrop = reduceMotion ? goal : hatchDrop + (goal - hatchDrop) * (1 - Math.exp(-dt * 12));
-  if (Math.abs(hatchDrop - goal) < .03) hatchDrop = goal;
-  scene?.draw(pose, hatchDrop, now);
+  const goal = hatchOpen ? 1 : 0;
+  serviceProgress = reduceMotion ? goal : clamp(serviceProgress + Math.sign(goal - serviceProgress) * Math.min(Math.abs(goal - serviceProgress), dt * .8), 0, 1);
+  scene?.draw(pose, serviceProgress, now);
   requestAnimationFrame(animate);
 }
 
@@ -374,7 +401,7 @@ async function start() {
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
   } catch (error) {
-    console.error("R5 B15 viewer could not load:", error);
+    console.error("R5 B25 viewer could not load:", error);
     loader.classList.add("failed");
     loader.querySelector(".loader").hidden = true;
     status.textContent = /WebGL/.test(error.message) ?

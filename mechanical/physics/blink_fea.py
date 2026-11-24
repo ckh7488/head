@@ -3,7 +3,7 @@
 from argparse import ArgumentParser
 from itertools import product
 import json
-from math import acos, atan2, cos, degrees, pi, radians, sin
+from math import atan2, cos, degrees, pi, radians, sin
 from pathlib import Path
 
 import numpy as np
@@ -32,54 +32,67 @@ def stress_bounds(basis, field, lame, shear):
 
 def link_angle(pivot, from_pin, arm, length, reference):
     delta = from_pin-pivot
-    distance = np.linalg.norm(delta)
+    distance = np.linalg.norm(delta, axis=-1)
     cosine = (distance**2+arm**2-length**2)/(2*distance*arm)
-    if abs(cosine) > 1.:
+    if not np.all(np.abs(cosine) <= 1.):
         raise ValueError('An elastically displaced blink link cannot reach its other pin')
-    line = atan2(delta[1], delta[0])
-    options = ((angle-reference+pi) % (2*pi)-pi for angle in (line-acos(cosine), line+acos(cosine)))
-    return reference+min(options, key=abs)
+    line = np.arctan2(delta[..., 1], delta[..., 0])
+    bend = np.arccos(cosine)
+    first = (line-bend-reference+pi) % (2*pi)-pi
+    second = (line+bend-reference+pi) % (2*pi)-pi
+    return reference+np.where(np.abs(first) <= np.abs(second), first, second)
 
 
-def elastic_lid_angles(layout, angle, end, torque, centers, include_link_pins=False):
-    left, right, motor_low, motor_high = centers
+def elastic_linkage(layout, lid, angle, centers):
+    """Solve the planar linkage for one or more sets of rail-centre displacements."""
+    left, right, motor_low, motor_high = np.moveaxis(centers, -2, 0)
     span = np.diff(layout['bearing_x_mm'])[0]
     pivot = np.array(layout['shaft_yz_mm'])
     motor = np.array(layout['servo_yz_mm'])
-    lid = np.array([-39., 119.])
     motor_z = layout['motor_mount_z_mm']
     mount = np.array([layout['motor_mount_y_mm'], np.mean(motor_z)])
-    motor_tilt = atan2(-(motor_high[0]-motor_low[0]), motor_z[1]-motor_z[0])
-    rotate = np.array([[cos(motor_tilt), -sin(motor_tilt)], [sin(motor_tilt), cos(motor_tilt)]])
-    moved_motor = mount+(motor_low+motor_high)/2+rotate@(motor-mount)
+    motor_tilt = np.arctan2(motor_low[..., 0]-motor_high[..., 0], motor_z[1]-motor_z[0])
+    c, s = np.cos(motor_tilt), np.sin(motor_tilt)
+    y, z = motor-mount
+    moved_motor = mount+(motor_low+motor_high)/2+np.stack((c*y-s*z, s*y+c*z), axis=-1)
     _, drive, _ = layout['crank_x_mm']
     drive_side = (drive-layout['bearing_x_mm'][0])/span
     drive_pivot = pivot+left+drive_side*(right-left)
     phase = radians(layout['phase_deg']+angle)
     horn_phase = phase+motor_tilt
     r = layout['radius_mm']
-    horn_pin = moved_motor+r*np.array([cos(horn_phase), sin(horn_phase)])
+    horn_pin = moved_motor+r*np.stack((np.cos(horn_phase), np.sin(horn_phase)), axis=-1)
     shaft_phase = link_angle(drive_pivot, horn_pin, r, np.linalg.norm(motor-pivot), phase)
     r = layout['lid_radius_mm']
-    output, link_pins = [], []
+    shaft_arm = r*np.stack((np.cos(shaft_phase), np.sin(shaft_phase)), axis=-1)
+    lid_phases, link_pins = [], []
     for lid_x in layout['crank_x_mm'][::2]:
         at = (lid_x-layout['bearing_x_mm'][0])/span
-        pin = pivot+left+at*(right-left)+r*np.array([cos(shaft_phase), sin(shaft_phase)])
+        pin = pivot+left+at*(right-left)+shaft_arm
         lid_phase = link_angle(lid, pin, r, np.linalg.norm(lid-pivot), phase)
-        output.append(angle+degrees(lid_phase-phase))
-        if include_link_pins:
-            lid_pin = lid+r*np.array([cos(lid_phase), sin(lid_phase)])
-            link_pins.append([lid_pin.tolist(), pin.tolist()])
+        lid_phases.append(lid_phase)
+        lid_pin = lid+r*np.stack((np.cos(lid_phase), np.sin(lid_phase)), axis=-1)
+        link_pins.append(np.stack((lid_pin, pin), axis=-2))
+    return (angle+np.degrees(shaft_phase-phase),
+            angle+np.degrees(np.stack(lid_phases, axis=-1)-phase),
+            np.stack(link_pins, axis=-3))
+
+
+def elastic_lid_angles(layout, angle, end, torque, centers, include_link_pins=False):
+    shaft_angle, lid_angles, link_pins = elastic_linkage(layout, np.array([-39., 119.]), angle, centers)
+    left, right = centers[:2]
+    span = np.diff(layout['bearing_x_mm'])[0]
     result = {'command_deg': angle, 'torque_Nm': torque, 'resisting_crank_x_mm': end,
-              'lid_deg': output, 'shaft_deg': angle+degrees(shaft_phase-phase),
+              'lid_deg': lid_angles.tolist(), 'shaft_deg': float(shaft_angle),
               'bearing_center_slope_deg': degrees(atan2(np.linalg.norm(right-left), span))}
     if include_link_pins:
-        result['link_pins_yz_mm'] = link_pins
+        result['link_pins_yz_mm'] = link_pins.tolist()
     return result
 
 
 def measure(directory, layout, size_mm, torques=(.04,.12), modulus=1000., stress=False,
-            replay_torque=None, *, link_load_cases=(), link_angles=()):
+            replay_torque=None, *, link_load_cases=(), link_angles=(), rail_states=False):
+    """Return rail results and link replay rows, or the mixed-load rail states for offset replay."""
     mesh=mesh_step(directory/'blink_rail.step',size_mm)
     boundary=mesh.boundary_facets()
     vertices=mesh.p[:,mesh.facets[:,boundary]]
@@ -145,11 +158,17 @@ def measure(directory, layout, size_mm, torques=(.04,.12), modulus=1000., stress
     for angle in link_angles:
         left_load, right_load = (unit_loads(end, angle) for end in ends)
         for left_torque, right_torque in link_load_cases:
-            displacement = ((left_torque*left_load + right_torque*right_load) @ responses)[indices]
+            loads = left_torque*left_load + right_torque*right_load
+            displacement = (loads @ responses)[indices]
             centers_yz = np.asarray([displacement[1:, n].mean(axis=1) for n in nodes])
-            row = elastic_lid_angles(layout, angle, None, left_torque+right_torque, centers_yz,
-                                     include_link_pins=True)
-            row['crank_torques_Nm'] = [left_torque, right_torque]
+            if rail_states:
+                # Patches are the left and right bearings, then the low and high motor pads.
+                row = {'angle': float(angle), 'torques': [left_torque, right_torque],
+                       'centers': centers_yz.tolist(), 'loads': loads.tolist()}
+            else:
+                row = elastic_lid_angles(layout, angle, None, left_torque+right_torque, centers_yz,
+                                         include_link_pins=True)
+                row['crank_torques_Nm'] = [left_torque, right_torque]
             deflected.append(row)
     rows = []
     for torque in torques:

@@ -1,0 +1,552 @@
+{
+  "project": "R5-B25-P2S-CF.3mf",
+  "project_sha256": "200658c0cb39ac1f9413e7c1a0afe00eaa9215b2088b16b3c2817fb4e0d38792",
+  "source_hf_project_sha256": "bd9367816d50d91909973c11c0a7f7871ccb267dc0ef88b5b9fdd38d1b3b7bd6",
+  "source_cad_sha256": "38932e0c0e206e521cf974be6ffd8c28474240ab879cb27ce21313bd213c1777",
+  "profile_sha256": "e91fdff4eb6564c5b8405be03d0eaef80abeb5a596ed2e105da0b76380139ad8",
+  "slicer": "Bambu Studio 02.09.01.70",
+  "printer": "Bambu Lab P2S 0.4 nozzle",
+  "filament": "Bambu PETG-CF @BBL P2S 0.4 nozzle",
+  "plate_sha256": {
+    "1": "33ebc8dfc898d2b84f0f8d26a7a4cf1522a330688db1807d638f55816f08a47d",
+    "2": "8eab9fedd158b0f2df8e8c0e06681d2dd3bdd7b7956117f9637981db1266c71a",
+    "3": "a0dafb23c1f45d2169d3cb847610f929c0fb295f412ce200028a8c7903060593",
+    "4": "5d4f2bb96a1a2b099cd1d6e53040fa0eefcd7daaf70c6a1d52017ce430e841bf",
+    "5": "5b1c482cf6bfa68b26e432c3afecdb5620258c4b4e2b2a16c22de6b32081f278",
+    "6": "0293b280e0269e44f082924bc5d697b58fb430b43993dbc24118d66028602b31",
+    "7": "3a120974b8f51a9e9e64b162689351389a0a7fb54e5afa7068bbb731adafd0ad",
+    "8": "4ed26475969a6d106fd4278116bd41f13fc89326557c4a35a8a2cc97e32ec980",
+    "9": "4ee51ac69bb51410bc59dceaf0b4543f8b7fbe0007ad527460ad294a0a0ca3c8",
+    "10": "2c86ae967ddd7b1d67eaee6a5784894c4c3e89dc410adeb3bc8e9a11f9ae3642",
+    "11": "c74ce8c7744eb66ee8a62ca90b4e782784de31ed2f6b2783550b147ea304aaf6",
+    "12": "b7e9ab7c56e7dd84917b215e0b9149129617b4decd2d59d4841abae9944971c7",
+    "13": "54fb5be35642bf6c54f4a7c9324c8ff9ae91abe6125f6f3f3de7eb772332f29b",
+    "14": "7fce10c02088d064aeeddbb21955cac5a17d6d1f472d163cb636a25c199026f3"
+  },
+  "mesh_payloads_and_per_object_settings_unchanged": true,
+  "changed_placement": [
+    {
+      "plate": 7,
+      "part": "24 blink rail",
+      "rotation_x_deg": 180,
+      "first_layer_mm2": [
+        24.93,
+        1026.43
+      ]
+    },
+    {
+      "plate": 8,
+      "part": "23 right blink link",
+      "rotation_x_deg": 180,
+      "x_shift_mm": 88.9515,
+      "first_layer_mm2": [
+        31.82,
+        236.77
+      ]
+    },
+    {
+      "plate": 8,
+      "part": "45 right spacer",
+      "rotation_x_deg": 180,
+      "first_layer_mm2": [
+        18.12,
+        23.32
+      ]
+    },
+    {
+      "plate": 8,
+      "part": "ID5 keeper",
+      "rotation_x_deg": 90,
+      "first_layer_mm2": [
+        7.17,
+        50.25
+      ]
+    },
+    {
+      "plate": 14,
+      "part": "12 cradle",
+      "rotation_x_deg": 180,
+      "first_layer_mm2": [
+        5.86,
+        103.4
+      ]
+    }
+  ],
+  "layout_checks": {
+    "section_height_mm": 0.1,
+    "lowest_z_mm": 0.0,
+    "updated_plates_conservative_xy_model_and_brim_overlaps": 0,
+    "plate_bounds_violations": 0,
+    "parts_below_100_mm2_with_outer_brim_at_least_6_mm": 19,
+    "plates_with_co_plated_parts_below_10_mm2": [
+      8,
+      9,
+      10
+    ]
+  },
+  "verified_plate_slices": {
+    "1": {
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 33347,
+      "estimated_filament_g": 234.197,
+      "gcode_sha256": "f455a75c37ed4e5b0411cb482fbd435f6923990a21e81512fae199e40309ac6b"
+    },
+    "2": {
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 6420,
+      "estimated_filament_g": 54.371,
+      "gcode_sha256": "8d214dc79e38455461c9c6bc941069580c8fa9366662b437f938b846b486d108"
+    },
+    "3": {
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 2701,
+      "estimated_filament_g": 13.917,
+      "gcode_sha256": "15292559c946e275fb049c95317fcbfa3a9e69635fb1ec3fa0edff0e3b8e2055"
+    },
+    "4": {
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 50551,
+      "estimated_filament_g": 211.689,
+      "gcode_sha256": "f5501f16d802215df0e0407c1f2b157b9dc97c6ac02d30056610d11ca210b71b"
+    },
+    "5": {
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 38605,
+      "estimated_filament_g": 157.404,
+      "gcode_sha256": "521c5fb996bf0a970c62e9d81af97c76468ab19d04a59fb34542aab1f1182e46"
+    },
+    "6": {
+      "print_objects": 9,
+      "warning_count": 0,
+      "estimated_seconds": 33817,
+      "estimated_filament_g": 195.618,
+      "gcode_sha256": "f5087d5a1f8c92dfd829a8298a8b83bc691e487f5fbbf830039a8f9160f6d1b7"
+    },
+    "7": {
+      "print_objects": 8,
+      "warning_count": 0,
+      "estimated_seconds": 22612,
+      "estimated_filament_g": 113.205,
+      "gcode_sha256": "79c62614b7ce9a369d8e15cefca97eb7c4158d5dbd51116355a0b66df7e7a2a1"
+    },
+    "8": {
+      "print_objects": 15,
+      "warning_count": 0,
+      "estimated_seconds": 11888,
+      "estimated_filament_g": 44.859,
+      "gcode_sha256": "57f2ec5b10bfb3a854240b2f46bbf511c79391de6f03ef61454da30a88704139"
+    },
+    "9": {
+      "print_objects": 7,
+      "warning_count": 0,
+      "estimated_seconds": 7100,
+      "estimated_filament_g": 28.203,
+      "gcode_sha256": "61ca261d7f0825c3a41cc38bc4d23f27ca15c28cfb3185d608f766376a806e21"
+    },
+    "10": {
+      "print_objects": 2,
+      "warning_count": 0,
+      "estimated_seconds": 1946,
+      "estimated_filament_g": 7.323,
+      "gcode_sha256": "410610e6ddf9a32128b7bf2fadcef2f6930ac3106e95080d6f90fec237761bf2"
+    },
+    "11": {
+      "print_objects": 3,
+      "warning_count": 0,
+      "estimated_seconds": 6091,
+      "estimated_filament_g": 32.853,
+      "gcode_sha256": "91dea12eb3a969e2da99edd0dd441a9c52cd28825d7e4dbe48928fa798262624"
+    },
+    "12": {
+      "print_objects": 4,
+      "warning_count": 0,
+      "estimated_seconds": 20575,
+      "estimated_filament_g": 94.673,
+      "gcode_sha256": "1b86ec5b975147efb439391f869678157be6485234b57ba280ebcfe00f8129be"
+    },
+    "13": {
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 10201,
+      "estimated_filament_g": 50.913,
+      "gcode_sha256": "0b5fe1206a6bdddf62a8088b2e1fcb4082b79524e420a4acdabd10d6ed61303f"
+    },
+    "14": {
+      "print_objects": 1,
+      "warning_count": 0,
+      "estimated_seconds": 3069,
+      "estimated_filament_g": 9.256,
+      "gcode_sha256": "fec4b23b9db4b5d9dac9b2c4f6d7e53cf2a00ef70e96df3b2dd93b5164c68521"
+    }
+  },
+  "estimated_seconds_total": 248923,
+  "estimated_filament_g_total": 1248.481,
+  "fit_gauge": {
+    "file": "R5-B25-Fit-Gauge-CF.3mf",
+    "project_sha256": "361dcbed2914190f41161fd5308f10027297e2cf76aeb127b7724c68a31b1bc8",
+    "print_objects": 1,
+    "warning_count": 0,
+    "estimated_seconds": 11759,
+    "estimated_filament_g": 60.97,
+    "gcode_sha256": "838919caee0d76de519c1c1e93719ecbb8a759047df9a351cf0a367ee49816cb"
+  },
+  "jaw_fit_variants": {
+    "file": "R5-B25-Jaw-Fit-CF.zip",
+    "archive_sha256": "04980550b8fcc632c5024fc4b25c66b386622996f9d2f1790713ecbc00371677",
+    "verified_projects": 5
+  },
+  "bore_toolpath_checks": {
+    "6": {
+      "gcode_sha256": "f5087d5a1f8c92dfd829a8298a8b83bc691e487f5fbbf830039a8f9160f6d1b7",
+      "bore_sections": {
+        "09 left": {
+          "Support": {
+            "moves": 1129,
+            "path_mm": 315.621,
+            "filament_mm": 9.401,
+            "layers": 31,
+            "gcode_z_mm": [
+              34.0,
+              40.0
+            ],
+            "first_line": 1173978
+          },
+          "Support interface": {
+            "moves": 71,
+            "path_mm": 50.216,
+            "filament_mm": 1.496,
+            "layers": 3,
+            "gcode_z_mm": [
+              40.0,
+              40.4
+            ],
+            "first_line": 1297587
+          }
+        },
+        "09 right": {
+          "Support": {
+            "moves": 1115,
+            "path_mm": 326.099,
+            "filament_mm": 9.713,
+            "layers": 30,
+            "gcode_z_mm": [
+              34.2,
+              40.0
+            ],
+            "first_line": 1176998
+          },
+          "Support interface": {
+            "moves": 92,
+            "path_mm": 54.603,
+            "filament_mm": 1.626,
+            "layers": 3,
+            "gcode_z_mm": [
+              40.0,
+              40.4
+            ],
+            "first_line": 1296269
+          }
+        }
+      },
+      "frame_x0_clearance": {
+        "subsequent": {
+          "Bridge": {
+            "distance_from_x0_mm": 6.644,
+            "center_x_mm": 6.845,
+            "line_width_mm": 0.401,
+            "gcode_z_mm": 19.2,
+            "example_line": 913070
+          },
+          "Floating vertical shell": {
+            "distance_from_x0_mm": 6.85,
+            "center_x_mm": 7.042,
+            "line_width_mm": 0.384,
+            "gcode_z_mm": 19.0,
+            "example_line": 910409
+          },
+          "Internal solid infill": {
+            "distance_from_x0_mm": 6.841,
+            "center_x_mm": 7.121,
+            "line_width_mm": 0.559,
+            "gcode_z_mm": 10.8,
+            "example_line": 763200
+          },
+          "Outer wall": {
+            "distance_from_x0_mm": 4.409,
+            "center_x_mm": 4.6,
+            "line_width_mm": 0.383,
+            "gcode_z_mm": 36.6,
+            "example_line": 1222517
+          },
+          "Overhang wall": {
+            "distance_from_x0_mm": 4.45,
+            "center_x_mm": 4.66,
+            "line_width_mm": 0.42,
+            "gcode_z_mm": 7.4,
+            "example_line": 566041
+          },
+          "Support": {
+            "distance_from_x0_mm": 3.743,
+            "center_x_mm": 3.953,
+            "line_width_mm": 0.42,
+            "gcode_z_mm": 0.4,
+            "example_line": 28448
+          },
+          "Support interface": {
+            "distance_from_x0_mm": 3.908,
+            "center_x_mm": 4.118,
+            "line_width_mm": 0.42,
+            "gcode_z_mm": 6.6,
+            "example_line": 514488
+          }
+        },
+        "first": {
+          "Bottom surface": {
+            "distance_from_x0_mm": 51.859,
+            "center_x_mm": 52.109,
+            "line_width_mm": 0.501,
+            "gcode_z_mm": 0.2,
+            "example_line": 11539
+          },
+          "Brim": {
+            "distance_from_x0_mm": 3.746,
+            "center_x_mm": 3.996,
+            "line_width_mm": 0.5,
+            "gcode_z_mm": 0.2,
+            "example_line": 13458
+          },
+          "Outer wall": {
+            "distance_from_x0_mm": 9.1,
+            "center_x_mm": 9.35,
+            "line_width_mm": 0.5,
+            "gcode_z_mm": 0.2,
+            "example_line": 13745
+          },
+          "Support": {
+            "distance_from_x0_mm": 1.661,
+            "center_x_mm": 1.911,
+            "line_width_mm": 0.5,
+            "gcode_z_mm": 0.2,
+            "example_line": 12884
+          }
+        }
+      }
+    },
+    "7": {
+      "gcode_sha256": "79c62614b7ce9a369d8e15cefca97eb7c4158d5dbd51116355a0b66df7e7a2a1",
+      "bore_sections": {
+        "07 left": {
+          "Support": {
+            "moves": 7598,
+            "path_mm": 2357.059,
+            "filament_mm": 70.208,
+            "layers": 77,
+            "gcode_z_mm": [
+              10.8,
+              26.0
+            ],
+            "first_line": 738104
+          },
+          "Support interface": {
+            "moves": 232,
+            "path_mm": 122.504,
+            "filament_mm": 3.649,
+            "layers": 4,
+            "gcode_z_mm": [
+              26.0,
+              26.6
+            ],
+            "first_line": 1353131
+          }
+        },
+        "07 right": {
+          "Support": {
+            "moves": 5548,
+            "path_mm": 1559.454,
+            "filament_mm": 46.45,
+            "layers": 63,
+            "gcode_z_mm": [
+              13.6,
+              26.0
+            ],
+            "first_line": 873993
+          },
+          "Support interface": {
+            "moves": 148,
+            "path_mm": 77.067,
+            "filament_mm": 2.296,
+            "layers": 4,
+            "gcode_z_mm": [
+              26.0,
+              26.6
+            ],
+            "first_line": 1351419
+          }
+        },
+        "24 left seat": {
+          "Support": {
+            "moves": 1619,
+            "path_mm": 418.218,
+            "filament_mm": 12.457,
+            "layers": 38,
+            "gcode_z_mm": [
+              44.0,
+              51.4
+            ],
+            "first_line": 1762180
+          },
+          "Support interface": {
+            "moves": 77,
+            "path_mm": 43.699,
+            "filament_mm": 1.302,
+            "layers": 3,
+            "gcode_z_mm": [
+              51.4,
+              51.8
+            ],
+            "first_line": 1844407
+          }
+        },
+        "24 left shoulder": {
+          "Support": {
+            "moves": 352,
+            "path_mm": 93.738,
+            "filament_mm": 2.792,
+            "layers": 33,
+            "gcode_z_mm": [
+              44.6,
+              51.0
+            ],
+            "first_line": 1769069
+          }
+        },
+        "24 right seat": {
+          "Support": {
+            "moves": 945,
+            "path_mm": 258.302,
+            "filament_mm": 7.694,
+            "layers": 43,
+            "gcode_z_mm": [
+              43.0,
+              51.4
+            ],
+            "first_line": 1750327
+          },
+          "Support interface": {
+            "moves": 36,
+            "path_mm": 16.943,
+            "filament_mm": 0.505,
+            "layers": 3,
+            "gcode_z_mm": [
+              51.4,
+              51.8
+            ],
+            "first_line": 1844579
+          }
+        },
+        "24 right shoulder": {
+          "Support": {
+            "moves": 253,
+            "path_mm": 65.553,
+            "filament_mm": 1.953,
+            "layers": 28,
+            "gcode_z_mm": [
+              45.6,
+              51.0
+            ],
+            "first_line": 1782157
+          }
+        }
+      }
+    },
+    "9": {
+      "gcode_sha256": "61ca261d7f0825c3a41cc38bc4d23f27ca15c28cfb3185d608f766376a806e21",
+      "bore_sections": {
+        "37 lead-in": {
+          "Support": {
+            "moves": 5,
+            "path_mm": 1.789,
+            "filament_mm": 0.069,
+            "layers": 1,
+            "gcode_z_mm": [
+              5.8,
+              5.8
+            ],
+            "first_line": 175855
+          }
+        },
+        "37 seat": {
+          "Support": {
+            "moves": 55,
+            "path_mm": 19.565,
+            "filament_mm": 0.759,
+            "layers": 11,
+            "gcode_z_mm": [
+              2.814,
+              5.529
+            ],
+            "first_line": 126253
+          },
+          "Support interface": {
+            "moves": 17,
+            "path_mm": 10.828,
+            "filament_mm": 0.366,
+            "layers": 3,
+            "gcode_z_mm": [
+              2.0,
+              2.543
+            ],
+            "first_line": 91399
+          }
+        },
+        "37 shoulder": {
+          "Support interface": {
+            "moves": 36,
+            "path_mm": 61.571,
+            "filament_mm": 1.834,
+            "layers": 2,
+            "gcode_z_mm": [
+              0.4,
+              0.6
+            ],
+            "first_line": 16823
+          }
+        }
+      }
+    }
+  },
+  "hf_changed_plate_recheck": {
+    "project_sha256": "bf18fe2ceb223d68d92a447928af07b9f0eebf977501ccb8f37993fb09c4fb95",
+    "profile": "R5 B15 Bambu PETG HF 14 mm3/s @ P2S",
+    "verified_plates": {
+      "7": {
+        "print_objects": 8,
+        "warning_count": 0,
+        "estimated_seconds": 21829,
+        "estimated_filament_g": 115.928,
+        "gcode_sha256": "c478c4eb83c1043e6b2d5349c9afa4494cf8387aad95efd5f2fc5097352374cd"
+      },
+      "8": {
+        "print_objects": 15,
+        "warning_count": 0,
+        "estimated_seconds": 11092,
+        "estimated_filament_g": 45.86,
+        "gcode_sha256": "354d800900ba9e97fbfbf37861cf6db952ee8deed0e9a2f47b5b0ee088d03144"
+      },
+      "14": {
+        "print_objects": 1,
+        "warning_count": 0,
+        "estimated_seconds": 3428,
+        "estimated_filament_g": 9.478,
+        "gcode_sha256": "0c63406b80f3006cac7bc94636b98969fa32f6626b613471f200be393ffe6808"
+      }
+    }
+  },
+  "slicer_log_note": "Plate warning fields were empty. CLI logs can include internal infill retries and an invalid T65535 message for the stock AMS unload sentinel, also present in HF.",
+  "physical_checks": "P01/P08 fit, adhesion, support removal, and P03 blink travel still require the printed parts."
+}

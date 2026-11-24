@@ -9,7 +9,7 @@ from track import LIMITS, RATES, ZERO, Planner, select_face
 FPS = 20
 FIRST_MISSING = FPS + 1
 HOLD_FRAMES = int(2.5 * FPS)
-DISPLACED_FEEDBACK = (-18., 6., 0., -42., 4.)
+DISPLACED_FEEDBACK = (-14., 6., 0., -42., 4.)
 
 
 def frame(planner, index, error=None, feedback=ZERO):
@@ -103,6 +103,15 @@ def test_park_confirms_fresh_feedback_and_keeps_the_load_offset():
     assert drift.active and not drift.keep_neutral
     reused = planner.step(None, feedback, now + .153, feedback_at=now + .12)
     assert reused.goals == drift.goals
+
+
+def test_eye_offset_does_not_block_a_centered_neck():
+    planner = Planner(exhibit=True)
+    planner.start_centering(ZERO)
+    feedback = (.6, 0., 0., 0., 0.)
+    assert planner.step((8., 0.), feedback, 0.).phase == 'RETURN'
+    assert planner.step((8., 0.), feedback, .12).keep_neutral
+    assert planner.step((8., 0.), feedback, .24).phase == 'TRACK'
 
 
 def test_blocked_return_does_not_claim_park_or_keep_applying_trim():

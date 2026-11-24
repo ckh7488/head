@@ -1,0 +1,80 @@
+{
+  "cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
+  "firmware_sha256": "fbc2e8f99787b2e06938a330469643ceafd3e6e7e09657ca3fe3002a63764833",
+  "pair": [
+    "Jaw_37_right_jaw_bearing_stay",
+    "Jaw_39_right_jaw_pivot_arm"
+  ],
+  "closed_reference_from_cad_ticks": 11,
+  "closing": {
+    "pair": [
+      "Part073",
+      "Jaw_30_moving_jaw"
+    ],
+    "relative_translation_half_box_mm": [
+      0.4,
+      0.4,
+      0.4
+    ],
+    "clear_through_cad_angle_deg": -1.47265625,
+    "reserve_from_accepted_feedback_at_least_deg": 2.0,
+    "continuous_lower_gap_mm": 1.7994016727848616e-05,
+    "verified_cells": 95
+  },
+  "pivot_mm": [
+    0.0,
+    -9.0,
+    92.0
+  ],
+  "tolerance_model": {
+    "fixed_warp_span_mm": 22.05651798923227,
+    "moving_warp_span_mm": 25.815693677573847,
+    "projected_through_jaw_deg": 7.86,
+    "radial_fit_terms_mm": {
+      "glued_pin": 0.04800000000000004,
+      "bearing_pocket": 0.025,
+      "bearing_internal": 0.01
+    },
+    "relative_world_half_box_mm": [
+      0.34411303597846454,
+      0.5044850959583044,
+      0.46438481774284696
+    ]
+  },
+  "wire_goal_max_deg": 5.5,
+  "goal_span_max_ticks": 62,
+  "goal_span_max_encoder_deg": 5.44921875,
+  "closed_front_tip_point_mm": [
+    10.226388931274414,
+    -67.02407761767874,
+    38.2396903195566
+  ],
+  "jaw_tip_drop_at_goal_mm": 5.175897778070841,
+  "feedback_opening_allowance_ticks": 5,
+  "accepted_feedback_max_encoder_deg": 5.888671875,
+  "contact_free_through_deg_in_relative_envelope": 6.893203125,
+  "required_stop_reserve_deg": 1.0,
+  "continuous_lower_gap_mm": 0.003092885223600822,
+  "verified_cells": 267,
+  "reserve_from_goal_at_least_deg": 1.4439843750000003,
+  "reserve_from_accepted_feedback_at_least_deg": 1.0045312500000003,
+  "earliest_sampled_contact_deg": 6.990216064453126,
+  "sampled_contact_shift_mm": [
+    -0.34411303597846454,
+    -0.5044850959583044,
+    -0.46438481774284696
+  ],
+  "powered_clearance": {
+    "end_deg": 5.888671875,
+    "minimum_mm": 0.30715525738016736,
+    "required_mm": 0.3,
+    "verified_cells": 623
+  },
+  "scope": "Rigid installed CAD, with the same closed reference for both stop checks. Measure first contacts, mounted fit and real closed reference on each assembly.",
+  "references": {
+    "conditions": "../spec/conditions.md",
+    "pin_m6": "https://www.pinstructure.com/ProductGrp/ISO8734-C1_Stainless_Hardened_Dowel_Pins",
+    "bearing_MR104": "https://www.nsk.com/eu-en/engineering/mr104bzzmc3-apn.html",
+    "standard_MC3_clearance": "https://www.nsk.com/common/data/ctrgPdf/bearings/e126h.pdf"
+  }
+}

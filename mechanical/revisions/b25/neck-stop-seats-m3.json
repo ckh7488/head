@@ -1,0 +1,170 @@
+{
+  "status": "neutral solid service and pitch shell checks passed",
+  "source_cad_sha256": "0818b8e089d2e64984a701d64181ff85975e421d9a13200ba9ce4d6148dcaf71",
+  "retention": "inboard M3 and DIN 988 shims",
+  "stations": [
+    {
+      "part": "Part011",
+      "pin_center_mm": [
+        -44.0,
+        26.0,
+        87.0
+      ],
+      "ear_x_spans_mm": [
+        [
+          -54.0,
+          -45.9
+        ],
+        [
+          -42.1,
+          -34.0
+        ]
+      ],
+      "sleeve_support_width_mm": [
+        8.1,
+        8.1
+      ],
+      "max_checked_pin_radial_displacement_mm": 0.16,
+      "shim_nominal_dimensions_mm": [
+        4.0,
+        8.0,
+        0.3
+      ],
+      "free_axial_link_and_shim_stack_mm": 0.2,
+      "shim_rear_entry_length_mm": 12.0,
+      "fastener_and_service_sweeps": 11,
+      "keeper_pull": {
+        "nominal_screw_length_mm": 6.0,
+        "minimum_under_head_to_keeper_face_mm": 1.3,
+        "checked_under_head_to_keeper_face_mm": 3.0,
+        "checked_under_head_to_clevis_mouth_mm": 1.7,
+        "checked_engagement_mm": 3.0,
+        "nominal_tip_to_pin_gap_mm": 0.2,
+        "flush_head_overlap_mm3": 4.94012528133679
+      },
+      "shim_model": "radial co-motion with pin, fixed axial position, rigid and frictionless"
+    },
+    {
+      "part": "Part019",
+      "pin_center_mm": [
+        -44.0,
+        37.0,
+        113.0
+      ],
+      "ear_x_spans_mm": [
+        [
+          -54.0,
+          -45.9
+        ],
+        [
+          -42.1,
+          -34.0
+        ]
+      ],
+      "sleeve_support_width_mm": [
+        8.1,
+        8.1
+      ],
+      "max_checked_pin_radial_displacement_mm": 0.16,
+      "shim_nominal_dimensions_mm": [
+        4.0,
+        8.0,
+        0.3
+      ],
+      "free_axial_link_and_shim_stack_mm": 0.2,
+      "shim_rear_entry_length_mm": 12.0,
+      "fastener_and_service_sweeps": 11,
+      "keeper_pull": {
+        "nominal_screw_length_mm": 6.0,
+        "minimum_under_head_to_keeper_face_mm": 1.3,
+        "checked_under_head_to_keeper_face_mm": 3.0,
+        "checked_under_head_to_clevis_mouth_mm": 1.7,
+        "checked_engagement_mm": 3.0,
+        "nominal_tip_to_pin_gap_mm": 0.2,
+        "flush_head_overlap_mm3": 4.940128838553068
+      },
+      "shim_model": "radial co-motion with pin, fixed axial position, rigid and frictionless"
+    }
+  ],
+  "installed_shell_clearance": {
+    "pitch_limits_deg": [
+      -17.204140625,
+      7.12171875
+    ],
+    "shell_pair_samples": 102,
+    "continuous_new_hardware_shell_gap_floor_mm": 0.1,
+    "rejected_extended_lower_boss_gap_mm": 0.0
+  },
+  "inherited_load_screen": {
+    "status": "B25 neck study material hypotheses, no assembled force curve measured",
+    "bearing_screen_limit_N": 473.3333333333333,
+    "left_shaft_radial_proof": {
+      "minimum_N": 446.0,
+      "slope_on_observed_peak_stop_force": 1.15,
+      "offset_N": 8.0,
+      "maximum_N": 473.3333333333333,
+      "rule": "Prove max(minimum_N, 1.15 \u00d7 observed peak stop force + 8 N). Reject if it exceeds maximum_N."
+    },
+    "separate_pitch_coupler_torsion_proof_Nm": [
+      -0.65,
+      0.65
+    ],
+    "results": [
+      {
+        "direction": "back",
+        "incident_energy_J": 0.05044,
+        "closing_force_along_stop_N": 3.815632965165675,
+        "travel_limit_mm": 0.46836957674819035,
+        "stop_force_limit_N": 404.6376811594203,
+        "cases": {
+          "soft_with_sleeves": {
+            "arrest_angle_deg": 0.6427274608590138,
+            "peak_stop_force_N": 262.31612827376733,
+            "bearing_screen_N": 309.66354751483243,
+            "passes_angle_and_bearing": true
+          },
+          "stiff_with_sleeves": {
+            "arrest_angle_deg": 0.48073429256040445,
+            "peak_stop_force_N": 348.13735718791725,
+            "bearing_screen_N": 408.3579607661048,
+            "passes_angle_and_bearing": true
+          },
+          "stiff_without_sleeves": {
+            "arrest_angle_deg": 0.40328244970958094,
+            "peak_stop_force_N": 413.532774937494,
+            "bearing_screen_N": 483.5626911781181,
+            "passes_angle_and_bearing": false
+          }
+        }
+      },
+      {
+        "direction": "forward",
+        "incident_energy_J": 0.05409,
+        "closing_force_along_stop_N": 4.57492336176283,
+        "travel_limit_mm": 0.6670390092393033,
+        "stop_force_limit_N": 404.6376811594203,
+        "cases": {
+          "soft_with_sleeves": {
+            "arrest_angle_deg": 0.6738802676546835,
+            "peak_stop_force_N": 288.321291360258,
+            "bearing_screen_N": 339.56948506429666,
+            "passes_angle_and_bearing": true
+          },
+          "stiff_with_sleeves": {
+            "arrest_angle_deg": 0.506065678419718,
+            "peak_stop_force_N": 380.89631334977486,
+            "bearing_screen_N": 446.03076035224103,
+            "passes_angle_and_bearing": true
+          },
+          "stiff_without_sleeves": {
+            "arrest_angle_deg": 0.4141833279500412,
+            "peak_stop_force_N": 463.36447859793526,
+            "bearing_screen_N": 540.8691503876255,
+            "passes_angle_and_bearing": false
+          }
+        }
+      }
+    ]
+  },
+  "scope": "B25 native solid checks at neutral with rear skull removed for repair. Sleeves and actual material properties are unmeasured."
+}

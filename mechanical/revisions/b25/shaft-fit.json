@@ -1,0 +1,522 @@
+{
+  "source_project": "R5-B25-P2S.3mf",
+  "source_project_sha256": "c685604c57ae0fdc419baf382d4675cb5e493adc48b1e544f7daa1ce26b53b13",
+  "units": "mm",
+  "stl_origin": "Source orientation with lowest Z at the build plate",
+  "parts": {
+    "08": {
+      "source_part": "08_pitch_horn_to_8mm_clamp-B24.stl",
+      "source_mesh_sha256": "1d5ab664dfb2a16b275e29d98b17cdb320700c352df3dcd976c40f8e9ad33a8b",
+      "p2s_plate": 6,
+      "p2s_settings": {
+        "layer_height": "0.2",
+        "nozzle_diameter": [
+          "0.4"
+        ],
+        "filament_settings_id": [
+          "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+        ],
+        "wall_generator": "classic",
+        "detect_thin_wall": "0",
+        "outer_wall_line_width": "0.42",
+        "wall_loops": "6",
+        "sparse_infill_density": "35%",
+        "enable_support": "1",
+        "support_type": "tree(auto)",
+        "xy_hole_compensation": "0"
+      },
+      "fit_gauge": "V8",
+      "stock_min_sampled_boss_wall_mm": 1.721,
+      "wall_samples_per_section": [
+        241,
+        241,
+        241
+      ],
+      "bore_axis": "Z (vertical)",
+      "stock_diameter_mm": 8.24,
+      "boss_diameter_mm": 13.1,
+      "bore_depth_mm": 9.8,
+      "d_flat_heights_from_axis_mm": [
+        3.08,
+        3.15
+      ],
+      "upper_relief_arc_offset_from_main_diameter_mm": -0.02,
+      "drive_screw_pilot_mm": 3.0,
+      "d_flat_min_web_to_screw_seat_mm": 2.42,
+      "boss_axial_sections_z_from_bed_mm": [
+        8.5,
+        10.5,
+        12.3
+      ],
+      "boss_wall_sampled_arc_deg": [
+        -60.0,
+        60.0
+      ],
+      "variants": [
+        {
+          "file": "V8/08_pitch-horn-clamp_D-bore_ID8.10mm.stl",
+          "bore_diameter_mm": 8.1,
+          "sha256": "0655dfabdbb872c7349875f110800801b3bbe590deca9bd57a3ce089afe6e259",
+          "min_sampled_boss_wall_mm": 1.791
+        },
+        {
+          "file": "V8/08_pitch-horn-clamp_D-bore_ID8.15mm.stl",
+          "bore_diameter_mm": 8.15,
+          "sha256": "cd5687961b187efbbc66891a82659a3d05e41b586f774edecc0b9c26bf792463",
+          "min_sampled_boss_wall_mm": 1.766
+        },
+        {
+          "file": "V8/08_pitch-horn-clamp_D-bore_ID8.20mm.stl",
+          "bore_diameter_mm": 8.2,
+          "sha256": "480eb76041d5d2a987f4e55293d9d79f14e2526a2c69eb6fdbcc976dcaf085ac",
+          "min_sampled_boss_wall_mm": 1.741
+        },
+        {
+          "file": "V8/08_pitch-horn-clamp_D-bore_ID8.25mm.stl",
+          "bore_diameter_mm": 8.25,
+          "sha256": "87c6fba7cf73b15bbd29f3f6246b6dd0cd49eb8cf37f841d309185840a55955d",
+          "min_sampled_boss_wall_mm": 1.716
+        },
+        {
+          "file": "V8/08_pitch-horn-clamp_D-bore_ID8.30mm.stl",
+          "bore_diameter_mm": 8.3,
+          "sha256": "3b578c8cf730446beb557f0c9331b40c377e6e32152d0e0ee347d585f06d2538",
+          "min_sampled_boss_wall_mm": 1.691
+        }
+      ]
+    },
+    "09": {
+      "source_part": "09_head_frame-B25.stl",
+      "source_mesh_sha256": "0036fa0b141ba1218ab8fea5919831cce961873837f694801fed71e515697d3b",
+      "p2s_plate": 6,
+      "p2s_settings": {
+        "layer_height": "0.2",
+        "nozzle_diameter": [
+          "0.4"
+        ],
+        "filament_settings_id": [
+          "R5 B15 Bambu PETG HF 14 mm3/s @ P2S"
+        ],
+        "wall_generator": "classic",
+        "detect_thin_wall": "0",
+        "outer_wall_line_width": "0.42",
+        "wall_loops": "6",
+        "sparse_infill_density": "35%",
+        "enable_support": "1",
+        "support_type": "tree(auto)",
+        "xy_hole_compensation": "0"
+      },
+      "fit_gauge": "P8",
+      "stock_min_sampled_boss_wall_mm": 2.278,
+      "wall_samples_per_section": [
+        655,
+        652,
+        720,
+        720
+      ],
+      "bore_axis": "X (horizontal)",
+      "stock_diameter_mm": 8.24,
+      "boss_diameter_mm": 12.8,
+      "boss_depth_mm": [
+        8.67,
+        8.5
+      ],
+      "boss_axial_sections_x_mm": [
+        -62.0,
+        -57.0,
+        59.5,
+        64.0
+      ],
+      "cross_pins_axis": "Y (horizontal)",
+      "cross_pins_diameter_mm": 3.1,
+      "cross_pin_boss_axial_ligament_mm": 2.7,
+      "bore_center_yz_from_bed_mm": [
+        21.05,
+        6.398010899999999
+      ],
+      "variants": [
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.10mm.stl",
+          "bore_diameter_mm": 8.1,
+          "sha256": "a20b2a749ab404479d2248219a024c64e3c9129c5473750a43519d65696ffeb1",
+          "min_sampled_boss_wall_mm": 2.349047165378458,
+          "cleared_local_pocket_intrusion_mm3": 3.4218069377562887,
+          "shafts_checked_gauge_diameter_mm": 8.076,
+          "final_fit_change_mm3": 25.314743894639832,
+          "final_dimensions_mm": [
+            150.6000062,
+            65.550003,
+            80.0
+          ],
+          "shaft_gauge_intersection_mm3": [
+            0.0,
+            0.0
+          ],
+          "minimum_sampled_support_wall_mm": 2.349047165378458,
+          "shaft_sections": [
+            {
+              "x_mm": -62.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.098068790475065,
+                8.099989352691601
+              ]
+            },
+            {
+              "x_mm": -57.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.097805965709185,
+                8.099999683438737
+              ]
+            },
+            {
+              "x_mm": 59.5,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.098005936122531,
+                8.09999355066188
+              ]
+            },
+            {
+              "x_mm": 64.0,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.098005936122528,
+                8.099989312747514
+              ]
+            }
+          ],
+          "transverse_pin_diameter_ranges_mm": [
+            [
+              [
+                3.099551094613193,
+                3.0999991755877256
+              ],
+              [
+                3.099527502100836,
+                3.0999941999509786
+              ]
+            ],
+            [
+              [
+                3.099533354879394,
+                3.0999977840342217
+              ],
+              [
+                3.099527502100836,
+                3.0999941999509786
+              ]
+            ]
+          ]
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.15mm.stl",
+          "bore_diameter_mm": 8.15,
+          "sha256": "943dfd85c425c2880d5b9776cc3fbbfb4b81cd69a7701c40b756a2b49812e724",
+          "min_sampled_boss_wall_mm": 2.3240423604452456,
+          "cleared_local_pocket_intrusion_mm3": 3.4233970650253625,
+          "shafts_checked_gauge_diameter_mm": 8.126000000000001,
+          "final_fit_change_mm3": 15.195955269795377,
+          "final_dimensions_mm": [
+            150.6000062,
+            65.550003,
+            80.0
+          ],
+          "shaft_gauge_intersection_mm3": [
+            0.0,
+            0.0
+          ],
+          "minimum_sampled_support_wall_mm": 2.3240423604452456,
+          "shaft_sections": [
+            {
+              "x_mm": -62.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.14785842351056,
+                8.149992578754164
+              ]
+            },
+            {
+              "x_mm": -57.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.147578287933449,
+                8.15000236000743
+              ]
+            },
+            {
+              "x_mm": 59.5,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.147791050578409,
+                8.1499984882212
+              ]
+            },
+            {
+              "x_mm": 64.0,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.147791050578407,
+                8.149997572575938
+              ]
+            }
+          ],
+          "transverse_pin_diameter_ranges_mm": [
+            [
+              [
+                3.0995505518995787,
+                3.099999259018166
+              ],
+              [
+                3.0995278579974457,
+                3.099994759370171
+              ]
+            ],
+            [
+              [
+                3.099533354879393,
+                3.099997089066082
+              ],
+              [
+                3.0995278579974457,
+                3.099994759370171
+              ]
+            ]
+          ]
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.20mm.stl",
+          "bore_diameter_mm": 8.2,
+          "sha256": "7069f39305d9349231e4a4180154fdeefde8709662b7f37d883cd393480dce9e",
+          "min_sampled_boss_wall_mm": 2.2990469882428126,
+          "cleared_local_pocket_intrusion_mm3": 3.4251598328085384,
+          "shafts_checked_gauge_diameter_mm": 8.176,
+          "final_fit_change_mm3": 5.010232238426397,
+          "final_dimensions_mm": [
+            150.6000062,
+            65.550003,
+            80.0
+          ],
+          "shaft_gauge_intersection_mm3": [
+            0.0,
+            0.0
+          ],
+          "minimum_sampled_support_wall_mm": 2.2990469882428126,
+          "shaft_sections": [
+            {
+              "x_mm": -62.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.197630464171834,
+                8.199992093556398
+              ]
+            },
+            {
+              "x_mm": -57.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.19734723597808,
+                8.19999830415185
+              ]
+            },
+            {
+              "x_mm": 59.5,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.197547448837696,
+                8.199995919233118
+              ]
+            },
+            {
+              "x_mm": 64.0,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.197577762695698,
+                8.19999818289363
+              ]
+            }
+          ],
+          "transverse_pin_diameter_ranges_mm": [
+            [
+              [
+                3.0995500076284137,
+                3.099999342690356
+              ],
+              [
+                3.0995282216203615,
+                3.09999533026545
+              ]
+            ],
+            [
+              [
+                3.099533354879392,
+                3.0999963895888936
+              ],
+              [
+                3.0995282216203615,
+                3.09999533026545
+              ]
+            ]
+          ]
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.25mm.stl",
+          "bore_diameter_mm": 8.25,
+          "sha256": "6982a1141bb4327079e7134a1a45bcbc0425ac27da86bf4232beeb4c88030c31",
+          "min_sampled_boss_wall_mm": 2.2740434788277755,
+          "cleared_local_pocket_intrusion_mm3": 3.4270067779263487,
+          "shafts_checked_gauge_diameter_mm": 8.226,
+          "final_fit_change_mm3": -5.242418869434914,
+          "final_dimensions_mm": [
+            150.6000062,
+            65.550003,
+            80.0
+          ],
+          "shaft_gauge_intersection_mm3": [
+            0.0,
+            0.0
+          ],
+          "minimum_sampled_support_wall_mm": 2.2740434788277755,
+          "shaft_sections": [
+            {
+              "x_mm": -62.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.247382855407766,
+                8.249990862911934
+              ]
+            },
+            {
+              "x_mm": -57.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.247116676969583,
+                8.249999172349638
+              ]
+            },
+            {
+              "x_mm": 59.5,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.24722379494981,
+                8.249995879678321
+              ]
+            },
+            {
+              "x_mm": 64.0,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.24729403391728,
+                8.249992942687241
+              ]
+            }
+          ],
+          "transverse_pin_diameter_ranges_mm": [
+            [
+              [
+                3.0995494617512644,
+                3.099999426611719
+              ],
+              [
+                3.0995285932120598,
+                3.0999959130360075
+              ]
+            ],
+            [
+              [
+                3.099533354879394,
+                3.0999963424978474
+              ],
+              [
+                3.0995285932120598,
+                3.0999959130360075
+              ]
+            ]
+          ]
+        },
+        {
+          "file": "P8/09_head-frame_shaft-bore_ID8.30mm.stl",
+          "bore_diameter_mm": 8.3,
+          "sha256": "0b6bd2dab2e6833ec2feeb15ae290fcbe7072c2c9bb411c6196d1f132f860110",
+          "min_sampled_boss_wall_mm": 2.249045031482276,
+          "cleared_local_pocket_intrusion_mm3": 3.4293209256093067,
+          "shafts_checked_gauge_diameter_mm": 8.276000000000002,
+          "final_fit_change_mm3": -15.561991518166906,
+          "final_dimensions_mm": [
+            150.6000062,
+            65.550003,
+            80.0
+          ],
+          "shaft_gauge_intersection_mm3": [
+            0.0,
+            0.0
+          ],
+          "minimum_sampled_support_wall_mm": 2.249045031482276,
+          "shaft_sections": [
+            {
+              "x_mm": -62.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.297145886504925,
+                8.29999353547648
+              ]
+            },
+            {
+              "x_mm": -57.0,
+              "ray_count": 647,
+              "shaft_diameter_range_mm": [
+                8.296885073393277,
+                8.299996924863517
+              ]
+            },
+            {
+              "x_mm": 59.5,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.296901371148149,
+                8.300001153288882
+              ]
+            },
+            {
+              "x_mm": 64.0,
+              "ray_count": 720,
+              "shaft_diameter_range_mm": [
+                8.296962939722398,
+                8.299997629821723
+              ]
+            }
+          ],
+          "transverse_pin_diameter_ranges_mm": [
+            [
+              [
+                3.099548914304967,
+                3.0999997059874786
+              ],
+              [
+                3.0995289730582125,
+                3.099996508012465
+              ]
+            ],
+            [
+              [
+                3.0995333548793935,
+                3.099996508065716
+              ],
+              [
+                3.0995289730582125,
+                3.099996508012465
+              ]
+            ]
+          ]
+        }
+      ],
+      "production_frame_mesh_sha256": "3352dd5de47bb2073fc00859233a1d3d68ed7d5d63be4a60710f71e281526434",
+      "pin_cheek_reinforcement_outer_radius_mm": 6.8,
+      "pin_cheek_minimum_design_ligament_mm": 1.2
+    }
+  },
+  "baseline_fit_project_sha256": "f19084b140e60ca3ac253746a6fcb869dbb15ecdf53824ae436f3d671e09810d",
+  "geometry_after_final_project_sha256": "acf4dd476f300ce8dd07ccd61142f1e1e64510ac93e46b6475ba4d0f009f5a6e",
+  "rebuilt_family": "P8"
+}

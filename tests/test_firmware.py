@@ -27,7 +27,7 @@ def test_unset_calibration_keeps_all_axes_off(uncalibrated):
 
 @pytest.mark.parametrize(('register', 'value'), [
     (0, 1190), (10, 4), (10, 8), (11, 1), (64, 1), (68, 1),
-    (POSITION, 1000), (POSITION, 4096), (POSITION, -1),
+    (STARTUP, 1), (STARTUP, 2), (POSITION, 1000), (POSITION, 4096), (POSITION, -1),
 ])
 def test_arm_checks_every_axis_before_writing(firmware, register, value):
     firmware.set(5, register, value)
@@ -79,36 +79,48 @@ def test_goal_limits_cover_reversed_and_one_sided_axes(firmware):
     arm(firmware, 63)
     firmware.command('GO -1e9 1e9 1e9 1e9 -1e9 5.5')
     assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [
-        (1, 1829), (2, 1965), (3, 3024), (4, 2707), (5, 2203), (6, 1938),
+        (1, 1886), (2, 1965), (3, 3024), (4, 2688), (5, 2197), (6, 1978),
     ]
     firmware.command('GO 0 0 0 0 0 0')
     firmware.tick(60)
     assert [e.value for e in writes(firmware.trace(), GOAL)] == [2048, 2048, 2000, 2048, 2048, 2000]
 
 
-@pytest.mark.parametrize('goal', ['13', '6', '-1'])
+@pytest.mark.parametrize('goal', ['5.5001', '6', '-1'])
 def test_jaw_rejects_commands_outside_calibrated_demo_range(firmware, goal):
     arm(firmware, 32)
     assert firmware.command('GO 0 0 0 0 0 ' + goal) == ['ERROR JAW_GOAL_RANGE ID6']
     assert not writes(firmware.trace(), GOAL)
 
 
-@pytest.mark.parametrize('opening_tick', [1937, 1852])
+@pytest.mark.parametrize('opening_tick', [1937, 2063])
 def test_jaw_arming_rejects_overlong_calibration(firmware_build, opening_tick):
     rows = (*CALIBRATED[:-1], (2000, 2000, opening_tick))
     simulator = Firmware(firmware_build(rows))
     try:
-        for command in ('ARM 56', 'ARM_JAW_DEMO'):
+        for command in ('ARM 56', 'ARM_JAW_DEMO', 'ARM_EXHIBIT'):
             assert simulator.command(command) == ['LOCKED JAW_CALIBRATION_RANGE ID6']
         assert not writes(simulator.trace(), TORQUE)
     finally:
         simulator.close()
 
+
+@pytest.mark.parametrize('opening_tick', [1938, 2062])
+def test_jaw_commands_the_62_tick_endpoint(firmware_build, opening_tick):
+    rows = (*CALIBRATED[:-1], (2000, 2000, opening_tick))
+    simulator = Firmware(firmware_build(rows))
+    try:
+        arm(simulator, 32)
+        simulator.command('GO 0 0 0 0 0 5.5')
+        assert [(e.id, e.value) for e in writes(simulator.trace(), GOAL)] == [(6, opening_tick)]
+    finally:
+        simulator.close()
+
 @pytest.mark.parametrize(('axis', 'row', 'name'), [
-    (0, (1828, 2048, 2267), 'EYE'), (1, (2131, 2048, 1964), 'EYE'),
+    (0, (1885, 2048, 2210), 'EYE'), (1, (2131, 2048, 1964), 'EYE'),
     (2, (2000, 2000, 3025), 'BLINK'), (2, (2000, 2000, 975), 'BLINK'),
-    (3, (1389, 2048, 2708), 'YAW'), (3, (2707, 2048, 1388), 'YAW'),
-    (3, (1374, 2048, 2722), 'YAW'),
+    (3, (1408, 2048, 2689), 'YAW'), (3, (2688, 2048, 1407), 'YAW'),
+    (3, (1389, 2048, 2707), 'YAW'),
 ])
 def test_arming_keeps_feedback_inside_cad_travel(firmware_build, axis, row, name):
     rows = list(CALIBRATED)
@@ -121,18 +133,18 @@ def test_arming_keeps_feedback_inside_cad_travel(firmware_build, axis, row, name
         simulator.close()
 
 
-def test_jaw_position_report_limits_overtravel_to_eleven_ticks(firmware):
+def test_jaw_position_report_limits_overtravel_to_five_ticks(firmware):
     arm(firmware, 32)
-    firmware.set(6, POSITION, 1938 - 11)
+    firmware.set(6, POSITION, 1978 - 5)
     assert firmware.tick(120)[0].endswith(' 5.500')
-    firmware.set(6, POSITION, 1938 - 12)
+    firmware.set(6, POSITION, 1978 - 6)
     assert firmware.tick(120) == ['ERROR POSITION_LIMIT ID6']
     assert [(e.id, e.value) for e in writes(firmware.trace(), TORQUE)] == [(6, 0)]
 
 
-@pytest.mark.parametrize('row', [(2203, 2048, 2013), (1893, 2048, 2083),
-                                 (2203, 2048, 1997), (1893, 2048, 2099)])
-def test_pitch_arming_rejects_more_than_34_ticks_of_positive_travel(firmware_build, row):
+@pytest.mark.parametrize('row', [(2197, 2048, 2017), (1899, 2048, 2079),
+                                 (2197, 2048, 1997), (1899, 2048, 2099)])
+def test_pitch_arming_rejects_more_than_30_ticks_of_positive_travel(firmware_build, row):
     rows = (*CALIBRATED[:4], row, CALIBRATED[5])
     simulator = Firmware(firmware_build(rows))
     try:
@@ -146,17 +158,17 @@ def test_pitch_arming_rejects_more_than_34_ticks_of_positive_travel(firmware_bui
 def test_positive_pitch_limits_the_goal_to_4_5_degrees_and_keeps_eight_tick_allowance(firmware):
     arm(firmware, 16)
     assert not firmware.command('GO 0 0 0 0 12')
-    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(5, 2014)]
-    firmware.set(5, POSITION, 2014 - 8)
+    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(5, 2018)]
+    firmware.set(5, POSITION, 2018 - 8)
     assert firmware.tick(120)[0].endswith(' 4.500')
-    firmware.set(5, POSITION, 2014 - 9)
+    firmware.set(5, POSITION, 2018 - 9)
     assert firmware.tick(120) == ['ERROR POSITION_LIMIT ID5', 'ERROR HOLD_UNCONFIRMED']
     assert not writes(firmware.trace(), TORQUE)
 
 
-@pytest.mark.parametrize('row', [(2204, 2048, 2014), (1892, 2048, 2082),
-                                 (2219, 2048, 2014), (1877, 2048, 2082)])
-def test_pitch_arming_rejects_more_than_155_ticks_of_negative_travel(firmware_build, row):
+@pytest.mark.parametrize('row', [(2198, 2048, 2018), (1898, 2048, 2078),
+                                 (2219, 2048, 2018), (1877, 2048, 2078)])
+def test_pitch_arming_rejects_more_than_149_ticks_of_negative_travel(firmware_build, row):
     rows = (*CALIBRATED[:4], row, CALIBRATED[5])
     simulator = Firmware(firmware_build(rows))
     try:
@@ -169,8 +181,8 @@ def test_pitch_arming_rejects_more_than_155_ticks_of_negative_travel(firmware_bu
 @pytest.mark.parametrize('direction', [-1, 1])
 def test_pitch_recovers_after_supported_return_from_a_negative_stop(firmware_build, direction):
     zero = 2048
-    lower = zero + direction * 155
-    row = (lower, zero, zero - direction * 34)
+    lower = zero + direction * 149
+    row = (lower, zero, zero - direction * 30)
     rows = (*CALIBRATED[:4], row, CALIBRATED[5])
     simulator = Firmware(firmware_build(rows))
     try:
@@ -214,7 +226,7 @@ def test_crlf_and_fragmented_input(firmware):
     firmware.receive(b'GO 0 0 0 15')
     assert not writes(firmware.trace(), GOAL)
     firmware.receive(b' 0\r\n')
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2213]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2208]
 
 
 def test_hold_discards_queued_setpoint(firmware):
@@ -224,11 +236,11 @@ def test_hold_discards_queued_setpoint(firmware):
     firmware.set(4, POSITION, 2100)
     firmware.command('HOLD')
     firmware.tick(60)
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2213, 2100]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2208, 2100]
 
 
 @pytest.mark.parametrize(('mask', 'servo', 'measured', 'goal'), [
-    (8, 4, 2710, 2707), (8, 4, 1386, 1389), (16, 5, 2011, 2014),
+    (8, 4, 2696, 2688), (8, 4, 1400, 1408), (16, 5, 2013, 2018), (32, 6, 1973, 1978),
 ])
 def test_hold_is_clamped_even_when_measured_tick_is_just_outside(firmware, mask, servo, measured, goal):
     arm(firmware, mask)
@@ -237,7 +249,47 @@ def test_hold_is_clamped_even_when_measured_tick_is_just_outside(firmware, mask,
     assert [e.value for e in writes(firmware.trace(), GOAL)] == [goal]
 
 
-@pytest.mark.parametrize(('endpoint', 'direction'), [(1389, -1), (2707, 1)])
+def test_watchdog_replaces_the_old_pitch_goal_with_a_clamped_hold(firmware):
+    arm(firmware, 16)
+    firmware.exchange('follow 5 0')
+    assert not firmware.command('GO 0 0 0 0 -10')
+    old_goal, = writes(firmware.trace(), GOAL)
+    assert old_goal.value > 2048
+    assert not firmware.command('GO 0 0 0 0 -14')
+    firmware.set(5, POSITION, 2018 - 5)
+    assert firmware.tick(400) == ['STATE 16 0.000 0.000 0.000 0.000 4.500']
+    events = firmware.trace()
+    assert [(e.id, e.value) for e in writes(events, GOAL)] == [(5, 2018)]
+    assert not writes(events, TORQUE)
+
+
+def test_watchdog_does_not_acknowledge_a_hold_when_the_servo_ignores_it(firmware):
+    arm(firmware, 16)
+    firmware.exchange('follow 5 0')
+    assert not firmware.command('GO 0 0 0 0 -10')
+    old_goal, = writes(firmware.trace(), GOAL)
+    firmware.set(5, POSITION, 2018 - 5)
+    firmware.fail('w', 5, GOAL, 'ignored')
+    assert firmware.tick(400) == ['ERROR HOLD_UNCONFIRMED']
+    assert any(e.direction == 'r' and e.register == GOAL and e.value == old_goal.value
+               for e in firmware.trace())
+    assert firmware.command('ARM 16') == ['LOCKED RELEASE_AFTER_FAULT']
+
+
+def test_watchdog_locks_if_hold_position_is_unconfirmed_and_holds_other_axes(firmware):
+    arm(firmware, 24)
+    assert not firmware.command('GO 0 0 0 10 -4')
+    assert not firmware.command('GO 0 0 0 20 -8')
+    firmware.trace()
+    firmware.fail('r', 4, POSITION, 'wrong_id', 2)
+    measured_pitch = 2060
+    firmware.set(5, POSITION, measured_pitch)
+    assert firmware.tick(400) == ['ERROR HOLD_UNCONFIRMED']
+    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(5, measured_pitch)]
+    assert firmware.command('ARM 24') == ['LOCKED RELEASE_AFTER_FAULT']
+
+
+@pytest.mark.parametrize(('endpoint', 'direction'), [(1408, -1), (2688, 1)])
 @pytest.mark.parametrize('delta', [8, 9])
 def test_report_limit_is_inclusive_at_eight_ticks(firmware, endpoint, direction, delta):
     arm(firmware, 8)
@@ -250,12 +302,25 @@ def test_report_limit_is_inclusive_at_eight_ticks(firmware, endpoint, direction,
     assert not any(e.direction == 'w' for e in firmware.trace())
 
 
-@pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'short'])
+@pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'short', 'truncated',
+                                  'wrong_id_denied', 'wrong_wire_length'])
 def test_transient_read_is_retried(firmware, kind):
     arm(firmware, 8)
     firmware.fail('r', 4, POSITION, kind)
     assert firmware.tick(120)[0].startswith('STATE 8 ')
-    assert [(e.direction, e.result) for e in firmware.trace()] == [('r', kind), ('r', 'ok')]
+    assert [(e.direction, e.register, e.result) for e in firmware.trace()] == [
+        ('r', POSITION, kind), ('r', POSITION, 'ok'), ('r', TORQUE, 'ok'),
+    ]
+
+
+@pytest.mark.parametrize('kind', ['wrong_id', 'wrong_id_alert', 'wrong_id_denied', 'extra', 'truncated'])
+def test_goal_write_retries_invalid_acknowledgements(firmware, kind):
+    arm(firmware, 1)
+    firmware.fail('w', 1, GOAL, kind)
+    assert not firmware.command('GO 10 0 0 0 0')
+    attempts = writes(firmware.trace(), GOAL)
+    assert [event.result for event in attempts] == [kind, 'ok']
+    assert attempts[0].value == attempts[1].value
 
 
 @pytest.mark.parametrize('kind', ['timeout', 'crc', 'instruction_crc', 'lost'])
@@ -264,7 +329,7 @@ def test_transient_write_retries_the_same_tick(firmware, kind):
     firmware.fail('w', 4, GOAL, kind)
     assert not firmware.command('GO 0 0 0 30 0')
     assert [(e.id, e.value, e.result) for e in writes(firmware.trace(), GOAL)] == [
-        (4, 2378, kind), (4, 2378, 'ok'),
+        (4, 2368, kind), (4, 2368, 'ok'),
     ]
     assert firmware.tick(120)[0].startswith('STATE 8 ')
 
@@ -314,6 +379,68 @@ def test_release_retries_only_the_unconfirmed_axis(firmware):
     assert firmware.command('RELEASE') == ['RELEASED']
     assert [e.id for e in writes(firmware.trace(), TORQUE)] == [5]
     arm(firmware, 24)
+
+
+def test_release_verifies_torque_after_an_openrb_only_restart(firmware):
+    # Fresh sketch, with a separately powered servo still holding its previous goal.
+    firmware.set(4, TORQUE, 1)
+    assert firmware.command('RELEASE') == ['RELEASED']
+    events = firmware.trace()
+    assert [e.id for e in events if e.direction == 'r' and e.register == 0] == list(range(1, 7))
+    assert [(e.direction, e.value) for e in events if e.id == 4 and e.register == TORQUE] == [
+        ('r', 1), ('w', 0), ('r', 0),
+    ]
+    assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(4, 0)]
+    assert not writes(events, GOAL)
+
+
+def test_release_verifies_all_powered_servos_after_an_openrb_only_restart(firmware):
+    for servo in range(1, 7):
+        firmware.set(servo, TORQUE, 1)
+    firmware.fail('w', 4, TORQUE, 'ignored')  # The write reply succeeds, but the register stays on.
+
+    assert firmware.command('RELEASE') == ['ERROR RELEASE_UNCONFIRMED']
+    events = firmware.trace()
+    assert [(event.id, event.value) for event in writes(events, TORQUE)] == [
+        (servo, 0) for servo in range(1, 7)
+    ]
+    torque_reads = {e.id: e.value for e in events if e.direction == 'r' and e.register == TORQUE}
+    assert torque_reads == {1: 0, 2: 0, 3: 0, 4: 1, 5: 0, 6: 0}
+
+    assert firmware.command('RELEASE') == ['RELEASED']
+    events = firmware.trace()
+    assert [(e.id, e.value) for e in events if e.direction == 'r' and e.register == TORQUE] == [
+        (1, 0), (2, 0), (3, 0), (4, 1), (4, 0), (5, 0), (6, 0),
+    ]
+    assert [event.id for event in writes(events, TORQUE)] == [4]
+
+
+@pytest.mark.parametrize('missing_or_wrong', ['absent', 'wrong_model', 'wrong_reply'])
+def test_release_continues_with_matching_servos_but_cannot_confirm_every_id(firmware, missing_or_wrong):
+    firmware.set(4, TORQUE, 1)
+    firmware.set(6, TORQUE, 1)
+    if missing_or_wrong == 'wrong_model':
+        firmware.set(6, 0, 1190)
+    else:
+        firmware.fail('r', 6, 0, 'timeout' if missing_or_wrong == 'absent' else 'wrong_id', 2)
+    assert firmware.command('RELEASE') == ['ERROR RELEASE_UNCONFIRMED']
+    events = firmware.trace()
+    assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(4, 0)]
+    assert not any(e.id == 6 and e.register == TORQUE for e in events)
+    assert firmware.command('ARM 8') == ['LOCKED RELEASE_AFTER_FAULT']
+    firmware.set(6, 0, 1200)
+    assert firmware.command('RELEASE') == ['RELEASED']
+    assert [(e.id, e.value) for e in writes(firmware.trace(), TORQUE)] == [(6, 0)]
+    arm(firmware, 8)
+
+
+def test_release_does_not_confirm_an_off_read_from_another_id(firmware):
+    firmware.set(4, TORQUE, 1)
+    firmware.fail('r', 4, TORQUE, 'wrong_id', 4)
+    assert firmware.command('RELEASE') == ['ERROR RELEASE_UNCONFIRMED']
+    assert [(e.id, e.value) for e in writes(firmware.trace(), TORQUE)] == [(4, 0)]
+    assert firmware.command('RELEASE') == ['RELEASED']
+    assert not writes(firmware.trace(), TORQUE)
 
 
 def test_reboot_recovers_an_axis_that_latched_a_hardware_alert(firmware):
@@ -408,7 +535,7 @@ def test_neck_neutral_guard_accepts_at_most_two_degrees(firmware, servo, delta):
 @pytest.mark.parametrize('closing', [False, True])
 def test_persistent_jaw_lag_releases_only_the_jaw(firmware, closing):
     if closing:
-        firmware.set(6, POSITION, 1938)
+        firmware.set(6, POSITION, 1978)
     arm(firmware, 56)
     firmware.exchange('follow 6 0')
     goal = 'GO 0 0 0 0 0 ' + ('0' if closing else '5.5')
@@ -433,10 +560,10 @@ def test_jaw_settling_and_a_single_late_lag_sample_do_not_trip(firmware):
     for _ in range(5):
         firmware.command(goal)
         assert firmware.tick(120)[0].startswith('STATE 32 ')
-    firmware.set(6, POSITION, 1938 + 34)
+    firmware.set(6, POSITION, 1978 + 8)
     firmware.command(goal)
     assert firmware.tick(120)[0].startswith('STATE 32 ')
-    firmware.set(6, POSITION, 1938 + 35)
+    firmware.set(6, POSITION, 1978 + 9)
     firmware.command(goal)
     assert firmware.tick(120)[0].startswith('STATE 32 ')
     assert not writes(firmware.trace(), TORQUE)
@@ -448,7 +575,7 @@ def test_jaw_lag_monitor_restarts_after_a_new_goal(firmware):
     for _ in range(5):
         firmware.command('GO 0 0 0 0 0 5.5')
         assert firmware.tick(120)[0].startswith('STATE 32 ')
-    firmware.command('GO 0 0 0 0 0 4')
+    firmware.command('GO 0 0 0 0 0 1.0')
     assert firmware.tick(120)[0].startswith('STATE 32 ')
     assert not writes(firmware.trace(), TORQUE)
 
@@ -486,7 +613,7 @@ def test_jaw_demo_rechecks_physical_neutral_before_a_new_jaw_goal(firmware):
     firmware.tick(240)
     firmware.trace()
     firmware.set(5, POSITION, 2048 + 23)
-    assert firmware.command('GO 0 0 0 0 0 4') == ['ERROR NECK_NOT_NEUTRAL ID5']
+    assert firmware.command('GO 0 0 0 0 0 1.0') == ['ERROR NECK_NOT_NEUTRAL ID5']
     events = firmware.trace()
     assert [e.id for e in writes(events, GOAL)] == [4, 5]
     assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(6, 0)]
@@ -495,7 +622,7 @@ def test_jaw_demo_rechecks_physical_neutral_before_a_new_jaw_goal(firmware):
 def test_jaw_demo_stops_if_neck_is_no_longer_holding(firmware):
     arm_jaw_demo(firmware)
     firmware.tick(240)
-    firmware.command('GO 0 0 0 0 0 4')
+    firmware.command('GO 0 0 0 0 0 1.0')
     firmware.trace()
     firmware.set(5, TORQUE, 0)
     assert firmware.tick(120) == ['ERROR JAW_DEMO_NECK_TORQUE ID5']
@@ -507,17 +634,17 @@ def test_jaw_demo_stops_if_neck_is_no_longer_holding(firmware):
 def test_jaw_demo_waits_for_the_neck_centering_interval(firmware):
     arm_jaw_demo(firmware)
     firmware.trace()
-    firmware.command('GO 0 0 0 0 0 4')
+    firmware.command('GO 0 0 0 0 0 2.75')
     firmware.tick(120)
     assert not writes(firmware.trace(), GOAL)
     firmware.tick(120)
-    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(6, 1955)]
+    assert [(e.id, e.value) for e in writes(firmware.trace(), GOAL)] == [(6, 1989)]
 
 
 def test_jaw_demo_refuses_a_non_neutral_neck_command(firmware):
     arm_jaw_demo(firmware)
     firmware.trace()
-    assert firmware.command('GO 0 0 0 -1 0 4') == ['ERROR JAW_DEMO_NECK_GOAL']
+    assert firmware.command('GO 0 0 0 -1 0 1.0') == ['ERROR JAW_DEMO_NECK_GOAL']
     events = firmware.trace()
     assert {(e.id, e.value) for e in writes(events, GOAL)} == {(4, 2048), (5, 2048)}
     assert [(e.id, e.value) for e in writes(events, TORQUE)] == [(6, 0)]
@@ -538,11 +665,11 @@ def test_pacing_applies_latest_goal_as_reports_continue(firmware):
     firmware.command('GO 0 0 0 5 0')
     firmware.command('GO 0 0 0 10 0')
     firmware.command('GO 0 0 0 25 0')
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2103]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2101]
     firmware.tick(period-1)
     assert not writes(firmware.trace(), GOAL)
     firmware.tick(1)
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2323]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2315]
     assert firmware.tick(report-period)[0].startswith('STATE 8 ')
 
 
@@ -554,7 +681,7 @@ def test_slow_usb_read_requests_do_not_flush_stale_goal_before_watchdog(firmware
     firmware.set(4, POSITION, 2100)
     firmware.fail('r', 4, POSITION, 'timeout', 32)
     firmware.receive(b'READ 4\n'*16)
-    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2158, 2100]
+    assert [e.value for e in writes(firmware.trace(), GOAL)] == [2155, 2100]
 
 
 def test_all_six_axes_have_bus_headroom(firmware):
@@ -562,8 +689,51 @@ def test_all_six_axes_have_bus_headroom(firmware):
     return_delay = .508
     write_ms = 27*10*1000/baud + return_delay
     read_ms = 29*10*1000/baud + return_delay
-    assert 6*(write_ms/period + read_ms/report) < .82
+    torque_read_ms = 26*10*1000/baud + return_delay
+    assert 6*(write_ms/period + read_ms/report) + torque_read_ms/report < .85
     assert 5*(write_ms/33.333 + read_ms/90) > 1
+
+
+@pytest.mark.parametrize('arm_command', ['ARM 31', 'ARM_EXHIBIT'])
+def test_rail_restart_locks_motion_instead_of_reporting_an_armed_state(firmware, arm_command):
+    assert firmware.command(arm_command)[-1].startswith('STATE 31 ')
+    firmware.trace()
+    for servo in range(1, 7):
+        firmware.set(servo, TORQUE, 0)
+    assert firmware.tick(120) == ['ERROR TORQUE_LOST ID1']
+    assert firmware.command('ARM 31') == ['LOCKED RELEASE_AFTER_FAULT']
+    assert not firmware.command('GO_EXHIBIT 0 0 0 20 3')
+    assert not firmware.tick(120)
+    assert all(e.value == 0 for e in writes(firmware.trace(), TORQUE))
+    assert firmware.command('RELEASE') == ['RELEASED']
+    arm(firmware, 31)
+
+
+def test_repeated_arm_verifies_torque_before_acknowledging(firmware):
+    arm(firmware, 24)
+    firmware.set(5, TORQUE, 0)
+    assert firmware.command('ARM 24') == ['ERROR TORQUE_LOST ID5']
+    events = firmware.trace()
+    assert [(e.id, e.value) for e in writes(events, GOAL)] == [(4, 2048)]
+    assert not writes(events, TORQUE)
+
+
+def test_one_torque_read_rotates_through_six_axes_and_catches_an_individual_reset(firmware):
+    arm(firmware, 63)
+    for servo in range(1, 7):
+        assert firmware.tick(120)[0].startswith('STATE 63 ')
+        assert [e.id for e in firmware.trace() if e.register == TORQUE] == [servo]
+        if servo == 1:
+            firmware.set(1, TORQUE, 0)
+    assert firmware.tick(120) == ['ERROR TORQUE_LOST ID1']
+    assert not writes(firmware.trace(), TORQUE)
+
+
+def test_torque_check_distinguishes_a_wrong_id_reply_from_an_observed_reset(firmware):
+    arm(firmware, 8)
+    firmware.fail('r', 4, TORQUE, 'wrong_id', 2)
+    assert firmware.tick(120) == ['ERROR TORQUE_UNCONFIRMED ID4']
+    assert not writes(firmware.trace(), TORQUE)
 
 
 def test_six_axis_flood_keeps_both_pacing_and_telemetry(firmware):
@@ -573,11 +743,16 @@ def test_six_axis_flood_keeps_both_pacing_and_telemetry(firmware):
     for frame in range(100):
         direction = 1 if (frame//6)%2 else -1
         firmware.command(f'GO {direction*10} {direction*5} {15+direction*5} '
-                         f'{direction*30} {direction*5} {3+direction*2}')
+                         f'{direction*30} {direction*5} {1+direction*.5}')
         states.extend(firmware.tick(10))
-    goals = writes(firmware.trace(), GOAL)
+    events = firmware.trace()
+    goals = writes(events, GOAL)
     for servo in range(1, 7):
         times = [e.time for e in goals if e.id==servo]
         assert len(times) >= 15
         assert all(b-a >= period for a,b in zip(times,times[1:]))
-    assert sum(line.startswith('STATE 63 ') for line in states) == 1000//report
+    reports = 1000//report
+    assert sum(line.startswith('STATE 63 ') for line in states) == reports
+    assert [e.id for e in events if e.direction == 'r' and e.register == TORQUE] == [
+        index % 6 + 1 for index in range(reports)
+    ]
