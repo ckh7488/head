@@ -2,7 +2,7 @@
 
 ## B25 실물 시험
 
-시험한 B25 CAD의 SHA-256, 출력 조건, 실제 부품, 카메라 선과 A5 허브, 펌웨어와 실측 `Calibration.h`를 식별합니다. 결과는 시험한 사람이 [검수 기록 형식](records/README.md)에 따라 남깁니다. [고정 검사 조건](conditions.md) · [B25 조립](../mechanical/revisions/b25/assembly.md)
+시험에 쓴 B25 CAD의 SHA-256, 출력 3MF와 출력 조건, 실제 부품, 카메라 선과 A5 허브, 펌웨어와 실측 `Calibration.h`를 식별합니다. 결과는 시험한 사람이 [검수 기록 형식](records/README.md)에 따라 남깁니다. [고정 검사 조건](conditions.md) · [B25 조립](../mechanical/revisions/b25/assembly.md)
 
 1. 하드웨어 없이 모형 검사와 영상 미리보기를 실행합니다. 시험 출력물에서 P01과 P08의 건식 맞춤을 시작합니다. [제어와 보정](../control/README.md)
 2. 모터를 뺀 상태에서 A5 입력과 출력, OpenRB USB 응답을 확인합니다. 최종 경로에 놓은 카메라 선의 도통·단락 검사와 High-Speed 영상을 확인합니다. [A5 첫 통전](../electronics/README.md#전원-실물-검수) · [카메라 선 조립](../mechanical/revisions/b25/assembly.md#카메라-usb-선재)

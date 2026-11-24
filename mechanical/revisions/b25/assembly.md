@@ -1,6 +1,6 @@
 # R5 B25 조립 절차
 
-출력 부품 57개를 18판에 배치한 B25 P2S PETG HF 프로젝트와 A5 허브를 사용합니다. [P2S 프로젝트](R5-B25-P2S.3mf) · [출력판 대조](print-hf.json) · [서울 출력](01-seoul-print.md) · [시험 전 준비품](02-order-before.md) · [시험 뒤 발주](03-order-after.md)
+출력 부품 57개를 18판에 배치한 B25 P2S PETG HF 프로젝트와 A5 허브를 사용합니다. [P2S 프로젝트](R5-B25-P2S.3mf) · [출력판 대조](print-hf.json) · [출력과 후가공](01-seoul-print.md) · [시험 전 준비품](02-order-before.md) · [시험 뒤 발주](03-order-after.md)
 
 현재 3D 조립 미리보기는 171단계의 부품·공구 위치 예시입니다. 이전 통합본 `14014ec`의 146단계 강체 검사에서는 이전 카메라 플러그 삽입 모델을 사용했고 막힘은 0건이었습니다. 현재 Eaton 접합, A5와 J2 체결, 턱 세 점 고정은 항목별 CAD 기록과 P01–P08 실물 시험을 확인합니다. [3D 미리보기 생성](../../../web/README.md#오프라인-조립-html-만들기) · [조립 검사 범위](alignment-checks.json) · [실물 시험](../../../spec/bench.md#b25-실물-시험)
 

@@ -3,7 +3,7 @@
 ## 현재 제작본 B25
 
 - **형상과 조립** · [FreeCAD 조립본](revisions/b25/R5-B25-Assembly.FCStd) · [B25 조립서](revisions/b25/assembly.md) · [3D 조립과 구동](../web/README.md#b25-웹-화면)
-- **출력** · Bambu Lab P2S, 0.4 mm 경화강 노즐, PETG HF, 0.20 mm, Textured PEI. 18판·57개에서 15번 링크와 13번 턱을 먼저 출력합니다. [P2S PETG HF 3MF](revisions/b25/R5-B25-P2S.3mf) · [서울 출력 목록](revisions/b25/01-seoul-print.md) · [맞춤 게이지](revisions/b25/fit-gauge.md)
+- **출력** · Bambu Lab P2S, 0.4 mm 경화강 노즐, PETG HF, 0.20 mm, Textured PEI. 18판·57개에서 15번 링크와 13번 턱을 먼저 출력합니다. [P2S PETG HF 3MF](revisions/b25/R5-B25-P2S.3mf) · [출력과 후가공](revisions/b25/01-seoul-print.md) · [맞춤 게이지](revisions/b25/fit-gauge.md)
 - **구매와 제작** · [먼저 살 부품](revisions/b25/02-order-before.md) · [시험 뒤 살 부품](revisions/b25/03-order-after.md) · [목 상하축 가공](revisions/b25/pitch-drive-shaft.md)
 - **판정** · [B25 검사 결과](revisions/b25/alignment.md) · [실물 조립·구동 시험](../spec/bench.md#b25-실물-시험)
 

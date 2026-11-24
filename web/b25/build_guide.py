@@ -12,16 +12,19 @@ import re
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 B25 = ROOT / "mechanical/revisions/b25"
+A5_VIEWER = HERE / "R5-B25-A5.html"
 DOCS = {
     "start": ("제작 순서", B25 / "README.md"),
-    "print": ("서울 출력", B25 / "01-seoul-print.md"),
+    "print": ("출력과 후가공", B25 / "01-seoul-print.md"),
     "before": ("먼저 살 부품", B25 / "02-order-before.md"),
     "gauge": ("맞춤 게이지", B25 / "fit-gauge.md"),
     "after": ("시험 뒤 살 부품", B25 / "03-order-after.md"),
     "assembly": ("조립 절차", B25 / "assembly.md"),
     "electronics": ("A5 발주·첫 통전", ROOT / "electronics/README.md"),
+    "service": ("J2 잠금·정비", B25 / "j2-disconnect.md"),
     "control": ("구동과 보정", ROOT / "control/README.md"),
     "bench": ("실물 시험", ROOT / "spec/bench.md"),
+    "records": ("검수 기록", ROOT / "spec/records/README.md"),
     "status": ("검사 결과와 범위", B25 / "alignment.md"),
     "intent": ("사람 요구사항", ROOT / "spec/user-spec.md"),
     "conditions": ("검사 조건", ROOT / "spec/conditions.md"),
@@ -29,7 +32,7 @@ DOCS = {
 }
 NAV_GROUPS = (
     ("제작", ("start", "print", "before", "gauge", "after", "assembly")),
-    ("통전·구동", ("electronics", "control", "bench")),
+    ("통전·구동", ("electronics", "service", "control", "bench", "records")),
     ("판정과 기준", ("status", "intent", "conditions", "requirements")),
 )
 ROUTE = {path: name for name, (_, path) in DOCS.items()}
@@ -52,6 +55,8 @@ def local_links(body, document, hosted_path, ref, output):
             media.parent.mkdir(parents=True, exist_ok=True)
             copyfile(path, media)
             location = f"{hosted_path}guide/media/{quote(relative)}"
+        elif path == A5_VIEWER:
+            location = f"{hosted_path}a5/"
         elif slug:
             location = f"{hosted_path}guide/{slug}/"
         else:
@@ -109,22 +114,13 @@ def build(output, poster, ref, offline=None):
     for name in ("index.html", "review.css"):
         copyfile(HERE / name, output / name)
     copyfile(poster, output / "r5-b25.webp")
+    (output / "a5").mkdir(exist_ok=True)
+    copyfile(A5_VIEWER, output / "a5" / "index.html")
     if offline:
         with ZipFile(output / "assembly-offline.zip", "w", ZIP_DEFLATED) as archive:
             archive.write(offline, "R5-B25-assembly.html")
     guide = output / "guide"
     guide.mkdir(exist_ok=True)
-    intro = """<h1>B25 제작 문서</h1>
-<p>P2S PETG HF 출력은 18판·57개입니다. 15번 링크와 13번 턱을 먼저 확인합니다. 완성품 조립, 통전과 구동은 실물에서 확인합니다.</p>
-<ol>
-<li><a href="before/">먼저 살 부품</a>을 준비하고 <a href="print/">서울 출력과 후가공</a>을 진행합니다.</li>
-<li><a href="gauge/">끼움</a>과 공구 접근을 건식으로 확인한 뒤 <a href="after/">모터와 전장</a>을 준비합니다.</li>
-<li>작업대에서 모터와 OpenRB를 분리하고 무전원 배선을 확인합니다. J2를 잠근 뒤 <a href="electronics/#전원-실물-검수">퓨즈를 뺀 첫 통전과 무부하 출력 검사</a>를 진행합니다.</li>
-<li>전원을 뽑고 <a href="assembly/">조립과 배선</a>을 마칩니다. <a href="control/">축별 보정</a> 후 <a href="bench/">P01–P08 실물 결과</a>를 기록합니다.</li>
-</ol>"""
-    if offline:
-        intro += '<p><a href="../assembly-offline.zip" download>오프라인 조립 HTML 내려받기</a></p>'
-    (guide / "index.html").write_text(sheet("제작 문서", intro, "../", ref), encoding="utf-8")
     for slug, (title, path) in DOCS.items():
         page = guide / slug
         page.mkdir(exist_ok=True)
@@ -134,9 +130,14 @@ def build(output, poster, ref, offline=None):
         )
         fragment = fragment.replace("<table>", '<div class="guide-table" tabindex="0"><table>')
         fragment = fragment.replace("</table>", "</table></div>")
-        fragment = local_links(fragment, path, "../../", ref, output)
+        if slug == "start":
+            intro = local_links(fragment, path, "../", ref, output)
+            if offline:
+                intro += '<p><a href="../assembly-offline.zip" download>오프라인 조립 HTML 내려받기</a></p>'
+            (guide / "index.html").write_text(sheet(title, intro, "../", ref, slug), encoding="utf-8")
+        body = local_links(fragment, path, "../../", ref, output)
         (page / "index.html").write_text(
-            sheet(title, fragment, "../../", ref, slug), encoding="utf-8"
+            sheet(title, body, "../../", ref, slug), encoding="utf-8"
         )
 
 

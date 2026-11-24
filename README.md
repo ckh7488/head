@@ -10,10 +10,10 @@ R5는 코에 숨긴 카메라로 지나가는 사람을 보고, 눈이 먼저 �
 
 | 순서 | 할 일 |
 | --- | --- |
-| 1. 출력 준비 | 핀·베어링·나사를 준비합니다. 한 번에 맡길 때는 **15번 링크 판**으로 바닥 접지를 확인한 뒤 **13번 턱 판**으로 큰 부품의 출력 상태를 확인합니다. [서울 출력](mechanical/revisions/b25/01-seoul-print.md) · [먼저 살 부품](mechanical/revisions/b25/02-order-before.md) |
-| 2. 건식 맞춤 | 끼움, 공구 접근, 오른쪽 턱 받침과 요크 사이 틈을 전원과 접착제 없이 확인합니다. [맞춤 게이지](mechanical/revisions/b25/fit-gauge.md) |
+| 1. 출력 준비 | 핀·베어링·나사를 준비합니다. 한 번에 맡길 때는 **15번 링크 판**으로 바닥 접지를 확인한 뒤 **13번 턱 판**으로 큰 부품의 출력 상태를 확인합니다. [출력과 후가공](mechanical/revisions/b25/01-seoul-print.md) · [먼저 살 부품](mechanical/revisions/b25/02-order-before.md) |
+| 2. 건식 맞춤 | 전원과 접착제 없이 끼움과 공구 접근을 봅니다. 턱을 연 채 오른쪽 받침과 요크 사이에 0.30 mm 틈새 게이지가 통과하는지 확인합니다. [건식 맞춤](mechanical/revisions/b25/01-seoul-print.md#출력물-후가공과-건식-맞춤) · [치수 선택용 게이지](mechanical/revisions/b25/fit-gauge.md) |
 | 3. 모터·전장 구매 | 건식 맞춤을 마친 뒤 모터·카메라·A5 허브를 준비합니다. [시험 뒤 구매](mechanical/revisions/b25/03-order-after.md) · [A5 PCBA 발주](electronics/README.md#jlcpcb-밑면-실장) |
-| 4. 허브 첫 통전 | 허브를 받침에 넣기 전에 작업대에서 확인합니다. 모터와 OpenRB는 분리하고, J2를 잠그고 퓨즈를 뺀 상태에서 입력부터 확인합니다. [전원 실물 검수](electronics/README.md#전원-실물-검수) |
+| 4. 허브 첫 통전 | 허브를 받침에 넣기 전에 작업대에서 확인합니다. 모터·OpenRB·퓨즈를 뺍니다. 무전원 도통 확인과 J2 잠금을 마친 뒤 입력 전압부터 확인합니다. [전원 실물 검수](electronics/README.md#전원-실물-검수) |
 | 5. 조립과 보정 | 허브의 전원을 뽑고 조립·배선합니다. 무전원에서 배선을 확인하고, 전원을 켜서 한 축씩 보정합니다. [조립 절차](mechanical/revisions/b25/assembly.md) · [구동과 보정](control/README.md) |
 | 6. 실물 인수 | 완성품의 조립 상태, 움직임, 전압과 전원 복구를 확인합니다. [실물 시험 P01–P08](spec/bench.md#b25-실물-시험) |
 
