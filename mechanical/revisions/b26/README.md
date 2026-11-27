@@ -1,6 +1,8 @@
 # R5 B26 제작 자료
 
-B26은 B25에서 **받침 01의 체결부와 벽 두께**를 고치고, 조립 점검에서 나온 **A5 J2 잠금쇠의 나사 머리 간섭**을 고친 리비전입니다. 받침의 열압입 인서트와 숨은 너트를 없애고, **관통 구멍 + 일반 너트**로 바꿨습니다. 볼트와 너트가 눈에 보이고 공구가 닿으며, 프린터 오차에 민감한 끼워맞춤이 없습니다. 외부 감사 두 번(2026-11-27)의 지적을 반영했습니다([아래](#외부-감사-반영)). 나머지 부품, 배선과 조립 순서는 B25와 같습니다. [B25 제작 자료](../b25/)
+B26은 B25에서 **받침 01의 체결부와 벽 두께**, **A5 J2 잠금쇠의 나사 머리 자리**를 고친 리비전입니다. 받침을 **관통 구멍 + 일반 너트** 방식으로 조립합니다. 현재 조립본은 06·09·28·29·30·36·37·42번 형상 보정을 포함합니다.
+
+[B26 조립 절차](assembly.md) · [오프라인 3D 조립](../../../web/b26/R5-B26-assembly.html) · [조립 및 구동 검수](assembly-review.md) · [B25 제작 기록](../b25/)
 
 ## 바뀐 곳
 
@@ -25,7 +27,7 @@ B26은 B25에서 **받침 01의 체결부와 벽 두께**를 고치고, 조립 �
 | 파일 | 내용 |
 | --- | --- |
 | [R5-B26-Assembly.FCStd](R5-B26-Assembly.FCStd) | FreeCAD 조립본. 받침 형상, 체결품, `R5.MotionGeometry`의 너트 자리와 브래킷 다리 정보 |
-| [R5-B26-P2S.3mf](R5-B26-P2S.3mf) | P2S PETG HF 출력 프로젝트. B25에서 받침과 J2 잠금쇠 메쉬를 바꾸고, 받침 카운터보어 4곳에 서포트 차단 볼륨을 넣고, 누름판 2개를 12번 판에서 뺌. **18판·55개** |
+| [R5-B26-P2S.3mf](R5-B26-P2S.3mf) | P2S PETG HF 출력 프로젝트. **18판·55개**. CAD와 같은 보정 형상을 넣었으며 받침 카운터보어의 서포트 차단 볼륨을 사용합니다. |
 | [tool-access.json](tool-access.json) | 브래킷 다리 너트에 소켓이 닿는지, 닿는 가장 굵은 소켓 바깥지름 |
 | [strength-check.json](strength-check.json) | 바뀐 면의 벽 두께, 덮개 너트 자리 응력 (B25와 비교) |
 | [BOM.csv](BOM.csv) | B25 대비: 인서트 −6, M3×6 −2, M3×8 −4, M3×16 −3, M3×18 +7, M3 너트 +4 |
@@ -72,28 +74,28 @@ B26은 B25에서 **받침 01의 체결부와 벽 두께**를 고치고, 조립 �
 
 ## 다시 만들기
 
-저장소 루트에서 FreeCAD Python 모듈과 기구 검사 의존성을 준비합니다. [웹 화면 만들기](../../../web/README.md#b25-웹-화면)
+저장소 루트에서 FreeCAD Python 모듈과 기구 검사 의존성을 준비합니다. 커밋된 조립본을 입력으로 검사와 웹 화면을 다시 생성합니다. [웹 화면 만들기](../../../web/README.md#b26-웹-화면)
 
 ```sh
 export PYTHONPATH="$PWD/mechanical:$PWD/mechanical/physics:/usr/lib/freecad-python3/lib"
 out=build/b26
 rev=mechanical/revisions/b26
-python mechanical/build_b26_base_fasteners.py mechanical/revisions/b25/R5-B25-Assembly.FCStd "$rev/R5-B26-Assembly.FCStd" --edits "$out/edits"
-python mechanical/build_b26_print.py mechanical/revisions/b25/R5-B25-P2S.3mf "$out/edits" "$rev/R5-B26-P2S.3mf"
 python mechanical/physics/export_cad.py --world --cad "$rev/R5-B26-Assembly.FCStd" "$out/cad"
+python mechanical/physics/check_b26_assembly.py "$out/cad" mechanical/revisions/b24/hardware.json mechanical/revisions/b24/hardware-spec.json "$rev" "$out/assembly-check.json" --source "$rev/R5-B26-Assembly.FCStd"
 python web/b19/build_b19_viewer.py "$out/cad" mechanical/revisions/b24/hardware.json mechanical/revisions/b24/hardware-spec.json \
+  "$out/assembly-check.json" \
   --revision B25 --label B26 --revision-dir "$rev" --assembly-cad "$rev/R5-B26-Assembly.FCStd" --output "$out/assembly-assets" --preview
-python mechanical/physics/check_b26_tool_access.py "$out/cad" "$out/assembly-assets/steps.json" "$rev/tool-access.json"
-python mechanical/physics/check_b26_assembly.py "$out/cad" mechanical/revisions/b24/hardware.json mechanical/revisions/b24/hardware-spec.json "$rev" "$rev/assembly-check.json" --source "$rev/R5-B26-Assembly.FCStd"
+python mechanical/physics/check_b26_tool_access.py "$out/cad" "$out/assembly-assets/steps.json" "$out/tool-access.json"
 npm ci --prefix web
 node web/b19/compress_model.mjs "$out/assembly-assets"
-python web/b19/pack_standalone.py "$out/assembly-assets" "$out/site/assembly" --revision B26 --preview --hosted
-python web/export_b25_motion.py "$rev/R5-B26-Assembly.FCStd" "$out/cad" "$out/motion"      # 3D 구동 화면 (meshopt로 압축해 web/assets/b25-motion에)
+python web/b19/pack_standalone.py "$out/assembly-assets" "$out/R5-B26-assembly.html" --revision B26 --preview
+python web/export_b25_motion.py "$rev/R5-B26-Assembly.FCStd" "$out/cad" "$out/motion"
+node web/b19/compress_model.mjs "$out/motion" --motion
 python web/wiring-review/export_pose_data.py "$out/cad/cad_parts.json" "$out/pose-data.json"
 R5_ASSEMBLY="$rev/R5-B26-Assembly.FCStd" node web/wiring-review/package_review.mjs "$out/cad" "$out/pose-data.json" "$out/site/wiring" "$(git rev-parse HEAD)"
 ```
 
-`design.json`의 `cad_sha256`과 `p2s_sha256`은 새로 만든 FCStd와 3MF의 SHA-256으로 갱신합니다.
+받침 변경의 생성 스크립트는 [`build_b26_base_fasteners.py`](../../build_b26_base_fasteners.py)와 [`build_b26_print.py`](../../build_b26_print.py)에 있습니다. 조립본과 출력본을 바꾸면 `design.json`의 SHA-256을 함께 갱신합니다.
 
 ## 디지털 검사 결과
 

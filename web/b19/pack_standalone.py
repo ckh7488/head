@@ -4,6 +4,7 @@ from argparse import ArgumentParser
 import base64
 from hashlib import sha256
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -23,7 +24,7 @@ def load_assets(assets, revision, preview):
         raise ValueError('CAD illustrations require preview packaging')
     if not re.fullmatch(r'[0-9a-f]{64}', data.get('cadSha256', '')):
         raise ValueError('Viewer has no exact CAD digest')
-    has_qualified_tools = revision in ('B21', 'B22', 'B23', 'B24', 'B25')
+    has_qualified_tools = revision in ('B21', 'B22', 'B23', 'B24', 'B25', 'B26')
     if has_qualified_tools and not re.fullmatch(r'[0-9a-f]{64}', data.get('planSha256') or ''):
         raise ValueError(f'{revision} viewer has no checked assembly-plan digest')
     if not preview and any(step['issues'] for step in data['steps']):
@@ -59,7 +60,8 @@ def load_assets(assets, revision, preview):
 
 def bundle_viewer():
     text = (VIEWER / 'viewer.js').read_text(encoding='utf-8')
-    return subprocess.run(['npx', '--yes', 'esbuild@0.25.12', '--bundle', '--format=esm', '--minify',
+    npx = 'npx.cmd' if os.name == 'nt' else 'npx'
+    return subprocess.run([npx, '--yes', 'esbuild@0.25.12', '--bundle', '--format=esm', '--minify',
                            '--loader=js', '--sourcefile=viewer.js'],
                           input=text, text=True, encoding='utf-8', cwd=VIEWER, capture_output=True, check=True).stdout
 
@@ -72,7 +74,7 @@ def credits():
 
 def build(assets, output, revision, preview=False, hosted=False):
     data, model = load_assets(assets, revision, preview)
-    bundle = bundle_viewer()
+    bundle = re.sub(r'[ \t]+$', '', bundle_viewer(), flags=re.M)
     markup = (VIEWER / 'index.html').read_text(encoding='utf-8')
     if preview and not data.get('illustration'):
         status = '<span class="sub" id="step-count"></span>'

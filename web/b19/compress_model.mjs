@@ -1,6 +1,6 @@
 // Compress the viewer model without simplifying it: meshopt-encoded, 16-bit positions.
 // The CAD tessellation from build_b19_viewer.py stays intact (no decimation here).
-//   node web/b19/compress_model.mjs <assets-dir>
+//   node web/b19/compress_model.mjs <assets-dir> [--motion]
 import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync, renameSync } from 'node:fs';
 import { join } from 'node:path';
@@ -10,13 +10,15 @@ import { meshopt } from '@gltf-transform/functions';
 import { MeshoptEncoder } from 'meshoptimizer';
 
 const folder = process.argv[2];
-if (!folder) throw new Error('usage: compress_model.mjs <assets-dir>');
-const model = join(folder, 'model.glb');
-const stepsPath = join(folder, 'steps.json');
+const motion = process.argv[3] === '--motion';
+if (!folder) throw new Error('usage: compress_model.mjs <assets-dir> [--motion]');
+const model = join(folder, motion ? 'assembly.glb' : 'model.glb');
+const stepsPath = join(folder, motion ? 'assembly.json' : 'steps.json');
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const raw = readFileSync(model);
 const steps = JSON.parse(readFileSync(stepsPath, 'utf8'));
-if (steps.modelSha256 !== sha(raw)) throw new Error('steps.json does not describe this model.glb (already compressed?)');
+if (steps.modelEncoding || (!motion && steps.modelSha256 !== sha(raw)))
+  throw new Error('Model and manifest do not match, or the model is already compressed');
 
 await MeshoptEncoder.ready;
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS).registerDependencies({ 'meshopt.encoder': MeshoptEncoder });
@@ -25,7 +27,7 @@ await doc.transform(meshopt({ encoder: MeshoptEncoder, level: 'medium', quantize
 const packed = await io.writeBinary(doc);
 writeFileSync(model + '.tmp', packed);
 renameSync(model + '.tmp', model);
-steps.rawModelSha256 = steps.modelSha256;
+steps.rawModelSha256 = sha(raw);
 steps.modelSha256 = sha(packed);
 steps.modelEncoding = 'EXT_meshopt_compression, KHR_mesh_quantization (16-bit positions)';
 writeFileSync(stepsPath, JSON.stringify(steps));

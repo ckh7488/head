@@ -1,6 +1,10 @@
 # R5 기구 설계와 조립
 
-## 현재 제작본 B25
+## 현재 제작본 B26
+
+[B26 제작 자료](revisions/b26/) · [B26 조립 절차](revisions/b26/assembly.md) · [168단계 오프라인 3D](../web/b26/R5-B26-assembly.html)
+
+## B25 기록
 
 - **형상과 조립** · [FreeCAD 조립본](revisions/b25/R5-B25-Assembly.FCStd) · [B25 조립서](revisions/b25/assembly.md) · [3D 조립과 구동](../web/README.md#b25-웹-화면)
 - **출력** · Bambu Lab P2S, 0.4 mm 경화강 노즐, PETG HF, 0.20 mm, Textured PEI. 18판·57개에서 15번 링크와 13번 턱을 먼저 출력합니다. [P2S PETG HF 3MF](revisions/b25/R5-B25-P2S.3mf) · [출력과 후가공](revisions/b25/01-seoul-print.md) · [맞춤 게이지](revisions/b25/fit-gauge.md)

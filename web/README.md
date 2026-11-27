@@ -1,5 +1,11 @@
 # 웹 뷰어
 
+## B26 웹 화면
+
+[B26 168단계 오프라인 조립 HTML](b26/R5-B26-assembly.html)을 GitHub에서 다운로드한 뒤 브라우저로 엽니다. 3D 형상과 조립 절차가 파일에 포함됩니다. [B26 조립 절차](../mechanical/revisions/b26/assembly.md) · [CAD에서 다시 생성](../mechanical/revisions/b26/README.md#다시-만들기)
+
+구동 화면은 `npm ci --prefix web` 뒤 `python -m http.server 8000 --directory web`으로 실행하고 주소창에 `http://127.0.0.1:8000/`을 입력합니다. 배선 화면은 같은 주소에 `?view=wiring`을 붙입니다.
+
 ## B25 웹 화면
 
 | 화면 | 사용할 때 |
@@ -48,7 +54,7 @@ python web/b25/build_guide.py "$out/site" --offline "$out/R5-B25-assembly.html" 
 python -m http.server 8000 --bind 127.0.0.1 --directory "$out/site"
 ```
 
-이 주소에서 개요를 엽니다. [로컬 B25 웹 화면](http://127.0.0.1:8000/)
+주소창에 `http://127.0.0.1:8000/`을 입력해 개요를 엽니다.
 
 핀별 배선도만 만들 때는 `node web/wiring-review/package_diagram.mjs build/wiring-diagram "$(git rev-parse HEAD)"`를 실행합니다. 결과에 원본 CSV를 함께 넣습니다. [B25 핀별 배선도](https://r5-b1-review.ckh.chatgpt.site/b25/wiring/diagram/)
 
@@ -69,7 +75,7 @@ npm ci --prefix web
 python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B24-assembly.html" --revision B24
 ```
 
-생성한 `build/b24-review/R5-B24-assembly.html`을 브라우저에서 엽니다. 로컬 파일 열기가 제한된 환경에선 `python -m http.server 8000 --bind 127.0.0.1 --directory build/b24-review`로 연 다음 브라우저에서 이 주소를 사용합니다. [로컬 B24 조립 화면](http://127.0.0.1:8000/R5-B24-assembly.html)
+생성한 `build/b24-review/R5-B24-assembly.html`을 브라우저에서 엽니다. 파일 열기가 제한된 환경에선 `python -m http.server 8000 --bind 127.0.0.1 --directory build/b24-review`로 연 다음 주소창에 `http://127.0.0.1:8000/R5-B24-assembly.html`을 입력합니다.
 
 ## B23 조립 순서
 
@@ -94,7 +100,7 @@ python web/b19/pack_standalone.py "$out/viewer" "$out/R5-B23-assembly.html" --re
 python -m http.server 8000 --bind 127.0.0.1 --directory build/b23-review
 ```
 
-서버를 띄운 뒤 이 주소에서 B23을 엽니다. [로컬 B23 조립 화면](http://127.0.0.1:8000/R5-B23-assembly.html)
+서버를 띄운 뒤 주소창에 `http://127.0.0.1:8000/R5-B23-assembly.html`을 입력합니다.
 
 ## 이전 뷰어의 로컬 실행
 

@@ -410,7 +410,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     if revision in ('B24', 'B25') and (not rig.get('pitch_coupler') or not rig.get('eye_pitch_bearings')):
         raise ValueError('Current CAD must include both revised pitch axes')
     world.layout = layout
-    illustration = report is None
+    illustration = report is None or (revision == 'B25' and preview and revision_dir is not None)
     if illustration:
         if revision != 'B25' or not preview or assembly_cad is None:
             raise ValueError('Report-free rendering requires B25 --preview and the exact --assembly-cad')
@@ -418,9 +418,12 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
 
         catalog, heat_screws, heat_retainers = B25.setup(layout, world, revision_dir)
         plan = B25.plan(layout, heat_screws, heat_retainers, world)
-        checked = [dict(id=step['id'], context=step['ctx'], text=step['text'], notes=[], issues=[],
-                        **{key: step[key] for key in ('actor_offsets', 'blink_deg') if key in step}) for step in plan]
-        checked[0].update(cad_sha256=layout['source_sha256'], plan_sha256=C.plan_hash(plan))
+        if report is None:
+            checked = [dict(id=step['id'], context=step['ctx'], text=step['text'], notes=[], issues=[],
+                            **{key: step[key] for key in ('actor_offsets', 'blink_deg') if key in step}) for step in plan]
+            checked[0].update(cad_sha256=layout['source_sha256'], plan_sha256=C.plan_hash(plan))
+        else:
+            checked = json.loads(report.read_text())
     else:
         plan = C.assembly_plan(revision.lower(), layout)
         checked = json.loads(report.read_text())
@@ -440,7 +443,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     if has_qualified_tools and checked[0].get('plan_sha256') != C.plan_hash(plan):
         raise ValueError(f'{revision} assembly plan differs from the one checked')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
-    cad_labels = load_cad_labels(assembly_cad) if report is None else {}
+    cad_labels = load_cad_labels(assembly_cad) if illustration else {}
     keeper_names = set()
     native_screws = set()
     if service_covers:

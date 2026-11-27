@@ -5,7 +5,7 @@
     "text": "받침 01을 작업대에 뒤집어 놓지 않고 바로 세웁니다.",
     "issues": [],
     "notes": [],
-    "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+    "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
     "plan_sha256": "410464fc99676454bf35b899de113af3158e59256588f43965249f059eeee946"
   },
   {
@@ -1209,7 +1209,7 @@
     "notes": [],
     "yaw_driver_adjustment": {
       "status": "pass",
-      "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+      "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
       "tool_rows": [
         {
           "side": -1,
@@ -1388,7 +1388,7 @@
             0.0
           ],
           "radius_mm": 1.18,
-          "minimum_driver_gap_mm": 0.5699999525020518,
+          "minimum_driver_gap_mm": 0.5699999525020513,
           "nearest_actor": "Part000"
         },
         {
@@ -1690,7 +1690,7 @@
     },
     "pitch_horn_head_approaches": {
       "status": "pass",
-      "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+      "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
       "radial_head_reserve_mm": 0.15,
       "extra_tip_length_mm": 0.25,
       "stations": {
@@ -1833,13 +1833,13 @@
           0,
           0
         ],
-        "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+        "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
         "status": "pass",
         "diameter_mm": 8.0,
         "pin_length_mm": 21.5,
         "material_outside_mm3": 0.0,
         "swept_overlap_mm3": 0.0,
-        "swept_gap_mm": 0.11999995973514757,
+        "swept_gap_mm": 0.11999995973513806,
         "mesh_hit": {
           "at_mm": 18.5,
           "overlap_mm3": 0.109
@@ -1864,7 +1864,7 @@
           0,
           16
         ],
-        "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+        "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
         "status": "pass",
         "diameter_mm": 3.0,
         "pin_length_mm": 12.0,
@@ -3335,11 +3335,11 @@
       ],
       "offset_mm": [
         0.0,
-        -24.3,
+        -26.1,
         0.0
       ],
-      "sampled_minimum_mm": 0.5,
-      "continuous_lower_bound_mm": 0.45,
+      "sampled_minimum_mm": 1.103912353515625,
+      "continuous_lower_bound_mm": 1.053912353515625,
       "required_mm": 0.2
     }
   },

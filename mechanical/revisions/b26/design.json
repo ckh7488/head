@@ -1,7 +1,7 @@
 {
   "source_cad_sha256": "f555e45331a56e59505bdd81195eea67c66c7e51fdfad659b6028c6dd96820e0",
-  "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
-  "p2s_sha256": "ecb1174ce7ac33d8ffa4a2863295d5e4a4f8491382400b4d18467f6189964f5b",
+  "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
+  "p2s_sha256": "520a66f4cec8eb07f8e2d3fee316e91977b28b58a1d1fad22dc942d1d29c2590",
   "geometry": {
     "base_fasteners": {
       "hatch_nut_seats": {
@@ -132,5 +132,10 @@
       ]
     }
   },
-  "note": "B25와 같은 형상에 받침 01의 체결부만 바꾼 리비전입니다. 나머지 근거는 B25 기록을 따릅니다."
+  "note": "B25와 같은 형상에 받침 01의 체결부만 바꾼 리비전입니다. 나머지 근거는 B25 기록을 따릅니다.",
+  "assembly_review": {
+    "baseline_commit": "59b7d48911710d06acac25da4b201c930ace2fdd",
+    "baseline_cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+    "baseline_p2s_sha256": "ecb1174ce7ac33d8ffa4a2863295d5e4a4f8491382400b4d18467f6189964f5b"
+  }
 }

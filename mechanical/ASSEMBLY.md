@@ -1,6 +1,6 @@
 # R5 조립 절차 (B21)
 
-현재 B25 기구와 A5 허브를 조립하는 경우 B25 조립서를 엽니다. 아래 절차는 Phoenix J2를 사용한 B21 기록입니다. [현재 B25 조립 절차](revisions/b25/assembly.md) · [A5 배선과 극성](../electronics/README.md#전원과-배선)
+현재 B26 기구와 A5 허브는 [B26 조립 절차](revisions/b26/assembly.md)를 사용합니다. 아래는 Phoenix J2를 사용한 B21 기록입니다. [A5 배선과 극성](../electronics/README.md#전원과-배선)
 
 [FreeCAD 조립본과 P2S 출력판](revisions/b21/) · [부품표](BOM.csv) · [전선 재단표](WIRING-CUT-LIST.csv) · [3D 조립 순서](../web/README.md#b21-조립-순서)
 
