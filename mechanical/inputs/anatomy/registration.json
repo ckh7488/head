@@ -1,0 +1,58 @@
+{
+  "source": "BoneHub/visible-human-3d-models (Hugging Face), 01_Male SKULL_CRANIAL_MAXILLA.stl and 01_Male SKULL_MANDIBLE.stl",
+  "license": "CC BY 4.0",
+  "cranium_source_to_r5": [
+    [
+      1.1614029247048587,
+      0.0017975790095132952,
+      -0.005182607563101782,
+      -282.6993661647218
+    ],
+    [
+      0.004717270514291353,
+      0.8110486642475201,
+      0.004872015967564812,
+      -175.15367220889982
+    ],
+    [
+      0.01914682613009206,
+      -0.0015280751104490282,
+      0.9529082924726442,
+      -1571.8984916530642
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "mandible_source_to_r5": [
+    [
+      1.2077048075971117,
+      0.005179282060134705,
+      -0.009762249455946635,
+      -284.6687049541956
+    ],
+    [
+      -0.0008507038106791194,
+      0.8427992747541869,
+      -0.03517811028189495,
+      -109.8875345584179
+    ],
+    [
+      0.025251420829994247,
+      0.032703572889545555,
+      0.9903269924004221,
+      -1642.9819558453357
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "cranium_note": "Affine fit of the source cranium to the untouched regions of skull 28/29 (from mechanical/revisions/b26/assembly-review.json skull_study.scan_registration). Cropped to |x| >= 22 mm and z <= 186 mm, capped, decimated (max deviation 0.05 mm).",
+  "mandible_note": "Source mandible moved by the cranium fit, then a similarity fit (scale 1.040) to the body of jaw 30 at the closed pose (60% trimmed ICP, median 1.44 mm). Decimated (q99 deviation below 0.05 mm). Jaw frame = world frame at jaw 0 deg."
+}

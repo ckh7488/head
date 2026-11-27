@@ -1,0 +1,123 @@
+{
+  "about": "Fixed acceptance conditions for the B27 skull cover work. Owned by the reviewer; the implementing agent must not edit this file. check_b27_skull_cover.py reads it.",
+  "skin_parts": [
+    "Part073",
+    "Part074",
+    "Jaw_30_moving_jaw"
+  ],
+  "always_visible_parts": [
+    "Part076",
+    "Part077",
+    "Part078",
+    "Part079",
+    "Part029",
+    "Part030",
+    "Part031",
+    "Part033",
+    "Part034",
+    "Part035",
+    "Part080",
+    "Part010",
+    "RearSkullScrewLeft",
+    "RearSkullScrewRight",
+    "JawExteriorScrewLeft",
+    "JawExteriorScrewRight",
+    "JawAntiRockScrew"
+  ],
+  "always_visible_motion_groups": [
+    "fixed",
+    "hatch"
+  ],
+  "views": {
+    "centre_mm": [
+      0,
+      -5,
+      125
+    ],
+    "half_size_mm": 100,
+    "step_mm": 0.4,
+    "yaw_deg": [
+      -30,
+      0,
+      30
+    ],
+    "tilt_deg": [
+      -20,
+      0,
+      20
+    ]
+  },
+  "lateral_zone": {
+    "abs_x_min_mm": 38,
+    "y_min_mm": -46,
+    "z_min_mm": 60,
+    "z_max_mm": 175,
+    "skull_base_excluded": {
+      "z_below_mm": 80,
+      "y_above_mm": 5
+    }
+  },
+  "exposure_limit_mm2": {
+    "per_view": 60,
+    "per_side_all_views": 300
+  },
+  "visible_cover_fasteners_per_side_max": 4,
+  "anatomy": {
+    "cranium": {
+      "right": "mechanical/inputs/anatomy/bonehub-male-cranium-right-r5.stl",
+      "left": "mechanical/inputs/anatomy/bonehub-male-cranium-left-r5.stl"
+    },
+    "mandible": "mechanical/inputs/anatomy/bonehub-male-mandible-r5.stl",
+    "abs_deviation_p95_max_mm": 1.5,
+    "outward_bulge_max_mm": 2.5,
+    "changed_skin_threshold_mm": 0.3,
+    "temple_fill": {
+      "right": "mechanical/inputs/anatomy/bonehub-male-temple-fill-right-r5.stl",
+      "left": "mechanical/inputs/anatomy/bonehub-male-temple-fill-left-r5.stl"
+    }
+  },
+  "clearance": {
+    "moving_pair_min_mm": 0.3,
+    "baseline_tolerance_mm": 0.01,
+    "static_overlap_growth_max_mm3": 0.01,
+    "neck_samples": 13,
+    "jaw_samples": 12,
+    "eye_pitch_deg": [
+      -8,
+      -4,
+      0,
+      4,
+      8
+    ],
+    "eye_yaw_deg": [
+      -20,
+      -10,
+      0,
+      10,
+      20
+    ],
+    "blink_deg": [
+      -1,
+      0,
+      15,
+      30,
+      45,
+      60,
+      75,
+      91
+    ]
+  },
+  "print": {
+    "new_part_area_below_0p8_mm2_max": 2.0,
+    "new_part_area_below_2p0_fraction_max": 0.03,
+    "changed_part_area_below_0p8_growth_mm2_max": 2.0,
+    "changed_part_area_below_2p0_growth_fraction_max": 0.01,
+    "samples_per_mm2": 20
+  },
+  "removal": {
+    "distance_mm": 40,
+    "step_mm": 0.5,
+    "penetration_max_mm": 0.05,
+    "measure_from_mm": 2.0
+  }
+}

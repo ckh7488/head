@@ -1,0 +1,118 @@
+{
+ "right 39 jaw pin arm / right": {
+  "share_outside_side_silhouette_%": 0.3,
+  "outside_bbox_yz": [
+   [
+    -14.2,
+    85.1
+   ],
+   [
+    -13.1,
+    86.7
+   ]
+  ]
+ },
+ "right 37 right cheek bearing stay": {
+  "share_outside_side_silhouette_%": 0.3,
+  "outside_bbox_yz": [
+   [
+    -14.3,
+    84.7
+   ],
+   [
+    -13.0,
+    87.1
+   ]
+  ]
+ },
+ "right 07 pitch yoke": {
+  "share_outside_side_silhouette_%": 11.9,
+  "outside_bbox_yz": [
+   [
+    -2.3,
+    67.0
+   ],
+   [
+    4.9,
+    82.2
+   ]
+  ]
+ },
+ "right 09 head frame": {
+  "share_outside_side_silhouette_%": 0.0
+ },
+ "right 13 right eye cradle mount": {
+  "share_outside_side_silhouette_%": 0.0
+ },
+ "right Ø4 × 10 mm right jaw pin": {
+  "share_outside_side_silhouette_%": 0.0
+ },
+ "left 38 jaw drive arm / left": {
+  "share_outside_side_silhouette_%": 5.2,
+  "outside_bbox_yz": [
+   [
+    -18.5,
+    82.5
+   ],
+   [
+    -12.0,
+    90.9
+   ]
+  ]
+ },
+ "left 36 left cheek servo stay": {
+  "share_outside_side_silhouette_%": 3.3,
+  "outside_bbox_yz": [
+   [
+    -35.5,
+    80.0
+   ],
+   [
+    1.6,
+    107.4
+   ]
+  ]
+ },
+ "left XL330-M288-T jaw motor · ID 6": {
+  "share_outside_side_silhouette_%": 6.7,
+  "outside_bbox_yz": [
+   [
+    -19.0,
+    83.0
+   ],
+   [
+    1.0,
+    90.9
+   ]
+  ]
+ },
+ "left 07 pitch yoke": {
+  "share_outside_side_silhouette_%": 6.5,
+  "outside_bbox_yz": [
+   [
+    -2.4,
+    67.0
+   ],
+   [
+    4.8,
+    82.2
+   ]
+  ]
+ },
+ "left 09 head frame": {
+  "share_outside_side_silhouette_%": 0.3,
+  "outside_bbox_yz": [
+   [
+    -36.5,
+    105.0
+   ],
+   [
+    -33.6,
+    107.1
+   ]
+  ]
+ },
+ "left 13 left eye cradle mount": {
+  "share_outside_side_silhouette_%": 0.0
+ }
+}

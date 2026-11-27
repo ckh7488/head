@@ -1,0 +1,272 @@
+{
+ "right": [
+  {
+   "part": "13 right eye cradle mount",
+   "name": "Part027",
+   "visible_mm2_all_views": 3384.6,
+   "inward_shift_p98_mm": 7.8,
+   "share_needing_shift_%": 61.7
+  },
+  {
+   "part": "39 jaw pin arm / right",
+   "name": "Jaw_39_right_jaw_pivot_arm",
+   "visible_mm2_all_views": 2910.7,
+   "inward_shift_p98_mm": 116.4,
+   "share_needing_shift_%": 76.4
+  },
+  {
+   "part": "09 head frame",
+   "name": "Part019",
+   "visible_mm2_all_views": 2332.3,
+   "inward_shift_p98_mm": 6.9,
+   "share_needing_shift_%": 24.1
+  },
+  {
+   "part": "07 pitch yoke",
+   "name": "Part011",
+   "visible_mm2_all_views": 2175.0,
+   "inward_shift_p98_mm": 2.9,
+   "share_needing_shift_%": 12.6
+  },
+  {
+   "part": "37 right cheek bearing stay",
+   "name": "Jaw_37_right_jaw_bearing_stay",
+   "visible_mm2_all_views": 1857.6,
+   "inward_shift_p98_mm": 97.9,
+   "share_needing_shift_%": 36.4
+  },
+  {
+   "part": "18 eye pitch link 58p5mm",
+   "name": "Part044",
+   "visible_mm2_all_views": 389.8,
+   "inward_shift_p98_mm": 2.7,
+   "share_needing_shift_%": 39.8
+  },
+  {
+   "part": "12 eye tilt cradle",
+   "name": "Part024",
+   "visible_mm2_all_views": 209.1,
+   "inward_shift_p98_mm": 2.7,
+   "share_needing_shift_%": 15.0
+  },
+  {
+   "part": "23 right short lid link",
+   "name": "Part060",
+   "visible_mm2_all_views": 196.8,
+   "inward_shift_p98_mm": 2.7,
+   "share_needing_shift_%": 13.4
+  },
+  {
+   "part": "NSK MR63ZZMC3P6 · eye-pitch bearing001",
+   "name": "EyePitchBearingR",
+   "visible_mm2_all_views": 152.6,
+   "inward_shift_p98_mm": 7.9,
+   "share_needing_shift_%": 100.0
+  },
+  {
+   "part": "08 pitch horn to 8mm clamp",
+   "name": "Part016",
+   "visible_mm2_all_views": 100.0,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "right 688 2RS",
+   "name": "Part014",
+   "visible_mm2_all_views": 98.4,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.3
+  },
+  {
+   "part": "Ø3 × 13 eye pitch pin001",
+   "name": "Part028",
+   "visible_mm2_all_views": 77.3,
+   "inward_shift_p98_mm": 9.2,
+   "share_needing_shift_%": 68.1
+  },
+  {
+   "part": "Right pitch shaft · Ø8 × 27.3, 9.95 D-flat and M3 radial tap",
+   "name": "Part015",
+   "visible_mm2_all_views": 75.8,
+   "inward_shift_p98_mm": 2.6,
+   "share_needing_shift_%": 15.4
+  },
+  {
+   "part": "XL330 M077 eye pitch",
+   "name": "Part041",
+   "visible_mm2_all_views": 48.3,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "XL330 M077 eye pitch front plate",
+   "name": "Part042",
+   "visible_mm2_all_views": 40.5,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "Ø4 × 10 mm right jaw pin",
+   "name": "Jaw_Pin_jaw_4x10",
+   "visible_mm2_all_views": 25.8,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "MR104ZZ 4 × 10 × 4 mm right bearing",
+   "name": "Jaw_MR104ZZ_jaw_right",
+   "visible_mm2_all_views": 18.1,
+   "inward_shift_p98_mm": 2.6,
+   "share_needing_shift_%": 16.1
+  },
+  {
+   "part": "Ø2 × 6 pin · glued in the 12 cradle lug",
+   "name": "EyePitchLinkCradlePin",
+   "visible_mm2_all_views": 15.8,
+   "inward_shift_p98_mm": 2.2,
+   "share_needing_shift_%": 38.3
+  },
+  {
+   "part": "34 eye pitch motor stay",
+   "name": "Part064",
+   "visible_mm2_all_views": 6.9,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "Ø2 × 6 ground pivot005",
+   "name": "BlinkPivotLowerR",
+   "visible_mm2_all_views": 6.7,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "17 eye pitch horn 10mm",
+   "name": "Part043",
+   "visible_mm2_all_views": 0.8,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.0
+  },
+  {
+   "part": "Right pitch pin Ø3 × 12 dowel",
+   "name": "PitchPinDowelRight",
+   "visible_mm2_all_views": 0.2,
+   "inward_shift_p98_mm": 2.6,
+   "share_needing_shift_%": 20.8
+  }
+ ],
+ "left": [
+  {
+   "part": "09 head frame",
+   "name": "Part019",
+   "visible_mm2_all_views": 6317.8,
+   "inward_shift_p98_mm": 8.1,
+   "share_needing_shift_%": 20.0
+  },
+  {
+   "part": "13 left eye cradle mount",
+   "name": "Part025",
+   "visible_mm2_all_views": 2740.0,
+   "inward_shift_p98_mm": 6.2,
+   "share_needing_shift_%": 58.1
+  },
+  {
+   "part": "38 jaw drive arm / left",
+   "name": "Jaw_38_left_jaw_drive_arm",
+   "visible_mm2_all_views": 2492.2,
+   "inward_shift_p98_mm": 8.5,
+   "share_needing_shift_%": 40.8
+  },
+  {
+   "part": "07 pitch yoke",
+   "name": "Part011",
+   "visible_mm2_all_views": 1594.2,
+   "inward_shift_p98_mm": 107.5,
+   "share_needing_shift_%": 12.7
+  },
+  {
+   "part": "36 left cheek servo stay",
+   "name": "Jaw_36_left_jaw_servo_stay",
+   "visible_mm2_all_views": 1182.9,
+   "inward_shift_p98_mm": 41.7,
+   "share_needing_shift_%": 27.0
+  },
+  {
+   "part": "12 eye tilt cradle",
+   "name": "Part024",
+   "visible_mm2_all_views": 204.5,
+   "inward_shift_p98_mm": 2.6,
+   "share_needing_shift_%": 14.5
+  },
+  {
+   "part": "NSK MR63ZZMC3P6 · eye-pitch bearing",
+   "name": "EyePitchBearingL",
+   "visible_mm2_all_views": 152.8,
+   "inward_shift_p98_mm": 5.7,
+   "share_needing_shift_%": 100.0
+  },
+  {
+   "part": "23 left short lid link",
+   "name": "Part057",
+   "visible_mm2_all_views": 151.5,
+   "inward_shift_p98_mm": 2.7,
+   "share_needing_shift_%": 14.1
+  },
+  {
+   "part": "Left pitch pin · Ø8 × 21.5, Ø3.0 cross hole",
+   "name": "Part013",
+   "visible_mm2_all_views": 127.0,
+   "inward_shift_p98_mm": 1.7,
+   "share_needing_shift_%": 8.1
+  },
+  {
+   "part": "Ø3 × 13 eye pitch pin",
+   "name": "Part026",
+   "visible_mm2_all_views": 77.3,
+   "inward_shift_p98_mm": 7.0,
+   "share_needing_shift_%": 52.4
+  },
+  {
+   "part": "목 상하 제한 강철판 12 × 3",
+   "name": "PitchLimitLink",
+   "visible_mm2_all_views": 37.9,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 0.5
+  },
+  {
+   "part": "M2 × 6 · 38 jaw drive arm to the XL330 horn",
+   "name": "JawHornScrew0",
+   "visible_mm2_all_views": 33.6,
+   "inward_shift_p98_mm": 25.0,
+   "share_needing_shift_%": 41.3
+  },
+  {
+   "part": "XL330-M288-T jaw motor · ID 6",
+   "name": "Jaw_XL330_M288_Jaw",
+   "visible_mm2_all_views": 26.4,
+   "inward_shift_p98_mm": 92.0,
+   "share_needing_shift_%": 16.9
+  },
+  {
+   "part": "left 688 2RS",
+   "name": "Part012",
+   "visible_mm2_all_views": 21.1,
+   "inward_shift_p98_mm": 0.0,
+   "share_needing_shift_%": 1.7
+  },
+  {
+   "part": "M2 × 6 · 38 jaw drive arm to the XL330 horn001",
+   "name": "JawHornScrew1",
+   "visible_mm2_all_views": 8.2,
+   "inward_shift_p98_mm": 2.6,
+   "share_needing_shift_%": 20.3
+  },
+  {
+   "part": "Left pitch pin Ø3 × 12 dowel",
+   "name": "PitchPinDowelLeft",
+   "visible_mm2_all_views": 0.3,
+   "inward_shift_p98_mm": 0.6,
+   "share_needing_shift_%": 5.0
+  }
+ ]
+}
