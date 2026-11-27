@@ -1,0 +1,5308 @@
+{
+  "status": "blocked_stage_1",
+  "spec_sha256": "61669a61840f17a3dc0381eabf81d577a57b7e375f4631a263770b42670aa8f1",
+  "checker_sha256": "c79f9d15d5cd99d2cf2f083151914c171856304d7e07edbb936e1d86d52c6919",
+  "baseline_check": {
+    "export_cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
+    "expected_without_covers": {
+      "exposure": false,
+      "anatomy": true,
+      "clearance": true,
+      "print": true
+    },
+    "exposure_mm2": {
+      "right": 14123.2,
+      "left": 15167.7
+    }
+  },
+  "trials": {
+    "group": {
+      "x_translations_mm": {
+        "Part025": 6.2,
+        "EyePitchBearingL": 6.2,
+        "Part026": 6.2,
+        "CradleMountFrameL": 6.2,
+        "CradleMountFrameLInsert": 6.2,
+        "Part027": -7.8,
+        "EyePitchBearingR": -7.8,
+        "Part028": -7.8,
+        "CradleMountFrameR": -7.8,
+        "CradleMountFrameRInsert": -7.8,
+        "Part044": -2.7,
+        "EyePitchLinkHornPin": -2.7,
+        "EyePitchLinkCradlePin": -2.7,
+        "Part057": 2.7,
+        "Part060": -2.7
+      },
+      "local_reshapes": [],
+      "pairs_checked": 140,
+      "clearance_failures": [
+        {
+          "pair": [
+            "09 head frame",
+            "13 left eye cradle mount"
+          ],
+          "parts": [
+            "Part019",
+            "Part025"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 626.1339073465406
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "13 left eye cradle mount"
+          ],
+          "parts": [
+            "Part024",
+            "Part025"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 407.60156249383846
+          },
+          "baseline_min_clearance_mm": 2.65,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 left eye cradle mount",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part025",
+            "Part073"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 4.954829132955865
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "lid hinge pin -1 -34"
+          ],
+          "parts": [
+            "Part026",
+            "Part058"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 17.111451064730602
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "31 left black orbit"
+          ],
+          "parts": [
+            "Part026",
+            "Part076"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 6.984401963467216
+          },
+          "baseline_min_clearance_mm": 0.975,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part026",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 5.108684827718965
+          },
+          "baseline_min_clearance_mm": 4.5,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "Part019",
+            "Part027"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 355.19297067652434
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "Part024",
+            "Part027"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 408.80366686224716
+          },
+          "baseline_min_clearance_mm": 3.8,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "XL330 M077 eye pitch"
+          ],
+          "parts": [
+            "Part027",
+            "Part041"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "XL330 M077 eye pitch front plate"
+          ],
+          "parts": [
+            "Part027",
+            "Part042"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 310.2010529111091
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "17 eye pitch horn 10mm"
+          ],
+          "parts": [
+            "Part027",
+            "Part043"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 127.58123262939444
+          },
+          "baseline_min_clearance_mm": 3.6,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part027",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 784.7566328338203
+          },
+          "baseline_min_clearance_mm": 0.65,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "34 eye pitch motor stay"
+          ],
+          "parts": [
+            "Part027",
+            "Part064"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 13.985331717272024
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part027",
+            "Part073"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 35.34002349958998
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part027",
+            "Part077"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.1726303297115617
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 17 horn",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "EyePitchLinkHornPin",
+            "Part027"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 13.814739132883687
+          },
+          "baseline_min_clearance_mm": 0.15,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 12 cradle lug",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "EyePitchLinkCradlePin",
+            "Part027"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.5669034861486686
+          },
+          "baseline_min_clearance_mm": 0.8,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "lid hinge pin 1 +34"
+          ],
+          "parts": [
+            "Part028",
+            "Part062"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 22.13499083737467
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part028",
+            "Part077"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 6.984401963467216
+          },
+          "baseline_min_clearance_mm": 0.975,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part028",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 10.108975426390467
+          },
+          "baseline_min_clearance_mm": 4.5,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part024",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 171.23648893506106
+          },
+          "baseline_min_clearance_mm": 0.55,
+          "pass": false
+        },
+        {
+          "pair": [
+            "XL330 M077 eye pitch",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part041",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.2,
+          "overlap": null,
+          "baseline_min_clearance_mm": 2.9,
+          "pass": false
+        },
+        {
+          "pair": [
+            "17 eye pitch horn 10mm",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part043",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 120.92268518610369
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Part024",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.11912643188593819
+          },
+          "baseline_min_clearance_mm": 1.014,
+          "pass": false
+        },
+        {
+          "pair": [
+            "14 eyeball 1",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Part029",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 6.596834035646832
+          },
+          "baseline_min_clearance_mm": 0.999,
+          "pass": false
+        },
+        {
+          "pair": [
+            "23 left short lid link",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part057",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.4461872864396786
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "36 left cheek servo stay",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Jaw_36_left_jaw_servo_stay",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              30.0,
+              0.0
+            ],
+            "overlap_mm3": 1.885575345833382
+          },
+          "baseline_min_clearance_mm": 0.73,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer002",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperLRetainer",
+            "Part057"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 8.870270599620653
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer004",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "BlinkPivotLowerLRetainer",
+            "Part057"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.890386744755915
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert002",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperLRetainerInsert",
+            "Part057"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 30.357707059717637
+          },
+          "baseline_overlap_mm3": 9.272,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "Part024",
+            "Part060"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.11912643188593819
+          },
+          "baseline_min_clearance_mm": 1.014,
+          "pass": false
+        },
+        {
+          "pair": [
+            "14 eyeball 2",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "Part033",
+            "Part060"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.25360884439969483
+          },
+          "baseline_min_clearance_mm": 0.998,
+          "pass": false
+        },
+        {
+          "pair": [
+            "23 right short lid link",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part060",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.44618623670546625
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer003",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperRRetainer",
+            "Part060"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 8.870276950482662
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer005",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "BlinkPivotLowerRRetainer",
+            "Part060"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.8903872475466794
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert003",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperRRetainerInsert",
+            "Part060"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 30.35775395342023
+          },
+          "baseline_overlap_mm3": 9.272,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 10 socket head cap screw",
+            "09 head frame"
+          ],
+          "parts": [
+            "CradleMountFrameL",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 21.938547990358984
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 10 socket head cap screw001",
+            "09 head frame"
+          ],
+          "parts": [
+            "CradleMountFrameR",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 45.55748638886816
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 17 horn",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchLinkHornPin",
+            "Part019"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.07701668578685024
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 17 horn",
+            "XL330 M077 eye pitch front plate"
+          ],
+          "parts": [
+            "EyePitchLinkHornPin",
+            "Part042"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 2.519981033808515
+          },
+          "baseline_min_clearance_mm": 0.3,
+          "pass": false
+        },
+        {
+          "pair": [
+            "NSK MR63ZZMC3P6 · eye-pitch bearing",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "EyePitchBearingL",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 33.629615597284705
+          },
+          "baseline_min_clearance_mm": 4.52,
+          "pass": false
+        },
+        {
+          "pair": [
+            "NSK MR63ZZMC3P6 · eye-pitch bearing001",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "EyePitchBearingR",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 42.63727848405097
+          },
+          "baseline_min_clearance_mm": 5.67,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert019",
+            "09 head frame"
+          ],
+          "parts": [
+            "CradleMountFrameLInsert",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 27.35868815621575
+          },
+          "baseline_overlap_mm3": 12.151,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert020",
+            "09 head frame"
+          ],
+          "parts": [
+            "CradleMountFrameRInsert",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 27.77633662476804
+          },
+          "baseline_overlap_mm3": 12.15,
+          "pass": false
+        }
+      ],
+      "printing": {
+        "parts": {
+          "13 left eye cradle mount": {
+            "part": "Part025",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0065,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0065,
+            "pass": true
+          },
+          "13 right eye cradle mount": {
+            "part": "Part027",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0068,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0068,
+            "pass": true
+          },
+          "18 eye pitch link 58p5mm": {
+            "part": "Part044",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0066,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0066,
+            "pass": true
+          },
+          "23 left short lid link": {
+            "part": "Part057",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 20.1,
+            "area_below_2p0_fraction": 0.2817,
+            "baseline_area_below_0p8_mm2": 20.1,
+            "baseline_area_below_2p0_fraction": 0.2817,
+            "pass": true
+          },
+          "23 right short lid link": {
+            "part": "Part060",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 21.7,
+            "area_below_2p0_fraction": 0.2767,
+            "baseline_area_below_0p8_mm2": 21.7,
+            "baseline_area_below_2p0_fraction": 0.2767,
+            "pass": true
+          }
+        },
+        "pass": true
+      }
+    },
+    "paired": {
+      "x_translations_mm": {
+        "Part025": 6.2,
+        "EyePitchBearingL": 6.2,
+        "Part026": 6.2,
+        "CradleMountFrameL": 6.2,
+        "CradleMountFrameLInsert": 6.2,
+        "Part027": -7.8,
+        "EyePitchBearingR": -7.8,
+        "Part028": -7.8,
+        "CradleMountFrameR": -7.8,
+        "CradleMountFrameRInsert": -7.8,
+        "Part044": -2.6,
+        "EyePitchLinkHornPin": -2.6,
+        "EyePitchLinkCradlePin": -2.6,
+        "Part057": 2.7,
+        "Part060": -2.7
+      },
+      "local_reshapes": [
+        "Part019",
+        "Part024"
+      ],
+      "pairs_checked": 290,
+      "clearance_failures": [
+        {
+          "pair": [
+            "09 head frame",
+            "13 left eye cradle mount"
+          ],
+          "parts": [
+            "Part019",
+            "Part025"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 317.28132292081744
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "Part019",
+            "Part027"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 128.99982359617874
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "17 eye pitch horn 10mm"
+          ],
+          "parts": [
+            "Part019",
+            "Part043"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.0172140101823605
+          },
+          "baseline_min_clearance_mm": 0.442,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part019",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              4.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.03744409027154864
+          },
+          "baseline_min_clearance_mm": 0.706,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 8 socket head cap screw006",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame0",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 31.083206972187252
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 8 socket head cap screw007",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame1",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 31.083206972187252
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert017",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame0Insert",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 27.77771127082542
+          },
+          "baseline_overlap_mm3": 12.151,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert018",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame1Insert",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 27.778039295808412
+          },
+          "baseline_overlap_mm3": 12.151,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "Part024",
+            "Part027"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 49.54497854437295
+          },
+          "baseline_min_clearance_mm": 3.8,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Part024",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.05441132188841413
+          },
+          "baseline_min_clearance_mm": 1.014,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "Part024",
+            "Part060"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.02719185484719115
+          },
+          "baseline_min_clearance_mm": 1.014,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part024",
+            "Part073"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.5004919264018708
+          },
+          "baseline_min_clearance_mm": 0.053,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "31 left black orbit"
+          ],
+          "parts": [
+            "Part024",
+            "Part076"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 53.52226217584727
+          },
+          "baseline_min_clearance_mm": 0.175,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part024",
+            "Part077"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.49345615189386444
+          },
+          "baseline_min_clearance_mm": 0.175,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part024",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 72.17548538727624
+          },
+          "baseline_min_clearance_mm": 0.906,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part024",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 102.84105380749907
+          },
+          "baseline_min_clearance_mm": 0.906,
+          "pass": false
+        },
+        {
+          "pair": [
+            "36 left cheek servo stay",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "Jaw_36_left_jaw_servo_stay",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 5.372148355772424
+          },
+          "baseline_min_clearance_mm": 0.25,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 ground pivot004",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "BlinkPivotLowerL",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              60.0,
+              0.0
+            ],
+            "overlap_mm3": 8.143697529479368
+          },
+          "baseline_min_clearance_mm": 3.6,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 ground pivot005",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "BlinkPivotLowerR",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              60.0,
+              0.0
+            ],
+            "overlap_mm3": 0.2742741683703353
+          },
+          "baseline_min_clearance_mm": 3.6,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 left eye cradle mount",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part025",
+            "Part073"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 4.954829132955865
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "lid hinge pin -1 -34"
+          ],
+          "parts": [
+            "Part026",
+            "Part058"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 17.111451064730602
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "31 left black orbit"
+          ],
+          "parts": [
+            "Part026",
+            "Part076"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 6.984401963467216
+          },
+          "baseline_min_clearance_mm": 0.975,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part026",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 5.108684827718965
+          },
+          "baseline_min_clearance_mm": 4.5,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "XL330 M077 eye pitch"
+          ],
+          "parts": [
+            "Part027",
+            "Part041"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "XL330 M077 eye pitch front plate"
+          ],
+          "parts": [
+            "Part027",
+            "Part042"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 310.2010529111091
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "17 eye pitch horn 10mm"
+          ],
+          "parts": [
+            "Part027",
+            "Part043"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 127.58123262939444
+          },
+          "baseline_min_clearance_mm": 3.6,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part027",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 753.9811493324067
+          },
+          "baseline_min_clearance_mm": 0.65,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "34 eye pitch motor stay"
+          ],
+          "parts": [
+            "Part027",
+            "Part064"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 13.985331717272024
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part027",
+            "Part073"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 35.34002349958998
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part027",
+            "Part077"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.1726303297115617
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 17 horn",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "EyePitchLinkHornPin",
+            "Part027"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 13.814739132883687
+          },
+          "baseline_min_clearance_mm": 0.15,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 12 cradle lug",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "EyePitchLinkCradlePin",
+            "Part027"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.5800871010181095
+          },
+          "baseline_min_clearance_mm": 0.8,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "lid hinge pin 1 +34"
+          ],
+          "parts": [
+            "Part028",
+            "Part062"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 22.13499083737467
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part028",
+            "Part077"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 6.984401963467216
+          },
+          "baseline_min_clearance_mm": 0.975,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part028",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 10.108975426390467
+          },
+          "baseline_min_clearance_mm": 4.5,
+          "pass": false
+        },
+        {
+          "pair": [
+            "17 eye pitch horn 10mm",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part043",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 115.77692624526753
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "14 eyeball 1",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Part029",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 6.596834035646832
+          },
+          "baseline_min_clearance_mm": 0.999,
+          "pass": false
+        },
+        {
+          "pair": [
+            "23 left short lid link",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part057",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.4461872864396786
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "36 left cheek servo stay",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Jaw_36_left_jaw_servo_stay",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              30.0,
+              0.0
+            ],
+            "overlap_mm3": 1.885575345833382
+          },
+          "baseline_min_clearance_mm": 0.73,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer002",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperLRetainer",
+            "Part057"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 8.870270599620653
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer004",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "BlinkPivotLowerLRetainer",
+            "Part057"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.890386744755915
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert002",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperLRetainerInsert",
+            "Part057"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 30.357707059717637
+          },
+          "baseline_overlap_mm3": 9.272,
+          "pass": false
+        },
+        {
+          "pair": [
+            "14 eyeball 2",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "Part033",
+            "Part060"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.25360884439969483
+          },
+          "baseline_min_clearance_mm": 0.998,
+          "pass": false
+        },
+        {
+          "pair": [
+            "23 right short lid link",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part060",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.44618623670546625
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer003",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperRRetainer",
+            "Part060"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 8.870276950482662
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer005",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "BlinkPivotLowerRRetainer",
+            "Part060"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.8903872475466794
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert003",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "BlinkPivotUpperRRetainerInsert",
+            "Part060"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 30.35775395342023
+          },
+          "baseline_overlap_mm3": 9.272,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 17 horn",
+            "XL330 M077 eye pitch front plate"
+          ],
+          "parts": [
+            "EyePitchLinkHornPin",
+            "Part042"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 2.414979320687858
+          },
+          "baseline_min_clearance_mm": 0.3,
+          "pass": false
+        }
+      ],
+      "printing": {
+        "parts": {
+          "09 head frame": {
+            "part": "Part019",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 1088.9,
+            "area_below_2p0_fraction": 0.1011,
+            "baseline_area_below_0p8_mm2": 531.1,
+            "baseline_area_below_2p0_fraction": 0.0623,
+            "pass": false
+          },
+          "12 eye tilt cradle": {
+            "part": "Part024",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 132.9,
+            "area_below_2p0_fraction": 0.1676,
+            "baseline_area_below_0p8_mm2": 108.2,
+            "baseline_area_below_2p0_fraction": 0.1538,
+            "pass": false
+          },
+          "13 left eye cradle mount": {
+            "part": "Part025",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0065,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0065,
+            "pass": true
+          },
+          "13 right eye cradle mount": {
+            "part": "Part027",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0068,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0068,
+            "pass": true
+          },
+          "18 eye pitch link 58p5mm": {
+            "part": "Part044",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0066,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0066,
+            "pass": true
+          },
+          "23 left short lid link": {
+            "part": "Part057",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 20.1,
+            "area_below_2p0_fraction": 0.2817,
+            "baseline_area_below_0p8_mm2": 20.1,
+            "baseline_area_below_2p0_fraction": 0.2817,
+            "pass": true
+          },
+          "23 right short lid link": {
+            "part": "Part060",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 21.7,
+            "area_below_2p0_fraction": 0.2767,
+            "baseline_area_below_0p8_mm2": 21.7,
+            "baseline_area_below_2p0_fraction": 0.2767,
+            "pass": true
+          }
+        },
+        "pass": false
+      }
+    },
+    "actuator": {
+      "x_translations_mm": {
+        "Part025": 6.2,
+        "EyePitchBearingL": 6.2,
+        "Part026": 6.2,
+        "CradleMountFrameL": 6.2,
+        "CradleMountFrameLInsert": 6.2,
+        "Part027": -7.8,
+        "EyePitchBearingR": -7.8,
+        "Part028": -7.8,
+        "CradleMountFrameR": -7.8,
+        "CradleMountFrameRInsert": -7.8,
+        "Part044": -7.8,
+        "EyePitchLinkHornPin": -7.8,
+        "EyePitchLinkCradlePin": -7.8,
+        "Part057": 2.7,
+        "Part060": -2.7,
+        "Part041": -7.8,
+        "Part042": -7.8,
+        "Part043": -7.8,
+        "Part064": -7.8,
+        "EyePitchStayFrame0": -7.8,
+        "EyePitchStayFrame1": -7.8,
+        "EyePitchHornScrew0": -7.8,
+        "EyePitchHornScrew1": -7.8,
+        "BlinkPivotUpperL": 2.7,
+        "BlinkPivotUpperLRetainer": 2.7,
+        "BlinkPivotUpperR": -2.7,
+        "BlinkPivotUpperRRetainer": -2.7,
+        "BlinkPivotLowerL": 2.7,
+        "BlinkPivotLowerLRetainer": 2.7,
+        "BlinkPivotLowerR": -2.7,
+        "BlinkPivotLowerRRetainer": -2.7,
+        "BlinkPivotUpperLRetainerInsert": 2.7,
+        "BlinkPivotUpperRRetainerInsert": -2.7,
+        "BlinkPivotLowerLRetainerInsert": 2.7,
+        "BlinkPivotLowerRRetainerInsert": -2.7,
+        "EyePitchStayFrame0Insert": -7.8,
+        "EyePitchStayFrame1Insert": -7.8,
+        "eyePitchHead4": -7.8,
+        "eyePitchHead4Insert": -7.8,
+        "eyePitchHead5": -7.8,
+        "eyePitchHead5Insert": -7.8
+      },
+      "local_reshapes": [
+        "Part019",
+        "Part024"
+      ],
+      "pairs_checked": 374,
+      "clearance_failures": [
+        {
+          "pair": [
+            "09 head frame",
+            "13 left eye cradle mount"
+          ],
+          "parts": [
+            "Part019",
+            "Part025"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 317.28132292081744
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "13 right eye cradle mount"
+          ],
+          "parts": [
+            "Part019",
+            "Part027"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 128.99982359617874
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "17 eye pitch horn 10mm"
+          ],
+          "parts": [
+            "Part019",
+            "Part043"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 3.8140007201292008
+          },
+          "baseline_min_clearance_mm": 0.442,
+          "pass": false
+        },
+        {
+          "pair": [
+            "09 head frame",
+            "18 eye pitch link 58p5mm"
+          ],
+          "parts": [
+            "Part019",
+            "Part044"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.261,
+          "overlap": null,
+          "baseline_min_clearance_mm": 0.706,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 8 socket head cap screw006",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame0",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 26.385920936973207
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 8 socket head cap screw007",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame1",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 26.69273077651087
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 17 horn",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchLinkHornPin",
+            "Part019"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.07388572166346045
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert017",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame0Insert",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 20.074219598143827
+          },
+          "baseline_overlap_mm3": 12.151,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert018",
+            "09 head frame"
+          ],
+          "parts": [
+            "EyePitchStayFrame1Insert",
+            "Part019"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 20.476255341782235
+          },
+          "baseline_overlap_mm3": 12.151,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Part024",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.05441132188841413
+          },
+          "baseline_min_clearance_mm": 1.014,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "Part024",
+            "Part060"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.18462040004250113
+          },
+          "baseline_min_clearance_mm": 1.014,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part024",
+            "Part073"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -4.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 0.6754562926215488
+          },
+          "baseline_min_clearance_mm": 0.053,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "31 left black orbit"
+          ],
+          "parts": [
+            "Part024",
+            "Part076"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 53.52226217584727
+          },
+          "baseline_min_clearance_mm": 0.175,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part024",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 72.17548538727624
+          },
+          "baseline_min_clearance_mm": 0.906,
+          "pass": false
+        },
+        {
+          "pair": [
+            "12 eye tilt cradle",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part024",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 119.79190504170477
+          },
+          "baseline_min_clearance_mm": 0.906,
+          "pass": false
+        },
+        {
+          "pair": [
+            "36 left cheek servo stay",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "Jaw_36_left_jaw_servo_stay",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 5.372148355772424
+          },
+          "baseline_min_clearance_mm": 0.25,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 ground pivot004",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "BlinkPivotLowerL",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.106,
+          "overlap": null,
+          "baseline_min_clearance_mm": 3.6,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 ground pivot005",
+            "12 eye tilt cradle"
+          ],
+          "parts": [
+            "BlinkPivotLowerR",
+            "Part024"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.7174915092856841
+          },
+          "baseline_min_clearance_mm": 3.6,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 left eye cradle mount",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part025",
+            "Part073"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 4.954829132955865
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "lid hinge pin -1 -34"
+          ],
+          "parts": [
+            "Part026",
+            "Part058"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 17.111451064730602
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "31 left black orbit"
+          ],
+          "parts": [
+            "Part026",
+            "Part076"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 6.984401963467216
+          },
+          "baseline_min_clearance_mm": 0.975,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part026",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 5.108684827718965
+          },
+          "baseline_min_clearance_mm": 4.5,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part027",
+            "Part073"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 35.34002349958998
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "13 right eye cradle mount",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part027",
+            "Part077"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.1726303297115617
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "lid hinge pin 1 +34"
+          ],
+          "parts": [
+            "Part028",
+            "Part062"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 22.13499083737467
+          },
+          "baseline_min_clearance_mm": 0.75,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "31 right black orbit"
+          ],
+          "parts": [
+            "Part028",
+            "Part077"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 6.984401963467216
+          },
+          "baseline_min_clearance_mm": 0.975,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø3 × 13 eye pitch pin001",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part028",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 10.108975426390467
+          },
+          "baseline_min_clearance_mm": 4.5,
+          "pass": false
+        },
+        {
+          "pair": [
+            "XL330 M077 eye pitch",
+            "XL330 M077 eye pitch front plate"
+          ],
+          "parts": [
+            "Part041",
+            "Part042"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "XL330 M077 eye pitch",
+            "17 eye pitch horn 10mm"
+          ],
+          "parts": [
+            "Part041",
+            "Part043"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_min_clearance_mm": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "XL330 M077 eye pitch",
+            "24 blink rail with bearing shoulders"
+          ],
+          "parts": [
+            "Part041",
+            "Part063"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "XL330 M077 eye pitch",
+            "34 eye pitch motor stay"
+          ],
+          "parts": [
+            "Part041",
+            "Part064"
+          ],
+          "moving": false,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_overlap_mm3": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M2 × 5 · 17 eye pitch horn to the XL330 horn",
+            "XL330 M077 eye pitch"
+          ],
+          "parts": [
+            "EyePitchHornScrew0",
+            "Part041"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_min_clearance_mm": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M2 × 5 · 17 eye pitch horn to the XL330 horn001",
+            "XL330 M077 eye pitch"
+          ],
+          "parts": [
+            "EyePitchHornScrew1",
+            "Part041"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": null
+          },
+          "baseline_min_clearance_mm": 0.0,
+          "pass": false
+        },
+        {
+          "pair": [
+            "18 eye pitch link 58p5mm",
+            "28 front skull with integrated camera tray"
+          ],
+          "parts": [
+            "Part044",
+            "Part073"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": null,
+          "baseline_min_clearance_mm": 1.721,
+          "pass": false
+        },
+        {
+          "pair": [
+            "18 eye pitch link 58p5mm",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part044",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 4.05536763042475
+          },
+          "baseline_min_clearance_mm": 6.65,
+          "pass": false
+        },
+        {
+          "pair": [
+            "14 eyeball 1",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Part029",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 6.596834035646832
+          },
+          "baseline_min_clearance_mm": 0.999,
+          "pass": false
+        },
+        {
+          "pair": [
+            "23 left short lid link",
+            "32 left upper lid"
+          ],
+          "parts": [
+            "Part057",
+            "Part078"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.4461872864396786
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "36 left cheek servo stay",
+            "23 left short lid link"
+          ],
+          "parts": [
+            "Jaw_36_left_jaw_servo_stay",
+            "Part057"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              30.0,
+              0.0
+            ],
+            "overlap_mm3": 1.885575345833382
+          },
+          "baseline_min_clearance_mm": 0.73,
+          "pass": false
+        },
+        {
+          "pair": [
+            "14 eyeball 2",
+            "23 right short lid link"
+          ],
+          "parts": [
+            "Part033",
+            "Part060"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.25360884439969483
+          },
+          "baseline_min_clearance_mm": 0.998,
+          "pass": false
+        },
+        {
+          "pair": [
+            "23 right short lid link",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "Part060",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.44618623670546625
+          },
+          "baseline_min_clearance_mm": 0.35,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 pin · glued in the 12 cradle lug",
+            "32 right upper lid"
+          ],
+          "parts": [
+            "EyePitchLinkCradlePin",
+            "Part079"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 4.567632179181539
+          },
+          "baseline_min_clearance_mm": 3.1,
+          "pass": false
+        },
+        {
+          "pair": [
+            "Ø2 × 6 ground pivot005",
+            "Ø2 × 6 pin · glued in the 12 cradle lug"
+          ],
+          "parts": [
+            "BlinkPivotLowerR",
+            "EyePitchLinkCradlePin"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              30.0,
+              0.0
+            ],
+            "overlap_mm3": 0.5027236447750644
+          },
+          "baseline_min_clearance_mm": 3.95,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer004",
+            "14 eyeball 1"
+          ],
+          "parts": [
+            "BlinkPivotLowerLRetainer",
+            "Part029"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.33290976057597277
+          },
+          "baseline_min_clearance_mm": 0.829,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3 flat point pin retainer005",
+            "14 eyeball 2"
+          ],
+          "parts": [
+            "BlinkPivotLowerRRetainer",
+            "Part033"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 1.6240211853264555
+          },
+          "baseline_min_clearance_mm": 0.83,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert004",
+            "14 eyeball 1"
+          ],
+          "parts": [
+            "BlinkPivotLowerLRetainerInsert",
+            "Part029"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -20.0,
+              15.0,
+              0.0
+            ],
+            "overlap_mm3": 0.09523644915389588
+          },
+          "baseline_min_clearance_mm": 1.822,
+          "pass": false
+        },
+        {
+          "pair": [
+            "M3 × 3.0 brass insert005",
+            "14 eyeball 2"
+          ],
+          "parts": [
+            "BlinkPivotLowerRRetainerInsert",
+            "Part033"
+          ],
+          "moving": true,
+          "min_clearance_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              -8.0,
+              -10.0,
+              -1.0,
+              0.0
+            ],
+            "overlap_mm3": 0.018955960956219837
+          },
+          "baseline_min_clearance_mm": 1.822,
+          "pass": false
+        }
+      ],
+      "printing": {
+        "parts": {
+          "09 head frame": {
+            "part": "Part019",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 1088.9,
+            "area_below_2p0_fraction": 0.1011,
+            "baseline_area_below_0p8_mm2": 531.1,
+            "baseline_area_below_2p0_fraction": 0.0623,
+            "pass": false
+          },
+          "12 eye tilt cradle": {
+            "part": "Part024",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 112.8,
+            "area_below_2p0_fraction": 0.1657,
+            "baseline_area_below_0p8_mm2": 108.2,
+            "baseline_area_below_2p0_fraction": 0.1538,
+            "pass": false
+          },
+          "13 left eye cradle mount": {
+            "part": "Part025",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0065,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0065,
+            "pass": true
+          },
+          "13 right eye cradle mount": {
+            "part": "Part027",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0068,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0068,
+            "pass": true
+          },
+          "XL330 M077 eye pitch front plate": {
+            "part": "Part042",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 34.2,
+            "area_below_2p0_fraction": 0.0339,
+            "baseline_area_below_0p8_mm2": 34.2,
+            "baseline_area_below_2p0_fraction": 0.0339,
+            "pass": true
+          },
+          "17 eye pitch horn 10mm": {
+            "part": "Part043",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0547,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0547,
+            "pass": true
+          },
+          "18 eye pitch link 58p5mm": {
+            "part": "Part044",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0066,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0066,
+            "pass": true
+          },
+          "23 left short lid link": {
+            "part": "Part057",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 20.1,
+            "area_below_2p0_fraction": 0.2817,
+            "baseline_area_below_0p8_mm2": 20.1,
+            "baseline_area_below_2p0_fraction": 0.2817,
+            "pass": true
+          },
+          "23 right short lid link": {
+            "part": "Part060",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 21.7,
+            "area_below_2p0_fraction": 0.2767,
+            "baseline_area_below_0p8_mm2": 21.7,
+            "baseline_area_below_2p0_fraction": 0.2767,
+            "pass": true
+          },
+          "34 eye pitch motor stay": {
+            "part": "Part064",
+            "new": false,
+            "closed": true,
+            "bodies": 1,
+            "area_below_0p8_mm2": 0.0,
+            "area_below_2p0_fraction": 0.0854,
+            "baseline_area_below_0p8_mm2": 0.0,
+            "baseline_area_below_2p0_fraction": 0.0854,
+            "pass": true
+          }
+        },
+        "pass": false
+      }
+    }
+  },
+  "compact_bare_bearing_boss": [
+    {
+      "part": "Part025",
+      "area_below_08_mm2": 0.0,
+      "area_below_20_fraction": 0.051949999999999996,
+      "fit": {
+        "Part019": {
+          "gap_mm": 7.78726,
+          "overlap": null,
+          "moving": false
+        },
+        "Part024": {
+          "gap_mm": 2.65,
+          "overlap": null,
+          "moving": true
+        },
+        "Part044": {
+          "gap_mm": 117.5605,
+          "overlap": null,
+          "moving": true
+        },
+        "Part057": {
+          "gap_mm": 10.84448,
+          "overlap": null,
+          "moving": true
+        },
+        "Part060": {
+          "gap_mm": 102.79849,
+          "overlap": null,
+          "moving": true
+        },
+        "Part073": {
+          "gap_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 2.6248368520229377
+          },
+          "moving": false
+        },
+        "Part076": {
+          "gap_mm": 1.575,
+          "overlap": null,
+          "moving": false
+        },
+        "Part077": {
+          "gap_mm": 69.575,
+          "overlap": null,
+          "moving": false
+        },
+        "Part078": {
+          "gap_mm": 5.1,
+          "overlap": null,
+          "moving": true
+        },
+        "Part079": {
+          "gap_mm": 73.45,
+          "overlap": null,
+          "moving": true
+        },
+        "Part042": {
+          "gap_mm": 118.39876,
+          "overlap": null,
+          "moving": false
+        }
+      },
+      "nominal_min_radial_wall_mm": 2.16
+    },
+    {
+      "part": "Part027",
+      "area_below_08_mm2": 0.0,
+      "area_below_20_fraction": 0.051949999999999996,
+      "fit": {
+        "Part019": {
+          "gap_mm": 24.93343,
+          "overlap": null,
+          "moving": false
+        },
+        "Part024": {
+          "gap_mm": 0.13586,
+          "overlap": null,
+          "moving": true
+        },
+        "Part044": {
+          "gap_mm": 1.57034,
+          "overlap": null,
+          "moving": true
+        },
+        "Part057": {
+          "gap_mm": 101.19894,
+          "overlap": null,
+          "moving": true
+        },
+        "Part060": {
+          "gap_mm": 9.26048,
+          "overlap": null,
+          "moving": true
+        },
+        "Part073": {
+          "gap_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.8372116496042619
+          },
+          "moving": false
+        },
+        "Part076": {
+          "gap_mm": 67.975,
+          "overlap": null,
+          "moving": false
+        },
+        "Part077": {
+          "gap_mm": 0.0,
+          "overlap": {
+            "angles_deg": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "overlap_mm3": 1.1085576187594295
+          },
+          "moving": false
+        },
+        "Part078": {
+          "gap_mm": 71.85,
+          "overlap": null,
+          "moving": true
+        },
+        "Part079": {
+          "gap_mm": 3.5,
+          "overlap": null,
+          "moving": true
+        },
+        "Part042": {
+          "gap_mm": 31.0656,
+          "overlap": null,
+          "moving": false
+        }
+      },
+      "nominal_min_radial_wall_mm": 2.16
+    }
+  ],
+  "minimum_wall_bearing_static": {
+    "right": {
+      "p98_shift_for_3mm_reference_mm": 8.5948,
+      "ref_hits": 360,
+      "ref_samples": 360,
+      "allowed": [
+        {
+          "inward_mm": 14.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 19.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        }
+      ],
+      "tested": [
+        {
+          "inward_mm": 4.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 24.981241585918877
+          }
+        },
+        {
+          "inward_mm": 4.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 25.242389242650763
+          }
+        },
+        {
+          "inward_mm": 4.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 25.472715632995005
+          }
+        },
+        {
+          "inward_mm": 4.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 23.949207978301274
+          }
+        },
+        {
+          "inward_mm": 5.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 19.786248492801406
+          }
+        },
+        {
+          "inward_mm": 5.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 15.574072400361123
+          }
+        },
+        {
+          "inward_mm": 5.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 11.317290851080543
+          }
+        },
+        {
+          "inward_mm": 5.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 7.0278761375375325
+          }
+        },
+        {
+          "inward_mm": 6.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 2.7052802484249696
+          }
+        },
+        {
+          "inward_mm": 6.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 1.8869806131268796
+          }
+        },
+        {
+          "inward_mm": 6.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 1.6842679776534206
+          }
+        },
+        {
+          "inward_mm": 6.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 1.5018981621550822
+          }
+        },
+        {
+          "inward_mm": 7.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 1.3469313274143133
+          }
+        },
+        {
+          "inward_mm": 7.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 1.2153838865791258
+          }
+        },
+        {
+          "inward_mm": 7.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 1.0982891396470353
+          }
+        },
+        {
+          "inward_mm": 7.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.987806888810558
+          }
+        },
+        {
+          "inward_mm": 8.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.8809157183226747
+          }
+        },
+        {
+          "inward_mm": 8.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.784740230549668
+          }
+        },
+        {
+          "inward_mm": 8.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.6809948354893542
+          }
+        },
+        {
+          "inward_mm": 8.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.5883322933109052
+          }
+        },
+        {
+          "inward_mm": 9.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.503933169871711
+          }
+        },
+        {
+          "inward_mm": 9.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.4251563314752101
+          }
+        },
+        {
+          "inward_mm": 9.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.34979293490436686
+          }
+        },
+        {
+          "inward_mm": 9.75,
+          "overlap_mm3": {
+            "Part077": 3.6279442825904575,
+            "Part073": 0.27474083570729924
+          }
+        },
+        {
+          "inward_mm": 10.0,
+          "overlap_mm3": {
+            "Part077": 12.265630706475045,
+            "Part073": 0.20020684420361926
+          }
+        },
+        {
+          "inward_mm": 10.25,
+          "overlap_mm3": {
+            "Part077": 20.903317130359635,
+            "Part073": 0.13019863367001375
+          }
+        },
+        {
+          "inward_mm": 10.5,
+          "overlap_mm3": {
+            "Part077": 29.541003554244224,
+            "Part073": 0.06595268656684672
+          }
+        },
+        {
+          "inward_mm": 10.75,
+          "overlap_mm3": {
+            "Part077": 38.17868997812881,
+            "Part073": 0.013992060741594573
+          }
+        },
+        {
+          "inward_mm": 11.0,
+          "overlap_mm3": {
+            "Part077": 46.8163764020131,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 11.25,
+          "overlap_mm3": {
+            "Part077": 55.45406282589769,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 11.5,
+          "overlap_mm3": {
+            "Part077": 64.09174924978227,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 11.75,
+          "overlap_mm3": {
+            "Part077": 72.72943567366686,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.0,
+          "overlap_mm3": {
+            "Part077": 81.36712209755144,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.25,
+          "overlap_mm3": {
+            "Part077": 86.03128297353472,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.5,
+          "overlap_mm3": {
+            "Part077": 77.39359654965013,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.75,
+          "overlap_mm3": {
+            "Part077": 68.75591012576554,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.0,
+          "overlap_mm3": {
+            "Part077": 60.11822370188096,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.25,
+          "overlap_mm3": {
+            "Part077": 51.48053727799637,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.5,
+          "overlap_mm3": {
+            "Part077": 42.84285085411178,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.75,
+          "overlap_mm3": {
+            "Part077": 34.20516443022719,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.0,
+          "overlap_mm3": {
+            "Part077": 25.5674780063426,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.25,
+          "overlap_mm3": {
+            "Part077": 16.929791582458165,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.5,
+          "overlap_mm3": {
+            "Part077": 8.292105158573577,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.25,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.5,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.75,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 19.0,
+          "overlap_mm3": {
+            "Part077": 0.0,
+            "Part073": 0.0
+          }
+        }
+      ]
+    },
+    "left": {
+      "p98_shift_for_3mm_reference_mm": 6.2225,
+      "ref_hits": 360,
+      "ref_samples": 360,
+      "allowed": [
+        {
+          "inward_mm": 14.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 19.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        }
+      ],
+      "tested": [
+        {
+          "inward_mm": 4.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 14.5967988195016
+          }
+        },
+        {
+          "inward_mm": 4.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 14.731169378132336
+          }
+        },
+        {
+          "inward_mm": 4.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 14.843906473283369
+          }
+        },
+        {
+          "inward_mm": 4.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 13.99226293422536
+          }
+        },
+        {
+          "inward_mm": 5.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 11.618375881544276
+          }
+        },
+        {
+          "inward_mm": 5.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 9.147546591057335
+          }
+        },
+        {
+          "inward_mm": 5.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 6.608081756669132
+          }
+        },
+        {
+          "inward_mm": 5.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 4.018975905117789
+          }
+        },
+        {
+          "inward_mm": 6.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 1.4203858567587606
+          }
+        },
+        {
+          "inward_mm": 6.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.9638454106780708
+          }
+        },
+        {
+          "inward_mm": 6.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.8853145592215714
+          }
+        },
+        {
+          "inward_mm": 6.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.8258525950334535
+          }
+        },
+        {
+          "inward_mm": 7.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.7879684332781224
+          }
+        },
+        {
+          "inward_mm": 7.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.7682971688557984
+          }
+        },
+        {
+          "inward_mm": 7.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.758198410051472
+          }
+        },
+        {
+          "inward_mm": 7.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.7516351915828388
+          }
+        },
+        {
+          "inward_mm": 8.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.7422687627151469
+          }
+        },
+        {
+          "inward_mm": 8.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.7288685371005444
+          }
+        },
+        {
+          "inward_mm": 8.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.6995415065294365
+          }
+        },
+        {
+          "inward_mm": 8.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.6306790682981429
+          }
+        },
+        {
+          "inward_mm": 9.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.5557113117402738
+          }
+        },
+        {
+          "inward_mm": 9.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.48080143833665306
+          }
+        },
+        {
+          "inward_mm": 9.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.405951720825362
+          }
+        },
+        {
+          "inward_mm": 9.75,
+          "overlap_mm3": {
+            "Part076": 3.6279442825906094,
+            "Part073": 0.33116113599557434
+          }
+        },
+        {
+          "inward_mm": 10.0,
+          "overlap_mm3": {
+            "Part076": 12.2656307064755,
+            "Part073": 0.2564416920257795
+          }
+        },
+        {
+          "inward_mm": 10.25,
+          "overlap_mm3": {
+            "Part076": 20.90331713036009,
+            "Part073": 0.1825889498757225
+          }
+        },
+        {
+          "inward_mm": 10.5,
+          "overlap_mm3": {
+            "Part076": 29.54100355424468,
+            "Part073": 0.11407148886093665
+          }
+        },
+        {
+          "inward_mm": 10.75,
+          "overlap_mm3": {
+            "Part076": 38.17868997812926,
+            "Part073": 0.05192090271712028
+          }
+        },
+        {
+          "inward_mm": 11.0,
+          "overlap_mm3": {
+            "Part076": 46.81637640201385,
+            "Part073": 0.0061640292980502664
+          }
+        },
+        {
+          "inward_mm": 11.25,
+          "overlap_mm3": {
+            "Part076": 55.45406282589844,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 11.5,
+          "overlap_mm3": {
+            "Part076": 64.09174924978304,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 11.75,
+          "overlap_mm3": {
+            "Part076": 72.72943567366747,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.0,
+          "overlap_mm3": {
+            "Part076": 81.36712209755176,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.25,
+          "overlap_mm3": {
+            "Part076": 86.03128297353487,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.5,
+          "overlap_mm3": {
+            "Part076": 77.39359654965028,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 12.75,
+          "overlap_mm3": {
+            "Part076": 68.7559101257657,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.0,
+          "overlap_mm3": {
+            "Part076": 60.11822370188111,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.25,
+          "overlap_mm3": {
+            "Part076": 51.48053727799652,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.5,
+          "overlap_mm3": {
+            "Part076": 42.842850854112235,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 13.75,
+          "overlap_mm3": {
+            "Part076": 34.20516443022765,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.0,
+          "overlap_mm3": {
+            "Part076": 25.567478006343055,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.25,
+          "overlap_mm3": {
+            "Part076": 16.929791582458467,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.5,
+          "overlap_mm3": {
+            "Part076": 8.29210515857388,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 14.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 15.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 16.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 17.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.25,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.5,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 18.75,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        },
+        {
+          "inward_mm": 19.0,
+          "overlap_mm3": {
+            "Part076": 0.0,
+            "Part073": 0.0
+          }
+        }
+      ]
+    }
+  },
+  "minimum_wall_bearing_motion": {
+    "right": {
+      "rows": [
+        {
+          "inward_mm": 14.75,
+          "Part033": 4.18953,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 15.0,
+          "Part033": 3.94313,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 15.25,
+          "Part033": 3.69708,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 15.5,
+          "Part033": 3.45089,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 15.75,
+          "Part033": 3.20499,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 16.0,
+          "Part033": 2.95918,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 16.25,
+          "Part033": 2.71357,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 16.5,
+          "Part033": 2.46807,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 16.75,
+          "Part033": 2.22265,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 17.0,
+          "Part033": 1.97839,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 17.25,
+          "Part033": 1.73535,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 17.5,
+          "Part033": 1.48967,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 17.75,
+          "Part033": 1.24385,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 18.0,
+          "Part033": 0.99804,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 18.25,
+          "Part033": 0.75346,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 18.5,
+          "Part033": 0.50922,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 18.75,
+          "Part033": 0.26595,
+          "Part079": 0.0
+        },
+        {
+          "inward_mm": 19.0,
+          "Part033": 0.02165,
+          "Part079": 0.0
+        }
+      ],
+      "pass_slots": []
+    },
+    "left": {
+      "rows": [
+        {
+          "inward_mm": 14.75,
+          "Part029": 4.18932,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 15.0,
+          "Part029": 3.94308,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 15.25,
+          "Part029": 3.69715,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 15.5,
+          "Part029": 3.45092,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 15.75,
+          "Part029": 3.20509,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 16.0,
+          "Part029": 2.9593,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 16.25,
+          "Part029": 2.71354,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 16.5,
+          "Part029": 2.46827,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 16.75,
+          "Part029": 2.2226,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 17.0,
+          "Part029": 1.97742,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 17.25,
+          "Part029": 1.73217,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 17.5,
+          "Part029": 1.48725,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 17.75,
+          "Part029": 1.24259,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 18.0,
+          "Part029": 0.99788,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 18.25,
+          "Part029": 0.75355,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 18.5,
+          "Part029": 0.5092,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 18.75,
+          "Part029": 0.26618,
+          "Part078": 0.0
+        },
+        {
+          "inward_mm": 19.0,
+          "Part029": 0.02181,
+          "Part078": 0.0
+        }
+      ],
+      "pass_slots": []
+    }
+  },
+  "head_check_b26": {
+    "cad_sha256": "2a50f5a128e886066cbee5a17bb285c53e91470169ff114774c941640e6bced0",
+    "pose_samples": 26196,
+    "pairs": 572,
+    "clearance_mm": {
+      "Part024 / Part057": 1.009,
+      "Part057 / Part073": 0.95,
+      "Part024 / Part060": 1.009,
+      "Part041 / Part060": 8.702,
+      "Part060 / Part073": 0.95,
+      "Part073 / Part078": 0.842,
+      "Part076 / Part078": 0.93,
+      "Part073 / Part079": 0.741,
+      "Part077 / Part079": 0.93
+    },
+    "collisions": [
+      {
+        "parts": [
+          "Part041",
+          "Part064"
+        ],
+        "angles_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "overlap_mm3": null
+      }
+    ]
+  },
+  "motor_solid_mesh_union_diagnostic": {
+    "cad_sha256": null,
+    "pose_samples": 26196,
+    "pairs": 572,
+    "clearance_mm": {
+      "Part024 / Part057": 1.009,
+      "Part057 / Part073": 0.95,
+      "Part024 / Part060": 1.009,
+      "Part041 / Part060": 8.702,
+      "Part060 / Part073": 0.95,
+      "Part073 / Part078": 0.842,
+      "Part076 / Part078": 0.93,
+      "Part073 / Part079": 0.741,
+      "Part077 / Part079": 0.93
+    },
+    "collisions": []
+  },
+  "yoke_screening": {
+    "reference_padding_mm": 2.9,
+    "sheet_sampling_mm": 0.4,
+    "views": [
+      {
+        "side": "right",
+        "yaw_deg": -30,
+        "tilt_deg": -20,
+        "yoke_exposed_mm2": 195.68,
+        "yoke_outside_reference_padding_mm2": 13.76
+      },
+      {
+        "side": "right",
+        "yaw_deg": -30,
+        "tilt_deg": 0,
+        "yoke_exposed_mm2": 332.64,
+        "yoke_outside_reference_padding_mm2": 10.24
+      },
+      {
+        "side": "right",
+        "yaw_deg": -30,
+        "tilt_deg": 20,
+        "yoke_exposed_mm2": 303.84,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "right",
+        "yaw_deg": 0,
+        "tilt_deg": -20,
+        "yoke_exposed_mm2": 235.52,
+        "yoke_outside_reference_padding_mm2": 14.72
+      },
+      {
+        "side": "right",
+        "yaw_deg": 0,
+        "tilt_deg": 0,
+        "yoke_exposed_mm2": 288.0,
+        "yoke_outside_reference_padding_mm2": 8.96
+      },
+      {
+        "side": "right",
+        "yaw_deg": 0,
+        "tilt_deg": 20,
+        "yoke_exposed_mm2": 303.68,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "right",
+        "yaw_deg": 30,
+        "tilt_deg": -20,
+        "yoke_exposed_mm2": 142.08,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "right",
+        "yaw_deg": 30,
+        "tilt_deg": 0,
+        "yoke_exposed_mm2": 173.28,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "right",
+        "yaw_deg": 30,
+        "tilt_deg": 20,
+        "yoke_exposed_mm2": 200.32,
+        "yoke_outside_reference_padding_mm2": 8.16
+      },
+      {
+        "side": "left",
+        "yaw_deg": -30,
+        "tilt_deg": -20,
+        "yoke_exposed_mm2": 90.88,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "left",
+        "yaw_deg": -30,
+        "tilt_deg": 0,
+        "yoke_exposed_mm2": 128.64,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "left",
+        "yaw_deg": -30,
+        "tilt_deg": 20,
+        "yoke_exposed_mm2": 217.28,
+        "yoke_outside_reference_padding_mm2": 30.08
+      },
+      {
+        "side": "left",
+        "yaw_deg": 0,
+        "tilt_deg": -20,
+        "yoke_exposed_mm2": 148.0,
+        "yoke_outside_reference_padding_mm2": 27.68
+      },
+      {
+        "side": "left",
+        "yaw_deg": 0,
+        "tilt_deg": 0,
+        "yoke_exposed_mm2": 218.24,
+        "yoke_outside_reference_padding_mm2": 9.44
+      },
+      {
+        "side": "left",
+        "yaw_deg": 0,
+        "tilt_deg": 20,
+        "yoke_exposed_mm2": 264.48,
+        "yoke_outside_reference_padding_mm2": 0.0
+      },
+      {
+        "side": "left",
+        "yaw_deg": 30,
+        "tilt_deg": -20,
+        "yoke_exposed_mm2": 92.0,
+        "yoke_outside_reference_padding_mm2": 21.28
+      },
+      {
+        "side": "left",
+        "yaw_deg": 30,
+        "tilt_deg": 0,
+        "yoke_exposed_mm2": 194.4,
+        "yoke_outside_reference_padding_mm2": 11.2
+      },
+      {
+        "side": "left",
+        "yaw_deg": 30,
+        "tilt_deg": 20,
+        "yoke_exposed_mm2": 240.32,
+        "yoke_outside_reference_padding_mm2": 0.0
+      }
+    ]
+  }
+}
