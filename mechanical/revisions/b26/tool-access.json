@@ -1,0 +1,45 @@
+{
+  "socket": {
+    "outer_diameter_mm": 8.0,
+    "length_mm": 60.0
+  },
+  "yaw_bracket_feet": {
+    "YawBracketFootNut0": {
+      "tool": "5.5 mm socket from above",
+      "pass": true,
+      "blocking_parts": [],
+      "widest_socket_outer_mm": 8.5,
+      "wider_blocked_by": [
+        "Part008"
+      ]
+    },
+    "YawBracketFootNut1": {
+      "tool": "5.5 mm socket from above",
+      "pass": true,
+      "blocking_parts": [],
+      "widest_socket_outer_mm": 8.5,
+      "wider_blocked_by": [
+        "Part008"
+      ]
+    },
+    "YawBracketFootNut2": {
+      "tool": "5.5 mm socket from above",
+      "pass": true,
+      "blocking_parts": [],
+      "widest_socket_outer_mm": 8.5,
+      "wider_blocked_by": [
+        "Part009"
+      ]
+    },
+    "YawBracketFootNut3": {
+      "tool": "5.5 mm socket from above",
+      "pass": true,
+      "blocking_parts": [],
+      "widest_socket_outer_mm": 8.5,
+      "wider_blocked_by": [
+        "Part009"
+      ]
+    }
+  },
+  "bottom_hatch": "the hex recesses on the bars hold the hatch nuts; no tool is needed on the nut side"
+}

@@ -16,9 +16,12 @@ B22_NATIVE = Path(__file__).resolve().parents[1] / 'revisions/b22/R5-B22-Assembl
 def service_metadata(layout):
     motion = layout['motion_geometry']
     rear = motion['rear_cable_service_nuts']
-    bottom = motion['bottom_board_service_nuts']
+    # B26 replaces the two keeper plates with visible press-fit nut seats in the base.
+    slots = motion.get('bottom_board_nut_seats')
+    bottom = motion.get('bottom_board_service_nuts', [])
     if (len(rear['bolt_seats_mm']) != 5 or rear['bolt_length_mm'] != 16.
-            or rear['service_orientation'] != 'upright' or len(bottom) != 2):
+            or rear['service_orientation'] != 'upright' or len(bottom) != (0 if slots else 2)
+            or (slots is not None and len(slots) != 4)):
         raise ValueError('Incomplete stock hardware for B23 service covers')
     for cap in bottom:
         for field in ('keeper', 'screw'):

@@ -1,0 +1,501 @@
+{
+  "cad_sha256": "d696fcc283d882e4f0c850dbde93751bcf2fa982de09d09e91ce4501bdb4fca2",
+  "p2s_sha256": "b9a3dc463a3040356f3ae37483b2c02e7631a6f31527c7ad72ea1bd55cc6d009",
+  "source_cad_sha256": "e899cec93a8a29a8fd749a94075c120674eae6da7227939de88900c3eae3b794",
+  "source_p2s_sha256": "232db77d3e6551e2e56846fd55a7d5bfbe3b2978dce0f4e4c2feb5c9259e87b2",
+  "part_number": "CNC Kitchen TC-M3x3.0",
+  "socket_head_sites": {
+    "ID5KeeperScrew1": {
+      "host": "Part011",
+      "seat": [
+        17.0,
+        23.1,
+        84.0
+      ],
+      "entry": [
+        17.0,
+        18.61,
+        84.0
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "bolt": 8,
+      "depth": 4.31,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "ID5KeeperScrew2": {
+      "host": "Part011",
+      "seat": [
+        17.0,
+        23.1,
+        108.0
+      ],
+      "entry": [
+        17.0,
+        18.61,
+        108.0
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "bolt": 8,
+      "depth": 4.31,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "EyePitchStayFrame0": {
+      "host": "Part019",
+      "seat": [
+        53.0,
+        34.6,
+        142.0
+      ],
+      "entry": [
+        53.0,
+        31.0,
+        142.0
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "bolt": 8,
+      "depth": 4.9,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "EyePitchStayFrame1": {
+      "host": "Part019",
+      "seat": [
+        53.0,
+        34.6,
+        151.0
+      ],
+      "entry": [
+        53.0,
+        31.0,
+        151.0
+      ],
+      "axis": [
+        0,
+        -1,
+        0
+      ],
+      "bolt": 8,
+      "depth": 4.9,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "CradleMountFrameL": {
+      "host": "Part019",
+      "seat": [
+        -69.2,
+        27.0,
+        146.0
+      ],
+      "entry": [
+        -64.75,
+        27.0,
+        146.0
+      ],
+      "axis": [
+        1,
+        0,
+        0
+      ],
+      "bolt": 10,
+      "depth": 4.4,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "CradleMountFrameR": {
+      "host": "Part019",
+      "seat": [
+        69.2,
+        27.0,
+        146.0
+      ],
+      "entry": [
+        64.75,
+        27.0,
+        146.0
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "bolt": 10,
+      "depth": 4.4,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "EyeYawFoot0": {
+      "host": "Part039",
+      "seat": [
+        0.25,
+        -47.6,
+        115.5
+      ],
+      "entry": [
+        0.25,
+        -47.6,
+        113.25
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "bolt": 6,
+      "depth": 4.5,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "EyeYawFoot1": {
+      "host": "Part039",
+      "seat": [
+        6.3,
+        -47.6,
+        115.5
+      ],
+      "entry": [
+        6.3,
+        -47.6,
+        113.25
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "bolt": 6,
+      "depth": 4.5,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "eyePitchHead4": {
+      "host": "Part064",
+      "seat": [
+        58.35,
+        4.6,
+        164.3
+      ],
+      "entry": [
+        55.65,
+        4.6,
+        164.3
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "bolt": 8,
+      "depth": 4.65,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "eyePitchHead5": {
+      "host": "Part064",
+      "seat": [
+        58.35,
+        15.4,
+        164.3
+      ],
+      "entry": [
+        55.65,
+        15.4,
+        164.3
+      ],
+      "axis": [
+        -1,
+        0,
+        0
+      ],
+      "bolt": 8,
+      "depth": 4.65,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "CameraTrayScrewLeft": {
+      "host": "Part065",
+      "seat": [
+        -12.0,
+        -47.0,
+        74.8
+      ],
+      "entry": [
+        -12.0,
+        -47.0,
+        70.75
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "bolt": 8,
+      "depth": 4.45,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    },
+    "CameraTrayScrewRight": {
+      "host": "Part065",
+      "seat": [
+        12.0,
+        -47.0,
+        74.8
+      ],
+      "entry": [
+        12.0,
+        -47.0,
+        70.75
+      ],
+      "axis": [
+        0,
+        0,
+        -1
+      ],
+      "bolt": 8,
+      "depth": 4.45,
+      "wall_missing_mm3": 0.0,
+      "bare_part_press_tool_overlap_mm3": 0.0,
+      "installed_screw_overlap_mm3": {}
+    }
+  },
+  "pin_retainer_sites": {
+    "BlinkPivotServoRetainer": {
+      "host": "Part056",
+      "offset": 0,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        9.15,
+        -9.386658546366338,
+        163.1604400264209
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 4.45
+    },
+    "BlinkPivotDriveRetainer": {
+      "host": "Part054",
+      "offset": 0,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        10.25,
+        -19.386658546366338,
+        147.1604400264209
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 2.45
+    },
+    "BlinkPivotUpperLRetainer": {
+      "host": "Part057",
+      "offset": 0,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        -47.95,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 2.45
+    },
+    "BlinkPivotUpperRRetainer": {
+      "host": "Part060",
+      "offset": 0,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        47.95,
+        -17.569281610086414,
+        144.46606791561703
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 2.45
+    },
+    "BlinkPivotLowerLRetainer": {
+      "host": "Part057",
+      "offset": 1.92,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        -47.95,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 0.53
+    },
+    "BlinkPivotLowerRRetainer": {
+      "host": "Part060",
+      "offset": 1.92,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        47.95,
+        -32.56928161008641,
+        109.46606791561702
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 0.53
+    },
+    "EyeYawDrivePivotRetainer": {
+      "host": "Part040",
+      "offset": 1.63,
+      "depth": 3.15,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 3.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        -5.8,
+        -22.0,
+        111.85
+      ],
+      "smooth_pin_sweep_vs_host_mm3": 0.0,
+      "retainer_host_smooth_guide_remaining_mm": 0.62
+    },
+    "PitchLimitLowerRetainer": {
+      "host": "Part011",
+      "offset": -2.0,
+      "depth": 4.2,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 5.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        -32.1,
+        27.5,
+        87.0
+      ]
+    },
+    "PitchLimitUpperRetainer": {
+      "host": "Part019",
+      "offset": -2.0,
+      "depth": 4.2,
+      "model_pilot_mm": 4.15,
+      "screw_length_mm": 5.0,
+      "guarded_wall_missing_mm3": 0.0,
+      "bare_heat_tool_intersection_mm3": 0.0,
+      "screw_visible_geometry_tip_mm": [
+        -32.1,
+        38.5,
+        113.0
+      ]
+    }
+  },
+  "changed_socket_pair_clearance_mm": 0.3770403940991336,
+  "pin_retainer_clearance_mm": {
+    "lower_link_against_eye_at_least": 0.313582,
+    "lower_link_against_lid_at_least": 0.323553,
+    "eye_yaw_against_tie_at_least": 0.35094,
+    "sweep_reliefs_at_least": 0.334315
+  },
+  "retainer_assembly_check": {
+    "comparisons": 115,
+    "deviations_reproduced_in_pre_insert_B25": 8,
+    "new_issues": 0
+  },
+  "oem_case_screws": {
+    "x6": 5,
+    "x8": 11
+  },
+  "jaw_stop_geometry_unchanged": true,
+  "rear_cover_recheck": "pass",
+  "fit_surface_maximum_sample_shift_mm": 0.0,
+  "fit_files_rechecked": 30,
+  "slice": {
+    "slicer": "Bambu Studio 02.09.01.70",
+    "profile": "P2S, Bambu PETG HF, 0.4 mm nozzle, 0.20 mm layer",
+    "plates": {
+      "1": {
+        "return_code": 0,
+        "estimated_seconds": 31777,
+        "estimated_filament_g": 240.45,
+        "project_warning": ""
+      },
+      "4": {
+        "return_code": 0,
+        "estimated_seconds": 52063,
+        "estimated_filament_g": 221.66,
+        "project_warning": ""
+      },
+      "6": {
+        "return_code": 0,
+        "estimated_seconds": 29484,
+        "estimated_filament_g": 186.01,
+        "project_warning": ""
+      },
+      "7": {
+        "return_code": 0,
+        "estimated_seconds": 26094,
+        "estimated_filament_g": 131.02,
+        "project_warning": ""
+      },
+      "8": {
+        "return_code": 0,
+        "estimated_seconds": 11416,
+        "estimated_filament_g": 46.15,
+        "project_warning": ""
+      },
+      "9": {
+        "return_code": 0,
+        "estimated_seconds": 6825,
+        "estimated_filament_g": 28.71,
+        "project_warning": ""
+      }
+    }
+  },
+  "physical_checks_pending": [
+    "Heat-set fit and flash at pin guides",
+    "Assembled play and loads"
+  ],
+  "retired_in_b26": [
+    "YawBracketFoot0",
+    "YawBracketFoot1",
+    "YawBracketFoot2",
+    "YawBracketFoot3",
+    "ServiceHatchNutKeeperLeftScrew",
+    "ServiceHatchNutKeeperRightScrew"
+  ]
+}

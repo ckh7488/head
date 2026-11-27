@@ -1,0 +1,104 @@
+{
+  "method": "physics/cut_b26_hatch_region.py + physics/check_b26_hatch_bar_fea.py, clamped mode, 600 N per bolt (about 0.35 N m on M3), PETG E 1800 MPa, nu 0.37",
+  "hatch_nut_seats": {
+    "B25": {
+      "nut_seat_z_mm": -74.78,
+      "bearing_under_nut_MPa": 46.3,
+      "von_mises_p99_MPa": 28.8,
+      "von_mises_p99_9_MPa": 45.7,
+      "deflection_under_nut_mm": [
+        0.14,
+        0.115
+      ]
+    },
+    "B26": {
+      "nut_seat_z_mm": -73.18,
+      "seat": "loose hex recess AF 5.9, 1.8 mm deep, flats facing +-X (rim walls 2.1 mm)",
+      "bearing_under_nut_MPa": [
+        47.6,
+        49.8
+      ],
+      "von_mises_p99_MPa": 19.7,
+      "von_mises_p99_9_MPa": 39.4,
+      "deflection_under_nut_mm": [
+        0.091,
+        0.081
+      ]
+    }
+  },
+  "changed_surface_wall_thickness": {
+    "sampled_points": 42555,
+    "percentile_1_mm": 2.8,
+    "below_2_mm": "two spots, 1.67 and 1.88 mm, both identical in B25 (unchanged surfaces caught by sampling)",
+    "note_wall_fixes": "After the wall fixes the whole base was rescanned: walls under 2 mm fell from 30919 to 4536 samples (0.185 mm2 each).",
+    "note_audit": "Rescanned after the audit fixes (recess, bridge layers, keeper): 4437 samples under 2 mm, all in the same places as before (B25-unchanged areas listed in the README)."
+  },
+  "note": "The largest stress is the bearing pressure under the nut, the same as B25. The nut now sits in a loose hex recess, so a washer does not fit under it; tighten by hand on the short arm of a 2.5 mm key (about 0.35 N m).",
+  "yaw_feet_600N": {
+    "post_compression_MPa": 11.0,
+    "head_bearing_MPa": 39.5,
+    "nut_bearing_on_bracket_MPa": 47.6,
+    "areas_mm2": {
+      "post": 54.5,
+      "head": 15.2,
+      "nut": 12.6
+    },
+    "head_seat_note": "Full ring under the M3 head (counterbore ceiling, no bridge layers); measured on the CAD and print mesh."
+  },
+  "wall_fixes": {
+    "bearing_seat_posts": {
+      "wall_mm": [
+        1.94,
+        2.54
+      ],
+      "cap_under_seat_bolt_head_mm": [
+        1.15,
+        2.0
+      ],
+      "seat_bolt": "M3x16 -> M3x18",
+      "head_shear_area_mm2": [
+        19.9,
+        34.6
+      ]
+    },
+    "deck_bolt_tunnels": {
+      "side_wall_mm": [
+        1.0,
+        2.24
+      ]
+    },
+    "removed": {
+      "side_window_pillar_mm3": 8.3,
+      "side_window_end_tips_mm3": "about 30 each side",
+      "hatch_lip_horns_mm3": 1.44
+    },
+    "filled": {
+      "shell_beside_rear_guide_socket_relief_mm": [
+        1.1,
+        ">= 2.6"
+      ],
+      "right_window_roof_tip_mm": [
+        0.08,
+        2.0
+      ]
+    },
+    "left_as_is": [
+      "bottom-hatch flange skirt 1.3-1.6 mm (needs hatch 35 change)",
+      "left bearing-seat post: side facing its open slot, 1.94 mm and a 1.4 mm outer strip",
+      "window sill strips 1.88 mm and a 1.78 mm roof plate, about 1 mm2 each"
+    ],
+    "checks": {
+      "overlap_with_all_parts_mm3": 0,
+      "lowering_paths_bearing_seat_carrier_brackets_deck": 0,
+      "seat_bolt_M3x18_clearance_to_yaw_rotor_mm": 13.1,
+      "yaw_side_driver_min_gap_mm": [
+        0.37,
+        0.37
+      ],
+      "hatch_spanner_widest_deg": [
+        35,
+        55
+      ]
+    }
+  }
+}

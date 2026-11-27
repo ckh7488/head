@@ -1,0 +1,212 @@
+{
+  "hardware": [
+    {
+      "screw": "YawBracketFoot0",
+      "nut": "YawBracketFootNut0",
+      "screw_mm": 18.0,
+      "head_seat_mm": [
+        -22.8,
+        5.0,
+        -79.0
+      ],
+      "nut_seat_mm": [
+        -22.8,
+        5.0,
+        -64.4
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "screw": "YawBracketFoot1",
+      "nut": "YawBracketFootNut1",
+      "screw_mm": 18.0,
+      "head_seat_mm": [
+        -22.8,
+        26.0,
+        -79.0
+      ],
+      "nut_seat_mm": [
+        -22.8,
+        26.0,
+        -64.4
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "screw": "YawBracketFoot2",
+      "nut": "YawBracketFootNut2",
+      "screw_mm": 18.0,
+      "head_seat_mm": [
+        22.8,
+        5.0,
+        -79.0
+      ],
+      "nut_seat_mm": [
+        22.8,
+        5.0,
+        -64.4
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "screw": "YawBracketFoot3",
+      "nut": "YawBracketFootNut3",
+      "screw_mm": 18.0,
+      "head_seat_mm": [
+        22.8,
+        26.0,
+        -79.0
+      ],
+      "nut_seat_mm": [
+        22.8,
+        26.0,
+        -64.4
+      ],
+      "axis": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  ],
+  "geometry": {
+    "hatch_nut_seats": {
+      "seat": "loose hex recess (clearance) on the bar, plain through hole",
+      "seat_z_mm": -73.18,
+      "recess_af_mm": 5.9,
+      "recess_depth_mm": 1.8,
+      "bar_mm": [
+        -76.0,
+        -71.38000000000001
+      ],
+      "hole_diameter_mm": 3.7,
+      "nut_phase_deg": 0.0,
+      "mounts": [
+        [
+          -41.2,
+          51.0
+        ],
+        [
+          -41.2,
+          71.0
+        ],
+        [
+          41.2,
+          51.0
+        ],
+        [
+          41.2,
+          71.0
+        ]
+      ]
+    },
+    "yaw_feet": {
+      "screw_mm": 18.0,
+      "head_seat_z_mm": -79.0,
+      "nut_seat_z_mm": -64.4,
+      "hole_diameter_mm": 3.4,
+      "head_bore_diameter_mm": 6.3,
+      "screw_proud_of_nut_mm": 1.0,
+      "feet": [
+        [
+          -22.8,
+          5.0
+        ],
+        [
+          -22.8,
+          26.0
+        ],
+        [
+          22.8,
+          5.0
+        ],
+        [
+          22.8,
+          26.0
+        ]
+      ]
+    },
+    "wall_fixes": {
+      "post_outer_radius_mm": 6.1,
+      "post_cap_mm": 2.0,
+      "seat_bolt_mm": 18.0,
+      "deck_tunnel_outer_radius_mm": 5.8,
+      "removed": [
+        "side-window pillar",
+        "side-window end tips",
+        "hatch-lip horns"
+      ],
+      "filled": [
+        "shell beside the rear-guide socket relief",
+        "right window roof tip"
+      ]
+    },
+    "yaw_foot_counterbore_support_blocker": {
+      "radius_mm": 3.6,
+      "z_mm": [
+        -83.5,
+        -78.4
+      ],
+      "centres_mm": [
+        [
+          -22.8,
+          5.0
+        ],
+        [
+          -22.8,
+          26.0
+        ],
+        [
+          22.8,
+          5.0
+        ],
+        [
+          22.8,
+          26.0
+        ]
+      ]
+    },
+    "j2_keeper": {
+      "rail_outer_x_mm": [
+        35.6,
+        34.4
+      ],
+      "arm_outer_y_mm": 77.15,
+      "head_notch_radius_mm": 3.15,
+      "bolts": [
+        [
+          30.8,
+          46.2
+        ],
+        [
+          30.8,
+          72.8
+        ]
+      ]
+    },
+    "retired": [
+      "ServiceHatchNutKeeperLeft",
+      "ServiceHatchNutKeeperRight",
+      "ServiceHatchNutKeeperLeftScrew",
+      "ServiceHatchNutKeeperRightScrew",
+      "ServiceHatchNutKeeperLeftScrewInsert",
+      "ServiceHatchNutKeeperRightScrewInsert",
+      "YawBracketFoot0Insert",
+      "YawBracketFoot1Insert",
+      "YawBracketFoot2Insert",
+      "YawBracketFoot3Insert"
+    ]
+  }
+}

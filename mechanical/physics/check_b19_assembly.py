@@ -534,6 +534,15 @@ def b23_service_plan(plan, layout):
             row = step(sid, 'base',
                        '위에서 M3×16 다섯 개를 손으로 먼저 걸어 너트를 올립니다. 뒤에서 5.5 mm 오픈 스패너로 잡고 위에서 2.5 mm 육각렌치로 조입니다. 스패너 머리는 폭 13 mm, 두께 4.2 mm 이하여야 합니다.',
                        bolts=row['bolts'])
+        elif sid == 'hatch-bolts' and (seats := layout['motion_geometry'].get('bottom_board_nut_seats')):
+            # B26: loose hex recesses on the bars hold the nuts; no tool is needed on the nut side.
+            names = g('hatchNut', 4)
+            row = step(sid, 'base',
+                       '받침을 옆으로 세웁니다. M3 너트 네 개를 양옆 막대 위의 육각 자리에 손으로 넣습니다. '
+                       '여유 있는 자리라 눌러 끼우지 않고, 너트가 돌지 않게만 잡아 줍니다. '
+                       '받침 밑에서 M3×8 네 개를 2.5 mm 육각렌치로 조입니다.',
+                       nuts=(names, tuple(seats[0]['entry_mm'])), bolts=row['bolts'],
+                       set_nut_phases={n: (seat['nut_phase_deg'] + 30.) % 60. - 30. for n, seat in zip(names, seats)})
         elif sid == 'hatch-bolts':
             row = step(sid, 'base', '받침 밑에서 2.5 mm 육각렌치로 M3×8 네 개를 조입니다. 안쪽 너트는 고정판이 잡아줍니다.',
                        bolts=row['bolts'])
@@ -557,7 +566,7 @@ def b23_service_plan(plan, layout):
             result.append(step('yaw-side-tighten', 'base',
                                '회전판을 손으로 눌러 PET 링에 앉힌 뒤 긴 2 mm 볼 육각렌치를 받침 옆 구멍에 넣어 ID4 나사 네 개를 조입니다. 앞쪽 구멍은 곧게, 뒤쪽은 앞쪽으로 약 10° 기울입니다. 회전판이 가볍게 도는지 확인합니다.',
                                yaw_driver_adjustment=True))
-        if sid == 'camera-base-feed':
+        if sid == 'camera-base-feed' and bottom:
             result.append(step('hatch-service-nuts', 'base', '바닥 덮개용 M3 육각너트 네 개를 받침 위에서 육각 자리에 넣습니다.',
                                nuts=(g('hatchNut', 4), (0, 0, 17))))
             result.append(step('hatch-service-keepers', 'base',
@@ -637,8 +646,10 @@ def b25_plan(plan, geometry):
         if row['id'] == 'rear-cover-bolts' and cable_inserts:
             row = dict(row, text='덮개 위에서 M3×16 다섯 개를 열압입 인서트에 넣고 2.5 mm 육각렌치로 조입니다.')
         if row['id'] == 'hatch-bolts' and hatch_length:
-            row = dict(row, text=f'받침 밑에서 M3×{hatch_length:g} 네 개를 2.5 mm 육각렌치로 조입니다. '
-                       '안쪽 육각너트는 고정판이 잡아줍니다.')
+            if geometry.get('bottom_board_nut_seats'):
+                row = dict(row, text=row['text'].replace('M3×8', f'M3×{hatch_length:g}'))
+            else:
+                row = dict(row, text=f'받침 밑에서 M3×{hatch_length:g} 네 개를 2.5 mm 육각렌치로 조입니다. 안쪽 육각너트는 고정판이 잡아줍니다.')
         if row['id'] == 'hatch-service-keepers':
             row = dict(row, text='열압입 인서트를 단 받침에 좌우 너트 고정판을 내려 놓고 M3×6 한 개씩으로 고정합니다.')
         if row['id'] in labels:
@@ -736,8 +747,8 @@ class World:
             self.screws[item['name']] = (size, round(shapes[1][2]+.1, 2), tuple(seat), tuple(axis))
         self.cache = {}
 
-    def apply_b25_heat_set_screws(self):
-        evidence = Path(__file__).resolve().parents[1] / 'revisions/b25/heat-set-checks.json'
+    def apply_b25_heat_set_screws(self, evidence=None):
+        evidence = evidence or Path(__file__).resolve().parents[1] / 'revisions/b25/heat-set-checks.json'
         sites = json.loads(evidence.read_text())['socket_head_sites']
         for name, site in sites.items():
             self.screws[name] = (3., site['bolt'], tuple(site['seat']), tuple(site['axis']))
