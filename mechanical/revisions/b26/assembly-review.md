@@ -36,6 +36,7 @@
 | 현재 B26 | 160.4 mm | 1,036 mm² | 792 mm² |
 | 현재 B26 외피 가로 +6% | 170.0 mm | 1,036 mm² | 792 mm² |
 | 절삭 전 외피의 정합 참조 가로 +6% | 169.5 mm | 576 mm² | 446 mm² |
+| 절삭 전 외피의 볼·관자만 가로 +6% | 169.5 mm | 586 mm² | 466 mm² |
 | 절삭 전 외피의 정합 참조 가로 +10% | 175.9 mm | 539 mm² | 388 mm² |
 
-0.40 mm 간격의 정측면 투영 표본입니다. 절삭 전 스캔에서 맞춘 외피에 가로 여유를 주고, 남아 있는 볼 아래 열림에 필요한 가림 면을 잡으면 됩니다. 이 외피는 형상 비교용이라 실제 셸의 체결점, 벽 두께, 앞뒤 외장 삽입 경로와 눈·목·턱 전 구간의 간섭을 다시 검사해야 합니다. [BoneHub Visible Human Full-Skeleton 3D Bone Models](https://huggingface.co/datasets/BoneHub/visible-human-3d-models) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+0.40 mm 간격의 정측면 투영 표본입니다. 볼·관자만 넓힌 안은 중심에서 좌우 43 mm 안쪽의 외피를 기준으로 두고 67 mm까지 부드럽게 확대합니다. 확대 후에도 볼 아래에 일부 부품이 보입니다. 이 외피는 형상 비교용이라 실제 셸의 체결점, 벽 두께, 앞뒤 외장 삽입 경로와 눈·목·턱 전 구간의 간섭을 다시 검사해야 합니다. [BoneHub Visible Human Full-Skeleton 3D Bone Models](https://huggingface.co/datasets/BoneHub/visible-human-3d-models) · [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

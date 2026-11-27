@@ -484,7 +484,8 @@
       "uniform_6": 170.032,
       "scan_0": 159.894,
       "scan_6": 169.487,
-      "scan_10": 175.883
+      "scan_10": 175.883,
+      "cheeks_6": 169.487
     },
     "side_views": {
       "-1/0": {
@@ -519,6 +520,10 @@
         "scan_10": {
           "previously_exposed_mm2": 504.64,
           "newly_exposed_mm2": 33.92
+        },
+        "cheeks_6": {
+          "previously_exposed_mm2": 551.04,
+          "newly_exposed_mm2": 34.72
         }
       },
       "-1/24": {
@@ -553,6 +558,10 @@
         "scan_10": {
           "previously_exposed_mm2": 444.8,
           "newly_exposed_mm2": 11.2
+        },
+        "cheeks_6": {
+          "previously_exposed_mm2": 496.32,
+          "newly_exposed_mm2": 21.28
         }
       },
       "+1/0": {
@@ -587,6 +596,10 @@
         "scan_10": {
           "previously_exposed_mm2": 327.04,
           "newly_exposed_mm2": 61.12
+        },
+        "cheeks_6": {
+          "previously_exposed_mm2": 400.32,
+          "newly_exposed_mm2": 65.92
         }
       },
       "+1/24": {
@@ -621,8 +634,17 @@
         "scan_10": {
           "previously_exposed_mm2": 303.68,
           "newly_exposed_mm2": 90.24
+        },
+        "cheeks_6": {
+          "previously_exposed_mm2": 357.92,
+          "newly_exposed_mm2": 100.48
         }
       }
+    },
+    "cheeks_6": {
+      "unchanged_centre_half_width_mm": 43.0,
+      "full_expansion_at_abs_x_mm": 67.0,
+      "width_factor": 1.06
     }
   }
 }
