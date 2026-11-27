@@ -83,15 +83,21 @@ def build(assets, output, revision, preview=False, hosted=False):
     css = (VIEWER / 'viewer.css').read_text(encoding='utf-8')
     if hosted:
         output.mkdir(parents=True, exist_ok=True)
-        if revision == 'B25':
+        if revision in ('B25', 'B26'):
             markup = markup.replace('<html lang="ko">', '<html lang="ko" data-hosted="b25">')
         (output/'index.html').write_text(markup + credits(), encoding='utf-8')
         (output/'viewer.css').write_text(css, encoding='utf-8')
         (output/'viewer.js').write_text(bundle, encoding='utf-8')
         (output/'model.glb').write_bytes(model)
         (output/'steps.json').write_bytes((assets/'steps.json').read_bytes())
+        hints = VIEWER / 'hints.json'
+        if hints.exists():
+            (output/'hints.json').write_bytes(hints.read_bytes())
         print(output)
         return
+    hints = VIEWER / 'hints.json'
+    if hints.exists():
+        data['hints'] = json.loads(hints.read_text(encoding='utf-8'))
     data['embeddedModel'] = base64.b64encode(model).decode('ascii')
     markup = markup.replace('<link rel="stylesheet" href="viewer.css">', '<style>' + css + '</style>')
     payload = json.dumps(data, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')

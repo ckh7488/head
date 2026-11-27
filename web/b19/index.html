@@ -13,33 +13,53 @@
   <header>
     <strong>R5 <span id="revision"></span> 조립 순서</strong>
     <span class="sub" id="step-count"></span>
-    <a id="overview-link" href="../" hidden>B25 개요</a>
+    <a id="overview-link" href="../" hidden>R5 개요</a>
   </header>
   <main>
     <nav id="list" aria-label="조립 단계"></nav>
     <section id="stage">
       <canvas id="view"></canvas>
+      <div id="caption" aria-live="polite">
+        <div class="cap-meta"><b id="cap-step"></b><span id="cap-section"></span><span id="cap-bench" hidden>작업대</span><span id="phase" hidden></span></div>
+        <p id="cap-text"></p>
+      </div>
+      <div id="chip" hidden></div>
+      <div id="stage-tools">
+        <button id="stage-play" type="button" aria-label="멈춤">❚❚</button>
+        <button id="replay" type="button" title="이 단계 처음부터, 시점 복원">↺ 처음부터</button>
+      </div>
       <div id="loading" role="status">모델을 불러오는 중…</div>
-      <div id="legend"><i class="b19"></i>추가 체결품·핀 <i class="moving"></i>이번 단계에 넣는 부품 <span id="tool-legend" hidden><i class="tool"></i><span id="tool-legend-label">검사한 공구 경로</span></span><span id="stop-legend" hidden><i class="stop"></i>접촉점</span></div>
+      <div id="legend">
+        <span id="moving-legend"><i class="moving"></i>이번 단계에 넣는 부품</span>
+        <span id="ghost-legend" hidden><i class="ghost"></i>들어갈 자리</span>
+        <span id="focus-legend" hidden><i class="focus"></i>손으로 다루는 곳</span>
+        <span id="tool-legend" hidden><i class="tool"></i><span id="tool-legend-label">검사한 공구 경로</span></span>
+        <span><i class="fixed"></i>이미 조립됨</span>
+        <span id="xray-legend" hidden><i class="xray"></i>가리는 부품 반투명</span>
+        <span id="stop-legend" hidden><i class="stop"></i>접촉점</span>
+      </div>
+      <div id="progress"><i id="progress-bar"></i></div>
     </section>
     <aside id="card">
       <div id="meta"></div>
       <h2 id="title"></h2>
       <p id="text"></p>
+      <div id="parts" hidden></div>
       <ul id="notes"></ul>
       <div id="issues" hidden><strong>CAD 검사에서 막힌 경로</strong><ul></ul></div>
       <div id="controls">
         <button id="prev" title="이전 단계 (←)">◀</button>
-        <button id="play" title="재생/멈춤 (Space)">❚❚</button>
+        <button id="play" title="멈춤 (Space)">❚❚</button>
         <button id="next" title="다음 단계 (→)">▶</button>
-        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="부품 위치">
+        <input id="scrub" type="range" min="0" max="1000" value="0" aria-label="단계 진행">
       </div>
       <label id="tool-view" hidden>공구 보기 <select id="tool-select"></select></label>
       <label id="stop-view" hidden><span id="inspection-label">스토퍼 위치</span> <select id="stop-select"><option value="">조립 화면</option></select></label>
       <label id="wire-view" hidden>배선 자세 비교 <select id="wire-select"><option value="">조립 상태</option></select></label>
       <label id="part-view" hidden>부품·체결 위치 <select id="part-select"></select></label>
-      <label id="display"><input id="hide-exterior" type="checkbox"> 외장 숨기기</label>
-      <p class="hint">드래그로 돌리고, 휠로 확대합니다. 오른쪽 버튼 드래그로 옮깁니다.</p>
+      <label class="check"><input id="xray" type="checkbox" checked> 가리는 부품 반투명</label>
+      <label class="check" id="display"><input id="hide-exterior" type="checkbox"> 외장 숨기기</label>
+      <p class="hint">드래그로 돌리고, 휠로 확대합니다. 오른쪽 버튼 드래그로 옮깁니다. ← → 단계 이동, Space 재생/멈춤.</p>
     </aside>
   </main>
   <script type="module">

@@ -4,5 +4,11 @@
   "type": "module",
   "dependencies": {
     "three": "0.175.0"
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/extensions": "4.5.1",
+    "@gltf-transform/functions": "4.5.1",
+    "meshoptimizer": "0.22.0"
   }
 }

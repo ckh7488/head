@@ -71,7 +71,7 @@ export class AssemblyViewer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.shadowMap.autoUpdate = false;
-    this.renderer.domElement.setAttribute("aria-label", "R5 B25 조립 3D 모델");
+    this.renderer.domElement.setAttribute("aria-label", "R5 조립 3D 모델");
     this.host.appendChild(this.renderer.domElement);
     const canvas = this.renderer.domElement;
     let down;
@@ -164,7 +164,7 @@ export class AssemblyViewer {
       if (!response.ok) throw Error("Assembly metadata");
       return response.json();
     });
-    if (data.revision !== "B25" || data.board !== "A5") throw Error("B25 A5 metadata is required");
+    if (!["B25", "B26"].includes(data.revision) || data.board !== "A5") throw Error("B25 or B26 A5 metadata is required");
     this.rig = data.rig;
     this.service = data.wiring.service;
     const model = embedded?.glb

@@ -184,7 +184,7 @@ at("show-yaw-studs").addEventListener("click", () => {
   desired = { ...neutral, neckYaw: 36 };
   updateReadouts(desired, true);
   scene?.inspectYawStuds();
-  setCaption("회전판 아래 볼트", "B25 받침과 목 좌우축 체결");
+  setCaption("회전판 아래 볼트", "받침과 목 좌우축 체결");
   upright.scrollIntoView({ block: "nearest", behavior: reduceMotion ? "auto" : "smooth" });
 });
 
@@ -401,7 +401,7 @@ async function start() {
     const current = viewButtons.find(b => b.getAttribute("aria-pressed") === "true");
     if (current?.dataset.view !== "assembled") scene.visibility();
   } catch (error) {
-    console.error("R5 B25 viewer could not load:", error);
+    console.error("R5 viewer could not load:", error);
     loader.classList.add("failed");
     loader.querySelector(".loader").hidden = true;
     status.textContent = /WebGL/.test(error.message) ?

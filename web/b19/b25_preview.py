@@ -19,6 +19,9 @@ HUB_J1 = ('A4J1FemaleEnvelope', 'A4J1CupPositiveEnvelope', 'A4J1CupGroundEnvelop
 HUB_J2 = ('A4J2FemaleEnvelope', 'A4J2CupPositiveEnvelope', 'A4J2CupGroundEnvelope')
 A4_HATCH_LEADS = ('A4W8', 'A4W9', 'A4XT60ExternalMate')
 A4_STATION_WASHERS = tuple(f'A4StationFastener{i}' for i in (2, 3, 6, 7))
+# Front washers go on from inside the base with the screws; rear washers and nuts from behind.
+A4_STATION_FRONT_WASHERS = ('A4StationFastener2', 'A4StationFastener6')
+A4_STATION_REAR_WASHERS = ('A4StationFastener3', 'A4StationFastener7')
 A4_STATION_NUTS = ('A4StationFastener4', 'A4StationFastener8')
 A4_WAGOS = ('A4WagoPositive', 'A4WagoGround')
 A4_FIXED_LEADS = ('A4W6', 'A4W6SupplyCup', 'A4W7', 'A4W7SupplyCup',
@@ -62,16 +65,33 @@ LABELS = {
 }
 
 
-def setup(layout, world):
-    def read(name):
-        return json.loads((B25 / name).read_text())
+def setup(layout, world, folder=None):
+    folder = folder or B25
 
-    world.apply_b25_heat_set_screws()
+    def read(name):
+        return json.loads((folder / name).read_text())
+
+    world.apply_b25_heat_set_screws(folder / 'heat-set-checks.json')
+    # B26: the yaw bracket feet are through-bolted from under the base into a visible nut on each foot.
+    for row in layout['motion_geometry'].get('yaw_feet_through_bolts', []):
+        world.screws[row['screw']] = 3, row['length_mm'], tuple(row['seat_mm']), tuple(row['axis'])
+        LABELS[row['screw']] = f"M3×{row['length_mm']:g} 브래킷 다리 나사"
+        LABELS[row['nut']] = 'M3 너트 · 브래킷 다리 위'
+    # B26: the bottom-hatch nuts drop into loose hex recesses on the bars, over plain through holes.
+    for seat in layout['motion_geometry'].get('bottom_board_nut_seats', []):
+        nut = next(name for name, row in world.rows.items() if name.startswith('hatchNut')
+                   and np.allclose(row['seat'][:2], seat['nut_seat_mm'][:2]))
+        world.rows[nut] = dict(world.rows[nut], seat=list(seat['nut_seat_mm']))
+        LABELS[nut] = 'M3 너트 · 막대 위 육각 자리 (돌지 않게 잡힘)'
+        LABELS[nut.replace('Nut', 'Bolt')] = f"M3×{layout['motion_geometry'].get('bottom_board_cover_bolt_length_mm', 8):g} 바닥 덮개 나사"
+    # B26: the bearing-seat posts have a 2 mm cap, so their bolts are M3 x 18 seated 0.85 mm lower.
+    for row in layout['motion_geometry'].get('bearing_seat_bolts', []):
+        world.rows[row['bolt']] = dict(world.rows[row['bolt']], seat=list(row['seat_mm']), length=row['length_mm'])
     catalog = read('xl330-case-screws.json')['seats']
     for name, site in catalog.items():
         world.screws[name] = 2, site['oem_tapping_screw_length_mm'], site['seat_mm'], site['axis']
     if read('design.json')['cad_sha256'] != layout['source_sha256']:
-        raise ValueError('B25 viewer expects the current revision CAD export')
+        raise ValueError(f'{folder.name} viewer expects the current revision CAD export')
     native_screw_rows = [(name, 3, length, seat, [-v for v in outward]) for name,length,seat,outward in JAW_SCREWS]
     for n, x in ((1, .26), (5, 25.26)):
         native_screw_rows.append((f'A4StationFastener{n}', 3, 30., (x, 173.5, -74.6), (0, 1, 0)))
@@ -139,6 +159,14 @@ def plan(layout, heat_screws, heat_retainers, world):
             ])
         elif sid == 'hatch-fit':
             row['text'] = '정비 XT60 플러그를 바깥 대기 위치에 둔 상태에서 A5 허브가 달린 덮개를 받침 아래에서 올립니다.'
+        elif sid == 'bearing-seat-bolts' and (seat_bolts := layout['motion_geometry'].get('bearing_seat_bolts')):
+            row['text'] = row['text'].replace('M3×16', f"M3×{seat_bolts[0]['length_mm']:g}")
+        elif sid == 'yaw-bracket-feet' and (feet := layout['motion_geometry'].get('yaw_feet_through_bolts')):
+            length = feet[0]['length_mm']
+            row.update(text=f'브래킷 다리 네 곳 위에 M3 너트를 올립니다. 받침을 옆으로 세워 밑면 구멍으로 M3×{length:g}을 넣고, '
+                            '위에서 5.5 mm 소켓으로 너트를 잡은 채 밑에서 2.5 mm 육각렌치로 조입니다. 모터를 넣기 전에 합니다.',
+                       nuts=([f['nut'] for f in feet], tuple(feet[0]['nut_entry_mm'])),
+                       held_nuts=[f['nut'] for f in feet])
         elif sid == 'yaw-bracket-feet':
             row['text'] = '위에서 M3×8 네 개를 받침의 인서트에 조입니다. 모터 고정 나사 머리가 이 길을 막으므로 모터보다 먼저 합니다.'
         elif sid == 'id5-keeper-screws':
@@ -182,7 +210,8 @@ def plan(layout, heat_screws, heat_retainers, world):
             result.append(step('a4-socket-body', 'base', '40번 가이드에서 12 V 정비용 XT60E-F를 결합면 쪽에서 끼웁니다.',
                                place=(('A4XT60ExternalSocket',),(0,-25,0))))
             result.append(step('a4-socket-fix', 'base', '정비 소켓 양쪽에 평와셔와 M3 너트를 댑니다. 뒤쪽 너트를 5.5 mm 스패너로 잡고 M3×30 두 개를 조입니다.',
-                               place=(A4_STATION_WASHERS + A4_STATION_NUTS,(0,10,0)),
+                               place=(A4_STATION_FRONT_WASHERS,(0,-10,0)),
+                               place2=(A4_STATION_REAR_WASHERS + A4_STATION_NUTS,(0,10,0)),
                                bolts=['A4StationFastener1','A4StationFastener5']))
             result.append(step('a4-inlet-body', 'base', '외부 12 V 입력 XT60U-M 몸체를 위에서 내리고 두 턱을 40번 가이드의 아래 홈에 맞춥니다.',
                                place=(('InputXT60Mate',),(0,0,18))))
@@ -227,8 +256,46 @@ def screw_model(size, length, seat, axis):
     return trimesh.util.concatenate((C.cylinder(2., 2., seat-2*axis, axis), C.cylinder(1., length, seat, axis)))
 
 
+NUT_SOCKET = (8.0, 6.6, 60.)       # 5.5 mm nut driver / 1/4" socket: outer and bore diameter, length
+
+
+def socket_model(nut, world):
+    """5.5 mm socket coming straight down onto an upright M3 nut (used to hold the nut)."""
+    mesh = world.mesh(nut)
+    outer, bore, length = NUT_SOCKET
+    tube = trimesh.creation.annulus(r_min=bore/2, r_max=outer/2, height=length, sections=48)
+    centre = mesh.bounds.mean(axis=0)
+    seat = np.array([centre[0], centre[1], mesh.bounds[0][2] + .3])
+    tube.apply_translation(seat + [0., 0., length/2])
+    return tube, seat
+
+
+SPANNER_PROFILE = [(-5.75, -3), (-2.8, -3), (-2.8, 2.2), (2.8, 2.2), (2.8, -3), (5.75, -3),
+                   (5.75, 2.5), (2.6, 7), (2.6, 100), (-2.6, 100), (-2.6, 7), (-5.75, 2.5)]
+
+
 def tools_for(row, world, models, catalog):
     choices = []
+    held = []
+    for nut in row.get('held_nuts', []):
+        model, seat = socket_model(nut, world)
+        ident = f'illustrated-socket-{row["id"]}-{nut}'
+        models[ident] = model
+        held.append([{'id': ident, 'nut': f'5.5 mm 소켓 · {LABELS.get(nut, nut)}', 'kind': 'illustration',
+                      'size': 3, 'seat': seat.tolist(), 'path': [[0., 0., 14.], [0, 0, 0]]}])
+    for nut in row.get('spanner_nuts', []):
+        # Open-end spanner flat on the bar, handle out through the side window (as in tool-access.json).
+        from shapely.geometry import Polygon
+        from check_b21_tools import arm_frame
+        mesh = world.mesh(nut)
+        centre = mesh.bounds.mean(axis=0)
+        outward = np.array([np.sign(centre[0]), 0., 0.])
+        blade = trimesh.creation.extrude_polygon(Polygon(SPANNER_PROFILE), 2.5)
+        blade.apply_transform(arm_frame((0., 0., 1.), outward, centre + outward*1. + [0, 0, mesh.bounds[0][2] + .05 - centre[2]]))
+        ident = f'illustrated-spanner-{row["id"]}-{nut}'
+        models[ident] = blade
+        held.append([{'id': ident, 'nut': f'5.5 mm 스패너 · {LABELS.get(nut, nut)}', 'kind': 'illustration',
+                      'size': 3, 'seat': centre.tolist(), 'path': [(14*outward).tolist(), [0, 0, 0]]}])
     for name in row.get('bolts', []):
         size,_,seat,axis = world.screw(name)
         point, outward = np.asarray(seat,float), -np.asarray(axis,float)
@@ -246,6 +313,11 @@ def tools_for(row, world, models, catalog):
         models[ident] = C.cylinder(radius,length,tip,outward)
         choices.append([{'id': ident,'nut': label,'kind': 'illustration','size': size,
                          'seat': tip.tolist(),'path': [(14*outward).tolist(),[0,0,0]]}])
+    if held:
+        # The socket or spanner holds each nut while the key turns the matching bolt: show them together.
+        if len(held) != len(choices):
+            raise ValueError(f'{row["id"]}: one held nut per bolt expected')
+        choices = [spanner + key for spanner, key in zip(held, choices)]
     if row['id'] == 'a4-socket-fix':
         from shapely.geometry import Polygon
         from check_b21_tools import arm_frame

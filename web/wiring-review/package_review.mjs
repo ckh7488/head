@@ -16,11 +16,11 @@ const digest = bytes => createHash("sha256").update(bytes).digest("hex");
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
 const layout = await readJson(join(cadDir, "cad_parts.json"));
 const poses = await readJson(posesFile);
-const assembly = await readFile(join(root, "mechanical/revisions/b25/R5-B25-Assembly.FCStd"));
+const assembly = await readFile(process.env.R5_ASSEMBLY ?? join(root, "mechanical/revisions/b25/R5-B25-Assembly.FCStd"));
 if (poses.cad !== layout.source_sha256 || poses.cad !== digest(assembly)) {
-  throw new Error("The pose data, exported mesh index and current B25 assembly must match.");
+  throw new Error("The pose data, exported mesh index and current assembly must match.");
 }
-const partIds = [...new Set(Object.values(partGroups).flat())];
+const partIds = [...new Set(Object.values(partGroups).flat())].filter(id => Object.hasOwn(layout.world_sha256, id));
 const vendor = {
   "three.module.min.js": "build/three.module.min.js",
   "three.core.min.js": "build/three.core.min.js",
@@ -48,4 +48,4 @@ await Promise.all([
     ...poses, revision, motion: Object.fromEntries(partIds.map(id => [id, layout.world_motion[id]])),
   })),
 ]);
-console.log(`Wrote ${partIds.length} B25 CAD meshes and ${poses.service.length} service poses to ${output}.`);
+console.log(`Wrote ${partIds.length} CAD meshes and ${poses.service.length} service poses to ${output}.`);

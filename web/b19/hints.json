@@ -1,0 +1,64 @@
+{
+  "about": "조립 화면 표시용 보조 정보. 이동 부품이 없는 단계에서 강조할 부품, 화면 안내, 카메라 방향만 담는다. CAD 형상이나 검사 결과를 바꾸지 않는다.",
+  "steps": {
+    "camera-base-feed": {
+      "showParts": [
+        "EatonCableNeutral",
+        "EatonRearStationarySplice",
+        "CameraUSB"
+      ],
+      "focusLabel": "Eaton 카메라 선 · 순정 USB-A 꼬리",
+      "focusNote": "주황색 케이블은 완성 상태의 배선 모양을 미리 보여 주는 예시입니다. 이 단계에서는 선의 맨 끝만 받침 오른쪽 통로로 넣어 위로 빼 둡니다."
+    },
+    "camera-rotor-feed": {
+      "showParts": [
+        "EatonCableNeutral"
+      ],
+      "focusLabel": "Eaton 카메라 선 맨 끝",
+      "frameOn": [
+        "Part007"
+      ],
+      "focusNote": "주황색 케이블은 완성 상태의 배선 모양을 미리 보여 주는 예시입니다."
+    },
+    "yaw-side-tighten": {
+      "focus": [
+        "XL430YawSideL0",
+        "XL430YawSideL1",
+        "XL430YawSideR0",
+        "XL430YawSideR1"
+      ],
+      "focusLabel": "ID4 고정 나사 4개",
+      "view": [
+        0,
+        12
+      ]
+    },
+    "yaw-bracket-feet": {
+      "view": [
+        -40,
+        12
+      ]
+    },
+    "hatch-bolts": {
+      "view": [
+        255,
+        30
+      ],
+      "frameOn": [
+        "hatchNut0",
+        "hatchNut1",
+        "hatchNut2",
+        "hatchNut3",
+        "hatchBolt0",
+        "hatchBolt3"
+      ],
+      "focusLabel": "막대 위 육각 자리의 너트 4개 · 밑에서 조임",
+      "focus": [
+        "hatchNut0",
+        "hatchNut1",
+        "hatchNut2",
+        "hatchNut3"
+      ]
+    }
+  }
+}

@@ -7,13 +7,13 @@ const byId = id => document.getElementById(id);
 const tabButtons = [...document.querySelectorAll("[data-tab]")];
 const captions = {
   power: "12 V 공급과 정비 플러그", hub: "A5 허브와 5 V 정비 루프",
-  camera: "Eaton 경로 · 목 중립", fasteners: "B25 체결품",
+  camera: "Eaton 경로 · 목 중립", fasteners: "체결품",
 };
 const fastenerDetails = {
   keeper: "기판 J2의 XT30U-F를 작업대에서 결합합니다. J1 쪽 두 곳은 M3×8, J2 잠금쇠를 지나는 두 곳은 M3×12로 체결합니다. 일반 M3 너트를 재사용합니다.",
   inlet: "외부 공급 XT60U-M의 성형 홈 양쪽을 가이드와 덮개에 걸고, 두 M3×12와 M3 인서트로 덮개를 고정합니다.",
   socket: "뒤쪽 XT60E-F는 M3×30 두 개, 평와셔 네 개, 일반 M3 너트 두 개로 고정합니다. 너트에는 5.5 mm 스패너를 씁니다.",
-  hatch: "하부 덮개를 정비할 때는 받침을 지지합니다. 덮개 나사를 끝까지 빼도 양쪽 포획부에 너트가 남습니다.",
+  hatch: "하부 덮개를 정비할 때는 받침을 옆으로 세워 지지하고 밑에서 나사를 풉니다. 너트는 막대 위의 헐거운 육각 자리가 잡아 돌지 않고, 받침을 옆으로 세운 채면 덮개를 떼어도 빠지지 않습니다. 뒤집기 전에는 너트를 빼 둡니다. B25는 너트를 고정판 아래에 가뒀습니다.",
   rear: "뒤 외장 29의 왼쪽은 M3×18, 오른쪽은 M3×16입니다. 일반 M3 너트를 프레임 슬롯에 먼저 넣습니다.",
   jaw: "양쪽 M3×12와 뒤쪽 M3×40으로 조립합니다. 뒤쪽 나사는 뒤 외장을 달기 전에 접근합니다.",
 };
@@ -68,7 +68,7 @@ function drawScene(data) {
   camera.up.set(0, 0, 1);
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.65));
-  renderer.domElement.setAttribute("aria-label", "B25 실제 CAD 부품과 정비 배선 3D 보기");
+  renderer.domElement.setAttribute("aria-label", "실제 CAD 부품과 정비 배선 3D 보기");
   host.append(renderer.domElement);
   const orbit = new OrbitControls(camera, renderer.domElement);
   orbit.minDistance = 13;
@@ -186,7 +186,7 @@ function drawScene(data) {
     const fastener = state.tab === "fasteners";
     const step = data.service[state.serviceIndex];
     const drop = power ? step.drop : hub ? state.hatchDrop : 0;
-    const visible = new Set(fastener ? fastenerViews[state.fastenerView].parts : partGroups[state.tab]);
+    const visible = new Set((fastener ? fastenerViews[state.fastenerView].parts : partGroups[state.tab]).filter(id => Object.hasOwn(data.motion, id)));
     for (const [id, mesh] of partMeshes) {
       const ghost = scenery.has(id);
       mesh.visible = visible.has(id) && (state.context || !ghost);
@@ -219,9 +219,10 @@ function drawScene(data) {
   let pending = 0;
   async function loadView() {
     const request = ++pending;
-    const ids = state.tab === "fasteners" ? fastenerViews[state.fastenerView].parts : partGroups[state.tab];
+    const ids = (state.tab === "fasteners" ? fastenerViews[state.fastenerView].parts : partGroups[state.tab])
+      .filter(id => Object.hasOwn(data.motion, id));
     const status = byId("scene-status");
-    status.textContent = "현재 B25 형상을 불러오는 중";
+    status.textContent = "현재 CAD 형상을 불러오는 중";
     status.hidden = false;
     for (const mesh of partMeshes.values()) mesh.visible = false;
     for (const mesh of Object.values(wireActors)) mesh.visible = false;

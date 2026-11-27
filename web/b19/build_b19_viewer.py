@@ -58,6 +58,49 @@ B24_ASSEMBLY_VIEWS = [
 ]
 
 
+# Printed parts must match the CAD that is sent to the printer; purchased-part envelopes and the
+# sculpted skull may be simplified a little more.
+PRINTED_FINISHES = {'graphite', 'frame', 'link', 'jaw', 'b19'}
+MAX_DEVIATION_MM = {'printed': .05, 'organic': .3, 'purchased': .3}
+
+
+def tolerance(finish):
+    if finish in PRINTED_FINISHES:
+        return MAX_DEVIATION_MM['printed']
+    return MAX_DEVIATION_MM['organic' if finish in ('bone', 'eye') else 'purchased']
+
+
+def deviation(reduced, original, samples=4000):
+    """Largest distance between the two surfaces, sampled both ways (mm)."""
+    worst = 0.
+    for a, b in ((reduced, original), (original, reduced)):
+        points = trimesh.sample.sample_surface(a, samples, seed=1)[0]
+        _, distance, _ = trimesh.proximity.closest_point(b, points)
+        worst = max(worst, float(np.max(distance)))
+    return worst
+
+
+def faithful_reduction(mesh, limit, allowed):
+    """Reduce a CAD part only when the result still matches the CAD surface.
+
+    Quadric decimation can tear thin walls or fold faces; the B25 base cup was published that way.
+    A reduction is accepted only if it stays closed (when the CAD part is closed) and no sampled
+    point moves more than `allowed` mm. Otherwise the CAD tessellation is kept as it is.
+    """
+    for target in [t for t in (limit, 2*limit, 4*limit) if t < len(mesh.faces)]:
+        reduced = mesh.simplify_quadric_decimation(face_count=target)
+        if mesh.is_watertight and not reduced.is_watertight:
+            continue
+        if deviation(reduced, mesh) <= allowed:
+            return reduced
+    return mesh
+
+
+def shade_like_cad(mesh):
+    """Split vertices at creases so flat CAD faces render flat instead of smoothed across edges."""
+    return trimesh.graph.smooth_shade(mesh, angle=np.radians(30.), facet_minarea=None)
+
+
 def numbers(text):
     return [float(v) for v in text.split(',')]
 
@@ -99,6 +142,19 @@ def load_wires(source, cad_hash):
         if not wires:
             raise ValueError('Source CAD has no internal cable paths')
         return wires
+    finally:
+        App.closeDocument(doc.Name)
+
+
+def load_cad_labels(source):
+    """FreeCAD labels of every part, used when a world part has no review label."""
+    if source is None:
+        return {}
+    import FreeCAD as App
+
+    doc = App.openDocument(str(source.resolve()))
+    try:
+        return {obj.Name: obj.Label for obj in doc.Objects if obj.Label != obj.Name}
     finally:
         App.closeDocument(doc.Name)
 
@@ -344,7 +400,7 @@ def load_stop_locations(report, cad_hash, steps, world_motion):
 
 
 def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None, stop_report=None,
-          guard_cad=None, guard_report=None, wire_states=None, preview=False):
+          guard_cad=None, guard_report=None, wire_states=None, preview=False, display_label=None, revision_dir=None):
     data = json.loads(hardware.read_text())
     stock = json.loads(spec.read_text())
     world = C.World(cad, data['hardware'], stock)
@@ -360,7 +416,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             raise ValueError('Report-free rendering requires B25 --preview and the exact --assembly-cad')
         import b25_preview as B25
 
-        catalog, heat_screws, heat_retainers = B25.setup(layout, world)
+        catalog, heat_screws, heat_retainers = B25.setup(layout, world, revision_dir)
         plan = B25.plan(layout, heat_screws, heat_retainers, world)
         checked = [dict(id=step['id'], context=step['ctx'], text=step['text'], notes=[], issues=[],
                         **{key: step[key] for key in ('actor_offsets', 'blink_deg') if key in step}) for step in plan]
@@ -384,10 +440,11 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     if has_qualified_tools and checked[0].get('plan_sha256') != C.plan_hash(plan):
         raise ValueError(f'{revision} assembly plan differs from the one checked')
     labels = {p['name']: p.get('label') or '' for p in layout.get('parts', [])}
+    cad_labels = load_cad_labels(assembly_cad) if report is None else {}
     keeper_names = set()
     native_screws = set()
     if service_covers:
-        for cap in rig['bottom_board_service_nuts']:
+        for cap in rig.get('bottom_board_service_nuts', []):
             keeper_names.add(cap['keeper'])
             native_screws.add(cap['screw'])
     if revision in ('B24', 'B25'):
@@ -572,7 +629,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
         review = dict(id='final-view', label='완료', section='조립 완료', fixed=fixed,
                       text='체결품과 배선이 있는 조립 상태입니다.', notes=[], issues=[], moves=[], showWires=True)
         if illustration:
-            review.update(text='B25 완성 상태입니다. 외장을 숨기면 내부 체결품과 배선을 볼 수 있습니다.',
+            review.update(text=f'{display_label or revision} 완성 상태입니다. 외장을 숨기면 내부 체결품과 배선을 볼 수 있습니다.',
                           notes=['조립 움직임과 공구는 CAD 위치를 설명합니다. 출력 공차와 실물 조립은 가조립에서 확인합니다.'])
         motion.update(dict.fromkeys(guard, 'fixed'))
         states = load_wire_states(wire_states, layout, fixed, motion, wires)
@@ -601,16 +658,13 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
             finish = B25.finish(name) or finish
         limit = FACE_LIMIT.get(finish, 4000)
         if name not in stop_actors and len(mesh.faces) > limit:
-            # Decimation can tear closed parts; torn faces render as black patches.
-            for target in [t for t in (limit, 2*limit) if t < len(mesh.faces)]:
-                reduced = mesh.simplify_quadric_decimation(face_count=target)
-                if reduced.is_watertight or not mesh.is_watertight:
-                    break
-            if reduced.is_watertight or not mesh.is_watertight or len(mesh.faces) > 40000:
-                mesh = reduced
+            printed = re.match(r'\d{2}[ _]', (B25.LABELS.get(name) if illustration else None) or labels.get(name, '') or '')
+            mesh = faithful_reduction(mesh, limit, MAX_DEVIATION_MM['printed'] if printed else tolerance(finish))
+        mesh = shade_like_cad(mesh)
         mesh.visual = trimesh.visual.TextureVisuals(material=materials[finish])
         scene.add_geometry(mesh, node_name=name, geom_name=name)
-        parts[name] = {'label': (B25.LABELS.get(name) if illustration else None) or labels.get(name, '') or name,
+        parts[name] = {'label': (B25.LABELS.get(name) if illustration else None) or labels.get(name, '')
+                       or cad_labels.get(name) or name,
                        'b19': name in b19_names,
                        'center': mesh.bounds.mean(axis=0).round(2).tolist(),
                        'size': float(np.linalg.norm(mesh.extents).round(2))}
@@ -632,7 +686,7 @@ def build(cad, hardware, spec, report, output, revision='B19', assembly_cad=None
     model = trimesh.exchange.gltf.export_glb(scene, include_normals=True)
     (output/'model.glb').write_bytes(model)
     (output/'steps.json').write_text(json.dumps({
-        'source': assembly_cad.name if illustration else report.name, 'revision': revision,
+        'source': assembly_cad.name if illustration else report.name, 'revision': display_label or revision,
         'cadSha256': layout['source_sha256'],
         'modelSha256': sha256(model).hexdigest(), 'planSha256': checked[0].get('plan_sha256'),
         'parts': parts, 'steps': steps, 'wires': wires,
@@ -662,6 +716,8 @@ if __name__ == '__main__':
     parser.add_argument('--guard-report', type=Path, help='Passing guard report pairing the exact head and guard')
     parser.add_argument('--wire-states', type=Path, help='Exact camera centerlines and poses for comparison')
     parser.add_argument('--preview', action='store_true', help='Display unresolved cover service without certifying it')
+    parser.add_argument('--label', help='Revision name shown in the viewer when a B25-family CAD is rendered (e.g. B26)')
+    parser.add_argument('--revision-dir', type=Path, help='Revision folder with design.json and heat-set-checks.json for --preview')
     args = parser.parse_args()
     build(args.cad, args.hardware, args.spec, args.report, args.output, args.revision, args.assembly_cad,
-          args.stop_report, args.guard_cad, args.guard_report, args.wire_states, args.preview)
+          args.stop_report, args.guard_cad, args.guard_report, args.wire_states, args.preview, args.label, args.revision_dir)

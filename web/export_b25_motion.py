@@ -148,6 +148,25 @@ def wire_frames(name, points):
     return result
 
 
+def deviation(reduced, original, samples=4000):
+    worst = 0.
+    for a, b in ((reduced, original), (original, reduced)):
+        points = trimesh.sample.sample_surface(a, samples, seed=1)[0]
+        _, distance, _ = trimesh.proximity.closest_point(b, points)
+        worst = max(worst, float(np.max(distance)))
+    return worst
+
+
+def faithful_reduction(mesh, limit, allowed):
+    for target in [t for t in (limit, 2*limit, 4*limit) if t < len(mesh.faces)]:
+        reduced = mesh.simplify_quadric_decimation(face_count=target)
+        if mesh.is_watertight and not reduced.is_watertight:
+            continue
+        if deviation(reduced, mesh) <= allowed:
+            return reduced
+    return mesh
+
+
 def native_wires(doc):
     wires = []
     for obj in doc.WiringRouting.Group:
@@ -195,7 +214,10 @@ def build(assembly, cad, output):
             mesh = trimesh.load_mesh(file)
             cap = 18000 if name in MOTORS else 36000 if previous.get('shell') else 8500 if name in ('Part000','Part019','CableSaddle','HubPCB') else 2600
             if len(mesh.faces) > cap:
-                mesh = mesh.simplify_quadric_decimation(face_count=cap)
+                # Same rule as the assembly viewer: reduce only while the surface stays within
+                # 0.05 mm (printed parts) or 0.3 mm (bought parts) of the CAD, else keep the CAD mesh.
+                printed = re.match(r'\d{2}[ _]', label or '') or name == 'Part000'
+                mesh = faithful_reduction(mesh, cap, .05 if printed else .3)
             if name in MOTORS:
                 mesh = mesh.smooth_shaded
             mesh.visual = trimesh.visual.TextureVisuals(material=materials[finish])
@@ -209,10 +231,11 @@ def build(assembly, cad, output):
         rig = {kind: layout['motion_geometry'][kind] for kind in ('eye_pitch','eye_yaw','blink','pitch_stop')}
         rig['jaw_pivot_mm'] = layout['jaw_pivot_mm']
         rig['jaw_closed_deg'] = CLOSED_REFERENCE_TICKS * TICK_DEG
-        document = {'revision':'B25','board':'A5','cad_sha256':digest,'parts':parts,'rig':rig,
+        revision = 'B26' if layout['motion_geometry'].get('bottom_board_nut_seats') else 'B25'
+        document = {'revision':revision,'board':'A5','cad_sha256':digest,'parts':parts,'rig':rig,
                     'wiring': {'routes':wires, 'blocks':[], 'eaton':eaton(), 'service':service_leads()}}
         (output/'assembly.json').write_text(json.dumps(document,ensure_ascii=False,separators=(',',':'))+'\n')
-        print(f'{len(parts)} B25 solids, {len(wires)} native wire centers · {digest[:12]}', flush=True)
+        print(f'{len(parts)} {document["revision"]} solids, {len(wires)} native wire centers · {digest[:12]}', flush=True)
     finally:
         App.closeDocument(doc.Name)
 

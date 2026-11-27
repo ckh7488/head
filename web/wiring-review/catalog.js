@@ -3,7 +3,11 @@ const hub = ["HubHolder", "HubPCB", ...sequence("HubBolt", 4), ...sequence("HubB
   "HubBodyF1", "HubBodyF2", "HubBodyC1", "HubBodyC2", ...sequence("HubPlugJ", 8).slice(2),
   "A4J1FemaleEnvelope", "A4J1CupGroundEnvelope", "A4J1CupPositiveEnvelope",
   "A4J2FemaleEnvelope", "A4J2CupGroundEnvelope", "A4J2CupPositiveEnvelope", "A4J2LeverKeeper"];
-const base = ["Part000", "Part002", "CableSaddle", "CableGate", "ServiceHatchNutKeeperLeft", "ServiceHatchNutKeeperRight"];
+// B25 holds the hatch nuts under two keeper plates; B26 has loose nuts on the base bars.
+// Parts missing from the packaged CAD revision are skipped.
+const hatchNuts = ["ServiceHatchNutKeeperLeft", "ServiceHatchNutKeeperRight", "hatchNut0", "hatchNut1", "hatchNut2", "hatchNut3"];
+const hatchBolts = ["hatchBolt0", "hatchBolt1", "hatchBolt2", "hatchBolt3"];
+const base = ["Part000", "Part002", "CableSaddle", "CableGate", ...hatchNuts];
 const inletBolts = [...sequence("A4InletBolt", 2), ...sequence("A4InletInsert", 2)];
 const stationBolts = sequence("A4StationFastener", 8);
 const stationWires = ["A4W6", "A4W7", "A4W35", "A4W36", "A4W6SupplyCup", "A4W7SupplyCup",
@@ -24,14 +28,14 @@ export const partGroups = {
   camera: unique([...base, ...cameraBody, ...cameraWires]),
   fasteners: unique([...base, ...hub, ...inletBolts, ...stationBolts, ...rearShell, ...jawFasteners, ...cameraBody,
     "InputXT60Mate", "A4XT60ExternalSocket", "ServiceHatchNutKeeperLeftScrew", "ServiceHatchNutKeeperRightScrew",
-    "ServiceHatchNutKeeperLeftScrewInsert", "ServiceHatchNutKeeperRightScrewInsert"]),
+    "ServiceHatchNutKeeperLeftScrewInsert", "ServiceHatchNutKeeperRightScrewInsert", ...hatchBolts]),
 };
 
 export const fastenerViews = {
   keeper: { target: [0, 63, -70], eye: [69, 117, 35], parts: ["A4J2LeverKeeper", ...sequence("HubBolt", 4), "A4J2FemaleEnvelope", "HubBodyJ1", "HubBodyJ2", "HubPCB", "HubHolder"] },
   inlet: { target: [-13, 172, -57], eye: [40, 94, 43], parts: ["InputXT60Mate", "CableSaddle", "CableGate", ...inletBolts] },
   socket: { target: [12, 186, -75], eye: [64, 100, 21], parts: ["A4XT60ExternalSocket", "CableSaddle", ...stationBolts] },
-  hatch: { target: [0, 65, -78], eye: [68, 100, -38], parts: ["Part000", "HubHolder", "ServiceHatchNutKeeperLeft", "ServiceHatchNutKeeperRight",
+  hatch: { target: [0, 65, -78], eye: [68, 100, -38], parts: ["Part000", "HubHolder", ...hatchNuts, ...hatchBolts,
     "ServiceHatchNutKeeperLeftScrew", "ServiceHatchNutKeeperRightScrew", "ServiceHatchNutKeeperLeftScrewInsert", "ServiceHatchNutKeeperRightScrewInsert"] },
   rear: { target: [0, 26, 119], eye: [43, 183, 33], parts: [...rearShell, "Part024"] },
   jaw: { target: [1, -3, 99], eye: [112, -4, 59], parts: [...jawFasteners, "Part024", "Jaw_30_moving_jaw", "Jaw_36_left_jaw_servo_stay", "Jaw_37_right_jaw_bearing_stay"] },
